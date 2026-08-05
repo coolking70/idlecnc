@@ -1,0 +1,1941 @@
+{
+  "fixtureVersion": 1,
+  "sourceKind": "formal_solver_raw",
+  "scenario": {
+    "unitTypes": [
+      "infantry",
+      "infantry",
+      "infantry",
+      "at_infantry",
+      "scout_car",
+      "mbt",
+      "mbt",
+      "repair_vehicle"
+    ],
+    "unitHpRatios": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "theaterId": "border_road",
+    "strategyId": "breakthrough",
+    "missionKind": "campaign",
+    "missionId": "border_road",
+    "seed": 1,
+    "id": "scenario-e-formal",
+    "formationId": "formation-scenario-e",
+    "formationName": "scenario-e formation",
+    "unitIdPrefix": "scenario-e",
+    "expectedResult": "victory"
+  },
+  "report": {
+    "id": "battle_1_formation-scenario-e_border_road_breakthrough",
+    "seed": 1,
+    "theaterId": "border_road",
+    "theaterName": "边境公路",
+    "terrain": "road",
+    "strategyId": "breakthrough",
+    "missionKind": "campaign",
+    "missionId": "border_road",
+    "strategyName": "正面突破",
+    "formationId": "formation-scenario-e",
+    "formationName": "scenario-e formation",
+    "startedAt": 1,
+    "initial": {
+      "friendly": [
+        {
+          "id": "unit_scenario-e-u-1",
+          "side": "friendly",
+          "realId": "scenario-e-u-1",
+          "type": "infantry",
+          "name": "步兵班",
+          "category": "infantry",
+          "shape": "infantry",
+          "hp": 100,
+          "maxHp": 100,
+          "attack": 12,
+          "antiArmor": 4,
+          "defense": 10,
+          "scouting": 2,
+          "mobility": 5,
+          "repair": 0,
+          "suppressed": 0,
+          "alive": true,
+          "callsign": null,
+          "rankId": "recruit",
+          "rankName": "新兵",
+          "rankModifiers": {
+            "attack": 1,
+            "antiArmor": 1,
+            "defense": 1,
+            "scouting": 1,
+            "mobility": 1,
+            "repair": 1
+          },
+          "experience": 0,
+          "battles": 0
+        },
+        {
+          "id": "unit_scenario-e-u-2",
+          "side": "friendly",
+          "realId": "scenario-e-u-2",
+          "type": "infantry",
+          "name": "步兵班",
+          "category": "infantry",
+          "shape": "infantry",
+          "hp": 100,
+          "maxHp": 100,
+          "attack": 12,
+          "antiArmor": 4,
+          "defense": 10,
+          "scouting": 2,
+          "mobility": 5,
+          "repair": 0,
+          "suppressed": 0,
+          "alive": true,
+          "callsign": null,
+          "rankId": "recruit",
+          "rankName": "新兵",
+          "rankModifiers": {
+            "attack": 1,
+            "antiArmor": 1,
+            "defense": 1,
+            "scouting": 1,
+            "mobility": 1,
+            "repair": 1
+          },
+          "experience": 0,
+          "battles": 0
+        },
+        {
+          "id": "unit_scenario-e-u-3",
+          "side": "friendly",
+          "realId": "scenario-e-u-3",
+          "type": "infantry",
+          "name": "步兵班",
+          "category": "infantry",
+          "shape": "infantry",
+          "hp": 100,
+          "maxHp": 100,
+          "attack": 12,
+          "antiArmor": 4,
+          "defense": 10,
+          "scouting": 2,
+          "mobility": 5,
+          "repair": 0,
+          "suppressed": 0,
+          "alive": true,
+          "callsign": null,
+          "rankId": "recruit",
+          "rankName": "新兵",
+          "rankModifiers": {
+            "attack": 1,
+            "antiArmor": 1,
+            "defense": 1,
+            "scouting": 1,
+            "mobility": 1,
+            "repair": 1
+          },
+          "experience": 0,
+          "battles": 0
+        },
+        {
+          "id": "unit_scenario-e-u-4",
+          "side": "friendly",
+          "realId": "scenario-e-u-4",
+          "type": "at_infantry",
+          "name": "反装甲班",
+          "category": "infantry",
+          "shape": "at_infantry",
+          "hp": 90,
+          "maxHp": 90,
+          "attack": 18,
+          "antiArmor": 25,
+          "defense": 7,
+          "scouting": 2,
+          "mobility": 4,
+          "repair": 0,
+          "suppressed": 0,
+          "alive": true,
+          "callsign": null,
+          "rankId": "recruit",
+          "rankName": "新兵",
+          "rankModifiers": {
+            "attack": 1,
+            "antiArmor": 1,
+            "defense": 1,
+            "scouting": 1,
+            "mobility": 1,
+            "repair": 1
+          },
+          "experience": 0,
+          "battles": 0
+        },
+        {
+          "id": "unit_scenario-e-u-5",
+          "side": "friendly",
+          "realId": "scenario-e-u-5",
+          "type": "scout_car",
+          "name": "侦察车",
+          "category": "vehicle",
+          "shape": "scout",
+          "hp": 90,
+          "maxHp": 90,
+          "attack": 6,
+          "antiArmor": 2,
+          "defense": 6,
+          "scouting": 20,
+          "mobility": 15,
+          "repair": 0,
+          "suppressed": 0,
+          "alive": true,
+          "callsign": null,
+          "rankId": "recruit",
+          "rankName": "新兵",
+          "rankModifiers": {
+            "attack": 1,
+            "antiArmor": 1,
+            "defense": 1,
+            "scouting": 1,
+            "mobility": 1,
+            "repair": 1
+          },
+          "experience": 0,
+          "battles": 0
+        },
+        {
+          "id": "unit_scenario-e-u-6",
+          "side": "friendly",
+          "realId": "scenario-e-u-6",
+          "type": "mbt",
+          "name": "主战坦克",
+          "category": "armor",
+          "shape": "tank",
+          "hp": 160,
+          "maxHp": 160,
+          "attack": 35,
+          "antiArmor": 20,
+          "defense": 30,
+          "scouting": 3,
+          "mobility": 10,
+          "repair": 0,
+          "suppressed": 0,
+          "alive": true,
+          "callsign": null,
+          "rankId": "recruit",
+          "rankName": "新兵",
+          "rankModifiers": {
+            "attack": 1,
+            "antiArmor": 1,
+            "defense": 1,
+            "scouting": 1,
+            "mobility": 1,
+            "repair": 1
+          },
+          "experience": 0,
+          "battles": 0
+        },
+        {
+          "id": "unit_scenario-e-u-7",
+          "side": "friendly",
+          "realId": "scenario-e-u-7",
+          "type": "mbt",
+          "name": "主战坦克",
+          "category": "armor",
+          "shape": "tank",
+          "hp": 160,
+          "maxHp": 160,
+          "attack": 35,
+          "antiArmor": 20,
+          "defense": 30,
+          "scouting": 3,
+          "mobility": 10,
+          "repair": 0,
+          "suppressed": 0,
+          "alive": true,
+          "callsign": null,
+          "rankId": "recruit",
+          "rankName": "新兵",
+          "rankModifiers": {
+            "attack": 1,
+            "antiArmor": 1,
+            "defense": 1,
+            "scouting": 1,
+            "mobility": 1,
+            "repair": 1
+          },
+          "experience": 0,
+          "battles": 0
+        },
+        {
+          "id": "unit_scenario-e-u-8",
+          "side": "friendly",
+          "realId": "scenario-e-u-8",
+          "type": "repair_vehicle",
+          "name": "维修车",
+          "category": "support",
+          "shape": "repair",
+          "hp": 110,
+          "maxHp": 110,
+          "attack": 0,
+          "antiArmor": 0,
+          "defense": 8,
+          "scouting": 2,
+          "mobility": 8,
+          "repair": 20,
+          "suppressed": 0,
+          "alive": true,
+          "callsign": null,
+          "rankId": "recruit",
+          "rankName": "新兵",
+          "rankModifiers": {
+            "attack": 1,
+            "antiArmor": 1,
+            "defense": 1,
+            "scouting": 1,
+            "mobility": 1,
+            "repair": 1
+          },
+          "experience": 0,
+          "battles": 0
+        }
+      ],
+      "enemy": [
+        {
+          "id": "enemy_infantry_1",
+          "side": "enemy",
+          "realId": null,
+          "type": "enemy_infantry",
+          "name": "敌方步兵班",
+          "category": "infantry",
+          "shape": "infantry",
+          "hp": 85,
+          "maxHp": 85,
+          "attack": 10,
+          "antiArmor": 2,
+          "defense": 8,
+          "scouting": 2,
+          "mobility": 5,
+          "repair": 0,
+          "suppressed": 0,
+          "alive": true,
+          "callsign": null,
+          "rankId": null,
+          "rankName": null,
+          "rankModifiers": null,
+          "experience": 0,
+          "battles": 0
+        },
+        {
+          "id": "enemy_infantry_2",
+          "side": "enemy",
+          "realId": null,
+          "type": "enemy_infantry",
+          "name": "敌方步兵班",
+          "category": "infantry",
+          "shape": "infantry",
+          "hp": 85,
+          "maxHp": 85,
+          "attack": 10,
+          "antiArmor": 2,
+          "defense": 8,
+          "scouting": 2,
+          "mobility": 5,
+          "repair": 0,
+          "suppressed": 0,
+          "alive": true,
+          "callsign": null,
+          "rankId": null,
+          "rankName": null,
+          "rankModifiers": null,
+          "experience": 0,
+          "battles": 0
+        },
+        {
+          "id": "enemy_infantry_3",
+          "side": "enemy",
+          "realId": null,
+          "type": "enemy_infantry",
+          "name": "敌方步兵班",
+          "category": "infantry",
+          "shape": "infantry",
+          "hp": 85,
+          "maxHp": 85,
+          "attack": 10,
+          "antiArmor": 2,
+          "defense": 8,
+          "scouting": 2,
+          "mobility": 5,
+          "repair": 0,
+          "suppressed": 0,
+          "alive": true,
+          "callsign": null,
+          "rankId": null,
+          "rankName": null,
+          "rankModifiers": null,
+          "experience": 0,
+          "battles": 0
+        },
+        {
+          "id": "enemy_infantry_4",
+          "side": "enemy",
+          "realId": null,
+          "type": "enemy_infantry",
+          "name": "敌方步兵班",
+          "category": "infantry",
+          "shape": "infantry",
+          "hp": 85,
+          "maxHp": 85,
+          "attack": 10,
+          "antiArmor": 2,
+          "defense": 8,
+          "scouting": 2,
+          "mobility": 5,
+          "repair": 0,
+          "suppressed": 0,
+          "alive": true,
+          "callsign": null,
+          "rankId": null,
+          "rankName": null,
+          "rankModifiers": null,
+          "experience": 0,
+          "battles": 0
+        },
+        {
+          "id": "enemy_at_1",
+          "side": "enemy",
+          "realId": null,
+          "type": "enemy_at",
+          "name": "敌方反装甲小组",
+          "category": "at_infantry",
+          "shape": "at_infantry",
+          "hp": 80,
+          "maxHp": 80,
+          "attack": 15,
+          "antiArmor": 22,
+          "defense": 6,
+          "scouting": 2,
+          "mobility": 4,
+          "repair": 0,
+          "suppressed": 0,
+          "alive": true,
+          "callsign": null,
+          "rankId": null,
+          "rankName": null,
+          "rankModifiers": null,
+          "experience": 0,
+          "battles": 0
+        },
+        {
+          "id": "enemy_at_2",
+          "side": "enemy",
+          "realId": null,
+          "type": "enemy_at",
+          "name": "敌方反装甲小组",
+          "category": "at_infantry",
+          "shape": "at_infantry",
+          "hp": 80,
+          "maxHp": 80,
+          "attack": 15,
+          "antiArmor": 22,
+          "defense": 6,
+          "scouting": 2,
+          "mobility": 4,
+          "repair": 0,
+          "suppressed": 0,
+          "alive": true,
+          "callsign": null,
+          "rankId": null,
+          "rankName": null,
+          "rankModifiers": null,
+          "experience": 0,
+          "battles": 0
+        }
+      ]
+    },
+    "final": {
+      "friendly": [
+        {
+          "id": "unit_scenario-e-u-1",
+          "side": "friendly",
+          "realId": "scenario-e-u-1",
+          "type": "infantry",
+          "name": "步兵班",
+          "category": "infantry",
+          "shape": "infantry",
+          "hp": 100,
+          "maxHp": 100,
+          "attack": 12,
+          "antiArmor": 4,
+          "defense": 10,
+          "scouting": 2,
+          "mobility": 5,
+          "repair": 0,
+          "suppressed": 0,
+          "alive": true,
+          "callsign": null,
+          "rankId": "recruit",
+          "rankName": "新兵",
+          "rankModifiers": {
+            "attack": 1,
+            "antiArmor": 1,
+            "defense": 1,
+            "scouting": 1,
+            "mobility": 1,
+            "repair": 1
+          },
+          "experience": 0,
+          "battles": 0
+        },
+        {
+          "id": "unit_scenario-e-u-2",
+          "side": "friendly",
+          "realId": "scenario-e-u-2",
+          "type": "infantry",
+          "name": "步兵班",
+          "category": "infantry",
+          "shape": "infantry",
+          "hp": 100,
+          "maxHp": 100,
+          "attack": 12,
+          "antiArmor": 4,
+          "defense": 10,
+          "scouting": 2,
+          "mobility": 5,
+          "repair": 0,
+          "suppressed": 0,
+          "alive": true,
+          "callsign": null,
+          "rankId": "recruit",
+          "rankName": "新兵",
+          "rankModifiers": {
+            "attack": 1,
+            "antiArmor": 1,
+            "defense": 1,
+            "scouting": 1,
+            "mobility": 1,
+            "repair": 1
+          },
+          "experience": 0,
+          "battles": 0
+        },
+        {
+          "id": "unit_scenario-e-u-3",
+          "side": "friendly",
+          "realId": "scenario-e-u-3",
+          "type": "infantry",
+          "name": "步兵班",
+          "category": "infantry",
+          "shape": "infantry",
+          "hp": 100,
+          "maxHp": 100,
+          "attack": 12,
+          "antiArmor": 4,
+          "defense": 10,
+          "scouting": 2,
+          "mobility": 5,
+          "repair": 0,
+          "suppressed": 0,
+          "alive": true,
+          "callsign": null,
+          "rankId": "recruit",
+          "rankName": "新兵",
+          "rankModifiers": {
+            "attack": 1,
+            "antiArmor": 1,
+            "defense": 1,
+            "scouting": 1,
+            "mobility": 1,
+            "repair": 1
+          },
+          "experience": 0,
+          "battles": 0
+        },
+        {
+          "id": "unit_scenario-e-u-4",
+          "side": "friendly",
+          "realId": "scenario-e-u-4",
+          "type": "at_infantry",
+          "name": "反装甲班",
+          "category": "infantry",
+          "shape": "at_infantry",
+          "hp": 90,
+          "maxHp": 90,
+          "attack": 18,
+          "antiArmor": 25,
+          "defense": 7,
+          "scouting": 2,
+          "mobility": 4,
+          "repair": 0,
+          "suppressed": 0,
+          "alive": true,
+          "callsign": null,
+          "rankId": "recruit",
+          "rankName": "新兵",
+          "rankModifiers": {
+            "attack": 1,
+            "antiArmor": 1,
+            "defense": 1,
+            "scouting": 1,
+            "mobility": 1,
+            "repair": 1
+          },
+          "experience": 0,
+          "battles": 0
+        },
+        {
+          "id": "unit_scenario-e-u-5",
+          "side": "friendly",
+          "realId": "scenario-e-u-5",
+          "type": "scout_car",
+          "name": "侦察车",
+          "category": "vehicle",
+          "shape": "scout",
+          "hp": 90,
+          "maxHp": 90,
+          "attack": 6,
+          "antiArmor": 2,
+          "defense": 6,
+          "scouting": 20,
+          "mobility": 15,
+          "repair": 0,
+          "suppressed": 0,
+          "alive": true,
+          "callsign": null,
+          "rankId": "recruit",
+          "rankName": "新兵",
+          "rankModifiers": {
+            "attack": 1,
+            "antiArmor": 1,
+            "defense": 1,
+            "scouting": 1,
+            "mobility": 1,
+            "repair": 1
+          },
+          "experience": 0,
+          "battles": 0
+        },
+        {
+          "id": "unit_scenario-e-u-6",
+          "side": "friendly",
+          "realId": "scenario-e-u-6",
+          "type": "mbt",
+          "name": "主战坦克",
+          "category": "armor",
+          "shape": "tank",
+          "hp": 160,
+          "maxHp": 160,
+          "attack": 35,
+          "antiArmor": 20,
+          "defense": 30,
+          "scouting": 3,
+          "mobility": 10,
+          "repair": 0,
+          "suppressed": 0,
+          "alive": true,
+          "callsign": null,
+          "rankId": "recruit",
+          "rankName": "新兵",
+          "rankModifiers": {
+            "attack": 1,
+            "antiArmor": 1,
+            "defense": 1,
+            "scouting": 1,
+            "mobility": 1,
+            "repair": 1
+          },
+          "experience": 0,
+          "battles": 0
+        },
+        {
+          "id": "unit_scenario-e-u-7",
+          "side": "friendly",
+          "realId": "scenario-e-u-7",
+          "type": "mbt",
+          "name": "主战坦克",
+          "category": "armor",
+          "shape": "tank",
+          "hp": 0,
+          "maxHp": 160,
+          "attack": 35,
+          "antiArmor": 20,
+          "defense": 30,
+          "scouting": 3,
+          "mobility": 10,
+          "repair": 0,
+          "suppressed": 0,
+          "alive": false,
+          "callsign": null,
+          "rankId": "recruit",
+          "rankName": "新兵",
+          "rankModifiers": {
+            "attack": 1,
+            "antiArmor": 1,
+            "defense": 1,
+            "scouting": 1,
+            "mobility": 1,
+            "repair": 1
+          },
+          "experience": 0,
+          "battles": 0
+        },
+        {
+          "id": "unit_scenario-e-u-8",
+          "side": "friendly",
+          "realId": "scenario-e-u-8",
+          "type": "repair_vehicle",
+          "name": "维修车",
+          "category": "support",
+          "shape": "repair",
+          "hp": 36,
+          "maxHp": 110,
+          "attack": 0,
+          "antiArmor": 0,
+          "defense": 8,
+          "scouting": 2,
+          "mobility": 8,
+          "repair": 20,
+          "suppressed": 0,
+          "alive": true,
+          "callsign": null,
+          "rankId": "recruit",
+          "rankName": "新兵",
+          "rankModifiers": {
+            "attack": 1,
+            "antiArmor": 1,
+            "defense": 1,
+            "scouting": 1,
+            "mobility": 1,
+            "repair": 1
+          },
+          "experience": 0,
+          "battles": 0
+        }
+      ],
+      "enemy": [
+        {
+          "id": "enemy_infantry_1",
+          "side": "enemy",
+          "realId": null,
+          "type": "enemy_infantry",
+          "name": "敌方步兵班",
+          "category": "infantry",
+          "shape": "infantry",
+          "hp": 0,
+          "maxHp": 85,
+          "attack": 10,
+          "antiArmor": 2,
+          "defense": 8,
+          "scouting": 2,
+          "mobility": 5,
+          "repair": 0,
+          "suppressed": 1,
+          "alive": false,
+          "callsign": null,
+          "rankId": null,
+          "rankName": null,
+          "rankModifiers": null,
+          "experience": 0,
+          "battles": 0
+        },
+        {
+          "id": "enemy_infantry_2",
+          "side": "enemy",
+          "realId": null,
+          "type": "enemy_infantry",
+          "name": "敌方步兵班",
+          "category": "infantry",
+          "shape": "infantry",
+          "hp": 0,
+          "maxHp": 85,
+          "attack": 10,
+          "antiArmor": 2,
+          "defense": 8,
+          "scouting": 2,
+          "mobility": 5,
+          "repair": 0,
+          "suppressed": 1,
+          "alive": false,
+          "callsign": null,
+          "rankId": null,
+          "rankName": null,
+          "rankModifiers": null,
+          "experience": 0,
+          "battles": 0
+        },
+        {
+          "id": "enemy_infantry_3",
+          "side": "enemy",
+          "realId": null,
+          "type": "enemy_infantry",
+          "name": "敌方步兵班",
+          "category": "infantry",
+          "shape": "infantry",
+          "hp": 0,
+          "maxHp": 85,
+          "attack": 10,
+          "antiArmor": 2,
+          "defense": 8,
+          "scouting": 2,
+          "mobility": 5,
+          "repair": 0,
+          "suppressed": 1,
+          "alive": false,
+          "callsign": null,
+          "rankId": null,
+          "rankName": null,
+          "rankModifiers": null,
+          "experience": 0,
+          "battles": 0
+        },
+        {
+          "id": "enemy_infantry_4",
+          "side": "enemy",
+          "realId": null,
+          "type": "enemy_infantry",
+          "name": "敌方步兵班",
+          "category": "infantry",
+          "shape": "infantry",
+          "hp": 0,
+          "maxHp": 85,
+          "attack": 10,
+          "antiArmor": 2,
+          "defense": 8,
+          "scouting": 2,
+          "mobility": 5,
+          "repair": 0,
+          "suppressed": 1,
+          "alive": false,
+          "callsign": null,
+          "rankId": null,
+          "rankName": null,
+          "rankModifiers": null,
+          "experience": 0,
+          "battles": 0
+        },
+        {
+          "id": "enemy_at_1",
+          "side": "enemy",
+          "realId": null,
+          "type": "enemy_at",
+          "name": "敌方反装甲小组",
+          "category": "at_infantry",
+          "shape": "at_infantry",
+          "hp": 0,
+          "maxHp": 80,
+          "attack": 15,
+          "antiArmor": 22,
+          "defense": 6,
+          "scouting": 2,
+          "mobility": 4,
+          "repair": 0,
+          "suppressed": 0,
+          "alive": false,
+          "callsign": null,
+          "rankId": null,
+          "rankName": null,
+          "rankModifiers": null,
+          "experience": 0,
+          "battles": 0
+        },
+        {
+          "id": "enemy_at_2",
+          "side": "enemy",
+          "realId": null,
+          "type": "enemy_at",
+          "name": "敌方反装甲小组",
+          "category": "at_infantry",
+          "shape": "at_infantry",
+          "hp": 0,
+          "maxHp": 80,
+          "attack": 15,
+          "antiArmor": 22,
+          "defense": 6,
+          "scouting": 2,
+          "mobility": 4,
+          "repair": 0,
+          "suppressed": 1,
+          "alive": false,
+          "callsign": null,
+          "rankId": null,
+          "rankName": null,
+          "rankModifiers": null,
+          "experience": 0,
+          "battles": 0
+        }
+      ]
+    },
+    "phases": [
+      {
+        "id": "scout",
+        "title": "侦察阶段",
+        "summary": "侦察判定：情报可信度 高，遭遇伏击，先手方：敌方。",
+        "details": []
+      },
+      {
+        "id": "approach",
+        "title": "接敌阶段",
+        "summary": "地形为公路：车辆机动×1.1，先手方：敌方。",
+        "details": []
+      },
+      {
+        "id": "engage",
+        "title": "交火阶段",
+        "summary": "共进行 4 轮交火",
+        "details": [
+          "第1轮交火，双方共13次攻击",
+          "第2轮交火，双方共11次攻击",
+          "第3轮交火，双方共9次攻击",
+          "第4轮交火，双方共8次攻击"
+        ]
+      },
+      {
+        "id": "resolve",
+        "title": "结算阶段",
+        "summary": "结果：胜利",
+        "details": []
+      }
+    ],
+    "events": [
+      {
+        "t": 0,
+        "type": "phase",
+        "actor": null,
+        "target": null,
+        "value": 0,
+        "text": "侦察阶段开始"
+      },
+      {
+        "t": 0.41,
+        "type": "reveal",
+        "actor": null,
+        "target": null,
+        "value": 4,
+        "text": "发现敌方单位：敌方步兵班 ×4"
+      },
+      {
+        "t": 0.81,
+        "type": "reveal",
+        "actor": null,
+        "target": null,
+        "value": 2,
+        "text": "发现敌方单位：敌方反装甲小组 ×2"
+      },
+      {
+        "t": 1.22,
+        "type": "reveal",
+        "actor": null,
+        "target": null,
+        "value": 0,
+        "text": "提前发现敌方高威胁单位"
+      },
+      {
+        "t": 1.63,
+        "type": "ambush",
+        "actor": null,
+        "target": null,
+        "value": 0,
+        "text": "scenario-e formation遭遇敌方伏击"
+      },
+      {
+        "t": 2.04,
+        "type": "phase",
+        "actor": null,
+        "target": null,
+        "value": 0,
+        "text": "接敌阶段开始"
+      },
+      {
+        "t": 2.44,
+        "type": "phase",
+        "actor": null,
+        "target": null,
+        "value": 0,
+        "text": "交火阶段开始"
+      },
+      {
+        "t": 2.85,
+        "type": "fire",
+        "actor": "enemy_infantry_1",
+        "target": "unit_scenario-e-u-8",
+        "value": 0,
+        "text": "敌方步兵班向维修车开火"
+      },
+      {
+        "t": 3.26,
+        "type": "damage",
+        "actor": "enemy_infantry_1",
+        "target": "unit_scenario-e-u-8",
+        "value": 12,
+        "text": "维修车受到12点伤害"
+      },
+      {
+        "t": 3.66,
+        "type": "fire",
+        "actor": "enemy_infantry_2",
+        "target": "unit_scenario-e-u-8",
+        "value": 0,
+        "text": "敌方步兵班向维修车开火"
+      },
+      {
+        "t": 4.07,
+        "type": "damage",
+        "actor": "enemy_infantry_2",
+        "target": "unit_scenario-e-u-8",
+        "value": 10,
+        "text": "维修车受到10点伤害"
+      },
+      {
+        "t": 4.48,
+        "type": "fire",
+        "actor": "enemy_infantry_3",
+        "target": "unit_scenario-e-u-8",
+        "value": 0,
+        "text": "敌方步兵班向维修车开火"
+      },
+      {
+        "t": 4.89,
+        "type": "damage",
+        "actor": "enemy_infantry_3",
+        "target": "unit_scenario-e-u-8",
+        "value": 11,
+        "text": "维修车受到11点伤害"
+      },
+      {
+        "t": 5.29,
+        "type": "fire",
+        "actor": "enemy_infantry_4",
+        "target": "unit_scenario-e-u-8",
+        "value": 0,
+        "text": "敌方步兵班向维修车开火"
+      },
+      {
+        "t": 5.7,
+        "type": "damage",
+        "actor": "enemy_infantry_4",
+        "target": "unit_scenario-e-u-8",
+        "value": 12,
+        "text": "维修车受到12点伤害"
+      },
+      {
+        "t": 6.11,
+        "type": "fire",
+        "actor": "enemy_at_1",
+        "target": "unit_scenario-e-u-7",
+        "value": 0,
+        "text": "敌方反装甲小组向主战坦克开火"
+      },
+      {
+        "t": 6.51,
+        "type": "damage",
+        "actor": "enemy_at_1",
+        "target": "unit_scenario-e-u-7",
+        "value": 40,
+        "text": "主战坦克受到40点伤害"
+      },
+      {
+        "t": 6.92,
+        "type": "suppress",
+        "actor": "enemy_at_1",
+        "target": "unit_scenario-e-u-7",
+        "value": 0,
+        "text": "主战坦克被压制，下次攻击下降"
+      },
+      {
+        "t": 7.33,
+        "type": "fire",
+        "actor": "enemy_at_2",
+        "target": "unit_scenario-e-u-7",
+        "value": 0,
+        "text": "敌方反装甲小组向主战坦克开火"
+      },
+      {
+        "t": 7.74,
+        "type": "damage",
+        "actor": "enemy_at_2",
+        "target": "unit_scenario-e-u-7",
+        "value": 39,
+        "text": "主战坦克受到39点伤害"
+      },
+      {
+        "t": 8.14,
+        "type": "suppress",
+        "actor": "enemy_at_2",
+        "target": "unit_scenario-e-u-7",
+        "value": 0,
+        "text": "主战坦克被压制，下次攻击下降"
+      },
+      {
+        "t": 8.55,
+        "type": "fire",
+        "actor": "unit_scenario-e-u-5",
+        "target": "enemy_infantry_3",
+        "value": 0,
+        "text": "侦察车向敌方步兵班开火"
+      },
+      {
+        "t": 8.96,
+        "type": "damage",
+        "actor": "unit_scenario-e-u-5",
+        "target": "enemy_infantry_3",
+        "value": 4,
+        "text": "敌方步兵班受到4点伤害"
+      },
+      {
+        "t": 9.36,
+        "type": "fire",
+        "actor": "unit_scenario-e-u-6",
+        "target": "enemy_infantry_3",
+        "value": 0,
+        "text": "主战坦克向敌方步兵班开火"
+      },
+      {
+        "t": 9.77,
+        "type": "damage",
+        "actor": "unit_scenario-e-u-6",
+        "target": "enemy_infantry_3",
+        "value": 48,
+        "text": "敌方步兵班受到48点伤害"
+      },
+      {
+        "t": 10.18,
+        "type": "suppress",
+        "actor": "unit_scenario-e-u-6",
+        "target": "enemy_infantry_3",
+        "value": 0,
+        "text": "敌方步兵班被压制，下次攻击下降"
+      },
+      {
+        "t": 10.59,
+        "type": "fire",
+        "actor": "unit_scenario-e-u-7",
+        "target": "enemy_infantry_3",
+        "value": 0,
+        "text": "主战坦克向敌方步兵班开火"
+      },
+      {
+        "t": 10.99,
+        "type": "damage",
+        "actor": "unit_scenario-e-u-7",
+        "target": "enemy_infantry_3",
+        "value": 48,
+        "text": "敌方步兵班受到48点伤害"
+      },
+      {
+        "t": 11.4,
+        "type": "suppress",
+        "actor": "unit_scenario-e-u-7",
+        "target": "enemy_infantry_3",
+        "value": 0,
+        "text": "敌方步兵班被压制，下次攻击下降"
+      },
+      {
+        "t": 11.81,
+        "type": "destroy",
+        "actor": "unit_scenario-e-u-7",
+        "target": "enemy_infantry_3",
+        "value": 0,
+        "text": "敌方步兵班被摧毁"
+      },
+      {
+        "t": 12.21,
+        "type": "fire",
+        "actor": "unit_scenario-e-u-1",
+        "target": "enemy_at_2",
+        "value": 0,
+        "text": "步兵班向敌方反装甲小组开火"
+      },
+      {
+        "t": 12.62,
+        "type": "damage",
+        "actor": "unit_scenario-e-u-1",
+        "target": "enemy_at_2",
+        "value": 10,
+        "text": "敌方反装甲小组受到10点伤害"
+      },
+      {
+        "t": 13.03,
+        "type": "fire",
+        "actor": "unit_scenario-e-u-2",
+        "target": "enemy_at_2",
+        "value": 0,
+        "text": "步兵班向敌方反装甲小组开火"
+      },
+      {
+        "t": 13.44,
+        "type": "damage",
+        "actor": "unit_scenario-e-u-2",
+        "target": "enemy_at_2",
+        "value": 10,
+        "text": "敌方反装甲小组受到10点伤害"
+      },
+      {
+        "t": 13.84,
+        "type": "fire",
+        "actor": "unit_scenario-e-u-3",
+        "target": "enemy_at_2",
+        "value": 0,
+        "text": "步兵班向敌方反装甲小组开火"
+      },
+      {
+        "t": 14.25,
+        "type": "damage",
+        "actor": "unit_scenario-e-u-3",
+        "target": "enemy_at_2",
+        "value": 12,
+        "text": "敌方反装甲小组受到12点伤害"
+      },
+      {
+        "t": 14.66,
+        "type": "fire",
+        "actor": "unit_scenario-e-u-4",
+        "target": "enemy_at_2",
+        "value": 0,
+        "text": "反装甲班向敌方反装甲小组开火"
+      },
+      {
+        "t": 15.06,
+        "type": "damage",
+        "actor": "unit_scenario-e-u-4",
+        "target": "enemy_at_2",
+        "value": 15,
+        "text": "敌方反装甲小组受到15点伤害"
+      },
+      {
+        "t": 15.47,
+        "type": "repair",
+        "actor": "unit_scenario-e-u-8",
+        "target": "unit_scenario-e-u-7",
+        "value": 6,
+        "text": "维修车修复主战坦克耐久6点"
+      },
+      {
+        "t": 15.88,
+        "type": "fire",
+        "actor": "unit_scenario-e-u-5",
+        "target": "enemy_infantry_2",
+        "value": 0,
+        "text": "侦察车向敌方步兵班开火"
+      },
+      {
+        "t": 16.29,
+        "type": "damage",
+        "actor": "unit_scenario-e-u-5",
+        "target": "enemy_infantry_2",
+        "value": 4,
+        "text": "敌方步兵班受到4点伤害"
+      },
+      {
+        "t": 16.69,
+        "type": "fire",
+        "actor": "unit_scenario-e-u-6",
+        "target": "enemy_infantry_2",
+        "value": 0,
+        "text": "主战坦克向敌方步兵班开火"
+      },
+      {
+        "t": 17.1,
+        "type": "damage",
+        "actor": "unit_scenario-e-u-6",
+        "target": "enemy_infantry_2",
+        "value": 50,
+        "text": "敌方步兵班受到50点伤害"
+      },
+      {
+        "t": 17.51,
+        "type": "suppress",
+        "actor": "unit_scenario-e-u-6",
+        "target": "enemy_infantry_2",
+        "value": 0,
+        "text": "敌方步兵班被压制，下次攻击下降"
+      },
+      {
+        "t": 17.91,
+        "type": "fire",
+        "actor": "unit_scenario-e-u-7",
+        "target": "enemy_infantry_2",
+        "value": 0,
+        "text": "主战坦克向敌方步兵班开火"
+      },
+      {
+        "t": 18.32,
+        "type": "damage",
+        "actor": "unit_scenario-e-u-7",
+        "target": "enemy_infantry_2",
+        "value": 55,
+        "text": "敌方步兵班受到55点伤害"
+      },
+      {
+        "t": 18.73,
+        "type": "suppress",
+        "actor": "unit_scenario-e-u-7",
+        "target": "enemy_infantry_2",
+        "value": 0,
+        "text": "敌方步兵班被压制，下次攻击下降"
+      },
+      {
+        "t": 19.14,
+        "type": "destroy",
+        "actor": "unit_scenario-e-u-7",
+        "target": "enemy_infantry_2",
+        "value": 0,
+        "text": "敌方步兵班被摧毁"
+      },
+      {
+        "t": 19.54,
+        "type": "fire",
+        "actor": "enemy_infantry_1",
+        "target": "unit_scenario-e-u-8",
+        "value": 0,
+        "text": "敌方步兵班向维修车开火"
+      },
+      {
+        "t": 19.95,
+        "type": "damage",
+        "actor": "enemy_infantry_1",
+        "target": "unit_scenario-e-u-8",
+        "value": 10,
+        "text": "维修车受到10点伤害"
+      },
+      {
+        "t": 20.36,
+        "type": "fire",
+        "actor": "enemy_infantry_4",
+        "target": "unit_scenario-e-u-8",
+        "value": 0,
+        "text": "敌方步兵班向维修车开火"
+      },
+      {
+        "t": 20.76,
+        "type": "damage",
+        "actor": "enemy_infantry_4",
+        "target": "unit_scenario-e-u-8",
+        "value": 9,
+        "text": "维修车受到9点伤害"
+      },
+      {
+        "t": 21.17,
+        "type": "fire",
+        "actor": "unit_scenario-e-u-1",
+        "target": "enemy_at_2",
+        "value": 0,
+        "text": "步兵班向敌方反装甲小组开火"
+      },
+      {
+        "t": 21.58,
+        "type": "damage",
+        "actor": "unit_scenario-e-u-1",
+        "target": "enemy_at_2",
+        "value": 10,
+        "text": "敌方反装甲小组受到10点伤害"
+      },
+      {
+        "t": 21.99,
+        "type": "fire",
+        "actor": "unit_scenario-e-u-2",
+        "target": "enemy_at_2",
+        "value": 0,
+        "text": "步兵班向敌方反装甲小组开火"
+      },
+      {
+        "t": 22.39,
+        "type": "damage",
+        "actor": "unit_scenario-e-u-2",
+        "target": "enemy_at_2",
+        "value": 10,
+        "text": "敌方反装甲小组受到10点伤害"
+      },
+      {
+        "t": 22.8,
+        "type": "fire",
+        "actor": "unit_scenario-e-u-3",
+        "target": "enemy_at_2",
+        "value": 0,
+        "text": "步兵班向敌方反装甲小组开火"
+      },
+      {
+        "t": 23.21,
+        "type": "damage",
+        "actor": "unit_scenario-e-u-3",
+        "target": "enemy_at_2",
+        "value": 11,
+        "text": "敌方反装甲小组受到11点伤害"
+      },
+      {
+        "t": 23.61,
+        "type": "fire",
+        "actor": "enemy_at_1",
+        "target": "unit_scenario-e-u-7",
+        "value": 0,
+        "text": "敌方反装甲小组向主战坦克开火"
+      },
+      {
+        "t": 24.02,
+        "type": "damage",
+        "actor": "enemy_at_1",
+        "target": "unit_scenario-e-u-7",
+        "value": 29,
+        "text": "主战坦克受到29点伤害"
+      },
+      {
+        "t": 24.43,
+        "type": "fire",
+        "actor": "enemy_at_2",
+        "target": "unit_scenario-e-u-7",
+        "value": 0,
+        "text": "敌方反装甲小组向主战坦克开火"
+      },
+      {
+        "t": 24.84,
+        "type": "damage",
+        "actor": "enemy_at_2",
+        "target": "unit_scenario-e-u-7",
+        "value": 28,
+        "text": "主战坦克受到28点伤害"
+      },
+      {
+        "t": 25.24,
+        "type": "fire",
+        "actor": "unit_scenario-e-u-4",
+        "target": "enemy_at_2",
+        "value": 0,
+        "text": "反装甲班向敌方反装甲小组开火"
+      },
+      {
+        "t": 25.65,
+        "type": "damage",
+        "actor": "unit_scenario-e-u-4",
+        "target": "enemy_at_2",
+        "value": 18,
+        "text": "敌方反装甲小组受到18点伤害"
+      },
+      {
+        "t": 26.06,
+        "type": "suppress",
+        "actor": "unit_scenario-e-u-4",
+        "target": "enemy_at_2",
+        "value": 0,
+        "text": "敌方反装甲小组被压制，下次攻击下降"
+      },
+      {
+        "t": 26.46,
+        "type": "destroy",
+        "actor": "unit_scenario-e-u-4",
+        "target": "enemy_at_2",
+        "value": 0,
+        "text": "敌方反装甲小组被摧毁"
+      },
+      {
+        "t": 26.87,
+        "type": "repair",
+        "actor": "unit_scenario-e-u-8",
+        "target": "unit_scenario-e-u-7",
+        "value": 6,
+        "text": "维修车修复主战坦克耐久6点"
+      },
+      {
+        "t": 27.28,
+        "type": "fire",
+        "actor": "unit_scenario-e-u-5",
+        "target": "enemy_infantry_1",
+        "value": 0,
+        "text": "侦察车向敌方步兵班开火"
+      },
+      {
+        "t": 27.69,
+        "type": "damage",
+        "actor": "unit_scenario-e-u-5",
+        "target": "enemy_infantry_1",
+        "value": 5,
+        "text": "敌方步兵班受到5点伤害"
+      },
+      {
+        "t": 28.09,
+        "type": "fire",
+        "actor": "unit_scenario-e-u-6",
+        "target": "enemy_infantry_1",
+        "value": 0,
+        "text": "主战坦克向敌方步兵班开火"
+      },
+      {
+        "t": 28.5,
+        "type": "damage",
+        "actor": "unit_scenario-e-u-6",
+        "target": "enemy_infantry_1",
+        "value": 54,
+        "text": "敌方步兵班受到54点伤害"
+      },
+      {
+        "t": 28.91,
+        "type": "suppress",
+        "actor": "unit_scenario-e-u-6",
+        "target": "enemy_infantry_1",
+        "value": 0,
+        "text": "敌方步兵班被压制，下次攻击下降"
+      },
+      {
+        "t": 29.31,
+        "type": "fire",
+        "actor": "unit_scenario-e-u-7",
+        "target": "enemy_infantry_1",
+        "value": 0,
+        "text": "主战坦克向敌方步兵班开火"
+      },
+      {
+        "t": 29.72,
+        "type": "damage",
+        "actor": "unit_scenario-e-u-7",
+        "target": "enemy_infantry_1",
+        "value": 58,
+        "text": "敌方步兵班受到58点伤害"
+      },
+      {
+        "t": 30.13,
+        "type": "suppress",
+        "actor": "unit_scenario-e-u-7",
+        "target": "enemy_infantry_1",
+        "value": 0,
+        "text": "敌方步兵班被压制，下次攻击下降"
+      },
+      {
+        "t": 30.54,
+        "type": "destroy",
+        "actor": "unit_scenario-e-u-7",
+        "target": "enemy_infantry_1",
+        "value": 0,
+        "text": "敌方步兵班被摧毁"
+      },
+      {
+        "t": 30.94,
+        "type": "fire",
+        "actor": "enemy_infantry_4",
+        "target": "unit_scenario-e-u-8",
+        "value": 0,
+        "text": "敌方步兵班向维修车开火"
+      },
+      {
+        "t": 31.35,
+        "type": "damage",
+        "actor": "enemy_infantry_4",
+        "target": "unit_scenario-e-u-8",
+        "value": 10,
+        "text": "维修车受到10点伤害"
+      },
+      {
+        "t": 31.76,
+        "type": "fire",
+        "actor": "unit_scenario-e-u-1",
+        "target": "enemy_at_1",
+        "value": 0,
+        "text": "步兵班向敌方反装甲小组开火"
+      },
+      {
+        "t": 32.16,
+        "type": "damage",
+        "actor": "unit_scenario-e-u-1",
+        "target": "enemy_at_1",
+        "value": 12,
+        "text": "敌方反装甲小组受到12点伤害"
+      },
+      {
+        "t": 32.57,
+        "type": "fire",
+        "actor": "unit_scenario-e-u-2",
+        "target": "enemy_at_1",
+        "value": 0,
+        "text": "步兵班向敌方反装甲小组开火"
+      },
+      {
+        "t": 32.98,
+        "type": "damage",
+        "actor": "unit_scenario-e-u-2",
+        "target": "enemy_at_1",
+        "value": 12,
+        "text": "敌方反装甲小组受到12点伤害"
+      },
+      {
+        "t": 33.39,
+        "type": "fire",
+        "actor": "unit_scenario-e-u-3",
+        "target": "enemy_at_1",
+        "value": 0,
+        "text": "步兵班向敌方反装甲小组开火"
+      },
+      {
+        "t": 33.79,
+        "type": "damage",
+        "actor": "unit_scenario-e-u-3",
+        "target": "enemy_at_1",
+        "value": 9,
+        "text": "敌方反装甲小组受到9点伤害"
+      },
+      {
+        "t": 34.2,
+        "type": "fire",
+        "actor": "enemy_at_1",
+        "target": "unit_scenario-e-u-7",
+        "value": 0,
+        "text": "敌方反装甲小组向主战坦克开火"
+      },
+      {
+        "t": 34.61,
+        "type": "damage",
+        "actor": "enemy_at_1",
+        "target": "unit_scenario-e-u-7",
+        "value": 30,
+        "text": "主战坦克受到30点伤害"
+      },
+      {
+        "t": 35.01,
+        "type": "fire",
+        "actor": "unit_scenario-e-u-4",
+        "target": "enemy_at_1",
+        "value": 0,
+        "text": "反装甲班向敌方反装甲小组开火"
+      },
+      {
+        "t": 35.42,
+        "type": "damage",
+        "actor": "unit_scenario-e-u-4",
+        "target": "enemy_at_1",
+        "value": 16,
+        "text": "敌方反装甲小组受到16点伤害"
+      },
+      {
+        "t": 35.83,
+        "type": "suppress",
+        "actor": "unit_scenario-e-u-4",
+        "target": "enemy_at_1",
+        "value": 0,
+        "text": "敌方反装甲小组被压制，下次攻击下降"
+      },
+      {
+        "t": 36.24,
+        "type": "repair",
+        "actor": "unit_scenario-e-u-8",
+        "target": "unit_scenario-e-u-7",
+        "value": 6,
+        "text": "维修车修复主战坦克耐久6点"
+      },
+      {
+        "t": 36.64,
+        "type": "fire",
+        "actor": "unit_scenario-e-u-5",
+        "target": "enemy_infantry_4",
+        "value": 0,
+        "text": "侦察车向敌方步兵班开火"
+      },
+      {
+        "t": 37.05,
+        "type": "damage",
+        "actor": "unit_scenario-e-u-5",
+        "target": "enemy_infantry_4",
+        "value": 4,
+        "text": "敌方步兵班受到4点伤害"
+      },
+      {
+        "t": 37.46,
+        "type": "fire",
+        "actor": "unit_scenario-e-u-6",
+        "target": "enemy_infantry_4",
+        "value": 0,
+        "text": "主战坦克向敌方步兵班开火"
+      },
+      {
+        "t": 37.86,
+        "type": "damage",
+        "actor": "unit_scenario-e-u-6",
+        "target": "enemy_infantry_4",
+        "value": 58,
+        "text": "敌方步兵班受到58点伤害"
+      },
+      {
+        "t": 38.27,
+        "type": "suppress",
+        "actor": "unit_scenario-e-u-6",
+        "target": "enemy_infantry_4",
+        "value": 0,
+        "text": "敌方步兵班被压制，下次攻击下降"
+      },
+      {
+        "t": 38.68,
+        "type": "fire",
+        "actor": "unit_scenario-e-u-7",
+        "target": "enemy_infantry_4",
+        "value": 0,
+        "text": "主战坦克向敌方步兵班开火"
+      },
+      {
+        "t": 39.09,
+        "type": "damage",
+        "actor": "unit_scenario-e-u-7",
+        "target": "enemy_infantry_4",
+        "value": 49,
+        "text": "敌方步兵班受到49点伤害"
+      },
+      {
+        "t": 39.49,
+        "type": "suppress",
+        "actor": "unit_scenario-e-u-7",
+        "target": "enemy_infantry_4",
+        "value": 0,
+        "text": "敌方步兵班被压制，下次攻击下降"
+      },
+      {
+        "t": 39.9,
+        "type": "destroy",
+        "actor": "unit_scenario-e-u-7",
+        "target": "enemy_infantry_4",
+        "value": 0,
+        "text": "敌方步兵班被摧毁"
+      },
+      {
+        "t": 40.31,
+        "type": "fire",
+        "actor": "unit_scenario-e-u-1",
+        "target": "enemy_at_1",
+        "value": 0,
+        "text": "步兵班向敌方反装甲小组开火"
+      },
+      {
+        "t": 40.71,
+        "type": "damage",
+        "actor": "unit_scenario-e-u-1",
+        "target": "enemy_at_1",
+        "value": 10,
+        "text": "敌方反装甲小组受到10点伤害"
+      },
+      {
+        "t": 41.12,
+        "type": "fire",
+        "actor": "unit_scenario-e-u-2",
+        "target": "enemy_at_1",
+        "value": 0,
+        "text": "步兵班向敌方反装甲小组开火"
+      },
+      {
+        "t": 41.53,
+        "type": "damage",
+        "actor": "unit_scenario-e-u-2",
+        "target": "enemy_at_1",
+        "value": 9,
+        "text": "敌方反装甲小组受到9点伤害"
+      },
+      {
+        "t": 41.94,
+        "type": "fire",
+        "actor": "unit_scenario-e-u-3",
+        "target": "enemy_at_1",
+        "value": 0,
+        "text": "步兵班向敌方反装甲小组开火"
+      },
+      {
+        "t": 42.34,
+        "type": "damage",
+        "actor": "unit_scenario-e-u-3",
+        "target": "enemy_at_1",
+        "value": 10,
+        "text": "敌方反装甲小组受到10点伤害"
+      },
+      {
+        "t": 42.75,
+        "type": "fire",
+        "actor": "enemy_at_1",
+        "target": "unit_scenario-e-u-7",
+        "value": 0,
+        "text": "敌方反装甲小组向主战坦克开火"
+      },
+      {
+        "t": 43.16,
+        "type": "damage",
+        "actor": "enemy_at_1",
+        "target": "unit_scenario-e-u-7",
+        "value": 26,
+        "text": "主战坦克受到26点伤害"
+      },
+      {
+        "t": 43.56,
+        "type": "destroy",
+        "actor": "enemy_at_1",
+        "target": "unit_scenario-e-u-7",
+        "value": 0,
+        "text": "主战坦克被摧毁"
+      },
+      {
+        "t": 43.97,
+        "type": "fire",
+        "actor": "unit_scenario-e-u-4",
+        "target": "enemy_at_1",
+        "value": 0,
+        "text": "反装甲班向敌方反装甲小组开火"
+      },
+      {
+        "t": 44.38,
+        "type": "damage",
+        "actor": "unit_scenario-e-u-4",
+        "target": "enemy_at_1",
+        "value": 14,
+        "text": "敌方反装甲小组受到14点伤害"
+      },
+      {
+        "t": 44.79,
+        "type": "destroy",
+        "actor": "unit_scenario-e-u-4",
+        "target": "enemy_at_1",
+        "value": 0,
+        "text": "敌方反装甲小组被摧毁"
+      },
+      {
+        "t": 45.19,
+        "type": "phase",
+        "actor": null,
+        "target": null,
+        "value": 0,
+        "text": "结算阶段开始"
+      },
+      {
+        "t": 45.6,
+        "type": "result",
+        "actor": null,
+        "target": null,
+        "value": 0,
+        "text": "战斗结果：胜利"
+      }
+    ],
+    "rounds": [
+      {
+        "index": 1,
+        "summary": "第1轮交火，双方共13次攻击",
+        "actions": 13
+      },
+      {
+        "index": 2,
+        "summary": "第2轮交火，双方共11次攻击",
+        "actions": 11
+      },
+      {
+        "index": 3,
+        "summary": "第3轮交火，双方共9次攻击",
+        "actions": 9
+      },
+      {
+        "index": 4,
+        "summary": "第4轮交火，双方共8次攻击",
+        "actions": 8
+      }
+    ],
+    "losses": {
+      "friendly": [
+        {
+          "id": "unit_scenario-e-u-7",
+          "realId": "scenario-e-u-7",
+          "type": "mbt",
+          "name": "主战坦克",
+          "side": "friendly"
+        }
+      ],
+      "enemy": [
+        {
+          "id": "enemy_infantry_3",
+          "realId": null,
+          "type": "enemy_infantry",
+          "name": "敌方步兵班",
+          "side": "enemy"
+        },
+        {
+          "id": "enemy_infantry_2",
+          "realId": null,
+          "type": "enemy_infantry",
+          "name": "敌方步兵班",
+          "side": "enemy"
+        },
+        {
+          "id": "enemy_at_2",
+          "realId": null,
+          "type": "enemy_at",
+          "name": "敌方反装甲小组",
+          "side": "enemy"
+        },
+        {
+          "id": "enemy_infantry_1",
+          "realId": null,
+          "type": "enemy_infantry",
+          "name": "敌方步兵班",
+          "side": "enemy"
+        },
+        {
+          "id": "enemy_infantry_4",
+          "realId": null,
+          "type": "enemy_infantry",
+          "name": "敌方步兵班",
+          "side": "enemy"
+        },
+        {
+          "id": "enemy_at_1",
+          "realId": null,
+          "type": "enemy_at",
+          "name": "敌方反装甲小组",
+          "side": "enemy"
+        }
+      ]
+    },
+    "result": "victory",
+    "reasons": {
+      "advantages": [
+        "侦察充分，提前发现敌方部署",
+        "步兵为装甲单位提供了掩护",
+        "维修车在交火中恢复了耐久"
+      ],
+      "problems": [
+        "遭遇敌方伏击，先手被夺",
+        "主战坦克遭到反装甲小组集中攻击"
+      ]
+    },
+    "rewards": {
+      "supply": 400,
+      "intel": 10
+    },
+    "capture": true,
+    "duration": 48,
+    "summary": "scenario-e formation在边境公路的作战以胜利告终。我方损失 1 个单位，敌方损失 6 个单位。",
+    "scout": {
+      "friendlyScouting": 36,
+      "ambushChance": 0.05,
+      "revealChance": 0.95,
+      "revealHighThreat": true,
+      "firstStrike": "enemy"
+    },
+    "modifiers": {
+      "scouting": 1,
+      "defense": 1,
+      "damage": 1,
+      "ambush": 0,
+      "firstPhaseAttack": 1.25,
+      "armorAttack": 1.15,
+      "infantryAttack": 1,
+      "suppression": 1,
+      "revealChance": 0,
+      "upkeep": 1.25,
+      "atRisk": 0.3,
+      "research": {
+        "supplyPerSec": 0,
+        "alloyPerSec": 0,
+        "supplyCap": 0,
+        "alloyCap": 0,
+        "infantryProductionTimeMultiplier": 1,
+        "vehicleProductionTimeMultiplier": 1,
+        "repairTimeMultiplier": 1,
+        "armorBattleDefenseMultiplier": 1,
+        "battleScoutingMultiplier": 1,
+        "commandCapacity": 0
+      }
+    },
+    "experienceMultiplier": 1
+  },
+  "rebuildHash": "c2224404520a2bfe435be4c7c21f494222af7332ec8162e5482dc2893871a601"
+}

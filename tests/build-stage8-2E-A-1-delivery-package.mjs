@@ -1,0 +1,22 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import crypto from 'node:crypto';
+import { execFileSync } from 'node:child_process';
+import { fileURLToPath } from 'node:url';
+
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const archive = path.join(root, 'iron-command-stage8-2E-A-1-formal-sidecar-hardening.zip');
+const hashFile = (file) => crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
+const boundaryPath = path.join(root, 'tests/stage8-2E-A-1-boundary.json');
+const boundary = JSON.parse(fs.readFileSync(boundaryPath, 'utf8'));
+const actual = crypto.createHash('sha256').update(boundary.formalBoundaryFiles.slice().sort().map((file) => `${file}\0${hashFile(path.join(root, file))}\n`).join('')).digest('hex');
+if (actual !== boundary.formalBoundaryHash) throw new Error('stage8.2E-A.1 boundary manifest is stale');
+const output = execFileSync('npm', ['test'], { cwd: root, encoding: 'utf8', maxBuffer: 128 * 1024 * 1024 });
+fs.mkdirSync(path.join(root, 'tests/outputs'), { recursive: true });
+fs.writeFileSync(path.join(root, 'tests/outputs/stage8-2E-A-1-full-test-output.txt'), output);
+const temp = path.join(root, `.stage8-2E-A-1-${process.pid}.zip`);
+execFileSync('zip', ['-rq', temp, '.', '-x', '*.zip', 'node_modules/*', 'output/*', 'tmp/*', '*.log', '*.tmp', '*.backup', '*/.*'], { cwd: root, stdio: 'inherit' });
+fs.renameSync(temp, archive);
+execFileSync(process.execPath, ['tests/verify-stage8-2E-A-1-delivery-package.mjs', archive], { cwd: root, stdio: 'inherit' });
+console.log(`delivery package: ${archive}`);
+console.log(`sha256: ${hashFile(archive)}`);

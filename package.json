@@ -1,0 +1,16 @@
+{
+  "name": "iron-command",
+  "version": "0.8.1-hotfix.3",
+  "private": true,
+  "type": "module",
+  "description": "钢铁指令 / IRON COMMAND —— 纯前端军事基地经营放置游戏原型（零第三方依赖；使用 ES Module，需要通过本地 HTTP 服务器运行，直接执行 npm start 即可）",
+  "scripts": {
+    "build": "node scripts/build-site.mjs",
+    "start": "node scripts/serve.mjs",
+    "test": "node tests/stage3-test.mjs && node tests/stage4-test.mjs && node tests/stage5-test.mjs && node tests/stage6-test.mjs && node tests/stage7-test.mjs && node tests/stage8-test.mjs && node tests/stage8-1-test.mjs && node tests/stage8-1-1-test.mjs && node tests/stage8-2D-A-2-test.mjs && node tests/stage8-2D-A-3-test.mjs && node tests/stage8-2E-A-test.mjs && node experiments/battle-sandbox/tests/formal-contract-presentation-integration-test.mjs && node tests/stage8-2E-A-1-test.mjs && node tests/stage8-2E-A-2-test.mjs",
+    "browser:evidence": "node tests/browser/formal-battle-evidence.mjs",
+    "verify:stage8-2E-A-1": "node tests/verify-stage8-2E-A-1-delivery-package.mjs",
+    "verify:stage8-2E-A-2": "node tests/verify-stage8-2E-A-2-delivery-package.mjs",
+    "build:stage8-2E-A-2": "node tests/build-stage8-2E-A-2-delivery-package.mjs"
+  }
+}

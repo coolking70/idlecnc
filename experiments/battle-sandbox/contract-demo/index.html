@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>真实战报驱动演示 · 参数化胜利模板</title>
+  <link rel="stylesheet" href="./contract-demo.css" />
+</head>
+<body>
+  <main class="contract-shell">
+    <header class="masthead">
+      <div><div class="eyebrow">IRON COMMAND · CONTRACT PRESENTATION 8.2D-B.2</div><h1>35秒公路 RTS 战斗演出</h1></div>
+      <div class="masthead-note">正在加载参数化胜利报告…<br />无正式战斗页面接入 · 无资源结算写入</div>
+    </header>
+    <section class="viewport" aria-label="真实战报驱动的边境公路战斗画面"><canvas id="contract-canvas" width="1280" height="720"></canvas><div class="scanline" aria-hidden="true"></div></section>
+    <div id="contract-error" class="error" hidden></div>
+    <section class="controls" aria-label="契约演示控制">
+      <div class="control-group"><button id="toggle-play" class="primary" type="button">暂停</button><button id="restart" type="button">重新开始</button></div>
+      <div class="control-group" role="group" aria-label="播放速度"><button class="speed" data-speed="0.5" type="button">0.5×</button><button class="speed active" data-speed="1" type="button">1×</button><button class="speed" data-speed="2" type="button">2×</button></div>
+      <div class="control-group"><button id="toggle-hud" type="button">隐藏HUD</button><button id="toggle-debug" type="button">开启权威调试</button><span id="state-note" class="control-note">正在加载 Fixture…</span></div>
+    </section>
+    <div class="footer-note"><span>?source=fixture · ?source=scenario-b/c/d/e/f</span><span>绝对取帧：window.seekContractDemoTime(seconds) · 调试层默认关闭</span></div>
+  </main>
+  <script type="module" src="./contract-demo.js"></script>
+</body>
+</html>

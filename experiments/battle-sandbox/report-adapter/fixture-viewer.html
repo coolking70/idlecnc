@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>钢铁指令 · 8.2D-A 战报契约查看器</title>
+  <link rel="stylesheet" href="./fixture-viewer.css">
+</head>
+<body>
+  <header class="masthead">
+    <div><p class="eyebrow">IRON COMMAND / REPORT ADAPTER</p><h1>权威战报契约检查台</h1></div>
+    <label>Fixture <select id="fixture-select" aria-label="选择战报 fixture"></select></label>
+  </header>
+  <main>
+    <section id="summary" class="panel"></section>
+    <div class="grid">
+      <section class="panel"><h2>战术角色绑定</h2><div id="roles"></div></section>
+      <section class="panel"><h2>权威锚点</h2><div id="anchors"></div></section>
+    </div>
+    <section class="panel"><h2>演员快照</h2><div id="actors"></div></section>
+    <section class="panel"><h2>诊断与校验</h2><pre id="diagnostics"></pre></section>
+    <details class="panel"><summary>Normalized contract JSON</summary><pre id="contract-json"></pre></details>
+  </main>
+  <script type="module" src="./fixture-viewer.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,6 @@
+dist/
+output/
+screenshots/
+artifacts/
+*.zip
+.DS_Store

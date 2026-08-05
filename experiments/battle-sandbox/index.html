@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>阶段8.2C · 20～35秒突破、防线崩溃与目标占领</title>
+  <link rel="stylesheet" href="./sandbox.css" />
+</head>
+<body>
+  <main class="sandbox-shell">
+    <header class="masthead">
+      <div><div class="eyebrow">IRON COMMAND · VISUAL EXPERIMENT 8.2C</div><h1>独立固定 RTS 战斗沙盒</h1></div>
+      <div class="masthead-note">20～35秒突破、防线崩溃与目标占领<br />固定种子 82021 · 无正式战斗系统接入</div>
+    </header>
+    <section class="viewport" aria-label="边境公路遭遇战画面"><canvas id="battle-canvas" width="1280" height="720"></canvas><div class="scanline" aria-hidden="true"></div></section>
+    <section class="controls" aria-label="沙盒控制">
+      <div class="control-group"><button id="toggle-play" class="primary" type="button">暂停</button><button id="restart" type="button">重新开始</button></div>
+      <div class="control-group" role="group" aria-label="播放速度"><button class="speed active" data-speed="1" type="button">1×</button><button class="speed" data-speed="0.5" type="button">0.5×</button><button class="speed" data-speed="2" type="button">2×</button></div>
+      <div class="control-group"><button id="toggle-hud" type="button">隐藏HUD</button><span id="state-note" class="control-note">场景初始化</span></div>
+    </section>
+    <div class="footer-note"><span>鼠标无需操作 · 画面将在 00:35 自动暂停</span><span>Space：暂停/继续 · R：重新开始 · F：全屏</span></div>
+  </main>
+  <script type="module" src="./sandbox.js"></script>
+</body>
+</html>

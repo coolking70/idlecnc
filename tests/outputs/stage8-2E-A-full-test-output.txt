@@ -1,0 +1,981 @@
+
+> iron-command@0.8.1-hotfix.3 test
+> node tests/stage3-test.mjs && node tests/stage4-test.mjs && node tests/stage5-test.mjs && node tests/stage6-test.mjs && node tests/stage7-test.mjs && node tests/stage8-test.mjs && node tests/stage8-1-test.mjs && node tests/stage8-1-1-test.mjs && node tests/stage8-2D-A-2-test.mjs && node tests/stage8-2D-A-3-test.mjs && node tests/stage8-2E-A-test.mjs && node experiments/battle-sandbox/tests/formal-contract-presentation-integration-test.mjs
+
+════════════════════════════════════════════
+  钢铁指令 阶段3 自动测试
+════════════════════════════════════════════
+
+── 一、阶段标记与阶段1/2 回归 ──
+  PASS  01 CURRENT_STAGE 已升级（向后兼容 >= 3）
+  PASS  02 SAVE_VERSION 已升级（向后兼容 >= 2）
+  PASS  03 阶段1回归：初始建筑/电力/指挥容量/产量正确
+  PASS  04 阶段2回归：五种建筑均可建成且电力不超载
+  PASS  05 阶段2回归：取消施工返还 50% 且工地移除
+
+── 二、建筑解锁单位 ──
+  PASS  06 兵营建成后解锁步兵班与反装甲班
+  PASS  07 装甲工厂建成后解锁侦察车/主战坦克/维修车
+  PASS  08 解锁列表不会出现重复项
+
+── 三、生产资格判断与错误码 ──
+  PASS  09 未知单位类型 → code=unknown
+  PASS  10 未建兵营 → code=producer_missing 且提示“需要先建成兵营”
+  PASS  11 未解锁装甲单位 → 提示“需要先建成装甲工厂”
+  PASS  12 生产建筑未完工 → code=producer_offline
+  PASS  13 资源不足 → code=resource 且带缺口数量
+  PASS  14 条件齐备 → ok=true, code=ready
+  PASS  15 canProduce() 别名与 canQueueUnit 行为一致
+
+── 四、入队 / 扣费 / 队列上限 ──
+  PASS  16 入队立即扣除资源并开始生产
+  PASS  17 多资源单位扣费正确（反装甲班：补给130 合金30）
+  PASS  18 队列上限 5（含当前），第 6 次入队被拒且不扣费
+  PASS  19 连点 10 次不会超扣、不会超出上限
+  PASS  20 资源不足时入队被拒绝且资源不变
+  PASS  21 排队任务写入等待队列而不是立即开工
+
+── 五、推进 / 暂停 / 完成结算 ──
+  PASS  22 暂停（dt=0）时进度完全不推进
+  PASS  23 1× 推进 5 秒 → 步兵班进度 50%
+  PASS  24 帧率无关：不同步长下完成数量一致
+  PASS  25 完成时只生成 1 个单位、unitsBuilt 只 +1、日志只写一次
+  PASS  26 重复调用 completeProduction 不重复生成/不重复计数
+  PASS  27 单帧超长 dt 顺序完成多个任务且不越界
+  PASS  28 当前项完成后自动开工下一项且从 0 开始
+  PASS  29 队列全部完成后生产线空闲并写入空闲日志
+
+── 六、单位实例 ──
+  PASS  30 单位实例字段完整且数值来自 UNITS 配置
+  PASS  31 连续生产的单位实例 ID 唯一
+  PASS  32 单位实例可 JSON 序列化（可存档）
+  PASS  33 五种单位都能被正确生产出来
+
+── 七、取消生产与返还 ──
+  PASS  34 取消当前生产返还 50% 成本
+  PASS  35 取消等待任务返还 100% 且不影响当前生产
+  PASS  36 连续点击取消不会重复返还
+  PASS  37 取消等待任务用不存在的 ID 返回失败对象而不抛异常
+  PASS  38 返还被资源上限钳制，不会溢出
+  PASS  39 取消当前后自动开工下一项等待任务
+
+── 八、单位库存 ──
+  PASS  40 inventoryCount 实时按类型统计
+  PASS  41 availableUnits 只返回空闲单位
+  PASS  42 库存单位不占用指挥容量
+
+── 九、进度查询接口 ──
+  PASS  43 空闲时 getProductionProgress 返回 null
+  PASS  44 生产中返回完整进度信息且不含 undefined
+
+── 十、存档与迁移 ──
+  PASS  45 生产半途保存后读档：进度、队列、库存都被还原
+  PASS  46 阶段2 旧档（version 1，无 production/units）可正常加载
+  PASS  47 reconcileUnlocksFromBuildings：按建筑重建解锁并过滤非法单位
+  PASS  48 施工完成后解锁被重新校准（丢失的解锁会补回）
+  PASS  49 损坏的生产数据不抛异常且被自动修复（阶段4 容错）
+  PASS  50 生产队列超上限时被裁剪到 maxQueueSize
+  PASS  51 完全损坏的存档 JSON 不会让 loadGame 抛异常
+  PASS  52 生产数据为字符串等非法类型时被重建为空结构
+
+── 十一、无主施工建筑恢复 ──
+  PASS  53 单座无主施工建筑：重建施工任务，绝不免费落成
+  PASS  54 无主施工建筑进度非法时被钳制到 0~1
+  PASS  55 多座无主施工建筑：只恢复一座，其余被移除
+  PASS  56 任务与建筑类型不匹配：清除任务后尝试重建，不白嫖落成
+  PASS  57 未知建筑类型的无主工地被移除且绝不落成
+  PASS  58 读档时无主施工建筑恢复后能正常继续施工完成
+
+── 十二、生产页构建 ──
+  PASS  59 生产页可构建，5 张单位卡片齐全且不抛异常
+  PASS  60 生产页刷新时按钮禁用状态与禁用原因正确
+  PASS  61 生产中刷新：进度条百分比与库存数量正确显示
+
+── 十三、全部源码语法检查 ──
+  PASS  62 js/ 目录下所有模块通过 node --check
+  PASS  63 tests/ 与自身脚本语法正常
+
+════════════════════════════════════════════
+  测试总数：63    通过：63    失败：0
+  全部通过 ✔
+════════════════════════════════════════════
+════════════════════════════════════════════
+  钢铁指令 阶段4 自动测试
+════════════════════════════════════════════
+
+── A. 阶段标记与阶段1/2/3 兼容回归 ──
+
+── B. 编队创建 / 命名 / 上限 ──
+
+── C. 重命名 / 解散 ──
+
+── D. 成员加入 / 移除 / 双向归属 ──
+
+── E. 指挥容量动态计算与超限 ──
+
+── F. 预设模板原子性 ──
+
+── G. 编队评估提示 ──
+
+── H. 编队汇总属性 ──
+
+── I. 存档迁移与编队容错 ──
+
+── J. UI 编队页构建 ──
+
+── K. 渲染器集结区只读表现 ──
+
+── L. 调试接口契约 ──
+
+── M. 本地服务器脚本 ──
+
+── N. 全部源码语法检查 ──
+  PASS  A01 CURRENT_STAGE 已升级（向后兼容 >= 4）
+  PASS  A02 SAVE_VERSION 已升级（向后兼容 >= 3）
+  PASS  A03 阶段1回归：初始建筑/指挥容量正确
+  PASS  A04 阶段3回归：生产步兵班扣补给100并生成单位
+  PASS  A05 阶段3回归：队列上限 5 仍生效
+  PASS  A06 阶段3回归：读档恢复 production / units（版本随 SAVE_VERSION 迁移）
+  PASS  A07 阶段3回归：损坏生产数据被自动修复且不抛
+  PASS  A08 无主施工建筑仍能被恢复（阶段3修复项保留）
+  PASS  B01 创建空编队成功，默认名为「第一战斗群」
+  PASS  B02 连续默认名序数递增且不重复
+  PASS  B03 自定义名被规范化（去首尾空格、截断到 20 字）
+  PASS  B04 空名 → NAME_INVALID
+  PASS  B05 达到上限（6）后无法再建，返回 LIMIT_REACHED
+  PASS  B06 默认名跳过已被占用的序数
+  PASS  C01 重命名成功
+  PASS  C02 改名为空 → NAME_INVALID
+  PASS  C03 重命名为原名视为不变（不报错）
+  PASS  C04 解散编队：成员返回库存（formationId 清空、status=ready）
+  PASS  C05 解散后释放指挥容量
+  PASS  C06 解散不存在的编队 → NOT_FOUND
+  PASS  D01 加入单位成功，双向归属建立
+  PASS  D02 加入单位后指挥占用增加该单位 command 值
+  PASS  D03 同一单位不能加入第二个编队 → UNIT_ASSIGNED
+  PASS  D04 非 ready 状态单位不能加入 → UNIT_NOT_READY
+  PASS  D05 移除单位成功，单位返回库存
+  PASS  D06 移除单位后指挥占用减少
+  PASS  D07 移除不存在的成员 → NOT_MEMBER
+  PASS  D08 加入不存在的单位 → UNIT_INVALID
+  PASS  D09 双向归属完全一致（unitIds 与 unit.formationId 互为映照）
+  PASS  E01 recalcDerived 依据编队成员计算 used（不信任存档字段）
+  PASS  E02 库存单位不占用指挥容量
+  PASS  E03 加入单位超过剩余容量 → CAPACITY
+  PASS  E04 超额加入被拒且不改变任何归属
+  PASS  E05 6 点容量被 3 个主战坦克（各2点）占满
+  PASS  F01 预设指挥消耗：combined=4、armor=6、recon=3
+  PASS  F02 canApplyPreset combined 库存足且容量足 → ok
+  PASS  F03 applyPreset combined 原子组建（建1编队+4成员+双向归属）
+  PASS  F04 applyPreset armor 需要 mbt/infantry/repair（capacity=6）
+  PASS  F05 库存不足 → INSUFFICIENT（recon 需2侦察车但只有1）
+  PASS  F06 容量不足 → CAPACITY（预设 need > 剩余）
+  PASS  F07 原子性：库存差1个时 applyPreset 不产生任何副作用
+  PASS  F08 预设建成的编队状态为 idle，名称取预设名
+  PASS  G01 空编队 → 单条 empty 提示
+  PASS  G02 侦察不足（纯装甲 scouting<8）触发侦察提示
+  PASS  G03 装甲缺步兵 → armorNoInfantry
+  PASS  G04 装甲缺维修车 → armorNoRepair
+  PASS  G05 反装甲不足（步兵+侦察，无装甲）触发 antiArmor
+  PASS  G06 均衡编队（combined）无提示
+  PASS  G07 getFormationWarnings 只读，不修改 state
+  PASS  H01 getFormationStats 汇总数值正确
+  PASS  H02 getFormationCommandCost 等于 stats.command
+  PASS  I01 引用不存在的单位被剔除
+  PASS  I02 同一单位被多支编队占用 → 只保留首支
+  PASS  I03 非待命状态复位为 idle 并清空 strategy/theaterId
+  PASS  I04 编队数量超限（>6）移除多余且释放其成员
+  PASS  I05 指挥容量超限 → 从末支编队尾部确定性移出成员回库存
+  PASS  I06 容错后 command = {capacity, used} 按真实成员重算（不信任存档）
+  PASS  I07 旧档 version 2 读档：migrate 到当前版本且补齐 formations/units 不抛
+  PASS  I08 带编队+成员的存档读档后完整还原
+  PASS  J01 new UI + refreshFormations 不抛，且自动选中首支编队
+  PASS  J02 空编队时 refreshFormations 不抛且选中态为空
+  PASS  J03 多次刷新不抛，且编队列表/详情渲染存在
+  PASS  K01 new BaseRenderer(canvas) 不抛，render 空基地多帧不抛
+  PASS  K02 含编队+单位的基地 render 多帧不抛
+  PASS  K03 render 绝不修改 state（编队/单位/指挥占用前后一致）
+  PASS  K04 编队事件只播表现，不修改 state
+  PASS  K05 setSelectedFormation 单向同步选中态
+  PASS  L01 formations 模块导出覆盖调试接口所需全部函数
+  PASS  L02 __IRON_COMMAND__ 列出的规则常量可经由 config 取得
+  PASS  M01 resolveRequestPath 防 ../ 穿越返回 403
+  PASS  M02 resolveRequestPath 正常路径与目录回落 index.html
+  PASS  M03 contentTypeOf 扩展名映射正确
+  PASS  M04 实际启动服务器：GET / 返回 200 且为 HTML
+  PASS  M05 实际启动服务器：POST 被拒绝（405）且编码穿越 403
+  PASS  N01 js/ 目录下所有模块通过 node --check
+  PASS  N02 scripts/ 与 tests/ 脚本语法正常
+
+════════════════════════════════════════════
+  测试总数：76    通过：76    失败：0
+  全部通过 ✔
+════════════════════════════════════════════
+
+── A. 阶段标记与阶段4/3 兼容回归 ──
+
+── B. 战区配置与解锁链 ──
+
+── C. 战前情报（雷达决定精度） ──
+
+── D. 派遣资格校验 ──
+
+── E. 派遣与活动战斗生命周期 ──
+
+── F. 确定性求解器（同种子同结果） ──
+
+── G. 占领奖励与持续收益 ──
+
+── H. 存档迁移 v3→v4 ──
+
+── I. UI 战区页 / 战报页构建（DOM 桩） ──
+
+── J. 战斗渲染器（canvas 桩） ──
+
+── K. 调试接口 / 模块导出契约 ──
+
+── L. 局部服务器与源码语法检查 ──
+════════════════════════════════════════════
+  钢铁指令 阶段5 自动测试
+══════════════════════════════════════════
+  PASS  A01 CURRENT_STAGE 已升级到阶段5（向后兼容 >= 5）
+  PASS  A02 SAVE_VERSION 已升级到 4（向后兼容 >= 4）
+  PASS  A03 阶段4回归：创建编队/默认名序数/上限仍生效
+  PASS  A04 阶段4回归：编队指令容量校验仍生效（超限被拒）
+  PASS  A05 阶段4回归：读档恢复 production / units（版本随 SAVE_VERSION 迁移）
+  PASS  A06 阶段3回归：损坏编队数据被自动修复（sanitizeFormations 双向归属）
+  PASS  B01 THEATERS 含 3 个战区且顺序稳定
+  PASS  B02 三个战区难度递增（1→2→3）
+  PASS  B03 scrap_mine 无前置且初始即解锁
+  PASS  B04 border_road 前置为 [scrap_mine]
+  PASS  B05 enemy_outpost 前置为 [border_road]
+  PASS  B06 初始状态 border_road / enemy_outpost 未解锁
+  PASS  B07 占领前置后，后续战区自动解锁
+  PASS  B08 未解锁时 lockReasonOf 给出中文提示
+  PASS  B09 listTheaters 数量与配置一致且字段完整
+  PASS  B10 ENEMY_UNITS 三类敌人均存在
+  PASS  B11 STRATEGIES 三套策略含 cost 字段
+  PASS  B12 listStrategies 顺序与配置一致
+  PASS  C01 无雷达：情报为估算（accurate=false，数量用区间）
+  PASS  C02 有雷达：情报精确（accurate=true，数量为数字）
+  PASS  C03 无雷达：高威胁单位用“疑似”模糊描述
+  PASS  C04 有雷达：笔记标记雷达在线
+  PASS  C05 隐蔽度决定伏击等级（enemy_outpost → high）
+  PASS  C06 地形效果文案随战区地形生成
+  PASS  D01 状态无效 → STATE_INVALID
+  PASS  D02 未知战区 → UNKNOWN_THEATER
+  PASS  D03 未知策略 → UNKNOWN_STRATEGY
+  PASS  D04 已有活动战斗 → BATTLE_ACTIVE
+  PASS  D05 已占领战区 → CAPTURED
+  PASS  D06 未解锁战区 → LOCKED 并带原因
+  PASS  D07 编队不存在 → FORMATION_NOT_FOUND
+  PASS  D08 编队非 idle → FORMATION_BUSY
+  PASS  D09 空编队 → FORMATION_EMPTY
+  PASS  D10 编队含维修中单位 → UNIT_UNAVAILABLE
+  PASS  D11 编队无攻击单位（仅维修车） → NO_COMBAT_UNIT
+  PASS  D12 资源不足 → INSUFFICIENT 并带 missing
+  PASS  D13 全条件满足 → READY 且成本正确
+  PASS  D14 recon_by_fire 在成本上叠加情报 5
+  PASS  E01 dispatchFormation 成功创建 activeBattle（playing=true）
+  PASS  E02 dispatchFormation 扣除了任务成本
+  PASS  E03 派遣把编队置为 FIGHTING、成员置为 deployed
+  PASS  E04 派遣增加了战区 attempts
+  PASS  E05 getActiveBattle 返回同一对象
+  PASS  E06 初始 isBattleFinished 为 false
+  PASS  E07 tickActiveBattle 推进 elapsed（未到时继续 playing）
+  PASS  E08 tickActiveBattle 到时自动结算
+  PASS  E09 settleActiveBattle 幂等（重复调用不重复扣血/发奖）
+  PASS  E10 结算后编队转为 RETURNING
+  PASS  E11 closeBattleResult 复位编队为 idle 并清空 activeBattle
+  PASS  E12 closeBattleResult 把成员恢复为 assigned
+  PASS  F01 相同 seed + 编队 + 策略 → 完全相同战报
+  PASS  F02 不同 seed 不影响结构完整性（均含四阶段与事件）
+  PASS  F03 战报关键字段完整（losses/rewards/capture/result）
+  PASS  F04 resultLabel 覆盖五类结果中文
+  PASS  F05 BATTLE_RESULT 五类常量存在
+  PASS  F06 战地抢救仅对装甲/车辆生效（不变式：recovered 单位类别只可能是 armor/vehicle）
+  PASS  F07 simulateBattle 是纯函数：不修改传入 state / formation / 真实单位
+  PASS  F08 雷达改变侦察判定：有/无雷达同 seed 下先手可能不同（确定性但受状态影响）
+  PASS  G01 首胜占领：rec.captured = true，victories +1
+  PASS  G02 首占发放 firstReward 且 firstRewardTaken = true
+  PASS  G03 已占领战区拒绝再次派遣，首占奖励不会被重复发放
+  PASS  G04 占领后 recalcDerived 把 captureIncome 计入 rates（scrap_mine → alloyPerSec +1）
+  PASS  G05 未占领不计收益，且收益一律由配置计算（不信任存档 income）
+  PASS  G06 占领 border_road → supplyPerSec +1
+  PASS  G07 getReports 历史战报按最新在前
+  PASS  G08 BATTLE.maxReports 限制（超出被裁剪）
+  PASS  H01 旧存档 version=3 迁移后 version = SAVE_VERSION(4)
+  PASS  H02 sanitizeTheaters 补齐缺失战区记录
+  PASS  H03 sanitizeTheaters 剔除未知战区记录
+  PASS  H04 sanitizeTheaters 丢弃存档 income 字段（不信任）
+  PASS  H05 sanitizeBattles 过滤无效战报（缺 events/final）
+  PASS  H06 sanitizeBattles 去重并限长
+  PASS  H07 sanitizeActiveBattle 丢弃无效活动战斗（战区不存在）
+  PASS  H08 sanitizeActiveBattle 在 sanitizeFormations 之前调用（activeFormationId 透传）
+  PASS  H09 sanitizeActiveBattle 修复已结算战斗：编队转 RETURNING
+  PASS  H10 完整 round-trip：v3 存档 → 保存 → 读档 v4（战区/战报/活动战斗保留）
+  PASS  H11 loadGame 返回 theaterRepaired / battleRepaired / upgraded 布尔字段
+  PASS  H12 损坏的 activeBattle 不导致 loadGame 白屏（返回 ok 或失败均可，但不抛）
+  PASS  I01 new UI 含战区/战报 handlers 不抛
+  PASS  I02 refreshTheater 不抛，且战区卡片数 = THEATERS 数
+  PASS  I03 派遣控制台结构完整（编队下拉 / 策略 / 成本 / 派遣按钮）
+  PASS  I04 资源不足时派遣按钮被禁用
+  PASS  I05 有活动战斗时“当前作战”面板显示且进度可推进
+  PASS  I06 结算后展示结果横幅与“返回基地”按钮
+  PASS  I07 refreshReports 不抛，且有战报时行数 = 战报数
+  PASS  I08 战报详情渲染不抛且统计赋值正确
+  PASS  J01 new BattleRenderer(canvas) 不抛
+  PASS  J02 render 活动战斗多帧不抛
+  PASS  J03 reset() 不抛
+  PASS  J04 BattleRenderer.render 不修改 activeBattle / state
+  PASS  J05 BattleRenderer 与 BaseRenderer 共存切换不抛
+  PASS  K01 theater 模块导出契约齐全（__IRON_COMMAND__ 战区相关面）
+  PASS  K02 battle 模块导出契约齐全（simulate / resultLabel / 事件类型）
+  PASS  K03 config 导出战区 / 策略 / 敌方单位 / 战斗常量
+  PASS  K04 THEATER_API 聚合面含 sanitize 系列
+  PASS  L01 scripts/serve.mjs 导出 createServer 且为 http.Server 实例
+  PASS  L02 局部服务器：真实请求返回 200 与正确 content-type
+  PASS  L03 局部服务器：路径穿越 /../ 返回 403
+  PASS  L04 全部 js/*.js 语法检查通过
+
+══════════════════════════════════════════
+  结果：99 通过 / 0 失败 / 共 99 项
+══════════════════════════════════════════
+
+── A. 阶段标记与配置 ──
+
+── B. 战斗修复 ──
+
+── C. 战斗修正接入 ──
+
+── D. 维修损伤判定与排队 ──
+
+── E. 维修推进 / 完成 / 取消 ──
+
+── F. 维修建队容错 ──
+
+── G. 维修离线推进与车间状态 ──
+
+── H. 离线结算 ──
+
+── I. 离线报告 ──
+
+── J. 离线确定性与幂等 ──
+
+── K. 存档迁移 v4→v5 与离线接线 ──
+
+── L. 战斗结算加固 ──
+
+── M. 经验配置接入 ──
+
+── N. 调试接口契约 ──
+
+── O. 界面维修页与离线报告卡片 ──
+
+── P. 渲染器维修车间表现 ──
+
+── Q. 源码语法检查 ──
+════════════════════════════════════════════
+  钢铁指令 阶段6 自动测试
+══════════════════════════════════════════
+  PASS  A01 CURRENT_STAGE 已进入阶段8
+  PASS  A02 SAVE_VERSION === 7
+  PASS  A03 package.json 版本号保持0.8.1-hotfix系列
+  PASS  A04 DAMAGE_THRESHOLDS 配置 {intact:0.75, light:0.4}
+  PASS  A05 BATTLE.experience 配置值
+  PASS  A06 REPAIR 配置（工位/队列/退款比例/耗时/成本）
+  PASS  A07 PANEL_TABS 含 repairs 与已开放 research
+  PASS  B01 战报 ID 含策略 ID
+  PASS  B02 simulateBattle 纯函数：同种子同结果
+  PASS  B03 simulateBattle 不修改状态资源
+  PASS  B04 时间轴：事件 t 单调不减且 <= duration
+  PASS  B05 时间轴：首个事件 t=0，RESULT 事件为最后一个且 t < duration
+  PASS  B06 final.friendly 快照含 realId / alive / hp
+  PASS  B07 initial/final 阵容数组结构合法
+  PASS  B08 防御修正只保护我方（敌方防御不影响我方伤害）
+  PASS  B09 反装甲风险修正存在（atRisk 修饰符）
+  PASS  B10 车辆机动受地形影响（不同战区结果可不同）
+  PASS  B11 压制阈值修正（火力侦察更易压制）
+  PASS  B12 不同策略产生不同战报 ID
+  PASS  C01 地形配置含 armorAttack / vehicleMobility
+  PASS  C02 策略修正含 suppression / defense（按策略各自定义）
+  PASS  C03 多种子求解均不抛异常
+  PASS  C04 战报奖励结构合法
+  PASS  C05 战报占领标记与结果一致
+  PASS  D01 getDamageState 边界值
+  PASS  D02 damageStateOfUnit 读单位实例
+  PASS  D03 canQueueRepair：单位不存在 → UNKNOWN_UNIT
+  PASS  D04 canQueueRepair：完好单位 → NOT_DAMAGED
+  PASS  D05 canQueueRepair：已损毁 → DESTROYED
+  PASS  D06 canQueueRepair：已在队列 → ALREADY_QUEUED
+  PASS  D07 canQueueRepair：资源不足 → INSUFFICIENT
+  PASS  D08 canQueueRepair：就绪 → READY 并带 severity/cost/duration
+  PASS  D09 queueRepair：扣资源 / 脱编队 / 状态 repairing
+  PASS  D10 queueRepair：重伤耗时与成本高于轻伤
+  PASS  D11 getRepairCost / getRepairTime 按 severity
+  PASS  D12 queueRepair 满队列 → QUEUE_FULL
+  PASS  E01 tickRepairs：无任务时 no-op
+  PASS  E02 tickRepairs：单任务完成后恢复满耐久
+  PASS  E03 tickRepairs：并行工位（两个 active 同时推进）
+  PASS  E04 tickRepairs：完成一个后队列递补
+  PASS  E05 tickRepairs：大 dt 与多次小 dt 结果一致（事件步进确定性）
+  PASS  E06 completeRepair：恢复满耐久并返回库存
+  PASS  E07 completeRepair：任务不存在 → NOT_FOUND
+  PASS  E08 cancelRepair：进行中退款 50%
+  PASS  E09 cancelRepair：排队中全额退款
+  PASS  E10 cancelRepair：任务不存在 → NOT_FOUND
+  PASS  E11 getRepairProgress / getRepairRemaining
+  PASS  E12 startQueuedRepairs：FIFO 提升
+  PASS  F01 sanitizeRepairs：空数组容错
+  PASS  F02 sanitizeRepairs：丢弃引用不存在单位的任务
+  PASS  F03 sanitizeRepairs：同一单位重复任务合并
+  PASS  F04 sanitizeRepairs：释放维修单位的编队归属
+  PASS  F05 sanitizeRepairs：活跃工位超限降级为排队
+  PASS  F06 sanitizeRepairs：孤儿维修单位（无任务但 status=repairing）恢复待命
+  PASS  G01 advanceOffline 复用 tickRepairs 并返回完成清单
+  PASS  G02 hasRepairShop：无装甲工厂为 false，有为 true
+  PASS  G03 maxQueueSize 限制生效
+  PASS  G04 REPAIR_API 聚合导出齐全
+  PASS  H01 calculateOfflineSeconds：savedAt<=0 返回 0
+  PASS  H02 calculateOfflineSeconds：超过上限截断
+  PASS  H03 calculateOfflineSeconds：正常差值
+  PASS  H04 settleOfflineProgress：空状态推进 0 秒 no-op
+  PASS  H05 settleOfflineProgress：产生资源收益
+  PASS  H06 settleOfflineProgress：推进施工完成
+  PASS  H07 settleOfflineProgress：推进生产完成
+  PASS  H08 settleOfflineProgress：推进维修完成
+  PASS  H09 settleOfflineProgress：推进游戏时钟
+  PASS  H10 settleOfflineProgress：写入 state.offline 报告
+  PASS  I01 buildOfflineReport：组装明细行
+  PASS  I02 buildOfflineReport：无进度时占位行
+  PASS  I03 dismissOfflineReport：清除 state.offline
+  PASS  I04 dismissOfflineReport：无报告时 no-op ok
+  PASS  I05 hasPendingOfflineReport：有/无报告
+  PASS  J01 settleOfflineProgress：大 dt 与多次小 dt 资源一致
+  PASS  J02 settleOfflineProgress：0 秒不标记 settled
+  PASS  J03 OFFLINE_API 聚合导出齐全
+  PASS  K01 migrate：v4 存档补挂 repairs 数组
+  PASS  K02 loadGame：触发离线结算并刷新 savedAt
+  PASS  K03 importSave：不重放离线收益（savedAt=now, offline=null）
+  PASS  K04 saveGame→loadGame 往返保留维修队列
+  PASS  K05 sanitizeRepairs 在 sanitizeFormations 之前执行（维修单位不占指挥容量）
+  PASS  L01 validateBattleReportForSettlement：合法战报通过
+  PASS  L02 validateBattleReportForSettlement：战报缺失拒绝
+  PASS  L03 validateBattleReportForSettlement：非法结果拒绝
+  PASS  L04 buildSettlementPlan：含 unitUpdates / rewards / theaterUpdate
+  PASS  L05 settleActiveBattle：事务性写入（settled 最后置位）
+  PASS  L06 settleActiveBattle：幂等（重复调用不重复发奖）
+  PASS  L07 settleActiveBattle：胜利占领并标记战区
+  PASS  L08 closeBattleResult：未结算禁止返回基地
+  PASS  M01 结算：存活单位获得参与经验 +5
+  PASS  M02 结算：胜利单位额外 +5 胜利经验
+  PASS  M03 结算：编队获得参与 +10 / 胜利 +10 经验
+  PASS  N01 repairs 模块导出 11 项调试面函数
+  PASS  N02 offline 模块导出调试面函数
+  PASS  N03 theater 新增 validateBattleReportForSettlement / buildSettlementPlan 导出
+  PASS  N04 theater 新增结果码
+  PASS  N05 canDispatch 双向校验：重复成员 → DUPLICATE_MEMBER
+  PASS  N06 canDispatch 双向校验：引用不存在单位 → UNKNOWN_UNIT
+  PASS  N07 canDispatch：deployed 状态成员 → MEMBER_STATUS
+  PASS  N08 dispatchFormation：dispatchedUnitIds 快照去重且来自真实成员
+  PASS  N09 settleActiveBattle 失败时回滚（不置 settled）
+  PASS  N10 REPAIR_CODE 全结果码存在
+  PASS  O01 UI 构建维修分页（DOM 桩）
+  PASS  O02 _updateRepairs 渲染活跃维修与候选单位
+  PASS  O03 _updateRepairs：空维修队列不抛异常
+  PASS  O04 refreshRepairs / refreshOverview 方法存在
+  PASS  O05 离线报告卡片：有报告时显示且含「知道了」按钮
+  PASS  O06 离线报告卡片：无报告时隐藏
+  PASS  P01 BaseRenderer 含 repairUnits Map
+  PASS  P02 render 含维修中单位不抛异常
+  PASS  P03 render 无维修单位时不抛异常
+  PASS  P04 render 多帧推进维修车间不抛异常
+  PASS  Q01 全部 js/*.js 语法检查通过
+  PASS  Q02 repairs.js / offline.js 存在且语法正确
+  PASS  Q03 serve.mjs 仍导出 createServer
+  PASS  Q04 package.json test 链含 stage6-test.mjs
+
+══════════════════════════════════════════
+  结果：116 通过 / 0 失败 / 共 116 项
+══════════════════════════════════════════
+
+════════════════════════════════════════════
+  钢铁指令 阶段7 自动测试
+════════════════════════════════════════════
+  PASS  01 A01 阶段与存档版本
+  PASS  02 A02 package 版本保持0.8.1-hotfix系列
+  PASS  03 A03 损伤阈值为 0.75 / 0.40
+  PASS  04 A04 unit-status 80% 完好
+  PASS  05 A05 unit-status 45% 轻伤
+  PASS  06 A06 unit-status 30% 重伤
+  PASS  07 A07 维修模块复用统一损伤判断
+  PASS  08 B01 维修重伤配置成本
+  PASS  09 B02 维修存档成本篡改被规范化
+  PASS  10 B03 返回中编队禁止维修
+  PASS  11 B04 非法单位状态禁止维修
+  PASS  12 B05 待命编队单位可维修且脱离
+  PASS  13 C01 战报 ID 包含 seed/编队/战区/策略
+  PASS  14 C02 战报友军初始/最终名单完整
+  PASS  15 C03 非法生命快照拒绝结算
+  PASS  16 C04 历史战报写入深拷贝
+  PASS  17 D01 技术实验室配置完整
+  PASS  18 D02 雷达站未完成时实验室不能建
+  PASS  19 D03 实验室建成后科研开放
+  PASS  20 D04 实验室电力消耗正确
+  PASS  21 D05 实验室渲染数据只读
+  PASS  22 E01 九项科技配置完整
+  PASS  23 E02 三分支各三项
+  PASS  24 E03 未知科技拒绝
+  PASS  25 E04 前置科技不足拒绝
+  PASS  26 E05 资源不足拒绝
+  PASS  27 E06 入队立即扣费且当前开工
+  PASS  28 E07 同科技不能重复入队
+  PASS  29 E08 队列最多三项
+  PASS  30 E09 研究推进可完成
+  PASS  31 E10 大 dt 消费后续任务剩余时间
+  PASS  32 E11 暂停不推进科研
+  PASS  33 E12 当前取消返还一半
+  PASS  34 E13 等待取消全额返还
+  PASS  35 E14 完成科技只记录一次
+  PASS  36 F01 后勤优化增加补给产量
+  PASS  37 F02 合金回收增加合金产量
+  PASS  38 F03 扩建储备增加上限
+  PASS  39 F04 指挥网络增加容量
+  PASS  40 F05 重复科技只应用一次
+  PASS  41 F06 未完成科技无效果
+  PASS  42 F07 步兵新任务使用训练快照
+  PASS  43 F08 已有步兵任务时长不被后续科技改变
+  PASS  44 F09 新维修任务使用维护快照
+  PASS  45 F10 复合装甲不改变真实maxHp
+  PASS  46 F11 战术数据链提高侦察
+  PASS  47 F12 科技战斗效果不修改敌方基础配置
+  PASS  48 G01 科研容错去重未知ID
+  PASS  49 G02 科研任务成本防篡改
+  PASS  50 G03 当前为空时恢复等待队列
+  PASS  51 G04 完成科技不能留在队列
+  PASS  52 G05 离线不增加累计游玩时间
+  PASS  53 G06 离线增加世界时间
+  PASS  54 G07 离线5秒静默
+  PASS  55 G08 离线59秒静默
+  PASS  56 G09 离线60秒生成报告
+  PASS  57 G10 同令牌只结算一次
+  PASS  58 G11 离线科研完成进入报告
+  PASS  59 G12 活动战斗离线保持暂停标记
+  PASS  60 H01 配置和模块语法检查
+  PASS  61 H02 research.js 本地服务器文件存在
+  PASS  62 H03 unit-status.js 本地服务器文件存在
+  PASS  63 H04 UI 含科研分页和九张卡
+  PASS  64 H05 主循环调用 tickResearch
+  PASS  65 H06 README 保留阶段7兼容说明
+
+════════════════════════════════════════════
+  测试总数：65    通过：65    失败：0
+  全部通过 ✔
+════════════════════════════════════════════
+
+════════════════════════════════════════════
+  钢铁指令 阶段8 自动测试
+════════════════════════════════════════════
+
+── A. 阶段标记、配置与公开契约 ──
+  PASS  01 A01 CURRENT_STAGE 为8
+  PASS  02 A02 SAVE_VERSION 为7
+  PASS  03 A03 package 版本保持0.8.1-hotfix系列
+  PASS  04 A04 四档老兵配置阈值递增
+  PASS  05 A05 老兵配置含战斗与后勤修正
+  PASS  06 A06 三个重复任务配置存在
+  PASS  07 A07 重复任务冷却按配置递增
+  PASS  08 A08 每个重复任务绑定已知战区
+  PASS  09 A09 部队分页阶段8开放
+  PASS  10 A10 操作公开 API 含成本与冷却
+
+── B. 科研依赖闭包与版本历史 ──
+  PASS  11 B01 初始科研历史含revision0
+  PASS  12 B02 非闭合科技被过滤
+  PASS  13 B03 闭合科技按配置顺序保留
+  PASS  14 B04 科研历史验证通过初始状态
+  PASS  15 B05 重复revision被历史验证拒绝
+  PASS  16 B06 科研历史限制64条
+  PASS  17 B07 非法当前科研任务被移除
+  PASS  18 B08 非法等待科研任务被移除
+  PASS  19 B09 科研完成会产生新revision
+  PASS  20 B10 科研历史公开查询为拷贝
+
+── C. 生产 / 维修可信科研绑定 ──
+  PASS  21 C01 生产任务写入researchRevision
+  PASS  22 C02 生产任务写入createdGameTime
+  PASS  23 C03 生产任务不信任后续科技
+  PASS  24 C04 维修任务写入科研版本
+  PASS  25 C05 维修任务写入创建时间
+  PASS  26 C06 维修任务不信任后续科技
+  PASS  27 C07 旧生产快照可迁移但不缩短非法任务
+  PASS  28 C08 科研修正只影响新任务
+
+── D. 单位档案、呼号与老兵等级 ──
+  PASS  29 D01 经验0为新兵
+  PASS  30 D02 经验10为训练有素
+  PASS  31 D03 经验30为老兵
+  PASS  32 D04 经验60为精锐
+  PASS  33 D05 等级进度返回下一档
+  PASS  34 D06 呼号规范化并限制长度
+  PASS  35 D07 空呼号恢复为空
+  PASS  36 D08 单位显示名包含呼号
+  PASS  37 D09 战斗属性使用等级修正
+  PASS  38 D10 等级不修改真实maxHp
+  PASS  39 D11 单位容错清理呼号与生命
+  PASS  40 D12 单位排序按经验降序
+
+── E. 战斗快照与完整性校验 ──
+  PASS  41 E01 派遣写入dispatchSnapshot
+  PASS  42 E02 派遣快照含研究revision
+  PASS  43 E03 派遣快照含单位等级
+  PASS  44 E04 派遣快照含呼号
+  PASS  45 E05 派遣后重建战报完全一致
+  PASS  46 E06 结算前修改实时单位不影响重建
+  PASS  47 E07 修改最终生命值会被拒绝
+  PASS  48 E08 alive非布尔值会被拒绝
+  PASS  49 E09 删除敌军会被拒绝
+  PASS  50 E10 结果与最终阵容冲突会被拒绝
+  PASS  51 E11 活动战斗确定性接口报告一致
+  PASS  52 E12 战报奖励不依赖实时资源
+  PASS  53 E13 事件时间单调
+  PASS  54 E14 战报初始友军全部存活
+
+── F. 重复任务派遣、结算与冷却 ──
+  PASS  55 F01 未占领战区禁止重复任务
+  PASS  56 F02 占领战区后重复任务可派遣
+  PASS  57 F03 重复任务成本含供应倍率
+  PASS  58 F04 重复任务成本不使用随机数
+  PASS  59 F05 重复任务ID含operation
+  PASS  60 F06 操作战报明确missionKind
+  PASS  61 F07 操作战报不占领战区
+  PASS  62 F08 操作战报可通过完整性校验
+  PASS  63 F09 操作结算发放确定性奖励
+  PASS  64 F10 操作结算增加胜利次数
+  PASS  65 F11 操作结算写入冷却
+  PASS  66 F12 冷却期间禁止再次派遣
+  PASS  67 F13 推进游戏时间解除冷却
+  PASS  68 F14 操作记录尝试次数只在派遣增加
+  PASS  69 F15 操作失败也保留结果记录
+  PASS  70 F16 未知操作拒绝
+
+── G. 离线世界时间与重复任务就绪 ──
+  PASS  71 G01 离线按段推进世界时间
+  PASS  72 G02 离线不增加累计游玩时间
+  PASS  73 G03 离线报告暴露operationsReady
+  PASS  74 G04 离线就绪不篡改冷却记录
+  PASS  75 G05 离线科研使用世界时间
+  PASS  76 G06 离线分段日志带不同时间
+  PASS  77 G07 重复离线令牌幂等
+  PASS  78 G08 活动战斗离线保持暂停
+
+── H. 存档容错、UI接线与文档 ──
+  PASS  79 H01 operations缺失可重建
+  PASS  80 H02 未知操作记录被移除
+  PASS  81 H03 操作胜利数不超过尝试数
+  PASS  82 H04 单位重复ID被清理
+  PASS  83 H05 战斗完整性模块导出比较器
+  PASS  84 H06 theater导出重复任务派遣
+  PASS  85 H07 battle导出快照重建
+  PASS  86 H08 UI含部队档案页
+  PASS  87 H09 UI含重复任务卡片
+  PASS  88 H10 renderer含老兵标记
+  PASS  89 H11 README已进入阶段8
+  PASS  90 H12 全部JS通过基础读取与源码契约检查
+
+════════════════════════════════════════════
+  测试总数：90    通过：90    失败：0
+  全部通过 ✔
+════════════════════════════════════════════
+
+════════════════════════════════════════════
+  钢铁指令 阶段8.1 自动测试
+════════════════════════════════════════════
+
+── A. 阶段标记与视觉模块 ──
+  PASS  01 A01 CURRENT_STAGE 保持8
+  PASS  02 A02 SAVE_VERSION 保持7
+  PASS  03 A03 package 版本保持0.8.1-hotfix系列
+  PASS  04 A04 战场世界坐标为1200×700
+  PASS  05 A05 导演/镜头/渲染器公开函数存在
+  PASS  06 A06 计划确定性：同一战报得到完全相同JSON
+  PASS  07 A07 创建计划不修改战报
+  PASS  08 A08 计划校验通过且路线不是单线
+
+── B. RTS 展示结构与权威事件 ──
+  PASS  09 B01 步兵显示4名成员
+  PASS  10 B02 反装甲组显示3名成员
+  PASS  11 B03 装甲/侦察/维修车各自有独立类别
+  PASS  12 B04 中段至少有3个友军持续可见
+  PASS  13 B05 只有DAMAGE改变hp
+  PASS  14 B06 DESTROY才让目标死亡
+  PASS  15 B07 装饰命中不带权威标记
+  PASS  16 B08 FIRE/REPAIR不直接修改hp
+  PASS  17 B09 计划中没有round展示阶段
+  PASS  18 B10 地形道具随open/fortified变化
+
+── C. 镜头与只读渲染 ──
+  PASS  19 C01 镜头支持总览/聚焦/打击/结果
+  PASS  20 C02 镜头结果模式回到战场中心
+  PASS  21 C03 镜头状态可校验
+  PASS  22 C04 渲染器多帧不抛异常
+  PASS  23 C05 渲染器不修改战报或活动战斗
+  PASS  24 C06 旧round文本不再作为战场主视图提示
+  PASS  25 C07 全局结果控件在HTML中存在
+  PASS  26 C08 基地图例与战术视图chip已接线
+
+── D. 结算、返航与迁移 ──
+  PASS  27 D01 派遣初始进入battle展示阶段
+  PASS  28 D02 结算后进入returning且返航计时归零
+  PASS  29 D03 返航两秒仍保留activeBattle
+  PASS  30 D04 五秒返航自动清空活动战斗
+  PASS  31 D05 跳过返航不重复结算或发奖
+  PASS  32 D06 旧close API仍能兼容跳过返航
+  PASS  33 D07 未结算不能跳过返航
+  PASS  34 D08 旧结算存档补齐returning字段且不重复结算
+  PASS  35 D09 自动完成后编队回到idle
+  PASS  36 D10 主循环源码接入tickBattleReturn
+
+════════════════════════════════════════════
+  测试总数：36    通过：36    失败：0
+  全部通过 ✔
+════════════════════════════════════════════
+
+════════════════════════════════════════════
+  钢铁指令 阶段8.1.1 自动测试
+════════════════════════════════════════════
+
+── A. 版本、契约与真实撤退求解 ──
+  PASS  01 A01 CURRENT_STAGE 保持8
+  PASS  02 A02 SAVE_VERSION 保持7
+  PASS  03 A03 package 版本保持0.8.1-hotfix系列
+  PASS  04 A04 RETREAT 事件常量存在
+  PASS  05 A05 结算阻断码公开
+  PASS  06 A06 安全关闭 API 公开
+  PASS  07 A07 永久错误分类为阻断
+  PASS  08 A08 时序错误保留重试
+  PASS  09 A09 固定种子由正式求解器得到WITHDRAW
+  PASS  10 A10 正式求解器的撤退战报包含RETREAT
+  PASS  11 A11 RETREAT位于RESULT之前
+  PASS  12 A12 战斗事件时间轴单调不减
+
+── B. 撤退结算与幂等阻断 ──
+  PASS  13 B01 派遣生成活动战斗且初始化阻断字段
+  PASS  14 B02 撤退报告通过完整性校验
+  PASS  15 B03 撤退结算成功
+  PASS  16 B04 撤退不占领战区
+  PASS  17 B05 撤退不发放首次占领奖励
+  PASS  18 B06 撤退仍记录参与经验/战斗次数
+  PASS  19 B07 重复结算不重复写报告
+  PASS  20 B08 未到时不能提前结算且不阻断
+  PASS  21 B09 缺RETREAT的撤退战报会被永久阻断
+  PASS  22 B10 阻断后tick返回settlement_blocked
+  PASS  23 B11 阻断后重复settle不再重试
+  PASS  24 B12 同一结算失败最多记录一次
+
+── C. 安全关闭与状态保护 ──
+  PASS  25 C01 未阻断战斗不能安全关闭
+  PASS  26 C02 安全关闭不应用奖励、损失或占领
+  PASS  27 C03 安全关闭恢复编队待命和成员assigned
+  PASS  28 C04 安全关闭只写一条安全关闭日志
+  PASS  29 C05 安全关闭后再次调用不产生新日志
+  PASS  30 C06 debug接口源码接入安全关闭
+
+── D. 旧存档确定性迁移 ──
+  PASS  31 D01 旧撤退报告缺RETREAT可由快照重建
+  PASS  32 D02 迁移不重复扣费/增加尝试次数
+  PASS  33 D03 迁移同步重建后的duration与elapsed边界
+  PASS  34 D04 无法重建的旧撤退报告会阻断而不丢失活动战斗
+  PASS  35 D05 无法重建迁移不重复刷错误日志
+  PASS  36 D06 已阻断字段可通过迁移往返保留
+  PASS  37 D07 正常撤退迁移后仍可结算一次
+
+── E. 代码边界与无副作用 ──
+  PASS  38 E01 结算失败不生成历史战报
+  PASS  39 E02 结算失败不改变单位HP
+  PASS  40 E03 结算失败不增加经验
+  PASS  41 E04 错误状态字段会自动补齐
+  PASS  42 E05 未阻断tick仍能推进播放时间
+  PASS  43 E06 文件未触碰视觉模块
+
+════════════════════════════════════════════
+  测试总数：43    通过：43    失败：0
+  全部通过 ✔
+════════════════════════════════════════════
+
+════════════════════════════════════════════
+  钢铁指令 阶段8.2D-A.2 正式结果语义测试
+════════════════════════════════════════════
+  PASS  01 outcome module exports unified functions
+  PASS  02 enemy zero permits victory
+  PASS  03 enemy zero permits pyrrhic
+  PASS  04 enemy live rejects victory
+  PASS  05 enemy live rejects pyrrhic
+  PASS  06 max-round equal combat with weak hp withdraws or loses
+  PASS  07 support-only survivor is defeat
+  PASS  08 no friendly survivor is wiped
+  PASS  09 capture and reward semantics are strict
+  PASS  10 withdraw requires exactly one retreat before result
+  PASS  11 combat capability uses hp/alive/attack
+  PASS  12 legacy five-unit seed 2 is no longer illegal victory
+  PASS  13 legacy seed 2 has authoritative retreat when withdrawn
+  PASS  14 seed 2 active battle settles without block
+  PASS  15 settlement retry does not duplicate error logs
+  PASS  16 operation victory remains successful without capture
+  PASS  17 seed scan 1..2000 has no invalid outcomes: legacy-road
+  PASS  18 seed scan 1..2000 has no invalid outcomes: campaign-victory
+  PASS  19 seed scan 1..2000 has no invalid outcomes: campaign-defeat-or-wiped
+  PASS  20 seed scan 1..2000 has no invalid outcomes: operation-result
+stage8-2D-A-2-test: 20 passed / 20 total
+
+════════════════════════════════════════════
+  钢铁指令 阶段8.2D-A.3 跨引擎确定性测试
+════════════════════════════════════════════
+  PASS  01 targeting module exists
+  PASS  02 target comparator source has no RNG call
+  PASS  03 comparator is stable across 100 calls
+  PASS  04 comparator is antisymmetric
+  PASS  05 comparator is transitive for sampled triples
+  PASS  06 comparator does not mutate ranking objects
+  PASS  07 empty targets return null without RNG
+  PASS  08 single target returns it
+  PASS  09 non-empty selection consumes exactly one RNG draw
+  PASS  10 RNG draw count is independent of candidate count
+  PASS  11 native and insertion ordering agree for 1000 candidate sets
+  PASS  12 native and merge ordering agree for 1000 candidate sets
+  PASS  13 input permutation does not change winner
+  PASS  14 fully tied targets remain stable and different salts can vary order
+  PASS  15 seed does not change an unambiguous priority winner
+  PASS  16 all formal fixtures agree across three sort implementations for seeds 1..200
+  PASS  17 legacy seed 2 remains a valid withdraw
+  PASS  18 formal source scan excludes RNG in sort comparators and wall clock
+  PASS  19 manifest boundary includes targeting and RNG utility
+stage8-2D-A-3-test: 19 passed / 19 total
+
+════════════════════════════════════════════
+  钢铁指令 阶段8.2E-A 正式旁路接入测试
+════════════════════════════════════════════
+  PASS 01 01 formal presentation directory exists
+  PASS 02 02 router module exists
+  PASS 03 03 adapter module exists
+  PASS 04 04 renderer module exists
+  PASS 05 05 cache module exists
+  PASS 06 06 time bridge module exists
+  PASS 07 07 render state module exists
+  PASS 08 08 diagnostics module exists
+  PASS 09 09 road template id is exact
+  PASS 10 10 report is a formal victory
+  PASS 11 11 report theater is border road
+  PASS 12 12 report has events
+  PASS 13 13 report has friendly actors
+  PASS 14 14 report has enemy actors
+  PASS 15 15 contract build does not mutate report
+  PASS 16 16 contract is deeply frozen
+  PASS 17 17 contract validation passes
+  PASS 18 18 contract support diagnostics pass
+  PASS 19 19 contract source template remains unassigned
+  PASS 20 20 contract has authority anchors
+  PASS 21 21 every report event is covered
+  PASS 22 22 candidate infantry requirement passes
+  PASS 23 23 candidate scout requirement passes
+  PASS 24 24 candidate armor requirement passes
+  PASS 25 25 enemy infantry requirement passes
+  PASS 26 26 adapter accepts actual active report
+  PASS 27 27 adapter selects contract mode
+  PASS 28 28 adapter preserves battle id
+  PASS 29 29 adapter preserves report id
+  PASS 30 30 adapter returns accepted template
+  PASS 31 31 plan validation passes
+  PASS 32 32 plan uses all real actors
+  PASS 33 33 plan actor ids are report ids
+  PASS 34 34 plan has no synthetic actor rows
+  PASS 35 35 plan duration is 35
+  PASS 36 36 plan result is victory
+  PASS 37 37 plan has semantic time map
+  PASS 38 38 plan has route registry
+  PASS 39 39 plan has role bindings
+  PASS 40 40 plan has required anchors
+  PASS 41 41 render state has time sampler
+  PASS 42 42 render state has text sampler
+  PASS 43 43 initial render state starts at zero
+  PASS 44 44 final render state ends at 35
+  PASS 45 45 render state actor count is stable
+  PASS 46 46 render state does not remove source ids
+  PASS 47 47 render state exposes authority
+  PASS 48 48 final state exposes capture
+  PASS 49 49 final state has result
+  PASS 50 50 render state is non-mutating
+  PASS 51 51 text state identifies report
+  PASS 52 52 text state identifies template result
+  PASS 53 53 text state reports contract validity
+  PASS 54 54 text state reports required anchors
+  PASS 55 55 text state reports objective capture
+  PASS 56 56 source zero maps to presentation zero
+  PASS 57 57 source time maps monotonically
+  PASS 58 58 presentation time remains bounded
+  PASS 59 59 inverse time remains bounded
+  PASS 60 60 paused active time does not auto-progress
+  PASS 61 61 cache first build succeeds
+  PASS 62 62 cache returns same presentation object
+  PASS 63 63 cache builds once
+  PASS 64 64 cache records hits
+  PASS 65 65 cache has one entry
+  PASS 66 66 non-victory report is rejected
+  PASS 67 67 non-victory fallback mode is legacy
+  PASS 68 68 non-victory fallback has code
+  PASS 69 69 missing report is rejected
+  PASS 70 70 wrong theater is rejected
+  PASS 71 71 formal source has no experiments import
+  PASS 72 72 formal source has no fixture identity
+  PASS 73 73 formal source has no scenario identity
+  PASS 74 74 formal source has no unsafe force win hook
+  PASS 75 75 formal source imports only allowed business boundary
+  PASS 76 76 legacy battle renderer remains present
+  PASS 77 77 main imports presentation router
+  PASS 78 78 main retains legacy renderer import
+  PASS 79 79 main does not import experiment path
+  PASS 80 80 main exposes presentation diagnostics
+  PASS 81 81 UI has selector markup
+  PASS 82 82 UI selector is session-only in router
+  PASS 83 83 actual source elapsed remains separate
+  PASS 84 84 actual report result remains authoritative
+  PASS 85 85 active battle report remains unchanged
+  PASS 86 86 contract plan has no report replacement
+  PASS 87 87 cache clear removes entries
+  PASS 88 88 router is constructible without canvas
+  PASS 89 89 router defaults to auto preference
+  PASS 90 90 router exposes diagnostics
+  PASS 91 91 router accepts legacy preference
+  PASS 92 92 router accepts contract preference
+  PASS 93 93 router falls back when no report
+  PASS 94 94 router reset clears active presentation
+  PASS 95 95 router destroy is safe
+  PASS 96 96 legacy preference forces legacy renderer
+  PASS 97 97 contract preference admits the same report
+  PASS 98 98 active report source id is runtime-derived
+  PASS 99 99 template id is not a business result
+  PASS 100 100 return phase sampler is visual-only
+  PASS 101 101 return phase preserves report result
+  PASS 102 102 final contract evidence is deterministic
+stage8-2E-A-test: 102 passed / 102 total
+
+════════════════════════════════════════════
+  正式战斗页面契约演出集成测试
+════════════════════════════════════════════
+  PASS 01 1. dynamic report is accepted or explicitly bounded
+  PASS 02 1. template is road victory
+  PASS 03 1. actor count is report-derived
+  PASS 04 1. source time zero maps to zero
+  PASS 05 1. source time advances presentation
+  PASS 06 1. presentation time stays within 35 seconds
+  PASS 07 1. returning phase pins presentation at 35
+  PASS 08 1. returning visual state is available
+  PASS 09 2. dynamic report is accepted or explicitly bounded
+  PASS 10 3. dynamic report is accepted or explicitly bounded
+  PASS 11 25 identical runtime report builds identical plan
+  PASS 12 26 plan has no hard-coded actor ids
+  PASS 13 27 plan has required repair choreography when report has repairs
+  PASS 14 28 result remains victory at final state
+  PASS 15 29 final objective is captured
+  PASS 16 30 integration path contains no experiment import
+formal-contract-presentation-integration-test: 16 passed / 16 total

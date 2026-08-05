@@ -1,0 +1,12 @@
+:root { color-scheme: dark; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; background: #091116; color: #d9e7e9; }
+* { box-sizing: border-box; }
+body { margin: 0; background: radial-gradient(circle at 20% 0%, #173039, #091116 54%); }
+.masthead { display: flex; gap: 24px; align-items: end; justify-content: space-between; padding: 28px 5vw 22px; border-bottom: 1px solid #2e5054; }
+h1, h2, p { margin: 0; } h1 { font: 700 clamp(22px, 4vw, 38px)/1.1 system-ui, sans-serif; letter-spacing: .04em; } h2 { font: 700 15px/1.2 system-ui, sans-serif; color: #efc66d; text-transform: uppercase; letter-spacing: .12em; margin-bottom: 14px; }
+.eyebrow { color: #69d0c5; font-size: 11px; letter-spacing: .2em; margin-bottom: 9px; }
+label { color: #9db9bd; font: 12px system-ui, sans-serif; display: grid; gap: 6px; } select { min-width: 260px; padding: 10px; color: #ecf5f2; background: #102127; border: 1px solid #477378; border-radius: 4px; font: inherit; }
+main { width: min(1240px, 90vw); margin: 24px auto 70px; display: grid; gap: 16px; } .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.panel { padding: 18px; border: 1px solid #294b50; border-radius: 6px; background: rgba(12, 26, 32, .9); box-shadow: 0 10px 30px rgba(0,0,0,.15); } .summary-line { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; } .metric { padding: 8px 10px; background: #122c31; border: 1px solid #28555a; border-radius: 3px; } .metric small { display: block; color: #86a8ab; font: 11px system-ui, sans-serif; } .metric strong { color: #f1cf75; font-size: 16px; }
+.ok { color: #7be0a7; } .bad { color: #ff8e7b; } .muted { color: #89a5a8; } table { width: 100%; border-collapse: collapse; font-size: 12px; } th, td { border-bottom: 1px solid #214044; padding: 8px 5px; text-align: left; vertical-align: top; } th { color: #81c9c4; font: 11px system-ui, sans-serif; text-transform: uppercase; } code { color: #e9bf68; } pre { white-space: pre-wrap; overflow: auto; color: #bed0d1; font-size: 11px; line-height: 1.55; } summary { cursor: pointer; color: #efc66d; font: 700 15px system-ui, sans-serif; }
+@media (max-width: 760px) { .masthead { display: grid; } .grid { grid-template-columns: 1fr; } select { min-width: 0; width: 100%; } }
+

@@ -1,0 +1,81 @@
+import assert from 'node:assert/strict';
+import crypto from 'node:crypto';
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { rebuildScenarioInput } from '../report-adapter/fixture-scenarios.js';
+import { simulateBattle } from '../../../js/battle.js';
+import { buildPresentationContract } from '../report-adapter/presentation-contract.js';
+import { buildVictoryPresentationPlan } from '../contract-demo/contract-plan-builder.js';
+import { buildContractCaptureState } from '../contract-demo/contract-capture-tools.js';
+import { getRepairChoreographyAtTime } from '../contract-demo/repair-choreography.js';
+import { validateSlotLayout } from '../contract-demo/slot-layout-validator.js';
+import { buildRouteRegistry } from '../contract-demo/dynamic-route-registry.js';
+import { stableStringify } from '../report-adapter/report-normalizer.js';
+import { boundsIntersect, getVisualBounds } from '../contract-demo/visual-bounds.js';
+
+const here = path.dirname(fileURLToPath(import.meta.url));
+const root = path.resolve(here, '..', '..', '..');
+const demo = path.join(root, 'experiments/battle-sandbox/contract-demo');
+const ids = ['scenario-d', 'scenario-e', 'scenario-f'];
+const payloads = Object.fromEntries(ids.map((id) => [id, JSON.parse(fs.readFileSync(path.join(demo, 'scenarios', `${id}.json`), 'utf8'))]));
+const hash = (value) => crypto.createHash('sha256').update(Buffer.isBuffer(value) ? value : stableStringify(value)).digest('hex');
+const rebuild = (payload) => {
+  const scenario = payload.scenario;
+  const input = rebuildScenarioInput(scenario);
+  const prefix = scenario.unitIdPrefix;
+  const unitIds = input.state.units.map((unit, index) => `${prefix}-u-${index + 1}`);
+  input.state.units.forEach((unit, index) => { unit.id = unitIds[index]; unit.formationId = scenario.formationId; });
+  input.formation.id = scenario.formationId; input.formation.name = scenario.formationName; input.formation.unitIds = unitIds;
+  return simulateBattle(input);
+};
+const built = Object.fromEntries(ids.map((id) => {
+  const payload = payloads[id]; const contract = buildPresentationContract(payload.report);
+  const plan = buildVictoryPresentationPlan(contract, { sourceId: id, sourceKind: payload.sourceKind, rebuildHash: payload.rebuildHash });
+  return [id, { payload, contract, plan }];
+}));
+
+let total = 0; let passed = 0;
+function check(name, fn) { total += 1; try { fn(); passed += 1; } catch (error) { console.error(`FAIL ${name}: ${error.message}`); throw error; } }
+
+check('1. scenario D/E/F files exist', () => ids.forEach((id) => assert.ok(payloads[id].report)));
+check('2. all three sources are raw solver reports', () => ids.forEach((id) => assert.equal(payloads[id].sourceKind, 'formal_solver_raw')));
+check('3. scenario C is explicitly transformed identity fuzz', () => { const c = JSON.parse(fs.readFileSync(path.join(demo, 'scenarios/scenario-c.json'), 'utf8')); assert.equal(c.sourceKind, 'transformed_identity_fuzz'); assert.equal(c.transformation, 'stable_actor_id_remap'); assert.ok(c.derivedFromReportId); });
+check('4. D/E/F reports rebuild byte-for-byte by stable stringify', () => ids.forEach((id) => assert.equal(stableStringify(rebuild(payloads[id])), stableStringify(payloads[id].report))));
+check('5. D/E/F rebuild hashes match payloads', () => ids.forEach((id) => assert.equal(hash(payloads[id].report), payloads[id].rebuildHash)));
+check('6. D/E/F reports are victory', () => ids.forEach((id) => assert.equal(payloads[id].report.result, 'victory')));
+check('7. D/E/F contracts are supported', () => ids.forEach((id) => assert.equal(built[id].contract.diagnostics.supported, true)));
+check('8. D/E/F plans validate', () => ids.forEach((id) => assert.equal(built[id].plan.ok, true)));
+check('9. D has exactly two ordinary infantry actors', () => assert.equal(built['scenario-d'].plan.actors.filter((actor) => actor.side === 'friendly' && actor.type === 'infantry').length, 2));
+check('10. D binds north infantry to formal north slot', () => assert.equal(built['scenario-d'].plan.actors.find((actor) => actor.role === 'friendly_north_infantry').templateSlot, 'friendly_north_assault'));
+check('11. D binds south infantry to formal south slot', () => assert.equal(built['scenario-d'].plan.actors.find((actor) => actor.role === 'friendly_south_infantry').templateSlot, 'friendly_south_infantry_assault'));
+check('12. D binds AT to third distinct assault slot', () => { const plan = built['scenario-d'].plan; assert.equal(plan.actorToSlot[plan.roleBinding.roles.friendly_at], 'friendly_south_at_assault'); assert.equal(new Set(['friendly_north_assault', 'friendly_south_infantry_assault', 'friendly_south_at_assault'].map((slot) => plan.slotToActor[slot])).size, 3); });
+check('13. D south infantry is not reserve', () => assert.doesNotMatch(built['scenario-d'].plan.actors.find((actor) => actor.role === 'friendly_south_infantry').templateSlot, /reserve/));
+check('14. D south infantry and AT routes differ', () => { const plan = built['scenario-d'].plan; assert.notDeepEqual(plan.routeRegistry.friendly_south_infantry_assault.points, plan.routeRegistry.friendly_south_at_assault.points); });
+check('15. D south infantry and AT final centers differ', () => { const plan = built['scenario-d'].plan; const state = buildContractCaptureState(plan, built['scenario-d'].contract, 35); const infantry = state.actors.find((actor) => actor.role === 'friendly_south_infantry'); const at = state.actors.find((actor) => actor.role === 'friendly_at'); assert.notDeepEqual(infantry.visualCenter, at.visualCenter); });
+check('16. E has three ordinary infantry actors', () => assert.equal(built['scenario-e'].plan.actors.filter((actor) => actor.side === 'friendly' && actor.type === 'infantry').length, 3));
+check('17. E extra infantry receives reserve slot', () => assert.equal(built['scenario-e'].plan.actors.filter((actor) => actor.side === 'friendly' && actor.type === 'infantry').some((actor) => actor.templateSlot === 'friendly_reserve_1'), true));
+check('18. E reserve route is registered dynamically', () => assert.equal(built['scenario-e'].plan.routeRegistry.friendly_reserve_1.source, 'dynamic'));
+check('19. E reserve is not at the old center fallback', () => { const point = built['scenario-e'].plan.routeRegistry.friendly_reserve_1.finalPosition; assert.notDeepEqual(point, { x: 640, y: 400 }); });
+check('20. E reserve route differs from both infantry routes', () => { const plan = built['scenario-e'].plan; const reserve = JSON.stringify(plan.routeRegistry.friendly_reserve_1.points); assert.notEqual(reserve, JSON.stringify(plan.routeRegistry.friendly_north_assault.points)); assert.notEqual(reserve, JSON.stringify(plan.routeRegistry.friendly_south_infantry_assault.points)); });
+check('21. E has no exact center overlap at seven key times', () => { const layout = built['scenario-e'].plan.layoutValidation; assert.equal(layout.ok, true); });
+check('22. E final logical actor visual bounds do not overlap', () => { const state = buildContractCaptureState(built['scenario-e'].plan, built['scenario-e'].contract, 35); const actors = state.actors.filter((actor) => actor.alive); for (let i = 0; i < actors.length; i += 1) for (let j = i + 1; j < actors.length; j += 1) { if (actors[i].side !== actors[j].side) continue; assert.equal(boundsIntersect(getVisualBounds(actors[i], actors[i].visualCenter), getVisualBounds(actors[j], actors[j].visualCenter)), false); } });
+check('23. F has no repair role', () => assert.equal(built['scenario-f'].plan.roleBinding.roles.friendly_repair, null));
+check('24. F has zero repair anchors', () => assert.equal(built['scenario-f'].plan.counts.repair, 0));
+check('25. F has no repair groups', () => assert.deepEqual(built['scenario-f'].plan.repairGroups, []));
+check('26. F repair choreography is always stowed', () => { const { plan, contract } = built['scenario-f']; for (const time of [0, 7, 13, 21, 26, 32, 35]) assert.equal(getRepairChoreographyAtTime(plan, time).state, 'stowed'); assert.equal(buildContractCaptureState(plan, contract, 35).choreography.state, 'stowed'); });
+check('27. F final authority equals report final', () => assert.equal(buildContractCaptureState(built['scenario-f'].plan, built['scenario-f'].contract, 35).finalCompare.ok, true));
+check('28. every D/E/F actor has one unique slot', () => ids.forEach((id) => { const plan = built[id].plan; assert.equal(new Set(plan.actors.map((actor) => actor.id)).size, plan.actors.length); assert.equal(new Set(plan.actors.map((actor) => actor.templateSlot)).size, plan.actors.length); }));
+check('29. every D/E/F slot has a route', () => ids.forEach((id) => built[id].plan.actors.forEach((actor) => assert.ok(built[id].plan.routeRegistry[actor.templateSlot]))));
+check('30. unknown slot is rejected explicitly', () => { const plan = built['scenario-e'].plan; const invalid = { ...plan, actors: plan.actors.map((actor) => actor.id === plan.actors.at(-1).id ? { ...actor, templateSlot: 'friendly_unregistered_slot' } : actor) }; const result = validateSlotLayout(invalid); assert.equal(result.ok, false); assert.ok(result.errors.some((error) => error.includes('unknown_template_slot'))); });
+check('31. route registry is plan-owned', () => ids.forEach((id) => assert.ok(Object.isExtensible(built[id].plan.routeRegistry))));
+check('32. all required anchors apply exactly once', () => ids.forEach((id) => { const { plan, contract } = built[id]; const state = buildContractCaptureState(plan, contract, 35); assert.equal(state.authority.appliedAnchorIds.filter((anchorId) => plan.requiredAnchors.some((anchor) => anchor.id === anchorId)).length, plan.requiredAnchors.length); }));
+check('33. final plan statuses contain no unknown slot error', () => ids.forEach((id) => assert.equal(built[id].plan.validation.errors.some((error) => error.includes('unknown_template_slot')), false)));
+check('34. no plan route contains fallback center', () => ids.forEach((id) => Object.values(built[id].plan.routeRegistry).forEach((route) => assert.equal(route.points.every((point) => point.x === 640 && point.y === 400), false))));
+check('35. D/E/F final result is victory and captured', () => ids.forEach((id) => { const state = buildContractCaptureState(built[id].plan, built[id].contract, 35); assert.equal(state.authority.result, 'victory'); assert.equal(state.authority.capture, true); }));
+const manifest = JSON.parse(fs.readFileSync(path.join(demo, 'screenshots/capture-manifest.json'), 'utf8'));
+check('36. D/E/F manifest capture counts match the evidence plan', () => ids.forEach((id) => assert.equal(manifest.scenarioCaptures[id].length, id === 'scenario-d' ? 4 : 3)));
+check('37. D/E/F manifest hashes match screenshots', () => ids.forEach((id) => manifest.scenarioCaptures[id].forEach((capture) => assert.equal(hash(fs.readFileSync(path.join(demo, 'screenshots', id, capture.file))), capture.pngSha256))));
+check('38. F capture metadata has no repair anchors', () => manifest.scenarioCaptures['scenario-f'].forEach((capture) => assert.equal(built['scenario-f'].plan.counts.repair, 0)));
+
+console.log(`contract-victory-layout-generalization-test: ${passed} passed / ${total} total`);

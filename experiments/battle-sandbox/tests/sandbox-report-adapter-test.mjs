@@ -1,0 +1,128 @@
+import assert from 'node:assert/strict';
+import crypto from 'node:crypto';
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { spawnSync, execFileSync } from 'node:child_process';
+import { UNITS } from '../../../js/config.js';
+import { simulateBattle } from '../../../js/battle.js';
+import { compareBattleReports } from '../../../js/integrity.js';
+import { SCENARIOS, rebuildScenarioInput } from '../report-adapter/fixture-scenarios.js';
+import { normalizeBattleEvent, normalizeBattleReport, stableStringify } from '../report-adapter/report-normalizer.js';
+import { validateAuthorityCoverage, validateEventReferences, validateNormalizedBattle, validateOutcomeConsistency } from '../report-adapter/report-validator.js';
+import { bindTacticalRoles } from '../report-adapter/tactical-role-binder.js';
+import { buildAuthorityAnchors } from '../report-adapter/authority-anchor-builder.js';
+import { buildPresentationContract } from '../report-adapter/presentation-contract.js';
+import { countReportEvents, scenarioMatchesReport, CONTRACT_VERSION } from '../report-adapter/schema.js';
+import { buildFixtureManifest, formalBoundaryHash, hashFile, hashJson } from '../report-adapter/fixture-integrity.js';
+
+const here = path.dirname(fileURLToPath(import.meta.url));
+const adapterRoot = path.resolve(here, '..', 'report-adapter');
+const projectRoot = path.resolve(adapterRoot, '..', '..', '..');
+const fixturesRoot = path.join(adapterRoot, 'fixtures');
+let total = 0; let passed = 0;
+function check(name, fn) {
+  total += 1;
+  try { fn(); passed += 1; }
+  catch (error) { console.error(`FAIL ${name}: ${error.message}`); throw error; }
+}
+const readFixture = (id) => JSON.parse(fs.readFileSync(path.join(fixturesRoot, `${id}.json`), 'utf8'));
+const manifest = JSON.parse(fs.readFileSync(path.join(adapterRoot, 'fixture-manifest.json'), 'utf8'));
+const manifestRows = Object.fromEntries(manifest.fixtures.map((row) => [row.id, row]));
+const reports = Object.fromEntries(SCENARIOS.map((scenario) => [scenario.id, readFixture(scenario.id).report]));
+const contracts = Object.fromEntries(SCENARIOS.map((scenario) => [scenario.id, buildPresentationContract(reports[scenario.id])]));
+const sourceFiles = fs.readdirSync(adapterRoot).filter((file) => /\.(js|mjs|html)$/.test(file)).map((file) => path.join(adapterRoot, file));
+
+check('normalizes formal actor/target/value fields', () => {
+  const event = normalizeBattleEvent({ t: 1.25, type: 'damage', actor: 'a', target: 'b', value: 17, text: 'hit' }, 0);
+  assert.deepEqual({ time: event.time, actorId: event.actorId, targetId: event.targetId, value: event.value }, { time: 1.25, actorId: 'a', targetId: 'b', value: 17 });
+});
+check('normalizes legacy actorId/targetId/amount aliases', () => {
+  const event = normalizeBattleEvent({ t: 1, type: 'repair', actorId: 'medic', targetId: 'tank', amount: 9 }, 1);
+  assert.equal(event.actorId, 'medic'); assert.equal(event.targetId, 'tank'); assert.equal(event.value, 9);
+});
+check('rejects conflicting actor aliases', () => assert.throws(() => normalizeBattleEvent({ actor: 'a', actorId: 'b' }, 0), /conflict/));
+check('rejects conflicting target aliases', () => assert.throws(() => normalizeBattleEvent({ target: 'a', targetId: 'b' }, 0), /conflict/));
+check('rejects conflicting value aliases', () => assert.throws(() => normalizeBattleEvent({ value: 3, amount: 4 }, 0), /conflict/));
+check('does not leak legacy event keys', () => {
+  const event = normalizeBattleEvent({ actorId: 'a', targetId: 'b', amount: 2 }, 0);
+  assert.equal('actor' in event, false); assert.equal('target' in event, false); assert.equal('amount' in event, false);
+});
+check('normalizes all four reports without undefined', () => contracts && Object.values(contracts).forEach((contract) => assert.equal(stableStringify(contract).includes('undefined'), false)));
+check('preserves real damage values', () => assert.ok(Object.values(reports).some((report) => report.events.some((event) => event.type === 'damage' && event.value > 0))));
+check('preserves real repair values', () => assert.ok(reports['campaign-victory'].events.some((event) => event.type === 'repair' && event.value > 0)));
+check('retains destroyed actors in final snapshots', () => assert.ok(contracts['campaign-victory'].normalizedBattle.actors.enemy.some((actor) => actor.final.alive === false)));
+check('retains actor initial/final sets', () => Object.values(contracts).forEach((contract) => ['friendly', 'enemy'].forEach((side) => assert.deepEqual(contract.normalizedBattle.actors[side].map((actor) => actor.id).sort(), contract.normalizedBattle.actors[side].map((actor) => actor.id).sort()))));
+check('actor IDs are unique and side-separated', () => Object.values(contracts).forEach((contract) => { const all = [...contract.normalizedBattle.actors.friendly, ...contract.normalizedBattle.actors.enemy]; assert.equal(new Set(all.map((actor) => actor.id)).size, all.length); }));
+check('actor type/category/maxHp are stable', () => Object.values(contracts).forEach((contract) => contract.normalizedBattle.actors.friendly.concat(contract.normalizedBattle.actors.enemy).forEach((actor) => { assert.ok(actor.type); assert.ok(actor.category); assert.equal(actor.initial.maxHp, actor.final.maxHp); })));
+check('alive/hp invariants hold for fixtures', () => Object.values(contracts).forEach((contract) => contract.normalizedBattle.actors.friendly.concat(contract.normalizedBattle.actors.enemy).forEach((actor) => ['initial', 'final'].forEach((phase) => { if (actor[phase].alive) assert.ok(actor[phase].hp > 0); else assert.equal(actor[phase].hp, 0); }))));
+check('fixture validation reports current formal consistency', () => Object.values(contracts).forEach((contract) => assert.equal(contract.validation.ok, true)));
+check('event times are monotonic and result is last', () => Object.values(contracts).forEach((contract) => { const events = contract.normalizedBattle.events; assert.equal(events.at(-1).type, 'result'); events.forEach((event, index) => { assert.ok(event.time >= 0); if (index) assert.ok(event.time >= events[index - 1].time); }); }));
+check('result event precedes presentation source duration', () => Object.values(contracts).forEach((contract) => assert.ok(contract.normalizedBattle.events.at(-1).time < contract.normalizedBattle.battle.duration)));
+check('event refs are legal', () => Object.values(contracts).forEach((contract) => assert.equal(validateEventReferences(contract.normalizedBattle).ok, true)));
+check('unknown event refs fail validation', () => { const copy = structuredClone(contracts['campaign-victory'].normalizedBattle); copy.events[1].actorId = 'ghost'; assert.equal(validateEventReferences(copy).ok, false); });
+check('backwards event time fails validation', () => { const copy = structuredClone(contracts['campaign-victory'].normalizedBattle); copy.events[2].time = 0; assert.equal(validateEventReferences(copy).ok, false); });
+check('withdraw retains retreat before result', () => { const events = contracts['campaign-withdraw'].normalizedBattle.events; assert.ok(events.some((event) => event.type === 'retreat')); assert.equal(events.at(-1).type, 'result'); assert.equal(validateOutcomeConsistency(contracts['campaign-withdraw'].normalizedBattle).ok, true); });
+check('outcome validator rejects wiped with live combat', () => { const copy = structuredClone(contracts['campaign-defeat-or-wiped'].normalizedBattle); copy.actors.friendly[0].final.alive = true; copy.actors.friendly[0].final.hp = 1; assert.equal(validateOutcomeConsistency(copy).ok, false); });
+check('outcome validator accepts operation victory without capture', () => assert.equal(validateOutcomeConsistency(contracts['operation-result'].normalizedBattle).ok, true));
+check('role binding is deterministic', () => Object.values(reports).forEach((report) => assert.equal(stableStringify(bindTacticalRoles(normalizeBattleReport(report))), stableStringify(bindTacticalRoles(normalizeBattleReport(report))))));
+check('role binding only references real actors', () => Object.values(contracts).forEach((contract) => { const ids = new Set([...contract.normalizedBattle.actors.friendly, ...contract.normalizedBattle.actors.enemy].map((actor) => actor.id)); Object.values(contract.roleBinding.roles).forEach((id) => { if (id) assert.equal(ids.has(id), true); }); }));
+check('role assignment does not duplicate an actor in occupied roles', () => Object.values(contracts).forEach((contract) => { const assigned = Object.values(contract.roleBinding.roles).filter(Boolean); assert.equal(new Set(assigned).size, assigned.length); }));
+check('role reserves retain all unassigned actors', () => Object.values(contracts).forEach((contract) => { const ids = [...contract.roleBinding.reserves.friendly, ...contract.roleBinding.reserves.enemy]; ids.forEach((id) => assert.ok(id)); }));
+check('highest scouting vehicle is friendly scout', () => { const contract = contracts['campaign-victory']; assert.equal(contract.roleBinding.roles.friendly_scout, 'unit_fixture-u-3'); });
+check('highest attack armor is friendly lead armor', () => { const contract = contracts['campaign-victory']; assert.equal(contract.roleBinding.roles.friendly_lead_armor, 'unit_fixture-u-4'); });
+check('friendly AT role binds AT infantry', () => assert.equal(contracts['campaign-victory'].normalizedBattle.actors.friendly.find((actor) => actor.id === contracts['campaign-victory'].roleBinding.roles.friendly_at).type, 'at_infantry'));
+check('repair role binds repair-capable actor', () => { const contract = contracts['campaign-victory']; const actor = contract.normalizedBattle.actors.friendly.find((row) => row.id === contract.roleBinding.roles.friendly_repair); assert.ok(actor && actor.stats.repair > 0); });
+check('enemy north/center/south infantry stay distinct', () => { const roles = contracts['campaign-victory'].roleBinding.roles; assert.equal(new Set([roles.enemy_north_infantry, roles.enemy_center_infantry, roles.enemy_south_infantry]).size, 3); });
+check('enemy AT roles stay distinct', () => { const roles = contracts['campaign-victory'].roleBinding.roles; assert.equal(new Set([roles.enemy_north_at, roles.enemy_south_at]).size, 2); });
+check('missing roles are explicit', () => Object.values(contracts).forEach((contract) => Object.keys(contract.roleBinding.missingRoles).forEach((role) => assert.equal(contract.roleBinding.roles[role], null))));
+check('anchors are one-to-one with source events', () => Object.values(contracts).forEach((contract) => assert.equal(new Set(contract.authorityAnchors.map((anchor) => anchor.sourceEventId)).size, contract.normalizedBattle.events.length)));
+check('anchors preserve source actor target value', () => Object.values(contracts).forEach((contract) => contract.normalizedBattle.events.forEach((event) => { const anchor = contract.authorityAnchors.find((row) => row.sourceEventId === event.id); assert.equal(anchor.actorId, event.actorId); assert.equal(anchor.targetId, event.targetId); assert.equal(anchor.value, event.value); })));
+check('required authority types have anchors', () => Object.values(contracts).forEach((contract) => assert.equal(validateAuthorityCoverage(contract.normalizedBattle, contract.authorityAnchors).ok, true)));
+check('fire anchors preserve individual sources', () => { const contract = contracts['campaign-victory']; const fireEvents = contract.normalizedBattle.events.filter((event) => event.type === 'fire'); assert.equal(contract.authorityAnchors.filter((anchor) => anchor.type === 'fire').length, fireEvents.length); });
+check('reveal/ambush anchors use scout authority type', () => Object.values(contracts).forEach((contract) => contract.authorityAnchors.filter((anchor) => ['reveal', 'ambush'].includes(anchor.type)).forEach((anchor) => assert.equal(anchor.authorityType, 'scout'))));
+check('contract uses fixed schema version', () => Object.values(contracts).forEach((contract) => { assert.equal(contract.contractVersion, CONTRACT_VERSION); assert.equal('templateId' in contract, false); assert.equal(contract.presentation.templateId, null); }));
+check('contract presentation duration is 35 seconds', () => Object.values(contracts).forEach((contract) => assert.equal(contract.presentation.presentationDuration, 35)));
+check('contract source duration comes from formal report', () => Object.values(contracts).forEach((contract) => assert.equal(contract.presentation.sourceDuration, contract.normalizedBattle.battle.duration)));
+check('contract is deeply frozen', () => { const contract = contracts['campaign-victory']; assert.equal(Object.isFrozen(contract), true); assert.equal(Object.isFrozen(contract.normalizedBattle), true); assert.equal(Object.isFrozen(contract.authorityAnchors), true); });
+check('source report remains unchanged', () => { const report = reports['campaign-victory']; const before = stableStringify(report); buildPresentationContract(report); assert.equal(stableStringify(report), before); });
+check('underspecified report produces diagnostics', () => { const report = structuredClone(reports['campaign-defeat-or-wiped']); report.initial = undefined; report.final = undefined; const contract = buildPresentationContract(report); assert.equal(contract.diagnostics.supported, false); assert.ok(contract.diagnostics.missingRequirements.some((item) => item.startsWith('friendlyInfantryCount'))); });
+check('unsupported diagnostics expose missing roles', () => assert.ok(Object.keys(contracts['campaign-defeat-or-wiped'].diagnostics.missingRoles).length > 0));
+check('all fixture files exist', () => SCENARIOS.forEach((scenario) => assert.equal(fs.existsSync(path.join(fixturesRoot, `${scenario.id}.json`)), true)));
+check('fixture index has four entries', () => { const index = JSON.parse(fs.readFileSync(path.join(fixturesRoot, 'index.json'), 'utf8')); assert.equal(index.length, 4); assert.deepEqual(index.map((item) => item.id), SCENARIOS.map((scenario) => scenario.id)); });
+check('fixture results match scenario declarations', () => SCENARIOS.forEach((scenario) => assert.equal(reports[scenario.id].result, scenario.expectedResult)));
+check('fixture reports use formal IDs and mission kinds', () => { assert.equal(reports['operation-result'].missionKind, 'operation'); assert.ok(reports['operation-result'].id.includes('operation')); });
+check('manifest counts match fixture reports', () => Object.entries(reports).forEach(([id, report]) => assert.deepEqual(manifestRows[id].counts, countReportEvents(report))));
+check('manifest hashes match fixture files', () => SCENARIOS.forEach((scenario) => { const fixture = readFixture(scenario.id); const row = manifestRows[scenario.id]; assert.equal(row.scenarioHash, hashJson(fixture.scenario)); assert.equal(row.reportHash, hashJson(fixture.report)); assert.equal(row.fileHash, hashFile(path.join(fixturesRoot, `${scenario.id}.json`))); }));
+check('event IDs are unique and ordered', () => Object.values(contracts).forEach((contract) => { const ids = contract.normalizedBattle.events.map((event) => event.id); assert.equal(new Set(ids).size, ids.length); assert.equal(ids[0], 'event_0001'); }));
+check('all normalized events remain authoritative', () => Object.values(contracts).forEach((contract) => contract.normalizedBattle.events.forEach((event) => assert.equal(event.authority, true))));
+check('outcome ID lists match final snapshots', () => Object.values(contracts).forEach((contract) => { const report = contract.normalizedBattle; assert.deepEqual(report.outcome.friendlyAliveIds, report.actors.friendly.filter((actor) => actor.final.alive).map((actor) => actor.id)); assert.deepEqual(report.outcome.enemyDestroyedIds, report.actors.enemy.filter((actor) => !actor.final.alive).map((actor) => actor.id)); }));
+check('all role actor references are listed in actorRoles', () => Object.values(contracts).forEach((contract) => Object.entries(contract.roleBinding.roles).forEach(([role, id]) => { if (id) assert.ok(contract.roleBinding.actorRoles[id].includes(role)); })));
+check('reserve lists retain reserve role metadata', () => Object.values(contracts).forEach((contract) => { contract.roleBinding.reserves.friendly.forEach((id) => assert.ok(contract.roleBinding.actorRoles[id].includes('friendly_reserve'))); contract.roleBinding.reserves.enemy.forEach((id) => assert.ok(contract.roleBinding.actorRoles[id].includes('enemy_reserve'))); }));
+check('required anchor count equals required event count', () => Object.values(contracts).forEach((contract) => assert.equal(contract.authorityAnchors.filter((anchor) => anchor.required).length, contract.normalizedBattle.events.filter((event) => ['damage', 'suppress', 'repair', 'destroy', 'retreat', 'result'].includes(event.type)).length)));
+check('contract phase windows are deterministic', () => Object.values(contracts).forEach((contract) => { assert.deepEqual(contract.presentation.phaseWindows.scout, { start: 0, end: 6 }); assert.deepEqual(contract.presentation.phaseWindows.resolve, { start: 28, end: 35 }); }));
+check('contract JSON serialization succeeds', () => Object.values(contracts).forEach((contract) => assert.doesNotThrow(() => JSON.stringify(contract))));
+check('scenario unit definitions are formal unit types', () => SCENARIOS.forEach((scenario) => scenario.unitTypes.forEach((type) => assert.ok(UNITS[type], type))));
+check('fixture seeds are positive integers', () => SCENARIOS.forEach((scenario) => { assert.equal(Number.isInteger(readFixture(scenario.id).scenario.seed), true); assert.ok(readFixture(scenario.id).scenario.seed > 0); }));
+check('fixture index entries point to matching files', () => JSON.parse(fs.readFileSync(path.join(fixturesRoot, 'index.json'), 'utf8')).forEach((entry) => assert.equal(JSON.parse(fs.readFileSync(path.join(fixturesRoot, entry.file), 'utf8')).scenario.id, entry.id)));
+check('manifest boundary hash matches current formal inputs', () => assert.equal(manifest.formalBoundaryHash, formalBoundaryHash(projectRoot)));
+check('scenario and report metadata match exactly', () => SCENARIOS.forEach((scenario) => assert.equal(scenarioMatchesReport(readFixture(scenario.id)), true)));
+check('manifest fixture order matches scenario order', () => assert.deepEqual(manifest.fixtures.map((row) => row.id), SCENARIOS.map((scenario) => scenario.id)));
+check('fixture generation remains deterministic', () => { for (const scenario of SCENARIOS) { const fixture = readFixture(scenario.id); const rerun = simulateBattle({ ...rebuildScenarioInput(fixture.scenario), seed: fixture.scenario.seed }); assert.equal(compareBattleReports(fixture.report, rerun).ok, true); } });
+check('fixture generator succeeds', () => assert.equal(spawnSync(process.execPath, [path.join(adapterRoot, 'fixture-generator.mjs')], { cwd: projectRoot, encoding: 'utf8' }).status, 0));
+check('viewer entry files exist', () => ['fixture-viewer.html', 'fixture-viewer.js', 'fixture-viewer.css'].forEach((file) => assert.equal(fs.existsSync(path.join(adapterRoot, file)), true)));
+check('viewer exposes required hooks', () => { const source = fs.readFileSync(path.join(adapterRoot, 'fixture-viewer.js'), 'utf8'); assert.match(source, /window\.selectFixture/); assert.match(source, /window\.render_contract_to_text/); });
+check('viewer is read-only and does not use formal renderer', () => { const source = fs.readFileSync(path.join(adapterRoot, 'fixture-viewer.js'), 'utf8'); assert.doesNotMatch(source, /localStorage|canvas|getState|updateSandboxState/); });
+check('adapter sources avoid runtime randomness/time', () => sourceFiles.filter((file) => !file.endsWith('fixture-viewer.html')).forEach((file) => { const source = fs.readFileSync(file, 'utf8'); assert.doesNotMatch(source, /Math\.random|Date\.now/); }));
+check('adapter source syntax passes', () => sourceFiles.filter((file) => file.endsWith('.js')).forEach((file) => assert.equal(spawnSync(process.execPath, ['--check', file]).status, 0, file)));
+check('fixture generator syntax passes', () => assert.equal(spawnSync(process.execPath, ['--check', path.join(adapterRoot, 'fixture-generator.mjs')]).status, 0));
+check('formal boundary files exist', () => ['js', 'css', 'index.html', 'package.json', 'scripts', 'tests'].forEach((entry) => assert.equal(fs.existsSync(path.join(projectRoot, entry)), true)));
+check('formal files match prior delivery archive when available', () => {
+  const archive = path.join(projectRoot, 'iron-command-stage8-2C-1-integration-readiness.zip');
+  if (!fs.existsSync(archive)) return;
+  const stage8_2dA2AllowedChanges = new Set(['js/battle.js', 'js/integrity.js', 'package.json', 'tests/stage6-test.mjs', 'tests/stage7-test.mjs', 'tests/stage8-test.mjs', 'tests/stage8-1-test.mjs', 'tests/stage8-1-1-test.mjs', 'tests/stage8-2D-A-2-test.mjs', 'tests/stage8-2D-A-3-test.mjs']);
+  const entries = execFileSync('unzip', ['-Z1', archive], { encoding: 'utf8' }).trim().split('\n').filter((entry) => /^(js|css|index\.html|package\.json|scripts|tests)\//.test(entry) || /^(index\.html|package\.json)$/.test(entry));
+  entries.filter((entry) => !entry.endsWith('/') && !stage8_2dA2AllowedChanges.has(entry)).forEach((entry) => { const current = fs.readFileSync(path.join(projectRoot, entry)); const archived = execFileSync('unzip', ['-p', archive, entry]); assert.equal(crypto.createHash('sha256').update(current).digest('hex'), crypto.createHash('sha256').update(archived).digest('hex'), `formal mismatch: ${entry}`); });
+});
+
+console.log(`sandbox-report-adapter-test: ${passed} passed / ${total} total`);

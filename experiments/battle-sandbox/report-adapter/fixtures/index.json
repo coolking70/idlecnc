@@ -1,0 +1,66 @@
+[
+  {
+    "id": "campaign-victory",
+    "file": "campaign-victory.json",
+    "expectedResult": "victory",
+    "seed": 1,
+    "reportHash": "2a141200b5a4768ce601ae54dbf2c005f347887002ad4b9e7057e7648adc2a81",
+    "counts": {
+      "actorsFriendly": 6,
+      "actorsEnemy": 6,
+      "events": 120,
+      "damage": 41,
+      "repair": 5,
+      "destroy": 7,
+      "retreat": 0
+    }
+  },
+  {
+    "id": "campaign-withdraw",
+    "file": "campaign-withdraw.json",
+    "expectedResult": "withdraw",
+    "seed": 12,
+    "reportHash": "340464358baa984bf4aa5a787ad5dd471134fcb709c61a92e28a9e2297d462ec",
+    "counts": {
+      "actorsFriendly": 5,
+      "actorsEnemy": 6,
+      "events": 150,
+      "damage": 60,
+      "repair": 3,
+      "destroy": 7,
+      "retreat": 1
+    }
+  },
+  {
+    "id": "campaign-defeat-or-wiped",
+    "file": "campaign-defeat-or-wiped.json",
+    "expectedResult": "wiped",
+    "seed": 1,
+    "reportHash": "81d192431b3160f29eb73cae2ac042289cfe22b7e6707174b46826690d391191",
+    "counts": {
+      "actorsFriendly": 1,
+      "actorsEnemy": 10,
+      "events": 32,
+      "damage": 12,
+      "repair": 0,
+      "destroy": 1,
+      "retreat": 0
+    }
+  },
+  {
+    "id": "operation-result",
+    "file": "operation-result.json",
+    "expectedResult": "victory",
+    "seed": 1,
+    "reportHash": "8c842113d3f03b5bd6af8f2c0cf6b3badf27332e21282e72652f03adce27f07d",
+    "counts": {
+      "actorsFriendly": 5,
+      "actorsEnemy": 2,
+      "events": 35,
+      "damage": 12,
+      "repair": 0,
+      "destroy": 2,
+      "retreat": 0
+    }
+  }
+]

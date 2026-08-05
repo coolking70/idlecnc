@@ -1,0 +1,138 @@
+{
+  "manifestVersion": 1,
+  "formalBoundaryHash": "2e419233547bd0bae2515ef0c4a2f15ca5acd1e0c40b42f4edf5a90de60ce8ab",
+  "formalBoundaryFiles": [
+    "experiments/battle-sandbox/report-adapter/fixture-scenarios.js",
+    "js/battle-outcome.js",
+    "js/battle-targeting.js",
+    "js/battle.js",
+    "js/config.js",
+    "js/integrity.js",
+    "js/research.js",
+    "js/state.js",
+    "js/units.js",
+    "js/utils.js"
+  ],
+  "fixtures": [
+    {
+      "id": "campaign-victory",
+      "file": "campaign-victory.json",
+      "scenarioHash": "7f0a2fe0d77469f587b51c2f43ce926379adf8e863f2fa1469d274d57a42c25b",
+      "reportHash": "2a141200b5a4768ce601ae54dbf2c005f347887002ad4b9e7057e7648adc2a81",
+      "fileHash": "ae53d58a8cb2a3efe7eb1e299f0cf1b2c7e48ff0478eb1159580d53db3558bd8",
+      "seed": 1,
+      "result": "victory",
+      "counts": {
+        "actorsFriendly": 6,
+        "actorsEnemy": 6,
+        "events": 120,
+        "damage": 41,
+        "repair": 5,
+        "destroy": 7,
+        "retreat": 0
+      },
+      "validation": {
+        "ok": true,
+        "errors": []
+      },
+      "supported": true,
+      "missingRequirements": [],
+      "viewerScreenshot": {
+        "file": "01-victory-contract.png",
+        "sha256": "d0495754fa46f4a0d01c06bb72a0c5504385cba5a45a01175f2d35c812528572",
+        "fixtureReportHash": "2a141200b5a4768ce601ae54dbf2c005f347887002ad4b9e7057e7648adc2a81"
+      }
+    },
+    {
+      "id": "campaign-withdraw",
+      "file": "campaign-withdraw.json",
+      "scenarioHash": "acdb0a0dd8d0ca8aa5c52fb453d3309ee067be160bdd6ce3d6a498b2043bcd42",
+      "reportHash": "340464358baa984bf4aa5a787ad5dd471134fcb709c61a92e28a9e2297d462ec",
+      "fileHash": "f16cd0489adda5a79b38fc8473f1cb407e9b5af5625b03fef42a71c0e2ba50a7",
+      "seed": 12,
+      "result": "withdraw",
+      "counts": {
+        "actorsFriendly": 5,
+        "actorsEnemy": 6,
+        "events": 150,
+        "damage": 60,
+        "repair": 3,
+        "destroy": 7,
+        "retreat": 1
+      },
+      "validation": {
+        "ok": true,
+        "errors": []
+      },
+      "supported": true,
+      "missingRequirements": [],
+      "viewerScreenshot": {
+        "file": "02-withdraw-contract.png",
+        "sha256": "18818491365fb28c68684da8a3ef6e6e161330d1ecef129992fec961fe0d3283",
+        "fixtureReportHash": "340464358baa984bf4aa5a787ad5dd471134fcb709c61a92e28a9e2297d462ec"
+      }
+    },
+    {
+      "id": "campaign-defeat-or-wiped",
+      "file": "campaign-defeat-or-wiped.json",
+      "scenarioHash": "c8265bfd806b758ae203e99678f31bed3c2bb19205f07ba565cb6fb3b3b29f2f",
+      "reportHash": "81d192431b3160f29eb73cae2ac042289cfe22b7e6707174b46826690d391191",
+      "fileHash": "4327b3b0676593f07bffd3667682d353d7ea24a319385910f8e0b57886142020",
+      "seed": 1,
+      "result": "wiped",
+      "counts": {
+        "actorsFriendly": 1,
+        "actorsEnemy": 10,
+        "events": 32,
+        "damage": 12,
+        "repair": 0,
+        "destroy": 1,
+        "retreat": 0
+      },
+      "validation": {
+        "ok": true,
+        "errors": []
+      },
+      "supported": false,
+      "missingRequirements": [
+        "friendlyInfantryCount requires 2, actual 1",
+        "friendlyScoutVehicleCount requires 1, actual 0",
+        "friendlyArmorCount requires 1, actual 0"
+      ],
+      "viewerScreenshot": {
+        "file": "03-wiped-contract.png",
+        "sha256": "cf8e4b5bb6c3471f9630ec0a03bf4d3bbf403ba9a1b1c0d0ddf5e5a510899b99",
+        "fixtureReportHash": "81d192431b3160f29eb73cae2ac042289cfe22b7e6707174b46826690d391191"
+      }
+    },
+    {
+      "id": "operation-result",
+      "file": "operation-result.json",
+      "scenarioHash": "bd1c6e51adb065efcccbcf71de780495de728433d0de58ee24d3479b6dbdc377",
+      "reportHash": "8c842113d3f03b5bd6af8f2c0cf6b3badf27332e21282e72652f03adce27f07d",
+      "fileHash": "acc7d9f2200c08c8f038c11a05f580065f48d8e7773ccf720ba9c8fb8310c5ae",
+      "seed": 1,
+      "result": "victory",
+      "counts": {
+        "actorsFriendly": 5,
+        "actorsEnemy": 2,
+        "events": 35,
+        "damage": 12,
+        "repair": 0,
+        "destroy": 2,
+        "retreat": 0
+      },
+      "validation": {
+        "ok": true,
+        "errors": []
+      },
+      "supported": true,
+      "missingRequirements": [],
+      "viewerScreenshot": {
+        "file": "04-operation-contract.png",
+        "sha256": "cd0dedc8dfb9fd6e32fe01b75aa0d7ca38ab5af0187168e64ff51d2b695c0576",
+        "fixtureReportHash": "8c842113d3f03b5bd6af8f2c0cf6b3badf27332e21282e72652f03adce27f07d"
+      }
+    }
+  ]
+}

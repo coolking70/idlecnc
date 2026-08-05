@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>钢铁指令 · IRON COMMAND</title>
+  <meta name="description" content="钢铁指令：军事基地经营与自动战斗放置游戏。建设基地、编排部队、下达作战策略。" />
+  <meta property="og:title" content="钢铁指令 · IRON COMMAND" />
+  <meta property="og:description" content="建设基地、编排部队、下达作战策略，见证自动战斗推演。" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="__OG_IMAGE_URL__" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="钢铁指令 · IRON COMMAND" />
+  <meta name="twitter:description" content="军事基地经营与自动战斗放置游戏。" />
+  <meta name="twitter:image" content="__OG_IMAGE_URL__" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div id="app">
+
+    <!-- ============ 顶部资源栏 ============ -->
+    <header id="topbar">
+      <div class="brand">
+        <span class="brand-mark">◣</span>
+        <span class="brand-text">
+          <span class="brand-name">钢铁指令</span>
+          <span class="brand-sub">IRON COMMAND · 指挥终端</span>
+        </span>
+      </div>
+
+      <div class="resource-bar" id="resource-bar">
+        <div class="res" data-res="supply">
+          <span class="res-icon">▤</span>
+          <span class="res-body">
+            <span class="res-label">补给</span>
+            <span class="res-value"><b id="val-supply">0</b><i id="cap-supply">/ 0</i></span>
+          </span>
+          <span class="res-rate" id="rate-supply">+0/s</span>
+        </div>
+
+        <div class="res" data-res="alloy">
+          <span class="res-icon">◈</span>
+          <span class="res-body">
+            <span class="res-label">合金</span>
+            <span class="res-value"><b id="val-alloy">0</b><i id="cap-alloy">/ 0</i></span>
+          </span>
+          <span class="res-rate" id="rate-alloy">+0/s</span>
+        </div>
+
+        <div class="res" data-res="intel">
+          <span class="res-icon">◎</span>
+          <span class="res-body">
+            <span class="res-label">情报</span>
+            <span class="res-value"><b id="val-intel">0</b><i id="cap-intel">/ 0</i></span>
+          </span>
+          <span class="res-rate" id="rate-intel">+0/s</span>
+        </div>
+
+        <div class="res" data-res="power">
+          <span class="res-icon">⚡</span>
+          <span class="res-body">
+            <span class="res-label">电力</span>
+            <span class="res-value"><b id="val-power">0</b><i id="cap-power">/ 0</i></span>
+          </span>
+          <span class="res-rate" id="rate-power">正常</span>
+        </div>
+
+        <div class="res" data-res="command">
+          <span class="res-icon">✦</span>
+          <span class="res-body">
+            <span class="res-label">指挥容量</span>
+            <span class="res-value"><b id="val-command">0</b><i id="cap-command">/ 0</i></span>
+          </span>
+          <span class="res-rate" id="rate-command">空闲</span>
+        </div>
+      </div>
+
+      <div class="topbar-right">
+        <div class="clock-box">
+          <span class="clock-label">基地时间</span>
+          <span class="clock" id="game-clock">08:00:00</span>
+          <span class="clock-day" id="game-day">第1天</span>
+        </div>
+        <div class="speed-box" id="speed-controls" role="group" aria-label="游戏速度">
+          <button type="button" class="spd" data-speed="0" title="暂停">❚❚</button>
+          <button type="button" class="spd is-active" data-speed="1" title="1倍速">1×</button>
+          <button type="button" class="spd" data-speed="2" title="2倍速">2×</button>
+          <button type="button" class="spd" data-speed="4" title="4倍速">4×</button>
+        </div>
+        <div class="sys-box">
+          <button type="button" class="sys" id="btn-save" title="立即保存">保存</button>
+          <button type="button" class="sys" id="btn-load" title="读取存档">读取</button>
+          <button type="button" class="sys danger" id="btn-new" title="清空存档重新开始">新游戏</button>
+        </div>
+      </div>
+    </header>
+
+    <!-- ============ 中央基地画面 ============ -->
+    <main id="stage">
+      <canvas id="base-canvas"></canvas>
+      <div class="stage-overlay">
+        <div class="chip view-chip" id="view-chip">视图：基地全景 / BASE VIEW</div>
+        <button type="button" class="chip presentation-mode" id="battle-presentation-mode" hidden>演出：自动</button>
+        <span class="presentation-status" id="battle-presentation-status" hidden></span>
+        <div class="zone-legend" id="zone-legend"></div>
+        <div class="chip stat-chip" id="stat-chip">FPS --</div>
+      </div>
+      <div class="battle-overlay-controls" id="battle-overlay-controls" hidden>
+        <div class="battle-overlay-status" id="battle-overlay-status">作战结束，部队正在重新集结并返航</div>
+        <div class="battle-overlay-actions">
+          <button type="button" class="btn" id="battle-view-report">查看完整战报</button>
+          <button type="button" class="btn primary" id="battle-skip-return">跳过返航动画</button>
+        </div>
+      </div>
+      <div class="canvas-tip" id="canvas-tip" hidden></div>
+      <div class="stage-scanline" aria-hidden="true"></div>
+    </main>
+
+    <!-- ============ 右侧管理面板 ============ -->
+    <aside id="panel">
+      <nav class="tabs" id="panel-tabs" role="tablist"></nav>
+      <div class="panel-body" id="panel-body"></div>
+    </aside>
+
+    <!-- ============ 底部消息栏 ============ -->
+    <footer id="logbar">
+      <div class="log-head">
+        <span class="dot"></span>
+        <span class="log-title">通讯记录 / COMMS</span>
+        <span class="log-count" id="log-count">0 / 30</span>
+      </div>
+      <ul class="log-list" id="log-list"></ul>
+    </footer>
+
+  </div>
+
+  <div class="toast" id="toast" hidden></div>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

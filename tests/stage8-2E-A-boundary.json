@@ -1,0 +1,19 @@
+{
+  "formalBoundaryHash": "484812364770b899002d0480e9d7a48292790d8bd0b4c67a09ad8d1110bfc1f4",
+  "formalBoundaryFiles": [
+    "index.html",
+    "css/style.css",
+    "js/main.js",
+    "js/ui.js",
+    "js/battle-renderer.js",
+    "js/battle-presentation/contract-battle-adapter.js",
+    "js/battle-presentation/contract-battle-renderer.js",
+    "js/battle-presentation/contract-plan-cache.js",
+    "js/battle-presentation/contract-render-assets.js",
+    "js/battle-presentation/contract-render-state.js",
+    "js/battle-presentation/contract-time-bridge.js",
+    "js/battle-presentation/presentation-diagnostics.js",
+    "js/battle-presentation/presentation-router.js",
+    "package.json"
+  ]
+}
