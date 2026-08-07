@@ -1,0 +1,11 @@
+{
+  "fixture": "rapid-contact",
+  "source": { "reportId": "fixture-rapid-contact", "theaterId": "scrap_mine", "missionKind": "operation", "missionId": "rapid", "strategyId": "breakthrough", "result": "victory", "seed": 17 },
+  "forces": { "friendly": [{ "actorId": "rapid-tank", "type": "mbt" }, { "actorId": "rapid-infantry", "type": "infantry" }], "enemy": [{ "actorId": "rapid-defender", "type": "at_infantry" }] },
+  "layout": { "bounds": { "width": 1200, "height": 700 }, "routes": [{ "actorId": "rapid-tank", "points": [{ "t": 0, "x": 100, "y": 350 }, { "t": 0.12, "x": 360, "y": 350 }], "tactical": { "staging": { "x": 360, "y": 350 } } }] },
+  "timeline": {
+    "duration": 18,
+    "actions": [{ "id": "rapid-deploy", "type": "deploy", "t": 0, "actorIds": ["rapid-tank", "rapid-infantry", "rapid-defender"] }, { "id": "rapid-advance", "type": "advance", "t": 1.4, "actorIds": ["rapid-tank", "rapid-infantry"] }, { "id": "rapid-cover", "type": "take_cover", "t": 2.1, "actorIds": ["rapid-tank", "rapid-infantry"] }],
+    "anchors": [{ "id": "rapid-phase", "type": "phase", "t": 0 }, { "id": "rapid-fire-1", "type": "fire", "t": 3, "actorId": "rapid-defender", "targetId": "rapid-tank" }, { "id": "rapid-damage-1", "type": "damage", "t": 3.4, "actorId": "rapid-defender", "targetId": "rapid-tank", "value": 12 }, { "id": "rapid-damage-2", "type": "damage", "t": 4.1, "actorId": "rapid-tank", "targetId": "rapid-defender", "value": 80 }, { "id": "rapid-destroy", "type": "destroy", "t": 6, "actorId": "rapid-tank", "targetId": "rapid-defender" }, { "id": "rapid-result", "type": "result", "t": 15, "result": "victory" }]
+  }
+}

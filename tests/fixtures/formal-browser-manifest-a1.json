@@ -1,0 +1,19 @@
+{
+  "version": 2,
+  "generatedBy": "stage8-2E-A.1-fixture-migration",
+  "reportId": "fixture-formal-report-a1",
+  "reportFingerprint": "fp1-ffeaca52a8514916",
+  "screenshots": [
+    {"file":"stage8-2E-A1-formal-contract-start.png","reportFingerprint":"fp1-ffeaca52a8514916","renderedMode":"contract_road_victory","canvasSignature":"canvas-af9963bf","pngSha256":"da0f27ee89c8499f1be7664fdadc4e2dbd046c3800cec1489fec9b7df591ee84"},
+    {"file":"stage8-2E-A1-formal-contract-contact.png","reportFingerprint":"fp1-ffeaca52a8514916","renderedMode":"contract_road_victory","canvasSignature":"canvas-2aef54a7","pngSha256":"327580e9a52c9fcf3d1f0b31c95ab7e9d688409e8edc7ee92859bc05d229dd6f"},
+    {"file":"stage8-2E-A1-formal-contract-repair.png","reportFingerprint":"fp1-ffeaca52a8514916","renderedMode":"contract_road_victory","canvasSignature":"canvas-cbf39ffb","pngSha256":"2c8db9326204e4aa84f23754281d83ac2762f288704dad047f33168364180622"},
+    {"file":"stage8-2E-A1-formal-contract-loss.png","reportFingerprint":"fp1-ffeaca52a8514916","renderedMode":"contract_road_victory","canvasSignature":"canvas-30a0767b","pngSha256":"712fc3d67f15bee49e9bd76f878175cadce1bbabad2e3e7292c3a8595c3a28c6"},
+    {"file":"stage8-2E-A1-formal-contract-capture.png","reportFingerprint":"fp1-ffeaca52a8514916","renderedMode":"contract_road_victory","canvasSignature":"canvas-5cd23957","pngSha256":"c16251389cd4e5817fedccd5d35dd7cb1284ae168963c596b831c048df4a3baa"},
+    {"file":"stage8-2E-A1-mode-legacy.png","reportFingerprint":"fp1-ffeaca52a8514916","renderedMode":"legacy","canvasSignature":"canvas-771d6c9a","pngSha256":"a5c97cb470438541b83f6cc90f7b519d637dff15871e61e36471ee141ccddb42"},
+    {"file":"stage8-2E-A1-mode-contract-restored.png","reportFingerprint":"fp1-ffeaca52a8514916","renderedMode":"contract_road_victory","canvasSignature":"canvas-5cd23957","pngSha256":"05eae3e06ba449a316cd1ead5bee0febd745d21b23b8aa31f0007b4408168851"},
+    {"file":"stage8-2E-A1-formal-returning-mid.png","reportFingerprint":"fp1-ffeaca52a8514916","renderedMode":"contract_road_victory","canvasSignature":"canvas-ae0a0efd","pngSha256":"e89ff9bb9f80a845d7814a6dd70615d1008737c1c7b3db224356f6a5ab43a193"},
+    {"file":"stage8-2E-A1-formal-returning-end.png","reportFingerprint":"fp1-ffeaca52a8514916","renderedMode":"contract_road_victory","canvasSignature":"canvas-b30daeb0","pngSha256":"220e339b179f668f651b3377bb0f46071050a18c3ac0d9f5e953f5068c7f32b1"},
+    {"file":"stage8-2E-A1-legacy-withdraw.png","reportFingerprint":"fp1-ffeaca52a8514916","renderedMode":"legacy","canvasSignature":"canvas-731b004b","pngSha256":"97723a508b0af1831fde8e61e3eecfddd2f1069099d46e6524d46eeb7d431232"},
+    {"file":"stage8-2E-A1-base-after-return.png","reportFingerprint":"fp1-ffeaca52a8514916","renderedMode":"legacy","canvasSignature":"canvas-46e78a5b","pngSha256":"2f64a135ba324faf5c16589f6ebb96b012691cadf9fdd2f083eb6bb6a49207be"}
+  ]
+}

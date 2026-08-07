@@ -1,0 +1,33 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Universal default coverage B.3 smoke</title>
+<style>
+  html, body { margin: 0; background: #101918; color: #d9ead9; font: 14px monospace; }
+  #scene { display: block; width: 1200px; height: 700px; }
+  #status { padding: 8px 12px; }
+</style>
+<div id="status">loading auto coverage renderer…</div>
+<canvas id="scene" width="1200" height="700"></canvas>
+<pre id="text"></pre>
+<script type="module">
+  import { createBattlePresentationRouter } from '../../js/battle-presentation/presentation-router.js';
+
+  const params = new URLSearchParams(location.search);
+  const fixtureName = params.get('fixture') || 'operation-result.json';
+  const fixture = await fetch(`../../experiments/battle-sandbox/report-adapter/fixtures/${fixtureName}`).then((response) => response.json());
+  const report = fixture.report;
+  const activeBattle = { id: `browser-b3-${fixtureName}`, theaterId: report.theaterId, report, elapsed: Math.max(0, Math.min(report.duration, Number(params.get('time') || 0))), duration: report.duration, presentationPhase: 'battle', returnElapsed: 0, returnDuration: 5 };
+  const router = createBattlePresentationRouter({ canvas: document.querySelector('#scene'), legacyRenderer: { render: () => true } });
+  router.setPreference('auto');
+  function paint() {
+    router.render(activeBattle);
+    const diagnostics = router.getState();
+    const text = router.getTextState() || { mode: diagnostics.renderedMode, errors: [] };
+    document.querySelector('#text').textContent = JSON.stringify({ diagnostics: { preference: diagnostics.preference, renderedMode: diagnostics.renderedMode, coverage: diagnostics.coverage }, text }, null, 2);
+    document.querySelector('#status').textContent = `AUTO DEFAULT · ${diagnostics.renderedMode} · ${diagnostics.coverage?.cell?.missionId}/${diagnostics.coverage?.cell?.result} · errors=${text.errors?.length || 0}`;
+  }
+  window.advanceTime = async (milliseconds) => { activeBattle.elapsed = Math.min(report.duration, activeBattle.elapsed + Math.max(0, Number(milliseconds) || 0) / 1000); paint(); };
+  window.setBattleTime = (seconds) => { activeBattle.elapsed = Math.max(0, Math.min(report.duration, Number(seconds) || 0)); paint(); };
+  window.render_game_to_text = () => document.querySelector('#text').textContent;
+  paint();
+</script>

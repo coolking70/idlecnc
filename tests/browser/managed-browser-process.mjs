@@ -67,6 +67,8 @@ export async function launchManagedBrowser(config = {}) {
   const exitPromise = new Promise((resolve) => { resolveExit = resolve; });
   let rejectStartup;
   const startupError = new Promise((_, reject) => { rejectStartup = reject; });
+  let rejectStartupExit;
+  const startupExit = new Promise((_, reject) => { rejectStartupExit = reject; });
   const browser = { child, executable: resolution.executable, args, profileDir, stderr, exitState, exitPromise, devtools: null };
   child.stderr?.on('data', (chunk) => stderr.push(chunk));
   // Register these listeners immediately: failed spawn must never become an unhandled error event.
@@ -77,12 +79,18 @@ export async function launchManagedBrowser(config = {}) {
   });
   child.once('exit', (code, signal) => {
     exitState.exited = true; exitState.code = code; exitState.signal = signal; resolveExit(exitState);
+    if (!browser.devtools) {
+      const error = new Error(`Chromium exited before DevTools startup: code=${code} signal=${signal}`);
+      error.code = 'chromium_process_exited'; error.exitState = { code, signal };
+      rejectStartupExit(error);
+    }
   });
 
   try {
     const browserWs = await Promise.race([
       waitForDevTools(child.stderr, stderr, config.devtoolsTimeoutMs || 15000),
-      startupError
+      startupError,
+      startupExit
     ]);
     const devtoolsPort = new URL(browserWs).port;
     const version = await getJson(`http://127.0.0.1:${devtoolsPort}/json/version`);

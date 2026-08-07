@@ -13,6 +13,8 @@
 
 export const SAVE_VERSION = 7;
 export const SAVE_KEY = 'iron-command.save.v1';
+/** 手动保存槽位：不被静默自动保存覆盖，供玩家点击“读取”时恢复。 */
+export const MANUAL_SAVE_KEY = 'iron-command.save.manual.v1';
 
 export const TIME = {
   startSeconds: 8 * 3600,   // 基地时钟起始时间 08:00:00
@@ -489,17 +491,17 @@ export const TECHNOLOGIES = {
   tactical_datalink: {
     id: 'tactical_datalink', name: '战术数据链', branch: 'command', tier: 1,
     cost: { intel: 25, alloy: 100 }, researchTime: 35, requires: [],
-    effects: { battleScoutingMultiplier: 1.15 }, desc: '编队在战斗中的有效侦察提高15%。'
+    effects: { battleScoutingMultiplier: 1.15, combinedArmsCoordination: 0.12 }, desc: '编队在战斗中的有效侦察提高15%，并提升步坦协同的目标分配与掩护效率。'
   },
   field_maintenance: {
     id: 'field_maintenance', name: '野战维护规程', branch: 'command', tier: 2,
     cost: { intel: 30, alloy: 150 }, researchTime: 45, requires: ['tactical_datalink'],
-    effects: { repairTimeMultiplier: 0.80 }, desc: '未来创建的维修任务耗时缩短20%。'
+    effects: { repairTimeMultiplier: 0.80, repairScreening: 0.10 }, desc: '未来创建的维修任务耗时缩短20%，维修车在步坦协同中更安全。'
   },
   expanded_command_network: {
     id: 'expanded_command_network', name: '扩展指挥网络', branch: 'command', tier: 3,
     cost: { intel: 50, alloy: 250 }, researchTime: 60, requires: ['field_maintenance'],
-    effects: { commandCapacity: 2 }, desc: '指挥容量上限增加2点。'
+    effects: { commandCapacity: 2, formationControl: 0.12 }, desc: '指挥容量上限增加2点，并提高复杂混合编队的队形保持能力。'
   }
 };
 
@@ -815,6 +817,7 @@ export const BATTLE = {
  * ========================================================== */
 
 export const CURRENT_STAGE = 8;
+export const CURRENT_STAGE_LABEL = 'Stage 8.2G-C.1 · Production Visual Consumption & Evidence Hardening';
 
 export const PANEL_TABS = [
   { id: 'overview',     label: '概览', stage: 1, title: '基地概览' },
@@ -841,10 +844,10 @@ export const STAGE_PLACEHOLDER = {
 
 /** 汇总导出，便于调试时一次性查看 */
 export const CONFIG = {
-  SAVE_VERSION, SAVE_KEY, TIME, LOG, RESOURCE_DEFS, ECONOMY, RENDER, BASE_LAYOUT,
+  SAVE_VERSION, SAVE_KEY, MANUAL_SAVE_KEY, TIME, LOG, RESOURCE_DEFS, ECONOMY, RENDER, BASE_LAYOUT,
   BUILDINGS, BUILDING_STATUS, CONSTRUCTION, CONSTRUCTION_UI, UNITS, UNIT_RANKS, PRODUCTION, PRODUCTION_UI,
   DAMAGE_STATES, DAMAGE_THRESHOLDS, REPAIR, RESEARCH, TECHNOLOGIES,
   FORMATION_STATUS, FORMATION_PRESETS, FORMATION, FORMATION_WARNINGS,
   THEATERS, OPERATIONS, ENEMY_UNITS, STRATEGIES, TERRAIN, BATTLE, BATTLE_RESULT,
-  PANEL_TABS, STAGE_PLACEHOLDER, CURRENT_STAGE
+  PANEL_TABS, STAGE_PLACEHOLDER, CURRENT_STAGE, CURRENT_STAGE_LABEL
 };

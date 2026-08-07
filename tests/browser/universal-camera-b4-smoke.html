@@ -1,0 +1,46 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Universal camera B.4 responsive and drag smoke</title>
+<style>
+  :root { color-scheme: dark; }
+  html, body { width: 100%; height: 100%; margin: 0; background: #101918; color: #d9ead9; font: 13px monospace; overflow: hidden; }
+  body { display: grid; grid-template-rows: 34px minmax(0, 1fr); }
+  #status { padding: 8px 12px; white-space: nowrap; overflow: hidden; }
+  #viewport { min-width: 0; min-height: 0; width: 100%; height: 100%; display: grid; place-items: center; background: #0a1110; }
+  #scene { display: block; width: 100%; height: 100%; touch-action: none; }
+  #text { position: fixed; left: -9999px; top: -9999px; }
+</style>
+<div id="status">loading responsive camera renderer…</div>
+<div id="viewport"><canvas id="scene" width="1280" height="720"></canvas></div>
+<pre id="text"></pre>
+<script type="module">
+  import { createBattlePresentationRouter } from '../../js/battle-presentation/presentation-router.js';
+
+  const params = new URLSearchParams(location.search);
+  const fixtureName = params.get('fixture') || 'operation-result.json';
+  const fixture = await fetch(`../../experiments/battle-sandbox/report-adapter/fixtures/${fixtureName}`).then((response) => response.json());
+  const report = fixture.report;
+  const activeBattle = { id: `browser-b4-${fixtureName}`, theaterId: report.theaterId, report, elapsed: Math.max(0, Math.min(report.duration, Number(params.get('time') || 8))), duration: report.duration, presentationPhase: 'battle', returnElapsed: 0, returnDuration: 5 };
+  const canvas = document.querySelector('#scene');
+  const router = createBattlePresentationRouter({ canvas, legacyRenderer: { render: () => true } });
+  router.setPreference('auto');
+  function currentPayload() {
+    const diagnostics = router.getState();
+    const text = router.getTextState() || { mode: diagnostics.renderedMode, errors: [] };
+    const interaction = router.getInteractionState?.() || null;
+    return { diagnostics: { preference: diagnostics.preference, renderedMode: diagnostics.renderedMode, coverage: diagnostics.coverage }, viewport: interaction?.viewport || null, interaction: { manual: Boolean(interaction?.manual), dragging: Boolean(interaction?.dragging) }, text };
+  }
+  function paint() {
+    router.render(activeBattle);
+    const payload = currentPayload();
+    const text = payload.text;
+    document.querySelector('#text').textContent = JSON.stringify(payload);
+    document.querySelector('#status').textContent = `RESPONSIVE CAMERA · ${fixtureName} · actors=${text.actorCount || text.actors?.length || 0} · ${text.result || ''} · camera=${text.camera?.label || ''} · manual=${payload.interaction.manual} · errors=${text.errors?.length || 0}`;
+  }
+  window.advanceTime = async (milliseconds) => { activeBattle.elapsed = Math.min(report.duration, activeBattle.elapsed + Math.max(0, Number(milliseconds) || 0) / 1000); paint(); };
+  window.setBattleTime = (seconds) => { activeBattle.elapsed = Math.max(0, Math.min(report.duration, Number(seconds) || 0)); paint(); };
+  window.resizeBattleViewport = (width, height) => { document.querySelector('#viewport').style.width = `${Math.max(320, Number(width) || 960)}px`; document.querySelector('#viewport').style.height = `${Math.max(240, Number(height) || 540)}px`; paint(); return router.getInteractionState?.(); };
+  window.resetBattleCamera = () => { router.resetCamera?.(); paint(); return router.getInteractionState?.(); };
+  window.render_game_to_text = () => JSON.stringify(currentPayload());
+  paint();
+</script>

@@ -1,0 +1,9 @@
+{
+  "fixtureVersion": 1,
+  "fixture": "stage8-2G-B-victory-mixed",
+  "sourceReport": "experiments/battle-sandbox/report-adapter/fixtures/campaign-victory.json",
+  "result": "victory",
+  "seed": 7,
+  "purpose": "mixed infantry and armor victory with sustained exchange, suppression and cover advance",
+  "requiredSignals": ["first_contact", "suppression", "cover_advance", "target_switch", "authoritative_damage", "authoritative_destroy", "battle_end"]
+}

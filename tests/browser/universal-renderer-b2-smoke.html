@@ -1,0 +1,38 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Universal formal renderer B.2 smoke</title>
+<style>
+  html, body { margin: 0; background: #101918; color: #d9ead9; font: 14px monospace; }
+  #scene { display: block; width: 1200px; height: 700px; }
+  #status { padding: 8px 12px; }
+</style>
+<div id="status">loading formal universal renderer…</div>
+<canvas id="scene" width="1200" height="700"></canvas>
+<pre id="text"></pre>
+<script type="module">
+  import { createUniversalBattlePresentation } from '../../js/battle-presentation/universal/universal-battle-adapter.js';
+  import { UniversalBattleRenderer } from '../../js/battle-presentation/universal/universal-battle-renderer.js';
+
+  const params = new URLSearchParams(location.search);
+  const fixtureName = params.get('fixture') || 'operation-result.json';
+  const fixture = await fetch(`../../experiments/battle-sandbox/report-adapter/fixtures/${fixtureName}`).then((response) => response.json());
+  const report = fixture.report;
+  const activeBattle = { id: `browser-b2-${fixtureName}`, theaterId: report.theaterId, report, elapsed: 0, duration: report.duration, presentationPhase: 'battle', returnElapsed: 0, returnDuration: 5 };
+  const presentation = createUniversalBattlePresentation(activeBattle);
+  if (!presentation.ok) throw new Error(presentation.reason);
+  const renderer = new UniversalBattleRenderer(document.querySelector('#scene'));
+  renderer.setPresentation(presentation);
+  let elapsed = Math.max(0, Math.min(report.duration, Number(params.get('time') || 0)));
+  function paint() {
+    activeBattle.elapsed = elapsed;
+    renderer.render(activeBattle);
+    const text = renderer.getTextState();
+    document.querySelector('#text').textContent = JSON.stringify(text, null, 2);
+    document.querySelector('#status').textContent = `UNIVERSAL RTS · ${text.result} · camera=${text.camera.label} · effects=${text.effects.length} · errors=${text.errors.length}`;
+  }
+  window.advanceTime = async (milliseconds) => { elapsed = Math.min(report.duration, elapsed + Math.max(0, Number(milliseconds) || 0) / 1000); paint(); };
+  window.setUniversalCamera = (mode) => { renderer.setCameraMode(mode); renderer.setAutoCamera(false); paint(); };
+  window.setBattleTime = (seconds) => { elapsed = Math.max(0, Math.min(report.duration, Number(seconds) || 0)); paint(); };
+  window.render_game_to_text = () => document.querySelector('#text').textContent;
+  paint();
+</script>

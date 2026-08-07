@@ -4,8 +4,8 @@
 
 玩家扮演基地指挥官，**不直接操作单位**：你只负责审批建设、编排部队、下达作战策略，剩下的交给系统自动推演。
 
-> **当前版本：0.8.1-hotfix.3 · 阶段 8.2D-A.3（跨引擎确定性与交付固化）**
-> 在阶段 1～8 系统之上，战斗画面现为多单位、多路线、地形道具和客观镜头的战术战场；结算后进入独立返航展示阶段，可自动完成或跳过。装备系统、新战区、随机事件和战斗中手动指挥保留到后续阶段。
+> **当前版本：0.8.1-hotfix.5 · Stage 8.2G-C.1 Production Visual Consumption & Evidence Hardening**
+> 在阶段 1～8.2G-A.1.1 之上，正式通用战场新增确定性交火编舞、目标选择与切换、压制/掩护推进、失败撤退和事件优先镜头；所有表现性射击仍不改变正式 HP、战报或结算权威。
 
 ---
 
@@ -46,7 +46,7 @@ npm start
 - `tests/stage8-1-1-test.mjs`（43 项）：真实 `WITHDRAW` + `RETREAT` 战报、结算阻断与一次性报错、安全关闭、旧存档确定性重建、阻断字段往返与无副作用。
 
 ```bash
-npm test            # 依次运行阶段3～阶段8.1.1测试
+npm test            # 依次运行阶段3～阶段8.2G-C测试（包含 B.1、B.1.1、证据篡改与 C 环境回归）
 ```
 
 ---
@@ -589,3 +589,13 @@ __IRON_COMMAND__.validateActiveBattleDeterministically()
 - 支持 session-only 的 `auto / legacy / contract` 偏好；实际模式为 `contract_road_victory` 或 `legacy`，任何不支持报告或渲染异常都会安全回退旧 BattleRenderer。
 - 演出时间由正式战斗 elapsed 驱动，计划按 battle/report/seed/result 缓存；结算、返航、跳过返航、读档与回基地均保持原业务语义。
 - 交付说明见 `STAGE8-2E-A-DELIVERY.md`，浏览器取帧见 `screenshots/stage8-2E-A-screenshot-manifest.json`，自包含封包验证由 `tests/build-stage8-2E-A-delivery-package.mjs` / `tests/verify-stage8-2E-A-delivery-package.mjs` 完成。
+# 阶段 8.2E-A.2.2 验证器收口
+
+最终交付验证命令：
+
+```bash
+npm run verify:stage8-2E-A-2-2
+npm run build:stage8-2E-A-2-2
+```
+
+验证器采用显式测试清单、按需静态服务器、进程组终止和可配置全局超时；统计从实际测试输出生成。详见 `STAGE8-2E-A-2-2-DELIVERY.md`。

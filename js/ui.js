@@ -6,7 +6,7 @@
  */
 
 import {
-  PANEL_TABS, STAGE_PLACEHOLDER, CURRENT_STAGE, BUILDINGS, BUILDING_STATUS,
+  PANEL_TABS, STAGE_PLACEHOLDER, CURRENT_STAGE, CURRENT_STAGE_LABEL, BUILDINGS, BUILDING_STATUS,
   RESOURCE_DEFS, BASE_LAYOUT, TIME, UNITS, CONSTRUCTION, CONSTRUCTION_UI,
   PRODUCTION, PRODUCTION_UI, FORMATION, FORMATION_PRESETS,
   BATTLE, BATTLE_RESULT, THEATERS, OPERATIONS, DAMAGE_STATES, REPAIR, RESEARCH, TECHNOLOGIES, UNIT_RANKS
@@ -109,7 +109,7 @@ export class UI {
     r.presentationMode = qs('#battle-presentation-mode');
     r.presentationStatus = qs('#battle-presentation-status');
     if (r.presentationMode) r.presentationMode.addEventListener('click', () => {
-      const order = ['auto', 'legacy', 'contract'];
+      const order = ['auto', 'legacy', 'contract', 'universal'];
       const index = Math.max(0, order.indexOf(this.presentationState.preference));
       this.handlers.onPresentationModeChange?.(order[(index + 1) % order.length]);
     });
@@ -1803,8 +1803,9 @@ export class UI {
 
     setText(t.battleTitle, `${active.formationName} → ${active.theaterName}`);
     const strategyName = (listStrategies().find((s) => s.id === active.strategyId) || {}).name || '未知策略';
+    const tacticalName = report.tactics?.name || (report.tactics?.combinedArms ? '步坦协同楔形' : '常规展开');
     setText(t.battleMeta,
-      `策略 ${strategyName} · 种子 ${active.seed} · 进度 ${Math.floor(pct)}%（${elapsed.toFixed(0)} / ${duration} 秒）`);
+      `策略 ${strategyName} · 队形 ${tacticalName} · 种子 ${active.seed} · 进度 ${Math.floor(pct)}%（${elapsed.toFixed(0)} / ${duration} 秒）`);
     t.battleBar.style.width = `${pct}%`;
 
     if (active.settled) {
@@ -1921,18 +1922,24 @@ export class UI {
   _updateBattlePresentation(state) {
     const active = getActiveBattle(state);
     const battle = !!active;
+    const stage = qs('#stage');
+    if (stage) {
+      stage.classList.toggle('is-battle-active', battle);
+      stage.classList.toggle('is-battle-settled', Boolean(active?.settled));
+    }
     if (this.refs.legend) this.refs.legend.hidden = battle;
     const renderedMode = this.presentationState.renderedMode || this.presentationState.mode || 'legacy';
     const contract = battle && renderedMode === 'contract_road_victory';
-    if (this.refs.viewChip) setText(this.refs.viewChip, battle ? (contract ? '视图：契约RTS战场 / CONTRACT RTS' : '视图：战术战场 / TACTICAL BATTLE') : '视图：基地全景 / BASE VIEW');
+    const universal = battle && renderedMode === 'universal_battle';
+    if (this.refs.viewChip) setText(this.refs.viewChip, battle ? (contract ? '视图：契约RTS战场 / CONTRACT RTS' : universal ? '视图：通用RTS战场 / UNIVERSAL RTS' : '视图：战术战场 / TACTICAL BATTLE') : '视图：基地全景 / BASE VIEW');
     if (this.refs.presentationMode) {
-      const labels = { auto: '演出：自动', legacy: '演出：兼容', contract: '演出：RTS' };
+      const labels = { auto: '演出：自动', legacy: '演出：兼容', contract: '演出：契约RTS', universal: '演出：通用RTS' };
       setText(this.refs.presentationMode, labels[this.presentationState.preference] || labels.auto);
       this.refs.presentationMode.hidden = !battle;
-      this.refs.presentationMode.title = '切换自动、兼容与契约RTS演出';
+      this.refs.presentationMode.title = '切换自动、兼容、契约RTS与通用RTS演出';
     }
     if (this.refs.presentationStatus) {
-      const status = contract ? '正面突破 · 道路RTS' : (battle && this.presentationState.preference === 'contract' ? '当前战报不满足正式演出条件，已回退' : '');
+      const status = contract ? '正面突破 · 道路RTS' : universal ? '通用规划 · 正式旁路' : (battle && this.presentationState.preference === 'contract' ? '当前战报不满足正式演出条件，已回退' : battle && this.presentationState.preference === 'universal' ? '当前战报不满足通用演出条件，已回退' : '');
       setText(this.refs.presentationStatus, status);
       this.refs.presentationStatus.hidden = !status;
     }
@@ -2218,6 +2225,13 @@ export class UI {
     };
     mk('随机种子', String(report.seed));
     mk('作战策略', report.strategyName);
+    if (report.tactics) {
+      mk('战术编组', `${report.tactics.name || '常规展开'}${report.tactics.combinedArms ? '（坦克前置、步兵护翼、反装甲后置警戒）' : ''}`);
+      const metrics = report.tactics.metrics || {};
+      if (Number.isFinite(Number(metrics.coordination)) && metrics.coordination > 0) {
+        mk('协同强度', `${Math.round(Number(metrics.coordination) * 100)}%`);
+      }
+    }
     if (report.missionKind === 'operation') {
       const op = OPERATIONS[report.missionId];
       mk('任务类型', op ? `${op.name}（${op.cooldown}s 冷却）` : report.missionId);
@@ -2516,7 +2530,7 @@ export class UI {
     const brief = el('div', 'card');
     const briefHead = el('div', 'card-head');
     briefHead.appendChild(el('span', '', '指挥官简报'));
-    r.briefTag = el('span', 'tag ok', `阶段 ${CURRENT_STAGE}`);
+    r.briefTag = el('span', 'tag ok', CURRENT_STAGE_LABEL);
     briefHead.appendChild(r.briefTag);
     brief.appendChild(briefHead);
 
@@ -2598,7 +2612,7 @@ export class UI {
     // —— 阶段交付核对表 ——
     const stage = el('div', 'card');
     const stageHead = el('div', 'card-head');
-    stageHead.appendChild(el('span', '', `阶段${CURRENT_STAGE} 交付内容`));
+    stageHead.appendChild(el('span', '', CURRENT_STAGE_LABEL));
     stageHead.appendChild(el('span', 'tag ok', '战区作战'));
     stage.appendChild(stageHead);
     const list = el('ul', 'check-list');

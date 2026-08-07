@@ -1,0 +1,9 @@
+{
+  "fixtureVersion": 1,
+  "fixture": "stage8-2G-B-defeat-wiped",
+  "sourceReport": "experiments/battle-sandbox/report-adapter/fixtures/campaign-defeat-or-wiped.json",
+  "result": "wiped",
+  "seed": 1,
+  "purpose": "formal full-loss case with final resistance, persistent wrecks and no victory choreography",
+  "requiredSignals": ["first_contact", "line_collapse", "critical_loss", "final_destruction", "wreck_field", "battle_end"]
+}

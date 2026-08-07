@@ -7,7 +7,7 @@
  * 容错原则：任何非法存档都不能让游戏崩溃，最坏情况回退到新游戏。
  */
 
-import { SAVE_KEY, SAVE_VERSION, TIME, BUILDINGS, BUILDING_STATUS, UNITS } from './config.js';
+import { SAVE_KEY, MANUAL_SAVE_KEY, SAVE_VERSION, TIME, BUILDINGS, BUILDING_STATUS, UNITS } from './config.js';
 import { createInitialState, getState, setState } from './state.js';
 import { recalcDerived } from './economy.js';
 import { sanitizeConstruction } from './construction.js';
@@ -22,6 +22,8 @@ import { calculateOfflineSeconds, settleOfflineProgress } from './offline.js';
 import { logEvent, emit, LOG_LEVEL } from './events.js';
 import { safeNumber, deepClone, formatDuration } from './utils.js';
 import { damageStateOfUnit } from './unit-status.js';
+
+export { SAVE_KEY, MANUAL_SAVE_KEY };
 
 /** localStorage 是否可用（隐私模式可能抛异常） */
 function storageAvailable() {
@@ -54,7 +56,11 @@ export function saveGame(state, { silent = false } = {}) {
   const data = serialize(state);
   if (!data) return false;
   try {
-    window.localStorage.setItem(SAVE_KEY, JSON.stringify(data));
+    const raw = JSON.stringify(data);
+    // 静默写入只更新自动续接槽位；显式“保存”同时更新手动槽位。
+    // 这样战斗结算、生产完成和关闭页面的自动保存不会覆盖玩家的战前存档。
+    window.localStorage.setItem(SAVE_KEY, raw);
+    if (!silent) window.localStorage.setItem(MANUAL_SAVE_KEY, raw);
     state.savedAt = data.savedAt;
     if (!silent) logEvent(state, '基地数据已保存。', LOG_LEVEL.INFO);
     emit('save:written', { savedAt: data.savedAt, silent });
@@ -67,10 +73,10 @@ export function saveGame(state, { silent = false } = {}) {
 }
 
 /** 读取原始存档文本 */
-export function readRaw() {
+export function readRaw(key = SAVE_KEY) {
   if (!storageAvailable()) return null;
   try {
-    return window.localStorage.getItem(SAVE_KEY);
+    return window.localStorage.getItem(key);
   } catch (err) {
     console.warn('[save] 读取存档失败：', err);
     return null;
@@ -79,7 +85,7 @@ export function readRaw() {
 
 /** 是否存在存档 */
 export function hasSave() {
-  return Boolean(readRaw());
+  return Boolean(readRaw(SAVE_KEY) || readRaw(MANUAL_SAVE_KEY));
 }
 
 /**
@@ -350,20 +356,27 @@ export function reconcileUnlocksFromBuildings(state) {
  * 读档并应用到全局状态
  * @returns {{ok:boolean, state?:object, reason?:string, offlineSeconds?:number}}
  */
-export function loadGame() {
-  const raw = readRaw();
-  if (!raw) return { ok: false, reason: '没有找到存档' };
-
+export function loadGame({ preferManual = false } = {}) {
+  const keys = preferManual ? [MANUAL_SAVE_KEY, SAVE_KEY] : [SAVE_KEY, MANUAL_SAVE_KEY];
   let parsed = null;
-  try {
-    parsed = JSON.parse(raw);
-  } catch (err) {
-    console.error('[save] 存档解析失败：', err);
-    return { ok: false, reason: '存档内容损坏' };
+  let sourceKey = null;
+  let lastReason = '没有找到存档';
+  for (const key of keys) {
+    const raw = readRaw(key);
+    if (!raw) continue;
+    try {
+      const candidate = JSON.parse(raw);
+      const check = validateSave(candidate);
+      if (!check.ok) { lastReason = check.reason; continue; }
+      parsed = candidate;
+      sourceKey = key;
+      break;
+    } catch (err) {
+      console.error('[save] 存档解析失败：', err);
+      lastReason = '存档内容损坏';
+    }
   }
-
-  const check = validateSave(parsed);
-  if (!check.ok) return { ok: false, reason: check.reason };
+  if (!parsed) return { ok: false, reason: lastReason };
 
   const report = {};
   let migrated = null;
@@ -434,6 +447,7 @@ export function loadGame() {
   return {
     ok: true,
     state: migrated,
+    source: sourceKey === MANUAL_SAVE_KEY ? 'manual' : 'auto',
     offlineSeconds,
     offlineReport,
     repaired: Boolean(report.repaired),
@@ -453,6 +467,7 @@ export function newGame({ keepStorage = false } = {}) {
   if (!keepStorage && storageAvailable()) {
     try {
       window.localStorage.removeItem(SAVE_KEY);
+      window.localStorage.removeItem(MANUAL_SAVE_KEY);
     } catch (err) {
       console.warn('[save] 清除存档失败：', err);
     }
@@ -495,6 +510,8 @@ export function importSave(text) {
   setState(migrated);
   recalcDerived(migrated);
   saveGame(migrated, { silent: true });
+  // 导入是用户主动选择的恢复点，也要成为下一次“读取”的手动快照。
+  try { window.localStorage.setItem(MANUAL_SAVE_KEY, JSON.stringify(serialize(migrated))); } catch (err) { /* 已由自动槽位承接 */ }
   emit('save:imported', null);
   return { ok: true, state: migrated, repaired: Boolean(report.repaired) };
 }

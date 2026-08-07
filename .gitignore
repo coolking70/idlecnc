@@ -3,4 +3,12 @@ output/
 screenshots/
 artifacts/
 *.zip
+*-final-package-record.json
 .DS_Store
+node_modules/
+browser-profiles/
+tests/outputs/
+tests/evidence/
+stage8_*.json
+**/audits/
+experiments/battle-sandbox/universal-planner/scenarios/fuzz.json

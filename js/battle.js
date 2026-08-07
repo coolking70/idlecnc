@@ -18,6 +18,7 @@ import { getResearchModifiers } from './research.js';
 import { getUnitRank, getUnitEffectiveStats } from './units.js';
 import { countCombatCapable, determineBattleOutcome } from './battle-outcome.js';
 import { chooseTargetDeterministically } from './battle-targeting.js';
+import { resolveBattleTactics, tacticalRole } from './battle-tactics.js';
 
 /** 战斗事件类型 */
 export const BATTLE_EVENT = {
@@ -110,7 +111,8 @@ export function createEmptyReport({ seed, theaterId, strategyId, formation, miss
     duration: BATTLE.baseDuration,
     summary: '',
     scout: { friendlyScouting: 0, ambushChance: 0, revealChance: 0, revealHighThreat: false, firstStrike: 'enemy' },
-    modifiers: {}
+    modifiers: {},
+    tactics: null
   };
 }
 
@@ -173,6 +175,9 @@ export function simulateBattle(params) {
         def.stats.hp, def.stats));
     }
   });
+
+  // 敌军数量在上面的配置展开后才完整；把威胁列表补回同一份确定性战术意图。
+  const resolvedTactics = resolveBattleTactics({ friendly, enemy, strategyId, research });
 
   const mods = strategy.mods || {};
   const modifiers = {
@@ -273,10 +278,21 @@ export function simulateBattle(params) {
       : attacker.attack;
     const counter = ((BATTLE.counters[attacker.category] || {})[target.category]) ?? 1;
     // 策略防御修正只保护我方单位
-    const defenseMod = target.side === 'friendly' ? (m.defense || 1) : 1;
+    let defenseMod = target.side === 'friendly' ? (m.defense || 1) : 1;
     const armorResearch = target.side === 'friendly'
       && (target.category === 'armor' || target.category === 'vehicle')
       ? research.armorBattleDefenseMultiplier : 1;
+    const targetRole = tacticalRole(resolvedTactics, target.id);
+    const armorProtected = target.side === 'friendly'
+      && (target.category === 'armor' || target.category === 'vehicle')
+      && resolvedTactics.combinedArms
+      && friendly.some((unit) => unit.alive && unit.id !== target.id && (unit.category === 'infantry' || unit.type === 'at_infantry'));
+    const supportProtected = target.side === 'friendly'
+      && targetRole?.role === 'support'
+      && resolvedTactics.combinedArms
+      && friendly.some((unit) => unit.alive && (unit.category === 'armor' || unit.type === 'mbt'));
+    if (armorProtected) defenseMod *= 1 + resolvedTactics.modifiers.armorProtection;
+    if (supportProtected) defenseMod *= 1 + resolvedTactics.modifiers.infantrySupport;
     const effectiveDefense = Math.max(0, target.defense * defenseMod * armorResearch);
     const mitigation = 100 / (100 + effectiveDefense * 2);
     let attackMod = 1;
@@ -286,6 +302,11 @@ export function simulateBattle(params) {
       attackMod *= (ter.armorAttack || 1);      // 地形对装甲攻击的修正
     }
     if (attacker.category === 'infantry') attackMod *= (m.infantryAttack || 1);
+    if (attacker.side === 'friendly' && (attacker.category === 'armor' || attacker.type === 'mbt')
+      && resolvedTactics.combinedArms
+      && friendly.some((unit) => unit.alive && unit.id !== attacker.id && (unit.category === 'infantry' || unit.type === 'at_infantry'))) {
+      attackMod *= 1 + resolvedTactics.modifiers.armorAttack;
+    }
     if (attacker.side === 'friendly') attackMod *= (ter.friendlyAttack || 1);
     if (target.side === 'enemy') attackMod *= (2 - (ter.enemyDefense || 1));
     if (isFirstRound && attacker.side === fs) attackMod *= (m.firstPhaseAttack || 1);
@@ -341,8 +362,12 @@ export function simulateBattle(params) {
       if (actor.repair > 0 && actor.attack === 0) continue; // 维修车在阶段末行动
       const targets = (actor.side === 'friendly' ? enemy : friendly).filter((u) => u.alive);
       if (targets.length === 0) break;
+      const tacticalPriority = resolvedTactics.researchEnhanced
+        ? resolvedTactics.targetPriorities?.[actor.id]
+        : null;
       const target = chooseTargetDeterministically(actor, targets, rng, {
-        sortImplementation: p.targetSortImplementation || 'native'
+        sortImplementation: p.targetSortImplementation || 'native',
+        categoryPriority: tacticalPriority
       });
       const isFirstRound = (round === 1);
       const dmg = computeDamage(actor, target, { modifiers, terrain, firstStrike, strategyId, isFirstRound }, rng);
@@ -493,6 +518,7 @@ export function simulateBattle(params) {
     friendlyScouting, ambushChance, revealChance, revealHighThreat, firstStrike
   };
   report.modifiers = modifiers;
+  report.tactics = resolvedTactics;
   report.experienceMultiplier = missionKind === 'operation'
     ? safeNumber(missionConfig && missionConfig.experienceMultiplier, 1) : 1;
   return report;

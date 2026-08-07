@@ -30,8 +30,10 @@ export function compareTargetRanking(a, b) {
   return compareIds(a.id, b.id);
 }
 
-export function buildTargetRanking(actor, targets, tieSalt) {
-  const priorities = targetCategoryPriority(actor?.category);
+export function buildTargetRanking(actor, targets, tieSalt, options = {}) {
+  const priorities = Array.isArray(options.categoryPriority) && options.categoryPriority.length
+    ? options.categoryPriority
+    : targetCategoryPriority(actor?.category);
   const salt = Number(tieSalt) >>> 0;
   return (Array.isArray(targets) ? targets : []).map((target) => {
     let priority = priorities.indexOf(target?.category);
@@ -95,7 +97,7 @@ export function chooseTargetDeterministically(actor, targets, rng, options = {})
   if (!Array.isArray(targets) || targets.length === 0) return null;
   if (!rng || typeof rng.int !== 'function') throw new TypeError('deterministic target selection requires rng.int');
   const tieSalt = rng.int(0, 0xFFFFFFFF);
-  const ranking = buildTargetRanking(actor, targets, tieSalt);
+  const ranking = buildTargetRanking(actor, targets, tieSalt, options);
   const sorted = sortRanking(ranking, options.sortImplementation || 'native');
   return sorted[0]?.target || null;
 }

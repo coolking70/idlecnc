@@ -1,0 +1,11 @@
+{
+  "fixture": "long-approach",
+  "source": { "reportId": "fixture-long-approach", "theaterId": "border_road", "missionKind": "convoy_escort", "missionId": "long-approach", "strategyId": "screen", "result": "victory", "seed": 29 },
+  "forces": { "friendly": [{ "actorId": "long-tank", "type": "mbt" }, { "actorId": "long-scout", "type": "scout_car" }, { "actorId": "long-infantry", "type": "infantry" }], "enemy": [{ "actorId": "long-guard-1", "type": "infantry" }, { "actorId": "long-guard-2", "type": "at_infantry" }] },
+  "layout": { "bounds": { "width": 1200, "height": 700 }, "routes": [{ "actorId": "long-tank", "points": [{ "t": 0, "x": 80, "y": 350 }, { "t": 0.42, "x": 600, "y": 350 }], "tactical": { "staging": { "x": 600, "y": 350 } } }] },
+  "timeline": {
+    "duration": 42,
+    "actions": [{ "id": "long-deploy", "type": "deploy", "t": 0, "actorIds": ["long-tank", "long-scout", "long-infantry", "long-guard-1", "long-guard-2"] }, { "id": "long-advance", "type": "advance", "t": 4, "actorIds": ["long-tank", "long-scout", "long-infantry"] }, { "id": "long-cover", "type": "take_cover", "t": 13, "actorIds": ["long-tank", "long-infantry"] }],
+    "anchors": [{ "id": "long-phase", "type": "phase", "t": 0 }, { "id": "long-fire", "type": "fire", "t": 22, "actorId": "long-guard-1", "targetId": "long-tank" }, { "id": "long-damage", "type": "damage", "t": 22.8, "actorId": "long-guard-1", "targetId": "long-tank", "value": 8 }, { "id": "long-destroy", "type": "destroy", "t": 31, "actorId": "long-tank", "targetId": "long-guard-1" }, { "id": "long-result", "type": "result", "t": 40, "result": "victory" }]
+  }
+}

@@ -106,7 +106,7 @@ check('main explicitly resets sidecar on load and new game', () => {
 check('browser evidence script and manifest use CDP path', () => {
   const script = fs.readFileSync(path.join(root, 'tests/browser/formal-battle-evidence.mjs'), 'utf8');
   assert.match(script, /dispatch/); assert.match(fs.readFileSync(path.join(root, 'tests/browser/cdp-client.mjs'), 'utf8'), /Page\.captureScreenshot/); assert.doesNotMatch(script, /playwright|puppeteer/i);
-  const manifestPath = path.join(root, 'screenshots/stage8-2E-A1-screenshot-manifest.json');
+  const manifestPath = path.join(root, 'tests/fixtures/formal-browser-manifest-a1.json');
   const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
   assert.equal(manifest.screenshots.length, 11);
   assert.ok(manifest.screenshots.every((entry) => entry.reportFingerprint && entry.renderedMode && entry.canvasSignature && entry.pngSha256));

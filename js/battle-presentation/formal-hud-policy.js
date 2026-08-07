@@ -38,17 +38,16 @@ export function drawFormalBattleHud(context, hud, renderState, options = {}) {
   const phaseColor = hud.phase === '返航' ? '#e7c77e' : hud.phase === '占领' ? '#72d39a' : '#9be0c2';
   if (options.screenSpace === true) {
     const width = Number(options.screenWidth || 960); const height = Number(options.screenHeight || 540); const dpr = Number(options.screenDpr || 1);
+    const compact = width < 680; const stacked = width < 500; const leftWidth = stacked ? width - 24 : compact ? Math.min(224, width - 24) : 300; const rightWidth = stacked ? width - 24 : compact ? 148 : 236; const rightX = stacked ? 12 : Math.max(12, width - rightWidth - 12); const rightY = stacked ? 56 : 8;
     context.save(); context.setTransform(dpr, 0, 0, dpr, 0, 0);
-    context.fillStyle = 'rgba(5,14,15,.92)'; context.beginPath(); context.roundRect(12, 12, 224, 72, 7); context.fill();
-    context.strokeStyle = 'rgba(147,205,172,.5)'; context.stroke();
-    context.fillStyle = '#f0d597'; context.font = '700 18px sans-serif'; context.fillText(hud.title, 24, 34);
-    context.fillStyle = '#9be0c2'; context.font = '700 13px sans-serif'; context.fillText(hud.subtitle, 24, 53);
-    context.fillStyle = phaseColor; context.font = '12px sans-serif'; context.fillText(`${hud.phaseLabel} · ${hud.progressLabel}`, 24, 72);
-    context.fillStyle = 'rgba(5,14,15,.92)'; context.beginPath(); context.roundRect(Math.max(248, width - 194), 12, 182, 54, 7); context.fill();
-    context.fillStyle = '#e7d7aa'; context.font = '700 14px sans-serif'; context.fillText(hud.modeLabel, Math.max(260, width - 182), 34);
-    context.fillStyle = phaseColor; context.font = '11px sans-serif'; context.fillText(hud.viewLabel, Math.max(260, width - 182), 52);
-    context.fillStyle = 'rgba(5,14,15,.86)'; context.beginPath(); context.roundRect(12, Math.max(92, height - 32), Math.min(width - 24, 420), 22, 5); context.fill();
-    context.fillStyle = '#b7c4a0'; context.font = '11px sans-serif'; context.fillText(hud.footer, 22, Math.max(107, height - 17));
+    context.fillStyle = 'rgba(5,14,15,.78)'; context.beginPath(); context.roundRect(12, 8, leftWidth, 42, 6); context.fill(); context.strokeStyle = 'rgba(147,205,172,.42)'; context.stroke();
+    context.fillStyle = '#f0d597'; context.font = '700 14px sans-serif'; context.fillText(`${hud.title} · ${hud.subtitle}`, 22, 26);
+    context.fillStyle = phaseColor; context.font = '11px sans-serif'; context.fillText(`${hud.phaseLabel} · ${hud.progressLabel}`, 22, 43);
+    context.fillStyle = 'rgba(5,14,15,.78)'; context.beginPath(); context.roundRect(rightX, rightY, rightWidth, 42, 6); context.fill();
+    context.fillStyle = '#e7d7aa'; context.font = '700 12px sans-serif'; context.fillText(hud.modeLabel, rightX + 10, rightY + 18);
+    context.fillStyle = phaseColor; context.font = '10px sans-serif'; context.fillText(hud.viewLabel, rightX + 10, rightY + 34);
+    context.fillStyle = 'rgba(5,14,15,.68)'; context.beginPath(); context.roundRect(12, Math.max(58, height - 28), Math.min(width - 24, compact ? 300 : 400), 20, 5); context.fill();
+    context.fillStyle = '#b7c4a0'; context.font = '10px sans-serif'; context.fillText(hud.footer, 21, Math.max(71, height - 14));
     context.restore(); return;
   }
   context.save();

@@ -1,0 +1,9 @@
+{
+  "fixtureVersion": 1,
+  "fixture": "stage8-2G-B-withdraw-cover",
+  "sourceReport": "experiments/battle-sandbox/report-adapter/fixtures/campaign-withdraw.json",
+  "result": "withdraw",
+  "seed": 12,
+  "purpose": "formal withdrawal with surviving actors, rear guard and covering fire",
+  "requiredSignals": ["line_collapse", "covering_retreat", "retreat_order", "battle_end"]
+}

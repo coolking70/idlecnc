@@ -2,7 +2,10 @@ import { positionAtSlot } from './contract-movement-director.js';
 import { boundsIntersect, distanceBetween, getVisualBounds } from './visual-bounds.js';
 
 const REPAIR_OFFSET = Object.freeze({ x: -62, y: -38 });
-const LEAD_REPAIR_OFFSET = Object.freeze({ x: -24, y: -60 });
+// Lead-armor repairs rendezvous on the tank's forward-right quarter so the
+// maintenance vehicle does not clip the friendly workshop at the south-west
+// edge of the road template when the lead tank is still near spawn.
+const LEAD_REPAIR_OFFSET = Object.freeze({ x: 54, y: -38 });
 const CONTACT_OFFSET = Object.freeze({ x: -24, y: 10 });
 const APPROACH_DURATION = 0.65;
 const RETRACT_DURATION = 0.66;
@@ -36,20 +39,28 @@ export function buildRepairGroups(plan) {
 }
 
 function lerpPoint(first, second, amount) { return { x: first.x + (second.x - first.x) * amount, y: first.y + (second.y - first.y) * amount }; }
-function retractPoint(workCurrent, retractBase, amount) {
-  const waypoint = { x: Math.max(workCurrent.x - 92, 330), y: workCurrent.y + 16 };
+function retractPoint(workCurrent, retractBase, amount, targetRole = null) {
+  const waypoint = targetRole === 'friendly_lead_armor'
+    ? { x: workCurrent.x + 92, y: workCurrent.y - 16 }
+    : { x: Math.max(workCurrent.x - 92, 330), y: workCurrent.y + 16 };
   if (amount <= .45) return lerpPoint(workCurrent, waypoint, amount / .45);
   return lerpPoint(waypoint, retractBase, (amount - .45) / .55);
 }
 function approachPoint(approachBase, workAtWork, amount, targetRole = null) {
   if (targetRole === 'friendly_lead_armor') {
-    const belowRight = { x: 350, y: 550 }; const detourRight = { x: 370, y: 450 }; const aboveRight = { x: 370, y: 250 };
+    const belowRight = { x: 500, y: 620 }; const detourRight = { x: 530, y: 450 }; const aboveRight = { x: 130, y: 80 };
     if (amount <= .35) return lerpPoint(approachBase, belowRight, amount / .35);
     if (amount <= .48) return lerpPoint(belowRight, detourRight, (amount - .35) / .13);
     if (amount <= .75) return lerpPoint(detourRight, aboveRight, (amount - .48) / .27);
     return lerpPoint(aboveRight, workAtWork, (amount - .75) / .25);
   }
-  const waypoint = { x: Math.max(workAtWork.x - 92, 330), y: workAtWork.y + 16 };
+  // Keep the repair vehicle on the safe side of the target while it closes in.
+  // The old waypoint approached from below, which can briefly put a repair
+  // vehicle inside a tank's visual bounds when the target is already moving
+  // through the south lane.  The work pose remains target-relative; only the
+  // transit waypoint is moved above it so the continuous layout validator can
+  // observe a collision-free approach at every sampled frame.
+  const waypoint = { x: Math.max(workAtWork.x - 92, 330), y: workAtWork.y - 36 };
   if (amount <= .55) return lerpPoint(approachBase, waypoint, amount / .55);
   return lerpPoint(waypoint, workAtWork, (amount - .55) / .45);
 }
@@ -65,7 +76,7 @@ export function getRepairChoreographyAtTime(plan, time, actorPositions = {}) {
   const workAtWork = getRepairWorkPosition(targetAtWork, targetAtWork.facing, targetActor.role); const workCurrent = getRepairWorkPosition(targetCurrent, targetCurrent.facing, targetActor.role); const contactPoint = getRepairContactPoint(targetCurrent, targetCurrent.facing, targetActor.type);
   let state = 'working'; let repairPosition = workCurrent;
   if (time < active.workingStart) { state = 'deploying'; const approachBase = routePosition(plan, repairActor, active.approachStart); repairPosition = approachPoint(approachBase, workAtWork, Math.max(0, Math.min(1, (time - active.approachStart) / (active.workingStart - active.approachStart))), targetActor.role); }
-  else if (time > active.retractStart) { state = 'retracting'; const retractBase = routePosition(plan, repairActor, active.end); repairPosition = retractPoint(workCurrent, retractBase, Math.max(0, Math.min(1, (time - active.retractStart) / (active.end - active.retractStart)))); }
+  else if (time > active.retractStart) { state = 'retracting'; const retractBase = routePosition(plan, repairActor, active.end); repairPosition = retractPoint(workCurrent, retractBase, Math.max(0, Math.min(1, (time - active.retractStart) / (active.end - active.retractStart))), targetActor.role); }
   const latest = active.anchors.filter((anchor) => anchor.presentationTime <= time).at(-1) || null;
   const sparkActive = active.anchors.some((anchor) => time >= anchor.presentationTime && time <= anchor.presentationTime + 0.55);
   const sparkPoint = { x: contactPoint.x + 4, y: contactPoint.y + 3 };

@@ -1,0 +1,127 @@
+{
+  "stage": "8.2G-C.1",
+  "version": 1,
+  "status": "passed",
+  "policy": {
+    "independentAuditImported": false,
+    "failedSamplesFiltered": false,
+    "expectedStateRecomputed": true,
+    "browserFallbackAllowed": false
+  },
+  "evidence": {
+    "machineFrames": 20,
+    "browserFrames": 20,
+    "uniquePngHashes": 20,
+    "dualTamperProtected": true,
+    "pageErrors": [],
+    "consoleErrors": []
+  },
+  "assetRuntime": {
+    "manifestToDrawSpec": true,
+    "runtimeDrawImage": true,
+    "proceduralFallback": true,
+    "hybridTank": true
+  },
+  "minimumScreenFootprint": {
+    "enforced": true,
+    "defaultViewport": [
+      {
+        "type": "mbt",
+        "screenFootprint": 67.2,
+        "minimum": 46
+      },
+      {
+        "type": "anti_armor_infantry",
+        "screenFootprint": 31.36,
+        "minimum": 24
+      },
+      {
+        "type": "infantry",
+        "screenFootprint": 31.36,
+        "minimum": 24
+      },
+      {
+        "type": "support_vehicle",
+        "screenFootprint": 49.28,
+        "minimum": 34
+      },
+      {
+        "type": "light_vehicle",
+        "screenFootprint": 49.28,
+        "minimum": 34
+      },
+      {
+        "type": "infantry",
+        "screenFootprint": 49.28,
+        "minimum": 24
+      },
+      {
+        "type": "infantry",
+        "screenFootprint": 49.28,
+        "minimum": 24
+      },
+      {
+        "type": "infantry",
+        "screenFootprint": 49.28,
+        "minimum": 24
+      }
+    ],
+    "narrowViewport": [
+      {
+        "type": "infantry",
+        "minimum": 24,
+        "screenFootprint": 24,
+        "visualScaleBoost": 4.2857
+      },
+      {
+        "type": "anti_armor_infantry",
+        "minimum": 24,
+        "screenFootprint": 24,
+        "visualScaleBoost": 4.2857
+      },
+      {
+        "type": "light_vehicle",
+        "minimum": 34,
+        "screenFootprint": 34,
+        "visualScaleBoost": 3.8636
+      },
+      {
+        "type": "mbt",
+        "minimum": 46,
+        "screenFootprint": 46,
+        "visualScaleBoost": 3.8333
+      },
+      {
+        "type": "support_vehicle",
+        "minimum": 34,
+        "screenFootprint": 34,
+        "visualScaleBoost": 3.8636
+      }
+    ]
+  },
+  "routePolylineClearance": {
+    "seedCount": 20,
+    "checkedEveryPolylineSegment": true,
+    "violations": 0
+  },
+  "weaponProfiles": {
+    "fields": {
+      "muzzleShape": "small_flash",
+      "tracerWidth": 9,
+      "impactScale": 0.7,
+      "smoke": "none",
+      "persistentMark": "small_impact_mark"
+    },
+    "combatReportUnchanged": true
+  },
+  "performance": {
+    "sampleCount": 160,
+    "averageRenderMs": 0.2301,
+    "medianRenderMs": 0.2253,
+    "p95RenderMs": 0.3038,
+    "maxRenderMs": 0.5131,
+    "samplesAreMeasured": true,
+    "percentileMethod": "nearest-rank(sorted samples)"
+  },
+  "generatedBy": "tests/generate-stage8-2G-C-1-evidence.mjs"
+}

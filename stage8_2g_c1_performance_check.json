@@ -1,0 +1,16 @@
+{
+  "stage": "8.2G-C.1",
+  "sampleCount": 160,
+  "averageRenderMs": 0.2296,
+  "medianRenderMs": 0.2177,
+  "p95RenderMs": 0.3265,
+  "maxRenderMs": 0.403,
+  "samplesAreMeasured": true,
+  "percentileMethod": "nearest-rank(sorted samples)",
+  "maxActiveParticles": 96,
+  "maxSmokeColumns": 24,
+  "maxDustEffects": 18,
+  "maxPersistentDecals": 128,
+  "bounded": true,
+  "passed": true
+}

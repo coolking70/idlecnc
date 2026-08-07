@@ -1,0 +1,1 @@
+{"ok":false,"code":"navigation_blocked_by_policy","message":"browser navigation was blocked by policy"}

@@ -104,7 +104,7 @@ export function localStaticServer(rootDir) {
     if (!file.startsWith(path.resolve(rootDir) + path.sep)) { response.writeHead(403); response.end(); return; }
     try {
       const data = await fs.readFile(file);
-      const type = file.endsWith('.html') ? 'text/html; charset=utf-8' : file.endsWith('.js') ? 'text/javascript; charset=utf-8' : file.endsWith('.css') ? 'text/css; charset=utf-8' : 'application/octet-stream';
+      const type = file.endsWith('.html') ? 'text/html; charset=utf-8' : file.endsWith('.js') ? 'text/javascript; charset=utf-8' : file.endsWith('.css') ? 'text/css; charset=utf-8' : file.endsWith('.svg') ? 'image/svg+xml' : 'application/octet-stream';
       response.writeHead(200, { 'content-type': type, 'cache-control': 'no-store' }); response.end(data);
     } catch { response.writeHead(404); response.end('not found'); }
   });

@@ -1,0 +1,1 @@
+{"ok":true,"evidenceRunId":"fixture-evidence-run-a2","url":"http://127.0.0.1:0/","screenshots":12,"battles":[{"battleId":"fixture-victory-battle","reportId":"fixture-victory-report","result":"victory"},{"battleId":"fixture-withdraw-battle","reportId":"fixture-withdraw-report","result":"withdraw"}],"pageErrors":[],"consoleErrors":[]}

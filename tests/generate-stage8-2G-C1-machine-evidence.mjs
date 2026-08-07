@@ -1,0 +1,17 @@
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { createUniversalBattlePresentation } from '../js/battle-presentation/universal/universal-battle-adapter.js';
+import { buildEvidenceSceneHash, buildStageC1EvidenceStatePayload, buildStageC1EvidenceStateSignature, stageC1SemanticPredicates } from '../js/battle-presentation/universal/evidence-integrity.js';
+import { buildC1ScenarioReports, C1_FRAME_SPECS } from './lib/stage8-2G-C1-scenarios.mjs';
+
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const output = path.join(root, 'stage8_2g_c1_machine_semantic_evidence.json');
+const makeScene = (id, result, report, specs) => { const presentation = createUniversalBattlePresentation({ id, report, duration: report.duration, presentationPhase: 'battle' }); if (!presentation.ok) throw new Error(`C.1 presentation failed: ${id}`); const duration = Number(presentation.plan.timeline.duration); const frames = specs.map(([file, ratio, semantic, viewportKind = 'default']) => { const timeMs = Number((duration * ratio * 1000).toFixed(3)); const state = presentation.renderState.atTime(timeMs / 1000); const payload = buildStageC1EvidenceStatePayload({ sceneId: id, seed: report.seed, state, timeMs, semanticName: semantic }); return { semanticFrameId: `${id}::${semantic}::${viewportKind}`, file, semantic, sceneId: id, seed: report.seed, timeMs, visualTimeSeconds: timeMs / 1000, viewportKind, sceneHash: buildEvidenceSceneHash(presentation.plan), stateSignature: buildStageC1EvidenceStateSignature({ sceneId: id, seed: report.seed, state, timeMs, semanticName: semantic }), environmentSignature: state.environment.signature, destructionSignature: state.destruction.signature, semanticPredicates: stageC1SemanticPredicates(semantic, state), environmentObjects: state.environment.objects, persistentDecals: state.decals, wrecks: state.wrecks, smoke: state.smoke, weaponVisuals: payload.weaponVisuals, actors: state.actors, drawSpecs: state.drawSpecs, statePayload: payload }; }); return { sceneId: id, result, seed: report.seed, reportId: report.id, sourceDuration: Number(report.duration), visualDuration: duration, sceneHash: buildEvidenceSceneHash(presentation.plan), sourceReport: report, frames }; };
+
+const reports = await buildC1ScenarioReports();
+const assetSpecs = [...C1_FRAME_SPECS.assets, ['asset-02-tank-hybrid-narrow.png', .62, 'asset-02-tank', 'narrow']];
+const scenes = [makeScene('stage8g-c1-victory', 'victory', reports.victory, C1_FRAME_SPECS.victory), makeScene('stage8g-c1-defeat', 'withdraw', reports.defeat, C1_FRAME_SPECS.defeat), makeScene('stage8g-c1-assets', 'victory', reports.victory, assetSpecs)];
+const frames = scenes.flatMap((scene) => scene.frames); if (new Set(frames.map((frame) => frame.semanticFrameId)).size !== frames.length) throw new Error('C.1 frame IDs are not unique');
+await fs.writeFile(output, JSON.stringify({ stage: '8.2G-C.1', version: 1, generatedBy: 'tests/generate-stage8-2G-C1-machine-evidence.mjs', baseline: '8.2G-C', independentAudit: false, browserFallbackAllowed: false, canonical: { expectedState: 'recomputed-from-current-code-and-canonical-scenario-reports', stateSignature: 'stageC1-payload-v1/sha256' }, scenes, frameCount: frames.length }, null, 2) + '\n');
+console.log(JSON.stringify({ ok: true, stage: '8.2G-C.1', output, scenes: scenes.length, frames: frames.length }));

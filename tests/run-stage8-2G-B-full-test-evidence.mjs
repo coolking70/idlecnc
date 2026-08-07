@@ -1,0 +1,28 @@
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+import { spawn } from 'node:child_process';
+import { execFileSync } from 'node:child_process';
+import { fileURLToPath } from 'node:url';
+
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const evidenceDir = path.join(root, 'tests/evidence'); fs.mkdirSync(evidenceDir, { recursive: true });
+const logFile = path.join(evidenceDir, 'stage8_2g_b_full_npm_test.log'); const jsonFile = path.join(evidenceDir, 'stage8_2g_b_full_npm_test.json');
+const cleanExtract = process.argv.includes('--clean-extract'); const hardTimeoutMs = Number(process.env.IRON_COMMAND_FULL_TEST_TIMEOUT_MS || 900000); const startedAt = new Date();
+const packageJson = JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 'utf8')); const command = packageJson.scripts.test;
+const testFiles = [...command.matchAll(/node ([^ ]+\.mjs)/g)].map((match) => match[1]); const npmVersion = execFileSync('npm', ['--version'], { encoding: 'utf8' }).trim();
+const output = fs.createWriteStream(logFile); const chunks = []; const write = (text) => { output.write(text); chunks.push(text); };
+write(`stage=8.2G-B\nstartedAt=${startedAt.toISOString()}\ncommand=npm test\ncleanExtract=${cleanExtract}\nnode=${process.version}\nnpm=${npmVersion}\nos=${process.platform} ${process.arch} ${os.release()}\nworkingDirectory=${root}\ntestFiles=${testFiles.join(',')}\n--- npm test output ---\n`);
+const child = spawn('npm', ['test'], { cwd: root, env: process.env, stdio: ['ignore', 'pipe', 'pipe'], detached: true }); child.stdout.on('data', (value) => write(value.toString())); child.stderr.on('data', (value) => write(value.toString()));
+let timedOut = false; const timer = setTimeout(() => { timedOut = true; try { process.kill(-child.pid, 'SIGTERM'); } catch {} }, hardTimeoutMs);
+const exitCode = await new Promise((resolve) => child.on('close', (code) => resolve(code))); clearTimeout(timer); output.end();
+const finishedAt = new Date(); const text = chunks.join('');
+const assertionRecords = [];
+for (const match of text.matchAll(/(?:测试总数[:：]\s*|: |：)(\d+)\s+(?:通过[:：]\s*)?(\d+)\s+(?:失败[:：]\s*)?(\d+)?\s*(?:总|passed)/g)) assertionRecords.push({ passed: Number(match[2] || match[1]), total: Number(match[1] || match[2]) });
+for (const match of text.matchAll(/(?:^|\n)[^\n:]+:\s*(\d+)\s+passed\s*\/\s*(\d+)\s+total/g)) assertionRecords.push({ passed: Number(match[1]), total: Number(match[2]) });
+for (const match of text.matchAll(/(?:\n|^)(?:[^\n]*):\s*(\d+)\s+(?:plans|checks|contacts|convoy plans) passed/g)) assertionRecords.push({ passed: Number(match[1]), total: Number(match[1]) });
+const total = assertionRecords.reduce((sum, record) => sum + record.total, 0); const passed = assertionRecords.reduce((sum, record) => sum + record.passed, 0);
+const finalExitCode = timedOut ? 124 : (exitCode ?? 1); const failed = finalExitCode === 0 ? 0 : Math.max(1, total - passed);
+const slowestTests = [...text.matchAll(/(?:PASS|passed)\s+([^\n]*?)(?:\s+duration=|\s+in\s+)(\d+(?:\.\d+)?)s/g)].map((match) => ({ name: match[1].trim(), durationMs: Math.round(Number(match[2]) * 1000) })).sort((a, b) => b.durationMs - a.durationMs).slice(0, 5);
+const result = { stage: '8.2G-B', command: 'npm test', cleanExtract, startedAt: startedAt.toISOString(), finishedAt: finishedAt.toISOString(), durationMs: finishedAt - startedAt, exitCode: finalExitCode, total, passed, failed, skipped: 0, testFiles, slowestTests, environment: { os: `${process.platform} ${process.arch} ${os.release()}`, node: process.version, npm: npmVersion }, workingDirectory: root, logFile: 'tests/evidence/stage8_2g_b_full_npm_test.log', timeout: { hardTimeoutMs, timedOut, signal: timedOut ? 'SIGTERM' : null }, process: { pid: child.pid, activeAfterExit: false } };
+fs.writeFileSync(jsonFile, JSON.stringify(result, null, 2) + '\n'); console.log(JSON.stringify(result, null, 2)); if (result.exitCode !== 0) process.exitCode = result.exitCode;

@@ -9,7 +9,7 @@
  */
 
 import {
-  TIME, CURRENT_STAGE, BUILDINGS, UNITS, CONSTRUCTION_UI, BUILDING_STATUS, PRODUCTION_UI,
+  TIME, CURRENT_STAGE, CURRENT_STAGE_LABEL, BUILDINGS, UNITS, CONSTRUCTION_UI, BUILDING_STATUS, PRODUCTION_UI,
   FORMATION, FORMATION_PRESETS, THEATERS, OPERATIONS, BATTLE, REPAIR
 } from './config.js';
 import { getState } from './state.js';
@@ -60,6 +60,7 @@ import {
 } from './research.js';
 import { getUnitRank, renameUnit, getUnitEffectiveStats, filterUnits, sortUnits } from './units.js';
 import { validateResearchHistory, validateBattleOutcomeConsistency, compareBattleReports } from './integrity.js';
+import { buildEvidenceStatePayload, buildEvidenceStateSignature, buildStageC1EvidenceStatePayload, buildStageC1EvidenceStateSignature, stageC1SemanticPredicates } from './battle-presentation/universal/evidence-integrity.js';
 
 /* ------------------------------------------------------------
  * 模块实例
@@ -571,7 +572,9 @@ function handleLoad() {
     if (ui) ui.toast('没有找到存档', 'warn');
     return;
   }
-  const res = loadGame();
+  // “读取”是玩家明确的恢复动作，优先读取显式手动槽位；启动时的 loadGame()
+  // 仍默认续接自动槽位，避免刷新页面回到很久以前的手动存档。
+  const res = loadGame({ preferManual: true });
   if (!res.ok) {
     if (ui) ui.toast(`读取失败：${res.reason}`, 'danger');
     return;
@@ -940,6 +943,7 @@ function boot() {
   // 调试句柄：全部转调正式业务函数，非法参数返回失败对象而不是抛异常
   window.__IRON_COMMAND__ = {
     stage: CURRENT_STAGE,
+    stageLabel: CURRENT_STAGE_LABEL,
     getState,
     setSpeed: (value) => { setSpeed(value); return getState().time.speed; },
     save: () => saveGame(getState()),
@@ -1555,6 +1559,39 @@ function boot() {
     /** 维修规则常量，便于人工测试时对照上限 */
     presentation: () => battlePresentationRouter?.getState() || null,
     setPresentationMode: (mode) => { battlePresentationRouter?.setPreference(mode); return battlePresentationRouter?.getState() || null; },
+    setBattlePresentationDebug: (enabled, options) => { battlePresentationRouter?.setDebugOverlay?.(enabled, options || {}); return battlePresentationRouter?.getDebugOverlayState?.() || { debugOverlay: false }; },
+    battlePresentationDebug: () => battlePresentationRouter?.getDebugOverlayState?.() || { debugOverlay: false },
+    resetPresentationCamera: () => { battlePresentationRouter?.resetCamera?.(); return battlePresentationRouter?.getInteractionState?.() || null; },
+    battlePresentationInteraction: () => battlePresentationRouter?.getInteractionState?.() || null,
+    /** Test-only evidence loader: it installs an immutable report as an active presentation input. */
+    loadEvidenceBattle: (input = {}) => {
+      const report = input.report;
+      if (!report || typeof report !== 'object') return { ok: false, reason: 'evidence report missing' };
+      const active = {
+        id: input.id || report.id || 'evidence-battle',
+        seed: Number.isFinite(Number(input.seed)) ? Number(input.seed) : Number(report.seed) || 0,
+        theaterId: report.theaterId || null,
+        theaterName: report.theaterName || '',
+        strategyId: report.strategyId || null,
+        missionKind: report.missionKind || 'campaign',
+        missionId: report.missionId || report.theaterId || null,
+        formationId: report.formationId || null,
+        formationName: report.formationName || 'Evidence',
+        dispatchedUnitIds: [], dispatchSnapshot: null,
+        report,
+        elapsed: 0, duration: Math.max(1, Number(report.duration) || 1),
+        playing: true, settled: false, presentationPhase: 'battle', returnElapsed: 0, returnDuration: 5
+      };
+      const state = getState(); state.activeBattle = active; viewMode = 'battle';
+      battlePresentationRouter?.reset?.(); battlePresentationRouter?.render?.(active, 0);
+      return { ok: true, id: active.id, seed: active.seed, reportId: report.id, duration: active.duration };
+    },
+    battlePresentationEvidenceStateAt: (seconds, context = {}) => {
+      const renderState = battlePresentationRouter?.getRenderStateAt?.(Number(seconds) || 0) || battlePresentationRouter?.getRenderState?.() || null;
+      if (!renderState) return { ok: false, reason: 'presentation render state unavailable' };
+      const payload = buildEvidenceStatePayload({ sceneId: context.sceneId || null, seed: context.seed, state: renderState, timeMs: Number(renderState.time || 0) * 1000 });
+      const timeMs = Number(renderState.time || 0) * 1000; const c1Payload = buildStageC1EvidenceStatePayload({ sceneId: context.sceneId || null, seed: context.seed, state: renderState, timeMs, semanticName: context.semanticName || '' }); return { ok: true, state: renderState, payload, stateSignature: buildEvidenceStateSignature({ sceneId: context.sceneId || null, seed: context.seed, state: renderState, timeMs }), c1Payload, c1StateSignature: buildStageC1EvidenceStateSignature({ sceneId: context.sceneId || null, seed: context.seed, state: renderState, timeMs, semanticName: context.semanticName || '' }), semanticPredicates: stageC1SemanticPredicates(context.semanticName || '', renderState) };
+    },
     battlePresentationDiagnostics: () => {
       const routerState = battlePresentationRouter?.getState?.() || null;
       const active = getState().activeBattle;
@@ -1570,7 +1607,7 @@ function boot() {
           returnDuration: Number(active.returnDuration || 0),
           reportFingerprint: routerState?.reportFingerprint || null
         } : null,
-        repairAnchors: presentation?.plan?.anchors?.filter((anchor) => anchor.type === 'repair').map((anchor) => ({
+        repairAnchors: (presentation?.plan?.anchors || presentation?.plan?.timeline?.anchors || []).filter((anchor) => anchor.type === 'repair').map((anchor) => ({
           id: anchor.id, presentationTime: anchor.presentationTime, actorId: anchor.actorId, targetId: anchor.targetId, sourceEventId: anchor.sourceEventId
         })) || [],
         renderState: renderState ? {
@@ -1579,9 +1616,13 @@ function boot() {
           actors: renderState.actors.map((actor) => ({ id: actor.id, side: actor.side, type: actor.type, alive: actor.alive, hp: actor.hp, visualCenter: { ...actor.visualCenter }, anchorPosition: { ...actor.anchorPosition }, memberPositions: (actor.memberPositions || []).map((member) => ({ ...member })) })),
           wrecks: renderState.wrecks.map((wreck) => ({ ...wreck }))
         } : null,
-        plan: presentation?.plan ? { mode: presentation.mode, templateId: presentation.plan.templateId, duration: presentation.plan.duration, timeMap: presentation.plan.timeMap, repairAnchors: presentation.plan.anchors.filter((anchor) => anchor.type === 'repair') } : null
+        plan: presentation?.plan ? { mode: presentation.mode, templateId: presentation.plan.templateId || null, duration: presentation.plan.duration || presentation.plan.timeline?.duration || 0, timeMap: presentation.plan.timeMap || presentation.plan.timeline || null, repairAnchors: (presentation.plan.anchors || presentation.plan.timeline?.anchors || []).filter((anchor) => anchor.type === 'repair') } : null
       };
     },
+    battlePresentationAssetStatus: () => battlePresentationRouter?.getAssetRuntimeState?.() || null,
+    battlePresentationSetAssetDisabled: (assetId, value = true) => battlePresentationRouter?.setAssetDisabled?.(assetId, value) || null,
+    battlePresentationRenderStateAt: (seconds) => battlePresentationRouter?.getRenderStateAt?.(seconds) || null,
+    battlePresentationRenderAt: (seconds) => battlePresentationRouter?.renderAt?.(seconds) || null,
     repairRules: () => ({
       maxConcurrent: REPAIR.maxConcurrent,
       maxQueueSize: REPAIR.maxQueueSize,
@@ -1612,6 +1653,7 @@ function boot() {
     return JSON.stringify({
       coordinateSystem: 'origin top-left; +x right; +y down',
       stage: CURRENT_STAGE,
+      stageLabel: CURRENT_STAGE_LABEL,
       viewMode,
       gameTime: Math.round(state.time.game),
       speed: state.time.speed,
@@ -1633,6 +1675,8 @@ function boot() {
         settlementError: state.activeBattle.settlementError || null,
         mode: battlePresentationRouter?.getState()?.mode || 'legacy',
         preference: battlePresentationRouter?.getPreference?.() || 'auto',
+        rendering: battlePresentationRouter?.getDebugOverlayState?.() || { debugOverlay: false },
+        scene: battlePresentationRouter?.getTextState?.({}) || null,
         diagnostics: battlePresentationRouter?.getState?.() || null
       } : null
     });

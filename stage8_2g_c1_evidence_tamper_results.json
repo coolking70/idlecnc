@@ -1,0 +1,48 @@
+{
+  "ok": true,
+  "stage": "8.2G-C.1",
+  "mutationCases": 8,
+  "cases": [
+    {
+      "label": "dual state signature",
+      "rejected": true,
+      "output": "{\"ok\":false,\"stage\":\"8.2G-C.1\",\"message\":\"C.1 expected state signature mismatch victory-01-environment-opening.png\"}\n"
+    },
+    {
+      "label": "dual environment signature",
+      "rejected": true,
+      "output": "{\"ok\":false,\"stage\":\"8.2G-C.1\",\"message\":\"C.1 expected environment/destruction binding mismatch victory-01-environment-opening.png\"}\n"
+    },
+    {
+      "label": "dual destruction signature",
+      "rejected": true,
+      "output": "{\"ok\":false,\"stage\":\"8.2G-C.1\",\"message\":\"C.1 expected environment/destruction binding mismatch victory-01-environment-opening.png\"}\n"
+    },
+    {
+      "label": "scene hash",
+      "rejected": true,
+      "output": "{\"ok\":false,\"stage\":\"8.2G-C.1\",\"message\":\"C.1 expected environment/destruction binding mismatch victory-01-environment-opening.png\"}\n"
+    },
+    {
+      "label": "semantic predicate",
+      "rejected": true,
+      "output": "{\"ok\":false,\"stage\":\"8.2G-C.1\",\"message\":\"C.1 semantic predicate mismatch victory-01-environment-opening.png\"}\n"
+    },
+    {
+      "label": "environment object",
+      "rejected": true,
+      "output": "{\"ok\":false,\"stage\":\"8.2G-C.1\",\"message\":\"C.1 environment object mismatch victory-01-environment-opening.png\"}\n"
+    },
+    {
+      "label": "decal radius",
+      "rejected": true,
+      "output": "{\"ok\":false,\"stage\":\"8.2G-C.1\",\"message\":\"C.1 decal mismatch victory-03-heavy-impact-crater.png\"}\n"
+    },
+    {
+      "label": "wrong png",
+      "rejected": true,
+      "output": "{\"ok\":false,\"stage\":\"8.2G-C.1\",\"message\":\"C.1 PNG hash mismatch victory-01-environment-opening.png\"}\n"
+    }
+  ],
+  "dualTamperUpdatesBrowserBinding": true
+}

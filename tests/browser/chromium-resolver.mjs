@@ -10,7 +10,7 @@ function unique(values) {
   return [...new Set(values.filter((value) => typeof value === 'string' && value.trim()).map((value) => value.trim()))];
 }
 
-function homeCandidates(platform = process.platform) {
+function homeCandidates(platform = process.platform, env = process.env) {
   const home = os.homedir();
   if (platform === 'darwin') return [
     '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
@@ -19,7 +19,7 @@ function homeCandidates(platform = process.platform) {
     path.join(home, 'Applications/Chromium.app/Contents/MacOS/Chromium')
   ];
   if (platform === 'win32') {
-    const roots = unique([process.env.PROGRAMFILES, process.env['PROGRAMFILES(X86)'], process.env.LOCALAPPDATA]);
+    const roots = unique([env.PROGRAMFILES, env['PROGRAMFILES(X86)'], env.LOCALAPPDATA]);
     return roots.flatMap((root) => [
       path.join(root, 'Google/Chrome/Application/chrome.exe'),
       path.join(root, 'Chromium/Application/chrome.exe'),
@@ -46,12 +46,15 @@ export function validateChromiumExecutable(file) {
 }
 
 function resolveFromPath(name, env = process.env) {
-  try {
-    const result = execFileSync('which', [name], { encoding: 'utf8', env, stdio: ['ignore', 'pipe', 'ignore'] }).trim();
-    return result || null;
-  } catch {
-    return null;
+  const pathEntries = String(env.PATH || '').split(path.delimiter).filter(Boolean);
+  for (const entry of pathEntries) {
+    const candidate = path.join(entry, name);
+    if (validateChromiumExecutable(candidate).ok) return candidate;
   }
+  if (process.platform === 'win32') {
+    try { return execFileSync('where.exe', [name], { encoding: 'utf8', env, stdio: ['ignore', 'pipe', 'ignore'] }).split(/\r?\n/).find(Boolean) || null; } catch {}
+  }
+  return null;
 }
 
 export function listChromiumCandidates(options = {}) {
@@ -60,7 +63,7 @@ export function listChromiumCandidates(options = {}) {
   const candidates = [];
   for (const key of EXPLICIT_ENV) if (env[key]) candidates.push(env[key]);
   for (const name of PATH_NAMES) candidates.push(resolveFromPath(name, env) || name);
-  candidates.push(...homeCandidates(platform));
+  candidates.push(...homeCandidates(platform, env));
   return unique(candidates);
 }
 
@@ -85,7 +88,7 @@ export function buildChromiumLaunchArgs(options = {}) {
   if ((options.platform || process.platform) === 'linux' && (options.uid ?? (typeof process.getuid === 'function' ? process.getuid() : null)) === 0) args.push('--no-sandbox');
   const extra = options.extraArgs ?? ((options.env || process.env).IRON_COMMAND_CHROMIUM_EXTRA_ARGS || '');
   if (Array.isArray(extra)) args.push(...extra);
-  else if (typeof extra === 'string' && extra.trim()) args.push(...extra.match(/(?:[^\s"]+|"[^"]*")+/g).map((value) => value.replace(/^"|"$/g, '')));
+  else if (typeof extra === 'string' && extra.trim()) args.push(...(extra.match(/(?:[^\s=]+="[^"]*"|"[^"]*"|[^\s]+)/g) || []).map((value) => value.replaceAll('"', '')));
   return args;
 }
 

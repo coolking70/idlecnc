@@ -24,7 +24,9 @@ const MODIFIER_DEFAULTS = {
   supplyPerSec: 0, alloyPerSec: 0, supplyCap: 0, alloyCap: 0,
   infantryProductionTimeMultiplier: 1, vehicleProductionTimeMultiplier: 1,
   repairTimeMultiplier: 1, armorBattleDefenseMultiplier: 1,
-  battleScoutingMultiplier: 1, commandCapacity: 0
+  battleScoutingMultiplier: 1, commandCapacity: 0,
+  /** 战斗AI修正：只影响正式战斗的编队协同，不改写单位基础属性。 */
+  combinedArmsCoordination: 0, repairScreening: 0, formationControl: 0
 };
 
 function isObject(v) { return Boolean(v) && typeof v === 'object' && !Array.isArray(v); }

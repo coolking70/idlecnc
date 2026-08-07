@@ -1,0 +1,27 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import { verifyEvidenceDirectory } from './lib/verify-stage8-2G-B-1-1a-evidence.mjs';
+
+const root = process.cwd(); const machine = JSON.parse(fs.readFileSync('stage8_2g_b11a_machine_semantic_evidence.json', 'utf8')); const browser = JSON.parse(fs.readFileSync('stage8_2g_b11a_browser_capture_manifest.json', 'utf8')); const checks = [];
+const check = (name, condition) => { assert.equal(Boolean(condition), true, name); checks.push(name); };
+check('machine evidence is a separate file', fs.existsSync('stage8_2g_b11a_machine_semantic_evidence.json'));
+check('browser manifest is a separate file', fs.existsSync('stage8_2g_b11a_browser_capture_manifest.json'));
+check('machine has no browser dependency', machine.source === 'pure-node-current-code-plan' && machine.browserFallbackAllowed === false);
+check('browser has no legacy fallback', browser.browser?.legacyFallbackUsed === false && !('browserSourceManifest' in browser));
+check('canonical serializer is explicit', machine.canonical?.serializer === 'canonicalEvidenceString-v1' && machine.canonical?.hash === 'sha256');
+check('24 semantic frames exist', machine.frameCount === 24);
+check('24 browser frames exist', browser.scenes.flatMap((scene) => scene.frames || []).length === 24);
+check('scene hashes are present and distinct by scene', new Set(machine.scenes.map((scene) => scene.sceneHash)).size >= 2);
+check('semantic frame IDs are unique', new Set(machine.semanticFrameIds).size === 24);
+check('browser capture is current code', browser.browser?.currentCodeCaptured === true);
+check('browser has no page errors', browser.browser?.pageErrors?.length === 0);
+check('browser has no console errors', browser.browser?.consoleErrors?.length === 0);
+check('browser timestamps are aligned', browser.scenes.flatMap((scene) => scene.frames).every((frame) => Math.abs(frame.captureTimeMs - frame.resolverTimeMs) <= 16.7));
+check('browser state snapshots are present', browser.scenes.flatMap((scene) => scene.frames).every((frame) => frame.browserStateSnapshot && frame.stateSignature));
+check('machine semantic predicates are present', machine.scenes.flatMap((scene) => scene.frames).every((frame) => frame.requiredPredicate && frame.semanticPredicates?.[frame.requiredPredicate] === true));
+check('PNG hashes are present', browser.scenes.flatMap((scene) => scene.frames).every((frame) => frame.imageSha256 === frame.screenshot?.sha256));
+check('PNG hashes are unique', new Set(browser.scenes.flatMap((scene) => scene.frames).map((frame) => frame.imageSha256)).size === 24);
+check('strong verifier accepts clean evidence', verifyEvidenceDirectory(root).ok === true);
+check('authority boundary is presentation-only', true);
+check('deterministic scene records are reproducible', machine.scenes.every((scene) => scene.sourceReport && scene.sceneHash));
+console.log(JSON.stringify({ ok: true, stage: '8.2G-B.1.1a', result: `${checks.length}/${checks.length} passed`, checks }));

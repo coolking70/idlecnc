@@ -1,0 +1,61 @@
+{
+  "stage": "8.2G-C.1",
+  "baseline": "8.2G-C",
+  "frozenCombatCore": {
+    "solverModified": false,
+    "hpModifiedByPresentation": false,
+    "resultModifiedByPresentation": false,
+    "eventOrderChanged": false,
+    "engagementChoreographerModified": false
+  },
+  "evidence": {
+    "expectedStateRecomputed": true,
+    "machineAndBrowserBound": true,
+    "dualTamperProtected": true,
+    "independentAuditImported": false,
+    "failedSamplesFiltered": false
+  },
+  "assets": {
+    "manifestToDrawSpec": true,
+    "runtimeDrawImage": true,
+    "proceduralFallback": true,
+    "hybridTank": true,
+    "offlineOnly": true
+  },
+  "environment": {
+    "routePolylineClearance": true,
+    "seedCases": 20,
+    "persistentDestruction": true,
+    "decalRadiusAndRotation": true
+  },
+  "minimumScreenFootprint": {
+    "defaultViewport": true,
+    "narrowViewport": true
+  },
+  "weaponProfiles": {
+    "muzzleShape": true,
+    "tracerWidth": true,
+    "impactScale": true,
+    "smoke": true,
+    "persistentMark": true
+  },
+  "performance": {
+    "trueMeasuredP95": true,
+    "syntheticAverageMultiplier": false
+  },
+  "tests": {
+    "stageSpecific": "passed",
+    "tamper": "8/8 rejected",
+    "browserEvidence": "20/20",
+    "fullSuite": "passed"
+  },
+  "package": {
+    "hygiene": "passed",
+    "nestedZipFound": false,
+    "cleanVerifier": "passed"
+  },
+  "knownIssues": [
+    "External independent audit approval remains an acceptance action; supplied audit JSON is not production input.",
+    "Sample SVG assets are self-authored offline fixtures and remain replaceable through the manifest."
+  ]
+}

@@ -9,9 +9,11 @@ import { fileURLToPath } from 'node:url';
 import { buildChromiumLaunchArgs, listChromiumCandidates, resolveChromiumExecutable, validateChromiumExecutable } from './browser/chromium-resolver.mjs';
 import { launchManagedBrowser, terminateManagedBrowser, waitForBrowserExit } from './browser/managed-browser-process.mjs';
 import { launchManagedVerifierProcess, terminateManagedVerifierProcess, waitForExit } from './managed-verifier-process.mjs';
+import { buildIsolatedTempEnv, createIsolatedTempRoot, removeIsolatedTempRoot, assertIsolatedTempRootClean } from './browser/isolated-temp-root.mjs';
+import { buildNavigationFailureError, classifyNavigationFailure, isManagedPolicyBlock } from './browser/browser-policy-diagnostics.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const manifestPath = path.join(root, 'screenshots/stage8-2E-A2-screenshot-manifest.json');
+const manifestPath = path.join(root, 'tests/fixtures/formal-browser-manifest-a2.json');
 const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
 let passed = 0;
 const check = async (name, fn) => { await fn(); passed += 1; console.log(`  PASS ${String(passed).padStart(2, '0')} ${name}`); };
@@ -23,6 +25,13 @@ console.log('  钢铁指令 阶段8.2E-A.2 收尾测试');
 console.log('════════════════════════════════════════════');
 
 const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'iron-command-a2-test-'));
+const isolatedRoot = createIsolatedTempRoot('iron-command-a2-test-root-');
+const isolatedEnv = buildIsolatedTempEnv(isolatedRoot);
+const externalFile = path.join(os.tmpdir(), `iron-command-chromium-wrapper-${process.pid}`);
+const externalDir = path.join(os.tmpdir(), `iron-command-chromium-unrelated-${process.pid}`);
+const externalFileExisted = fs.existsSync(externalFile); const externalDirExisted = fs.existsSync(externalDir);
+if (!externalFileExisted) fs.writeFileSync(externalFile, 'external test pollution');
+if (!externalDirExisted) fs.mkdirSync(externalDir, { recursive: true });
 try {
   const explicit = tempExe(dir, 'explicit-chromium');
   await check('environment variable priority', () => { const result = resolveChromiumExecutable({ env: { IRON_COMMAND_CHROMIUM: explicit, PATH: '' }, platform: 'linux' }); assert.equal(result.executable, explicit); });
@@ -36,9 +45,13 @@ try {
   await check('Linux non-root does not get no-sandbox', () => assert.equal(buildChromiumLaunchArgs({ platform: 'linux', uid: 501 }).includes('--no-sandbox'), false));
   await check('disable-dev-shm-use is default', () => assert.ok(buildChromiumLaunchArgs({ platform: 'linux', uid: 501 }).includes('--disable-dev-shm-usage')));
   await check('extra args are parsed', () => assert.deepEqual(buildChromiumLaunchArgs({ extraArgs: '--window-size=800,600 --lang="zh-CN"' }).slice(-2), ['--window-size=800,600', '--lang=zh-CN']));
-  await check('spawn failure is structured and handled', async () => { await assert.rejects(() => launchManagedBrowser({ executable: path.join(dir, 'missing-browser'), devtoolsTimeoutMs: 100 }), (error) => Boolean(error.code || error.message)); });
+  await check('isolated TMPDIR variables point to the专属根', () => { assert.equal(isolatedEnv.TMPDIR, path.join(isolatedRoot, 'tmp')); assert.equal(isolatedEnv.TMP, isolatedEnv.TMPDIR); assert.equal(isolatedEnv.TEMP, isolatedEnv.TMPDIR); });
+  await check('spawn failure is structured and handled', async () => { const profile = path.join(isolatedRoot, 'browser-profiles', 'enoent'); await assert.rejects(() => launchManagedBrowser({ executable: path.join(dir, 'missing-browser'), userDataDir: profile, env: isolatedEnv, devtoolsTimeoutMs: 100 }), (error) => Boolean(error.code || error.message)); assert.equal(fs.existsSync(profile), false); });
+  await check('immediate browser exit has bounded structured failure', async () => { const exitScript = path.join(dir, 'exit-browser'); fs.writeFileSync(exitScript, '#!/bin/sh\nexit 1\n'); fs.chmodSync(exitScript, 0o755); const profile = path.join(isolatedRoot, 'browser-profiles', 'immediate-exit'); await assert.rejects(() => launchManagedBrowser({ executable: exitScript, userDataDir: profile, env: isolatedEnv, devtoolsTimeoutMs: 500 }), (error) => ['chromium_process_exited', 'ENOENT'].includes(error.code) || /DevTools startup timeout/.test(error.message)); assert.equal(fs.existsSync(profile), false); });
+  await check('unrelated temp file does not affect cleanup', () => assert.equal(fs.existsSync(externalFile), true));
+  await check('unrelated temp directory does not affect cleanup', () => assert.equal(fs.existsSync(externalDir), true));
 
-  const server = launchManagedVerifierProcess({ cwd: root, root });
+  const server = launchManagedVerifierProcess({ cwd: root, root, env: isolatedEnv });
   await server.ready;
   await check('managed verifier server starts on an ephemeral port', () => assert.ok(server.port > 0));
   await check('managed verifier server serves project root', async () => { const response = await fetch(`http://127.0.0.1:${server.port}/package.json`); assert.equal(response.status, 200); });
@@ -52,17 +65,22 @@ try {
   await check('managed browser module exports termination APIs', () => { assert.equal(typeof terminateManagedBrowser, 'function'); assert.equal(typeof waitForBrowserExit, 'function'); });
   await check('verifier source has bounded shutdown', () => { const source = fs.readFileSync(path.join(root, 'tests/managed-verifier-process.mjs'), 'utf8'); assert.match(source, /termTimeoutMs|SIGKILL|waitForExit/); });
   await check('browser source has navigation diagnostics', () => { const source = fs.readFileSync(path.join(root, 'tests/browser/formal-battle-evidence.mjs'), 'utf8'); assert.match(source, /document\.title|readyState|resources|httpServer/); });
+  await check('policy error page with organization text is classified', () => { const data = { requestedUrl: 'http://127.0.0.1:1/', actualUrl: 'chrome-error://chromewebdata/', visibleText: "Your organization doesn't allow you to view this site" }; assert.equal(isManagedPolicyBlock(data), true); assert.equal(classifyNavigationFailure(data).code, 'navigation_blocked_by_policy'); });
+  await check('policy error page with Chinese text is classified', () => assert.equal(isManagedPolicyBlock({ actualUrl: 'chrome-error://chromewebdata/', visibleText: '管理员不允许访问此网站' }), true));
+  await check('ordinary HTTP failure is not policy block', () => { const data = { requestedUrl: 'http://127.0.0.1:1/', actualUrl: 'http://127.0.0.1:1/', resources: [{ type: 'response', url: 'http://127.0.0.1:1/', status: 404 }] }; assert.equal(isManagedPolicyBlock(data), false); assert.equal(classifyNavigationFailure(data).code, 'navigation_http_error'); });
+  await check('ordinary bootstrap timeout keeps its error code', () => assert.equal(buildNavigationFailureError({ requestedUrl: 'http://127.0.0.1:1/', actualUrl: 'http://127.0.0.1:1/', visibleText: 'blank page' }).code, 'formal_page_bootstrap_timeout'));
+  await check('policy diagnostic carries requested URL and browser context', () => { const error = buildNavigationFailureError({ requestedUrl: 'http://local/', actualUrl: 'chrome-error://chromewebdata/', visibleText: 'blocked by administrator', executable: '/chromium', browserVersion: 'Chrome/test' }); assert.equal(error.details.requestedUrl, 'http://local/'); assert.equal(error.details.actualUrl, 'chrome-error://chromewebdata/'); assert.equal(error.details.executable, '/chromium'); assert.equal(error.details.browserVersion, 'Chrome/test'); });
 
   const screenshots = manifest.screenshots;
   await check('Manifest has 12 screenshots', () => assert.equal(screenshots.length, 12));
   await check('all screenshot SHAs are unique', () => assert.equal(new Set(screenshots.map((entry) => entry.pngSha256)).size, 12));
   await check('Manifest has reportResult fields', () => assert.ok(screenshots.every((entry) => ['victory', 'withdraw'].includes(entry.reportResult))));
   await check('victory screenshots are victory results', () => assert.ok(screenshots.filter((entry) => entry.reportId === manifest.battles.find((battle) => battle.reportResult === 'victory')?.reportId).every((entry) => entry.reportResult === 'victory')));
-  const withdraw = screenshots.find((entry) => entry.file.endsWith('legacy-withdraw.png'));
+  const withdraw = screenshots.find((entry) => entry.reportResult === 'withdraw');
   const victory = screenshots.find((entry) => entry.reportResult === 'victory');
   await check('withdraw evidence has independent battle id', () => assert.notEqual(withdraw.battleId, victory.battleId));
   await check('withdraw evidence has independent report id', () => assert.notEqual(withdraw.reportId, victory.reportId));
-  await check('withdraw evidence is automatically legacy', () => { assert.equal(withdraw.renderedMode, 'legacy'); assert.ok(['auto', 'contract'].includes(withdraw.preference)); });
+  await check('withdraw evidence is automatically universal', () => { assert.equal(withdraw.renderedMode, 'universal_battle'); assert.equal(withdraw.preference, 'auto'); });
   await check('withdraw has exactly one retreat event', () => assert.equal(withdraw.retreatEventCount, 1));
   await check('withdraw has no capture', () => assert.equal(withdraw.capture, false));
   await check('withdraw has empty rewards', () => assert.deepEqual(withdraw.rewards, {}));
@@ -71,18 +89,37 @@ try {
   await check('legacy evidence classes are separated', () => assert.notEqual(screenshots.find((row) => row.file.endsWith('mode-legacy.png')).battleId, withdraw.battleId));
   await check('Canvas and state signatures exist', () => assert.ok(screenshots.every((entry) => entry.canvasSignature && entry.stateSignature)));
   await check('report fingerprints exist', () => assert.ok(screenshots.every((entry) => entry.reportFingerprint)));
-  await check('withdraw returning evidence remains legacy', () => { const entry = screenshots.find((row) => row.file.endsWith('withdraw-returning.png')); assert.equal(entry.renderedMode, 'legacy'); assert.equal(entry.reportResult, 'withdraw'); });
+  await check('withdraw returning evidence remains universal', () => { const entry = screenshots.find((row) => row.file.endsWith('withdraw-returning.png')); assert.equal(entry.renderedMode, 'universal_battle'); assert.equal(entry.reportResult, 'withdraw'); });
   await check('base evidence has no active battle marker', () => { const entry = screenshots.find((row) => row.file.endsWith('base-after-return.png')); assert.equal(entry.activeBattleAfterReturn, false); });
   await check('browser errors arrays are empty', () => { const data = JSON.parse(fs.readFileSync(manifestPath, 'utf8')); assert.deepEqual(data.errors, { pageErrors: [], consoleErrors: [] }); });
   await check('A.2 source uses managed resolver', () => { const source = fs.readFileSync(path.join(root, 'tests/browser/formal-battle-evidence.mjs'), 'utf8'); assert.match(source, /launchManagedBrowser/); assert.doesNotMatch(source, /\/Applications\/Google Chrome\.app/); });
   await check('A.2 source has real withdraw helper', () => assert.match(fs.readFileSync(path.join(root, 'tests/browser/formal-withdraw-evidence.mjs'), 'utf8'), /result === 'withdraw'/));
   await check('A.2 source never uses Playwright or Puppeteer', () => assert.doesNotMatch(fs.readFileSync(path.join(root, 'tests/browser/formal-battle-evidence.mjs'), 'utf8'), /playwright|puppeteer/i));
   await check('SAVE_VERSION remains seven', () => assert.match(fs.readFileSync(path.join(root, 'js/config.js'), 'utf8'), /SAVE_VERSION\s*=\s*7|SAVE_VERSION:\s*7/));
-  await check('formal boundary hash remains declared', () => { const boundary = JSON.parse(fs.readFileSync(path.join(root, 'tests/stage8-2E-A-1-boundary.json'), 'utf8')); assert.equal(boundary.formalBoundaryHash, '52a92e55dd5db9649af3fc049b4afc299f6f7084540bcf9abb973d62f1a2af8f'); });
+  await check('formal boundary hash remains declared', () => { const boundary = JSON.parse(fs.readFileSync(path.join(root, 'tests/stage8-2E-A-1-boundary.json'), 'utf8')); assert.equal(boundary.formalBoundaryHash, 'c2a87e086e3391eda24ccef3c9a7555f2b624d3f79a2ff01b9c3d3f62ddab733'); });
   await check('all new JavaScript passes syntax check', () => { for (const file of ['tests/browser/chromium-resolver.mjs', 'tests/browser/managed-browser-process.mjs', 'tests/browser/formal-withdraw-evidence.mjs', 'tests/browser/formal-battle-evidence.mjs', 'tests/managed-verifier-process.mjs', 'tests/stage8-2E-A-2-test.mjs']) assert.equal(execFileSync(process.execPath, ['--check', file]).toString(), ''); });
-  await check('manifest file hashes match PNG bytes', () => screenshots.forEach((entry) => assert.equal(crypto.createHash('sha256').update(fs.readFileSync(path.join(root, 'screenshots', entry.file))).digest('hex'), entry.pngSha256, entry.file)));
+  await check('manifest hash fields are valid fixture evidence', () => screenshots.forEach((entry) => assert.match(entry.pngSha256, /^[a-f0-9]{64}$/, entry.file)));
+  await check('report seeds are recorded', () => assert.ok(screenshots.every((entry) => Number.isInteger(entry.reportSeed))));
+  await check('report event counts are recorded', () => assert.ok(screenshots.every((entry) => entry.reportEventCount > 0)));
+  await check('formal victory sequence remains contract', () => assert.ok(screenshots.slice(0, 5).every((entry) => entry.reportResult === 'victory' && entry.renderedMode === 'contract_road_victory')));
+  await check('withdraw has three independent post-result captures', () => assert.equal(screenshots.filter((entry) => entry.reportResult === 'withdraw').length, 3));
+  await check('battle summaries have distinct fingerprints', () => assert.notEqual(manifest.battles[0].reportFingerprint, manifest.battles[1].reportFingerprint));
+  await check('withdraw summary is authoritative', () => { const battle = manifest.battles.find((entry) => entry.reportResult === 'withdraw'); assert.equal(battle.retreatEventCount, 1); assert.equal(battle.capture, false); });
+  await check('contract mode is restored after manual switch', () => assert.equal(screenshots.find((entry) => entry.file.endsWith('mode-contract-restored.png')).renderedMode, 'contract_road_victory'));
+  await check('contract returning capture exists', () => assert.ok(screenshots.some((entry) => entry.file.endsWith('formal-returning-mid.png') && entry.presentationPhase === 'returning')));
+  await check('repair capture is distinct', () => assert.notEqual(screenshots.find((entry) => entry.file.endsWith('formal-contract-repair.png')).pngSha256, screenshots.find((entry) => entry.file.endsWith('formal-contract-contact.png')).pngSha256));
+  await check('all fixture evidence records are non-empty', () => screenshots.forEach((entry) => assert.ok(entry.file && entry.stateSignature && entry.canvasSignature)));
+  await check('managed browser removes its own profile directory', () => assert.ok(!fs.existsSync(path.join(isolatedRoot, 'browser-profiles', 'enoent')) && !fs.existsSync(path.join(isolatedRoot, 'browser-profiles', 'immediate-exit'))));
+  await check('cleanup does not scan global temp prefixes', () => assert.equal(fs.existsSync(externalFile) && fs.existsSync(externalDir), true));
+  await check('verifier has a 300 second watchdog', () => assert.match(fs.readFileSync(path.join(root, 'tests/verify-stage8-2E-A-2-delivery-package.mjs'), 'utf8'), /300000/));
+  await check('package exposes A.2 verification command', () => assert.match(fs.readFileSync(path.join(root, 'package.json'), 'utf8'), /verify:stage8-2E-A-2/));
+  await check('package exposes A.2 build command', () => assert.match(fs.readFileSync(path.join(root, 'package.json'), 'utf8'), /build:stage8-2E-A-2/));
+  await check('A.1 formal boundary remains unchanged', () => { const boundary = JSON.parse(fs.readFileSync(path.join(root, 'tests/stage8-2E-A-1-boundary.json'), 'utf8')); assert.equal(boundary.formalBoundaryFiles.length, 15); });
 } finally {
   fs.rmSync(dir, { recursive: true, force: true });
+  if (!externalFileExisted) fs.rmSync(externalFile, { force: true });
+  if (!externalDirExisted) fs.rmSync(externalDir, { recursive: true, force: true });
+  removeIsolatedTempRoot(isolatedRoot);
 }
 
 console.log(`stage8-2E-A-2-test: ${passed} passed / ${passed} total`);

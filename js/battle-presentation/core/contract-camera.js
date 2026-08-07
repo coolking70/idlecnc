@@ -14,4 +14,10 @@ export function finalStatusCamera(state) {
   const center = points.reduce((sum, point) => ({ x: sum.x + point.x / points.length, y: sum.y + point.y / points.length }), { x: 0, y: 0 });
   return { x: Math.max(430, Math.min(850, center.x)), y: Math.max(300, Math.min(500, center.y)), zoom: 1.08 };
 }
+export function clampContractCamera(camera) {
+  const zoom = Math.max(.76, Math.min(1.45, Number(camera?.zoom) || .86)); const halfWidth = 640 / zoom; const halfHeight = 360 / zoom;
+  const x = halfWidth >= 640 ? 640 : Math.max(halfWidth, Math.min(1280 - halfWidth, Number(camera?.x) || 640));
+  const y = halfHeight >= 360 ? 360 : Math.max(halfHeight, Math.min(720 - halfHeight, Number(camera?.y) || 360));
+  return { x, y, zoom };
+}
 export function worldToScreen(point, camera, width, height) { return { x: (point.x - camera.x) * camera.zoom + width / 2, y: (point.y - camera.y) * camera.zoom + height / 2 }; }

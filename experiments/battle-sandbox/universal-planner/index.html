@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>钢铁指令 · 通用战斗演出规划器</title>
+  <link rel="stylesheet" href="./universal-planner.css">
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar"><div><p class="eyebrow">STAGE 8.2F-A · DEBUG SANDBOX</p><h1>通用战斗演出规划器</h1><p class="sub">正式战报 → Presentation Contract → Universal Presentation Plan</p></div><div id="status" class="status">载入语料库…</div></header>
+    <section class="toolbar"><label>场景 <select id="scenario-select"></select></label><label>时间 <input id="time-range" type="range" min="0" max="45" step="0.1" value="0"><output id="time-value">0.0s</output></label><button id="play">播放</button></section>
+    <section class="grid"><div class="stage-card"><canvas id="scene" width="1200" height="700" aria-label="通用战斗演出调试画布"></canvas><div class="legend"><span><i class="friendly"></i>我方</span><span><i class="enemy"></i>敌方</span><span><i class="objective"></i>任务目标</span><span><i class="authority"></i>正式权威事件</span></div></div><aside class="side"><div class="panel"><h2>覆盖矩阵</h2><pre id="coverage">载入中…</pre></div><div class="panel"><h2>当前计划</h2><pre id="plan-text">载入中…</pre></div></aside></section>
+  </main>
+  <script type="module" src="./universal-planner.js"></script>
+</body>
+</html>

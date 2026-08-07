@@ -215,3 +215,235 @@
 - [x] 新增会话级持久回退与统一 renderedMode/frameId 状态；渲染异常不再逐帧重复尝试。
 - [x] 新增零依赖 Chromium/CDP 正式取证，真实正式 dispatch 生成包含维修锚点的活动战斗，自动生成11张截图和增强Manifest。
 - [x] 新增阶段8.2E-A.1测试、沙盒加固测试、边界哈希和最终ZIP自包含验证脚本。
+
+# Stage 8.2E-A.2 progress
+
+- [x] 新增可移植 Chromium resolver：环境变量、PATH、macOS/Windows/Linux 候选路径、结构化失败诊断、root `--no-sandbox` 与额外参数解析。
+- [x] 新增托管浏览器/验证服务器进程：spawn/error 竞态处理、DevTools 超时、stderr 诊断、进程组终止、SIGKILL 回退、临时 profile 与端口清理、300 秒封包总超时和阶段输出。
+- [x] 真实正式页面完成第二场独立 withdraw 战斗：前置占领后以五单位正式编队 dispatch，Manifest 记录 `withdraw`、恰好一个 `retreat`、`capture=false`、空奖励，auto 偏好自动回退 legacy。
+- [x] A.2 生成 12 张 PNG；胜利模式切换与真实撤退证据 battle/report ID、结果、指纹、模式和 SHA 完全分离。
+- [x] 新增 72 项 A.2 与 37 项 A.2.1 专项测试；更新最终 ZIP 构建/解压后二次验证；因 `package.json` 新增验收命令，边界入口哈希更新为 `c2a87e086e3391eda24ccef3c9a7555f2b624d3f79a2ff01b9c3d3f62ddab733`，正式业务/表现文件未改。
+# 阶段 8.2E-A.2.2
+
+- 已完成最终验证器可伸缩调度、统一进程/服务器生命周期、全局超时有界清理和显式测试清单。
+- `npm test` 实际通过：A.2 72/72、A.2.1 37/37、A.2.2 62/62。
+- 成功浏览器证据仍为 12 张独立截图，Manifest 含 victory/withdraw 双战斗及零页面/控制台错误。
+- 交付说明：`STAGE8-2E-A-2-2-DELIVERY.md`；最终包：`iron-command-stage8-2E-A-2-2-verifier-final.zip`。
+
+# 阶段 8.2F-A
+
+- 已新增隔离的通用战斗演出规划器纯数据管线：Intent、Scene Grammar、Force Groups、Dynamic Layout、Routes、Timeline、Presentation Actions 与 Universal Plan Validator。
+- 覆盖正式配置的 open / road / fortified、3 个战役/3 个行动任务、3 种策略、victory / pyrrhic / withdraw / defeat / wiped；不接入正式主循环，不修改正式战报字段。
+- 已由正式 `simulateBattle()` 生成 72 条 canonical + 500 条 deterministic fuzz，共 572 条合法战报；规划失败 0，演员数 3–18，友军 1–8，现有 6 个 missionId 全覆盖。
+- 新增隔离 debug sandbox、浏览器文本接口 `window.selectUniversalScenario()` / `window.seekUniversalPlanTime()` / `window.render_universal_plan_to_text()`，以及 112 项规划器测试和 572 条 corpus 测试。
+
+# 阶段 8.2F-A.1
+
+- [x] 新增确定性位置采样、布局去冲突、障碍校验、维修编舞、结局编舞、接敌分析、权威最终状态与计划 fingerprint；正式 authority anchor/action、最终 HP/alive、result/capture 保持只读一致。
+- [x] 修复同侧动态碰撞、撤退仍指向目标点、失败结果错误 secure_objective、维修车死亡后继续移动、convoy 非权威场景物件及 per-actor final state 缺失。
+- [x] canonical 扩展至 120，deterministic fuzz 扩展至 1000；友军兵种序列 661 种；覆盖初始损伤、经验、维修、敌装甲、发现/伏击/高威胁正反样本；计划/连续布局/语义失败数组全部为空。
+- [x] 新增 input stability、semantics、continuous layout、delivery 四组专项测试；`npm test` 已接入并保持严格失败即停。
+- [x] 动态 debug 证据改为 12 个实际不同时间点，Manifest 记录 fingerprint、请求/实际时间、位置哈希、活动动作、结果与 PNG SHA；A.2.4 官方浏览器证据重新执行并完成三方 evidenceRunId 收口。
+- [x] 完成 `STAGE8-2F-A-1-DELIVERY.md`、自包含 ZIP 验证器与最终包 `iron-command-stage8-2F-A-1-universal-planner-hardening.zip`。
+
+# Stage 8.2F-B.0 progress
+
+- [x] 修复 coverage dashboard 对真实 coverage schema 的读取；页面显示 terrain/mission/strategy/result/roster 计数，不再出现 `undefined`。
+- [x] 写入确定性的 mission×result 矩阵：30 个组合中当前 26 个有样本，明确列出 4 个未观察组合，不过滤失败或伪造覆盖。
+- [x] canonical 语料固定保留 `convoy_escort` 的 victory / withdraw / wiped 严格取证样本，并保护这些样本不被后续策略均衡替换。
+- [x] 浏览器取证谓词改为任务与结果双重精确匹配；12 张截图 Manifest 语义与文件名一致，pageErrors/consoleErrors 均为空。
+- [x] 页面状态明确区分 120 条 canonical reports 与 1000 条 fuzz specs；Playwright 客户端已打开页面并检查截图，无新增控制台错误。
+- [x] 专项测试与完整 `npm test` 均通过；1120 条规划语料、1123 条连续布局检查、12 张浏览器证据均完成回归。
+- [x] 重建 `iron-command-stage8-2F-A-2-universal-spatial-final.zip` 并通过自包含解压验证；封包含 345 个文件，SHA-256 为 `4c4f80209a2a2e436c69dcb6e4cff9c718e3ae3ba25f76bf8549b5b8f9969030`。
+- [x] B.1：通用规划器正式 runtime adapter、render state、缓存和 production renderer 已接入显式 universal 旁路；auto 默认策略保持 A.2 兼容。
+
+# Stage 8.2F-B.1 progress
+
+- [x] 新增正式通用 adapter：只读取 `activeBattle.report`，以 universal plan validation、空间校验和报告 fingerprint 作为准入门槛；不写回战报或结算状态。
+- [x] 新增通用 render state：权威事件按时间推进 HP/alive，最终状态与正式报告逐演员一致；返航仅移动友军视觉位置，敌军、残骸和权威状态保持不变。
+- [x] 新增 session-only universal plan cache、通用 Canvas renderer、HUD 和 `universal_battle` text state；正式代码不引用 `experiments/` 或 fixture 资源。
+- [x] 主路由接入显式 `universal` 旁路；`auto` 保持既有 contract → legacy 行为以避免改变 A.2 正式证据，universal 渲染异常一次性回退 legacy。
+- [x] UI 演出选择器支持 `auto / legacy / contract / universal`；主页面调试接口兼容 universal plan/timeline 和 render state。
+- [x] 新增 `stage8-2F-B-1-test.mjs`，adapter、四类结果、缓存、返航、路由回退和生产边界共 12 项通过。
+- [x] 真实 Chromium Canvas smoke、完整 `npm test`、解压后自包含回归和最终封包验证均通过；B.1 仍不改变正式 `auto` 默认策略。
+- [x] 完成 `iron-command-stage8-2F-B-1-universal-sidecar-final.zip`；封包含 353 个文件，120 canonical、1000 fuzz，SHA-256 为 `05847b1f403baff82f5036bccd1bf1b32d19bb30adff9ca9d23f4ba5b61bafd4`。
+
+# Stage 8.2F-B.2 progress
+
+- [x] Added deterministic formal universal camera module with overview, focus, impact and result modes; automatic camera is bounded to the zoomed map viewport.
+- [x] Expanded formal universal render state with member formations, facing/status, scene-object visual semantics, authority effects, active actions, outcome choreography and camera state.
+- [x] Replaced the B.1 placeholder Renderer with layered terrain, zones, routes, obstacles, infantry, anti-armor infantry, MBT, scout car, repair vehicle, enemy forces, wrecks, mission objects, tracers, impacts, repair welding, destruction and objective-ring visuals.
+- [x] Preserved `visualKind` for mission objects so control nodes, salvage sites/teams, search sectors and convoy vehicles render by mission semantics without changing spatial or authority types.
+- [x] Implemented explicit camera forwarding through the formal router while preserving the existing `auto` contract/legacy selection boundary.
+- [x] Added `tests/stage8-2F-B-2-test.mjs` (8/8), browser smoke page `tests/browser/universal-renderer-b2-smoke.html`, and `build:stage8-2F-B-2`.
+- [x] Real Chromium Canvas smoke passed for salvage交火 and wiped结局 frames; page errors 0, text-state errors empty, and the zoom-edge black-band issue was fixed and rechecked.
+- [x] Full `npm test` passed; planner/corpus/continuous/spatial/semantic regressions passed: 112/112, 1120/1120, 1123/1123, 12/12, 63/63; delivery builder passed in workspace and extracted package.
+- [x] Final package: `iron-command-stage8-2F-B-2-universal-renderer-final.zip`, SHA-256 `1209742da99ea0c212c2f9d8921c9e8242eca222282d5247c1572d18531c0f6e`, 9,306,028 bytes, 357 entries.
+
+# Stage 8.2F-B.3 progress
+
+- [x] 新增生产侧静态覆盖矩阵 `universal-coverage-matrix.js`：6 个 mission × 5 个 result，共 30 格；26 格正式可观测、4 格明确保持 unobserved，不导入 sandbox `coverage.json`，不删除或过滤失败样本。
+- [x] 收口正式 `auto` 路由：已覆盖且非契约优先的矩阵格默认进入 `universal_battle`；`border_road/victory` 保留既有契约 Renderer 优先；未观测/未知格回退 legacy；显式 `universal` 仍可用于验收与诊断。
+- [x] 诊断状态新增覆盖决策、默认通用尝试/成功计数；契约优先格不计入通用默认尝试，避免统计语义误报；通用 Renderer 异常继续一次性、有界回退。
+- [x] 正式浏览器取证重新生成 12 张截图：胜利契约优先，withdraw 活动/返航帧为 `auto → universal_battle`，返航结束清理 active battle；pageErrors/consoleErrors 均为 0。
+- [x] 新增 B.3 矩阵测试 9/9、默认通用浏览器烟测；官方 Playwright Canvas smoke 已检查 operation 与 withdraw 场景，文本状态 errors 为空、通用 HUD/地图/单位/路线正常显示。
+- [x] A.2.4 动态证据输出改为读取当前 run 的 A.2.4 文件，evidenceRunId 与 manifest/浏览器输出三方一致；A.2.4 37/37，B.1 12/12，B.2 8/8。
+- [x] 全量 `npm test` 与 B.3 builder/抽取包回归通过：1120 plans、1123 continuous layout、120 obstacle plans、120 performance plans/1742ms、delivery/slim verification 均通过。
+- [x] 最终包：`iron-command-stage8-2F-B-3-formal-coverage-default-final.zip`；SHA-256、大小以最终构建 stdout/外部校验值为准，清单哈希与抽取包回归均通过。
+
+# Stage 8.2F-B.4 progress
+
+- [x] 正式通用/契约 Renderer 改为保持 16:9 比例的响应式 viewport：按实际 Canvas CSS 尺寸、DPR、缩放和 letterbox 偏移绘制，避免窗口变化时拉伸或错位。
+- [x] 新增正式视野交互：左键/触控拖动、滚轮缩放、双击复位；手动观察会关闭自动镜头跟踪并在 `render_game_to_text`/诊断状态中标记 `manual=true`。
+- [x] 手动相机受世界边界和缩放范围约束，覆盖 operation、victory、withdraw、wiped 等不同任务/结果和敌我兵力配置；正式主循环新增 reset/interaction 调试 API。
+- [x] 新增 B.4 专项测试 5/5 与响应式浏览器烟测；官方 Playwright 检查通用开阔地、withdraw、wiped 及契约公路胜利，真实鼠标拖动三类配置通过，双击复位通过，console/page errors 均为 0。
+- [x] 完成全量 `npm test`：阶段 3～8.2F-B.4、1120 条规划语料、1123 条连续布局、空间/维修/车队/障碍/残骸等回归全部通过；正式浏览器证据重新生成并通过三方 evidenceRunId 校验。
+- [ ] 可选增强：在正式 UI 叠加显式“复位镜头”按钮和拖动提示；当前双击复位与 `window.__IRON_COMMAND__.resetPresentationCamera()` 已可用。
+
+# Stage 8.2F-B.5 progress
+
+- [x] 重设计正式通用战术空间：废弃矿区使用三条带掩体、绕行点、友军集结线/火力线/目标接近线；公路和防御阵地保留各自的道路/突破口语义。
+- [x] 单位不再从部署点直接沿直线进入攻击：首轮火力前先经过侦察、集结、掩体和火力线；路线与场景障碍通过动态空间校验。
+- [x] 自动镜头在开局/接敌阶段保持全战场可见，修复缩小镜头时地图偏移；战术火力线和重掩体采用低干扰标记。
+- [x] HUD 收缩为上下边缘窄条；战斗期间隐藏基地视图 chip、FPS、图例和画布提示；返航控件改为右下角窄栏，避免遮挡中央战术区。
+- [x] 新增 `stage8-2F-B-5-test.mjs` 8/8，覆盖废弃矿区路线阶段、首轮火力前位移、三种地形、动态碰撞、HUD 和正式战斗壳层。
+- [x] 掩体地物明确为 `soft_cover` 可通行语义；单位残骸保留生命周期、位置和渲染证据，但不伪装成硬地形阻挡，返航仍先横向脱离残骸再沿安全边缘撤出。
+- [x] 正式布局器按战术 lane 均匀分配大兵力单位并受边界容量约束，修复 8 单位/多维修车配置在地图底边堆叠；1120 corpus、1123 continuous、120 obstacle、30 wreck 与性能回归全部通过。
+- [x] 官方 Playwright 复查废弃矿区、公路撤离、防御阵地歼灭三种正式画面：HUD 不遮挡中央战区，文本状态 errors=0；最终 `npm test` 全部通过。
+- [ ] TODO：可继续把单位选中/命令面板做成可折叠侧栏；当前本轮只收口正式演出层，不开放中途手动指挥。
+
+# Stage 8.2F-B.6 progress
+
+- [x] 修复首轮远距离互射：`universal-time-mapper` 将首次 FIRE/DAMAGE/DESTROY 等交战锚点延后到演出时长约 40% 之后，侦察/展开占据前段；战报源时间仍单独保留，正式结果与伤害权威不变。
+- [x] 接敌点按首次交火目标所属 tactical lane 绑定，取消会把先手单位甩到无关通道的跨 lane 轮换；同通道仅保留受边界约束的小幅横向展开，低兵力样本不再停在部署线超远距离开火。
+- [x] 三类地形新增正式 tactical soft-cover bands；每条接敌路线公开 `coverPropId/coverValue`，render state 在 approach/in_cover/fire_from_cover 阶段公开掩体保护状态，Renderer 绘制低干扰掩体标记和单位掩体环。
+- [x] 修复 wiped/少兵力样本：存活敌军会沿集结、掩体、火力线继续推进，不再因结果已 wiped 把整条路线冻结在出生点；补齐残骸避障的双向角点回退和修复编舞后的最终路线重算。
+- [x] 补齐多兵力/任务对象空间边界：公路南肩上移，为 convoy 留出底边机动走廊；convoy escort 的友军部署线避开车队初始 footprint；残骸明确为可穿越视觉证据，硬碰撞仍严格校验掩体、地形障碍和任务对象。
+- [x] 新增 `tests/stage8-2F-B-6-test.mjs`：首轮火力时序、首轮位移与受控距离、掩体绑定/渲染状态、单兵覆灭推进共 5/5 通过。
+- [x] 重新生成 120 条 canonical + 1000 条 fuzz 派生语料；1120 规划计划、1123 连续布局检查、120 障碍计划、30 残骸计划、6 车队计划和 120 性能计划均通过。
+- [x] 官方 Chrome/CDP 取证重新生成 12 张截图；Manifest 与浏览器 stdout 的 evidenceRunId 一致，pageErrors=0、consoleErrors=0；完整 `npm test` 最终通过。
+
+# Stage 8.2F-C.1 progress
+
+- [x] 修复存档覆盖边界：显式“保存”写入独立手动槽位，静默自动保存只写自动续接槽位；战斗结算、生产完成和关闭页面不再覆盖战前手动存档。
+- [x] “读取”按钮优先恢复手动槽位；启动初始化仍默认续接自动槽位；新游戏会同时清理两个槽位，导入存档会成为新的手动恢复点。
+- [x] 新增正式 `battle-tactics.js`：根据敌我单位构成和策略确定步坦协同、装甲楔形、步兵展开线、反装甲后置警戒、维修支援等角色与通道。
+- [x] 正式战斗求解器消费同一战术意图：坦克/步兵目标优先级、装甲掩护、防护与协同攻击修正均确定性生效；研究树保留九项结构，并由战术数据链、野战维护规程、扩展指挥网络逐级增强协同。
+- [x] 通用 RTS 规划器和战区 UI 消费战报战术意图，正式报告显示队形与协同强度；不改变 authority report 的既有完整性字段和重建校验。
+- [x] 新增 `tests/stage8-2F-C-1-test.mjs`：战前手动存档在战斗全灭/结算后可恢复、自动槽位与手动槽位隔离、步坦角色/研究增强与混编正式布局共 3/3 通过。
+- [x] 修复正式公路模板中维修车接近/撤离路径的连续布局边界；混编步坦战斗在正式 Renderer 中的维修过渡不再穿过友军单位或建筑，并新增混编正式布局回归。
+- [x] 重新生成并验证正式交付包 `iron-command-stage8-2F-B-3-formal-coverage-default-final.zip`：369 个条目、9,488,769 bytes，SHA-256 `1797455e8ea56e51c7ae5949f6631c66bbc86b4130a1fce87a5359b371730dcc`；工作区与解压包全量测试均通过。
+
+# Stage 8.2G-A progress
+
+- [x] 新增正式通用视觉场景模型：由正式 plan、时间和空间采样确定性生成 deploy/approach/contact/engagement/end 六阶段，以及 move/aim/fire/reload/hit/destroying/wreck 演员状态。
+- [x] 新增视觉武器档案与派生射击计划：步兵小武器、反装甲火箭、侦察车机枪、坦克主炮、维修工具拥有不同节奏和特效参数；火力、弹道、命中、毁伤、残骸、烟雾和贴花由正式 authority anchors 驱动，不改战报。
+- [x] 正式 Renderer 完成生产层/调试层拆分：默认隐藏路线、区域、碰撞形状和 Actor ID；调试 overlay 通过显式 API 读取同一 plan/render state 绘制，`render_game_to_text()` 同步暴露正式视觉摘要。
+- [x] 完成废弃矿区混编胜利垂直切片：正式页面构建步兵、反装甲班、侦察车、两辆主战坦克和维修车，seed 1 取得 victory；十张阶段/模式/尺寸证据 PNG 哈希唯一，页面与控制台错误均为 0。
+- [x] 新增 `tests/stage8-2G-A-test.mjs` 7/7、`tests/browser/stage8-2G-A-evidence.mjs`、`stage8_2g_a_developer_selfcheck.json` 与 `STAGE8-2G-A-DELIVERY.md`；完整 `npm test` 通过，含 1120 条通用规划语料。
+- [x] 新增可复验 builder/verifier，封包过滤 node_modules、.git、缓存、临时输出、旧阶段截图和旧 ZIP；最终包名为 `iron-command-stage8-2G-A-production-visual-core.zip`。
+
+# Stage 8.2G-A.1 progress
+
+- [x] 将旧阶段测试中依赖的静态截图/输出迁移为随包 fixtures；保留失败样本和原有断言，不把独立审计 JSON 导入生产代码，也不通过过滤样本归零。
+- [x] 收口闭合视觉状态机：`idle/deploy/move/turn/brake/aim/fire/reload/hit/destroying/wreck`；规划器动作不会直接泄漏到 Renderer 状态。
+- [x] 新增事件/动作驱动的语义阶段解析：`deploy/approach/first_contact/main_engagement/critical_event/battle_end`，不使用固定百分比切片。
+- [x] 射击演出固定开火源点、朝向、瞄准目标点和命中点；统一稳定深度队列，并对不同单位 footprint 做确定性分离。
+- [x] 正式 Renderer 默认只显示生产层；debug overlay 通过显式入口叠加在同一时间/状态上，正式层移除原始路线、区域和碰撞调试标记，掩体改为实体化视觉结构。
+- [x] 生成 10 张正式证据：7 张生产阶段、1 张同帧 debug 对照、2 张默认/窄窗口尺寸证据；manifest 阶段、语义阶段、锚点和生产/debug 一致性字段齐全，浏览器 page/console errors 为 0。
+- [x] `stage8-2G-A-1-test.mjs` 通过；全量 `npm test` 通过，含 1120 plans、1123 continuous layout、120 obstacle、120 performance 等回归；干净解压包重新执行 `npm install && npm test` 与阶段专测均通过。
+- [x] 最终包：`iron-command-stage8-2G-A-1-production-visual-core-hardening.zip`；SHA-256 `a8a731884abc72ed0b8bd55c766edebc2dd07b1e25638fb4a8cbc8e3c21dc67d`，26,164,951 bytes，433 entries，10 screenshots。
+
+# Stage 8.2G-A.1.1 progress
+
+- [x] 独立复现基线：上一轮 ZIP 干净解压后 `npm install` 成功；A.2.4 独立运行 37/37，PID 十次循环均 `allClean=true`；完整语料阶段未发现实际挂起，进程树显示为正常运行中的 corpus 子进程。
+- [x] 新增全量测试 hard-timeout/evidence runner：每次记录开始/结束时间、Node/npm/OS、测试文件、总数、通过/失败/跳过、最慢测试、退出码、PID 与日志；clean extraction 证据已写入 `tests/evidence/stage8_2g_a11_full_npm_test.{log,json}`。
+- [x] 完全迁移 debug 网格：Production Renderer 不再包含网格/路线/区域 debug 绘制，网格统一由 `universal-debug-overlay.js` 按开关构建；Scene Hash、状态签名和同帧 viewport 对照测试通过。
+- [x] 新增三份结构不同的阶段 Fixture：`rapid-contact.json`、`long-approach.json`、`prolonged-engagement.json`；阶段边界随真实事件节奏变化，Resolver 不使用固定比例。
+- [x] deploy 改为演员级路线/action 语义边界：由 staging route、首个推进/战术动作和 brake/turn 过渡决定；移除固定 2.8 秒判断，支持任意时间跳转与重复采样。
+- [x] 收紧 footprint：步兵、反装甲、坦克、侦察车、维修车和残骸使用不同矩形/椭圆近似；普通单位阈值 `.90`、大型单位 `.96`，并对活动残骸做确定性局部分离；软掩体半透明化，保留演员可读轮廓。
+- [x] 新增五阶段空间验证：部署、首次接敌、主要交火、关键摧毁、战斗结束，并在每个时刻前后 100ms 检查演员/残骸/障碍/边界/偏移/抖动/确定性，共 18 个结构化 frame。
+- [x] 正式证据重生成 10 张：部署结束、首次接敌、主要交火、关键摧毁、战斗结束、debug 网格同帧、默认尺寸、窄窗口、footprint debug、clean-package-result；生产/debug 同 Scene Hash、同时间、同 viewport、同状态签名。
+- [x] 完整 `npm test` clean extraction：3128 total / 3128 passed / 0 failed / 0 skipped；clean evidence duration 421318ms；Node `v25.2.1`、npm `11.6.2`、macOS arm64。
+- [x] 最终 verifier 重新执行 clean `npm install && npm test`、A.2.4 37/37、A.1.1 专测并检查禁止文件；最终包 `iron-command-stage8-2G-A-1-1-production-visual-core-closure.zip`，SHA-256 `17f7dfe1176798b0d643581a871f4126de181a5618659e7a2e12127f96353b95`，26,261,256 bytes，444 entries，10 screenshots。
+- [ ] 已知事项：提示词引用的 `stage8_2g_a1_independent_audit.json` 未在工作区或基线 ZIP 中提供，因此未被导入、替代或用于过滤失败样本。
+
+# Stage 8.2G-B progress
+
+- [x] P0 收口：统一当前阶段标签为 Stage 8.2G-B；射击证据补齐非空 `source/target/impact` 锚点、时间与稳定重复帧；正式状态公开 route/planned/pre-separation/visual 位置；加入真实 ±200ms jitter 与 wall-clock 统计。
+- [x] 新增通用预计算 `universal-engagement-choreographer.js`：目标选择/切换、武器 cadence、reload、presentation-only shots、suppression、cover advance、covering fire、retreat 和 bounded limits 均由正式 plan/result/roles/routes 数据驱动，不修改 solver、HP、result、reward 或 save。
+- [x] 新增 `universal-camera-director.js`：按 first contact、main engagement、critical hit、destroy、retreat、battle end 生成确定性镜头兴趣点；保留 manual override，Renderer 不承载求解或目标选择。
+- [x] 正式视觉状态机与 Renderer 增加 `suppressed/take_cover/cover_fire/retreat/search_target` 表现；debug engagement overlay 显式叠加，生产层不显示调试路线/区域/Actor ID。
+- [x] 新增胜利混编、掩护撤退、失败/全灭三份 engagement fixture；胜利切片覆盖 deploy、first contact、suppression、cover advance、target switch、authoritative hit、destruction、battle end；失败切片覆盖 line collapse、covering fire、last resistance、final destruction、wreck field。
+- [x] 浏览器证据重新生成 21 张 PNG，manifest pageErrors/consoleErrors 均为 0；同帧 production/debug 的 presentation time、viewport、scene hash 一致，debug 仅增加 overlay。
+- [x] 机器证据通过：authority solver/HP/result/event order unchanged；同 seed schedule fingerprint 一致、不同 outcome schedule 可区分；schedule 预计算且 per-frame target scoring/shot generation/retreat ordering 为 false，增长受限。
+- [x] 阶段专测 `stage8-2G-B-test.mjs`：1/1 通过，victory shots=180、targetSwitches=30、withdraw retreatOrders=2、wiped friendlyAlive=0。
+- [x] 工作区全量 `npm test`：3129/3129 passed，0 failed，0 skipped，exitCode=0，duration 564574ms；A.2.4 中的 FAIL 行是刻意触发的 timeout 分支并由对应 PASS 断言覆盖，不是 npm 失败。
+- [x] 最终 ZIP clean extraction：`npm install && npm test` 3129/3129 passed，0 failed，0 skipped，duration 501788ms；A.2.4 与 Stage 8.2G-B 专测均通过，禁止文件检查通过。
+- [x] 最终交付包：`iron-command-stage8-2G-B-deterministic-engagement-choreographer.zip`，486 entries，13,556,691 bytes，SHA-256 `2255f9d39adb9c8743af8e2b53de6a0fa0cfe546016022e06624c8e4f67db91f`，21 screenshots。
+- [ ] 已知事项：用户提示词引用的 `stage8_2g_a11_independent_audit.json` 未在工作区或基线 ZIP 中提供，因此未导入生产代码、未替代独立审计，也未过滤其中的失败样本；当前结论是开发者证据与 clean verifier 通过，不宣称独立审计批准。
+
+# Stage 8.2G-B.1 progress
+
+- [x] 修复接战编排真实性：不再在 approach 预排满局部射击；按 first contact/main engagement/critical event 分配阶段、阵营、Actor 和武器族预算，胜利样本为 38 发（友军 23、敌军 15、4 个武器族）。
+- [x] 新增显式 combat profile：`enemy_at` 使用反装甲火箭，`enemy_light_armor` 使用侦察车机枪族，维修/未知支援 Actor fail-closed，不再静默回退为 `infantry_light` 攻击者。
+- [x] 射程、目标类型、存活状态、硬障碍/LOS 都是射击硬合法性条件；每个编排 Shot 带 legality 证据，`sourceFacingAtFire` 由 source→impact 弹道向量计算。
+- [x] 压制查询改为 targetIds；source/target 集合分离。Cover Move 公开 fire hold 与 maneuver target station，正式视觉场景对 maneuverGroup 生成实际位移；撤退公开多点 presentation route、退出距离、后卫延迟和敌方朝向。
+- [x] 新增事件驱动 `evidence-frame-resolver.js`、B.1 12 项专项测试、10 份机器证据、24 张 B.1 命名截图及语义封包 verifier；命中/摧毁/切换/撤退名称均绑定到真实 schedule/authority predicate。
+- [x] Stage 8.2G-B.1 开发包 builder/verifier 已通过工作区与解压包语义门禁；包名 `iron-command-stage8-2G-B-1-engagement-correctness-hardening.zip`。
+- [x] 逐文件墙钟 runner：43/43、0 失败、0 跳过，总墙钟 420895ms；原生 `npm test` 命令链与最终 ZIP 解压后的 `npm install && npm test` 均通过，clean 记录写入 `stage8_2g_b1_clean_package_test.json`。
+- [x] 用户随后提供 `/Users/coolking70/Downloads/stage8_2g_b1_independent_audit.json`；该 B.1 独立审计基线结论为 `not_passed`，建议进入 B.1.1。文件仅作失败样本与回归参考，未导入生产代码、未过滤失败样本；因此 B.1 仍不宣称独立审计通过。
+
+# Stage 8.2G-B.1.1 progress
+
+- [x] Assignment phase slicing：同一 actor-target hold 可跨 first_contact、main_engagement、critical_event 继续产生 Shot；first_contact 使用较小预算，main/critical/retreat 独立计数并受上限约束。
+- [x] Covering Retreat Fire：withdraw 样本生成合法 rear_guard cover-fire Assignment、6 发 retreat Shot、muzzle/projectile/压制链和延迟离场路线；普通主撤退组不抢占后卫预算。
+- [x] 权威 Shot 朝向统一为 source→impact projectile vector；victory/withdraw/wiped 权威 Shot 最大角度误差 0°。
+- [x] `at_infantry` / `enemy_at` 恢复为 infantry target class，反装甲武器族仍由 attacker profile 表达。
+- [x] 新增实时 Chromium 证据脚本，不读取 Stage B/B.1 PNG 或 Manifest fallback；24 张 B.1.1 PNG 均由当前代码实时采集，并记录 resolver/capture 时间、sceneHash、stateSignature、semanticFrameId 和 PNG SHA-256。
+- [x] `npm test` 正式纳入 B.1 与 B.1.1；新增 B.1.1 专项测试、机器证据、强绑定 verifier、封包卫生检查和外部 clean package hash 报告。
+- [x] 工作区 `npm test` 与最终 ZIP clean extraction `npm install && npm test` 均以 exitCode=0 完成；B.1 `12/12`、B.1.1 `20/20`、浏览器绑定 `24/24`、禁止项 `0`。
+- [x] 最终交付包：`iron-command-stage8-2G-B-1-1-phase-continuous-fire-evidence-closure.zip`，SHA-256 `4c21bd2f1030e1fc91244c5d598c3c42445de94a447d02cd063144cbd8bd4c74`，34,516,188 bytes；外部 clean report 写入 `stage8_2g_b11_clean_package_test.json`。
+- [x] 已读取并登记 B.1 独立失败基线：审计指出 B1/B2/B3/B4（旧证据复用、跨 Phase 射击中断、撤退后卫无实际射击、移动朝向冒充弹道朝向）以及 AT Infantry、PNG 语义绑定和封包链问题；B.1.1 的实现、专项测试和实时证据覆盖这些回归项。
+
+# Stage 8.2G-B.1.1a progress
+
+- [x] 以 `stage8_2g_b11_independent_audit.json` 与 tamper proof 作为 B.1.1 证据失败基线；不导入生产代码、不删除或过滤失败样本。
+- [x] Machine Semantic Evidence 与 Browser Capture Manifest 已拆分为两个独立文件；浏览器只读取 Machine Evidence 的目标帧列表，不能回写或替代 Machine Evidence。
+- [x] 新增跨 Node/Browser 共用的 canonical serializer、round(位置4位/角度5位/时间3位) 和同步 SHA-256 State Signature；Scene Hash 由当前 Universal Plan Fingerprint 重算。
+- [x] Verifier 逐帧比较 sceneId、seed、timestamp、sceneHash、stateSignature、semanticFrameId、Machine/Browser 状态快照和文件名对应 semantic predicate，并重新读取 PNG SHA-256/尺寸。
+- [x] 新增 12 类篡改测试：错误 sceneHash、stateSignature、semanticFrameId、timestamp、事件语义、PNG、重复 PNG、Machine Evidence、Browser Manifest、fallback 标记和浏览器状态快照均被拒绝。
+- [x] 当前代码托管 Chromium 实时生成 24 张 B.1.1a 截图；pageErrors/consoleErrors=0，时间误差≤16.7ms，唯一 PNG=24，浏览器失败无旧证据 fallback。
+- [x] B.1.1a 专项 20/20；B.1 回归 12/12；B.1.1 回归 20/20；工作区全量 `npm test` exitCode=0，46 个 test files，clean extraction 全量 exitCode=0。
+- [x] 最终 ZIP：`iron-command-stage8-2G-B-1-1a-evidence-integrity-hotfix.zip`；最终 SHA-256、大小和 clean verifier 结果以 ZIP 外部的 `iron-command-stage8-2G-B-1-1a-final-package-record.json` 为准，避免在 ZIP 内形成自引用哈希。
+- [x] 8.2G-B 系列证据完整性热修已完成；后续可进入 8.2G-C，但独立审计批准仍需由外部验收方按新包重新执行。
+
+# Stage 8.2G-C progress
+
+## Stage 8.2G-C.1 · Production Visual Consumption & Evidence Hardening
+
+- Implemented offline manifest consumption through a browser asset runtime with
+  `drawImage`, deterministic procedural fallback, and hybrid tank rendering.
+- Added production Draw Specs with minimum screen footprints, asset status, source,
+  world size, fallback path and weapon presentation metadata.
+- Added full route-polyline segment clearance checks and deterministic decal radius/
+  rotation handling.
+- Added C.1 machine/browser evidence with expected state recomputation, environment
+  and destruction signatures, Draw Specs, semantic predicates, PNG hashes and dual
+  tamper rejection.
+- Added 20 browser frames across victory, defeat, asset, fallback and narrow-viewport
+  cases. Browser capture reports no page or console errors.
+- Added 20-seed route tests, profile mutation tests, seek determinism, authority
+  isolation and 160 individually measured render samples with true nearest-rank P95.
+- Final package build and clean-package verification completed; the external package record contains the final SHA-256 and byte size.
+
+- [x] 以 `stage8_2g_b11a_independent_audit.json` 作为失败基线与回归参考；未导入生产代码、未删除或过滤失败样本。
+- [x] 新增生产级 Environment Grammar、矿区语义分区、确定性布局、路线/目标/掩体净空和离线可替换 Asset Manifest；环境层只读正式 plan、routes、objective、cover、bounds 与 seed。
+- [x] 新增持久破坏层：事件历史直接求值弹坑、烧痕、碎片、烟柱、尘土、残骸生命周期；支持 seek/rewind，同 seed 与时间可复现，并受粒子、烟柱、碎片和残骸上限约束。
+- [x] 新增步兵/轻车/反装甲/坦克炮/侦察/维修等武器视觉档案，以及 Procedural/Sprite/Hybrid/Offline Fallback 资产管线；不调用外部生成 API。
+- [x] 正式 Renderer 已接入环境、弹坑、烧痕、碎片、烟尘和残骸；生产默认不显示调试几何/Actor ID，default/narrow viewport 均保留战场可读性，战斗核心与权威结算冻结不变。
+- [x] C 专项 `11/11`；机器证据 20 帧、浏览器实时 Chromium 20 张 PNG，scene/state/environment/destruction 签名强绑定，唯一 PNG=20，pageErrors/consoleErrors=0。
+- [x] B 系列分段回归已通过：B/B.1/B.1.1/B.1.1a 及 universal presentation/spatial/repair/convoy/obstacle/wreck/slim/performance 测试均通过；工作区与最终 ZIP clean extraction 的完整 `npm test` 均 exitCode=0。
+- [x] 最终封包 verifier：20/20 C PNG 哈希一致、唯一 PNG=20、pageErrors/consoleErrors=0、禁止项=0；clean install 后完整回归通过。
+- [x] 最终 ZIP：`iron-command-stage8-2G-C-battlefield-environment-art-pipeline.zip`，SHA-256 `c204447ccf57f9f84b2b1d78397ecfc588f10310c5ef3c316594c46788a21671`，38,539,864 bytes，689 entries；包内同时保留 B.1.1a 回归所需 24 张历史截图与 C 当前 20 张截图。
+- [ ] 独立审计方仍需按最终 C ZIP 重新验收；当前 `independent-audit.json` 仅为外部基线，不代表本阶段已获得独立批准。

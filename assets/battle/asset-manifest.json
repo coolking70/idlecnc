@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "provider": "offline-manifest",
+  "runtimeGeneration": false,
+  "assets": [
+    { "id": "unit_friendly_infantry", "category": "unit", "type": "infantry", "source": "assets/battle/sample-assets/unit-friendly-infantry.svg", "version": 1, "format": "svg", "fallback": "procedural_infantry", "anchor": { "x": 0.5, "y": 0.5 }, "worldSize": { "width": 22, "height": 28 }, "license": "self-authored", "author": "Iron Command", "generated": false },
+    { "id": "unit_friendly_mbt", "category": "unit", "type": "mbt", "source": "assets/battle/sample-assets/unit-friendly-mbt.svg", "version": 1, "format": "svg", "fallback": "procedural_mbt", "anchor": { "x": 0.5, "y": 0.5 }, "worldSize": { "width": 60, "height": 36 }, "license": "self-authored", "author": "Iron Command", "generated": false },
+    { "id": "wreck_tank", "category": "wreck", "type": "tank_wreck", "source": "assets/battle/sample-assets/wreck-tank.svg", "version": 1, "format": "svg", "fallback": "procedural_wreck", "anchor": { "x": 0.5, "y": 0.5 }, "worldSize": { "width": 60, "height": 36 }, "license": "self-authored", "author": "Iron Command", "generated": false },
+    { "id": "cover_industrial_module", "category": "industrial_prop", "type": "cover", "source": "assets/battle/sample-assets/industrial-cover.svg", "version": 1, "format": "svg", "fallback": "procedural_industrial_cover", "anchor": { "x": 0.5, "y": 0.5 }, "worldSize": { "width": 42, "height": 24 }, "license": "self-authored", "author": "Iron Command", "generated": false },
+    { "id": "terrain_scrap_pile", "category": "terrain", "type": "prop", "source": "assets/battle/sample-assets/terrain-scrap-pile.svg", "version": 1, "format": "svg", "fallback": "procedural_terrain_prop", "anchor": { "x": 0.5, "y": 0.5 }, "worldSize": { "width": 36, "height": 22 }, "license": "self-authored", "author": "Iron Command", "generated": false }
+  ]
+}
