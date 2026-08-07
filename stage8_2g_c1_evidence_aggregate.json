@@ -27,42 +27,42 @@
     "defaultViewport": [
       {
         "type": "mbt",
-        "screenFootprint": 67.2,
+        "screenFootprint": 71.68,
         "minimum": 46
       },
       {
         "type": "anti_armor_infantry",
-        "screenFootprint": 31.36,
+        "screenFootprint": 33.451,
         "minimum": 24
       },
       {
         "type": "infantry",
-        "screenFootprint": 31.36,
+        "screenFootprint": 33.451,
         "minimum": 24
       },
       {
         "type": "support_vehicle",
-        "screenFootprint": 49.28,
+        "screenFootprint": 52.565,
         "minimum": 34
       },
       {
         "type": "light_vehicle",
-        "screenFootprint": 49.28,
+        "screenFootprint": 52.565,
         "minimum": 34
       },
       {
         "type": "infantry",
-        "screenFootprint": 49.28,
+        "screenFootprint": 52.565,
         "minimum": 24
       },
       {
         "type": "infantry",
-        "screenFootprint": 49.28,
+        "screenFootprint": 52.565,
         "minimum": 24
       },
       {
         "type": "infantry",
-        "screenFootprint": 49.28,
+        "screenFootprint": 52.565,
         "minimum": 24
       }
     ],
@@ -71,31 +71,31 @@
         "type": "infantry",
         "minimum": 24,
         "screenFootprint": 24,
-        "visualScaleBoost": 4.2857
+        "visualScaleBoost": 4.0179
       },
       {
         "type": "anti_armor_infantry",
         "minimum": 24,
         "screenFootprint": 24,
-        "visualScaleBoost": 4.2857
+        "visualScaleBoost": 4.0179
       },
       {
         "type": "light_vehicle",
         "minimum": 34,
         "screenFootprint": 34,
-        "visualScaleBoost": 3.8636
+        "visualScaleBoost": 3.6222
       },
       {
         "type": "mbt",
         "minimum": 46,
         "screenFootprint": 46,
-        "visualScaleBoost": 3.8333
+        "visualScaleBoost": 3.5938
       },
       {
         "type": "support_vehicle",
         "minimum": 34,
         "screenFootprint": 34,
-        "visualScaleBoost": 3.8636
+        "visualScaleBoost": 3.6222
       }
     ]
   },
@@ -116,10 +116,10 @@
   },
   "performance": {
     "sampleCount": 160,
-    "averageRenderMs": 0.2301,
-    "medianRenderMs": 0.2253,
-    "p95RenderMs": 0.3038,
-    "maxRenderMs": 0.5131,
+    "averageRenderMs": 0.2422,
+    "medianRenderMs": 0.236,
+    "p95RenderMs": 0.3375,
+    "maxRenderMs": 0.4063,
     "samplesAreMeasured": true,
     "percentileMethod": "nearest-rank(sorted samples)"
   },

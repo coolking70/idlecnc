@@ -1,0 +1,439 @@
+{
+  "stage": "8.2G-C.1.1",
+  "formula": "worldSize * worldToLogicalViewScale * camera.zoom * visualScaleBoost * viewport.scale",
+  "metricSpace": "final_css_pixels",
+  "minimums": {
+    "infantry": 24,
+    "anti_armor_infantry": 24,
+    "light_vehicle": 34,
+    "mbt": 46,
+    "support_vehicle": 34
+  },
+  "cases": [
+    {
+      "scenario": "victory",
+      "viewportKind": "default",
+      "viewport": {
+        "width": 1440,
+        "height": 900,
+        "scale": 1.125
+      },
+      "actors": [
+        {
+          "actorId": "unit_stage8g-c1-mining-3",
+          "side": "friendly",
+          "type": "mbt",
+          "rawScreenFootprint": 73.44,
+          "minimumScreenFootprint": 46,
+          "visualScaleBoost": 1,
+          "screenFootprint": 73.44,
+          "metricSpace": "final_css_pixels"
+        },
+        {
+          "actorId": "unit_stage8g-c1-mining-1",
+          "side": "friendly",
+          "type": "anti_armor_infantry",
+          "rawScreenFootprint": 34.272,
+          "minimumScreenFootprint": 24,
+          "visualScaleBoost": 1,
+          "screenFootprint": 34.272,
+          "metricSpace": "final_css_pixels"
+        },
+        {
+          "actorId": "unit_stage8g-c1-mining-0",
+          "side": "friendly",
+          "type": "infantry",
+          "rawScreenFootprint": 34.272,
+          "minimumScreenFootprint": 24,
+          "visualScaleBoost": 1,
+          "screenFootprint": 34.272,
+          "metricSpace": "final_css_pixels"
+        },
+        {
+          "actorId": "unit_stage8g-c1-mining-4",
+          "side": "friendly",
+          "type": "support_vehicle",
+          "rawScreenFootprint": 53.856,
+          "minimumScreenFootprint": 34,
+          "visualScaleBoost": 1,
+          "screenFootprint": 53.856,
+          "metricSpace": "final_css_pixels"
+        },
+        {
+          "actorId": "unit_stage8g-c1-mining-2",
+          "side": "friendly",
+          "type": "light_vehicle",
+          "rawScreenFootprint": 53.856,
+          "minimumScreenFootprint": 34,
+          "visualScaleBoost": 1,
+          "screenFootprint": 53.856,
+          "metricSpace": "final_css_pixels"
+        },
+        {
+          "actorId": "enemy_infantry_1",
+          "side": "enemy",
+          "type": "infantry",
+          "rawScreenFootprint": 53.856,
+          "minimumScreenFootprint": 24,
+          "visualScaleBoost": 1,
+          "screenFootprint": 53.856,
+          "metricSpace": "final_css_pixels"
+        },
+        {
+          "actorId": "enemy_infantry_2",
+          "side": "enemy",
+          "type": "infantry",
+          "rawScreenFootprint": 53.856,
+          "minimumScreenFootprint": 24,
+          "visualScaleBoost": 1,
+          "screenFootprint": 53.856,
+          "metricSpace": "final_css_pixels"
+        },
+        {
+          "actorId": "enemy_infantry_3",
+          "side": "enemy",
+          "type": "infantry",
+          "rawScreenFootprint": 53.856,
+          "minimumScreenFootprint": 24,
+          "visualScaleBoost": 1,
+          "screenFootprint": 53.856,
+          "metricSpace": "final_css_pixels"
+        }
+      ]
+    },
+    {
+      "scenario": "victory",
+      "viewportKind": "narrow",
+      "viewport": {
+        "width": 780,
+        "height": 900,
+        "scale": 0.609375
+      },
+      "actors": [
+        {
+          "actorId": "unit_stage8g-c1-mining-3",
+          "side": "friendly",
+          "type": "mbt",
+          "rawScreenFootprint": 39.78,
+          "minimumScreenFootprint": 46,
+          "visualScaleBoost": 1.1564,
+          "screenFootprint": 46,
+          "metricSpace": "final_css_pixels"
+        },
+        {
+          "actorId": "unit_stage8g-c1-mining-1",
+          "side": "friendly",
+          "type": "anti_armor_infantry",
+          "rawScreenFootprint": 18.564,
+          "minimumScreenFootprint": 24,
+          "visualScaleBoost": 1.2928,
+          "screenFootprint": 24,
+          "metricSpace": "final_css_pixels"
+        },
+        {
+          "actorId": "unit_stage8g-c1-mining-0",
+          "side": "friendly",
+          "type": "infantry",
+          "rawScreenFootprint": 18.564,
+          "minimumScreenFootprint": 24,
+          "visualScaleBoost": 1.2928,
+          "screenFootprint": 24,
+          "metricSpace": "final_css_pixels"
+        },
+        {
+          "actorId": "unit_stage8g-c1-mining-4",
+          "side": "friendly",
+          "type": "support_vehicle",
+          "rawScreenFootprint": 29.172,
+          "minimumScreenFootprint": 34,
+          "visualScaleBoost": 1.1655,
+          "screenFootprint": 34,
+          "metricSpace": "final_css_pixels"
+        },
+        {
+          "actorId": "unit_stage8g-c1-mining-2",
+          "side": "friendly",
+          "type": "light_vehicle",
+          "rawScreenFootprint": 29.172,
+          "minimumScreenFootprint": 34,
+          "visualScaleBoost": 1.1655,
+          "screenFootprint": 34,
+          "metricSpace": "final_css_pixels"
+        },
+        {
+          "actorId": "enemy_infantry_1",
+          "side": "enemy",
+          "type": "infantry",
+          "rawScreenFootprint": 29.172,
+          "minimumScreenFootprint": 24,
+          "visualScaleBoost": 1,
+          "screenFootprint": 29.172,
+          "metricSpace": "final_css_pixels"
+        },
+        {
+          "actorId": "enemy_infantry_2",
+          "side": "enemy",
+          "type": "infantry",
+          "rawScreenFootprint": 29.172,
+          "minimumScreenFootprint": 24,
+          "visualScaleBoost": 1,
+          "screenFootprint": 29.172,
+          "metricSpace": "final_css_pixels"
+        },
+        {
+          "actorId": "enemy_infantry_3",
+          "side": "enemy",
+          "type": "infantry",
+          "rawScreenFootprint": 29.172,
+          "minimumScreenFootprint": 24,
+          "visualScaleBoost": 1,
+          "screenFootprint": 29.172,
+          "metricSpace": "final_css_pixels"
+        }
+      ]
+    },
+    {
+      "scenario": "defeat",
+      "viewportKind": "default",
+      "viewport": {
+        "width": 1440,
+        "height": 900,
+        "scale": 1.125
+      },
+      "actors": [
+        {
+          "actorId": "unit_fixture-u-4",
+          "side": "friendly",
+          "type": "mbt",
+          "rawScreenFootprint": 73.44,
+          "minimumScreenFootprint": 46,
+          "visualScaleBoost": 1,
+          "screenFootprint": 73.44,
+          "metricSpace": "final_css_pixels"
+        },
+        {
+          "actorId": "unit_fixture-u-2",
+          "side": "friendly",
+          "type": "anti_armor_infantry",
+          "rawScreenFootprint": 34.272,
+          "minimumScreenFootprint": 24,
+          "visualScaleBoost": 1,
+          "screenFootprint": 34.272,
+          "metricSpace": "final_css_pixels"
+        },
+        {
+          "actorId": "unit_fixture-u-1",
+          "side": "friendly",
+          "type": "infantry",
+          "rawScreenFootprint": 34.272,
+          "minimumScreenFootprint": 24,
+          "visualScaleBoost": 1,
+          "screenFootprint": 34.272,
+          "metricSpace": "final_css_pixels"
+        },
+        {
+          "actorId": "unit_fixture-u-5",
+          "side": "friendly",
+          "type": "support_vehicle",
+          "rawScreenFootprint": 53.856,
+          "minimumScreenFootprint": 34,
+          "visualScaleBoost": 1,
+          "screenFootprint": 53.856,
+          "metricSpace": "final_css_pixels"
+        },
+        {
+          "actorId": "unit_fixture-u-3",
+          "side": "friendly",
+          "type": "light_vehicle",
+          "rawScreenFootprint": 53.856,
+          "minimumScreenFootprint": 34,
+          "visualScaleBoost": 1,
+          "screenFootprint": 53.856,
+          "metricSpace": "final_css_pixels"
+        },
+        {
+          "actorId": "enemy_at_1",
+          "side": "enemy",
+          "type": "support_vehicle",
+          "rawScreenFootprint": 53.856,
+          "minimumScreenFootprint": 34,
+          "visualScaleBoost": 1,
+          "screenFootprint": 53.856,
+          "metricSpace": "final_css_pixels"
+        },
+        {
+          "actorId": "enemy_at_2",
+          "side": "enemy",
+          "type": "support_vehicle",
+          "rawScreenFootprint": 53.856,
+          "minimumScreenFootprint": 34,
+          "visualScaleBoost": 1,
+          "screenFootprint": 53.856,
+          "metricSpace": "final_css_pixels"
+        },
+        {
+          "actorId": "enemy_infantry_1",
+          "side": "enemy",
+          "type": "infantry",
+          "rawScreenFootprint": 53.856,
+          "minimumScreenFootprint": 24,
+          "visualScaleBoost": 1,
+          "screenFootprint": 53.856,
+          "metricSpace": "final_css_pixels"
+        },
+        {
+          "actorId": "enemy_infantry_2",
+          "side": "enemy",
+          "type": "infantry",
+          "rawScreenFootprint": 53.856,
+          "minimumScreenFootprint": 24,
+          "visualScaleBoost": 1,
+          "screenFootprint": 53.856,
+          "metricSpace": "final_css_pixels"
+        },
+        {
+          "actorId": "enemy_infantry_3",
+          "side": "enemy",
+          "type": "infantry",
+          "rawScreenFootprint": 53.856,
+          "minimumScreenFootprint": 24,
+          "visualScaleBoost": 1,
+          "screenFootprint": 53.856,
+          "metricSpace": "final_css_pixels"
+        },
+        {
+          "actorId": "enemy_infantry_4",
+          "side": "enemy",
+          "type": "infantry",
+          "rawScreenFootprint": 53.856,
+          "minimumScreenFootprint": 24,
+          "visualScaleBoost": 1,
+          "screenFootprint": 53.856,
+          "metricSpace": "final_css_pixels"
+        }
+      ]
+    },
+    {
+      "scenario": "defeat",
+      "viewportKind": "narrow",
+      "viewport": {
+        "width": 780,
+        "height": 900,
+        "scale": 0.609375
+      },
+      "actors": [
+        {
+          "actorId": "unit_fixture-u-4",
+          "side": "friendly",
+          "type": "mbt",
+          "rawScreenFootprint": 39.78,
+          "minimumScreenFootprint": 46,
+          "visualScaleBoost": 1.1564,
+          "screenFootprint": 46,
+          "metricSpace": "final_css_pixels"
+        },
+        {
+          "actorId": "unit_fixture-u-2",
+          "side": "friendly",
+          "type": "anti_armor_infantry",
+          "rawScreenFootprint": 18.564,
+          "minimumScreenFootprint": 24,
+          "visualScaleBoost": 1.2928,
+          "screenFootprint": 24,
+          "metricSpace": "final_css_pixels"
+        },
+        {
+          "actorId": "unit_fixture-u-1",
+          "side": "friendly",
+          "type": "infantry",
+          "rawScreenFootprint": 18.564,
+          "minimumScreenFootprint": 24,
+          "visualScaleBoost": 1.2928,
+          "screenFootprint": 24,
+          "metricSpace": "final_css_pixels"
+        },
+        {
+          "actorId": "unit_fixture-u-5",
+          "side": "friendly",
+          "type": "support_vehicle",
+          "rawScreenFootprint": 29.172,
+          "minimumScreenFootprint": 34,
+          "visualScaleBoost": 1.1655,
+          "screenFootprint": 34,
+          "metricSpace": "final_css_pixels"
+        },
+        {
+          "actorId": "unit_fixture-u-3",
+          "side": "friendly",
+          "type": "light_vehicle",
+          "rawScreenFootprint": 29.172,
+          "minimumScreenFootprint": 34,
+          "visualScaleBoost": 1.1655,
+          "screenFootprint": 34,
+          "metricSpace": "final_css_pixels"
+        },
+        {
+          "actorId": "enemy_at_1",
+          "side": "enemy",
+          "type": "support_vehicle",
+          "rawScreenFootprint": 29.172,
+          "minimumScreenFootprint": 34,
+          "visualScaleBoost": 1.1655,
+          "screenFootprint": 34,
+          "metricSpace": "final_css_pixels"
+        },
+        {
+          "actorId": "enemy_at_2",
+          "side": "enemy",
+          "type": "support_vehicle",
+          "rawScreenFootprint": 29.172,
+          "minimumScreenFootprint": 34,
+          "visualScaleBoost": 1.1655,
+          "screenFootprint": 34,
+          "metricSpace": "final_css_pixels"
+        },
+        {
+          "actorId": "enemy_infantry_1",
+          "side": "enemy",
+          "type": "infantry",
+          "rawScreenFootprint": 29.172,
+          "minimumScreenFootprint": 24,
+          "visualScaleBoost": 1,
+          "screenFootprint": 29.172,
+          "metricSpace": "final_css_pixels"
+        },
+        {
+          "actorId": "enemy_infantry_2",
+          "side": "enemy",
+          "type": "infantry",
+          "rawScreenFootprint": 29.172,
+          "minimumScreenFootprint": 24,
+          "visualScaleBoost": 1,
+          "screenFootprint": 29.172,
+          "metricSpace": "final_css_pixels"
+        },
+        {
+          "actorId": "enemy_infantry_3",
+          "side": "enemy",
+          "type": "infantry",
+          "rawScreenFootprint": 29.172,
+          "minimumScreenFootprint": 24,
+          "visualScaleBoost": 1,
+          "screenFootprint": 29.172,
+          "metricSpace": "final_css_pixels"
+        },
+        {
+          "actorId": "enemy_infantry_4",
+          "side": "enemy",
+          "type": "infantry",
+          "rawScreenFootprint": 29.172,
+          "minimumScreenFootprint": 24,
+          "visualScaleBoost": 1,
+          "screenFootprint": 29.172,
+          "metricSpace": "final_css_pixels"
+        }
+      ]
+    }
+  ],
+  "passed": true
+}

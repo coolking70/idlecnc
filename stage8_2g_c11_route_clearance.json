@@ -1,0 +1,614 @@
+{
+  "stage": "8.2G-C.1.1",
+  "seedCountPerScenario": 20,
+  "routeClasses": [
+    "planner",
+    "cover_advance",
+    "retreat",
+    "rear_guard"
+  ],
+  "cases": [
+    {
+      "scenario": "victory",
+      "seed": 0,
+      "routeSegmentCounts": {
+        "planner": 112,
+        "cover_advance": 4
+      },
+      "routeSegmentViolations": 0,
+      "routeSegmentViolationsByClass": {
+        "planner": [],
+        "cover_advance": []
+      }
+    },
+    {
+      "scenario": "victory",
+      "seed": 1,
+      "routeSegmentCounts": {
+        "planner": 112,
+        "cover_advance": 4
+      },
+      "routeSegmentViolations": 0,
+      "routeSegmentViolationsByClass": {
+        "planner": [],
+        "cover_advance": []
+      }
+    },
+    {
+      "scenario": "victory",
+      "seed": 2,
+      "routeSegmentCounts": {
+        "planner": 112,
+        "cover_advance": 4
+      },
+      "routeSegmentViolations": 0,
+      "routeSegmentViolationsByClass": {
+        "planner": [],
+        "cover_advance": []
+      }
+    },
+    {
+      "scenario": "victory",
+      "seed": 3,
+      "routeSegmentCounts": {
+        "planner": 112,
+        "cover_advance": 4
+      },
+      "routeSegmentViolations": 0,
+      "routeSegmentViolationsByClass": {
+        "planner": [],
+        "cover_advance": []
+      }
+    },
+    {
+      "scenario": "victory",
+      "seed": 4,
+      "routeSegmentCounts": {
+        "planner": 112,
+        "cover_advance": 4
+      },
+      "routeSegmentViolations": 0,
+      "routeSegmentViolationsByClass": {
+        "planner": [],
+        "cover_advance": []
+      }
+    },
+    {
+      "scenario": "victory",
+      "seed": 5,
+      "routeSegmentCounts": {
+        "planner": 112,
+        "cover_advance": 4
+      },
+      "routeSegmentViolations": 0,
+      "routeSegmentViolationsByClass": {
+        "planner": [],
+        "cover_advance": []
+      }
+    },
+    {
+      "scenario": "victory",
+      "seed": 6,
+      "routeSegmentCounts": {
+        "planner": 112,
+        "cover_advance": 4
+      },
+      "routeSegmentViolations": 0,
+      "routeSegmentViolationsByClass": {
+        "planner": [],
+        "cover_advance": []
+      }
+    },
+    {
+      "scenario": "victory",
+      "seed": 7,
+      "routeSegmentCounts": {
+        "planner": 112,
+        "cover_advance": 4
+      },
+      "routeSegmentViolations": 0,
+      "routeSegmentViolationsByClass": {
+        "planner": [],
+        "cover_advance": []
+      }
+    },
+    {
+      "scenario": "victory",
+      "seed": 8,
+      "routeSegmentCounts": {
+        "planner": 112,
+        "cover_advance": 4
+      },
+      "routeSegmentViolations": 0,
+      "routeSegmentViolationsByClass": {
+        "planner": [],
+        "cover_advance": []
+      }
+    },
+    {
+      "scenario": "victory",
+      "seed": 9,
+      "routeSegmentCounts": {
+        "planner": 112,
+        "cover_advance": 4
+      },
+      "routeSegmentViolations": 0,
+      "routeSegmentViolationsByClass": {
+        "planner": [],
+        "cover_advance": []
+      }
+    },
+    {
+      "scenario": "victory",
+      "seed": 10,
+      "routeSegmentCounts": {
+        "planner": 112,
+        "cover_advance": 4
+      },
+      "routeSegmentViolations": 0,
+      "routeSegmentViolationsByClass": {
+        "planner": [],
+        "cover_advance": []
+      }
+    },
+    {
+      "scenario": "victory",
+      "seed": 11,
+      "routeSegmentCounts": {
+        "planner": 112,
+        "cover_advance": 4
+      },
+      "routeSegmentViolations": 0,
+      "routeSegmentViolationsByClass": {
+        "planner": [],
+        "cover_advance": []
+      }
+    },
+    {
+      "scenario": "victory",
+      "seed": 12,
+      "routeSegmentCounts": {
+        "planner": 112,
+        "cover_advance": 4
+      },
+      "routeSegmentViolations": 0,
+      "routeSegmentViolationsByClass": {
+        "planner": [],
+        "cover_advance": []
+      }
+    },
+    {
+      "scenario": "victory",
+      "seed": 13,
+      "routeSegmentCounts": {
+        "planner": 112,
+        "cover_advance": 4
+      },
+      "routeSegmentViolations": 0,
+      "routeSegmentViolationsByClass": {
+        "planner": [],
+        "cover_advance": []
+      }
+    },
+    {
+      "scenario": "victory",
+      "seed": 14,
+      "routeSegmentCounts": {
+        "planner": 112,
+        "cover_advance": 4
+      },
+      "routeSegmentViolations": 0,
+      "routeSegmentViolationsByClass": {
+        "planner": [],
+        "cover_advance": []
+      }
+    },
+    {
+      "scenario": "victory",
+      "seed": 15,
+      "routeSegmentCounts": {
+        "planner": 112,
+        "cover_advance": 4
+      },
+      "routeSegmentViolations": 0,
+      "routeSegmentViolationsByClass": {
+        "planner": [],
+        "cover_advance": []
+      }
+    },
+    {
+      "scenario": "victory",
+      "seed": 16,
+      "routeSegmentCounts": {
+        "planner": 112,
+        "cover_advance": 4
+      },
+      "routeSegmentViolations": 0,
+      "routeSegmentViolationsByClass": {
+        "planner": [],
+        "cover_advance": []
+      }
+    },
+    {
+      "scenario": "victory",
+      "seed": 17,
+      "routeSegmentCounts": {
+        "planner": 112,
+        "cover_advance": 4
+      },
+      "routeSegmentViolations": 0,
+      "routeSegmentViolationsByClass": {
+        "planner": [],
+        "cover_advance": []
+      }
+    },
+    {
+      "scenario": "victory",
+      "seed": 18,
+      "routeSegmentCounts": {
+        "planner": 112,
+        "cover_advance": 4
+      },
+      "routeSegmentViolations": 0,
+      "routeSegmentViolationsByClass": {
+        "planner": [],
+        "cover_advance": []
+      }
+    },
+    {
+      "scenario": "victory",
+      "seed": 19,
+      "routeSegmentCounts": {
+        "planner": 112,
+        "cover_advance": 4
+      },
+      "routeSegmentViolations": 0,
+      "routeSegmentViolationsByClass": {
+        "planner": [],
+        "cover_advance": []
+      }
+    },
+    {
+      "scenario": "defeat",
+      "seed": 0,
+      "routeSegmentCounts": {
+        "planner": 234,
+        "cover_advance": 4,
+        "retreat": 2,
+        "rear_guard": 2
+      },
+      "routeSegmentViolations": 0,
+      "routeSegmentViolationsByClass": {
+        "planner": [],
+        "cover_advance": [],
+        "retreat": [],
+        "rear_guard": []
+      }
+    },
+    {
+      "scenario": "defeat",
+      "seed": 1,
+      "routeSegmentCounts": {
+        "planner": 234,
+        "cover_advance": 4,
+        "retreat": 2,
+        "rear_guard": 2
+      },
+      "routeSegmentViolations": 0,
+      "routeSegmentViolationsByClass": {
+        "planner": [],
+        "cover_advance": [],
+        "retreat": [],
+        "rear_guard": []
+      }
+    },
+    {
+      "scenario": "defeat",
+      "seed": 2,
+      "routeSegmentCounts": {
+        "planner": 234,
+        "cover_advance": 4,
+        "retreat": 2,
+        "rear_guard": 2
+      },
+      "routeSegmentViolations": 0,
+      "routeSegmentViolationsByClass": {
+        "planner": [],
+        "cover_advance": [],
+        "retreat": [],
+        "rear_guard": []
+      }
+    },
+    {
+      "scenario": "defeat",
+      "seed": 3,
+      "routeSegmentCounts": {
+        "planner": 234,
+        "cover_advance": 4,
+        "retreat": 2,
+        "rear_guard": 2
+      },
+      "routeSegmentViolations": 0,
+      "routeSegmentViolationsByClass": {
+        "planner": [],
+        "cover_advance": [],
+        "retreat": [],
+        "rear_guard": []
+      }
+    },
+    {
+      "scenario": "defeat",
+      "seed": 4,
+      "routeSegmentCounts": {
+        "planner": 234,
+        "cover_advance": 4,
+        "retreat": 2,
+        "rear_guard": 2
+      },
+      "routeSegmentViolations": 0,
+      "routeSegmentViolationsByClass": {
+        "planner": [],
+        "cover_advance": [],
+        "retreat": [],
+        "rear_guard": []
+      }
+    },
+    {
+      "scenario": "defeat",
+      "seed": 5,
+      "routeSegmentCounts": {
+        "planner": 234,
+        "cover_advance": 4,
+        "retreat": 2,
+        "rear_guard": 2
+      },
+      "routeSegmentViolations": 0,
+      "routeSegmentViolationsByClass": {
+        "planner": [],
+        "cover_advance": [],
+        "retreat": [],
+        "rear_guard": []
+      }
+    },
+    {
+      "scenario": "defeat",
+      "seed": 6,
+      "routeSegmentCounts": {
+        "planner": 234,
+        "cover_advance": 4,
+        "retreat": 2,
+        "rear_guard": 2
+      },
+      "routeSegmentViolations": 0,
+      "routeSegmentViolationsByClass": {
+        "planner": [],
+        "cover_advance": [],
+        "retreat": [],
+        "rear_guard": []
+      }
+    },
+    {
+      "scenario": "defeat",
+      "seed": 7,
+      "routeSegmentCounts": {
+        "planner": 234,
+        "cover_advance": 4,
+        "retreat": 2,
+        "rear_guard": 2
+      },
+      "routeSegmentViolations": 0,
+      "routeSegmentViolationsByClass": {
+        "planner": [],
+        "cover_advance": [],
+        "retreat": [],
+        "rear_guard": []
+      }
+    },
+    {
+      "scenario": "defeat",
+      "seed": 8,
+      "routeSegmentCounts": {
+        "planner": 234,
+        "cover_advance": 4,
+        "retreat": 2,
+        "rear_guard": 2
+      },
+      "routeSegmentViolations": 0,
+      "routeSegmentViolationsByClass": {
+        "planner": [],
+        "cover_advance": [],
+        "retreat": [],
+        "rear_guard": []
+      }
+    },
+    {
+      "scenario": "defeat",
+      "seed": 9,
+      "routeSegmentCounts": {
+        "planner": 234,
+        "cover_advance": 4,
+        "retreat": 2,
+        "rear_guard": 2
+      },
+      "routeSegmentViolations": 0,
+      "routeSegmentViolationsByClass": {
+        "planner": [],
+        "cover_advance": [],
+        "retreat": [],
+        "rear_guard": []
+      }
+    },
+    {
+      "scenario": "defeat",
+      "seed": 10,
+      "routeSegmentCounts": {
+        "planner": 234,
+        "cover_advance": 4,
+        "retreat": 2,
+        "rear_guard": 2
+      },
+      "routeSegmentViolations": 0,
+      "routeSegmentViolationsByClass": {
+        "planner": [],
+        "cover_advance": [],
+        "retreat": [],
+        "rear_guard": []
+      }
+    },
+    {
+      "scenario": "defeat",
+      "seed": 11,
+      "routeSegmentCounts": {
+        "planner": 234,
+        "cover_advance": 4,
+        "retreat": 2,
+        "rear_guard": 2
+      },
+      "routeSegmentViolations": 0,
+      "routeSegmentViolationsByClass": {
+        "planner": [],
+        "cover_advance": [],
+        "retreat": [],
+        "rear_guard": []
+      }
+    },
+    {
+      "scenario": "defeat",
+      "seed": 12,
+      "routeSegmentCounts": {
+        "planner": 234,
+        "cover_advance": 4,
+        "retreat": 2,
+        "rear_guard": 2
+      },
+      "routeSegmentViolations": 0,
+      "routeSegmentViolationsByClass": {
+        "planner": [],
+        "cover_advance": [],
+        "retreat": [],
+        "rear_guard": []
+      }
+    },
+    {
+      "scenario": "defeat",
+      "seed": 13,
+      "routeSegmentCounts": {
+        "planner": 234,
+        "cover_advance": 4,
+        "retreat": 2,
+        "rear_guard": 2
+      },
+      "routeSegmentViolations": 0,
+      "routeSegmentViolationsByClass": {
+        "planner": [],
+        "cover_advance": [],
+        "retreat": [],
+        "rear_guard": []
+      }
+    },
+    {
+      "scenario": "defeat",
+      "seed": 14,
+      "routeSegmentCounts": {
+        "planner": 234,
+        "cover_advance": 4,
+        "retreat": 2,
+        "rear_guard": 2
+      },
+      "routeSegmentViolations": 0,
+      "routeSegmentViolationsByClass": {
+        "planner": [],
+        "cover_advance": [],
+        "retreat": [],
+        "rear_guard": []
+      }
+    },
+    {
+      "scenario": "defeat",
+      "seed": 15,
+      "routeSegmentCounts": {
+        "planner": 234,
+        "cover_advance": 4,
+        "retreat": 2,
+        "rear_guard": 2
+      },
+      "routeSegmentViolations": 0,
+      "routeSegmentViolationsByClass": {
+        "planner": [],
+        "cover_advance": [],
+        "retreat": [],
+        "rear_guard": []
+      }
+    },
+    {
+      "scenario": "defeat",
+      "seed": 16,
+      "routeSegmentCounts": {
+        "planner": 234,
+        "cover_advance": 4,
+        "retreat": 2,
+        "rear_guard": 2
+      },
+      "routeSegmentViolations": 0,
+      "routeSegmentViolationsByClass": {
+        "planner": [],
+        "cover_advance": [],
+        "retreat": [],
+        "rear_guard": []
+      }
+    },
+    {
+      "scenario": "defeat",
+      "seed": 17,
+      "routeSegmentCounts": {
+        "planner": 234,
+        "cover_advance": 4,
+        "retreat": 2,
+        "rear_guard": 2
+      },
+      "routeSegmentViolations": 0,
+      "routeSegmentViolationsByClass": {
+        "planner": [],
+        "cover_advance": [],
+        "retreat": [],
+        "rear_guard": []
+      }
+    },
+    {
+      "scenario": "defeat",
+      "seed": 18,
+      "routeSegmentCounts": {
+        "planner": 234,
+        "cover_advance": 4,
+        "retreat": 2,
+        "rear_guard": 2
+      },
+      "routeSegmentViolations": 0,
+      "routeSegmentViolationsByClass": {
+        "planner": [],
+        "cover_advance": [],
+        "retreat": [],
+        "rear_guard": []
+      }
+    },
+    {
+      "scenario": "defeat",
+      "seed": 19,
+      "routeSegmentCounts": {
+        "planner": 234,
+        "cover_advance": 4,
+        "retreat": 2,
+        "rear_guard": 2
+      },
+      "routeSegmentViolations": 0,
+      "routeSegmentViolationsByClass": {
+        "planner": [],
+        "cover_advance": [],
+        "retreat": [],
+        "rear_guard": []
+      }
+    }
+  ],
+  "violations": 0,
+  "passed": true
+}

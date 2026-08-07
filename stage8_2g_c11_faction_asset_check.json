@@ -1,0 +1,45 @@
+{
+  "stage": "8.2G-C.1.1",
+  "manifestProvider": "offline-manifest",
+  "sameFrameFriendlyEnemyRequired": true,
+  "cases": [
+    {
+      "side": "friendly",
+      "type": "infantry",
+      "assetId": "unit_friendly_infantry",
+      "requestedAssetId": "unit_friendly_infantry",
+      "mode": "sprite",
+      "reason": null,
+      "factionVisualMode": "friendly"
+    },
+    {
+      "side": "friendly",
+      "type": "mbt",
+      "assetId": "unit_friendly_mbt",
+      "requestedAssetId": "unit_friendly_mbt",
+      "mode": "hybrid",
+      "reason": null,
+      "factionVisualMode": "friendly"
+    },
+    {
+      "side": "enemy",
+      "type": "infantry",
+      "assetId": null,
+      "requestedAssetId": "unit_enemy_infantry",
+      "mode": "procedural",
+      "reason": "faction_asset_unavailable",
+      "factionVisualMode": "procedural_enemy"
+    },
+    {
+      "side": "enemy",
+      "type": "mbt",
+      "assetId": null,
+      "requestedAssetId": "unit_enemy_mbt",
+      "mode": "procedural",
+      "reason": "faction_asset_unavailable",
+      "factionVisualMode": "procedural_enemy"
+    }
+  ],
+  "enemyFriendlyAssetReuse": false,
+  "passed": true
+}

@@ -2,9 +2,14 @@ import { buildEnvironmentLayout } from './environment-layout.js';
 
 const cache = new WeakMap();
 
-export function buildEnvironmentScene(plan) {
+export function buildEnvironmentScene(plan, options = {}) {
   if (!plan || typeof plan !== 'object') throw new TypeError('buildEnvironmentScene requires a plan');
-  const cached = cache.get(plan); if (cached) return cached;
+  if (options.engagementSchedule) {
+    let schedules = cache.get(plan); if (!(schedules instanceof WeakMap)) { schedules = new WeakMap(); cache.set(plan, schedules); }
+    const cached = schedules.get(options.engagementSchedule); if (cached) return cached;
+    const scene = Object.freeze(buildEnvironmentLayout(plan, options)); schedules.set(options.engagementSchedule, scene); return scene;
+  }
+  const cached = cache.get(plan); if (cached && !(cached instanceof WeakMap)) return cached;
   const scene = Object.freeze(buildEnvironmentLayout(plan)); cache.set(plan, scene); return scene;
 }
 

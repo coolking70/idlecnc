@@ -1,0 +1,19 @@
+name: core-regression
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  node-core:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm install --ignore-scripts
+      - run: npm run test:stage8-2G-C-1
+      - run: npm run test:stage8-2G-C-1-1
+      - run: npm run test:stage8-2G-B-1-1a

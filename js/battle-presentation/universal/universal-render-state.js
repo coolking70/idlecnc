@@ -198,7 +198,9 @@ export function buildUniversalRenderState(plan, seconds = 0, runtime = {}, preco
   });
   const authorityShotSchedule = runtime.authorityShotSchedule || buildVisualShotSchedule(plan, positionSampler);
   const visualShotSchedule = (runtime.visualShotSchedule || [...authorityShotSchedule, ...(engagementSchedule.shots || [])].sort((left, right) => Number(left.t) - Number(right.t) || String(left.id).localeCompare(String(right.id)))).map((shot) => ({ ...shot, weapon: { ...(shot.weapon || {}), validTargetClasses: [...(shot.weapon?.validTargetClasses || [])], presentation: { ...(shot.weapon?.presentation || {}) } } }));
-  const environment = runtime.environmentScene || buildEnvironmentScene(plan);
+  // The environment is visual-only, but its clearance audit must see every
+  // presentation corridor selected by the same deterministic choreography.
+  const environment = runtime.environmentScene || buildEnvironmentScene(plan, { engagementSchedule });
   const environmentState = buildEnvironmentState(environment, battleTime);
   const visualScene = buildUniversalVisualScene(plan, battleTime, (actorId, time) => sampleSpatialEntityPosition(compiled, actorId, time), {
     visualShotSchedule,
@@ -228,7 +230,7 @@ export function buildUniversalRenderState(plan, seconds = 0, runtime = {}, preco
   const activeRetreats = actors.map((actor) => retreatAtTime(engagementSchedule, actor.id, battleTime)).filter(Boolean).map((item) => ({ ...item, exit: { ...item.exit } }));
   const camera = resolveDirectedCamera(plan, { actors, activeAnchors, effects, time: battleTime, returning }, cameraDirector, { mode: runtime.cameraMode || 'overview', autoCamera: runtime.autoCamera !== false, cameraOverride: runtime.cameraOverride || null });
   const cameraWithFallback = camera || { x: 640, y: 360, zoom: .86 };
-  const drawSpecs = buildProductionDrawSpecs({ actors: presentationActors, wrecks, environment: environmentState, camera: cameraWithFallback, options: { manifest: OFFLINE_ASSET_MANIFEST, availableSources: new Set(OFFLINE_ASSET_MANIFEST.assets.map((asset) => asset.source)) } });
+  const drawSpecs = buildProductionDrawSpecs({ actors: presentationActors, wrecks, environment: environmentState, camera: cameraWithFallback, options: { manifest: OFFLINE_ASSET_MANIFEST, availableSources: new Set(OFFLINE_ASSET_MANIFEST.assets.map((asset) => asset.source)), battlefieldBounds: plan.layout?.bounds || { width: 1200, height: 700 } } });
   const actorByDrawSpec = new Map(drawSpecs.actorSpecs.map((spec) => [spec.actorId, spec]));
   // Keep the text/evidence state graph tree-shaped.  Sharing a Draw Spec object
   // between `state.drawSpecs` and `actor.drawSpec` is semantically harmless but

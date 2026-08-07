@@ -4,7 +4,7 @@
 
 玩家扮演基地指挥官，**不直接操作单位**：你只负责审批建设、编排部队、下达作战策略，剩下的交给系统自动推演。
 
-> **当前版本：0.8.1-hotfix.5 · Stage 8.2G-C.1 Production Visual Consumption & Evidence Hardening**
+> **当前版本：0.8.1-hotfix.6 · Stage 8.2G-C.1.1 Runtime Readability & Route Clearance Closure**
 > 在阶段 1～8.2G-A.1.1 之上，正式通用战场新增确定性交火编舞、目标选择与切换、压制/掩护推进、失败撤退和事件优先镜头；所有表现性射击仍不改变正式 HP、战报或结算权威。
 
 ---

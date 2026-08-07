@@ -1,0 +1,15 @@
+{
+  "stage": "8.2G-C.1.1",
+  "factionAware": true,
+  "finalCssMetrics": true,
+  "routeClasses": [
+    "planner",
+    "cover_advance",
+    "retreat",
+    "rear_guard"
+  ],
+  "seedCountPerScenario": 20,
+  "violations": 0,
+  "browserRequired": true,
+  "passed": true
+}

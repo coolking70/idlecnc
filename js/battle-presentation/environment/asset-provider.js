@@ -23,10 +23,17 @@ export function resolveAsset(manifest, id, availableSources = new Set()) {
 }
 
 export function resolveUnitAsset(actor, manifest, availableSources = new Set(), mode = 'hybrid') {
-  const id = actor?.type === 'mbt' ? 'unit_friendly_mbt' : actor?.category === 'infantry' || actor?.type === 'at_infantry' ? 'unit_friendly_infantry' : null;
-  if (!id || !ASSET_RENDER_MODES.includes(mode)) return { assetId: id, mode: 'procedural', fallback: true };
+  const side = actor?.side === 'enemy' ? 'enemy' : actor?.side === 'friendly' ? 'friendly' : 'neutral';
+  const unitType = actor?.type === 'mbt' ? 'mbt' : actor?.category === 'infantry' || actor?.type === 'at_infantry' ? 'infantry' : null;
+  const factionId = unitType ? `unit_${side}_${unitType}` : null;
+  // The offline manifest intentionally only ships the friendly sample art.
+  // Never let an enemy actor silently borrow that art: the procedural renderer
+  // is the authoritative faction-safe fallback until enemy art is supplied.
+  if (!unitType || !ASSET_RENDER_MODES.includes(mode)) return { assetId: null, mode: 'procedural', fallback: true, side, factionVisualMode: 'procedural' };
+  const id = factionId;
+  if (side !== 'friendly' && !assetEntry(manifest, id)) return { assetId: null, requestedAssetId: id, mode: 'procedural', fallback: true, status: 'fallback', reason: 'faction_asset_unavailable', side, factionVisualMode: `procedural_${side}` };
   const resolved = resolveAsset(manifest, id, availableSources);
-  return { ...resolved, mode: resolved.ok && mode !== 'procedural' ? mode : 'procedural' };
+  return { ...resolved, mode: resolved.ok && mode !== 'procedural' ? mode : 'procedural', side, factionVisualMode: resolved.ok ? side : `procedural_${side}` };
 }
 
 export function resolveEnvironmentAsset(object, manifest = OFFLINE_ASSET_MANIFEST, availableSources = new Set(), mode = 'sprite') {

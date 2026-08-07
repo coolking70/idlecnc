@@ -122,6 +122,8 @@ export function createBattlePresentationRouter({ canvas, legacyRenderer, onState
   function getDebugOverlayState() { return renderedMode === 'universal_battle' ? universalRenderer.getDebugOverlayState?.() : contractRenderer.getDebugOverlayState?.() || { debugOverlay: false }; }
   function getInteractionState() { return renderedMode === 'universal_battle' ? universalRenderer.getInteractionState?.() : renderedMode === 'contract_road_victory' ? contractRenderer.getInteractionState?.() : legacyRenderer?.getInteractionState?.() || null; }
   function getAssetRuntimeState() { return renderedMode === 'universal_battle' ? universalRenderer.getAssetRuntimeState?.() || null : null; }
+  function getActorScreenMetrics() { return renderedMode === 'universal_battle' ? universalRenderer.getActorScreenMetrics?.() || null : null; }
+  function getActorScreenMetricsAt(seconds) { return renderedMode === 'universal_battle' ? universalRenderer.getActorScreenMetricsAt?.(seconds) || null : null; }
   function setAssetDisabled(assetId, value = true) { return renderedMode === 'universal_battle' ? universalRenderer.setAssetDisabled?.(assetId, value) || null : null; }
 
   function getRenderState() { return renderedMode === 'universal_battle' ? universalRenderer.lastState || null : contractRenderer.lastState || null; }
@@ -134,5 +136,5 @@ export function createBattlePresentationRouter({ canvas, legacyRenderer, onState
     universalRenderer.render(snapshot, 0); return universalRenderer.lastState || null;
   }
 
-  return { render, reset, destroy, setPreference, getPreference: preference, getState, getPresentation, getRenderState, getRenderStateAt, renderAt, getTextState, setCameraMode, setAutoCamera, resetCamera, setDebugOverlay, getDebugOverlayState, getInteractionState, getAssetRuntimeState, setAssetDisabled };
+  return { render, reset, destroy, setPreference, getPreference: preference, getState, getPresentation, getRenderState, getRenderStateAt, renderAt, getTextState, setCameraMode, setAutoCamera, resetCamera, setDebugOverlay, getDebugOverlayState, getInteractionState, getAssetRuntimeState, getActorScreenMetrics, getActorScreenMetricsAt, setAssetDisabled };
 }
