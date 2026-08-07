@@ -1,0 +1,10 @@
+{
+  "stage": "8.2G-C.1.1a",
+  "uniqueNormalizer": true,
+  "sharedFinalDrawGeometry": true,
+  "sharedPresentationRoutes": true,
+  "assetRuntimeGuarded": true,
+  "sampledSeeds": 40,
+  "sampledPathViolations": 0,
+  "passed": true
+}

@@ -9,6 +9,7 @@ import { buildEnvironmentScene } from '../environment/environment-scene-builder.
 import { buildEnvironmentState } from '../environment/environment-state.js';
 import { OFFLINE_ASSET_MANIFEST } from '../environment/asset-provider.js';
 import { buildProductionDrawSpecs } from '../environment/production-visual-draw-spec.js';
+import { normalizeVisualUnitClass } from '../environment/visual-unit-class.js';
 
 const clamp = (value, min, max) => Math.max(min, Math.min(max, Number(value) || 0));
 
@@ -55,7 +56,8 @@ function actionFor(plan, actorId, seconds) {
 }
 
 function memberCount(actor) {
-  if (actor.category === 'infantry' || actor.type === 'at_infantry') return actor.type === 'at_infantry' ? 3 : 4;
+  const visualClass = normalizeVisualUnitClass(actor);
+  if (visualClass === 'infantry' || visualClass === 'anti_armor_infantry') return visualClass === 'anti_armor_infantry' ? 3 : 4;
   return 0;
 }
 
@@ -73,7 +75,7 @@ function memberPositions(actor, center, facing, seconds) {
   return offsets.map(([ox, oy], index) => {
     const cos = Math.cos(facing); const sin = Math.sin(facing);
     const sway = moving ? Math.sin(seconds * 5 + index) * 1.3 : 0;
-    return { x: center.x + ox * cos - oy * sin + sway, y: center.y + ox * sin + oy * cos + sway, facing, stance: moving ? (index % 2 ? 'moving' : 'stand') : 'stand', role: actor.type === 'at_infantry' && index === 0 ? 'rocket' : 'rifle' };
+    return { x: center.x + ox * cos - oy * sin + sway, y: center.y + ox * sin + oy * cos + sway, facing, stance: moving ? (index % 2 ? 'moving' : 'stand') : 'stand', role: normalizeVisualUnitClass(actor) === 'anti_armor_infantry' && index === 0 ? 'rocket' : 'rifle' };
   });
 }
 
@@ -190,7 +192,7 @@ export function buildUniversalRenderState(plan, seconds = 0, runtime = {}, preco
       facing,
       turretFacing: facing,
       memberPositions: memberPositions(presentationActor, visualCenter, facing, battleTime),
-      minimumScreenFootprint: actor.type === 'mbt' ? 46 : actor.category === 'infantry' || actor.type === 'at_infantry' ? 24 : 34,
+      minimumScreenFootprint: ({ mbt: 46, infantry: 24, anti_armor_infantry: 24, light_vehicle: 34, support_vehicle: 34, unknown: 30 })[normalizeVisualUnitClass(actor)] || 30,
       currentAction,
       cover,
       visualStatus: !alive ? 'destroyed' : cover.inCover ? 'in_cover' : currentAction === 'repair' ? 'being_repaired' : currentAction === 'repair_approach' ? 'repairing' : currentAction === 'damage' || currentAction === 'fire' ? 'engaging' : currentAction

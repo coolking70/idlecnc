@@ -1,0 +1,58 @@
+{
+  "stage": "8.2G-C.1.1a",
+  "package": "iron-command-stage8-2G-C-1-1a-final-hotfix.zip",
+  "packagePath": "/Users/coolking70/Documents/同步空间/idlecnc/iron-command-stage8-2G-C-1-1a-final-hotfix.zip",
+  "packageSha256": "5bc085cdd997346ceee37978abaf851be788b6243becf760acd3b716be0db859",
+  "packageBytes": 48202092,
+  "entries": 791,
+  "browser": {
+    "currentCodeCaptured": true,
+    "legacyFallbackUsed": false,
+    "pageErrors": [],
+    "consoleErrors": [],
+    "screenshotsDir": "screenshots/stage8-2G-C-1-1a",
+    "captureCount": 6
+  },
+  "tamper": {
+    "ok": true,
+    "stage": "8.2G-C.1.1a",
+    "mutationCases": 5,
+    "cases": [
+      {
+        "label": "finalDrawRect mutation",
+        "rejected": true,
+        "output": "file:///Users/coolking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-C-1-1a-evidence.mjs:12\nconst fail = (message) => { throw new Error(message); };\n                                  ^\n\nError: machine final geometry alias-01-enemy-at-is-infantry.png\n    at fail (file:///Users/coolking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-C-1-1a-evidence.mjs:12:35)\n    at file:///Users/coolking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-C-1-1a-evidence.mjs:33:102\n\nNode.js v25.2.1\n"
+      },
+      {
+        "label": "visualClass mutation",
+        "rejected": true,
+        "output": "file:///Users/coolking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-C-1-1a-evidence.mjs:12\nconst fail = (message) => { throw new Error(message); };\n                                  ^\n\nError: machine final geometry alias-01-enemy-at-is-infantry.png\n    at fail (file:///Users/coolking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-C-1-1a-evidence.mjs:12:35)\n    at file:///Users/coolking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-C-1-1a-evidence.mjs:33:102\n\nNode.js v25.2.1\n"
+      },
+      {
+        "label": "cover presentationRoute mutation",
+        "rejected": true,
+        "output": "file:///Users/coolking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-C-1-1a-evidence.mjs:12\nconst fail = (message) => { throw new Error(message); };\n                                  ^\n\nError: cover presentation route binding footprint-01-friendly-infantry-narrow.png\n    at fail (file:///Users/coolking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-C-1-1a-evidence.mjs:12:35)\n    at file:///Users/coolking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-C-1-1a-evidence.mjs:28:296\n\nNode.js v25.2.1\n"
+      },
+      {
+        "label": "asset runtime readiness mutation",
+        "rejected": true,
+        "output": "file:///Users/coolking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-C-1-1a-evidence.mjs:12\nconst fail = (message) => { throw new Error(message); };\n                                  ^\n\nError: asset runtime not ready alias-01-enemy-at-is-infantry.png\n    at fail (file:///Users/coolking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-C-1-1a-evidence.mjs:12:35)\n    at file:///Users/coolking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-C-1-1a-evidence.mjs:37:53\n\nNode.js v25.2.1\n"
+      },
+      {
+        "label": "duplicate PNG hash",
+        "rejected": true,
+        "output": "file:///Users/coolking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-C-1-1a-evidence.mjs:12\nconst fail = (message) => { throw new Error(message); };\n                                  ^\n\nError: duplicate PNG footprint-02-enemy-at-narrow.png\n    at fail (file:///Users/coolking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-C-1-1a-evidence.mjs:12:35)\n    at file:///Users/coolking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-C-1-1a-evidence.mjs:29:216\n\nNode.js v25.2.1\n"
+      }
+    ],
+    "finalDrawRectProtected": true,
+    "visualClassProtected": true,
+    "presentationRouteProtected": true,
+    "assetRuntimeProtected": true,
+    "duplicatePngProtected": true
+  },
+  "hygiene": {
+    "forbiddenCount": 0,
+    "screenshots": 6
+  },
+  "cleanPackageGate": "verified-by-default-package-verifier"
+}

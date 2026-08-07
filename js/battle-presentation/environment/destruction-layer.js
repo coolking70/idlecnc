@@ -1,9 +1,10 @@
 import { buildBattlefieldDecals } from './battlefield-decals.js';
 import { buildPersistentEffects, EFFECT_LIMITS } from './persistent-effects.js';
 import { deterministicUnit } from './environment-layout.js';
+import { normalizeVisualUnitClass } from './visual-unit-class.js';
 
 function actorById(plan) { return new Map([...(plan?.forces?.friendly || []), ...(plan?.forces?.enemy || [])].map((actor) => [actor.actorId, actor])); }
-function wreckType(actor) { if (!actor) return 'unknown_wreck'; if (actor.type === 'mbt') return 'tank_wreck'; if (['scout_car', 'enemy_scout_car', 'repair_vehicle'].includes(actor.type)) return 'light_vehicle_wreck'; if (actor.category === 'infantry' || actor.type === 'at_infantry') return 'infantry_casualty_marker'; return 'structure_wreck'; }
+function wreckType(actor) { const visualClass = normalizeVisualUnitClass(actor); if (!actor) return 'unknown_wreck'; if (visualClass === 'mbt') return 'tank_wreck'; if (visualClass === 'light_vehicle' || visualClass === 'support_vehicle') return 'light_vehicle_wreck'; if (visualClass === 'infantry' || visualClass === 'anti_armor_infantry') return 'infantry_casualty_marker'; return 'structure_wreck'; }
 function destroyEvents(plan, shots) {
   const known = new Set(shots.filter((shot) => shot.hitType === 'destroy' || shot.authorityType === 'destroy').map((shot) => shot.targetId));
   return (plan?.timeline?.anchors || []).filter((anchor) => anchor.type === 'destroy' && anchor.targetId && !known.has(anchor.targetId)).map((anchor) => ({ id: anchor.id, targetId: anchor.targetId, t: Number(anchor.t) || 0, point: anchor.impact || anchor.position || null, source: 'authority_anchor' }));

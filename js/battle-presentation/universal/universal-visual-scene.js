@@ -9,6 +9,7 @@ import { separateVisualFootprints, visualFootprint } from './visual-footprints.j
 import { assignmentAtTime, retreatAtTime, suppressionSourceAtTime, suppressionTargetAtTime } from './universal-engagement-choreographer.js';
 import { buildEnvironmentScene } from '../environment/environment-scene-builder.js';
 import { buildPersistentDestructionLayer } from '../environment/destruction-layer.js';
+import { normalizeVisualUnitClass } from '../environment/visual-unit-class.js';
 
 const clamp = (value, min, max) => Math.max(min, Math.min(max, Number(value) || 0));
 const TAU = Math.PI * 2;
@@ -58,10 +59,11 @@ function facingFor(actor, seconds, shot, presentationFacing = null) {
 }
 
 function memberPositions(actor, center, facing, visualState, seconds) {
-  const count = actor.category === 'infantry' || actor.type === 'at_infantry' ? (actor.type === 'at_infantry' ? 3 : 4) : 0;
+  const visualClass = normalizeVisualUnitClass(actor);
+  const count = visualClass === 'infantry' || visualClass === 'anti_armor_infantry' ? (visualClass === 'anti_armor_infantry' ? 3 : 4) : 0;
   if (!count) return [];
   const offsets = count === 3 ? [[-10, -7], [8, -3], [-4, 9]] : [[-14, -9], [8, -8], [-8, 8], [14, 8]];
-  const moving = visualState === 'move'; const walkCycle = moving ? (seconds * (actor.type === 'at_infantry' ? 4.2 : 5.1)) : 0;
+  const moving = visualState === 'move'; const walkCycle = moving ? (seconds * (visualClass === 'anti_armor_infantry' ? 4.2 : 5.1)) : 0;
   const cos = Math.cos(facing); const sin = Math.sin(facing);
   return offsets.map(([ox, oy], index) => {
     const step = moving ? Math.sin(walkCycle + index * 1.6) * 2.4 : 0;
@@ -72,7 +74,7 @@ function memberPositions(actor, center, facing, visualState, seconds) {
       facing,
       stance: moving ? (index % 2 ? 'step' : 'stride') : visualState === 'fire' ? 'braced' : 'stand',
       walkPhase: ((walkCycle + index * 1.6) % TAU + TAU) % TAU,
-      role: actor.type === 'at_infantry' && index === 0 ? 'rocket' : 'rifle'
+      role: visualClass === 'anti_armor_infantry' && index === 0 ? 'rocket' : 'rifle'
     };
   });
 }
@@ -115,7 +117,7 @@ function interpolate(left, right, progress) {
   return { x: left.x + (right.x - left.x) * progress, y: left.y + (right.y - left.y) * progress };
 }
 
-function pointOnPresentationRoute(route, seconds) {
+export function pointOnPresentationRoute(route, seconds) {
   if (!route?.length) return null;
   const ordered = [...route].sort((a, b) => a.t - b.t);
   if (seconds <= ordered[0].t) return { x: ordered[0].x, y: ordered[0].y };
@@ -141,8 +143,8 @@ function positionFor(actor, plan, seconds, sampler, engagementSchedule) {
     const move = (engagementSchedule?.coverMoves || []).find((item) => seconds >= item.start - .000001 && seconds <= item.end + .000001 && (item.fireGroupIds.includes(actor.actorId) || item.maneuverGroupIds.includes(actor.actorId)));
     if (move) {
       if (move.maneuverGroupIds.includes(actor.actorId)) {
-        const target = move.maneuverTargetPositions?.[actor.actorId];
-        if (target) presentation = interpolate(current, target, clamp((seconds - move.start) / Math.max(.001, move.end - move.start), 0, 1));
+        const route = move.presentationRoutes?.[actor.actorId];
+        if (route) presentation = pointOnPresentationRoute(route, seconds) || presentation;
         presentationMode = 'cover_advance';
       } else {
         const hold = move.fireGroupHoldPositions?.[actor.actorId];
@@ -211,7 +213,7 @@ export function buildUniversalVisualScene(plan, seconds, sampler, runtime = {}) 
     };
   });
   const finalActors = actors.filter((actor) => actor.visualState !== 'wreck');
-  const fallbackWrecks = actors.filter((actor) => actor.visualState === 'wreck' || (!actor.alive && !latestDestroy(plan, actor.id))).map((actor) => ({ id: `wreck_${actor.id}`, sourceActorId: actor.id, x: actor.visualCenter.x, y: actor.visualCenter.y, angle: actor.facing || 0, wreckType: actor.category === 'infantry' || actor.type === 'at_infantry' ? 'infantry_casualty_marker' : actor.type === 'mbt' ? 'tank_wreck' : 'light_vehicle_wreck', persistent: true }));
+  const fallbackWrecks = actors.filter((actor) => actor.visualState === 'wreck' || (!actor.alive && !latestDestroy(plan, actor.id))).map((actor) => ({ id: `wreck_${actor.id}`, sourceActorId: actor.id, x: actor.visualCenter.x, y: actor.visualCenter.y, angle: actor.facing || 0, wreckType: normalizeVisualUnitClass(actor) === 'infantry' || normalizeVisualUnitClass(actor) === 'anti_armor_infantry' ? 'infantry_casualty_marker' : normalizeVisualUnitClass(actor) === 'mbt' ? 'tank_wreck' : 'light_vehicle_wreck', persistent: true }));
   // Keep destroyed actors in the lookup used by projectiles/effects: the wreck and
   // its smoke must remain at the last authoritative position after the actor leaves
   // the live-actor layer.

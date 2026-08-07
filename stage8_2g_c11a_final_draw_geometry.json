@@ -1,0 +1,482 @@
+{
+  "stage": "8.2G-C.1.1a",
+  "geometrySource": "production-final-draw-geometry",
+  "cases": [
+    {
+      "scenario": "victory",
+      "actorId": "unit_stage8g-c1-mining-3",
+      "visualClass": "mbt",
+      "renderMode": "hybrid",
+      "assetId": "unit_friendly_mbt",
+      "logicalRect": {
+        "x": 669.9055715526305,
+        "y": 68.31217410040941,
+        "width": 74.00703871292106,
+        "height": 44.40422322775263
+      },
+      "cssRect": {
+        "x": 430.7727272727273,
+        "y": 55.15714285714286,
+        "width": 46,
+        "height": 27.599999999999994
+      },
+      "finalCssWidth": 46,
+      "finalCssHeight": 27.6,
+      "screenFootprint": 46,
+      "minimumScreenFootprint": 46,
+      "visualScaleBoost": 1.1564,
+      "rendererGeometrySource": "production-final-draw-geometry"
+    },
+    {
+      "scenario": "victory",
+      "actorId": "unit_stage8g-c1-mining-1",
+      "visualClass": "anti_armor_infantry",
+      "renderMode": "sprite",
+      "assetId": "unit_friendly_infantry",
+      "logicalRect": {
+        "x": 691.7399463281818,
+        "y": 178.1795302736479,
+        "width": 30.338289161818572,
+        "height": 38.612368024132735
+      },
+      "cssRect": {
+        "x": 430.7727272727273,
+        "y": 120.34285714285714,
+        "width": 18.857142857142858,
+        "height": 24
+      },
+      "finalCssWidth": 18.8571,
+      "finalCssHeight": 24,
+      "screenFootprint": 24,
+      "minimumScreenFootprint": 24,
+      "visualScaleBoost": 1.2928,
+      "rendererGeometrySource": "production-final-draw-geometry"
+    },
+    {
+      "scenario": "victory",
+      "actorId": "unit_stage8g-c1-mining-0",
+      "visualClass": "infantry",
+      "renderMode": "sprite",
+      "assetId": "unit_friendly_infantry",
+      "logicalRect": {
+        "x": 691.7399463281818,
+        "y": 124.69381598793363,
+        "width": 30.338289161818572,
+        "height": 38.612368024132735
+      },
+      "cssRect": {
+        "x": 430.7727272727273,
+        "y": 87.75,
+        "width": 18.857142857142858,
+        "height": 24
+      },
+      "finalCssWidth": 18.8571,
+      "finalCssHeight": 24,
+      "screenFootprint": 24,
+      "minimumScreenFootprint": 24,
+      "visualScaleBoost": 1.2928,
+      "rendererGeometrySource": "production-final-draw-geometry"
+    },
+    {
+      "scenario": "victory",
+      "actorId": "unit_stage8g-c1-mining-4",
+      "visualClass": "support_vehicle",
+      "renderMode": "procedural",
+      "assetId": null,
+      "logicalRect": {
+        "x": 679.5586635586636,
+        "y": 595.2390720390721,
+        "width": 54.7008547008547,
+        "height": 27.35042735042735
+      },
+      "cssRect": {
+        "x": 430.7727272727273,
+        "y": 371.0571428571429,
+        "width": 34,
+        "height": 17
+      },
+      "finalCssWidth": 34,
+      "finalCssHeight": 17,
+      "screenFootprint": 34,
+      "minimumScreenFootprint": 34,
+      "visualScaleBoost": 1.1655,
+      "rendererGeometrySource": "production-final-draw-geometry"
+    },
+    {
+      "scenario": "victory",
+      "actorId": "unit_stage8g-c1-mining-2",
+      "visualClass": "light_vehicle",
+      "renderMode": "procedural",
+      "assetId": null,
+      "logicalRect": {
+        "x": 679.5586635586636,
+        "y": 23.353357753357756,
+        "width": 54.7008547008547,
+        "height": 27.35042735042735
+      },
+      "cssRect": {
+        "x": 430.7727272727273,
+        "y": 22.564285714285717,
+        "width": 34,
+        "height": 17
+      },
+      "finalCssWidth": 34,
+      "finalCssHeight": 17,
+      "screenFootprint": 34,
+      "minimumScreenFootprint": 34,
+      "visualScaleBoost": 1.1655,
+      "rendererGeometrySource": "production-final-draw-geometry"
+    },
+    {
+      "scenario": "victory",
+      "actorId": "enemy_infantry_1",
+      "visualClass": "infantry",
+      "renderMode": "procedural",
+      "assetId": null,
+      "logicalRect": {
+        "x": 834.4281122816808,
+        "y": 545.447619047619,
+        "width": 34.13333333333333,
+        "height": 40.53333333333333
+      },
+      "cssRect": {
+        "x": 518.8796309216493,
+        "y": 344.73214285714283,
+        "width": 21.216,
+        "height": 25.194
+      },
+      "finalCssWidth": 21.216,
+      "finalCssHeight": 25.194,
+      "screenFootprint": 25.194,
+      "minimumScreenFootprint": 24,
+      "visualScaleBoost": 1,
+      "rendererGeometrySource": "production-final-draw-geometry"
+    },
+    {
+      "scenario": "victory",
+      "actorId": "enemy_infantry_2",
+      "visualClass": "infantry",
+      "renderMode": "procedural",
+      "assetId": null,
+      "logicalRect": {
+        "x": 876.4121212121212,
+        "y": 588.6476190476191,
+        "width": 34.13333333333333,
+        "height": 40.53333333333333
+      },
+      "cssRect": {
+        "x": 544.4636363636364,
+        "y": 371.0571428571429,
+        "width": 21.216,
+        "height": 25.194
+      },
+      "finalCssWidth": 21.216,
+      "finalCssHeight": 25.194,
+      "screenFootprint": 25.194,
+      "minimumScreenFootprint": 24,
+      "visualScaleBoost": 1,
+      "rendererGeometrySource": "production-final-draw-geometry"
+    },
+    {
+      "scenario": "victory",
+      "actorId": "enemy_infantry_3",
+      "visualClass": "infantry",
+      "renderMode": "procedural",
+      "assetId": null,
+      "logicalRect": {
+        "x": 854.6909090909089,
+        "y": 631.8476190476191,
+        "width": 34.13333333333333,
+        "height": 40.53333333333333
+      },
+      "cssRect": {
+        "x": 531.2272727272726,
+        "y": 397.38214285714287,
+        "width": 21.216,
+        "height": 25.194
+      },
+      "finalCssWidth": 21.216,
+      "finalCssHeight": 25.194,
+      "screenFootprint": 25.194,
+      "minimumScreenFootprint": 24,
+      "visualScaleBoost": 1,
+      "rendererGeometrySource": "production-final-draw-geometry"
+    },
+    {
+      "scenario": "defeat",
+      "actorId": "unit_fixture-u-4",
+      "visualClass": "mbt",
+      "renderMode": "hybrid",
+      "assetId": "unit_friendly_mbt",
+      "logicalRect": {
+        "x": 692.475078722717,
+        "y": 486.94074552898087,
+        "width": 74.00703871292106,
+        "height": 44.40422322775263
+      },
+      "cssRect": {
+        "x": 444.52602070449876,
+        "y": 310.2589285714286,
+        "width": 46,
+        "height": 27.599999999999994
+      },
+      "finalCssWidth": 46,
+      "finalCssHeight": 27.6,
+      "screenFootprint": 46,
+      "minimumScreenFootprint": 46,
+      "visualScaleBoost": 1.1564,
+      "rendererGeometrySource": "production-final-draw-geometry"
+    },
+    {
+      "scenario": "defeat",
+      "actorId": "unit_fixture-u-2",
+      "visualClass": "anti_armor_infantry",
+      "renderMode": "sprite",
+      "assetId": "unit_friendly_infantry",
+      "logicalRect": {
+        "x": 749.9217645099998,
+        "y": 426.0652445593622,
+        "width": 30.338289161818572,
+        "height": 38.612368024132735
+      },
+      "cssRect": {
+        "x": 466.2272727272727,
+        "y": 271.3982142857143,
+        "width": 18.857142857142858,
+        "height": 24
+      },
+      "finalCssWidth": 18.8571,
+      "finalCssHeight": 24,
+      "screenFootprint": 24,
+      "minimumScreenFootprint": 24,
+      "visualScaleBoost": 1.2928,
+      "rendererGeometrySource": "production-final-draw-geometry"
+    },
+    {
+      "scenario": "defeat",
+      "actorId": "unit_fixture-u-1",
+      "visualClass": "infantry",
+      "renderMode": "sprite",
+      "assetId": "unit_friendly_infantry",
+      "logicalRect": {
+        "x": 684.671015819489,
+        "y": 385.68050343526795,
+        "width": 30.338289161818572,
+        "height": 38.612368024132735
+      },
+      "cssRect": {
+        "x": 426.46509774399266,
+        "y": 246.78876266321933,
+        "width": 18.857142857142858,
+        "height": 24
+      },
+      "finalCssWidth": 18.8571,
+      "finalCssHeight": 24,
+      "screenFootprint": 24,
+      "minimumScreenFootprint": 24,
+      "visualScaleBoost": 1.2928,
+      "rendererGeometrySource": "production-final-draw-geometry"
+    },
+    {
+      "scenario": "defeat",
+      "actorId": "unit_fixture-u-5",
+      "visualClass": "support_vehicle",
+      "renderMode": "procedural",
+      "assetId": null,
+      "logicalRect": {
+        "x": 635.7030025955152,
+        "y": 375.39524173459483,
+        "width": 54.7008547008547,
+        "height": 27.35042735042735
+      },
+      "cssRect": {
+        "x": 404.04818387330874,
+        "y": 237.08980876535207,
+        "width": 34,
+        "height": 17
+      },
+      "finalCssWidth": 34,
+      "finalCssHeight": 17,
+      "screenFootprint": 34,
+      "minimumScreenFootprint": 34,
+      "visualScaleBoost": 1.1655,
+      "rendererGeometrySource": "production-final-draw-geometry"
+    },
+    {
+      "scenario": "defeat",
+      "actorId": "unit_fixture-u-3",
+      "visualClass": "light_vehicle",
+      "renderMode": "procedural",
+      "assetId": null,
+      "logicalRect": {
+        "x": 665.982905982906,
+        "y": 441.98192918192916,
+        "width": 54.7008547008547,
+        "height": 27.35042735042735
+      },
+      "cssRect": {
+        "x": 422.5,
+        "y": 277.6660714285714,
+        "width": 34,
+        "height": 17
+      },
+      "finalCssWidth": 34,
+      "finalCssHeight": 17,
+      "screenFootprint": 34,
+      "minimumScreenFootprint": 34,
+      "visualScaleBoost": 1.1655,
+      "rendererGeometrySource": "production-final-draw-geometry"
+    },
+    {
+      "scenario": "defeat",
+      "actorId": "enemy_at_1",
+      "visualClass": "anti_armor_infantry",
+      "renderMode": "procedural",
+      "assetId": null,
+      "logicalRect": {
+        "x": 841.4060606060606,
+        "y": 380.83809523809526,
+        "width": 36.266666666666666,
+        "height": 42.666666666666664
+      },
+      "cssRect": {
+        "x": 523.7818181818182,
+        "y": 245.0732142857143,
+        "width": 22.541999999999998,
+        "height": 26.519999999999996
+      },
+      "finalCssWidth": 22.542,
+      "finalCssHeight": 26.52,
+      "screenFootprint": 26.52,
+      "minimumScreenFootprint": 24,
+      "visualScaleBoost": 1,
+      "rendererGeometrySource": "production-final-draw-geometry"
+    },
+    {
+      "scenario": "defeat",
+      "actorId": "enemy_at_2",
+      "visualClass": "anti_armor_infantry",
+      "renderMode": "procedural",
+      "assetId": null,
+      "logicalRect": {
+        "x": 864.6787878787878,
+        "y": 424.03809523809525,
+        "width": 36.266666666666666,
+        "height": 42.666666666666664
+      },
+      "cssRect": {
+        "x": 537.9636363636363,
+        "y": 271.3982142857143,
+        "width": 22.541999999999998,
+        "height": 26.519999999999996
+      },
+      "finalCssWidth": 22.542,
+      "finalCssHeight": 26.52,
+      "screenFootprint": 26.52,
+      "minimumScreenFootprint": 24,
+      "visualScaleBoost": 1,
+      "rendererGeometrySource": "production-final-draw-geometry"
+    },
+    {
+      "scenario": "defeat",
+      "actorId": "enemy_infantry_1",
+      "visualClass": "infantry",
+      "renderMode": "procedural",
+      "assetId": null,
+      "logicalRect": {
+        "x": 819.4521485660555,
+        "y": 424.0761904761905,
+        "width": 34.13333333333333,
+        "height": 40.53333333333333
+      },
+      "cssRect": {
+        "x": 509.75365303244007,
+        "y": 270.7714285714286,
+        "width": 21.216,
+        "height": 25.194
+      },
+      "finalCssWidth": 21.216,
+      "finalCssHeight": 25.194,
+      "screenFootprint": 25.194,
+      "minimumScreenFootprint": 24,
+      "visualScaleBoost": 1,
+      "rendererGeometrySource": "production-final-draw-geometry"
+    },
+    {
+      "scenario": "defeat",
+      "actorId": "enemy_infantry_2",
+      "visualClass": "infantry",
+      "renderMode": "procedural",
+      "assetId": null,
+      "logicalRect": {
+        "x": 854.1090909090907,
+        "y": 467.2761904761905,
+        "width": 34.13333333333333,
+        "height": 40.53333333333333
+      },
+      "cssRect": {
+        "x": 530.8727272727272,
+        "y": 297.0964285714286,
+        "width": 21.216,
+        "height": 25.194
+      },
+      "finalCssWidth": 21.216,
+      "finalCssHeight": 25.194,
+      "screenFootprint": 25.194,
+      "minimumScreenFootprint": 24,
+      "visualScaleBoost": 1,
+      "rendererGeometrySource": "production-final-draw-geometry"
+    },
+    {
+      "scenario": "defeat",
+      "actorId": "enemy_infantry_3",
+      "visualClass": "infantry",
+      "renderMode": "procedural",
+      "assetId": null,
+      "logicalRect": {
+        "x": 842.4727272727272,
+        "y": 510.4761904761905,
+        "width": 34.13333333333333,
+        "height": 40.53333333333333
+      },
+      "cssRect": {
+        "x": 523.7818181818182,
+        "y": 323.4214285714286,
+        "width": 21.216,
+        "height": 25.194
+      },
+      "finalCssWidth": 21.216,
+      "finalCssHeight": 25.194,
+      "screenFootprint": 25.194,
+      "minimumScreenFootprint": 24,
+      "visualScaleBoost": 1,
+      "rendererGeometrySource": "production-final-draw-geometry"
+    },
+    {
+      "scenario": "defeat",
+      "actorId": "enemy_infantry_4",
+      "visualClass": "infantry",
+      "renderMode": "procedural",
+      "assetId": null,
+      "logicalRect": {
+        "x": 865.7454545454544,
+        "y": 553.6761904761905,
+        "width": 34.13333333333333,
+        "height": 40.53333333333333
+      },
+      "cssRect": {
+        "x": 537.9636363636363,
+        "y": 349.74642857142857,
+        "width": 21.216,
+        "height": 25.194
+      },
+      "finalCssWidth": 21.216,
+      "finalCssHeight": 25.194,
+      "screenFootprint": 25.194,
+      "minimumScreenFootprint": 24,
+      "visualScaleBoost": 1,
+      "rendererGeometrySource": "production-final-draw-geometry"
+    }
+  ],
+  "passed": true
+}

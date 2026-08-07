@@ -123,6 +123,7 @@ export function createBattlePresentationRouter({ canvas, legacyRenderer, onState
   function getInteractionState() { return renderedMode === 'universal_battle' ? universalRenderer.getInteractionState?.() : renderedMode === 'contract_road_victory' ? contractRenderer.getInteractionState?.() : legacyRenderer?.getInteractionState?.() || null; }
   function getAssetRuntimeState() { return renderedMode === 'universal_battle' ? universalRenderer.getAssetRuntimeState?.() || null : null; }
   function getActorScreenMetrics() { return renderedMode === 'universal_battle' ? universalRenderer.getActorScreenMetrics?.() || null : null; }
+  function getActorRenderedBounds() { return renderedMode === 'universal_battle' ? universalRenderer.getActorRenderedBounds?.() || null : null; }
   function getActorScreenMetricsAt(seconds) { return renderedMode === 'universal_battle' ? universalRenderer.getActorScreenMetricsAt?.(seconds) || null : null; }
   function setAssetDisabled(assetId, value = true) { return renderedMode === 'universal_battle' ? universalRenderer.setAssetDisabled?.(assetId, value) || null : null; }
 
@@ -130,11 +131,11 @@ export function createBattlePresentationRouter({ canvas, legacyRenderer, onState
   function getRenderStateAt(seconds) { return renderedMode === 'universal_battle' && universalRenderer.presentation?.renderState ? universalRenderer.presentation.renderState.atTime(Number(seconds) || 0) : getRenderState(); }
   // Test/evidence-only deterministic seek: render a timestamp without
   // advancing settlement or mutating the authoritative active battle.
-  function renderAt(seconds) {
-    if (renderedMode !== 'universal_battle' || !universalRenderer.presentation?.plan || !lastBattleRef) return null;
-    const visualDuration = Math.max(.001, Number(universalRenderer.presentation.plan.timeline?.duration) || 1); const sourceDuration = Math.max(.001, Number(lastBattleRef.duration) || 1); const snapshot = { ...lastBattleRef, elapsed: Math.max(0, Math.min(sourceDuration, Number(seconds) / visualDuration * sourceDuration)), playing: false };
-    universalRenderer.render(snapshot, 0); return universalRenderer.lastState || null;
+  function renderAt(seconds, activeBattleOverride = null) {
+    const activeBattle = lastBattleRef || activeBattleOverride;
+    if (renderedMode !== 'universal_battle' || !universalRenderer.presentation?.plan || !activeBattle) return null;
+    universalRenderer.render(activeBattle, 0, Number(seconds) || 0); return universalRenderer.lastState || null;
   }
 
-  return { render, reset, destroy, setPreference, getPreference: preference, getState, getPresentation, getRenderState, getRenderStateAt, renderAt, getTextState, setCameraMode, setAutoCamera, resetCamera, setDebugOverlay, getDebugOverlayState, getInteractionState, getAssetRuntimeState, getActorScreenMetrics, getActorScreenMetricsAt, setAssetDisabled };
+  return { render, reset, destroy, setPreference, getPreference: preference, getState, getPresentation, getRenderState, getRenderStateAt, renderAt, getTextState, setCameraMode, setAutoCamera, resetCamera, setDebugOverlay, getDebugOverlayState, getInteractionState, getAssetRuntimeState, getActorScreenMetrics, getActorRenderedBounds, getActorScreenMetricsAt, setAssetDisabled };
 }

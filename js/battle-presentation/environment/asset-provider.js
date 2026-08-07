@@ -1,3 +1,5 @@
+import { normalizeVisualUnitClass } from './visual-unit-class.js';
+
 /** Offline asset manifest resolver. Runtime never calls a generation service. */
 export const ASSET_RENDER_MODES = Object.freeze(['procedural', 'sprite', 'hybrid']);
 
@@ -24,16 +26,17 @@ export function resolveAsset(manifest, id, availableSources = new Set()) {
 
 export function resolveUnitAsset(actor, manifest, availableSources = new Set(), mode = 'hybrid') {
   const side = actor?.side === 'enemy' ? 'enemy' : actor?.side === 'friendly' ? 'friendly' : 'neutral';
-  const unitType = actor?.type === 'mbt' ? 'mbt' : actor?.category === 'infantry' || actor?.type === 'at_infantry' ? 'infantry' : null;
+  const visualClass = normalizeVisualUnitClass(actor);
+  const unitType = visualClass === 'mbt' ? 'mbt' : ['infantry', 'anti_armor_infantry'].includes(visualClass) ? 'infantry' : null;
   const factionId = unitType ? `unit_${side}_${unitType}` : null;
   // The offline manifest intentionally only ships the friendly sample art.
   // Never let an enemy actor silently borrow that art: the procedural renderer
   // is the authoritative faction-safe fallback until enemy art is supplied.
-  if (!unitType || !ASSET_RENDER_MODES.includes(mode)) return { assetId: null, mode: 'procedural', fallback: true, side, factionVisualMode: 'procedural' };
+  if (!unitType || !ASSET_RENDER_MODES.includes(mode)) return { assetId: null, mode: 'procedural', fallback: true, side, visualClass, factionVisualMode: 'procedural' };
   const id = factionId;
-  if (side !== 'friendly' && !assetEntry(manifest, id)) return { assetId: null, requestedAssetId: id, mode: 'procedural', fallback: true, status: 'fallback', reason: 'faction_asset_unavailable', side, factionVisualMode: `procedural_${side}` };
+  if (side !== 'friendly' && !assetEntry(manifest, id)) return { assetId: null, requestedAssetId: id, mode: 'procedural', fallback: true, status: 'fallback', reason: 'faction_asset_unavailable', side, visualClass, factionVisualMode: `procedural_${side}` };
   const resolved = resolveAsset(manifest, id, availableSources);
-  return { ...resolved, mode: resolved.ok && mode !== 'procedural' ? mode : 'procedural', side, factionVisualMode: resolved.ok ? side : `procedural_${side}` };
+  return { ...resolved, mode: resolved.ok && mode !== 'procedural' ? mode : 'procedural', side, visualClass, factionVisualMode: resolved.ok ? side : `procedural_${side}` };
 }
 
 export function resolveEnvironmentAsset(object, manifest = OFFLINE_ASSET_MANIFEST, availableSources = new Set(), mode = 'sprite') {

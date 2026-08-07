@@ -31,38 +31,38 @@
         "minimum": 46
       },
       {
-        "type": "anti_armor_infantry",
-        "screenFootprint": 33.451,
+        "type": "at_infantry",
+        "screenFootprint": 33.4507,
         "minimum": 24
       },
       {
         "type": "infantry",
-        "screenFootprint": 33.451,
+        "screenFootprint": 33.4507,
         "minimum": 24
       },
       {
-        "type": "support_vehicle",
-        "screenFootprint": 52.565,
+        "type": "repair_vehicle",
+        "screenFootprint": 52.5653,
         "minimum": 34
       },
       {
-        "type": "light_vehicle",
-        "screenFootprint": 52.565,
+        "type": "scout_car",
+        "screenFootprint": 52.5653,
         "minimum": 34
       },
       {
-        "type": "infantry",
-        "screenFootprint": 52.565,
+        "type": "enemy_infantry",
+        "screenFootprint": 45.3973,
         "minimum": 24
       },
       {
-        "type": "infantry",
-        "screenFootprint": 52.565,
+        "type": "enemy_infantry",
+        "screenFootprint": 45.3973,
         "minimum": 24
       },
       {
-        "type": "infantry",
-        "screenFootprint": 52.565,
+        "type": "enemy_infantry",
+        "screenFootprint": 45.3973,
         "minimum": 24
       }
     ],
@@ -96,6 +96,12 @@
         "minimum": 34,
         "screenFootprint": 34,
         "visualScaleBoost": 3.6222
+      },
+      {
+        "type": "unknown",
+        "minimum": 30,
+        "screenFootprint": 34,
+        "visualScaleBoost": 3.6222
       }
     ]
   },
@@ -116,10 +122,10 @@
   },
   "performance": {
     "sampleCount": 160,
-    "averageRenderMs": 0.2422,
-    "medianRenderMs": 0.236,
-    "p95RenderMs": 0.3375,
-    "maxRenderMs": 0.4063,
+    "averageRenderMs": 0.25,
+    "medianRenderMs": 0.2427,
+    "p95RenderMs": 0.3418,
+    "maxRenderMs": 0.4062,
     "samplesAreMeasured": true,
     "percentileMethod": "nearest-rank(sorted samples)"
   },

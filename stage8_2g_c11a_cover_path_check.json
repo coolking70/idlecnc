@@ -1,0 +1,363 @@
+{
+  "stage": "8.2G-C.1.1a",
+  "scenarios": [
+    "victory",
+    "defeat"
+  ],
+  "seedsPerScenario": 20,
+  "sampleStepMs": 50,
+  "routeClasses": [
+    "planner",
+    "cover_advance",
+    "retreat",
+    "rear_guard"
+  ],
+  "cases": [
+    {
+      "scenario": "victory",
+      "seed": 1,
+      "sampledWindows": 1,
+      "sampleStepMs": 50,
+      "samples": 67,
+      "plannerRouteViolations": 0,
+      "coverAdvanceRouteViolations": 0,
+      "retreatRouteViolations": 0,
+      "rearGuardRouteViolations": 0,
+      "sampledPathViolations": 0
+    },
+    {
+      "scenario": "defeat",
+      "seed": 12,
+      "sampledWindows": 4,
+      "sampleStepMs": 50,
+      "samples": 321,
+      "plannerRouteViolations": 0,
+      "coverAdvanceRouteViolations": 0,
+      "retreatRouteViolations": 0,
+      "rearGuardRouteViolations": 0,
+      "sampledPathViolations": 0
+    },
+    {
+      "scenario": "victory",
+      "seed": 0,
+      "windows": 1,
+      "sampleStepMs": 50,
+      "samples": 12864,
+      "sampledPathViolations": 0
+    },
+    {
+      "scenario": "victory",
+      "seed": 1,
+      "windows": 1,
+      "sampleStepMs": 50,
+      "samples": 12328,
+      "sampledPathViolations": 0
+    },
+    {
+      "scenario": "victory",
+      "seed": 2,
+      "windows": 1,
+      "sampleStepMs": 50,
+      "samples": 11256,
+      "sampledPathViolations": 0
+    },
+    {
+      "scenario": "victory",
+      "seed": 3,
+      "windows": 1,
+      "sampleStepMs": 50,
+      "samples": 12864,
+      "sampledPathViolations": 0
+    },
+    {
+      "scenario": "victory",
+      "seed": 4,
+      "windows": 1,
+      "sampleStepMs": 50,
+      "samples": 12864,
+      "sampledPathViolations": 0
+    },
+    {
+      "scenario": "victory",
+      "seed": 5,
+      "windows": 1,
+      "sampleStepMs": 50,
+      "samples": 13400,
+      "sampledPathViolations": 0
+    },
+    {
+      "scenario": "victory",
+      "seed": 6,
+      "windows": 1,
+      "sampleStepMs": 50,
+      "samples": 13400,
+      "sampledPathViolations": 0
+    },
+    {
+      "scenario": "victory",
+      "seed": 7,
+      "windows": 1,
+      "sampleStepMs": 50,
+      "samples": 11792,
+      "sampledPathViolations": 0
+    },
+    {
+      "scenario": "victory",
+      "seed": 8,
+      "windows": 1,
+      "sampleStepMs": 50,
+      "samples": 11792,
+      "sampledPathViolations": 0
+    },
+    {
+      "scenario": "victory",
+      "seed": 9,
+      "windows": 1,
+      "sampleStepMs": 50,
+      "samples": 12864,
+      "sampledPathViolations": 0
+    },
+    {
+      "scenario": "victory",
+      "seed": 10,
+      "windows": 1,
+      "sampleStepMs": 50,
+      "samples": 12328,
+      "sampledPathViolations": 0
+    },
+    {
+      "scenario": "victory",
+      "seed": 11,
+      "windows": 1,
+      "sampleStepMs": 50,
+      "samples": 12328,
+      "sampledPathViolations": 0
+    },
+    {
+      "scenario": "victory",
+      "seed": 12,
+      "windows": 1,
+      "sampleStepMs": 50,
+      "samples": 12328,
+      "sampledPathViolations": 0
+    },
+    {
+      "scenario": "victory",
+      "seed": 13,
+      "windows": 1,
+      "sampleStepMs": 50,
+      "samples": 12864,
+      "sampledPathViolations": 0
+    },
+    {
+      "scenario": "victory",
+      "seed": 14,
+      "windows": 1,
+      "sampleStepMs": 50,
+      "samples": 12864,
+      "sampledPathViolations": 0
+    },
+    {
+      "scenario": "victory",
+      "seed": 15,
+      "windows": 1,
+      "sampleStepMs": 50,
+      "samples": 13400,
+      "sampledPathViolations": 0
+    },
+    {
+      "scenario": "victory",
+      "seed": 16,
+      "windows": 1,
+      "sampleStepMs": 50,
+      "samples": 12328,
+      "sampledPathViolations": 0
+    },
+    {
+      "scenario": "victory",
+      "seed": 17,
+      "windows": 1,
+      "sampleStepMs": 50,
+      "samples": 12864,
+      "sampledPathViolations": 0
+    },
+    {
+      "scenario": "victory",
+      "seed": 18,
+      "windows": 1,
+      "sampleStepMs": 50,
+      "samples": 12328,
+      "sampledPathViolations": 0
+    },
+    {
+      "scenario": "victory",
+      "seed": 19,
+      "windows": 1,
+      "sampleStepMs": 50,
+      "samples": 12328,
+      "sampledPathViolations": 0
+    },
+    {
+      "scenario": "defeat",
+      "seed": 0,
+      "windows": 4,
+      "sampleStepMs": 50,
+      "samples": 63756,
+      "sampledPathViolations": 0
+    },
+    {
+      "scenario": "defeat",
+      "seed": 1,
+      "windows": 4,
+      "sampleStepMs": 50,
+      "samples": 67298,
+      "sampledPathViolations": 0
+    },
+    {
+      "scenario": "defeat",
+      "seed": 2,
+      "windows": 4,
+      "sampleStepMs": 50,
+      "samples": 67298,
+      "sampledPathViolations": 0
+    },
+    {
+      "scenario": "defeat",
+      "seed": 3,
+      "windows": 4,
+      "sampleStepMs": 50,
+      "samples": 60214,
+      "sampledPathViolations": 0
+    },
+    {
+      "scenario": "defeat",
+      "seed": 4,
+      "windows": 4,
+      "sampleStepMs": 50,
+      "samples": 60214,
+      "sampledPathViolations": 0
+    },
+    {
+      "scenario": "defeat",
+      "seed": 5,
+      "windows": 4,
+      "sampleStepMs": 50,
+      "samples": 60214,
+      "sampledPathViolations": 0
+    },
+    {
+      "scenario": "defeat",
+      "seed": 6,
+      "windows": 4,
+      "sampleStepMs": 50,
+      "samples": 74382,
+      "sampledPathViolations": 0
+    },
+    {
+      "scenario": "defeat",
+      "seed": 7,
+      "windows": 4,
+      "sampleStepMs": 50,
+      "samples": 63756,
+      "sampledPathViolations": 0
+    },
+    {
+      "scenario": "defeat",
+      "seed": 8,
+      "windows": 4,
+      "sampleStepMs": 50,
+      "samples": 67298,
+      "sampledPathViolations": 0
+    },
+    {
+      "scenario": "defeat",
+      "seed": 9,
+      "windows": 4,
+      "sampleStepMs": 50,
+      "samples": 56672,
+      "sampledPathViolations": 0
+    },
+    {
+      "scenario": "defeat",
+      "seed": 10,
+      "windows": 4,
+      "sampleStepMs": 50,
+      "samples": 67298,
+      "sampledPathViolations": 0
+    },
+    {
+      "scenario": "defeat",
+      "seed": 11,
+      "windows": 4,
+      "sampleStepMs": 50,
+      "samples": 63756,
+      "sampledPathViolations": 0
+    },
+    {
+      "scenario": "defeat",
+      "seed": 12,
+      "windows": 4,
+      "sampleStepMs": 50,
+      "samples": 56672,
+      "sampledPathViolations": 0
+    },
+    {
+      "scenario": "defeat",
+      "seed": 13,
+      "windows": 4,
+      "sampleStepMs": 50,
+      "samples": 63756,
+      "sampledPathViolations": 0
+    },
+    {
+      "scenario": "defeat",
+      "seed": 14,
+      "windows": 4,
+      "sampleStepMs": 50,
+      "samples": 53130,
+      "sampledPathViolations": 0
+    },
+    {
+      "scenario": "defeat",
+      "seed": 15,
+      "windows": 4,
+      "sampleStepMs": 50,
+      "samples": 70840,
+      "sampledPathViolations": 0
+    },
+    {
+      "scenario": "defeat",
+      "seed": 16,
+      "windows": 4,
+      "sampleStepMs": 50,
+      "samples": 70840,
+      "sampledPathViolations": 0
+    },
+    {
+      "scenario": "defeat",
+      "seed": 17,
+      "windows": 4,
+      "sampleStepMs": 50,
+      "samples": 63756,
+      "sampledPathViolations": 0
+    },
+    {
+      "scenario": "defeat",
+      "seed": 18,
+      "windows": 4,
+      "sampleStepMs": 50,
+      "samples": 63756,
+      "sampledPathViolations": 0
+    },
+    {
+      "scenario": "defeat",
+      "seed": 19,
+      "windows": 4,
+      "sampleStepMs": 50,
+      "samples": 56672,
+      "sampledPathViolations": 0
+    }
+  ],
+  "sampledPathViolations": 0,
+  "passed": true
+}

@@ -1,0 +1,206 @@
+{
+  "stage": "8.2G-C.1.1a",
+  "metricSpace": "final_css_pixels",
+  "minimums": {
+    "infantry": 24,
+    "anti_armor_infantry": 24,
+    "light_vehicle": 34,
+    "mbt": 46,
+    "support_vehicle": 34,
+    "unknown": 30
+  },
+  "cases": [
+    {
+      "scenario": "victory",
+      "viewport": {
+        "width": 780,
+        "height": 900,
+        "scale": 0.609375
+      },
+      "actors": [
+        {
+          "actorId": "unit_stage8g-c1-mining-3",
+          "visualClass": "mbt",
+          "finalCssWidth": 46,
+          "finalCssHeight": 27.6,
+          "screenFootprint": 46,
+          "minimumScreenFootprint": 46,
+          "visualScaleBoost": 1.1564
+        },
+        {
+          "actorId": "unit_stage8g-c1-mining-1",
+          "visualClass": "anti_armor_infantry",
+          "finalCssWidth": 18.8571,
+          "finalCssHeight": 24,
+          "screenFootprint": 24,
+          "minimumScreenFootprint": 24,
+          "visualScaleBoost": 1.2928
+        },
+        {
+          "actorId": "unit_stage8g-c1-mining-0",
+          "visualClass": "infantry",
+          "finalCssWidth": 18.8571,
+          "finalCssHeight": 24,
+          "screenFootprint": 24,
+          "minimumScreenFootprint": 24,
+          "visualScaleBoost": 1.2928
+        },
+        {
+          "actorId": "unit_stage8g-c1-mining-4",
+          "visualClass": "support_vehicle",
+          "finalCssWidth": 34,
+          "finalCssHeight": 17,
+          "screenFootprint": 34,
+          "minimumScreenFootprint": 34,
+          "visualScaleBoost": 1.1655
+        },
+        {
+          "actorId": "unit_stage8g-c1-mining-2",
+          "visualClass": "light_vehicle",
+          "finalCssWidth": 34,
+          "finalCssHeight": 17,
+          "screenFootprint": 34,
+          "minimumScreenFootprint": 34,
+          "visualScaleBoost": 1.1655
+        },
+        {
+          "actorId": "enemy_infantry_1",
+          "visualClass": "infantry",
+          "finalCssWidth": 21.216,
+          "finalCssHeight": 25.194,
+          "screenFootprint": 25.194,
+          "minimumScreenFootprint": 24,
+          "visualScaleBoost": 1
+        },
+        {
+          "actorId": "enemy_infantry_2",
+          "visualClass": "infantry",
+          "finalCssWidth": 21.216,
+          "finalCssHeight": 25.194,
+          "screenFootprint": 25.194,
+          "minimumScreenFootprint": 24,
+          "visualScaleBoost": 1
+        },
+        {
+          "actorId": "enemy_infantry_3",
+          "visualClass": "infantry",
+          "finalCssWidth": 21.216,
+          "finalCssHeight": 25.194,
+          "screenFootprint": 25.194,
+          "minimumScreenFootprint": 24,
+          "visualScaleBoost": 1
+        }
+      ]
+    },
+    {
+      "scenario": "defeat",
+      "viewport": {
+        "width": 780,
+        "height": 900,
+        "scale": 0.609375
+      },
+      "actors": [
+        {
+          "actorId": "unit_fixture-u-4",
+          "visualClass": "mbt",
+          "finalCssWidth": 46,
+          "finalCssHeight": 27.6,
+          "screenFootprint": 46,
+          "minimumScreenFootprint": 46,
+          "visualScaleBoost": 1.1564
+        },
+        {
+          "actorId": "unit_fixture-u-2",
+          "visualClass": "anti_armor_infantry",
+          "finalCssWidth": 18.8571,
+          "finalCssHeight": 24,
+          "screenFootprint": 24,
+          "minimumScreenFootprint": 24,
+          "visualScaleBoost": 1.2928
+        },
+        {
+          "actorId": "unit_fixture-u-1",
+          "visualClass": "infantry",
+          "finalCssWidth": 18.8571,
+          "finalCssHeight": 24,
+          "screenFootprint": 24,
+          "minimumScreenFootprint": 24,
+          "visualScaleBoost": 1.2928
+        },
+        {
+          "actorId": "unit_fixture-u-5",
+          "visualClass": "support_vehicle",
+          "finalCssWidth": 34,
+          "finalCssHeight": 17,
+          "screenFootprint": 34,
+          "minimumScreenFootprint": 34,
+          "visualScaleBoost": 1.1655
+        },
+        {
+          "actorId": "unit_fixture-u-3",
+          "visualClass": "light_vehicle",
+          "finalCssWidth": 34,
+          "finalCssHeight": 17,
+          "screenFootprint": 34,
+          "minimumScreenFootprint": 34,
+          "visualScaleBoost": 1.1655
+        },
+        {
+          "actorId": "enemy_at_1",
+          "visualClass": "anti_armor_infantry",
+          "finalCssWidth": 22.542,
+          "finalCssHeight": 26.52,
+          "screenFootprint": 26.52,
+          "minimumScreenFootprint": 24,
+          "visualScaleBoost": 1
+        },
+        {
+          "actorId": "enemy_at_2",
+          "visualClass": "anti_armor_infantry",
+          "finalCssWidth": 22.542,
+          "finalCssHeight": 26.52,
+          "screenFootprint": 26.52,
+          "minimumScreenFootprint": 24,
+          "visualScaleBoost": 1
+        },
+        {
+          "actorId": "enemy_infantry_1",
+          "visualClass": "infantry",
+          "finalCssWidth": 21.216,
+          "finalCssHeight": 25.194,
+          "screenFootprint": 25.194,
+          "minimumScreenFootprint": 24,
+          "visualScaleBoost": 1
+        },
+        {
+          "actorId": "enemy_infantry_2",
+          "visualClass": "infantry",
+          "finalCssWidth": 21.216,
+          "finalCssHeight": 25.194,
+          "screenFootprint": 25.194,
+          "minimumScreenFootprint": 24,
+          "visualScaleBoost": 1
+        },
+        {
+          "actorId": "enemy_infantry_3",
+          "visualClass": "infantry",
+          "finalCssWidth": 21.216,
+          "finalCssHeight": 25.194,
+          "screenFootprint": 25.194,
+          "minimumScreenFootprint": 24,
+          "visualScaleBoost": 1
+        },
+        {
+          "actorId": "enemy_infantry_4",
+          "visualClass": "infantry",
+          "finalCssWidth": 21.216,
+          "finalCssHeight": 25.194,
+          "screenFootprint": 25.194,
+          "minimumScreenFootprint": 24,
+          "visualScaleBoost": 1
+        }
+      ]
+    }
+  ],
+  "passed": true
+}

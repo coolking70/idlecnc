@@ -13,7 +13,7 @@
       "seed": 0,
       "routeSegmentCounts": {
         "planner": 112,
-        "cover_advance": 4
+        "cover_advance": 19
       },
       "routeSegmentViolations": 0,
       "routeSegmentViolationsByClass": {
@@ -26,7 +26,7 @@
       "seed": 1,
       "routeSegmentCounts": {
         "planner": 112,
-        "cover_advance": 4
+        "cover_advance": 19
       },
       "routeSegmentViolations": 0,
       "routeSegmentViolationsByClass": {
@@ -39,7 +39,7 @@
       "seed": 2,
       "routeSegmentCounts": {
         "planner": 112,
-        "cover_advance": 4
+        "cover_advance": 19
       },
       "routeSegmentViolations": 0,
       "routeSegmentViolationsByClass": {
@@ -52,7 +52,7 @@
       "seed": 3,
       "routeSegmentCounts": {
         "planner": 112,
-        "cover_advance": 4
+        "cover_advance": 19
       },
       "routeSegmentViolations": 0,
       "routeSegmentViolationsByClass": {
@@ -65,7 +65,7 @@
       "seed": 4,
       "routeSegmentCounts": {
         "planner": 112,
-        "cover_advance": 4
+        "cover_advance": 19
       },
       "routeSegmentViolations": 0,
       "routeSegmentViolationsByClass": {
@@ -78,7 +78,7 @@
       "seed": 5,
       "routeSegmentCounts": {
         "planner": 112,
-        "cover_advance": 4
+        "cover_advance": 19
       },
       "routeSegmentViolations": 0,
       "routeSegmentViolationsByClass": {
@@ -91,7 +91,7 @@
       "seed": 6,
       "routeSegmentCounts": {
         "planner": 112,
-        "cover_advance": 4
+        "cover_advance": 19
       },
       "routeSegmentViolations": 0,
       "routeSegmentViolationsByClass": {
@@ -104,7 +104,7 @@
       "seed": 7,
       "routeSegmentCounts": {
         "planner": 112,
-        "cover_advance": 4
+        "cover_advance": 19
       },
       "routeSegmentViolations": 0,
       "routeSegmentViolationsByClass": {
@@ -117,7 +117,7 @@
       "seed": 8,
       "routeSegmentCounts": {
         "planner": 112,
-        "cover_advance": 4
+        "cover_advance": 19
       },
       "routeSegmentViolations": 0,
       "routeSegmentViolationsByClass": {
@@ -130,7 +130,7 @@
       "seed": 9,
       "routeSegmentCounts": {
         "planner": 112,
-        "cover_advance": 4
+        "cover_advance": 19
       },
       "routeSegmentViolations": 0,
       "routeSegmentViolationsByClass": {
@@ -143,7 +143,7 @@
       "seed": 10,
       "routeSegmentCounts": {
         "planner": 112,
-        "cover_advance": 4
+        "cover_advance": 19
       },
       "routeSegmentViolations": 0,
       "routeSegmentViolationsByClass": {
@@ -156,7 +156,7 @@
       "seed": 11,
       "routeSegmentCounts": {
         "planner": 112,
-        "cover_advance": 4
+        "cover_advance": 19
       },
       "routeSegmentViolations": 0,
       "routeSegmentViolationsByClass": {
@@ -169,7 +169,7 @@
       "seed": 12,
       "routeSegmentCounts": {
         "planner": 112,
-        "cover_advance": 4
+        "cover_advance": 19
       },
       "routeSegmentViolations": 0,
       "routeSegmentViolationsByClass": {
@@ -182,7 +182,7 @@
       "seed": 13,
       "routeSegmentCounts": {
         "planner": 112,
-        "cover_advance": 4
+        "cover_advance": 19
       },
       "routeSegmentViolations": 0,
       "routeSegmentViolationsByClass": {
@@ -195,7 +195,7 @@
       "seed": 14,
       "routeSegmentCounts": {
         "planner": 112,
-        "cover_advance": 4
+        "cover_advance": 19
       },
       "routeSegmentViolations": 0,
       "routeSegmentViolationsByClass": {
@@ -208,7 +208,7 @@
       "seed": 15,
       "routeSegmentCounts": {
         "planner": 112,
-        "cover_advance": 4
+        "cover_advance": 19
       },
       "routeSegmentViolations": 0,
       "routeSegmentViolationsByClass": {
@@ -221,7 +221,7 @@
       "seed": 16,
       "routeSegmentCounts": {
         "planner": 112,
-        "cover_advance": 4
+        "cover_advance": 19
       },
       "routeSegmentViolations": 0,
       "routeSegmentViolationsByClass": {
@@ -234,7 +234,7 @@
       "seed": 17,
       "routeSegmentCounts": {
         "planner": 112,
-        "cover_advance": 4
+        "cover_advance": 19
       },
       "routeSegmentViolations": 0,
       "routeSegmentViolationsByClass": {
@@ -247,7 +247,7 @@
       "seed": 18,
       "routeSegmentCounts": {
         "planner": 112,
-        "cover_advance": 4
+        "cover_advance": 19
       },
       "routeSegmentViolations": 0,
       "routeSegmentViolationsByClass": {
@@ -260,7 +260,7 @@
       "seed": 19,
       "routeSegmentCounts": {
         "planner": 112,
-        "cover_advance": 4
+        "cover_advance": 19
       },
       "routeSegmentViolations": 0,
       "routeSegmentViolationsByClass": {
@@ -273,7 +273,7 @@
       "seed": 0,
       "routeSegmentCounts": {
         "planner": 234,
-        "cover_advance": 4,
+        "cover_advance": 20,
         "retreat": 2,
         "rear_guard": 2
       },
@@ -290,7 +290,7 @@
       "seed": 1,
       "routeSegmentCounts": {
         "planner": 234,
-        "cover_advance": 4,
+        "cover_advance": 20,
         "retreat": 2,
         "rear_guard": 2
       },
@@ -307,7 +307,7 @@
       "seed": 2,
       "routeSegmentCounts": {
         "planner": 234,
-        "cover_advance": 4,
+        "cover_advance": 20,
         "retreat": 2,
         "rear_guard": 2
       },
@@ -324,7 +324,7 @@
       "seed": 3,
       "routeSegmentCounts": {
         "planner": 234,
-        "cover_advance": 4,
+        "cover_advance": 20,
         "retreat": 2,
         "rear_guard": 2
       },
@@ -341,7 +341,7 @@
       "seed": 4,
       "routeSegmentCounts": {
         "planner": 234,
-        "cover_advance": 4,
+        "cover_advance": 20,
         "retreat": 2,
         "rear_guard": 2
       },
@@ -358,7 +358,7 @@
       "seed": 5,
       "routeSegmentCounts": {
         "planner": 234,
-        "cover_advance": 4,
+        "cover_advance": 20,
         "retreat": 2,
         "rear_guard": 2
       },
@@ -375,7 +375,7 @@
       "seed": 6,
       "routeSegmentCounts": {
         "planner": 234,
-        "cover_advance": 4,
+        "cover_advance": 20,
         "retreat": 2,
         "rear_guard": 2
       },
@@ -392,7 +392,7 @@
       "seed": 7,
       "routeSegmentCounts": {
         "planner": 234,
-        "cover_advance": 4,
+        "cover_advance": 20,
         "retreat": 2,
         "rear_guard": 2
       },
@@ -409,7 +409,7 @@
       "seed": 8,
       "routeSegmentCounts": {
         "planner": 234,
-        "cover_advance": 4,
+        "cover_advance": 20,
         "retreat": 2,
         "rear_guard": 2
       },
@@ -426,7 +426,7 @@
       "seed": 9,
       "routeSegmentCounts": {
         "planner": 234,
-        "cover_advance": 4,
+        "cover_advance": 20,
         "retreat": 2,
         "rear_guard": 2
       },
@@ -443,7 +443,7 @@
       "seed": 10,
       "routeSegmentCounts": {
         "planner": 234,
-        "cover_advance": 4,
+        "cover_advance": 20,
         "retreat": 2,
         "rear_guard": 2
       },
@@ -460,7 +460,7 @@
       "seed": 11,
       "routeSegmentCounts": {
         "planner": 234,
-        "cover_advance": 4,
+        "cover_advance": 20,
         "retreat": 2,
         "rear_guard": 2
       },
@@ -477,7 +477,7 @@
       "seed": 12,
       "routeSegmentCounts": {
         "planner": 234,
-        "cover_advance": 4,
+        "cover_advance": 20,
         "retreat": 2,
         "rear_guard": 2
       },
@@ -494,7 +494,7 @@
       "seed": 13,
       "routeSegmentCounts": {
         "planner": 234,
-        "cover_advance": 4,
+        "cover_advance": 20,
         "retreat": 2,
         "rear_guard": 2
       },
@@ -511,7 +511,7 @@
       "seed": 14,
       "routeSegmentCounts": {
         "planner": 234,
-        "cover_advance": 4,
+        "cover_advance": 20,
         "retreat": 2,
         "rear_guard": 2
       },
@@ -528,7 +528,7 @@
       "seed": 15,
       "routeSegmentCounts": {
         "planner": 234,
-        "cover_advance": 4,
+        "cover_advance": 20,
         "retreat": 2,
         "rear_guard": 2
       },
@@ -545,7 +545,7 @@
       "seed": 16,
       "routeSegmentCounts": {
         "planner": 234,
-        "cover_advance": 4,
+        "cover_advance": 20,
         "retreat": 2,
         "rear_guard": 2
       },
@@ -562,7 +562,7 @@
       "seed": 17,
       "routeSegmentCounts": {
         "planner": 234,
-        "cover_advance": 4,
+        "cover_advance": 20,
         "retreat": 2,
         "rear_guard": 2
       },
@@ -579,7 +579,7 @@
       "seed": 18,
       "routeSegmentCounts": {
         "planner": 234,
-        "cover_advance": 4,
+        "cover_advance": 20,
         "retreat": 2,
         "rear_guard": 2
       },
@@ -596,7 +596,7 @@
       "seed": 19,
       "routeSegmentCounts": {
         "planner": 234,
-        "cover_advance": 4,
+        "cover_advance": 20,
         "retreat": 2,
         "rear_guard": 2
       },

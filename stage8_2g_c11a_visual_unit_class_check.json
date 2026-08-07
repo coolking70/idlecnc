@@ -1,0 +1,96 @@
+{
+  "stage": "8.2G-C.1.1a",
+  "matrix": [
+    {
+      "actor": {
+        "type": "infantry",
+        "category": "infantry",
+        "shape": "infantry"
+      },
+      "expected": "infantry",
+      "actual": "infantry"
+    },
+    {
+      "actor": {
+        "type": "enemy_infantry",
+        "category": "infantry"
+      },
+      "expected": "infantry",
+      "actual": "infantry"
+    },
+    {
+      "actor": {
+        "type": "at_infantry",
+        "category": "at_infantry",
+        "shape": "at_infantry"
+      },
+      "expected": "anti_armor_infantry",
+      "actual": "anti_armor_infantry"
+    },
+    {
+      "actor": {
+        "type": "enemy_at",
+        "category": "at_infantry"
+      },
+      "expected": "anti_armor_infantry",
+      "actual": "anti_armor_infantry"
+    },
+    {
+      "actor": {
+        "type": "mbt",
+        "category": "armor",
+        "shape": "tank"
+      },
+      "expected": "mbt",
+      "actual": "mbt"
+    },
+    {
+      "actor": {
+        "type": "scout_car",
+        "category": "vehicle",
+        "shape": "scout"
+      },
+      "expected": "light_vehicle",
+      "actual": "light_vehicle"
+    },
+    {
+      "actor": {
+        "type": "enemy_scout_car",
+        "category": "vehicle"
+      },
+      "expected": "light_vehicle",
+      "actual": "light_vehicle"
+    },
+    {
+      "actor": {
+        "type": "repair_vehicle",
+        "category": "support"
+      },
+      "expected": "support_vehicle",
+      "actual": "support_vehicle"
+    },
+    {
+      "actor": {
+        "type": "support_vehicle",
+        "category": "support_vehicle",
+        "shape": "support"
+      },
+      "expected": "support_vehicle",
+      "actual": "support_vehicle"
+    },
+    {
+      "actor": {
+        "type": "unmapped"
+      },
+      "expected": "unknown",
+      "actual": "unknown"
+    }
+  ],
+  "enemyAt": {
+    "assetId": null,
+    "mode": "procedural",
+    "factionVisualMode": "procedural_enemy",
+    "rendererFamily": "infantry"
+  },
+  "passed": true
+}

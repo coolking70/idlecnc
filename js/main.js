@@ -1621,10 +1621,11 @@ function boot() {
     },
     battlePresentationAssetStatus: () => battlePresentationRouter?.getAssetRuntimeState?.() || null,
     battlePresentationScreenMetrics: () => battlePresentationRouter?.getActorScreenMetrics?.() || null,
+    battlePresentationRenderedBounds: () => battlePresentationRouter?.getActorRenderedBounds?.() || null,
     battlePresentationScreenMetricsAt: (seconds) => battlePresentationRouter?.getActorScreenMetricsAt?.(seconds) || null,
     battlePresentationSetAssetDisabled: (assetId, value = true) => battlePresentationRouter?.setAssetDisabled?.(assetId, value) || null,
     battlePresentationRenderStateAt: (seconds) => battlePresentationRouter?.getRenderStateAt?.(seconds) || null,
-    battlePresentationRenderAt: (seconds) => { const active = getState().activeBattle; let rendered = battlePresentationRouter?.renderAt?.(seconds) || null; if (!rendered && active) { battlePresentationRouter?.setPreference?.('universal'); battlePresentationRouter?.render?.(active, 0); rendered = battlePresentationRouter?.renderAt?.(seconds) || null; } if (rendered && active) { const visualDuration = Math.max(.001, Number(battlePresentationRouter?.getPresentation?.()?.plan?.timeline?.duration) || 1); active.elapsed = Math.max(0, Math.min(Number(active.duration) || 1, Number(seconds) / visualDuration * (Number(active.duration) || 1))); active.playing = false; battlePresentationRouter?.render?.(active, 0); rendered = battlePresentationRouter?.getRenderState?.() || rendered; } return rendered; },
+    battlePresentationRenderAt: (seconds) => { const active = getState().activeBattle; let rendered = battlePresentationRouter?.renderAt?.(seconds, active) || null; if (!rendered && active) { battlePresentationRouter?.setPreference?.('universal'); battlePresentationRouter?.render?.(active, 0); rendered = battlePresentationRouter?.renderAt?.(seconds, active) || null; } if (rendered && active) active.playing = false; return rendered; },
     repairRules: () => ({
       maxConcurrent: REPAIR.maxConcurrent,
       maxQueueSize: REPAIR.maxQueueSize,

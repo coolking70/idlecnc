@@ -78,6 +78,15 @@
 - [x] `battle.js`：正式求解器在 `WITHDRAW` 的 `RESULT` 前补写权威 `RETREAT` 事件，保持时间轴单调且不改变数值。
 - [x] `theater.js`：新增结算尝试/阻断/错误字段，永久错误一次性记录并停止 tick 重试；新增 `abortInvalidBattle()` 安全关闭流程。
 - [x] `theater.js` / `save.js`：旧撤退战报按 `dispatchSnapshot + seed` 确定性重建；无法重建时保留活动战斗并阻断，不重复扣费、奖励或日志。
+
+# Stage 8.2G-C.1.1a progress
+
+- [x] Added the unique production `normalizeVisualUnitClass` authority, including `enemy_at -> anti_armor_infantry` and procedural enemy faction-safe fallback.
+- [x] Unified Renderer/metrics/evidence around `ActorFinalDrawGeometry` and added actual final geometry fields to browser evidence.
+- [x] Cover advance now carries deterministic sampled `presentationRoutes`; environment clearance consumes those route segments. 20 victory + 20 defeat seeds sampled at 50ms with zero visual-center violations.
+- [x] Added asset runtime readiness proof, six current-code browser frames, five tamper cases, C.1.1a Node verifier and package-gate scripts.
+- [x] Preserved C.1.1 and B.1.1a regression/tamper gates; ordinary `npm test` pretest now logs and runs the C.1.1a tamper test.
+- [ ] Remaining handoff: run the default clean-package verifier, inspect the final package hash, commit and push `agent/stage8-2G-C-1-1a-final-hotfix`.
 - [x] `main.js`：接入 `__IRON_COMMAND__.abortInvalidBattle()`；保留 `render_game_to_text` 的活动战斗阻断状态。
 - [x] package 版本更新为 `0.8.1-hotfix.1`；CURRENT_STAGE=8、SAVE_VERSION=7 保持不变。
 - [x] 新增 `tests/stage8-1-1-test.mjs`，43项全部通过；阶段3～8.1历史测试保持通过，累计588项通过。

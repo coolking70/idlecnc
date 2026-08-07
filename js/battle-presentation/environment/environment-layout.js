@@ -21,11 +21,6 @@ function point(value, fallback = { x: 0, y: 0 }) { return value && Number.isFini
 function segmentsBetween(points, meta) { const normalized = (points || []).map((item) => point(item)); return normalized.slice(1).map((end, index) => ({ ...meta, start: normalized[index], end })); }
 export function buildRouteSegments(plan) { return (plan?.layout?.routes || []).flatMap((route) => segmentsBetween(route.points, { routeClass: 'planner', routeId: route.id || route.actorId || 'route', actorId: route.actorId || null })); }
 
-function actorRouteStart(plan, actorId, fallback) {
-  const route = (plan?.layout?.routes || []).find((item) => item.actorId === actorId); const tactical = route?.tactical || {};
-  return point(tactical.approach || tactical.covered || route?.points?.[0] || fallback);
-}
-
 /** All visual corridors that can be occupied by actors during presentation.
  * These are derived from choreography only and never participate in combat
  * authority or planner collision semantics. */
@@ -34,8 +29,8 @@ export function buildPresentationRouteSegments(plan, engagementSchedule = null) 
   const coverAdvance = [];
   for (const move of engagementSchedule?.coverMoves || []) {
     for (const actorId of move.maneuverGroupIds || []) {
-      const target = move.maneuverTargetPositions?.[actorId]; if (!target) continue;
-      coverAdvance.push({ routeClass: 'cover_advance', routeId: move.id, actorId, start: actorRouteStart(plan, actorId, target), end: point(target), purpose: move.purpose || 'cover_advance' });
+      const route = move.presentationRoutes?.[actorId]; if (!route?.length) continue;
+      coverAdvance.push(...segmentsBetween(route, { routeClass: 'cover_advance', routeId: move.id, actorId, purpose: move.purpose || 'cover_advance' }));
     }
     // A fire group's hold point is a presentation reservation even when it is
     // stationary; keep it as a zero-length corridor for audit visibility.

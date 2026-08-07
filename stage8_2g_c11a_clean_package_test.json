@@ -1,0 +1,14 @@
+{
+  "stage": "8.2G-C.1.1a",
+  "package": "iron-command-stage8-2G-C-1-1a-final-hotfix.zip",
+  "packageSha256": "5bc085cdd997346ceee37978abaf851be788b6243becf760acd3b716be0db859",
+  "cleanInstall": {
+    "command": "npm install --ignore-scripts --no-audit --no-fund",
+    "status": 0
+  },
+  "npmTest": {
+    "command": "npm test",
+    "status": 0
+  },
+  "passed": true
+}

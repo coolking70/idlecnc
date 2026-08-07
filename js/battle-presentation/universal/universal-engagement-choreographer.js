@@ -52,6 +52,17 @@ function sample(positionSampler, actor, time) {
   return { ...(value || actor?.position || actor?.visualCenter || { x: 0, y: 0 }) };
 }
 
+function presentationRouteFor(actor, start, end, target, positionSampler, sampleCount = 16) {
+  const count = Math.max(8, Math.min(16, Number(sampleCount) || 16));
+  const actorId = idOf(actor);
+  return Array.from({ length: count + 1 }, (_, index) => {
+    const t = start + (end - start) * index / count;
+    const formal = sample(positionSampler, actor, t);
+    const progress = clamp((t - start) / Math.max(EPS, end - start), 0, 1);
+    return { t: Number(t.toFixed(6)), x: formal.x + (target.x - formal.x) * progress, y: formal.y + (target.y - formal.y) * progress, actorId };
+  });
+}
+
 export function classifyTargetClass(actor) {
   const type = typeOf(actor);
   // Anti-armour infantry is still infantry.  Weapon affinity is carried by
@@ -301,11 +312,20 @@ function buildCoverMoves(plan, phases, assignments, retreatOrders, positionSampl
     const tactical = routeFor(plan, idOf(actor))?.tactical || {}; const base = role === 'fire' ? tactical.firing || tactical.covered : tactical.approach || tactical.covered;
     return base ? { x: base.x, y: base.y } : sample(positionSampler, actor, main.start);
   };
-  const move = { id: 'cover_move_1', start: clamp(main.start + Math.min(.35, Math.max(.05, (main.end - main.start) * .04)), 0, duration), end: clamp(main.start + Math.max(2.2, (main.end - main.start) * .28), 0, duration), fireGroupIds: fireGroup.map(idOf), maneuverGroupIds: maneuver.map(idOf), fireGroupHoldPositions: Object.fromEntries(fireGroup.map((actor) => [idOf(actor), positionForRole(actor, 'fire')])), maneuverTargetPositions: Object.fromEntries(maneuver.map((actor) => [idOf(actor), positionForRole(actor, 'maneuver')])), purpose: 'cover_advance', state: 'cover_fire', station: 'covered_to_firing', displacementPolicy: 'maneuver_only' };
+  const start = clamp(main.start + Math.min(.35, Math.max(.05, (main.end - main.start) * .04)), 0, duration);
+  const end = clamp(main.start + Math.max(2.2, (main.end - main.start) * .28), 0, duration);
+  const fireGroupHoldPositions = Object.fromEntries(fireGroup.map((actor) => [idOf(actor), positionForRole(actor, 'fire')]));
+  const maneuverTargetPositions = Object.fromEntries(maneuver.map((actor) => [idOf(actor), positionForRole(actor, 'maneuver')]));
+  const presentationRoutes = Object.fromEntries(maneuver.map((actor) => [idOf(actor), presentationRouteFor(actor, start, end, maneuverTargetPositions[idOf(actor)], positionSampler)]));
+  const move = { id: 'cover_move_1', start, end, fireGroupIds: fireGroup.map(idOf), maneuverGroupIds: maneuver.map(idOf), fireGroupHoldPositions, maneuverTargetPositions, presentationRoutes, purpose: 'cover_advance', state: 'cover_fire', station: 'covered_to_firing', displacementPolicy: 'maneuver_only' };
   const moves = [move];
   if (retreatOrders.length) {
     const rear = retreatOrders.filter((order) => order.coverFire).map((order) => order.actorId); const moving = retreatOrders.filter((order) => !order.coverFire).map((order) => order.actorId);
-    if (rear.length && moving.length) moves.push({ id: 'cover_retreat_1', start: retreatOrders[0].start, end: Math.min(duration, retreatOrders.at(-1).start + 2.8), fireGroupIds: rear, maneuverGroupIds: moving, fireGroupHoldPositions: Object.fromEntries(rear.map((id) => [id, sample(positionSampler, (plan.forces.friendly || []).find((actor) => idOf(actor) === id), retreatOrders.find((order) => order.actorId === id).start)])), maneuverTargetPositions: Object.fromEntries(moving.map((id) => [id, retreatOrders.find((order) => order.actorId === id)?.presentationRoute?.at(-1) || { x: 0, y: 0 }])), purpose: 'cover_retreat', state: 'cover_fire', station: 'retreat_exit', displacementPolicy: 'maneuver_only' });
+    if (rear.length && moving.length) {
+      const retreatStart = retreatOrders[0].start; const retreatEnd = Math.min(duration, retreatOrders.at(-1).start + 2.8);
+      const retreatRoutes = Object.fromEntries(moving.map((id) => [id, retreatOrders.find((order) => order.actorId === id)?.presentationRoute || []]));
+      moves.push({ id: 'cover_retreat_1', start: retreatStart, end: retreatEnd, fireGroupIds: rear, maneuverGroupIds: moving, fireGroupHoldPositions: Object.fromEntries(rear.map((id) => [id, sample(positionSampler, (plan.forces.friendly || []).find((actor) => idOf(actor) === id), retreatOrders.find((order) => order.actorId === id).start)])), maneuverTargetPositions: Object.fromEntries(moving.map((id) => [id, retreatRoutes[id]?.at(-1) || { x: 0, y: 0 }])), presentationRoutes: retreatRoutes, purpose: 'cover_retreat', state: 'cover_fire', station: 'retreat_exit', displacementPolicy: 'maneuver_only' });
+    }
   }
   return moves.filter((item) => item.fireGroupIds.length && item.maneuverGroupIds.length);
 }

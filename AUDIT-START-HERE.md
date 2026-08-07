@@ -1,49 +1,42 @@
-# Stage 8.2G-C.1.1 Audit Start Here
+# Stage 8.2G-C.1.1a Audit Start Here
 
-## C.1.1 verification entry points
+本交付的需求主体是 Stage 8.2G-C.1.1a 开发提示词。当前代码基线为
+`22b4fea85f877217a8f4ab18621f2a982e64a546`（C.1.1 runtime readability），上一轮参考为
+`stage8_2g_c11_github_reaudit.json`。该 JSON 仅是外部失败基线和回归样本，不会进入生产代码；失败样本保留，不通过过滤或删除来归零。
+
+## C.1.1a entry points
 
 ```bash
-npm run test:stage8-2G-C-1-1
-npm run browser:stage8-2G-C-1-1
-npm run build:stage8-2G-C-1-1
-npm run verify:stage8-2G-C-1-1
-```
-
-C.1.1 evidence recomputes expected state from current source code and canonical
-scenarios. The supplied independent-audit JSON is an external previous-review
-baseline only; it is not loaded by production code, and failed samples are not
-filtered or deleted.
-
-本交付以 Stage 8.2G-B.1.1a 为基线，新增 Environment Grammar、持久破坏、矿区环境视觉、武器视觉档案和离线 Asset Manifest。表现层不修改 solver、HP、damage、destroy、result、reward、save、Choreographer 或 authoritative event order；证据继续使用 B.1.1a 强绑定原则。
-
-## Clean reproduction
-
-```sh
 npm install
-npm run test:stage8-2G-C-1-1
-npm run browser:stage8-2G-C-1-1
-npm run verify:stage8-2G-C-1-1
-npm test
-npm run build:stage8-2G-C-1-1
-npm run verify:stage8-2G-C-1-1
+npm run test:stage8-2G-C-1-1a
+npm run browser:stage8-2G-C-1-1a
+npm run build:stage8-2G-C-1-1a
+npm run verify:stage8-2G-C-1-1a -- --skip-full
+npm run verify:stage8-2G-C-1-1a
 ```
 
-上一轮独立审计文件 `stage8_2g_c1_github_independent_audit.json` 与此前阶段审计均只作为回归基线使用；未导入生产代码、未替代、未过滤或用于抹平失败样本。本文件不把独立审计误写成通过。
+默认封包验证器会在干净解压目录执行 hygiene、C.1.1a 证据/Node/篡改、C.1.1、C、B.1.1a 回归，然后执行 `npm install --ignore-scripts --no-audit --no-fund` 和完整 `npm test`。`--skip-full` 只用于快速静态/证据门禁。
 
-基线阻塞项为：旧截图/Manifest 复用而非事件解析（B1）、跨 Phase Assignment 被截断（B2）、撤退后卫没有实际演出射击（B3）、权威 Shot 使用移动朝向而非弹道向量（B4），以及 B.1.1a 审计发现的强绑定可篡改问题。B.1.1 已覆盖战斗功能回归；B.1.1a 只覆盖证据完整性。
+## Required current records
 
-## Required evidence
+- `stage8_2g_c11a_visual_unit_class_check.json`
+- `stage8_2g_c11a_final_draw_geometry.json`
+- `stage8_2g_c11a_screen_footprint_check.json`
+- `stage8_2g_c11a_cover_path_check.json`
+- `stage8_2g_c11a_asset_runtime_check.json`
+- `stage8_2g_c11a_authority_check.json`
+- `stage8_2g_c11a_tamper_results.json`
+- `stage8_2g_c11a_clean_package_test.json`
+- `stage8_2g_c11a_developer_selfcheck.json`
 
-- Machine/browser evidence: `stage8_2g_c11_machine_semantic_evidence.json`, `stage8_2g_c11_browser_capture_manifest.json`
-- Faction/metrics/routes/tamper/authority/selfcheck: `stage8_2g_c11_faction_asset_check.json`, `stage8_2g_c11_screen_footprint_check.json`, `stage8_2g_c11_route_clearance.json`, `stage8_2g_c11_evidence_tamper_results.json`, `stage8_2g_c11_authority_check.json`, `stage8_2g_c11_developer_selfcheck.json`
-- Tests and verifier: `tests/stage8-2G-C-1-1-test.mjs`, `tests/verify-stage8-2G-C-1-1-evidence.mjs`, `tests/stage8-2G-C-1-1-evidence-tamper-test.mjs`
-- Screenshots: `screenshots/stage8-2G-C-1-1/`
+浏览器证据为 `stage8_2g_c11a_machine_semantic_evidence.json`、
+`stage8_2g_c11a_browser_capture_manifest.json`，截图目录为
+`screenshots/stage8-2G-C-1-1a/`。生产调试覆盖层默认关闭。
 
-## Commands and platform
+## Scope and authority
 
-- Node/npm/OS are recorded by the C clean-package runner in `stage8_2g_c_clean_package_test.json`.
-- The browser command must fail when Chromium cannot start or navigate; it has no B-stage screenshot fallback.
-- The package verifier extracts the ZIP, rejects `.DS_Store`, `__MACOSX`, nested `*.zip`, `node_modules`, `.git`, temporary artifacts/profiles, recomputes Machine/Browser/Environment/Destruction bindings, checks PNG SHA-256, then runs clean `npm install`, C, B regression and `npm test`.
-- `packageSha256` is written by the external clean-package report after the final ZIP is built, avoiding self-referential ZIP hashing.
+本轮只收口视觉运行时契约：唯一 Visual Unit Class Normalizer、共享
+`ActorFinalDrawGeometry`、共享 `presentationRoute`、真实资产就绪状态和浏览器/机器证据绑定。
+不修改 solver、HP、damage、destroy、result、reward、save 或正式战斗权威事件顺序。
 
-Final package record: `stage8_2g_c_final_package_record.json` (external to the ZIP).
+`stage8_2g_c11a_final_package_record.json` 是封包外最终记录；ZIP 内保留 clean-package test 记录和 delivery manifest。
