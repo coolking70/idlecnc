@@ -502,3 +502,19 @@
 - [x] 12 类证据篡改回归全部拒绝；官方 `develop-web-game` Playwright 客户端已执行，正式页面 `render_game_to_text` 正常且无控制台错误。
 - [x] D-B 测试已接入 npm 与 CI；完整 clean-package gate 已通过（隔离安装与包内 `npm test` 均 exitCode=0），外部 ZIP `iron-command-stage8-2G-D-B-full-unit-art-hud.zip` SHA-256 `5275a6e6cdfd9505ef9cbf65e6a8a4267a1934c4673150c28a96e7e49e476278`，61,147,511 bytes，945 entries；当前 `stage8_2g_db_*` JSON 仍仅为机器证据，未作为正式运行资源。
 - [ ] 待完成：提交、推送并等待 GitHub Actions；独立审计方仍需按最终 D-B ZIP 重新验收。
+
+# Stage 8.2G-D-B.1 progress
+
+- [x] 以 `stage8_2g_db_independent_audit.json` 作为 D-B 失败基线与回归样本参考；未导入生产代码、未删除或过滤失败样本。
+- [x] 冻结 solver、HP/damage/repair/destroy authority、target assignment/switch、shot schedule/timing/facing/impact/position、planner、routes、choreographer、suppression/cover/retreat/rear-guard、result/reward/settlement/save；本阶段只修改 presentation consumption、evidence、responsive CSS 和验证器。
+- [x] 集中式 presentation capability filter 已加入 `presentation-facing-policy.js`，并由 Universal Visual Scene、Animation Resolver、炮口/弹道/特效消费共同使用；unarmed 的 aim/fire/reload/cover_fire 会 fail-closed 到 idle/move/retreat，正式 repair anchor 只绑定对应 repair actor。
+- [x] 正式 victory、formal withdraw/defeat、synthetic art 三条完整 50ms 时间轴扫描：2045 个状态样本，禁止状态/动画/武器消费违规 `0`，最大验证扫描 `11.56ms`，报告输入稳定，planner/solver/choreographer 未修改。
+- [x] 生产语义解析器支持 scout-move、scout-fire、repair-action、support-unarmed、cover-advance、retreat-rear-guard；6 个机器语义帧全部解析，formal repair/cover/retreat/真实 shot actorId 均有绑定；fail-closed 与浏览器重算启用。
+- [x] D-B 原有 16 帧已重生成并修正旧语义文件名/时间：scout-move、scout-fire、repair-action、cover-advance、retreat-rear-guard；旧浏览器证据同步执行 production semantic predicate 校验。
+- [x] D-B.1 Chromium 当前代码证据 10/10 帧、10 个唯一 PNG、8 个语义帧；pageErrors/consoleErrors `0`，时间绑定误差≤16.7ms，机器/浏览器 state signature 与 semantic actor binding 一致。
+- [x] Responsive 真实几何：480×720 与 390×844 均 battlefield width ratio `1.0`、stage 全宽、panel `display:none`、battle-first layout；窄屏 HUD/result 仍位于战场画布安全区。
+- [x] Production DOM leak scan：禁止字符串命中 `0`；内部 stage label 不进入生产可见 DOM，debug render/text 仍保留 `stageLabel` 与 debug overlay 状态。
+- [x] D-B.1 tamper matrix `12/12` 拒绝：unarmed fire/authority、semantic relabel/signature/fake repair、missing/duplicate PNG、narrow sidebar/geometry、production leak/debug diagnostics。
+- [x] ordinary `npm test` 通过并通过 `posttest` 纳入 D-B.1 浏览器/篡改链；CI 新增 `npm run test:stage8-2G-D-B-1`；clean install + package 内普通 `npm test` verifier 通过。
+- [x] 最终 ZIP：`iron-command-stage8-2G-D-B-1-semantic-responsive-closure.zip`，SHA-256 `e87f06a63d8770482501022c51ca6f6c20f27f6eb858bd80dad1192cbd8b9007`，62,690,107 bytes，980 entries；ZIP 不作为 Git 运行资源提交，外部 record 保留 package hash。
+- [ ] 独立审计方仍需按最终 D-B.1 ZIP 重新验收；审计 JSON 仍仅是外部失败基线，不代表独立批准。

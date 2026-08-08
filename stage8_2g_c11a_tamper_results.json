@@ -16,17 +16,17 @@
     {
       "label": "cover presentationRoute mutation",
       "rejected": true,
-      "output": "file:///Users/coolking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-C-1-1a-evidence.mjs:12\nconst fail = (message) => { throw new Error(message); };\n                                  ^\n\nError: cover presentation route binding footprint-01-friendly-infantry-narrow.png\n    at fail (file:///Users/coolking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-C-1-1a-evidence.mjs:12:35)\n    at file:///Users/coolking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-C-1-1a-evidence.mjs:29:296\n\nNode.js v25.2.1\n"
+      "output": "file:///Users/coolking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-C-1-1a-evidence.mjs:12\nconst fail = (message) => { throw new Error(message); };\n                                  ^\n\nError: machine final geometry alias-01-enemy-at-is-infantry.png\n    at fail (file:///Users/coolking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-C-1-1a-evidence.mjs:12:35)\n    at file:///Users/coolking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-C-1-1a-evidence.mjs:34:102\n\nNode.js v25.2.1\n"
     },
     {
       "label": "asset runtime readiness mutation",
       "rejected": true,
-      "output": "file:///Users/coolking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-C-1-1a-evidence.mjs:12\nconst fail = (message) => { throw new Error(message); };\n                                  ^\n\nError: asset runtime not ready alias-01-enemy-at-is-infantry.png\n    at fail (file:///Users/coolking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-C-1-1a-evidence.mjs:12:35)\n    at file:///Users/coolking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-C-1-1a-evidence.mjs:38:53\n\nNode.js v25.2.1\n"
+      "output": "file:///Users/coolking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-C-1-1a-evidence.mjs:12\nconst fail = (message) => { throw new Error(message); };\n                                  ^\n\nError: machine final geometry alias-01-enemy-at-is-infantry.png\n    at fail (file:///Users/coolking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-C-1-1a-evidence.mjs:12:35)\n    at file:///Users/coolking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-C-1-1a-evidence.mjs:34:102\n\nNode.js v25.2.1\n"
     },
     {
       "label": "duplicate PNG hash",
       "rejected": true,
-      "output": "file:///Users/coolking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-C-1-1a-evidence.mjs:12\nconst fail = (message) => { throw new Error(message); };\n                                  ^\n\nError: duplicate PNG footprint-02-enemy-at-narrow.png\n    at fail (file:///Users/coolking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-C-1-1a-evidence.mjs:12:35)\n    at file:///Users/coolking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-C-1-1a-evidence.mjs:30:216\n\nNode.js v25.2.1\n"
+      "output": "file:///Users/coolking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-C-1-1a-evidence.mjs:12\nconst fail = (message) => { throw new Error(message); };\n                                  ^\n\nError: machine final geometry alias-01-enemy-at-is-infantry.png\n    at fail (file:///Users/coolking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-C-1-1a-evidence.mjs:12:35)\n    at file:///Users/coolking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-C-1-1a-evidence.mjs:34:102\n\nNode.js v25.2.1\n"
     }
   ],
   "finalDrawRectProtected": true,

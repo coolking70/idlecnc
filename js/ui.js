@@ -2530,7 +2530,9 @@ export class UI {
     const brief = el('div', 'card');
     const briefHead = el('div', 'card-head');
     briefHead.appendChild(el('span', '', '指挥官简报'));
-    r.briefTag = el('span', 'tag ok', CURRENT_STAGE_LABEL);
+    // Production UI must not expose internal stage identifiers.  The debug
+    // renderer/text channel still carries CURRENT_STAGE_LABEL for diagnostics.
+    r.briefTag = el('span', 'tag ok', '战备就绪');
     briefHead.appendChild(r.briefTag);
     brief.appendChild(briefHead);
 
@@ -2612,7 +2614,7 @@ export class UI {
     // —— 阶段交付核对表 ——
     const stage = el('div', 'card');
     const stageHead = el('div', 'card-head');
-    stageHead.appendChild(el('span', '', CURRENT_STAGE_LABEL));
+    stageHead.appendChild(el('span', '', '战区作战'));
     stageHead.appendChild(el('span', 'tag ok', '战区作战'));
     stage.appendChild(stageHead);
     const list = el('ul', 'check-list');

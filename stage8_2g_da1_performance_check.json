@@ -1,8 +1,8 @@
 {
   "stage": "8.2G-D-A.1",
   "sampleCount": 60,
-  "p95RenderMs": 4.6374,
-  "maxRenderMs": 5.0436,
+  "p95RenderMs": 3.7118,
+  "maxRenderMs": 4.0885,
   "noWallClockInSemanticResolver": true,
   "bounded": true,
   "passed": true

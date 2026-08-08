@@ -48,20 +48,20 @@
         {
           "actorId": "unit_stage8g-c1-mining-4",
           "visualClass": "support_vehicle",
-          "finalCssWidth": 34,
-          "finalCssHeight": 17,
-          "screenFootprint": 34,
+          "finalCssWidth": 34.476,
+          "finalCssHeight": 18.564,
+          "screenFootprint": 34.476,
           "minimumScreenFootprint": 34,
-          "visualScaleBoost": 1.1655
+          "visualScaleBoost": 1
         },
         {
           "actorId": "unit_stage8g-c1-mining-2",
           "visualClass": "light_vehicle",
           "finalCssWidth": 34,
-          "finalCssHeight": 17,
+          "finalCssHeight": 18.4167,
           "screenFootprint": 34,
           "minimumScreenFootprint": 34,
-          "visualScaleBoost": 1.1655
+          "visualScaleBoost": 1.0684
         },
         {
           "actorId": "enemy_infantry_1",
@@ -130,20 +130,20 @@
         {
           "actorId": "unit_fixture-u-5",
           "visualClass": "support_vehicle",
-          "finalCssWidth": 34,
-          "finalCssHeight": 17,
-          "screenFootprint": 34,
+          "finalCssWidth": 34.476,
+          "finalCssHeight": 18.564,
+          "screenFootprint": 34.476,
           "minimumScreenFootprint": 34,
-          "visualScaleBoost": 1.1655
+          "visualScaleBoost": 1
         },
         {
           "actorId": "unit_fixture-u-3",
           "visualClass": "light_vehicle",
           "finalCssWidth": 34,
-          "finalCssHeight": 17,
+          "finalCssHeight": 18.4167,
           "screenFootprint": 34,
           "minimumScreenFootprint": 34,
-          "visualScaleBoost": 1.1655
+          "visualScaleBoost": 1.0684
         },
         {
           "actorId": "enemy_at_1",

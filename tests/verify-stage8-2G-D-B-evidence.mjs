@@ -12,7 +12,7 @@ import { buildDbArtShowcaseReport } from './lib/stage8-2G-DB-art-scenarios.mjs';
 const root = process.cwd();
 const sha256File = (file) => crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
 const readJson = (file) => JSON.parse(fs.readFileSync(path.join(root, file), 'utf8'));
-const expectedFrameNames = new Set(['d-b-01-full-friendly-lineup.png', 'd-b-02-full-enemy-lineup.png', 'd-b-03-scout-move-fire.png', 'd-b-04-repair-vehicle-action.png', 'd-b-05-support-vehicle.png', 'd-b-06-production-mixed-battle.png', 'd-b-07-cover-advance-production.png', 'd-b-08-retreat-rear-guard-production.png', 'd-b-09-selected-unit-hud.png', 'd-b-10-damaged-unit-health.png', 'd-b-11-objective-and-phase.png', 'd-b-12-victory-result.png', 'd-b-13-defeat-result.png', 'd-b-14-narrow-production-battle.png', 'd-b-15-narrow-result-ui.png', 'd-b-16-production-fallback.png']);
+const expectedFrameNames = new Set(['d-b-01-full-friendly-lineup.png', 'd-b-02-full-enemy-lineup.png', 'd-b-03-scout-move.png', 'd-b-04-scout-fire.png', 'd-b-05-repair-action.png', 'd-b-06-support-vehicle.png', 'd-b-07-cover-advance.png', 'd-b-08-retreat-rear-guard.png', 'd-b-09-selected-unit-hud.png', 'd-b-10-damaged-unit-health.png', 'd-b-11-objective-and-phase.png', 'd-b-12-victory-result.png', 'd-b-13-defeat-result.png', 'd-b-14-narrow-production-battle.png', 'd-b-15-narrow-result-ui.png', 'd-b-16-production-fallback.png']);
 
 export function buildDbTamperReference() {
   const report = JSON.parse(fs.readFileSync(path.join(root, 'experiments/battle-sandbox/report-adapter/fixtures/campaign-victory.json'), 'utf8')).report;

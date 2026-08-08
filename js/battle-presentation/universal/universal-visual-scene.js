@@ -12,7 +12,7 @@ import { buildPersistentDestructionLayer } from '../environment/destruction-laye
 import { normalizeVisualUnitClass } from '../environment/visual-unit-class.js';
 import { OFFLINE_ASSET_MANIFEST } from '../environment/asset-provider.js';
 import { resolveMuzzleAnchor } from '../environment/animation-resolver.js';
-import { resolvePresentationFacingPolicy } from '../environment/presentation-facing-policy.js';
+import { resolvePresentationFacingPolicy, resolvePresentationVisualState, resolveWeaponTopology, WEAPON_TOPOLOGY } from '../environment/presentation-facing-policy.js';
 
 const clamp = (value, min, max) => Math.max(min, Math.min(max, Number(value) || 0));
 const TAU = Math.PI * 2;
@@ -75,8 +75,15 @@ function unitAssetEntry(actor) {
   const visualClass = normalizeVisualUnitClass(actor); const type = visualClass === 'anti_armor_infantry' ? 'at_infantry' : visualClass; return OFFLINE_ASSET_MANIFEST.assets.find((asset) => asset.id === `unit_${actor?.side || 'friendly'}_${type}`) || null;
 }
 
+function isUnarmedActor(actor) {
+  const visualClass = normalizeVisualUnitClass(actor);
+  const entry = unitAssetEntry(actor);
+  return resolveWeaponTopology({ actor, visualClass, weaponTopology: actor?.weaponTopology || entry?.weaponTopology }) === WEAPON_TOPOLOGY.UNARMED;
+}
+
 function muzzlePointForShot(shot, actors) {
   const actor = actors.find((item) => item.id === shot.actorId || item.actorId === shot.actorId); const source = shot.sourcePositionAtFire || actor?.visualCenter || { x: 0, y: 0 }; if (!actor) return { point: { ...source }, anchor: { ok: false, reason: 'source_actor_missing' } };
+  if (isUnarmedActor(actor)) return { point: { ...source }, anchor: { ok: false, reason: 'unarmed_actor_has_no_weapon_muzzle' } };
   const entry = unitAssetEntry(actor); const facing = Number(shot.sourceFacingAtFire ?? actor.facing) || 0; const anchoredActor = { ...actor, facing, turretFacing: facing }; const anchor = resolveMuzzleAnchor(anchoredActor, entry, undefined); if (!anchor.ok) return { point: { ...source }, anchor };
   const visualClass = normalizeVisualUnitClass(actor); const width = visualClass === 'mbt' ? 60 : visualClass === 'anti_armor_infantry' ? 34 : visualClass === 'infantry' ? 30 : 44; const height = visualClass === 'mbt' ? 36 : visualClass === 'anti_armor_infantry' ? 40 : visualClass === 'infantry' ? 36 : 22; const forward = anchor.forward * width / 2; const lateral = anchor.lateral * height / 2;
   return { point: { x: source.x + Math.cos(facing) * forward - Math.sin(facing) * lateral, y: source.y + Math.sin(facing) * forward + Math.cos(facing) * lateral }, anchor: { ...anchor, sourceActorId: shot.actorId, sourceFacingAtFire: facing, source: 'manifest.weaponMuzzleAnchor' } };
@@ -112,6 +119,10 @@ function resolveVisualState(plan, actor, seconds, schedule, engagementSchedule) 
   }
   const damage = latestDamage(plan, actor.actorId, seconds);
   if (damage && seconds - Number(damage.t) < .42) return { id: 'hit', progress: clamp((seconds - damage.t) / .42, 0, 1), authorityAnchorId: damage.id };
+  const repairAnchor = latestAnchor(plan, (anchor) => anchor.type === 'repair' && anchor.targetId === actor.actorId, seconds);
+  const formalRepair = repairAnchor && seconds - Number(repairAnchor.t) < .42;
+  if (formalRepair) return { id: 'repair', progress: clamp((seconds - Number(repairAnchor.t)) / .42, 0, 1), authorityAnchorId: repairAnchor.id || null, formalRepair: true };
+  const action = currentAction(plan, actor.actorId, seconds);
   const shot = activeShot(schedule, actor.actorId, seconds);
   if (shot) {
     const age = seconds - shot.t;
@@ -119,7 +130,6 @@ function resolveVisualState(plan, actor, seconds, schedule, engagementSchedule) 
     if (age <= shot.weapon.fireDuration) return { id: 'fire', progress: clamp(age / shot.weapon.fireDuration, 0, 1), shot };
     if (seconds <= shot.t + shot.weapon.fireDuration + shot.weapon.reloadDuration) return { id: 'reload', progress: clamp((seconds - shot.t - shot.weapon.fireDuration) / shot.weapon.reloadDuration, 0, 1), shot };
   }
-  const action = currentAction(plan, actor.actorId, seconds);
   const window = stateWindow(plan, actor.actorId, seconds);
   const previous = actor.previousPosition || actor.visualCenter;
   const movement = movementVisualState({ seconds, current: actor.visualCenter, previous, next: actor.nextPosition, deploymentEnd: deploymentSemanticEnd(plan, actor.actorId) });
@@ -175,7 +185,7 @@ function positionFor(actor, plan, seconds, sampler, engagementSchedule) {
       } else {
         const hold = move.fireGroupHoldPositions?.[actor.actorId];
         if (hold) presentation = { ...hold };
-        presentationMode = 'cover_fire';
+        presentationMode = isUnarmedActor(actor) ? 'route' : 'cover_fire';
       }
     }
   }
@@ -186,6 +196,7 @@ function positionFor(actor, plan, seconds, sampler, engagementSchedule) {
 function projectileFor(shot, seconds, actors) {
   if (seconds < shot.t || seconds > shot.impactTime + .08) return null;
   const muzzle = muzzlePointForShot(shot, actors); const source = muzzle.point; const target = shot.impactPositionAtImpact;
+  if (muzzle.anchor?.reason === 'unarmed_actor_has_no_weapon_muzzle') return null;
   const progress = clamp((seconds - shot.t) / Math.max(.001, shot.impactTime - shot.t), 0, 1);
   return { id: `${shot.id}:projectile`, shotId: shot.id, kind: shot.weaponKind, x: source.x + (target.x - source.x) * progress, y: source.y + (target.y - source.y) * progress,
     // `start` remains the authoritative battle position for legacy evidence
@@ -198,6 +209,7 @@ function visualEffects(plan, actors, schedule, seconds) {
   const effects = []; const decals = []; const smoke = [];
   for (const shot of schedule) {
     const muzzle = muzzlePointForShot(shot, actors); const source = muzzle.point; const target = shot.impactPositionAtImpact; const presentation = shot.weapon.presentation || {};
+    if (muzzle.anchor?.reason === 'unarmed_actor_has_no_weapon_muzzle') continue;
     const fireAge = seconds - shot.t; const impactAge = seconds - shot.impactTime;
     if (fireAge >= 0 && fireAge <= shot.weapon.muzzleLife) effects.push({ id: `${shot.id}:muzzle`, kind: 'muzzle_flash', muzzleShape: presentation.muzzleShape || 'small_flash', smokeMode: presentation.smoke || 'none', x: source.x, y: source.y, size: (shot.weapon.kind === 'cannon' ? 26 : 10) * Math.max(.5, Number(presentation.impactScale || 1) ** .35), life: shot.weapon.muzzleLife - fireAge, maxLife: shot.weapon.muzzleLife, weaponKind: shot.weapon.kind, weaponProfileId: shot.weapon.id, source: 'manifest.weaponMuzzleAnchor', muzzleAnchor: muzzle.anchor, authoritativeSourcePosition: { ...shot.sourcePositionAtFire }, actorId: shot.actorId, target: shot.targetId, presentationOnly: true });
     if (impactAge >= 0 && impactAge <= shot.weapon.impactLife) {
@@ -227,12 +239,15 @@ export function buildUniversalVisualScene(plan, seconds, sampler, runtime = {}) 
   raw = separateVisualFootprints(raw, plan.layout?.bounds, { blockers: wreckBlockers });
   const actorById = new Map(raw.map((actor) => [actor.actorId, actor]));
   const actors = rows.map((actor) => {
-    const positioned = actorById.get(actor.actorId); const visual = resolveVisualState(plan, positioned, seconds, schedule, runtime.engagementSchedule); const shot = visual.shot || null;
+    const positioned = actorById.get(actor.actorId); const rawVisual = resolveVisualState(plan, positioned, seconds, schedule, runtime.engagementSchedule); const shot = rawVisual.shot || null;
     const weapon = visualWeaponProfile(actor);
     const movementFacing = movementFacingFor(positioned, positioned.movementFacing);
-    const aimFacing = aimFacingFor(positioned, seconds, shot, visual, movementFacing);
+    const aimFacing = aimFacingFor(positioned, seconds, shot, rawVisual, movementFacing);
     const visualClass = normalizeVisualUnitClass(actor);
-    const facingPolicy = resolvePresentationFacingPolicy({ actor, visualClass, weaponTopology: actor.weaponTopology, visualState: visual.id, movementFacing, aimFacing, shot });
+    const capability = resolvePresentationVisualState({ actor, visualClass, weaponTopology: actor.weaponTopology, visualState: rawVisual.id, action: actor.currentAction, formalRepair: rawVisual.formalRepair === true, fallback: positioned.presentationMode === 'rear_guard_hold' ? 'retreat' : positioned.presentationMode === 'cover_advance' ? 'move' : 'idle' });
+    const visual = capability.visualState === rawVisual.id ? rawVisual : { ...rawVisual, id: capability.visualState, shot: null, filtered: true, filterReason: capability.reason };
+    const effectiveShot = visual.shot || null;
+    const facingPolicy = resolvePresentationFacingPolicy({ actor, visualClass, weaponTopology: actor.weaponTopology, visualState: visual.id, movementFacing, aimFacing, shot: effectiveShot });
     const { bodyFacing, weaponFacing, facing, turretFacing, shotFacing, weaponTopology } = facingPolicy;
     const recoil = visual.id === 'fire' ? Math.sin(clamp(visual.progress, 0, 1) * Math.PI) * weapon.recoil : 0;
     const visible = visual.id !== 'wreck';
@@ -242,10 +257,10 @@ export function buildUniversalVisualScene(plan, seconds, sampler, runtime = {}) 
       routePosition: { ...positioned.routePosition }, plannedPosition: { ...positioned.plannedPosition }, preSeparationPosition: { ...positioned.preSeparationPosition }, visualPosition: { ...positioned.visualCenter }, presentationMode: positioned.presentationMode,
       footprint: positioned.footprint,
       anchorPosition: { ...positioned.preSeparationPosition }, visualOffset: { x: positioned.visualCenter.x - positioned.preSeparationPosition.x, y: positioned.visualCenter.y - positioned.preSeparationPosition.y }, nextPosition: { ...positioned.nextPosition }, facing, facingPolicy: facingPolicy.policy, weaponTopology, bodyFacing, weaponFacing, hullFacing: visualClass === 'mbt' ? bodyFacing : null, movementFacing, aimFacing, turretFacing, shotFacing,
-      visualState: normalizeVisualState(visual.id), visualStatus: visual.id === 'idle' && actor.currentAction === 'repair' ? 'repairing' : normalizeVisualState(visual.id), stateProgress: visual.progress, currentAction: actor.currentAction, weapon: { id: weapon.id, kind: weapon.kind, label: weapon.label, presentation: { ...(weapon.presentation || {}) } }, weaponPresentation: { ...(weapon.presentation || {}) },
+      visualState: normalizeVisualState(visual.id), visualStatus: visual.id === 'repair' || (visual.id === 'idle' && actor.currentAction === 'repair') ? 'repairing' : normalizeVisualState(visual.id), presentationVisualState: normalizeVisualState(visual.id), presentationFiltered: capability.filtered, presentationFilterReason: capability.reason, plannerAction: actor.currentAction, stateProgress: visual.progress, currentAction: actor.currentAction, weapon: { id: weapon.id, kind: weapon.kind, label: weapon.label, presentation: { ...(weapon.presentation || {}) } }, weaponPresentation: { ...(weapon.presentation || {}) },
       firing: visual.id === 'fire', aiming: visual.id === 'aim', reloading: visual.id === 'reload', recoil, walkCycle: visual.id === 'move' ? seconds * (actor.type === 'mbt' ? 1.5 : 5) : 0,
       memberPositions: memberPositions(actor, positioned, bodyFacing, visual.id === 'retreat' ? 'move' : visual.id, seconds), visualAuthorityAnchorId: visual.authorityAnchorId || shot?.authorityAnchorId || null,
-      targetId: shot?.targetId || visual.assignment?.targetId || null, targetAssignmentId: visual.assignment?.id || null, suppression: visual.suppression ? { ...visual.suppression, sourceIds: [...visual.suppression.sourceIds], targetIds: [...visual.suppression.targetIds], area: { ...visual.suppression.area, center: { ...(visual.suppression.area?.center || {}) } } } : null, retreat: visual.retreat ? { ...visual.retreat, exit: { ...visual.retreat.exit } } : null
+      targetId: effectiveShot?.targetId || visual.assignment?.targetId || null, targetAssignmentId: visual.assignment?.id || null, suppression: visual.suppression ? { ...visual.suppression, sourceIds: [...visual.suppression.sourceIds], targetIds: [...visual.suppression.targetIds], area: { ...visual.suppression.area, center: { ...(visual.suppression.area?.center || {}) } } } : null, retreat: visual.retreat ? { ...visual.retreat, exit: { ...visual.retreat.exit } } : null
     };
   });
   const finalActors = actors.filter((actor) => actor.visualState !== 'wreck');
@@ -259,5 +274,5 @@ export function buildUniversalVisualScene(plan, seconds, sampler, runtime = {}) 
   const destruction = buildPersistentDestructionLayer(plan, seconds, { visualShotSchedule: schedule, actors, windVector: environment.windVector });
   const wrecks = [...new Map([...fallbackWrecks, ...destruction.wrecks].map((wreck) => [wreck.id, wreck])).values()];
   const visualPhase = resolveBattlePhase(plan, seconds);
-  return { actors, wrecks, projectiles, effects: [...effects.effects, ...destruction.effects], decals: destruction.decals, smoke: destruction.smoke, debris: destruction.debris, destruction: { version: destruction.version, limits: { ...destruction.limits }, signature: destruction.signature, eventCount: schedule.length }, environment, shotSchedule: schedule, visualStage: visualPhase.id, visualPhase, sceneSeed: plan.source?.seed ?? 0, engagementSchedule: runtime.engagementSchedule || null };
+  return { actors, wrecks, projectiles, effects: [...effects.effects, ...destruction.effects], decals: destruction.decals, smoke: destruction.smoke, debris: destruction.debris, destruction: { version: destruction.version, limits: { ...destruction.limits }, signature: destruction.signature, eventCount: schedule.length }, environment, shotSchedule: schedule, formalRepairEvents: (plan.timeline?.anchors || []).filter((anchor) => anchor.type === 'repair').map((anchor) => ({ id: anchor.id || null, targetId: anchor.targetId || null, t: Number(anchor.t), value: Number(anchor.value) || 0 })), visualStage: visualPhase.id, visualPhase, sceneSeed: plan.source?.seed ?? 0, engagementSchedule: runtime.engagementSchedule || null };
 }

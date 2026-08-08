@@ -4,7 +4,7 @@
   "generatedBy": "tests/browser/stage8-2G-B-1-1a-evidence.mjs",
   "independentAudit": false,
   "machineEvidenceFile": "stage8_2g_b11a_machine_semantic_evidence.json",
-  "machineEvidenceSha256": "700e803462c61fe5d18b9f9cc11454499913715b19c232e3c48f1629d8077597",
+  "machineEvidenceSha256": "33d0953ebfec33554c5d3eccf103f0cb54ecb159116fc58b9cccc326adef695d",
   "browser": {
     "currentCodeCaptured": true,
     "legacyFallbackUsed": false,
@@ -28,7 +28,7 @@
           "timeMs": 13546,
           "phase": "first_contact",
           "sceneHash": "upf_b7f3e811",
-          "stateSignature": "94a658515262b8f7e7364ccb38b8962589ce599575a2387337ce9742f6c17cc9",
+          "stateSignature": "60fd84979219ba5babfe9ae2335d96a4a1ff888d0a5bae22a007e3ee24f852ac",
           "semanticPredicates": {
             "firstContact": true,
             "mixedFire": true,
@@ -241,7 +241,7 @@
               "actorId": "unit_fixture-u-6",
               "side": "friendly",
               "type": "repair_vehicle",
-              "visualState": "fire",
+              "visualState": "idle",
               "currentAction": "fire",
               "presentationPosition": {
                 "x": 697.0313,
@@ -428,7 +428,7 @@
                 "actorId": "unit_fixture-u-6",
                 "side": "friendly",
                 "type": "repair_vehicle",
-                "visualState": "fire",
+                "visualState": "idle",
                 "currentAction": "fire",
                 "presentationPosition": {
                   "x": 697.0313,
@@ -737,7 +737,7 @@
                 "actorId": "unit_fixture-u-6",
                 "side": "friendly",
                 "type": "repair_vehicle",
-                "visualState": "fire",
+                "visualState": "idle",
                 "currentAction": "fire",
                 "presentationPosition": {
                   "x": 697.0313,
@@ -860,10 +860,10 @@
               "mode": "overview"
             }
           },
-          "imageSha256": "dd9d690f97aef64da660e8527d336b9793c96c75bbce4b7f2d1bbfa32a5e236a",
+          "imageSha256": "aa2de7e5b63933c7d5ae88f603acfaac95233a148ed8dc98f36a3f93dbb99df1",
           "screenshot": {
             "path": "screenshots/stage8-2G-B-1-1a/victory-01-first-contact.png",
-            "sha256": "dd9d690f97aef64da660e8527d336b9793c96c75bbce4b7f2d1bbfa32a5e236a"
+            "sha256": "aa2de7e5b63933c7d5ae88f603acfaac95233a148ed8dc98f36a3f93dbb99df1"
           }
         },
         {
@@ -1888,10 +1888,10 @@
               "mode": "overview"
             }
           },
-          "imageSha256": "f0fdb4421e86b2e355cae68cb9907ade2cade66ee093d4be68d5ecec0cf66d83",
+          "imageSha256": "baa561e6370ef6f4b464ebda87302dba91517b711cff18fd3ddba53b70f1413a",
           "screenshot": {
             "path": "screenshots/stage8-2G-B-1-1a/victory-02-main-engagement-mixed-fire.png",
-            "sha256": "f0fdb4421e86b2e355cae68cb9907ade2cade66ee093d4be68d5ecec0cf66d83"
+            "sha256": "baa561e6370ef6f4b464ebda87302dba91517b711cff18fd3ddba53b70f1413a"
           }
         },
         {
@@ -2949,10 +2949,10 @@
               "mode": "overview"
             }
           },
-          "imageSha256": "2839f8c2155056ce375bbd4cea0cd93f4664523d73164007749a12ddc7ab1466",
+          "imageSha256": "c10871940f3a7587d9fc35702b0ac0d73b64ed88514f4bcb4545449e647d2d36",
           "screenshot": {
             "path": "screenshots/stage8-2G-B-1-1a/victory-03-tank-or-antiarmor-fire.png",
-            "sha256": "2839f8c2155056ce375bbd4cea0cd93f4664523d73164007749a12ddc7ab1466"
+            "sha256": "c10871940f3a7587d9fc35702b0ac0d73b64ed88514f4bcb4545449e647d2d36"
           }
         },
         {
@@ -4056,10 +4056,10 @@
               "mode": "overview"
             }
           },
-          "imageSha256": "4c743dde4bdc458f705ef6a5cbcd4def8f3276fdf67ffdc9ee5fe0f2b38cf7de",
+          "imageSha256": "ee0c66d7f294aed328b4685c41fb40d4cf2b10dacce5631fe279921d57c2b763",
           "screenshot": {
             "path": "screenshots/stage8-2G-B-1-1a/victory-07-authoritative-hit.png",
-            "sha256": "4c743dde4bdc458f705ef6a5cbcd4def8f3276fdf67ffdc9ee5fe0f2b38cf7de"
+            "sha256": "ee0c66d7f294aed328b4685c41fb40d4cf2b10dacce5631fe279921d57c2b763"
           }
         },
         {
@@ -5191,10 +5191,10 @@
               "mode": "overview"
             }
           },
-          "imageSha256": "8aa0fe89a7be1f2355b2b3535ff4dad186f1a7b0f95dc84ff5c6f5b3541600ee",
+          "imageSha256": "2f14555a5eccd69c1eb457aa6d9598959e752b52338424954ad71fa09a4590fb",
           "screenshot": {
             "path": "screenshots/stage8-2G-B-1-1a/victory-04-suppression-target.png",
-            "sha256": "8aa0fe89a7be1f2355b2b3535ff4dad186f1a7b0f95dc84ff5c6f5b3541600ee"
+            "sha256": "2f14555a5eccd69c1eb457aa6d9598959e752b52338424954ad71fa09a4590fb"
           }
         },
         {
@@ -6384,10 +6384,10 @@
               "mode": "overview"
             }
           },
-          "imageSha256": "731c104ec8518be62a4702f913ec1694fdb3e2a33e3b0f4195760f4e262a61c9",
+          "imageSha256": "005fa819729c31020a303a06c1720db142436339852f6cb9791246ae4fdcbe6c",
           "screenshot": {
             "path": "screenshots/stage8-2G-B-1-1a/victory-05-cover-advance.png",
-            "sha256": "731c104ec8518be62a4702f913ec1694fdb3e2a33e3b0f4195760f4e262a61c9"
+            "sha256": "005fa819729c31020a303a06c1720db142436339852f6cb9791246ae4fdcbe6c"
           }
         },
         {
@@ -7391,10 +7391,10 @@
               "mode": "overview"
             }
           },
-          "imageSha256": "610370689b6c4000f63ee9d17b65513bc3163c2bf423d40fc5a4b5c3b775e25a",
+          "imageSha256": "de50f787ae92e264bc9c04bebe028669b4063f836b6ad1dc5dffbbd60409cfcd",
           "screenshot": {
             "path": "screenshots/stage8-2G-B-1-1a/victory-08-authoritative-destruction.png",
-            "sha256": "610370689b6c4000f63ee9d17b65513bc3163c2bf423d40fc5a4b5c3b775e25a"
+            "sha256": "de50f787ae92e264bc9c04bebe028669b4063f836b6ad1dc5dffbbd60409cfcd"
           }
         },
         {
@@ -8401,10 +8401,10 @@
               "mode": "overview"
             }
           },
-          "imageSha256": "1db0378f47aab8f62a190db46e956f585cd1fb925d67b9e7b8517e9997838bd1",
+          "imageSha256": "d04552216b920355bc68ee1c04db9f71b8c778ed279345f7f281768e60416ab0",
           "screenshot": {
             "path": "screenshots/stage8-2G-B-1-1a/victory-06-target-switch.png",
-            "sha256": "1db0378f47aab8f62a190db46e956f585cd1fb925d67b9e7b8517e9997838bd1"
+            "sha256": "d04552216b920355bc68ee1c04db9f71b8c778ed279345f7f281768e60416ab0"
           }
         },
         {
@@ -9186,10 +9186,10 @@
               "mode": "overview"
             }
           },
-          "imageSha256": "a32747e3e0de243649e6693cffc1aa1aa72c01a065c78657d17c174c2843d652",
+          "imageSha256": "b9e60011448f959e66e2788f1f8f545f4b3b395e5fa7578d485915fa86827c0f",
           "screenshot": {
             "path": "screenshots/stage8-2G-B-1-1a/victory-09-battle-end.png",
-            "sha256": "a32747e3e0de243649e6693cffc1aa1aa72c01a065c78657d17c174c2843d652"
+            "sha256": "b9e60011448f959e66e2788f1f8f545f4b3b395e5fa7578d485915fa86827c0f"
           }
         }
       ]
@@ -9208,7 +9208,7 @@
           "timeMs": 13418,
           "phase": "first_contact",
           "sceneHash": "upf_7af1e100",
-          "stateSignature": "0134295437d8f2ea8d74efa96547a443ac0177b598f57d0cbb32a25af5b212d8",
+          "stateSignature": "9c6c3bc4a9176678f725bc878dcb8e188a0b3f99f26b52dd2b84a50f762fc98e",
           "semanticPredicates": {
             "firstContact": true,
             "mixedFire": false,
@@ -9407,7 +9407,7 @@
               "actorId": "unit_fixture-u-5",
               "side": "friendly",
               "type": "repair_vehicle",
-              "visualState": "fire",
+              "visualState": "idle",
               "currentAction": "fire",
               "presentationPosition": {
                 "x": 663.1217,
@@ -9579,7 +9579,7 @@
                 "actorId": "unit_fixture-u-5",
                 "side": "friendly",
                 "type": "repair_vehicle",
-                "visualState": "fire",
+                "visualState": "idle",
                 "currentAction": "fire",
                 "presentationPosition": {
                   "x": 663.1217,
@@ -9873,7 +9873,7 @@
                 "actorId": "unit_fixture-u-5",
                 "side": "friendly",
                 "type": "repair_vehicle",
-                "visualState": "fire",
+                "visualState": "idle",
                 "currentAction": "fire",
                 "presentationPosition": {
                   "x": 663.1217,
@@ -9996,10 +9996,10 @@
               "mode": "overview"
             }
           },
-          "imageSha256": "28eb6dd176569840da5e9d3266a6d3fb40df1e9ad4e853594cf0491db53695eb",
+          "imageSha256": "37aba4f71f211c716412c108c3a6b53a36386866e26a18c0eb44eab3299bbd20",
           "screenshot": {
             "path": "screenshots/stage8-2G-B-1-1a/defeat-06-authoritative-loss.png",
-            "sha256": "28eb6dd176569840da5e9d3266a6d3fb40df1e9ad4e853594cf0491db53695eb"
+            "sha256": "37aba4f71f211c716412c108c3a6b53a36386866e26a18c0eb44eab3299bbd20"
           }
         },
         {
@@ -10863,10 +10863,10 @@
               "mode": "overview"
             }
           },
-          "imageSha256": "85d9861fa1fbab115880d4c429203bcf892ecb0aa72840f7da861a7b7eb96e97",
+          "imageSha256": "fe1be6da7b0e0998c2210e6d3f07301ef373c9daff053bd88fb76bc4643ee650",
           "screenshot": {
             "path": "screenshots/stage8-2G-B-1-1a/defeat-01-line-collapse.png",
-            "sha256": "85d9861fa1fbab115880d4c429203bcf892ecb0aa72840f7da861a7b7eb96e97"
+            "sha256": "fe1be6da7b0e0998c2210e6d3f07301ef373c9daff053bd88fb76bc4643ee650"
           }
         },
         {
@@ -11655,10 +11655,10 @@
               "mode": "overview"
             }
           },
-          "imageSha256": "19c4f05105fa07cc5b6011c0210229367fd3482f879881f46bc97aff08fa01c4",
+          "imageSha256": "bb9a9bd58fd1565f53bfb50b3414dad7145cd6ff82e5b1f6c99400fd82fcf01b",
           "screenshot": {
             "path": "screenshots/stage8-2G-B-1-1a/defeat-02-main-withdrawal.png",
-            "sha256": "19c4f05105fa07cc5b6011c0210229367fd3482f879881f46bc97aff08fa01c4"
+            "sha256": "bb9a9bd58fd1565f53bfb50b3414dad7145cd6ff82e5b1f6c99400fd82fcf01b"
           }
         },
         {
@@ -12428,10 +12428,10 @@
               "mode": "overview"
             }
           },
-          "imageSha256": "509c5d4681ef7d20dc5867715f1e8af217eafc59683aa0bedb87290b8319c622",
+          "imageSha256": "5e438896327a2090776afc40d99bfe07eb4492dbfdfe71dc64dc9204e95922a1",
           "screenshot": {
             "path": "screenshots/stage8-2G-B-1-1a/defeat-05-rear-guard-withdraw-or-loss.png",
-            "sha256": "509c5d4681ef7d20dc5867715f1e8af217eafc59683aa0bedb87290b8319c622"
+            "sha256": "5e438896327a2090776afc40d99bfe07eb4492dbfdfe71dc64dc9204e95922a1"
           }
         },
         {
@@ -13238,10 +13238,10 @@
               "mode": "overview"
             }
           },
-          "imageSha256": "fbbdd6f321877197b1362b2f63c895e9d4e6ae52bde7ebdde6f0886a96f17540",
+          "imageSha256": "479edb849042b0651c83d93be482b247ac53cda8725a62e1041255cc0ff4a38f",
           "screenshot": {
             "path": "screenshots/stage8-2G-B-1-1a/defeat-03-rear-guard-cover-fire.png",
-            "sha256": "fbbdd6f321877197b1362b2f63c895e9d4e6ae52bde7ebdde6f0886a96f17540"
+            "sha256": "479edb849042b0651c83d93be482b247ac53cda8725a62e1041255cc0ff4a38f"
           }
         },
         {
@@ -14048,10 +14048,10 @@
               "mode": "overview"
             }
           },
-          "imageSha256": "6c684cc3ef094d46a9d9416e4e3758a9181bd9a4239e59b692ddbe0bf9c19298",
+          "imageSha256": "dfc6bc3558981a84e9e6c9c17613f53865ab97fa53cb4aafa9a00d213101537d",
           "screenshot": {
             "path": "screenshots/stage8-2G-B-1-1a/defeat-04-rear-guard-projectile.png",
-            "sha256": "6c684cc3ef094d46a9d9416e4e3758a9181bd9a4239e59b692ddbe0bf9c19298"
+            "sha256": "dfc6bc3558981a84e9e6c9c17613f53865ab97fa53cb4aafa9a00d213101537d"
           }
         },
         {
@@ -14814,10 +14814,10 @@
               "mode": "overview"
             }
           },
-          "imageSha256": "a55b945f47b5f5648f4d409ceed51a0b90192d139dc35e7a177af3d99cb51f2d",
+          "imageSha256": "5677406c0108072770bfed37fb70f0028b9c0199c69e1fda0ca7ec61ce83cceb",
           "screenshot": {
             "path": "screenshots/stage8-2G-B-1-1a/defeat-07-final-state.png",
-            "sha256": "a55b945f47b5f5648f4d409ceed51a0b90192d139dc35e7a177af3d99cb51f2d"
+            "sha256": "5677406c0108072770bfed37fb70f0028b9c0199c69e1fda0ca7ec61ce83cceb"
           }
         }
       ]
@@ -14836,7 +14836,7 @@
           "timeMs": 13418,
           "phase": "first_contact",
           "sceneHash": "upf_7af1e100",
-          "stateSignature": "e4826381daef036710e781514a6671592da34be7bac4d7853c9eb01d796176b7",
+          "stateSignature": "73459de448a15315293d0b710c85686a02d6e2e9aef3fe4d8a40ed4ebcc04c8b",
           "semanticPredicates": {
             "firstContact": true,
             "mixedFire": false,
@@ -15035,7 +15035,7 @@
               "actorId": "unit_fixture-u-5",
               "side": "friendly",
               "type": "repair_vehicle",
-              "visualState": "fire",
+              "visualState": "idle",
               "currentAction": "fire",
               "presentationPosition": {
                 "x": 663.1217,
@@ -15207,7 +15207,7 @@
                 "actorId": "unit_fixture-u-5",
                 "side": "friendly",
                 "type": "repair_vehicle",
-                "visualState": "fire",
+                "visualState": "idle",
                 "currentAction": "fire",
                 "presentationPosition": {
                   "x": 663.1217,
@@ -15501,7 +15501,7 @@
                 "actorId": "unit_fixture-u-5",
                 "side": "friendly",
                 "type": "repair_vehicle",
-                "visualState": "fire",
+                "visualState": "idle",
                 "currentAction": "fire",
                 "presentationPosition": {
                   "x": 663.1217,
@@ -15624,10 +15624,10 @@
               "mode": "overview"
             }
           },
-          "imageSha256": "7640b92a5d4edf784a7026597e92f7190d2cbca2f4e6aa429decedd3a30a1540",
+          "imageSha256": "4b043f76a96bfaee0e46f777c801c8dff6ededf75835418db315804739ee38a8",
           "screenshot": {
             "path": "screenshots/stage8-2G-B-1-1a/debug-assignment-phase-slices.png",
-            "sha256": "7640b92a5d4edf784a7026597e92f7190d2cbca2f4e6aa429decedd3a30a1540"
+            "sha256": "4b043f76a96bfaee0e46f777c801c8dff6ededf75835418db315804739ee38a8"
           }
         },
         {
@@ -15638,7 +15638,7 @@
           "timeMs": 13418,
           "phase": "first_contact",
           "sceneHash": "upf_7af1e100",
-          "stateSignature": "e4826381daef036710e781514a6671592da34be7bac4d7853c9eb01d796176b7",
+          "stateSignature": "73459de448a15315293d0b710c85686a02d6e2e9aef3fe4d8a40ed4ebcc04c8b",
           "semanticPredicates": {
             "firstContact": true,
             "mixedFire": false,
@@ -15837,7 +15837,7 @@
               "actorId": "unit_fixture-u-5",
               "side": "friendly",
               "type": "repair_vehicle",
-              "visualState": "fire",
+              "visualState": "idle",
               "currentAction": "fire",
               "presentationPosition": {
                 "x": 663.1217,
@@ -16009,7 +16009,7 @@
                 "actorId": "unit_fixture-u-5",
                 "side": "friendly",
                 "type": "repair_vehicle",
-                "visualState": "fire",
+                "visualState": "idle",
                 "currentAction": "fire",
                 "presentationPosition": {
                   "x": 663.1217,
@@ -16303,7 +16303,7 @@
                 "actorId": "unit_fixture-u-5",
                 "side": "friendly",
                 "type": "repair_vehicle",
-                "visualState": "fire",
+                "visualState": "idle",
                 "currentAction": "fire",
                 "presentationPosition": {
                   "x": 663.1217,
@@ -16426,10 +16426,10 @@
               "mode": "overview"
             }
           },
-          "imageSha256": "ca31a8a01e2127d71dbe3cb87ebb3d04f4dbfb9ecbb8ac406a9254f0cd758abb",
+          "imageSha256": "e3bf6823b7da78137e60845b6d55e2e8896df97200309d1bf4dcec19dc92c28d",
           "screenshot": {
             "path": "screenshots/stage8-2G-B-1-1a/debug-authoritative-shot-facing.png",
-            "sha256": "ca31a8a01e2127d71dbe3cb87ebb3d04f4dbfb9ecbb8ac406a9254f0cd758abb"
+            "sha256": "e3bf6823b7da78137e60845b6d55e2e8896df97200309d1bf4dcec19dc92c28d"
           }
         },
         {
@@ -17236,10 +17236,10 @@
               "mode": "overview"
             }
           },
-          "imageSha256": "a75ed7cd203257b7cd5b4694f9e5da923d6d737d24ea9b1389d8bd468921a7f2",
+          "imageSha256": "13fbf2680c86d5f2689b9e449299459208e9fbc51fe2405b6d0097e90d0560e8",
           "screenshot": {
             "path": "screenshots/stage8-2G-B-1-1a/debug-cover-retreat-shot.png",
-            "sha256": "a75ed7cd203257b7cd5b4694f9e5da923d6d737d24ea9b1389d8bd468921a7f2"
+            "sha256": "13fbf2680c86d5f2689b9e449299459208e9fbc51fe2405b6d0097e90d0560e8"
           }
         },
         {
@@ -18046,10 +18046,10 @@
               "mode": "overview"
             }
           },
-          "imageSha256": "044b68290ceb033b83025ec352494474dbdd714357433936a8e24bc5f9cc7207",
+          "imageSha256": "e7c0536aaa89bab8eb724a259757a86dfb9978e97ad291623d6e5860b4f7a0a7",
           "screenshot": {
             "path": "screenshots/stage8-2G-B-1-1a/debug-evidence-frame-binding.png",
-            "sha256": "044b68290ceb033b83025ec352494474dbdd714357433936a8e24bc5f9cc7207"
+            "sha256": "e7c0536aaa89bab8eb724a259757a86dfb9978e97ad291623d6e5860b4f7a0a7"
           }
         }
       ]
@@ -19082,10 +19082,10 @@
               "mode": "overview"
             }
           },
-          "imageSha256": "63c7751fbf9f7f6ab896f1eed561a781a31202853b41daeaabf890df6305e5a4",
+          "imageSha256": "be428870dfb610dd13927dc50ab505efeb8109c8d871d522a5406f4347efd5c3",
           "screenshot": {
             "path": "screenshots/stage8-2G-B-1-1a/formal-victory-default-size.png",
-            "sha256": "63c7751fbf9f7f6ab896f1eed561a781a31202853b41daeaabf890df6305e5a4"
+            "sha256": "be428870dfb610dd13927dc50ab505efeb8109c8d871d522a5406f4347efd5c3"
           }
         },
         {
@@ -20110,10 +20110,10 @@
               "mode": "overview"
             }
           },
-          "imageSha256": "571804d82383e21afd2e77b549555f42af9f5340523a96fed4a0adfec2378783",
+          "imageSha256": "a442705ffa54673401ac3400fb2744506a91f20644ea7b8044e30a4b17ab5f4c",
           "screenshot": {
             "path": "screenshots/stage8-2G-B-1-1a/formal-victory-narrow-size.png",
-            "sha256": "571804d82383e21afd2e77b549555f42af9f5340523a96fed4a0adfec2378783"
+            "sha256": "a442705ffa54673401ac3400fb2744506a91f20644ea7b8044e30a4b17ab5f4c"
           }
         }
       ]
@@ -20910,10 +20910,10 @@
               "mode": "overview"
             }
           },
-          "imageSha256": "9a9f7a45393d37f486af7deea0cb28658697636c153a3197935777392fa78e72",
+          "imageSha256": "a54f37b327cf4b91c51631a015eda93ab87dcbd4a08a0a547511ec7e397ab55c",
           "screenshot": {
             "path": "screenshots/stage8-2G-B-1-1a/formal-defeat-default-size.png",
-            "sha256": "9a9f7a45393d37f486af7deea0cb28658697636c153a3197935777392fa78e72"
+            "sha256": "a54f37b327cf4b91c51631a015eda93ab87dcbd4a08a0a547511ec7e397ab55c"
           }
         },
         {
@@ -21702,10 +21702,10 @@
               "mode": "overview"
             }
           },
-          "imageSha256": "4639fff64ac12c9b538d46e811360fd381c343094c4f4a1611c063f151e196fc",
+          "imageSha256": "2ac80c304506e10ba525a8daf9cc33dfc2f589d29939ee72b10a65698ca5a9bd",
           "screenshot": {
             "path": "screenshots/stage8-2G-B-1-1a/formal-defeat-narrow-size.png",
-            "sha256": "4639fff64ac12c9b538d46e811360fd381c343094c4f4a1611c063f151e196fc"
+            "sha256": "2ac80c304506e10ba525a8daf9cc33dfc2f589d29939ee72b10a65698ca5a9bd"
           }
         }
       ]

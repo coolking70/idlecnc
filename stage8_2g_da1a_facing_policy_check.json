@@ -157,6 +157,7 @@
   ],
   "reload": {
     "policy": "body_aims_weapon",
+    "weaponTopology": "body_mounted",
     "movementFacing": 0,
     "aimFacing": 0.7853981633974483,
     "bodyFacing": 0.7853981633974483,
@@ -169,6 +170,7 @@
   },
   "rearGuard": {
     "policy": "body_aims_weapon",
+    "weaponTopology": "body_mounted",
     "movementFacing": 3.141592653589793,
     "aimFacing": 0,
     "bodyFacing": 0,
@@ -181,6 +183,7 @@
   },
   "coverFire": {
     "policy": "body_aims_weapon",
+    "weaponTopology": "body_mounted",
     "movementFacing": 3.141592653589793,
     "aimFacing": -1.5707963267948966,
     "bodyFacing": -1.5707963267948966,
@@ -193,6 +196,7 @@
   },
   "support": {
     "policy": "movement_only",
+    "weaponTopology": "unarmed",
     "movementFacing": 0.25,
     "aimFacing": 1.5,
     "bodyFacing": 0.25,
@@ -200,7 +204,7 @@
     "facing": 0.25,
     "turretFacing": null,
     "shotFacing": null,
-    "aiming": true,
+    "aiming": false,
     "passed": true
   },
   "passed": true

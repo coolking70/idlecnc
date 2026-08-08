@@ -1875,7 +1875,7 @@
           "timeMs": 13546,
           "phase": "first_contact",
           "sceneHash": "upf_b7f3e811",
-          "stateSignature": "94a658515262b8f7e7364ccb38b8962589ce599575a2387337ce9742f6c17cc9",
+          "stateSignature": "60fd84979219ba5babfe9ae2335d96a4a1ff888d0a5bae22a007e3ee24f852ac",
           "semanticPredicates": {
             "firstContact": true,
             "mixedFire": false,
@@ -2088,7 +2088,7 @@
               "actorId": "unit_fixture-u-6",
               "side": "friendly",
               "type": "repair_vehicle",
-              "visualState": "fire",
+              "visualState": "idle",
               "currentAction": "fire",
               "presentationPosition": {
                 "x": 697.0313,
@@ -2275,7 +2275,7 @@
                 "actorId": "unit_fixture-u-6",
                 "side": "friendly",
                 "type": "repair_vehicle",
-                "visualState": "fire",
+                "visualState": "idle",
                 "currentAction": "fire",
                 "presentationPosition": {
                   "x": 697.0313,
@@ -12095,7 +12095,7 @@
           "timeMs": 13418,
           "phase": "first_contact",
           "sceneHash": "upf_7af1e100",
-          "stateSignature": "0134295437d8f2ea8d74efa96547a443ac0177b598f57d0cbb32a25af5b212d8",
+          "stateSignature": "9c6c3bc4a9176678f725bc878dcb8e188a0b3f99f26b52dd2b84a50f762fc98e",
           "semanticPredicates": {
             "firstContact": true,
             "mixedFire": false,
@@ -12294,7 +12294,7 @@
               "actorId": "unit_fixture-u-5",
               "side": "friendly",
               "type": "repair_vehicle",
-              "visualState": "fire",
+              "visualState": "idle",
               "currentAction": "fire",
               "presentationPosition": {
                 "x": 663.1217,
@@ -12466,7 +12466,7 @@
                 "actorId": "unit_fixture-u-5",
                 "side": "friendly",
                 "type": "repair_vehicle",
-                "visualState": "fire",
+                "visualState": "idle",
                 "currentAction": "fire",
                 "presentationPosition": {
                   "x": 663.1217,
@@ -15121,7 +15121,7 @@
           "timeMs": 13418,
           "phase": "first_contact",
           "sceneHash": "upf_7af1e100",
-          "stateSignature": "e4826381daef036710e781514a6671592da34be7bac4d7853c9eb01d796176b7",
+          "stateSignature": "73459de448a15315293d0b710c85686a02d6e2e9aef3fe4d8a40ed4ebcc04c8b",
           "semanticPredicates": {
             "firstContact": true,
             "mixedFire": false,
@@ -15320,7 +15320,7 @@
               "actorId": "unit_fixture-u-5",
               "side": "friendly",
               "type": "repair_vehicle",
-              "visualState": "fire",
+              "visualState": "idle",
               "currentAction": "fire",
               "presentationPosition": {
                 "x": 663.1217,
@@ -15492,7 +15492,7 @@
                 "actorId": "unit_fixture-u-5",
                 "side": "friendly",
                 "type": "repair_vehicle",
-                "visualState": "fire",
+                "visualState": "idle",
                 "currentAction": "fire",
                 "presentationPosition": {
                   "x": 663.1217,
@@ -16133,7 +16133,7 @@
           "timeMs": 13418,
           "phase": "first_contact",
           "sceneHash": "upf_7af1e100",
-          "stateSignature": "e4826381daef036710e781514a6671592da34be7bac4d7853c9eb01d796176b7",
+          "stateSignature": "73459de448a15315293d0b710c85686a02d6e2e9aef3fe4d8a40ed4ebcc04c8b",
           "semanticPredicates": {
             "firstContact": true,
             "mixedFire": false,
@@ -16332,7 +16332,7 @@
               "actorId": "unit_fixture-u-5",
               "side": "friendly",
               "type": "repair_vehicle",
-              "visualState": "fire",
+              "visualState": "idle",
               "currentAction": "fire",
               "presentationPosition": {
                 "x": 663.1217,
@@ -16504,7 +16504,7 @@
                 "actorId": "unit_fixture-u-5",
                 "side": "friendly",
                 "type": "repair_vehicle",
-                "visualState": "fire",
+                "visualState": "idle",
                 "currentAction": "fire",
                 "presentationPosition": {
                   "x": 663.1217,

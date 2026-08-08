@@ -21,3 +21,4 @@ jobs:
       - run: npm run test:stage8-2G-D-A-1
       - run: npm run test:stage8-2G-D-A-1a
       - run: npm run test:stage8-2G-D-B
+      - run: npm run test:stage8-2G-D-B-1

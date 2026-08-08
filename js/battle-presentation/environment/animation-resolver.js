@@ -1,4 +1,5 @@
 import { normalizeVisualUnitClass } from './visual-unit-class.js';
+import { resolvePresentationVisualState } from './presentation-facing-policy.js';
 
 export const DIRECTION_ORDER = Object.freeze(['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW']);
 const DIRECTION_ANGLES = Object.freeze([-Math.PI / 2, -Math.PI / 4, 0, Math.PI / 4, Math.PI / 2, 3 * Math.PI / 4, Math.PI, -3 * Math.PI / 4]);
@@ -27,12 +28,13 @@ export function directionName(directionIndex) { return DIRECTION_ORDER[Number(di
 export function directionRadians(directionIndex) { return DIRECTION_ANGLES[Number(directionIndex) % DIRECTION_ANGLES.length] || DIRECTION_ANGLES[0]; }
 
 function animationForState(actor, visualState) {
-  const state = String(visualState || actor?.visualState || actor?.presentationMode || 'idle').toLowerCase();
+  const requested = String(visualState || actor?.visualState || actor?.presentationMode || 'idle').toLowerCase();
+  const state = resolvePresentationVisualState({ actor, visualClass: normalizeVisualUnitClass(actor), weaponTopology: actor?.weaponTopology, visualState: requested, action: actor?.currentAction, formalRepair: actor?.visualStatus === 'repairing' }).visualState;
   if (['destroying', 'destroy'].includes(state)) return 'destroy';
   if (state === 'hit' || actor?.visualState === 'hit') return 'hit';
   if (state === 'repair' || actor?.visualStatus === 'repairing' || actor?.currentAction === 'repair') return 'repair';
-  if (state === 'fire' || actor?.firing) return 'fire';
-  if (state === 'aim' || actor?.aiming) return 'aim';
+  if (state === 'fire' || (actor?.firing && state !== 'idle')) return 'fire';
+  if (state === 'aim' || (actor?.aiming && state !== 'idle')) return 'aim';
   if (['move', 'deploy', 'turn', 'brake', 'retreat', 'cover_advance', 'retreat_route'].includes(state) || ['move', 'deploy', 'advance', 'screen', 'take_cover', 'disengage', 'repair_approach'].includes(actor?.currentAction)) return 'move';
   return 'idle';
 }

@@ -74,23 +74,23 @@ const machineScenes = [
   { sceneId: 'stage8g-db-art-showcase', result: report.result, seed: report.seed, fixtureType: 'synthetic-art', sourceReport: report, frames: [
     { file: 'd-b-01-full-friendly-lineup.png', visualTimeSeconds: 0, timeMs: 0, viewportKind: 'default', semantic: 'full-friendly-lineup', selectionType: 'friendly' },
     { file: 'd-b-02-full-enemy-lineup.png', visualTimeSeconds: 0, timeMs: 0, viewportKind: 'default', semantic: 'full-enemy-lineup', selectionType: 'enemy' },
-    { file: 'd-b-03-scout-move-fire.png', visualTimeSeconds: 14.8, timeMs: 14800, viewportKind: 'default', semantic: 'scout-move-fire', selectionType: 'scout' },
-    { file: 'd-b-05-support-vehicle.png', visualTimeSeconds: 2.4, timeMs: 2400, viewportKind: 'default', semantic: 'support-vehicle', selectionType: 'support' },
-    { file: 'd-b-06-production-mixed-battle.png', visualTimeSeconds: 15, timeMs: 15000, viewportKind: 'default', semantic: 'mixed-battle', selectionType: 'friendly' },
-    { file: 'd-b-07-cover-advance-production.png', visualTimeSeconds: 8, timeMs: 8000, viewportKind: 'default', semantic: 'cover-advance', selectionType: 'friendly' },
+    { file: 'd-b-03-scout-move.png', visualTimeSeconds: 2.8, timeMs: 2800, viewportKind: 'default', semantic: 'scout-move', selectionType: 'scout' },
+    { file: 'd-b-04-scout-fire.png', visualTimeSeconds: 14.25, timeMs: 14250, viewportKind: 'default', semantic: 'scout-fire', selectionType: 'scout' },
+    { file: 'd-b-06-support-vehicle.png', visualTimeSeconds: 2.4, timeMs: 2400, viewportKind: 'default', semantic: 'support-unarmed', selectionType: 'support' },
+    { file: 'd-b-07-cover-advance.png', visualTimeSeconds: 15.02, timeMs: 15020, viewportKind: 'default', semantic: 'cover-advance', selectionType: 'friendly' },
     { file: 'd-b-09-selected-unit-hud.png', visualTimeSeconds: 4, timeMs: 4000, viewportKind: 'default', semantic: 'selected-unit-hud', selectionType: 'friendly' },
     { file: 'd-b-11-objective-and-phase.png', visualTimeSeconds: 22, timeMs: 22000, viewportKind: 'default', semantic: 'objective-phase', selectionType: 'friendly' },
     { file: 'd-b-14-narrow-production-battle.png', visualTimeSeconds: 15, timeMs: 15000, viewportKind: 'narrow', semantic: 'narrow-production-battle', selectionType: 'friendly' },
     { file: 'd-b-16-production-fallback.png', visualTimeSeconds: 4.8, timeMs: 4800, viewportKind: 'default', semantic: 'production-fallback', selectionType: 'scout', fallbackExpected: true }
   ] },
   { sceneId: 'stage8g-db-formal-victory', result: formalVictoryReport.result, seed: formalVictoryReport.seed, fixtureType: 'formal-unmodified', sourceReport: formalVictoryReport, frames: [
-    { file: 'd-b-04-repair-vehicle-action.png', visualTimeSeconds: formalRepairTime + .02, timeMs: (formalRepairTime + .02) * 1000, viewportKind: 'default', semantic: 'repair-vehicle-action', selectionType: 'repair' },
+    { file: 'd-b-05-repair-action.png', visualTimeSeconds: formalRepairTime + .02, timeMs: (formalRepairTime + .02) * 1000, viewportKind: 'default', semantic: 'repair-action', selectionType: 'repair' },
     { file: 'd-b-10-damaged-unit-health.png', visualTimeSeconds: 14.05, timeMs: 14050, viewportKind: 'default', semantic: 'damaged-unit-health', selectionType: 'damaged' },
     { file: 'd-b-12-victory-result.png', visualTimeSeconds: formalVictoryDuration, timeMs: Number(formalVictoryDuration) * 1000, viewportKind: 'default', semantic: 'victory-result', selectionType: 'friendly' },
     { file: 'd-b-15-narrow-result-ui.png', visualTimeSeconds: formalVictoryDuration, timeMs: Number(formalVictoryDuration) * 1000, viewportKind: 'narrow', semantic: 'narrow-result', selectionType: 'friendly' }
   ] },
   { sceneId: 'stage8g-db-formal-defeat', result: formalDefeatReport.result, seed: formalDefeatReport.seed, fixtureType: 'formal-unmodified', sourceReport: formalDefeatReport, frames: [
-    { file: 'd-b-08-retreat-rear-guard-production.png', visualTimeSeconds: Math.max(1, formalDefeatDuration * .72), timeMs: Number(formalDefeatDuration * .72) * 1000, viewportKind: 'default', semantic: 'retreat-rear-guard', selectionType: 'friendly' },
+    { file: 'd-b-08-retreat-rear-guard.png', visualTimeSeconds: formalDefeatPresentation.renderState.atTime(0).engagementSchedule.retreatOrders.find((order) => order.role === 'rear_guard')?.start || formalDefeatDuration * .88, timeMs: Number((formalDefeatPresentation.renderState.atTime(0).engagementSchedule.retreatOrders.find((order) => order.role === 'rear_guard')?.start || formalDefeatDuration * .88) * 1000), viewportKind: 'default', semantic: 'retreat-rear-guard', selectionType: 'friendly' },
     { file: 'd-b-13-defeat-result.png', visualTimeSeconds: formalDefeatDuration, timeMs: Number(formalDefeatDuration) * 1000, viewportKind: 'default', semantic: 'defeat-result', selectionType: 'friendly' }
   ] }
 ];

@@ -81,50 +81,50 @@
       "scenario": "victory",
       "actorId": "unit_stage8g-c1-mining-4",
       "visualClass": "support_vehicle",
-      "renderMode": "procedural",
-      "assetId": null,
+      "renderMode": "sprite",
+      "assetId": "unit_friendly_repair_vehicle",
       "logicalRect": {
-        "x": 679.5586635586636,
-        "y": 595.2390720390721,
-        "width": 54.7008547008547,
-        "height": 27.35042735042735
+        "x": 679.1757575757576,
+        "y": 593.9809523809524,
+        "width": 55.46666666666667,
+        "height": 29.866666666666667
       },
       "cssRect": {
         "x": 430.7727272727273,
         "y": 371.0571428571429,
-        "width": 34,
-        "height": 17
+        "width": 34.476,
+        "height": 18.564
       },
-      "finalCssWidth": 34,
-      "finalCssHeight": 17,
-      "screenFootprint": 34,
+      "finalCssWidth": 34.476,
+      "finalCssHeight": 18.564,
+      "screenFootprint": 34.476,
       "minimumScreenFootprint": 34,
-      "visualScaleBoost": 1.1655,
+      "visualScaleBoost": 1,
       "rendererGeometrySource": "production-final-draw-geometry"
     },
     {
       "scenario": "victory",
       "actorId": "unit_stage8g-c1-mining-2",
       "visualClass": "light_vehicle",
-      "renderMode": "procedural",
-      "assetId": null,
+      "renderMode": "sprite",
+      "assetId": "unit_friendly_scout_car",
       "logicalRect": {
         "x": 679.5586635586636,
-        "y": 23.353357753357756,
-        "width": 54.7008547008547,
-        "height": 27.35042735042735
+        "y": 22.213756613756615,
+        "width": 54.700854700854705,
+        "height": 29.62962962962963
       },
       "cssRect": {
         "x": 430.7727272727273,
         "y": 22.564285714285717,
         "width": 34,
-        "height": 17
+        "height": 18.416666666666664
       },
       "finalCssWidth": 34,
-      "finalCssHeight": 17,
+      "finalCssHeight": 18.4167,
       "screenFootprint": 34,
       "minimumScreenFootprint": 34,
-      "visualScaleBoost": 1.1655,
+      "visualScaleBoost": 1.0684,
       "rendererGeometrySource": "production-final-draw-geometry"
     },
     {
@@ -281,50 +281,50 @@
       "scenario": "defeat",
       "actorId": "unit_fixture-u-5",
       "visualClass": "support_vehicle",
-      "renderMode": "procedural",
-      "assetId": null,
+      "renderMode": "sprite",
+      "assetId": "unit_friendly_repair_vehicle",
       "logicalRect": {
-        "x": 635.7030025955152,
-        "y": 375.39524173459483,
-        "width": 54.7008547008547,
-        "height": 27.35042735042735
+        "x": 635.3200966126092,
+        "y": 374.1371220764752,
+        "width": 55.46666666666667,
+        "height": 29.866666666666667
       },
       "cssRect": {
         "x": 404.04818387330874,
         "y": 237.08980876535207,
-        "width": 34,
-        "height": 17
+        "width": 34.476,
+        "height": 18.564
       },
-      "finalCssWidth": 34,
-      "finalCssHeight": 17,
-      "screenFootprint": 34,
+      "finalCssWidth": 34.476,
+      "finalCssHeight": 18.564,
+      "screenFootprint": 34.476,
       "minimumScreenFootprint": 34,
-      "visualScaleBoost": 1.1655,
+      "visualScaleBoost": 1,
       "rendererGeometrySource": "production-final-draw-geometry"
     },
     {
       "scenario": "defeat",
       "actorId": "unit_fixture-u-3",
       "visualClass": "light_vehicle",
-      "renderMode": "procedural",
-      "assetId": null,
+      "renderMode": "sprite",
+      "assetId": "unit_friendly_scout_car",
       "logicalRect": {
         "x": 665.982905982906,
-        "y": 441.98192918192916,
-        "width": 54.7008547008547,
-        "height": 27.35042735042735
+        "y": 440.842328042328,
+        "width": 54.700854700854705,
+        "height": 29.62962962962963
       },
       "cssRect": {
         "x": 422.5,
         "y": 277.6660714285714,
         "width": 34,
-        "height": 17
+        "height": 18.416666666666664
       },
       "finalCssWidth": 34,
-      "finalCssHeight": 17,
+      "finalCssHeight": 18.4167,
       "screenFootprint": 34,
       "minimumScreenFootprint": 34,
-      "visualScaleBoost": 1.1655,
+      "visualScaleBoost": 1.0684,
       "rendererGeometrySource": "production-final-draw-geometry"
     },
     {

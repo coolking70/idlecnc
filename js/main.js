@@ -61,6 +61,7 @@ import {
 import { getUnitRank, renameUnit, getUnitEffectiveStats, filterUnits, sortUnits } from './units.js';
 import { validateResearchHistory, validateBattleOutcomeConsistency, compareBattleReports } from './integrity.js';
 import { buildEvidenceStatePayload, buildEvidenceStateSignature, buildStageC1EvidenceStatePayload, buildStageC1EvidenceStateSignature, stageC1SemanticPredicates } from './battle-presentation/universal/evidence-integrity.js';
+import { evaluateProductionSemanticPredicate } from './battle-presentation/universal/production-semantic-predicates.js';
 
 /* ------------------------------------------------------------
  * 模块实例
@@ -1593,7 +1594,7 @@ function boot() {
       const renderState = battlePresentationRouter?.getRenderStateAt?.(Number(seconds) || 0) || battlePresentationRouter?.getRenderState?.() || null;
       if (!renderState) return { ok: false, reason: 'presentation render state unavailable' };
       const payload = buildEvidenceStatePayload({ sceneId: context.sceneId || null, seed: context.seed, state: renderState, timeMs: Number(renderState.time || 0) * 1000 });
-      const timeMs = Number(renderState.time || 0) * 1000; const c1Payload = buildStageC1EvidenceStatePayload({ sceneId: context.sceneId || null, seed: context.seed, state: renderState, timeMs, semanticName: context.semanticName || '' }); const textState = battlePresentationRouter?.getTextState?.({}) || null; return { ok: true, state: renderState, payload, stateSignature: buildEvidenceStateSignature({ sceneId: context.sceneId || null, seed: context.seed, state: renderState, timeMs }), c1Payload, c1StateSignature: buildStageC1EvidenceStateSignature({ sceneId: context.sceneId || null, seed: context.seed, state: renderState, timeMs, semanticName: context.semanticName || '' }), semanticPredicates: stageC1SemanticPredicates(context.semanticName || '', renderState), hudContract: textState?.hudContract || null, selection: battlePresentationRouter?.getSelectionState?.() || null };
+      const timeMs = Number(renderState.time || 0) * 1000; const c1Payload = buildStageC1EvidenceStatePayload({ sceneId: context.sceneId || null, seed: context.seed, state: renderState, timeMs, semanticName: context.semanticName || '' }); const textState = battlePresentationRouter?.getTextState?.({}) || null; return { ok: true, state: renderState, payload, stateSignature: buildEvidenceStateSignature({ sceneId: context.sceneId || null, seed: context.seed, state: renderState, timeMs }), c1Payload, c1StateSignature: buildStageC1EvidenceStateSignature({ sceneId: context.sceneId || null, seed: context.seed, state: renderState, timeMs, semanticName: context.semanticName || '' }), semanticPredicates: stageC1SemanticPredicates(context.semanticName || '', renderState), productionSemanticPredicate: evaluateProductionSemanticPredicate(context.semanticName || '', renderState), hudContract: textState?.hudContract || null, selection: battlePresentationRouter?.getSelectionState?.() || null };
     },
     battlePresentationDiagnostics: () => {
       const routerState = battlePresentationRouter?.getState?.() || null;

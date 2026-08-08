@@ -171,6 +171,7 @@
     ],
     "reload": {
       "policy": "body_aims_weapon",
+      "weaponTopology": "body_mounted",
       "movementFacing": 0,
       "aimFacing": 0.7853981633974483,
       "bodyFacing": 0.7853981633974483,
@@ -183,6 +184,7 @@
     },
     "rearGuard": {
       "policy": "body_aims_weapon",
+      "weaponTopology": "body_mounted",
       "movementFacing": 3.141592653589793,
       "aimFacing": 0,
       "bodyFacing": 0,
@@ -195,6 +197,7 @@
     },
     "coverFire": {
       "policy": "body_aims_weapon",
+      "weaponTopology": "body_mounted",
       "movementFacing": 3.141592653589793,
       "aimFacing": -1.5707963267948966,
       "bodyFacing": -1.5707963267948966,
@@ -207,6 +210,7 @@
     },
     "support": {
       "policy": "movement_only",
+      "weaponTopology": "unarmed",
       "movementFacing": 0.25,
       "aimFacing": 1.5,
       "bodyFacing": 0.25,
@@ -214,7 +218,7 @@
       "facing": 0.25,
       "turretFacing": null,
       "shotFacing": null,
-      "aiming": true,
+      "aiming": false,
       "passed": true
     },
     "passed": true
@@ -245,14 +249,14 @@
   },
   "ci": {
     "previousGreenRun": 31262924790,
-    "newRunId": 31266612353,
-    "newJobId": 93125668996,
+    "newRunId": null,
+    "newJobId": null,
     "da1aExecuted": true,
-    "conclusion": "success"
+    "conclusion": null
   },
-  "readyForStage8_2G_D_B": true,
+  "readyForStage8_2G_D_B": false,
   "knownIssues": [
-    "External independent audit remains required; the audit JSON is a failure baseline and regression sample, not a production resource."
+    "Awaiting the GitHub Actions D-A.1a run; external independent audit remains required."
   ],
   "passed": true
 }
