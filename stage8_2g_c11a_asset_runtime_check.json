@@ -3,6 +3,6 @@
   "manifestProvider": "offline-manifest",
   "runtimeApi": "battlePresentationAssetStatus",
   "sameFrameActualDrawPathRequired": true,
-  "fallbackPolicy": "enemy-at-procedural-enemy",
+  "fallbackPolicy": "faction-safe-local-sprite-then-procedural",
   "passed": true
 }

@@ -1,0 +1,16 @@
+{
+  "stage": "8.2G-D-A",
+  "package": "iron-command-stage8-2G-D-A-production-unit-art.zip",
+  "packageSha256": "a1502489298b607fa4ff535f9d5449b2415ffc7f7db318d9193dc856ee6bc459",
+  "packageBytes": 47137330,
+  "entries": 823,
+  "cleanInstall": {
+    "command": "npm install --ignore-scripts --no-audit --no-fund",
+    "status": 0
+  },
+  "npmTest": {
+    "command": "npm test",
+    "status": 0
+  },
+  "passed": true
+}

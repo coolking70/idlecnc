@@ -1,0 +1,54 @@
+{
+  "ok": true,
+  "stage": "8.2G-D-A",
+  "mutationCases": 8,
+  "cases": [
+    {
+      "label": "machine asset id",
+      "rejected": true,
+      "output": "olking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-D-A-evidence.mjs:14:35)\n    at file:///Users/coolking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-D-A-evidence.mjs:53:102\n    at ModuleJob.run (node:internal/modules/esm/module_job:413:25)\n    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:654:26)\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)\n\nNode.js v25.2.1\n"
+    },
+    {
+      "label": "machine animation frame",
+      "rejected": true,
+      "output": "olking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-D-A-evidence.mjs:14:35)\n    at file:///Users/coolking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-D-A-evidence.mjs:53:102\n    at ModuleJob.run (node:internal/modules/esm/module_job:413:25)\n    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:654:26)\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)\n\nNode.js v25.2.1\n"
+    },
+    {
+      "label": "browser source rect",
+      "rejected": true,
+      "output": "olking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-D-A-evidence.mjs:14:35)\n    at file:///Users/coolking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-D-A-evidence.mjs:67:526\n    at ModuleJob.run (node:internal/modules/esm/module_job:413:25)\n    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:654:26)\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)\n\nNode.js v25.2.1\n"
+    },
+    {
+      "label": "browser faction palette",
+      "rejected": true,
+      "output": "olking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-D-A-evidence.mjs:14:35)\n    at file:///Users/coolking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-D-A-evidence.mjs:67:526\n    at ModuleJob.run (node:internal/modules/esm/module_job:413:25)\n    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:654:26)\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)\n\nNode.js v25.2.1\n"
+    },
+    {
+      "label": "browser screenshot hash",
+      "rejected": true,
+      "output": "olking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-D-A-evidence.mjs:14:35)\n    at file:///Users/coolking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-D-A-evidence.mjs:65:332\n    at ModuleJob.run (node:internal/modules/esm/module_job:413:25)\n    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:654:26)\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)\n\nNode.js v25.2.1\n"
+    },
+    {
+      "label": "duplicate screenshot hash",
+      "rejected": true,
+      "output": "olking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-D-A-evidence.mjs:14:35)\n    at file:///Users/coolking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-D-A-evidence.mjs:65:332\n    at ModuleJob.run (node:internal/modules/esm/module_job:413:25)\n    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:654:26)\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)\n\nNode.js v25.2.1\n"
+    },
+    {
+      "label": "fallback binding",
+      "rejected": true,
+      "output": "olking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-D-A-evidence.mjs:14:35)\n    at file:///Users/coolking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-D-A-evidence.mjs:67:526\n    at ModuleJob.run (node:internal/modules/esm/module_job:413:25)\n    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:654:26)\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)\n\nNode.js v25.2.1\n"
+    },
+    {
+      "label": "source report",
+      "rejected": true,
+      "output": "olking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-D-A-evidence.mjs:14:35)\n    at file:///Users/coolking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-D-A-evidence.mjs:28:120\n    at ModuleJob.run (node:internal/modules/esm/module_job:413:25)\n    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:654:26)\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)\n\nNode.js v25.2.1\n"
+    }
+  ],
+  "assetBindingProtected": true,
+  "animationBindingProtected": true,
+  "sourceRectProtected": true,
+  "factionProtected": true,
+  "screenshotHashProtected": true,
+  "fallbackProtected": true,
+  "sourceReportProtected": true
+}

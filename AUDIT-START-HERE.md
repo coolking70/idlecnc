@@ -1,8 +1,20 @@
-# Stage 8.2G-C.1.1a Audit Start Here
+# Stage 8.2G-D-A Audit Start Here
 
-本交付的需求主体是 Stage 8.2G-C.1.1a 开发提示词。当前代码基线为
-`22b4fea85f877217a8f4ab18621f2a982e64a546`（C.1.1 runtime readability），上一轮参考为
-`stage8_2g_c11_github_reaudit.json`。该 JSON 仅是外部失败基线和回归样本，不会进入生产代码；失败样本保留，不通过过滤或删除来归零。
+本交付的需求主体是 Stage 8.2G-D-A 开发提示词。当前工作基线为
+`dcbab21` 之后的 D-A 分支，上一轮参考为
+`stage8_2g_c11a_github_independent_audit.json`。该 JSON 仅是外部失败基线和回归样本，不会进入生产代码；失败样本保留，不通过过滤或删除来归零。
+
+## D-A entry points
+
+```bash
+npm run test:stage8-2G-D-A
+npm run browser:stage8-2G-D-A
+npm run build:stage8-2G-D-A
+npm run verify:stage8-2G-D-A -- --skip-full
+npm run verify:stage8-2G-D-A
+```
+
+D-A 生产截图位于 `screenshots/stage8-2G-D-A/`，Manifest v2 位于 `assets/battle/asset-manifest.json`。
 
 ## C.1.1a entry points
 

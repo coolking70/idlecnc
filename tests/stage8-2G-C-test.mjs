@@ -59,7 +59,7 @@ check('weapon profiles are visually distinct', () => {
 });
 
 check('asset manifest and procedural fallback are valid', () => {
-  const manifest = JSON.parse(fs.readFileSync(new URL('../assets/battle/asset-manifest.json', import.meta.url), 'utf8')); assert.equal(manifest.runtimeGeneration, false); assert.equal(manifest.assets.length, 5); const missing = resolveAsset(manifest, 'unit_friendly_mbt', new Set()); assert.equal(missing.mode, 'procedural'); assert.equal(missing.fallback, true); const resolved = resolveAsset(manifest, 'unit_friendly_mbt', new Set([manifest.assets.find((asset) => asset.id === 'unit_friendly_mbt').source])); assert.equal(resolved.mode, 'sprite'); assert.equal(resolveUnitAsset({ type: 'mbt' }, manifest, new Set()).fallback, true); assert.equal(unitVisualSpec({ type: 'mbt' }, { manifest }).minimumScreenFootprint, 46);
+  const manifest = JSON.parse(fs.readFileSync(new URL('../assets/battle/asset-manifest.json', import.meta.url), 'utf8')); assert.equal(manifest.runtimeGeneration, false); assert.equal(manifest.version, 2); assert.ok(manifest.assets.length >= 13); assert.equal(manifest.directions, 8); const missing = resolveAsset(manifest, 'unit_friendly_mbt', new Set()); assert.equal(missing.mode, 'procedural'); assert.equal(missing.fallback, true); const resolved = resolveAsset(manifest, 'unit_friendly_mbt', new Set([manifest.assets.find((asset) => asset.id === 'unit_friendly_mbt').source])); assert.equal(resolved.mode, 'sprite'); assert.equal(resolveUnitAsset({ type: 'mbt' }, manifest, new Set()).fallback, true); assert.equal(unitVisualSpec({ type: 'mbt' }, { manifest }).minimumScreenFootprint, 46);
 });
 
 check('production and debug remain separated', () => {

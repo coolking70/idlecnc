@@ -24,20 +24,20 @@
     {
       "side": "enemy",
       "type": "infantry",
-      "assetId": null,
+      "assetId": "unit_enemy_infantry",
       "requestedAssetId": "unit_enemy_infantry",
-      "mode": "procedural",
-      "reason": "faction_asset_unavailable",
-      "factionVisualMode": "procedural_enemy"
+      "mode": "sprite",
+      "reason": null,
+      "factionVisualMode": "enemy"
     },
     {
       "side": "enemy",
       "type": "mbt",
-      "assetId": null,
+      "assetId": "unit_enemy_mbt",
       "requestedAssetId": "unit_enemy_mbt",
-      "mode": "procedural",
-      "reason": "faction_asset_unavailable",
-      "factionVisualMode": "procedural_enemy"
+      "mode": "hybrid",
+      "reason": null,
+      "factionVisualMode": "enemy"
     }
   ],
   "enemyFriendlyAssetReuse": false,

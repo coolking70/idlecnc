@@ -87,9 +87,9 @@
     }
   ],
   "enemyAt": {
-    "assetId": null,
-    "mode": "procedural",
-    "factionVisualMode": "procedural_enemy",
+    "assetId": "unit_enemy_at_infantry",
+    "mode": "sprite",
+    "factionVisualMode": "enemy",
     "rendererFamily": "infantry"
   },
   "passed": true

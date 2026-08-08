@@ -20,7 +20,7 @@ for (const side of ['friendly', 'enemy']) for (const type of ['infantry', 'mbt']
   const actor = { id: `${side}-${type}`, side, type, category: type === 'infantry' ? 'infantry' : 'armor' };
   const resolved = resolveUnitAsset(actor, OFFLINE_ASSET_MANIFEST, new Set(OFFLINE_ASSET_MANIFEST.assets.map((asset) => asset.source)), type === 'mbt' ? 'hybrid' : 'sprite');
   if (side === 'friendly') assert.equal(resolved.assetId, `unit_friendly_${type}`);
-  else { assert.notEqual(resolved.assetId, `unit_friendly_${type}`); assert.equal(resolved.mode, 'procedural'); assert.equal(resolved.reason, 'faction_asset_unavailable'); }
+  else { assert.notEqual(resolved.assetId, `unit_friendly_${type}`); assert.ok(resolved.assetId === `unit_enemy_${type}` || resolved.mode === 'procedural'); assert.equal(resolved.factionVisualMode, resolved.assetId ? 'enemy' : 'procedural_enemy'); }
   assetCases.push({ side, type, assetId: resolved.assetId, requestedAssetId: resolved.requestedAssetId || resolved.assetId, mode: resolved.mode, reason: resolved.reason || null, factionVisualMode: resolved.factionVisualMode });
 }
 const reportsByScenario = {};
@@ -36,8 +36,8 @@ for (const [scenario, report] of Object.entries(reports)) {
   const friendlyTank = state.actors.find((actor) => actor.side === 'friendly' && actor.type === 'mbt');
   const enemyTank = { id: 'audit-enemy-mbt', side: 'enemy', type: 'mbt', category: 'armor' };
   const specs = buildProductionDrawSpecs({ actors: [friendlyInfantry, enemyInfantry, friendlyTank, enemyTank].filter(Boolean), wrecks: [], environment: state.environment, camera: state.camera, options: { battlefieldBounds: plan.layout.bounds } });
-  assert.equal(specs.actorSpecs.find((spec) => spec.actorId === enemyInfantry?.id)?.assetId || null, null);
-  assert.equal(specs.actorSpecs.find((spec) => spec.actorId === enemyTank.id)?.assetId || null, null);
+  assert.ok(specs.actorSpecs.find((spec) => spec.actorId === enemyInfantry?.id)?.assetId?.startsWith('unit_enemy_'));
+  assert.equal(specs.actorSpecs.find((spec) => spec.actorId === enemyTank.id)?.assetId || null, 'unit_enemy_mbt');
   for (const [viewportKind, viewport] of [['default', { width: 1440, height: 900, scale: Math.min(1440 / 1280, 900 / 720) }], ['narrow', { width: 780, height: 900, scale: Math.min(780 / 1280, 900 / 720) }]]) {
     const runtimeSpecs = buildProductionDrawSpecs({ actors: state.actors, wrecks: state.wrecks, environment: state.environment, camera: state.camera, options: { battlefieldBounds: plan.layout.bounds, viewport } });
     assert.ok(runtimeSpecs.actorSpecs.every((spec) => spec.screenFootprint + 1e-9 >= spec.minimumScreenFootprint), `${scenario} ${viewportKind} footprint floor`);

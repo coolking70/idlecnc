@@ -456,3 +456,13 @@
 - [x] 最终封包 verifier：20/20 C PNG 哈希一致、唯一 PNG=20、pageErrors/consoleErrors=0、禁止项=0；clean install 后完整回归通过。
 - [x] 最终 ZIP：`iron-command-stage8-2G-C-battlefield-environment-art-pipeline.zip`，SHA-256 `c204447ccf57f9f84b2b1d78397ecfc588f10310c5ef3c316594c46788a21671`，38,539,864 bytes，689 entries；包内同时保留 B.1.1a 回归所需 24 张历史截图与 C 当前 20 张截图。
 - [ ] 独立审计方仍需按最终 C ZIP 重新验收；当前 `independent-audit.json` 仅为外部基线，不代表本阶段已获得独立批准。
+# Stage 8.2G-D-A progress
+
+- [x] Added ten offline self-authored PNG sheets: six formal faction/unit assets, two MBT turret component sheets, and two faction-specific MBT Wreck sheets.
+- [x] Upgraded the offline asset manifest to v2 with provenance, eight-direction order, deterministic animation rows, world size, faction palette/mark and weapon muzzle anchors.
+- [x] Added production deterministic direction/animation/sourceRect/muzzle resolver; no `Date.now()` or `performance.now()` in production animation.
+- [x] Connected the formal Universal Renderer to current presentation state, viewport geometry, spritesheet frames, MBT Hull/Turret components, faction Wrecks, depth sorting and faction-safe fallback.
+- [x] Added D-A Node coverage, seek/replay determinism, 12 current-code browser screenshots, runtime/fallback proof, screen-footprint and performance evidence, machine/browser verifier and 8-case tamper regression.
+- [x] Refreshed C.1.1a machine/browser evidence after the shared animation clock and screen-metrics contract changes; C.1.1a verifier and tamper regression pass.
+- [x] Added default npm/CI gates and clean-package builder/verifier entry points for D-A, with B.1.1a and C.1.1a regression retention.
+- [ ] Remaining handoff: run the default clean-package verifier, inspect the final ZIP hash, commit and push `agent/stage8-2G-D-A-production-unit-art`.

@@ -1,5 +1,6 @@
-import { OFFLINE_ASSET_MANIFEST, resolveAsset, resolveEnvironmentAsset, resolveUnitAsset } from './asset-provider.js';
+import { OFFLINE_ASSET_MANIFEST, resolveAsset, resolveEnvironmentAsset, resolveUnitAsset, resolveWreckAsset } from './asset-provider.js';
 import { normalizeVisualUnitClass, visualUnitClassFamily } from './visual-unit-class.js';
+import { resolveActorAnimationState, resolveMuzzleAnchor, resolveSpriteFrame } from './animation-resolver.js';
 import { PRESENTATION_WORLD_HEIGHT, PRESENTATION_WORLD_WIDTH } from '../presentation-viewport.js';
 
 export const MINIMUM_SCREEN_FOOTPRINT = Object.freeze({
@@ -116,7 +117,7 @@ export function buildActorFinalDrawGeometry({ actor, resolved, visualClass = nor
 }
 
 export function assetSpecForResolved(resolved, kind = 'actor') {
-  const entry = resolved?.assetId ? (resolved.source ? resolved : null) : null;
+  const entry = resolved?.assetId ? (resolved.entry || (resolved.source ? resolved : null)) : null;
   return {
     assetId: resolved?.assetId || null,
     requestedAssetId: resolved?.requestedAssetId || resolved?.assetId || null,
@@ -125,11 +126,20 @@ export function assetSpecForResolved(resolved, kind = 'actor') {
     fallbackUsed: resolved?.fallback !== false,
     assetStatus: resolved?.status || (resolved?.fallback === false ? 'ready' : 'fallback'),
     assetSource: entry?.source || null,
+    assetFormat: entry?.format || null,
+    directions: entry?.directions || null,
+    directionOrder: entry?.directionOrder || null,
+    spritesheet: entry?.spritesheet || null,
+    animations: entry?.animations || null,
+    weaponMuzzleAnchor: entry?.weaponMuzzleAnchor || null,
+    componentAssetIds: resolved?.componentAssetIds || entry?.components || null,
     worldSize: resolved?.worldSize || null,
     license: entry?.license || null,
     drawPath: resolved?.fallback === false ? 'drawImage' : 'procedural-fallback',
     faction: resolved?.side || null,
     factionVisualMode: resolved?.factionVisualMode || null,
+    factionPalette: entry?.factionPalette || null,
+    factionMark: entry?.factionMark || null,
     visualClass: resolved?.visualClass || null,
     resolutionReason: resolved?.reason || null,
     kind
@@ -142,6 +152,12 @@ export function buildActorDrawSpec(actor, camera = {}, options = {}) {
   const visualClass = normalizeVisualUnitClass(actor);
   const requestedMode = options.modeByType?.[visualClass] || (visualClass === 'mbt' ? 'hybrid' : ['infantry', 'anti_armor_infantry'].includes(visualClass) ? 'sprite' : 'procedural');
   const resolved = { ...resolveUnitAsset(actor, manifest, sources, requestedMode), visualClass };
+  const animationState = resolveActorAnimationState(actor, actor?.visualState, options.presentationSeconds ?? actor?.presentationSeconds ?? 0, { entry: resolved.entry, seed: options.seed ?? actor?.seed ?? 0 });
+  const spriteFrame = resolveSpriteFrame(resolved.entry, animationState);
+  const turretEntry = resolved.componentAssetIds?.turretAssetId ? (manifest.assets || []).find((asset) => asset.id === resolved.componentAssetIds.turretAssetId) : null;
+  const turretAnimationState = turretEntry ? resolveActorAnimationState({ ...actor, facing: actor?.turretFacing ?? actor?.facing }, actor?.visualState, options.presentationSeconds ?? actor?.presentationSeconds ?? 0, { entry: turretEntry, seed: options.seed ?? actor?.seed ?? 0 }) : null;
+  const turretSpriteFrame = turretEntry ? resolveSpriteFrame(turretEntry, turretAnimationState) : null;
+  const muzzleAnchor = resolveMuzzleAnchor(actor, resolved.entry, animationState.directionIndex);
   const geometry = buildActorFinalDrawGeometry({ actor, resolved, visualClass, camera, battlefieldBounds: options.battlefieldBounds, viewport: options.viewport, visualScaleBoost: options.visualScaleBoostByActor?.[actor?.id || actor?.actorId] });
   return {
     actorId: actor?.id || actor?.actorId || null,
@@ -149,10 +165,17 @@ export function buildActorDrawSpec(actor, camera = {}, options = {}) {
     visualClass,
     ...geometry,
     ...assetSpecForResolved(resolved, 'actor'),
+    animation: animationState.animation,
+    animationState,
+    spriteFrame,
+    sourceRect: spriteFrame.sourceRect || null,
+    turretAnimationState,
+    turretSourceRect: turretSpriteFrame?.sourceRect || null,
+    muzzleAnchor,
     finalDrawGeometry: geometry,
     weaponProfileId: actor?.weapon?.id || null,
     weaponPresentation: actor?.weaponPresentation || null,
-    hybridComponents: resolved.mode === 'hybrid' ? ['sprite_hull', 'procedural_turret', 'procedural_barrel', 'procedural_selection'] : []
+    hybridComponents: resolved.mode === 'hybrid' && visualClass === 'mbt' ? ['sprite_hull', 'sprite_turret', 'procedural_selection', 'procedural_weapon_effects'] : []
   };
 }
 
@@ -162,8 +185,8 @@ export function buildActorScreenMetrics(args = {}) { return buildActorFinalDrawG
 
 export function buildWreckDrawSpec(wreck, options = {}) {
   const manifest = options.manifest || OFFLINE_ASSET_MANIFEST; const sources = sourceSet(manifest, options.availableSources);
-  const resolved = wreck?.wreckType === 'tank_wreck' ? resolveAsset(manifest, 'wreck_tank', sources) : { assetId: null, mode: 'procedural', fallback: true, status: 'fallback' };
-  return { wreckId: wreck?.id || wreck?.sourceActorId || null, wreckType: wreck?.wreckType || 'unknown_wreck', ...assetSpecForResolved(resolved, 'wreck') };
+  const resolved = resolveWreckAsset(wreck, manifest, sources); const animationState = resolveActorAnimationState({ ...wreck, id: wreck?.id || wreck?.sourceActorId, visualState: 'idle', facing: wreck?.angle || 0 }, 'idle', options.presentationSeconds ?? 0, { entry: resolved.entry, seed: wreck?.seed ?? 0 }); const spriteFrame = resolveSpriteFrame(resolved.entry, animationState);
+  return { wreckId: wreck?.id || wreck?.sourceActorId || null, wreckType: wreck?.wreckType || 'unknown_wreck', side: wreck?.side || null, lastHullFacing: Number(wreck?.angle) || 0, ...assetSpecForResolved(resolved, 'wreck'), animationState, spriteFrame, sourceRect: spriteFrame.sourceRect || null };
 }
 
 export function buildEnvironmentDrawSpecs(environment, options = {}) {
@@ -176,7 +199,7 @@ export function buildProductionDrawSpecs({ actors = [], wrecks = [], environment
   const wreckSpecs = wrecks.map((wreck) => buildWreckDrawSpec(wreck, options));
   const environmentSpecs = buildEnvironmentDrawSpecs(environment, options);
   return {
-    version: '8.2G-C.1.1a-draw-spec-3',
+    version: '8.2G-D-A-draw-spec-1',
     actorSpecs,
     wreckSpecs,
     environmentSpecs,

@@ -10,6 +10,8 @@ import { assignmentAtTime, retreatAtTime, suppressionSourceAtTime, suppressionTa
 import { buildEnvironmentScene } from '../environment/environment-scene-builder.js';
 import { buildPersistentDestructionLayer } from '../environment/destruction-layer.js';
 import { normalizeVisualUnitClass } from '../environment/visual-unit-class.js';
+import { OFFLINE_ASSET_MANIFEST } from '../environment/asset-provider.js';
+import { resolveMuzzleAnchor } from '../environment/animation-resolver.js';
 
 const clamp = (value, min, max) => Math.max(min, Math.min(max, Number(value) || 0));
 const TAU = Math.PI * 2;
@@ -56,6 +58,17 @@ function facingFor(actor, seconds, shot, presentationFacing = null) {
   if (Number.isFinite(presentationFacing)) return presentationFacing;
   const current = point(actor); const later = actor.nextPosition || current;
   return distance(current, later) > .01 ? Math.atan2(later.y - current.y, later.x - current.x) : Number(actor.facing) || 0;
+}
+
+function unitAssetEntry(actor) {
+  const visualClass = normalizeVisualUnitClass(actor); const type = visualClass === 'anti_armor_infantry' ? 'at_infantry' : visualClass; return OFFLINE_ASSET_MANIFEST.assets.find((asset) => asset.id === `unit_${actor?.side || 'friendly'}_${type}`) || null;
+}
+
+function muzzlePointForShot(shot, actors) {
+  const actor = actors.find((item) => item.id === shot.actorId || item.actorId === shot.actorId); const source = shot.sourcePositionAtFire || actor?.visualCenter || { x: 0, y: 0 }; if (!actor) return { point: { ...source }, anchor: { ok: false, reason: 'source_actor_missing' } };
+  const entry = unitAssetEntry(actor); const facing = Number(shot.sourceFacingAtFire ?? actor.facing) || 0; const anchoredActor = { ...actor, facing, turretFacing: facing }; const anchor = resolveMuzzleAnchor(anchoredActor, entry, undefined); if (!anchor.ok) return { point: { ...source }, anchor };
+  const visualClass = normalizeVisualUnitClass(actor); const width = visualClass === 'mbt' ? 60 : visualClass === 'anti_armor_infantry' ? 34 : visualClass === 'infantry' ? 30 : 44; const height = visualClass === 'mbt' ? 36 : visualClass === 'anti_armor_infantry' ? 40 : visualClass === 'infantry' ? 36 : 22; const forward = anchor.forward * width / 2; const lateral = anchor.lateral * height / 2;
+  return { point: { x: source.x + Math.cos(facing) * forward - Math.sin(facing) * lateral, y: source.y + Math.sin(facing) * forward + Math.cos(facing) * lateral }, anchor: { ...anchor, sourceActorId: shot.actorId, sourceFacingAtFire: facing, source: 'manifest.weaponMuzzleAnchor' } };
 }
 
 function memberPositions(actor, center, facing, visualState, seconds) {
@@ -156,19 +169,23 @@ function positionFor(actor, plan, seconds, sampler, engagementSchedule) {
   return { ...actor, routePosition: { ...current }, plannedPosition: { ...current }, preSeparationPosition: { ...current }, visualCenter: { ...presentation }, nextPosition: { ...next }, presentationFacing, presentationMode };
 }
 
-function projectileFor(shot, seconds) {
+function projectileFor(shot, seconds, actors) {
   if (seconds < shot.t || seconds > shot.impactTime + .08) return null;
-  const source = shot.sourcePositionAtFire; const target = shot.impactPositionAtImpact;
+  const muzzle = muzzlePointForShot(shot, actors); const source = muzzle.point; const target = shot.impactPositionAtImpact;
   const progress = clamp((seconds - shot.t) / Math.max(.001, shot.impactTime - shot.t), 0, 1);
-  return { id: `${shot.id}:projectile`, shotId: shot.id, kind: shot.weaponKind, x: source.x + (target.x - source.x) * progress, y: source.y + (target.y - source.y) * progress, start: { ...source }, end: { ...target }, progress, color: shot.weapon.projectileColor, tracerWidth: Number(shot.weapon.presentation?.tracerWidth || 2), weaponProfileId: shot.weapon.id, presentation: { ...(shot.weapon.presentation || {}) }, presentationOnly: true };
+  return { id: `${shot.id}:projectile`, shotId: shot.id, kind: shot.weaponKind, x: source.x + (target.x - source.x) * progress, y: source.y + (target.y - source.y) * progress,
+    // `start` remains the authoritative battle position for legacy evidence
+    // and audit consumers.  Renderer uses visualStart for the muzzle-aligned
+    // tracer without changing the combat source of the shot.
+    start: { ...shot.sourcePositionAtFire }, visualStart: { ...source }, end: { ...target }, progress, color: shot.weapon.projectileColor, tracerWidth: Number(shot.weapon.presentation?.tracerWidth || 2), weaponProfileId: shot.weapon.id, presentation: { ...(shot.weapon.presentation || {}) }, muzzleAnchor: muzzle.anchor, authoritativeSourcePosition: { ...shot.sourcePositionAtFire }, presentationOnly: true };
 }
 
 function visualEffects(plan, actors, schedule, seconds) {
   const effects = []; const decals = []; const smoke = [];
   for (const shot of schedule) {
-    const source = shot.sourcePositionAtFire; const target = shot.impactPositionAtImpact; const presentation = shot.weapon.presentation || {};
+    const muzzle = muzzlePointForShot(shot, actors); const source = muzzle.point; const target = shot.impactPositionAtImpact; const presentation = shot.weapon.presentation || {};
     const fireAge = seconds - shot.t; const impactAge = seconds - shot.impactTime;
-    if (fireAge >= 0 && fireAge <= shot.weapon.muzzleLife) effects.push({ id: `${shot.id}:muzzle`, kind: 'muzzle_flash', muzzleShape: presentation.muzzleShape || 'small_flash', smokeMode: presentation.smoke || 'none', x: source.x, y: source.y, size: (shot.weapon.kind === 'cannon' ? 26 : 10) * Math.max(.5, Number(presentation.impactScale || 1) ** .35), life: shot.weapon.muzzleLife - fireAge, maxLife: shot.weapon.muzzleLife, weaponKind: shot.weapon.kind, weaponProfileId: shot.weapon.id, source: 'authority_anchor', actorId: shot.actorId, target: shot.targetId, presentationOnly: true });
+    if (fireAge >= 0 && fireAge <= shot.weapon.muzzleLife) effects.push({ id: `${shot.id}:muzzle`, kind: 'muzzle_flash', muzzleShape: presentation.muzzleShape || 'small_flash', smokeMode: presentation.smoke || 'none', x: source.x, y: source.y, size: (shot.weapon.kind === 'cannon' ? 26 : 10) * Math.max(.5, Number(presentation.impactScale || 1) ** .35), life: shot.weapon.muzzleLife - fireAge, maxLife: shot.weapon.muzzleLife, weaponKind: shot.weapon.kind, weaponProfileId: shot.weapon.id, source: 'manifest.weaponMuzzleAnchor', muzzleAnchor: muzzle.anchor, authoritativeSourcePosition: { ...shot.sourcePositionAtFire }, actorId: shot.actorId, target: shot.targetId, presentationOnly: true });
     if (impactAge >= 0 && impactAge <= shot.weapon.impactLife) {
       const kind = shot.hitType === 'destroy' ? 'explosion' : shot.weapon.impactKind === 'heavy_explosion' ? 'heavy_impact' : 'hit_spark';
       effects.push({ id: `${shot.id}:impact`, kind, impactScale: Number(presentation.impactScale || 1), persistentMark: presentation.persistentMark || null, x: target.x, y: target.y, size: (shot.hitType === 'destroy' ? 42 : shot.weapon.kind === 'cannon' ? 28 : 12) * Number(presentation.impactScale || 1), life: shot.weapon.impactLife - impactAge, maxLife: shot.weapon.impactLife, source: 'authority_anchor', actorId: shot.actorId, target: shot.targetId, authorityAnchorId: shot.authorityAnchorId, weaponProfileId: shot.weapon.id, presentationOnly: true });
@@ -213,11 +230,11 @@ export function buildUniversalVisualScene(plan, seconds, sampler, runtime = {}) 
     };
   });
   const finalActors = actors.filter((actor) => actor.visualState !== 'wreck');
-  const fallbackWrecks = actors.filter((actor) => actor.visualState === 'wreck' || (!actor.alive && !latestDestroy(plan, actor.id))).map((actor) => ({ id: `wreck_${actor.id}`, sourceActorId: actor.id, x: actor.visualCenter.x, y: actor.visualCenter.y, angle: actor.facing || 0, wreckType: normalizeVisualUnitClass(actor) === 'infantry' || normalizeVisualUnitClass(actor) === 'anti_armor_infantry' ? 'infantry_casualty_marker' : normalizeVisualUnitClass(actor) === 'mbt' ? 'tank_wreck' : 'light_vehicle_wreck', persistent: true }));
+  const fallbackWrecks = actors.filter((actor) => actor.visualState === 'wreck' || (!actor.alive && !latestDestroy(plan, actor.id))).map((actor) => ({ id: `wreck_${actor.id}`, sourceActorId: actor.id, side: actor.side, visualClass: normalizeVisualUnitClass(actor), x: actor.visualCenter.x, y: actor.visualCenter.y, angle: actor.facing || 0, wreckType: normalizeVisualUnitClass(actor) === 'infantry' || normalizeVisualUnitClass(actor) === 'anti_armor_infantry' ? 'infantry_casualty_marker' : normalizeVisualUnitClass(actor) === 'mbt' ? 'tank_wreck' : 'light_vehicle_wreck', persistent: true }));
   // Keep destroyed actors in the lookup used by projectiles/effects: the wreck and
   // its smoke must remain at the last authoritative position after the actor leaves
   // the live-actor layer.
-  const projectiles = schedule.map((shot) => projectileFor(shot, seconds)).filter(Boolean);
+  const projectiles = schedule.map((shot) => projectileFor(shot, seconds, actors)).filter(Boolean);
   const effects = visualEffects(plan, actors, schedule, seconds);
   const environment = runtime.environmentScene || buildEnvironmentScene(plan);
   const destruction = buildPersistentDestructionLayer(plan, seconds, { visualShotSchedule: schedule, actors, windVector: environment.windVector });

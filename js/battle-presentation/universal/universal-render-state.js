@@ -13,6 +13,15 @@ import { normalizeVisualUnitClass } from '../environment/visual-unit-class.js';
 
 const clamp = (value, min, max) => Math.max(min, Math.min(max, Number(value) || 0));
 
+// Render-state evidence is serialized deterministically.  Keep the exposed
+// graph tree-shaped even when an internal planner intentionally shares nested
+// records between schedules or draw-spec fields.
+function cloneTree(value) {
+  if (Array.isArray(value)) return value.map(cloneTree);
+  if (!value || typeof value !== 'object') return value;
+  return Object.fromEntries(Object.entries(value).map(([key, child]) => [key, cloneTree(child)]));
+}
+
 function actorRows(plan) {
   return [...(plan?.forces?.friendly || []), ...(plan?.forces?.enemy || [])];
 }
@@ -232,15 +241,22 @@ export function buildUniversalRenderState(plan, seconds = 0, runtime = {}, preco
   const activeRetreats = actors.map((actor) => retreatAtTime(engagementSchedule, actor.id, battleTime)).filter(Boolean).map((item) => ({ ...item, exit: { ...item.exit } }));
   const camera = resolveDirectedCamera(plan, { actors, activeAnchors, effects, time: battleTime, returning }, cameraDirector, { mode: runtime.cameraMode || 'overview', autoCamera: runtime.autoCamera !== false, cameraOverride: runtime.cameraOverride || null });
   const cameraWithFallback = camera || { x: 640, y: 360, zoom: .86 };
-  const drawSpecs = buildProductionDrawSpecs({ actors: presentationActors, wrecks, environment: environmentState, camera: cameraWithFallback, options: { manifest: OFFLINE_ASSET_MANIFEST, availableSources: new Set(OFFLINE_ASSET_MANIFEST.assets.map((asset) => asset.source)), battlefieldBounds: plan.layout?.bounds || { width: 1200, height: 700 } } });
+  const drawSpecs = buildProductionDrawSpecs({ actors: presentationActors, wrecks, environment: environmentState, camera: cameraWithFallback, options: { manifest: OFFLINE_ASSET_MANIFEST, availableSources: new Set(OFFLINE_ASSET_MANIFEST.assets.map((asset) => asset.source)), battlefieldBounds: plan.layout?.bounds || { width: 1200, height: 700 }, presentationSeconds: battleTime, seed: plan.source?.seed ?? 0 } });
   const actorByDrawSpec = new Map(drawSpecs.actorSpecs.map((spec) => [spec.actorId, spec]));
   // Keep the text/evidence state graph tree-shaped.  Sharing a Draw Spec object
   // between `state.drawSpecs` and `actor.drawSpec` is semantically harmless but
   // makes deterministic serializers treat the repeated array as a cycle.
-  const copyDrawSpec = (spec) => spec ? { ...spec, hybridComponents: [...(spec.hybridComponents || [])], weaponPresentation: spec.weaponPresentation ? { ...spec.weaponPresentation } : null } : null;
+  // Draw specs are also exposed on each actor for the renderer.  Clone the
+  // complete JSON-shaped spec rather than only its top level: sourceRect is
+  // intentionally shared by spriteFrame in the production spec, and
+  // finalDrawGeometry shares its nested rectangles with the top level.  Those
+  // aliases are harmless at runtime but make the deterministic serializer
+  // interpret a render state as circular/repeated data.
+  const copyDrawSpec = (spec) => spec ? cloneTree(spec) : null;
   const actorsWithSpecs = presentationActors.map((actor) => ({ ...actor, drawSpec: copyDrawSpec(actorByDrawSpec.get(actor.id)), weaponPresentation: actor.weapon?.presentation || actor.weaponPresentation ? { ...(actor.weapon?.presentation || actor.weaponPresentation) } : null }));
   const wreckByDrawSpec = new Map(drawSpecs.wreckSpecs.map((spec) => [spec.wreckId, spec]));
   const wrecksWithSpecs = wrecks.map((wreck) => ({ ...wreck, drawSpec: copyDrawSpec(wreckByDrawSpec.get(wreck.id || wreck.sourceActorId)) }));
+  const stateDrawSpecs = cloneTree(drawSpecs);
   return {
     sceneHash: plan.planFingerprint || plan.source?.reportFingerprint || null,
     duration,
@@ -258,7 +274,7 @@ export function buildUniversalRenderState(plan, seconds = 0, runtime = {}, preco
     debris: visualScene.debris || [],
     environment: environmentState,
     destruction: visualScene.destruction || null,
-    shotSchedule: visualScene.shotSchedule,
+    shotSchedule: cloneTree(visualScene.shotSchedule),
     visualStage: visualScene.visualStage,
     visualPhase: visualScene.visualPhase,
     sceneObjects,
@@ -267,10 +283,10 @@ export function buildUniversalRenderState(plan, seconds = 0, runtime = {}, preco
     activeActions: (plan.timeline?.actions || []).filter((action) => Math.abs(Number(action.t) - battleTime) < .8),
     objectiveState: objectiveState(plan, battleTime),
     choreography: { version: engagementSchedule.version, outcome: plan.source?.result, objectiveState: objectiveState(plan, battleTime), activeOutcome: outcomeAction?.type || null, activeEffectCount: effects.length, visualStage: visualScene.visualStage, activeEngagement: activeEngagement ? { ...activeEngagement, attackerIds: [...activeEngagement.attackerIds], defenderIds: [...activeEngagement.defenderIds], authoritativeAnchorIds: [...activeEngagement.authoritativeAnchorIds] } : null, activeAssignments: activeAssignments.map((item) => ({ ...item })), activeSuppression: activeSuppression.map((item) => ({ ...item, sourceIds: [...item.sourceIds], targetIds: [...item.targetIds], area: { ...item.area, center: { ...(item.area?.center || {}) } } })), activeRetreats, targetSwitches: engagementSchedule.targetSwitches.filter((item) => Math.abs(item.time - battleTime) < .8).map((item) => ({ ...item })), limits: { ...engagementSchedule.limits } },
-    engagementSchedule,
+    engagementSchedule: cloneTree(engagementSchedule),
     cameraDirector,
     camera,
-    drawSpecs,
+    drawSpecs: stateDrawSpecs,
     finalCompare: { ok: true, errors: [] }
   };
 }

@@ -18,3 +18,4 @@ jobs:
       - run: npm run test:stage8-2G-C-1-1
       - run: npm run test:stage8-2G-C-1-1a
       - run: npm run test:stage8-2G-B-1-1a
+      - run: npm run test:stage8-2G-D-A

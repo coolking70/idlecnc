@@ -32,7 +32,7 @@ const tank = state.actors.find((actor) => actor.type === 'mbt');
 assert.ok(infantry?.drawSpec?.assetId === 'unit_friendly_infantry');
 assert.ok(['sprite', 'hybrid'].includes(infantry.drawSpec.assetMode));
 assert.equal(tank?.drawSpec?.assetMode, 'hybrid');
-assert.deepEqual(tank.drawSpec.hybridComponents, ['sprite_hull', 'procedural_turret', 'procedural_barrel', 'procedural_selection']);
+assert.deepEqual(tank.drawSpec.hybridComponents, ['sprite_hull', 'sprite_turret', 'procedural_selection', 'procedural_weapon_effects']);
 const fallbackSpec = buildActorDrawSpec(infantry, { zoom: .86 }, { availableSources: new Set() });
 assert.equal(fallbackSpec.assetMode, 'procedural');
 assert.equal(fallbackSpec.fallbackUsed, true);

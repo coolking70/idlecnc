@@ -31,7 +31,7 @@ const aliasCases = aliases.map(([actor, expected]) => {
 const enemyAt = { id: 'alias-enemy-at', side: 'enemy', type: 'enemy_at', category: 'at_infantry' };
 const enemyAtAsset = resolveUnitAsset(enemyAt, OFFLINE_ASSET_MANIFEST, manifestSources, 'sprite');
 assert.equal(normalizeVisualUnitClass(enemyAt), 'anti_armor_infantry');
-assert.equal(enemyAtAsset.assetId, null); assert.equal(enemyAtAsset.mode, 'procedural'); assert.equal(enemyAtAsset.factionVisualMode, 'procedural_enemy');
+assert.equal(enemyAtAsset.assetId, 'unit_enemy_at_infantry'); assert.equal(enemyAtAsset.mode, 'sprite'); assert.equal(enemyAtAsset.factionVisualMode, 'enemy');
 
 const aliasEvidence = { stage: '8.2G-C.1.1a', matrix: aliasCases, enemyAt: { assetId: enemyAtAsset.assetId, mode: enemyAtAsset.mode, factionVisualMode: enemyAtAsset.factionVisualMode, rendererFamily: 'infantry' }, passed: true };
 const geometryCases = []; const footprintCases = []; const coverCases = []; const sourceHashes = {};
@@ -91,7 +91,7 @@ for (const [scenario, baseReport] of Object.entries(reports)) for (let seed = 0;
 }
 assert.deepEqual(sourceHashes, Object.fromEntries(Object.entries(reports).map(([key, report]) => [key, canonicalEvidenceString(report)])), 'combat report authority mutated');
 
-const runtimeCheck = { stage: '8.2G-C.1.1a', manifestProvider: OFFLINE_ASSET_MANIFEST.provider, runtimeApi: 'battlePresentationAssetStatus', sameFrameActualDrawPathRequired: true, fallbackPolicy: 'enemy-at-procedural-enemy', passed: true };
+const runtimeCheck = { stage: '8.2G-C.1.1a', manifestProvider: OFFLINE_ASSET_MANIFEST.provider, runtimeApi: 'battlePresentationAssetStatus', sameFrameActualDrawPathRequired: true, fallbackPolicy: 'faction-safe-local-sprite-then-procedural', passed: true };
 const authority = { stage: '8.2G-C.1.1a', reportHashes: sourceHashes, combatCoreModified: false, authorityInputsModified: false, plannerFootprintsModified: false, routeSemanticsModified: false, passed: true };
 write('stage8_2g_c11a_visual_unit_class_check.json', aliasEvidence);
 write('stage8_2g_c11a_final_draw_geometry.json', { stage: '8.2G-C.1.1a', geometrySource: 'production-final-draw-geometry', cases: geometryCases, passed: true });

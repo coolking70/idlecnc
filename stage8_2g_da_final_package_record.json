@@ -1,0 +1,142 @@
+{
+  "stage": "8.2G-D-A",
+  "package": "iron-command-stage8-2G-D-A-production-unit-art.zip",
+  "packagePath": "/Users/coolking70/Documents/同步空间/idlecnc/iron-command-stage8-2G-D-A-production-unit-art.zip",
+  "packageSha256": "a1502489298b607fa4ff535f9d5449b2415ffc7f7db318d9193dc856ee6bc459",
+  "packageBytes": 47137330,
+  "entries": 823,
+  "browser": {
+    "currentCodeCaptured": true,
+    "legacyFallbackUsed": false,
+    "pageErrors": [],
+    "consoleErrors": [],
+    "screenshotsDir": "screenshots/stage8-2G-D-A",
+    "captureCount": 12
+  },
+  "tamper": {
+    "ok": true,
+    "stage": "8.2G-D-A",
+    "mutationCases": 8,
+    "cases": [
+      {
+        "label": "machine asset id",
+        "rejected": true,
+        "output": "olking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-D-A-evidence.mjs:14:35)\n    at file:///Users/coolking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-D-A-evidence.mjs:53:102\n    at ModuleJob.run (node:internal/modules/esm/module_job:413:25)\n    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:654:26)\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)\n\nNode.js v25.2.1\n"
+      },
+      {
+        "label": "machine animation frame",
+        "rejected": true,
+        "output": "olking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-D-A-evidence.mjs:14:35)\n    at file:///Users/coolking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-D-A-evidence.mjs:53:102\n    at ModuleJob.run (node:internal/modules/esm/module_job:413:25)\n    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:654:26)\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)\n\nNode.js v25.2.1\n"
+      },
+      {
+        "label": "browser source rect",
+        "rejected": true,
+        "output": "olking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-D-A-evidence.mjs:14:35)\n    at file:///Users/coolking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-D-A-evidence.mjs:67:526\n    at ModuleJob.run (node:internal/modules/esm/module_job:413:25)\n    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:654:26)\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)\n\nNode.js v25.2.1\n"
+      },
+      {
+        "label": "browser faction palette",
+        "rejected": true,
+        "output": "olking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-D-A-evidence.mjs:14:35)\n    at file:///Users/coolking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-D-A-evidence.mjs:67:526\n    at ModuleJob.run (node:internal/modules/esm/module_job:413:25)\n    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:654:26)\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)\n\nNode.js v25.2.1\n"
+      },
+      {
+        "label": "browser screenshot hash",
+        "rejected": true,
+        "output": "olking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-D-A-evidence.mjs:14:35)\n    at file:///Users/coolking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-D-A-evidence.mjs:65:332\n    at ModuleJob.run (node:internal/modules/esm/module_job:413:25)\n    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:654:26)\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)\n\nNode.js v25.2.1\n"
+      },
+      {
+        "label": "duplicate screenshot hash",
+        "rejected": true,
+        "output": "olking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-D-A-evidence.mjs:14:35)\n    at file:///Users/coolking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-D-A-evidence.mjs:65:332\n    at ModuleJob.run (node:internal/modules/esm/module_job:413:25)\n    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:654:26)\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)\n\nNode.js v25.2.1\n"
+      },
+      {
+        "label": "fallback binding",
+        "rejected": true,
+        "output": "olking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-D-A-evidence.mjs:14:35)\n    at file:///Users/coolking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-D-A-evidence.mjs:67:526\n    at ModuleJob.run (node:internal/modules/esm/module_job:413:25)\n    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:654:26)\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)\n\nNode.js v25.2.1\n"
+      },
+      {
+        "label": "source report",
+        "rejected": true,
+        "output": "olking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-D-A-evidence.mjs:14:35)\n    at file:///Users/coolking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-D-A-evidence.mjs:28:120\n    at ModuleJob.run (node:internal/modules/esm/module_job:413:25)\n    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:654:26)\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)\n\nNode.js v25.2.1\n"
+      }
+    ],
+    "assetBindingProtected": true,
+    "animationBindingProtected": true,
+    "sourceRectProtected": true,
+    "factionProtected": true,
+    "screenshotHashProtected": true,
+    "fallbackProtected": true,
+    "sourceReportProtected": true
+  },
+  "includedScreenshots": [
+    "screenshots/stage8-2G-B-1-1a/debug-assignment-phase-slices.png",
+    "screenshots/stage8-2G-B-1-1a/debug-authoritative-shot-facing.png",
+    "screenshots/stage8-2G-B-1-1a/debug-cover-retreat-shot.png",
+    "screenshots/stage8-2G-B-1-1a/debug-evidence-frame-binding.png",
+    "screenshots/stage8-2G-B-1-1a/defeat-01-line-collapse.png",
+    "screenshots/stage8-2G-B-1-1a/defeat-02-main-withdrawal.png",
+    "screenshots/stage8-2G-B-1-1a/defeat-03-rear-guard-cover-fire.png",
+    "screenshots/stage8-2G-B-1-1a/defeat-04-rear-guard-projectile.png",
+    "screenshots/stage8-2G-B-1-1a/defeat-05-rear-guard-withdraw-or-loss.png",
+    "screenshots/stage8-2G-B-1-1a/defeat-06-authoritative-loss.png",
+    "screenshots/stage8-2G-B-1-1a/defeat-07-final-state.png",
+    "screenshots/stage8-2G-B-1-1a/formal-defeat-default-size.png",
+    "screenshots/stage8-2G-B-1-1a/formal-defeat-narrow-size.png",
+    "screenshots/stage8-2G-B-1-1a/formal-victory-default-size.png",
+    "screenshots/stage8-2G-B-1-1a/formal-victory-narrow-size.png",
+    "screenshots/stage8-2G-B-1-1a/victory-01-first-contact.png",
+    "screenshots/stage8-2G-B-1-1a/victory-02-main-engagement-mixed-fire.png",
+    "screenshots/stage8-2G-B-1-1a/victory-03-tank-or-antiarmor-fire.png",
+    "screenshots/stage8-2G-B-1-1a/victory-04-suppression-target.png",
+    "screenshots/stage8-2G-B-1-1a/victory-05-cover-advance.png",
+    "screenshots/stage8-2G-B-1-1a/victory-06-target-switch.png",
+    "screenshots/stage8-2G-B-1-1a/victory-07-authoritative-hit.png",
+    "screenshots/stage8-2G-B-1-1a/victory-08-authoritative-destruction.png",
+    "screenshots/stage8-2G-B-1-1a/victory-09-battle-end.png",
+    "screenshots/stage8-2G-C-1-1/readability-01-friendly-vs-enemy-infantry.png",
+    "screenshots/stage8-2G-C-1-1/readability-02-friendly-vs-enemy-armor.png",
+    "screenshots/stage8-2G-C-1-1/route-01-cover-advance-clear.png",
+    "screenshots/stage8-2G-C-1-1/route-02-retreat-clear.png",
+    "screenshots/stage8-2G-C-1-1/route-03-rear-guard-clear.png",
+    "screenshots/stage8-2G-C-1-1/screen-01-default-footprint.png",
+    "screenshots/stage8-2G-C-1-1/screen-02-narrow-footprint.png",
+    "screenshots/stage8-2G-C-1-1a/alias-01-enemy-at-is-infantry.png",
+    "screenshots/stage8-2G-C-1-1a/coverpath-01-cover-advance-route.png",
+    "screenshots/stage8-2G-C-1-1a/coverpath-02-cover-advance-midpoint.png",
+    "screenshots/stage8-2G-C-1-1a/faction-01-friendly-enemy-at-same-frame.png",
+    "screenshots/stage8-2G-C-1-1a/footprint-01-friendly-infantry-narrow.png",
+    "screenshots/stage8-2G-C-1-1a/footprint-02-enemy-at-narrow.png",
+    "screenshots/stage8-2G-C-1/asset-01-infantry-sprite.png",
+    "screenshots/stage8-2G-C-1/asset-02-tank-hybrid-narrow.png",
+    "screenshots/stage8-2G-C-1/asset-02-tank-hybrid.png",
+    "screenshots/stage8-2G-C-1/asset-03-wreck-sprite.png",
+    "screenshots/stage8-2G-C-1/asset-04-industrial-cover.png",
+    "screenshots/stage8-2G-C-1/asset-05-terrain-prop.png",
+    "screenshots/stage8-2G-C-1/asset-06-missing-asset-fallback.png",
+    "screenshots/stage8-2G-C-1/defeat-01-damaged-battlefield.png",
+    "screenshots/stage8-2G-C-1/defeat-02-rear-guard-fire.png",
+    "screenshots/stage8-2G-C-1/defeat-03-retreat-through-smoke.png",
+    "screenshots/stage8-2G-C-1/defeat-04-critical-loss.png",
+    "screenshots/stage8-2G-C-1/defeat-05-final-wreck-field.png",
+    "screenshots/stage8-2G-C-1/victory-01-environment-opening.png",
+    "screenshots/stage8-2G-C-1/victory-02-mixed-weapon-fire.png",
+    "screenshots/stage8-2G-C-1/victory-03-heavy-impact-crater.png",
+    "screenshots/stage8-2G-C-1/victory-04-sprite-tank.png",
+    "screenshots/stage8-2G-C-1/victory-05-authoritative-destruction.png",
+    "screenshots/stage8-2G-C-1/victory-06-wreck-sprite-smoke.png",
+    "screenshots/stage8-2G-C-1/victory-07-persistent-battlefield.png",
+    "screenshots/stage8-2G-C-1/victory-08-battle-end.png",
+    "screenshots/stage8-2G-D-A/d-a-01-friendly-unit-lineup.png",
+    "screenshots/stage8-2G-D-A/d-a-02-enemy-unit-lineup.png",
+    "screenshots/stage8-2G-D-A/d-a-03-friendly-infantry-move.png",
+    "screenshots/stage8-2G-D-A/d-a-04-infantry-fire.png",
+    "screenshots/stage8-2G-D-A/d-a-05-friendly-at-fire.png",
+    "screenshots/stage8-2G-D-A/d-a-06-enemy-at-fire.png",
+    "screenshots/stage8-2G-D-A/d-a-07-tank-direction-and-turret.png",
+    "screenshots/stage8-2G-D-A/d-a-08-tank-fire.png",
+    "screenshots/stage8-2G-D-A/d-a-09-mixed-battle.png",
+    "screenshots/stage8-2G-D-A/d-a-10-friendly-enemy-wrecks.png",
+    "screenshots/stage8-2G-D-A/d-a-11-narrow-readability.png",
+    "screenshots/stage8-2G-D-A/d-a-12-asset-fallback.png"
+  ],
+  "cleanPackageGate": "passed"
+}

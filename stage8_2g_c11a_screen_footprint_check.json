@@ -30,20 +30,20 @@
         {
           "actorId": "unit_stage8g-c1-mining-1",
           "visualClass": "anti_armor_infantry",
-          "finalCssWidth": 18.8571,
-          "finalCssHeight": 24,
-          "screenFootprint": 24,
+          "finalCssWidth": 22.542,
+          "finalCssHeight": 26.52,
+          "screenFootprint": 26.52,
           "minimumScreenFootprint": 24,
-          "visualScaleBoost": 1.2928
+          "visualScaleBoost": 1
         },
         {
           "actorId": "unit_stage8g-c1-mining-0",
           "visualClass": "infantry",
-          "finalCssWidth": 18.8571,
+          "finalCssWidth": 20,
           "finalCssHeight": 24,
           "screenFootprint": 24,
           "minimumScreenFootprint": 24,
-          "visualScaleBoost": 1.2928
+          "visualScaleBoost": 1.0055
         },
         {
           "actorId": "unit_stage8g-c1-mining-4",
@@ -66,29 +66,29 @@
         {
           "actorId": "enemy_infantry_1",
           "visualClass": "infantry",
-          "finalCssWidth": 21.216,
-          "finalCssHeight": 25.194,
-          "screenFootprint": 25.194,
+          "finalCssWidth": 20,
+          "finalCssHeight": 24,
+          "screenFootprint": 24,
           "minimumScreenFootprint": 24,
-          "visualScaleBoost": 1
+          "visualScaleBoost": 1.0055
         },
         {
           "actorId": "enemy_infantry_2",
           "visualClass": "infantry",
-          "finalCssWidth": 21.216,
-          "finalCssHeight": 25.194,
-          "screenFootprint": 25.194,
+          "finalCssWidth": 20,
+          "finalCssHeight": 24,
+          "screenFootprint": 24,
           "minimumScreenFootprint": 24,
-          "visualScaleBoost": 1
+          "visualScaleBoost": 1.0055
         },
         {
           "actorId": "enemy_infantry_3",
           "visualClass": "infantry",
-          "finalCssWidth": 21.216,
-          "finalCssHeight": 25.194,
-          "screenFootprint": 25.194,
+          "finalCssWidth": 20,
+          "finalCssHeight": 24,
+          "screenFootprint": 24,
           "minimumScreenFootprint": 24,
-          "visualScaleBoost": 1
+          "visualScaleBoost": 1.0055
         }
       ]
     },
@@ -112,20 +112,20 @@
         {
           "actorId": "unit_fixture-u-2",
           "visualClass": "anti_armor_infantry",
-          "finalCssWidth": 18.8571,
-          "finalCssHeight": 24,
-          "screenFootprint": 24,
+          "finalCssWidth": 22.542,
+          "finalCssHeight": 26.52,
+          "screenFootprint": 26.52,
           "minimumScreenFootprint": 24,
-          "visualScaleBoost": 1.2928
+          "visualScaleBoost": 1
         },
         {
           "actorId": "unit_fixture-u-1",
           "visualClass": "infantry",
-          "finalCssWidth": 18.8571,
+          "finalCssWidth": 20,
           "finalCssHeight": 24,
           "screenFootprint": 24,
           "minimumScreenFootprint": 24,
-          "visualScaleBoost": 1.2928
+          "visualScaleBoost": 1.0055
         },
         {
           "actorId": "unit_fixture-u-5",
@@ -166,38 +166,38 @@
         {
           "actorId": "enemy_infantry_1",
           "visualClass": "infantry",
-          "finalCssWidth": 21.216,
-          "finalCssHeight": 25.194,
-          "screenFootprint": 25.194,
+          "finalCssWidth": 20,
+          "finalCssHeight": 24,
+          "screenFootprint": 24,
           "minimumScreenFootprint": 24,
-          "visualScaleBoost": 1
+          "visualScaleBoost": 1.0055
         },
         {
           "actorId": "enemy_infantry_2",
           "visualClass": "infantry",
-          "finalCssWidth": 21.216,
-          "finalCssHeight": 25.194,
-          "screenFootprint": 25.194,
+          "finalCssWidth": 20,
+          "finalCssHeight": 24,
+          "screenFootprint": 24,
           "minimumScreenFootprint": 24,
-          "visualScaleBoost": 1
+          "visualScaleBoost": 1.0055
         },
         {
           "actorId": "enemy_infantry_3",
           "visualClass": "infantry",
-          "finalCssWidth": 21.216,
-          "finalCssHeight": 25.194,
-          "screenFootprint": 25.194,
+          "finalCssWidth": 20,
+          "finalCssHeight": 24,
+          "screenFootprint": 24,
           "minimumScreenFootprint": 24,
-          "visualScaleBoost": 1
+          "visualScaleBoost": 1.0055
         },
         {
           "actorId": "enemy_infantry_4",
           "visualClass": "infantry",
-          "finalCssWidth": 21.216,
-          "finalCssHeight": 25.194,
-          "screenFootprint": 25.194,
+          "finalCssWidth": 20,
+          "finalCssHeight": 24,
+          "screenFootprint": 24,
           "minimumScreenFootprint": 24,
-          "visualScaleBoost": 1
+          "visualScaleBoost": 1.0055
         }
       ]
     }

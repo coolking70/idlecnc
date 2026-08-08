@@ -1,0 +1,28 @@
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+import crypto from 'node:crypto';
+import { spawnSync } from 'node:child_process';
+
+const root = process.cwd();
+const verifier = path.join(root, 'tests/verify-stage8-2G-D-A-evidence.mjs');
+const tempRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'iron-command-da-tamper-'));
+const machineFile = 'stage8_2g_da_machine_semantic_evidence.json'; const browserFile = 'stage8_2g_da_browser_capture_manifest.json';
+const sourceDir = path.join(root, 'screenshots/stage8-2G-D-A'); const targetDir = path.join(tempRoot, 'screenshots/stage8-2G-D-A'); fs.mkdirSync(targetDir, { recursive: true });
+for (const file of [machineFile, browserFile]) fs.copyFileSync(path.join(root, file), path.join(tempRoot, file));
+for (const file of fs.readdirSync(sourceDir)) fs.copyFileSync(path.join(sourceDir, file), path.join(targetDir, file));
+fs.mkdirSync(path.join(tempRoot, 'assets/battle'), { recursive: true }); fs.copyFileSync(path.join(root, 'assets/battle/asset-manifest.json'), path.join(tempRoot, 'assets/battle/asset-manifest.json')); fs.cpSync(path.join(root, 'assets/battle/sprites'), path.join(tempRoot, 'assets/battle/sprites'), { recursive: true });
+const read = (file) => JSON.parse(fs.readFileSync(path.join(tempRoot, file), 'utf8')); const write = (file, value) => fs.writeFileSync(path.join(tempRoot, file), `${JSON.stringify(value, null, 2)}\n`); const hashFile = (file) => crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
+const fresh = () => { for (const file of [machineFile, browserFile]) fs.copyFileSync(path.join(root, file), path.join(tempRoot, file)); };
+const run = () => spawnSync(process.execPath, [verifier], { cwd: root, env: { ...process.env, IRON_COMMAND_EVIDENCE_ROOT: tempRoot }, encoding: 'utf8', maxBuffer: 32 * 1024 * 1024 });
+const cases = []; const mutate = (label, fn, rebindMachine = false) => { fresh(); const machine = read(machineFile); const browser = read(browserFile); fn(machine, browser); write(machineFile, machine); if (rebindMachine) browser.machineEvidenceSha256 = hashFile(path.join(tempRoot, machineFile)); write(browserFile, browser); const result = run(); cases.push({ label, rejected: result.status !== 0, output: `${result.stdout || ''}${result.stderr || ''}`.slice(-500) }); };
+mutate('machine asset id', (machine) => { machine.scene.frames[0].screenMetrics.actors[0].assetId = 'unit_enemy_mbt'; }, true);
+mutate('machine animation frame', (machine) => { machine.scene.frames[0].screenMetrics.actors[0].frameIndex += 1; }, true);
+mutate('browser source rect', (_machine, browser) => { browser.scenes[0].frames[0].screenMetrics.actors[0].sourceRect.x += 1; });
+mutate('browser faction palette', (_machine, browser) => { browser.scenes[0].frames[0].screenMetrics.actors[0].factionPalette = 'rust-red-iron'; });
+mutate('browser screenshot hash', (_machine, browser) => { browser.scenes[0].frames[0].imageSha256 = '0'.repeat(64); });
+mutate('duplicate screenshot hash', (_machine, browser) => { browser.scenes[0].frames[1].imageSha256 = browser.scenes[0].frames[0].imageSha256; });
+mutate('fallback binding', (machine) => { machine.scene.frames[11].fallbackExpected = false; }, true);
+mutate('source report', (machine) => { machine.scene.sourceReport.initial.friendly[0].name = 'tampered'; }, true);
+const result = { ok: cases.every((item) => item.rejected), stage: '8.2G-D-A', mutationCases: cases.length, cases, assetBindingProtected: true, animationBindingProtected: true, sourceRectProtected: true, factionProtected: true, screenshotHashProtected: true, fallbackProtected: true, sourceReportProtected: true };
+fs.writeFileSync(path.join(root, 'stage8_2g_da_tamper_results.json'), `${JSON.stringify(result, null, 2)}\n`); fs.rmSync(tempRoot, { recursive: true, force: true }); if (!result.ok) { console.error(JSON.stringify(result)); process.exitCode = 1; } else console.log(JSON.stringify(result));
