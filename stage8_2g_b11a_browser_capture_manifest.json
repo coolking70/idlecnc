@@ -860,10 +860,10 @@
               "mode": "overview"
             }
           },
-          "imageSha256": "658e36b79d44e37c5698b7d0bc64a879c82197eaba6847335f42843f17fd00e1",
+          "imageSha256": "1cd46b30fdddc31b32f2b104b0fd9d505760b3912ea1c83c519b82336343d1f6",
           "screenshot": {
             "path": "screenshots/stage8-2G-B-1-1a/victory-01-first-contact.png",
-            "sha256": "658e36b79d44e37c5698b7d0bc64a879c82197eaba6847335f42843f17fd00e1"
+            "sha256": "1cd46b30fdddc31b32f2b104b0fd9d505760b3912ea1c83c519b82336343d1f6"
           }
         },
         {
@@ -1888,10 +1888,10 @@
               "mode": "overview"
             }
           },
-          "imageSha256": "1d2a50b33265046d7cdbbec637e4f9dff8c955281f6b50de96bccf49b767d51a",
+          "imageSha256": "fbaf9363bde914e3076e6b72ae3fe91bc8f934d35ff84e6b18b27eb6c31da6bb",
           "screenshot": {
             "path": "screenshots/stage8-2G-B-1-1a/victory-02-main-engagement-mixed-fire.png",
-            "sha256": "1d2a50b33265046d7cdbbec637e4f9dff8c955281f6b50de96bccf49b767d51a"
+            "sha256": "fbaf9363bde914e3076e6b72ae3fe91bc8f934d35ff84e6b18b27eb6c31da6bb"
           }
         },
         {
@@ -2949,10 +2949,10 @@
               "mode": "overview"
             }
           },
-          "imageSha256": "97dc25f4747b77aa7ab4d59d8a039c5dd1fd8c0dc2fc816786db477e146ecb7a",
+          "imageSha256": "d7f24c8521d2325cc18e7c2deb8e9a1ca99431a4fa4a396b38a085b618a4c5d0",
           "screenshot": {
             "path": "screenshots/stage8-2G-B-1-1a/victory-03-tank-or-antiarmor-fire.png",
-            "sha256": "97dc25f4747b77aa7ab4d59d8a039c5dd1fd8c0dc2fc816786db477e146ecb7a"
+            "sha256": "d7f24c8521d2325cc18e7c2deb8e9a1ca99431a4fa4a396b38a085b618a4c5d0"
           }
         },
         {
@@ -4056,10 +4056,10 @@
               "mode": "overview"
             }
           },
-          "imageSha256": "2b80c320908042e2bc9c8d338710a6fbcdeff9a083c2e043dc44d31422589290",
+          "imageSha256": "325418fa21d7bde94bf371f63e90ac6de944f0115de6f582cba0ddae5267f235",
           "screenshot": {
             "path": "screenshots/stage8-2G-B-1-1a/victory-07-authoritative-hit.png",
-            "sha256": "2b80c320908042e2bc9c8d338710a6fbcdeff9a083c2e043dc44d31422589290"
+            "sha256": "325418fa21d7bde94bf371f63e90ac6de944f0115de6f582cba0ddae5267f235"
           }
         },
         {
@@ -5191,10 +5191,10 @@
               "mode": "overview"
             }
           },
-          "imageSha256": "f76455b76b96ada2013d415854baafbb1cc7d2ffe7903effa106f764a2987292",
+          "imageSha256": "97312be16e09f8532bb30c66e8ff6d4ba73d1814e91c948d4d8991dff668e933",
           "screenshot": {
             "path": "screenshots/stage8-2G-B-1-1a/victory-04-suppression-target.png",
-            "sha256": "f76455b76b96ada2013d415854baafbb1cc7d2ffe7903effa106f764a2987292"
+            "sha256": "97312be16e09f8532bb30c66e8ff6d4ba73d1814e91c948d4d8991dff668e933"
           }
         },
         {
@@ -6384,10 +6384,10 @@
               "mode": "overview"
             }
           },
-          "imageSha256": "7bc305765d2a6724e11b62f70d3fbf0ceffe1b109c40fbb5ae5bcf6bb32bc768",
+          "imageSha256": "87954d8b8c1c1ccc1266993e1310de5c3e6a34c604fcd267e9a34135ab79fcb6",
           "screenshot": {
             "path": "screenshots/stage8-2G-B-1-1a/victory-05-cover-advance.png",
-            "sha256": "7bc305765d2a6724e11b62f70d3fbf0ceffe1b109c40fbb5ae5bcf6bb32bc768"
+            "sha256": "87954d8b8c1c1ccc1266993e1310de5c3e6a34c604fcd267e9a34135ab79fcb6"
           }
         },
         {
@@ -7391,10 +7391,10 @@
               "mode": "overview"
             }
           },
-          "imageSha256": "907c807faa9d7e1e812a32d9cbe862b0286cd04a3bb61fd3011eb0afb1cad565",
+          "imageSha256": "1cb25fcfbf80d820f19262c8baedb4c1bfb1fd27622e7e438d4edbacd5a334cd",
           "screenshot": {
             "path": "screenshots/stage8-2G-B-1-1a/victory-08-authoritative-destruction.png",
-            "sha256": "907c807faa9d7e1e812a32d9cbe862b0286cd04a3bb61fd3011eb0afb1cad565"
+            "sha256": "1cb25fcfbf80d820f19262c8baedb4c1bfb1fd27622e7e438d4edbacd5a334cd"
           }
         },
         {
@@ -8401,10 +8401,10 @@
               "mode": "overview"
             }
           },
-          "imageSha256": "d6137e787bc4609ba741399fab794419f276ea5a34a1d9caf66d6fa0c67bc5f6",
+          "imageSha256": "eafb8c913096b9171b0c811a008cce253684c2f0abb5d34bb5f5ee2293f1989e",
           "screenshot": {
             "path": "screenshots/stage8-2G-B-1-1a/victory-06-target-switch.png",
-            "sha256": "d6137e787bc4609ba741399fab794419f276ea5a34a1d9caf66d6fa0c67bc5f6"
+            "sha256": "eafb8c913096b9171b0c811a008cce253684c2f0abb5d34bb5f5ee2293f1989e"
           }
         },
         {
@@ -9186,10 +9186,10 @@
               "mode": "overview"
             }
           },
-          "imageSha256": "eccb60b340774825b8cb6709c1b22c731fdcfc392b9eb060a2efbf1898f4c6a2",
+          "imageSha256": "27cb70b2a0fae6d0dac6e32bf64cdec5ab37216239e9c7e1999d2744ee75fc00",
           "screenshot": {
             "path": "screenshots/stage8-2G-B-1-1a/victory-09-battle-end.png",
-            "sha256": "eccb60b340774825b8cb6709c1b22c731fdcfc392b9eb060a2efbf1898f4c6a2"
+            "sha256": "27cb70b2a0fae6d0dac6e32bf64cdec5ab37216239e9c7e1999d2744ee75fc00"
           }
         }
       ]
@@ -9996,10 +9996,10 @@
               "mode": "overview"
             }
           },
-          "imageSha256": "50fb9aa3b70898a6e2c57ff8dd6ea2dbb5e1da2a9b98f3156a1d679046b8beba",
+          "imageSha256": "86ec5595f0b723da804665fb5d341a721d9b79097c243f1a31c72ba3220770a1",
           "screenshot": {
             "path": "screenshots/stage8-2G-B-1-1a/defeat-06-authoritative-loss.png",
-            "sha256": "50fb9aa3b70898a6e2c57ff8dd6ea2dbb5e1da2a9b98f3156a1d679046b8beba"
+            "sha256": "86ec5595f0b723da804665fb5d341a721d9b79097c243f1a31c72ba3220770a1"
           }
         },
         {
@@ -10863,10 +10863,10 @@
               "mode": "overview"
             }
           },
-          "imageSha256": "87c410225fdd527de9ccbdfa477c8bc27fb3a31eb8585637c34e482f440ac786",
+          "imageSha256": "00772d550aeed8f0dcb220f822a1a195b998e5f6aae57fc4dc96611da72ed5f9",
           "screenshot": {
             "path": "screenshots/stage8-2G-B-1-1a/defeat-01-line-collapse.png",
-            "sha256": "87c410225fdd527de9ccbdfa477c8bc27fb3a31eb8585637c34e482f440ac786"
+            "sha256": "00772d550aeed8f0dcb220f822a1a195b998e5f6aae57fc4dc96611da72ed5f9"
           }
         },
         {
@@ -11655,10 +11655,10 @@
               "mode": "overview"
             }
           },
-          "imageSha256": "5a24c07cfbcfba57e8f111b88508b22b7f78b3d6952fd1056cda9c7e7b337ba3",
+          "imageSha256": "9409f12f47de9bcdf2fb4a83c27d912bf2a3f533387c732b4332689307669548",
           "screenshot": {
             "path": "screenshots/stage8-2G-B-1-1a/defeat-02-main-withdrawal.png",
-            "sha256": "5a24c07cfbcfba57e8f111b88508b22b7f78b3d6952fd1056cda9c7e7b337ba3"
+            "sha256": "9409f12f47de9bcdf2fb4a83c27d912bf2a3f533387c732b4332689307669548"
           }
         },
         {
@@ -12428,10 +12428,10 @@
               "mode": "overview"
             }
           },
-          "imageSha256": "a5bad0f1ee9de3d8a8ae8f53de2a5ce3d247851deffee977fcb49e65fd737610",
+          "imageSha256": "339701b2efee8f833e245ba42eabae690636d36d78e7e095f25dcdc3886ecc45",
           "screenshot": {
             "path": "screenshots/stage8-2G-B-1-1a/defeat-05-rear-guard-withdraw-or-loss.png",
-            "sha256": "a5bad0f1ee9de3d8a8ae8f53de2a5ce3d247851deffee977fcb49e65fd737610"
+            "sha256": "339701b2efee8f833e245ba42eabae690636d36d78e7e095f25dcdc3886ecc45"
           }
         },
         {
@@ -13238,10 +13238,10 @@
               "mode": "overview"
             }
           },
-          "imageSha256": "6af31b4b653cad5ea2aa416c181f6429b7042d70126d6f2b6cb52f73ab90653e",
+          "imageSha256": "48a33070f4ddce9b0964f6a8d3c33e686b1b6ad9e924e34cfab73ca0f27acb5f",
           "screenshot": {
             "path": "screenshots/stage8-2G-B-1-1a/defeat-03-rear-guard-cover-fire.png",
-            "sha256": "6af31b4b653cad5ea2aa416c181f6429b7042d70126d6f2b6cb52f73ab90653e"
+            "sha256": "48a33070f4ddce9b0964f6a8d3c33e686b1b6ad9e924e34cfab73ca0f27acb5f"
           }
         },
         {
@@ -14048,10 +14048,10 @@
               "mode": "overview"
             }
           },
-          "imageSha256": "e69984f3002ed332280dac5f57efae173b9adc1ab69c4dcd823da2ce620e45f2",
+          "imageSha256": "03da597437e300be2f1900faace523b46c5b53318695358245d199850863a832",
           "screenshot": {
             "path": "screenshots/stage8-2G-B-1-1a/defeat-04-rear-guard-projectile.png",
-            "sha256": "e69984f3002ed332280dac5f57efae173b9adc1ab69c4dcd823da2ce620e45f2"
+            "sha256": "03da597437e300be2f1900faace523b46c5b53318695358245d199850863a832"
           }
         },
         {
@@ -14814,10 +14814,10 @@
               "mode": "overview"
             }
           },
-          "imageSha256": "4fed57e0512725414bdb05e7e6af9fe5dad087587e4aa12f97b7d70d44416067",
+          "imageSha256": "3834fe4a64ad171427b6a57b620bf7673d66a29cf84687526a72731d5fcd6fc6",
           "screenshot": {
             "path": "screenshots/stage8-2G-B-1-1a/defeat-07-final-state.png",
-            "sha256": "4fed57e0512725414bdb05e7e6af9fe5dad087587e4aa12f97b7d70d44416067"
+            "sha256": "3834fe4a64ad171427b6a57b620bf7673d66a29cf84687526a72731d5fcd6fc6"
           }
         }
       ]
@@ -15624,10 +15624,10 @@
               "mode": "overview"
             }
           },
-          "imageSha256": "0dfd027f7a71cd1744312c413f85cba6915ab64783fe3123e88f569cfe19c678",
+          "imageSha256": "75058d11b9b655a2e51b7bbcc62fce436a7b6378a9061f0470ad8c3d3771d08b",
           "screenshot": {
             "path": "screenshots/stage8-2G-B-1-1a/debug-assignment-phase-slices.png",
-            "sha256": "0dfd027f7a71cd1744312c413f85cba6915ab64783fe3123e88f569cfe19c678"
+            "sha256": "75058d11b9b655a2e51b7bbcc62fce436a7b6378a9061f0470ad8c3d3771d08b"
           }
         },
         {
@@ -16426,10 +16426,10 @@
               "mode": "overview"
             }
           },
-          "imageSha256": "a8aa77cea9a894b68015246df73163623d8dfc3537998baa415c4582ff35d15f",
+          "imageSha256": "cd1efc39a74fdcac4db77b9c2c1915e2e49a63194b4e5ab00eef0e6a1c61dda6",
           "screenshot": {
             "path": "screenshots/stage8-2G-B-1-1a/debug-authoritative-shot-facing.png",
-            "sha256": "a8aa77cea9a894b68015246df73163623d8dfc3537998baa415c4582ff35d15f"
+            "sha256": "cd1efc39a74fdcac4db77b9c2c1915e2e49a63194b4e5ab00eef0e6a1c61dda6"
           }
         },
         {
@@ -17236,10 +17236,10 @@
               "mode": "overview"
             }
           },
-          "imageSha256": "4af6b85c649ea7567fc2aa6d34aa906802f51efc8f4df34dbcfa19b97d6bcd07",
+          "imageSha256": "33809ad3f5bd50fc5aa3dab4ff43199db4d4134216b8a938591465bba7610d33",
           "screenshot": {
             "path": "screenshots/stage8-2G-B-1-1a/debug-cover-retreat-shot.png",
-            "sha256": "4af6b85c649ea7567fc2aa6d34aa906802f51efc8f4df34dbcfa19b97d6bcd07"
+            "sha256": "33809ad3f5bd50fc5aa3dab4ff43199db4d4134216b8a938591465bba7610d33"
           }
         },
         {
@@ -18046,10 +18046,10 @@
               "mode": "overview"
             }
           },
-          "imageSha256": "077826e0d54d4ac290d7b21719ba4d9affd3e3ae47592e16c0e8eff1ef1bd71b",
+          "imageSha256": "5e102070d6edbf8d4a922220de9594882870cb572de180a62b998784b68220c9",
           "screenshot": {
             "path": "screenshots/stage8-2G-B-1-1a/debug-evidence-frame-binding.png",
-            "sha256": "077826e0d54d4ac290d7b21719ba4d9affd3e3ae47592e16c0e8eff1ef1bd71b"
+            "sha256": "5e102070d6edbf8d4a922220de9594882870cb572de180a62b998784b68220c9"
           }
         }
       ]
@@ -19082,10 +19082,10 @@
               "mode": "overview"
             }
           },
-          "imageSha256": "4a65c9ed8462354469402598a1ebc35157936362601e7163a421793fa04fb19e",
+          "imageSha256": "6f2b20677254ba203a33541e67d4d699837d28d132b93d409e2623c0f23bfeee",
           "screenshot": {
             "path": "screenshots/stage8-2G-B-1-1a/formal-victory-default-size.png",
-            "sha256": "4a65c9ed8462354469402598a1ebc35157936362601e7163a421793fa04fb19e"
+            "sha256": "6f2b20677254ba203a33541e67d4d699837d28d132b93d409e2623c0f23bfeee"
           }
         },
         {
@@ -20110,10 +20110,10 @@
               "mode": "overview"
             }
           },
-          "imageSha256": "0b86be86399af9e320cfe402787e466769104eef872bb2375fa677a91b83df73",
+          "imageSha256": "7f0ed5797919c5f795ef1efd26402be71ffca86a2113ece3696de2b665275938",
           "screenshot": {
             "path": "screenshots/stage8-2G-B-1-1a/formal-victory-narrow-size.png",
-            "sha256": "0b86be86399af9e320cfe402787e466769104eef872bb2375fa677a91b83df73"
+            "sha256": "7f0ed5797919c5f795ef1efd26402be71ffca86a2113ece3696de2b665275938"
           }
         }
       ]
@@ -20910,10 +20910,10 @@
               "mode": "overview"
             }
           },
-          "imageSha256": "808a27201668147012e46bd0c2364cd4195bb1e6c7e2637f3176152a24387a76",
+          "imageSha256": "0545fd2fc6367874a7e8f498a0753131454b83fae3e3e5f33c62116cc9b6118e",
           "screenshot": {
             "path": "screenshots/stage8-2G-B-1-1a/formal-defeat-default-size.png",
-            "sha256": "808a27201668147012e46bd0c2364cd4195bb1e6c7e2637f3176152a24387a76"
+            "sha256": "0545fd2fc6367874a7e8f498a0753131454b83fae3e3e5f33c62116cc9b6118e"
           }
         },
         {
@@ -21702,10 +21702,10 @@
               "mode": "overview"
             }
           },
-          "imageSha256": "421553b5c27c1620c79c3819ededce838f385230be5e0ab0d8ec0c942a634754",
+          "imageSha256": "678473f987a0ebd196f1f4434af50a6264c674a79d4a6df43891d503817937ca",
           "screenshot": {
             "path": "screenshots/stage8-2G-B-1-1a/formal-defeat-narrow-size.png",
-            "sha256": "421553b5c27c1620c79c3819ededce838f385230be5e0ab0d8ec0c942a634754"
+            "sha256": "678473f987a0ebd196f1f4434af50a6264c674a79d4a6df43891d503817937ca"
           }
         }
       ]

@@ -530,5 +530,7 @@
 - [x] 当前 Chromium 证据 7/7、唯一 PNG 7、pageErrors/consoleErrors `0`；Repair 截图四层绑定 `Screenshot = Browser Selection = HUD = Repair Source`，Formal Target 绑定一致；480/390 responsive 与 production leak 回归通过。
 - [x] 新增 action attribution、Repair attribution、Repair semantic binding、Retreat binding、Authority hash、12 类 D-B.1a tamper 与 developer selfcheck；D-B.1a tamper `12/12` 拒绝。
 - [x] `npm test`（含 posttest D-B.1a）、D-B.1/D-B/D-A.1a/D-A.1/D-A/C.1.1a/B.1.1a 回归及默认 clean package verifier 均通过。
-- [x] 最终 ZIP：`iron-command-stage8-2G-D-B-1a-repair-semantic-final.zip`，SHA-256 `da7a9263022441806a38fa37600f4aac935a715b07454fe77bb0c9bcc83adca9`，63,936,583 bytes，1009 entries；ZIP 内无 stale final package record，最终记录位于 ZIP 外。
-- [ ] 待创建 D-B.1a 分支并推送后确认 GitHub Actions Run/Job；独立审计方仍需按最终 D-B.1a ZIP 重新验收。
+- [x] 最终 ZIP：`iron-command-stage8-2G-D-B-1a-repair-semantic-final.zip`，SHA-256 `b878936c0736869871219ebd000730717e86ceec1ecd6a714b03c77f2129fc86`，63,893,388 bytes，1010 entries；ZIP 内无 stale final package record，最终记录位于 ZIP 外。
+- [x] 已提交并推送 `agent/stage8-2G-D-B-1a-repair-semantic-final`，commit `8f8557239be3f3e7566dbd8179cf9c38fe176620`；Draft PR #5 以 `agent/stage8-2G-D-B-1-semantic-responsive-closure` 为 base。
+- [x] GitHub Actions Run `31276414890` / Job `93150552033` 成功，D-B.1a gate 实际执行；最终 clean-package verifier 的 clean install、包内普通 `npm test`、posttest、证据/封包卫生均通过。
+- [ ] 独立审计方仍需按最终 D-B.1a ZIP 重新验收；audit JSON 仍仅是失败基线和回归样本，不代表独立批准。
