@@ -488,5 +488,5 @@
 - [x] D-A.1a Node/Chromium 证据：13/13 帧、13 个唯一 PNG、pageErrors=0、consoleErrors=0；覆盖友军/敌军 Infantry、友军/敌军 AT、友军 MBT hull/turret 分离、default/narrow muzzle 与 footprint。
 - [x] D-A.1 原有 13 帧和 17 类 tamper 已按新谓词重生成并通过；官方 `develop-web-game` Playwright 客户端已检查正式页面，`render_game_to_text` 正常、无控制台错误。
 - [x] D-A.1a 完整封包 clean verifier 已通过：ZIP SHA-256 `b5bb32b9c9beff297346b065af6953c6d6d2188332b1af29e068ed4cf948b1b8`，56,472,094 bytes，890 entries；clean install 后完整 `npm test` exitCode=0。
-- [x] D-A.1a 浏览器证据、13/13 唯一 PNG、5 类新增 tamper、150 发 authority 不变性和 D-A.1/D-A/C.1.1a/B.1.1a 回归均已通过；GitHub Actions 新 gate、提交/推送已进入收尾。
+- [x] D-A.1a 浏览器证据、13/13 唯一 PNG、5 类新增 tamper、150 发 authority 不变性和 D-A.1/D-A/C.1.1a/B.1.1a 回归均已通过；GitHub Actions Run `31266612353` / Job `93125668996` 为 success，D-A.1a gate 已实际执行。
 - [ ] 独立审计方仍需按最终 D-A.1a ZIP 重新验收；audit JSON 仅为失败基线和回归样本，不代表独立批准。

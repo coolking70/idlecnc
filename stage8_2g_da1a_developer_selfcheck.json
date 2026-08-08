@@ -245,14 +245,14 @@
   },
   "ci": {
     "previousGreenRun": 31262924790,
-    "newRunId": null,
-    "newJobId": null,
+    "newRunId": 31266612353,
+    "newJobId": 93125668996,
     "da1aExecuted": true,
-    "conclusion": null
+    "conclusion": "success"
   },
-  "readyForStage8_2G_D_B": false,
+  "readyForStage8_2G_D_B": true,
   "knownIssues": [
-    "Awaiting the GitHub Actions D-A.1a run; external independent audit remains required."
+    "External independent audit remains required; the audit JSON is a failure baseline and regression sample, not a production resource."
   ],
   "passed": true
 }
