@@ -1563,6 +1563,9 @@ function boot() {
     battlePresentationDebug: () => battlePresentationRouter?.getDebugOverlayState?.() || { debugOverlay: false },
     resetPresentationCamera: () => { battlePresentationRouter?.resetCamera?.(); return battlePresentationRouter?.getInteractionState?.() || null; },
     battlePresentationInteraction: () => battlePresentationRouter?.getInteractionState?.() || null,
+    battlePresentationSelection: () => battlePresentationRouter?.getSelectionState?.() || null,
+    battlePresentationSelectActor: (actorId) => battlePresentationRouter?.setSelection?.(actorId) || null,
+    battlePresentationClearSelection: () => battlePresentationRouter?.clearSelection?.() || null,
     /** Test-only evidence loader: it installs an immutable report as an active presentation input. */
     loadEvidenceBattle: (input = {}) => {
       const report = input.report;
@@ -1590,7 +1593,7 @@ function boot() {
       const renderState = battlePresentationRouter?.getRenderStateAt?.(Number(seconds) || 0) || battlePresentationRouter?.getRenderState?.() || null;
       if (!renderState) return { ok: false, reason: 'presentation render state unavailable' };
       const payload = buildEvidenceStatePayload({ sceneId: context.sceneId || null, seed: context.seed, state: renderState, timeMs: Number(renderState.time || 0) * 1000 });
-      const timeMs = Number(renderState.time || 0) * 1000; const c1Payload = buildStageC1EvidenceStatePayload({ sceneId: context.sceneId || null, seed: context.seed, state: renderState, timeMs, semanticName: context.semanticName || '' }); return { ok: true, state: renderState, payload, stateSignature: buildEvidenceStateSignature({ sceneId: context.sceneId || null, seed: context.seed, state: renderState, timeMs }), c1Payload, c1StateSignature: buildStageC1EvidenceStateSignature({ sceneId: context.sceneId || null, seed: context.seed, state: renderState, timeMs, semanticName: context.semanticName || '' }), semanticPredicates: stageC1SemanticPredicates(context.semanticName || '', renderState) };
+      const timeMs = Number(renderState.time || 0) * 1000; const c1Payload = buildStageC1EvidenceStatePayload({ sceneId: context.sceneId || null, seed: context.seed, state: renderState, timeMs, semanticName: context.semanticName || '' }); const textState = battlePresentationRouter?.getTextState?.({}) || null; return { ok: true, state: renderState, payload, stateSignature: buildEvidenceStateSignature({ sceneId: context.sceneId || null, seed: context.seed, state: renderState, timeMs }), c1Payload, c1StateSignature: buildStageC1EvidenceStateSignature({ sceneId: context.sceneId || null, seed: context.seed, state: renderState, timeMs, semanticName: context.semanticName || '' }), semanticPredicates: stageC1SemanticPredicates(context.semanticName || '', renderState), hudContract: textState?.hudContract || null, selection: battlePresentationRouter?.getSelectionState?.() || null };
     },
     battlePresentationDiagnostics: () => {
       const routerState = battlePresentationRouter?.getState?.() || null;
@@ -1638,6 +1641,7 @@ function boot() {
 
   // 浏览器自动化与人工调试钩子：按游戏秒推进并返回可读的最小状态摘要。
   window.advanceTime = (milliseconds) => {
+    battlePresentationRouter?.clearRenderOverride?.();
     const seconds = Math.max(0, Number(milliseconds) || 0) / 1000;
     const state = getState();
     let remaining = seconds;

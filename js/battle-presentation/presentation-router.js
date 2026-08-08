@@ -115,6 +115,9 @@ export function createBattlePresentationRouter({ canvas, legacyRenderer, onState
   function reset() { presentation = null; renderedMode = 'legacy'; lastBattleId = null; lastBattleKey = null; lastBattleRef = null; clearContractPlanCache(); clearUniversalPlanCache(); clearAllRuntimeFallbacks(); contractRenderer.reset(); universalRenderer.reset(); publish(); }
   function destroy() { contractRenderer.destroy(); universalRenderer.destroy(); reset(); }
   function getTextState(options) { return renderedMode === 'contract_road_victory' ? contractRenderer.getTextState(options) : renderedMode === 'universal_battle' ? universalRenderer.getTextState(options) : null; }
+  function getSelectionState() { return renderedMode === 'universal_battle' ? universalRenderer.getSelectionState?.() || null : null; }
+  function setSelection(actorId) { return renderedMode === 'universal_battle' ? universalRenderer.setSelection?.(actorId) || null : { ok: false, reason: 'selection_unavailable' }; }
+  function clearSelection() { return renderedMode === 'universal_battle' ? universalRenderer.clearSelection?.() || null : null; }
   function setCameraMode(mode) { contractRenderer.setCameraMode(mode); universalRenderer.setCameraMode(mode); legacyRenderer?.setCameraMode?.(mode); }
   function setAutoCamera(enabled) { contractRenderer.setAutoCamera(enabled); universalRenderer.setAutoCamera(enabled); legacyRenderer?.setAutoCamera?.(enabled); }
   function resetCamera() { contractRenderer.resetCamera?.(); universalRenderer.resetCamera?.(); legacyRenderer?.resetCamera?.(); }
@@ -126,6 +129,7 @@ export function createBattlePresentationRouter({ canvas, legacyRenderer, onState
   function getActorRenderedBounds() { return renderedMode === 'universal_battle' ? universalRenderer.getActorRenderedBounds?.() || null : null; }
   function getActorScreenMetricsAt(seconds) { return renderedMode === 'universal_battle' ? universalRenderer.getActorScreenMetricsAt?.(seconds) || null : null; }
   function setAssetDisabled(assetId, value = true) { return renderedMode === 'universal_battle' ? universalRenderer.setAssetDisabled?.(assetId, value) || null : null; }
+  function clearRenderOverride() { universalRenderer.clearRenderOverride?.(); }
 
   function getRenderState() { return renderedMode === 'universal_battle' ? universalRenderer.lastState || null : contractRenderer.lastState || null; }
   function getRenderStateAt(seconds) { return renderedMode === 'universal_battle' && universalRenderer.presentation?.renderState ? universalRenderer.presentation.renderState.atTime(Number(seconds) || 0) : getRenderState(); }
@@ -134,8 +138,8 @@ export function createBattlePresentationRouter({ canvas, legacyRenderer, onState
   function renderAt(seconds, activeBattleOverride = null) {
     const activeBattle = lastBattleRef || activeBattleOverride;
     if (renderedMode !== 'universal_battle' || !universalRenderer.presentation?.plan || !activeBattle) return null;
-    universalRenderer.render(activeBattle, 0, Number(seconds) || 0); return universalRenderer.lastState || null;
+    universalRenderer.setRenderOverride?.(Number(seconds) || 0); universalRenderer.render(activeBattle, 0, Number(seconds) || 0); return universalRenderer.lastState || null;
   }
 
-  return { render, reset, destroy, setPreference, getPreference: preference, getState, getPresentation, getRenderState, getRenderStateAt, renderAt, getTextState, setCameraMode, setAutoCamera, resetCamera, setDebugOverlay, getDebugOverlayState, getInteractionState, getAssetRuntimeState, getActorScreenMetrics, getActorRenderedBounds, getActorScreenMetricsAt, setAssetDisabled };
+  return { render, reset, destroy, setPreference, getPreference: preference, getState, getPresentation, getRenderState, getRenderStateAt, renderAt, getTextState, getSelectionState, setSelection, clearSelection, setCameraMode, setAutoCamera, resetCamera, setDebugOverlay, getDebugOverlayState, getInteractionState, getAssetRuntimeState, getActorScreenMetrics, getActorRenderedBounds, getActorScreenMetricsAt, setAssetDisabled, clearRenderOverride };
 }

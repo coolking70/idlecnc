@@ -2,9 +2,6 @@
   "version": 2,
   "provider": "offline-manifest",
   "runtimeGeneration": false,
-  "directions": 8,
-  "directionOrder": ["N", "NE", "E", "SE", "S", "SW", "W", "NW"],
-  "requiredAnimations": ["idle", "move", "fire"],
   "assets": [
     {
       "id": "unit_friendly_infantry",
@@ -17,49 +14,222 @@
       "format": "spritesheet",
       "source": "assets/battle/sprites/unit-friendly-infantry.png",
       "directions": 8,
-      "directionOrder": ["N", "NE", "E", "SE", "S", "SW", "W", "NW"],
-      "spritesheet": { "frameWidth": 96, "frameHeight": 96, "columns": 8, "rows": 8 },
-      "animations": {
-        "idle": { "startFrame": 0, "frameCount": 2, "frameDuration": 0.6, "loop": true, "region": "direction-row" },
-        "move": { "startFrame": 2, "frameCount": 4, "frameDuration": 0.14, "loop": true, "region": "direction-row" },
-        "aim": { "startFrame": 6, "frameCount": 1, "frameDuration": 0.5, "loop": false, "region": "direction-row" },
-        "fire": { "startFrame": 7, "frameCount": 1, "frameDuration": 0.18, "loop": false, "region": "direction-row" },
-        "hit": { "startFrame": 1, "frameCount": 1, "frameDuration": 0.22, "loop": false, "region": "direction-row" },
-        "destroy": { "startFrame": 7, "frameCount": 1, "frameDuration": 0.5, "loop": false, "region": "direction-row" }
+      "directionOrder": [
+        "N",
+        "NE",
+        "E",
+        "SE",
+        "S",
+        "SW",
+        "W",
+        "NW"
+      ],
+      "spritesheet": {
+        "frameWidth": 96,
+        "frameHeight": 96,
+        "columns": 8,
+        "rows": 8
       },
-      "anchor": { "x": 0.5, "y": 0.55 },
-      "worldSize": { "width": 30, "height": 36 },
-      "weaponMuzzleAnchor": { "space": "normalized-destination", "forward": 0.56, "lateral": -0.08, "directionAware": true },
+      "animations": {
+        "idle": {
+          "startFrame": 0,
+          "frameCount": 2,
+          "frameDuration": 0.6,
+          "loop": true,
+          "region": "direction-row"
+        },
+        "move": {
+          "startFrame": 2,
+          "frameCount": 4,
+          "frameDuration": 0.14,
+          "loop": true,
+          "region": "direction-row"
+        },
+        "aim": {
+          "startFrame": 6,
+          "frameCount": 1,
+          "frameDuration": 0.5,
+          "loop": false,
+          "region": "direction-row"
+        },
+        "fire": {
+          "startFrame": 7,
+          "frameCount": 1,
+          "frameDuration": 0.18,
+          "loop": false,
+          "region": "direction-row"
+        },
+        "repair": {
+          "startFrame": 6,
+          "frameCount": 1,
+          "frameDuration": 0.38,
+          "loop": true,
+          "region": "direction-row"
+        },
+        "hit": {
+          "startFrame": 1,
+          "frameCount": 1,
+          "frameDuration": 0.22,
+          "loop": false,
+          "region": "direction-row"
+        },
+        "destroy": {
+          "startFrame": 7,
+          "frameCount": 1,
+          "frameDuration": 0.5,
+          "loop": false,
+          "region": "direction-row"
+        }
+      },
+      "requiredAnimations": [
+        "idle",
+        "move",
+        "aim",
+        "fire"
+      ],
+      "optionalAnimations": [
+        "aim",
+        "fire",
+        "reload",
+        "hit",
+        "destroy"
+      ],
+      "weaponTopology": "body_mounted",
+      "anchor": {
+        "x": 0.5,
+        "y": 0.55
+      },
+      "worldSize": {
+        "width": 30,
+        "height": 36
+      },
+      "weaponMuzzleAnchor": {
+        "space": "normalized-destination",
+        "forward": 0.56,
+        "lateral": -0.08,
+        "directionAware": true
+      },
       "fallback": "procedural_infantry",
+      "components": null,
       "license": "self-authored",
       "author": "Iron Command",
       "generated": true,
       "generationSource": "scripts/generate-stage8-2G-D-A-assets.mjs",
-      "versionTag": 1
+      "version": 1
     },
     {
       "id": "unit_friendly_at_infantry",
       "category": "unit",
       "visualClass": "anti_armor_infantry",
-      "type": "anti_armor_infantry",
+      "type": "at_infantry",
       "side": "friendly",
       "factionPalette": "military-green-sand",
       "factionMark": "mint-chevron",
       "format": "spritesheet",
       "source": "assets/battle/sprites/unit-friendly-at-infantry.png",
       "directions": 8,
-      "directionOrder": ["N", "NE", "E", "SE", "S", "SW", "W", "NW"],
-      "spritesheet": { "frameWidth": 96, "frameHeight": 96, "columns": 8, "rows": 8 },
-      "animations": { "idle": { "startFrame": 0, "frameCount": 2, "frameDuration": 0.6, "loop": true, "region": "direction-row" }, "move": { "startFrame": 2, "frameCount": 4, "frameDuration": 0.14, "loop": true, "region": "direction-row" }, "aim": { "startFrame": 6, "frameCount": 1, "frameDuration": 0.5, "loop": false, "region": "direction-row" }, "fire": { "startFrame": 7, "frameCount": 1, "frameDuration": 0.18, "loop": false, "region": "direction-row" }, "hit": { "startFrame": 1, "frameCount": 1, "frameDuration": 0.22, "loop": false, "region": "direction-row" }, "destroy": { "startFrame": 7, "frameCount": 1, "frameDuration": 0.5, "loop": false, "region": "direction-row" } },
-      "anchor": { "x": 0.5, "y": 0.55 },
-      "worldSize": { "width": 34, "height": 40 },
-      "weaponMuzzleAnchor": { "space": "normalized-destination", "forward": 0.68, "lateral": -0.16, "directionAware": true },
+      "directionOrder": [
+        "N",
+        "NE",
+        "E",
+        "SE",
+        "S",
+        "SW",
+        "W",
+        "NW"
+      ],
+      "spritesheet": {
+        "frameWidth": 96,
+        "frameHeight": 96,
+        "columns": 8,
+        "rows": 8
+      },
+      "animations": {
+        "idle": {
+          "startFrame": 0,
+          "frameCount": 2,
+          "frameDuration": 0.6,
+          "loop": true,
+          "region": "direction-row"
+        },
+        "move": {
+          "startFrame": 2,
+          "frameCount": 4,
+          "frameDuration": 0.14,
+          "loop": true,
+          "region": "direction-row"
+        },
+        "aim": {
+          "startFrame": 6,
+          "frameCount": 1,
+          "frameDuration": 0.5,
+          "loop": false,
+          "region": "direction-row"
+        },
+        "fire": {
+          "startFrame": 7,
+          "frameCount": 1,
+          "frameDuration": 0.18,
+          "loop": false,
+          "region": "direction-row"
+        },
+        "repair": {
+          "startFrame": 6,
+          "frameCount": 1,
+          "frameDuration": 0.38,
+          "loop": true,
+          "region": "direction-row"
+        },
+        "hit": {
+          "startFrame": 1,
+          "frameCount": 1,
+          "frameDuration": 0.22,
+          "loop": false,
+          "region": "direction-row"
+        },
+        "destroy": {
+          "startFrame": 7,
+          "frameCount": 1,
+          "frameDuration": 0.5,
+          "loop": false,
+          "region": "direction-row"
+        }
+      },
+      "requiredAnimations": [
+        "idle",
+        "move",
+        "aim",
+        "fire"
+      ],
+      "optionalAnimations": [
+        "aim",
+        "fire",
+        "reload",
+        "hit",
+        "destroy"
+      ],
+      "weaponTopology": "body_mounted",
+      "anchor": {
+        "x": 0.5,
+        "y": 0.55
+      },
+      "worldSize": {
+        "width": 34,
+        "height": 40
+      },
+      "weaponMuzzleAnchor": {
+        "space": "normalized-destination",
+        "forward": 0.68,
+        "lateral": -0.16,
+        "directionAware": true
+      },
       "fallback": "procedural_anti_armor_infantry",
+      "components": null,
       "license": "self-authored",
       "author": "Iron Command",
       "generated": true,
       "generationSource": "scripts/generate-stage8-2G-D-A-assets.mjs",
-      "versionTag": 1
+      "version": 1
     },
     {
       "id": "unit_enemy_infantry",
@@ -72,42 +242,222 @@
       "format": "spritesheet",
       "source": "assets/battle/sprites/unit-enemy-infantry.png",
       "directions": 8,
-      "directionOrder": ["N", "NE", "E", "SE", "S", "SW", "W", "NW"],
-      "spritesheet": { "frameWidth": 96, "frameHeight": 96, "columns": 8, "rows": 8 },
-      "animations": { "idle": { "startFrame": 0, "frameCount": 2, "frameDuration": 0.6, "loop": true, "region": "direction-row" }, "move": { "startFrame": 2, "frameCount": 4, "frameDuration": 0.14, "loop": true, "region": "direction-row" }, "aim": { "startFrame": 6, "frameCount": 1, "frameDuration": 0.5, "loop": false, "region": "direction-row" }, "fire": { "startFrame": 7, "frameCount": 1, "frameDuration": 0.18, "loop": false, "region": "direction-row" }, "hit": { "startFrame": 1, "frameCount": 1, "frameDuration": 0.22, "loop": false, "region": "direction-row" }, "destroy": { "startFrame": 7, "frameCount": 1, "frameDuration": 0.5, "loop": false, "region": "direction-row" } },
-      "anchor": { "x": 0.5, "y": 0.55 },
-      "worldSize": { "width": 30, "height": 36 },
-      "weaponMuzzleAnchor": { "space": "normalized-destination", "forward": 0.56, "lateral": -0.08, "directionAware": true },
+      "directionOrder": [
+        "N",
+        "NE",
+        "E",
+        "SE",
+        "S",
+        "SW",
+        "W",
+        "NW"
+      ],
+      "spritesheet": {
+        "frameWidth": 96,
+        "frameHeight": 96,
+        "columns": 8,
+        "rows": 8
+      },
+      "animations": {
+        "idle": {
+          "startFrame": 0,
+          "frameCount": 2,
+          "frameDuration": 0.6,
+          "loop": true,
+          "region": "direction-row"
+        },
+        "move": {
+          "startFrame": 2,
+          "frameCount": 4,
+          "frameDuration": 0.14,
+          "loop": true,
+          "region": "direction-row"
+        },
+        "aim": {
+          "startFrame": 6,
+          "frameCount": 1,
+          "frameDuration": 0.5,
+          "loop": false,
+          "region": "direction-row"
+        },
+        "fire": {
+          "startFrame": 7,
+          "frameCount": 1,
+          "frameDuration": 0.18,
+          "loop": false,
+          "region": "direction-row"
+        },
+        "repair": {
+          "startFrame": 6,
+          "frameCount": 1,
+          "frameDuration": 0.38,
+          "loop": true,
+          "region": "direction-row"
+        },
+        "hit": {
+          "startFrame": 1,
+          "frameCount": 1,
+          "frameDuration": 0.22,
+          "loop": false,
+          "region": "direction-row"
+        },
+        "destroy": {
+          "startFrame": 7,
+          "frameCount": 1,
+          "frameDuration": 0.5,
+          "loop": false,
+          "region": "direction-row"
+        }
+      },
+      "requiredAnimations": [
+        "idle",
+        "move",
+        "aim",
+        "fire"
+      ],
+      "optionalAnimations": [
+        "aim",
+        "fire",
+        "reload",
+        "hit",
+        "destroy"
+      ],
+      "weaponTopology": "body_mounted",
+      "anchor": {
+        "x": 0.5,
+        "y": 0.55
+      },
+      "worldSize": {
+        "width": 30,
+        "height": 36
+      },
+      "weaponMuzzleAnchor": {
+        "space": "normalized-destination",
+        "forward": 0.56,
+        "lateral": -0.08,
+        "directionAware": true
+      },
       "fallback": "procedural_infantry",
+      "components": null,
       "license": "self-authored",
       "author": "Iron Command",
       "generated": true,
       "generationSource": "scripts/generate-stage8-2G-D-A-assets.mjs",
-      "versionTag": 1
+      "version": 1
     },
     {
       "id": "unit_enemy_at_infantry",
       "category": "unit",
       "visualClass": "anti_armor_infantry",
-      "type": "anti_armor_infantry",
+      "type": "at_infantry",
       "side": "enemy",
       "factionPalette": "rust-red-iron",
       "factionMark": "orange-slash",
       "format": "spritesheet",
       "source": "assets/battle/sprites/unit-enemy-at-infantry.png",
       "directions": 8,
-      "directionOrder": ["N", "NE", "E", "SE", "S", "SW", "W", "NW"],
-      "spritesheet": { "frameWidth": 96, "frameHeight": 96, "columns": 8, "rows": 8 },
-      "animations": { "idle": { "startFrame": 0, "frameCount": 2, "frameDuration": 0.6, "loop": true, "region": "direction-row" }, "move": { "startFrame": 2, "frameCount": 4, "frameDuration": 0.14, "loop": true, "region": "direction-row" }, "aim": { "startFrame": 6, "frameCount": 1, "frameDuration": 0.5, "loop": false, "region": "direction-row" }, "fire": { "startFrame": 7, "frameCount": 1, "frameDuration": 0.18, "loop": false, "region": "direction-row" }, "hit": { "startFrame": 1, "frameCount": 1, "frameDuration": 0.22, "loop": false, "region": "direction-row" }, "destroy": { "startFrame": 7, "frameCount": 1, "frameDuration": 0.5, "loop": false, "region": "direction-row" } },
-      "anchor": { "x": 0.5, "y": 0.55 },
-      "worldSize": { "width": 34, "height": 40 },
-      "weaponMuzzleAnchor": { "space": "normalized-destination", "forward": 0.68, "lateral": -0.16, "directionAware": true },
+      "directionOrder": [
+        "N",
+        "NE",
+        "E",
+        "SE",
+        "S",
+        "SW",
+        "W",
+        "NW"
+      ],
+      "spritesheet": {
+        "frameWidth": 96,
+        "frameHeight": 96,
+        "columns": 8,
+        "rows": 8
+      },
+      "animations": {
+        "idle": {
+          "startFrame": 0,
+          "frameCount": 2,
+          "frameDuration": 0.6,
+          "loop": true,
+          "region": "direction-row"
+        },
+        "move": {
+          "startFrame": 2,
+          "frameCount": 4,
+          "frameDuration": 0.14,
+          "loop": true,
+          "region": "direction-row"
+        },
+        "aim": {
+          "startFrame": 6,
+          "frameCount": 1,
+          "frameDuration": 0.5,
+          "loop": false,
+          "region": "direction-row"
+        },
+        "fire": {
+          "startFrame": 7,
+          "frameCount": 1,
+          "frameDuration": 0.18,
+          "loop": false,
+          "region": "direction-row"
+        },
+        "repair": {
+          "startFrame": 6,
+          "frameCount": 1,
+          "frameDuration": 0.38,
+          "loop": true,
+          "region": "direction-row"
+        },
+        "hit": {
+          "startFrame": 1,
+          "frameCount": 1,
+          "frameDuration": 0.22,
+          "loop": false,
+          "region": "direction-row"
+        },
+        "destroy": {
+          "startFrame": 7,
+          "frameCount": 1,
+          "frameDuration": 0.5,
+          "loop": false,
+          "region": "direction-row"
+        }
+      },
+      "requiredAnimations": [
+        "idle",
+        "move",
+        "aim",
+        "fire"
+      ],
+      "optionalAnimations": [
+        "aim",
+        "fire",
+        "reload",
+        "hit",
+        "destroy"
+      ],
+      "weaponTopology": "body_mounted",
+      "anchor": {
+        "x": 0.5,
+        "y": 0.55
+      },
+      "worldSize": {
+        "width": 34,
+        "height": 40
+      },
+      "weaponMuzzleAnchor": {
+        "space": "normalized-destination",
+        "forward": 0.68,
+        "lateral": -0.16,
+        "directionAware": true
+      },
       "fallback": "procedural_anti_armor_infantry",
+      "components": null,
       "license": "self-authored",
       "author": "Iron Command",
       "generated": true,
       "generationSource": "scripts/generate-stage8-2G-D-A-assets.mjs",
-      "versionTag": 1
+      "version": 1
     },
     {
       "id": "unit_friendly_mbt",
@@ -120,19 +470,110 @@
       "format": "spritesheet",
       "source": "assets/battle/sprites/unit-friendly-mbt-hull.png",
       "directions": 8,
-      "directionOrder": ["N", "NE", "E", "SE", "S", "SW", "W", "NW"],
-      "spritesheet": { "frameWidth": 96, "frameHeight": 96, "columns": 8, "rows": 8 },
-      "animations": { "idle": { "startFrame": 0, "frameCount": 2, "frameDuration": 0.6, "loop": true, "region": "direction-row" }, "move": { "startFrame": 2, "frameCount": 4, "frameDuration": 0.14, "loop": true, "region": "direction-row" }, "aim": { "startFrame": 6, "frameCount": 1, "frameDuration": 0.5, "loop": false, "region": "direction-row" }, "fire": { "startFrame": 7, "frameCount": 1, "frameDuration": 0.18, "loop": false, "region": "direction-row" }, "hit": { "startFrame": 1, "frameCount": 1, "frameDuration": 0.22, "loop": false, "region": "direction-row" }, "destroy": { "startFrame": 7, "frameCount": 1, "frameDuration": 0.5, "loop": false, "region": "direction-row" } },
-      "anchor": { "x": 0.5, "y": 0.5 },
-      "worldSize": { "width": 60, "height": 36 },
-      "weaponMuzzleAnchor": { "space": "normalized-destination", "forward": 0.78, "lateral": -0.02, "directionAware": true, "uses": "turretFacing" },
-      "components": { "hullAssetId": "unit_friendly_mbt", "turretAssetId": "unit_friendly_mbt_turret" },
+      "directionOrder": [
+        "N",
+        "NE",
+        "E",
+        "SE",
+        "S",
+        "SW",
+        "W",
+        "NW"
+      ],
+      "spritesheet": {
+        "frameWidth": 96,
+        "frameHeight": 96,
+        "columns": 8,
+        "rows": 8
+      },
+      "animations": {
+        "idle": {
+          "startFrame": 0,
+          "frameCount": 2,
+          "frameDuration": 0.6,
+          "loop": true,
+          "region": "direction-row"
+        },
+        "move": {
+          "startFrame": 2,
+          "frameCount": 4,
+          "frameDuration": 0.14,
+          "loop": true,
+          "region": "direction-row"
+        },
+        "aim": {
+          "startFrame": 6,
+          "frameCount": 1,
+          "frameDuration": 0.5,
+          "loop": false,
+          "region": "direction-row"
+        },
+        "fire": {
+          "startFrame": 7,
+          "frameCount": 1,
+          "frameDuration": 0.18,
+          "loop": false,
+          "region": "direction-row"
+        },
+        "repair": {
+          "startFrame": 6,
+          "frameCount": 1,
+          "frameDuration": 0.38,
+          "loop": true,
+          "region": "direction-row"
+        },
+        "hit": {
+          "startFrame": 1,
+          "frameCount": 1,
+          "frameDuration": 0.22,
+          "loop": false,
+          "region": "direction-row"
+        },
+        "destroy": {
+          "startFrame": 7,
+          "frameCount": 1,
+          "frameDuration": 0.5,
+          "loop": false,
+          "region": "direction-row"
+        }
+      },
+      "requiredAnimations": [
+        "idle",
+        "move"
+      ],
+      "optionalAnimations": [
+        "aim",
+        "fire",
+        "reload",
+        "hit",
+        "destroy"
+      ],
+      "weaponTopology": "independent_turret",
+      "anchor": {
+        "x": 0.5,
+        "y": 0.55
+      },
+      "worldSize": {
+        "width": 60,
+        "height": 36
+      },
+      "weaponMuzzleAnchor": {
+        "space": "normalized-destination",
+        "forward": 0.78,
+        "lateral": -0.02,
+        "directionAware": true,
+        "uses": "turretFacing"
+      },
       "fallback": "procedural_mbt",
+      "components": {
+        "hullAssetId": "unit_friendly_mbt",
+        "turretAssetId": "unit_friendly_mbt_turret"
+      },
       "license": "self-authored",
       "author": "Iron Command",
       "generated": true,
       "generationSource": "scripts/generate-stage8-2G-D-A-assets.mjs",
-      "versionTag": 1
+      "version": 1
     },
     {
       "id": "unit_enemy_mbt",
@@ -145,26 +586,1311 @@
       "format": "spritesheet",
       "source": "assets/battle/sprites/unit-enemy-mbt-hull.png",
       "directions": 8,
-      "directionOrder": ["N", "NE", "E", "SE", "S", "SW", "W", "NW"],
-      "spritesheet": { "frameWidth": 96, "frameHeight": 96, "columns": 8, "rows": 8 },
-      "animations": { "idle": { "startFrame": 0, "frameCount": 2, "frameDuration": 0.6, "loop": true, "region": "direction-row" }, "move": { "startFrame": 2, "frameCount": 4, "frameDuration": 0.14, "loop": true, "region": "direction-row" }, "aim": { "startFrame": 6, "frameCount": 1, "frameDuration": 0.5, "loop": false, "region": "direction-row" }, "fire": { "startFrame": 7, "frameCount": 1, "frameDuration": 0.18, "loop": false, "region": "direction-row" }, "hit": { "startFrame": 1, "frameCount": 1, "frameDuration": 0.22, "loop": false, "region": "direction-row" }, "destroy": { "startFrame": 7, "frameCount": 1, "frameDuration": 0.5, "loop": false, "region": "direction-row" } },
-      "anchor": { "x": 0.5, "y": 0.5 },
-      "worldSize": { "width": 60, "height": 36 },
-      "weaponMuzzleAnchor": { "space": "normalized-destination", "forward": 0.78, "lateral": -0.02, "directionAware": true, "uses": "turretFacing" },
-      "components": { "hullAssetId": "unit_enemy_mbt", "turretAssetId": "unit_enemy_mbt_turret" },
+      "directionOrder": [
+        "N",
+        "NE",
+        "E",
+        "SE",
+        "S",
+        "SW",
+        "W",
+        "NW"
+      ],
+      "spritesheet": {
+        "frameWidth": 96,
+        "frameHeight": 96,
+        "columns": 8,
+        "rows": 8
+      },
+      "animations": {
+        "idle": {
+          "startFrame": 0,
+          "frameCount": 2,
+          "frameDuration": 0.6,
+          "loop": true,
+          "region": "direction-row"
+        },
+        "move": {
+          "startFrame": 2,
+          "frameCount": 4,
+          "frameDuration": 0.14,
+          "loop": true,
+          "region": "direction-row"
+        },
+        "aim": {
+          "startFrame": 6,
+          "frameCount": 1,
+          "frameDuration": 0.5,
+          "loop": false,
+          "region": "direction-row"
+        },
+        "fire": {
+          "startFrame": 7,
+          "frameCount": 1,
+          "frameDuration": 0.18,
+          "loop": false,
+          "region": "direction-row"
+        },
+        "repair": {
+          "startFrame": 6,
+          "frameCount": 1,
+          "frameDuration": 0.38,
+          "loop": true,
+          "region": "direction-row"
+        },
+        "hit": {
+          "startFrame": 1,
+          "frameCount": 1,
+          "frameDuration": 0.22,
+          "loop": false,
+          "region": "direction-row"
+        },
+        "destroy": {
+          "startFrame": 7,
+          "frameCount": 1,
+          "frameDuration": 0.5,
+          "loop": false,
+          "region": "direction-row"
+        }
+      },
+      "requiredAnimations": [
+        "idle",
+        "move"
+      ],
+      "optionalAnimations": [
+        "aim",
+        "fire",
+        "reload",
+        "hit",
+        "destroy"
+      ],
+      "weaponTopology": "independent_turret",
+      "anchor": {
+        "x": 0.5,
+        "y": 0.55
+      },
+      "worldSize": {
+        "width": 60,
+        "height": 36
+      },
+      "weaponMuzzleAnchor": {
+        "space": "normalized-destination",
+        "forward": 0.78,
+        "lateral": -0.02,
+        "directionAware": true,
+        "uses": "turretFacing"
+      },
+      "fallback": "procedural_mbt",
+      "components": {
+        "hullAssetId": "unit_enemy_mbt",
+        "turretAssetId": "unit_enemy_mbt_turret"
+      },
+      "license": "self-authored",
+      "author": "Iron Command",
+      "generated": true,
+      "generationSource": "scripts/generate-stage8-2G-D-A-assets.mjs",
+      "version": 1
+    },
+    {
+      "id": "unit_friendly_scout_car",
+      "category": "unit",
+      "visualClass": "light_vehicle",
+      "type": "scout_car",
+      "side": "friendly",
+      "factionPalette": "military-green-sand",
+      "factionMark": "mint-chevron",
+      "format": "spritesheet",
+      "source": "assets/battle/sprites/unit-friendly-scout-car.png",
+      "directions": 8,
+      "directionOrder": [
+        "N",
+        "NE",
+        "E",
+        "SE",
+        "S",
+        "SW",
+        "W",
+        "NW"
+      ],
+      "spritesheet": {
+        "frameWidth": 96,
+        "frameHeight": 96,
+        "columns": 8,
+        "rows": 8
+      },
+      "animations": {
+        "idle": {
+          "startFrame": 0,
+          "frameCount": 2,
+          "frameDuration": 0.6,
+          "loop": true,
+          "region": "direction-row"
+        },
+        "move": {
+          "startFrame": 2,
+          "frameCount": 4,
+          "frameDuration": 0.14,
+          "loop": true,
+          "region": "direction-row"
+        },
+        "aim": {
+          "startFrame": 6,
+          "frameCount": 1,
+          "frameDuration": 0.5,
+          "loop": false,
+          "region": "direction-row"
+        },
+        "fire": {
+          "startFrame": 7,
+          "frameCount": 1,
+          "frameDuration": 0.18,
+          "loop": false,
+          "region": "direction-row"
+        },
+        "repair": {
+          "startFrame": 6,
+          "frameCount": 1,
+          "frameDuration": 0.38,
+          "loop": true,
+          "region": "direction-row"
+        },
+        "hit": {
+          "startFrame": 1,
+          "frameCount": 1,
+          "frameDuration": 0.22,
+          "loop": false,
+          "region": "direction-row"
+        },
+        "destroy": {
+          "startFrame": 7,
+          "frameCount": 1,
+          "frameDuration": 0.5,
+          "loop": false,
+          "region": "direction-row"
+        }
+      },
+      "requiredAnimations": [
+        "idle",
+        "move",
+        "aim",
+        "fire"
+      ],
+      "optionalAnimations": [
+        "aim",
+        "fire",
+        "reload",
+        "hit",
+        "destroy"
+      ],
+      "weaponTopology": "body_mounted",
+      "anchor": {
+        "x": 0.5,
+        "y": 0.55
+      },
+      "worldSize": {
+        "width": 48,
+        "height": 26
+      },
+      "weaponMuzzleAnchor": {
+        "space": "normalized-destination",
+        "forward": 0.68,
+        "lateral": -0.05,
+        "directionAware": true
+      },
+      "fallback": "procedural_light_vehicle",
+      "components": null,
+      "license": "self-authored",
+      "author": "Iron Command",
+      "generated": true,
+      "generationSource": "scripts/generate-stage8-2G-D-A-assets.mjs",
+      "version": 1
+    },
+    {
+      "id": "unit_enemy_scout_car",
+      "category": "unit",
+      "visualClass": "light_vehicle",
+      "type": "scout_car",
+      "side": "enemy",
+      "factionPalette": "rust-red-iron",
+      "factionMark": "orange-slash",
+      "format": "spritesheet",
+      "source": "assets/battle/sprites/unit-enemy-scout-car.png",
+      "directions": 8,
+      "directionOrder": [
+        "N",
+        "NE",
+        "E",
+        "SE",
+        "S",
+        "SW",
+        "W",
+        "NW"
+      ],
+      "spritesheet": {
+        "frameWidth": 96,
+        "frameHeight": 96,
+        "columns": 8,
+        "rows": 8
+      },
+      "animations": {
+        "idle": {
+          "startFrame": 0,
+          "frameCount": 2,
+          "frameDuration": 0.6,
+          "loop": true,
+          "region": "direction-row"
+        },
+        "move": {
+          "startFrame": 2,
+          "frameCount": 4,
+          "frameDuration": 0.14,
+          "loop": true,
+          "region": "direction-row"
+        },
+        "aim": {
+          "startFrame": 6,
+          "frameCount": 1,
+          "frameDuration": 0.5,
+          "loop": false,
+          "region": "direction-row"
+        },
+        "fire": {
+          "startFrame": 7,
+          "frameCount": 1,
+          "frameDuration": 0.18,
+          "loop": false,
+          "region": "direction-row"
+        },
+        "repair": {
+          "startFrame": 6,
+          "frameCount": 1,
+          "frameDuration": 0.38,
+          "loop": true,
+          "region": "direction-row"
+        },
+        "hit": {
+          "startFrame": 1,
+          "frameCount": 1,
+          "frameDuration": 0.22,
+          "loop": false,
+          "region": "direction-row"
+        },
+        "destroy": {
+          "startFrame": 7,
+          "frameCount": 1,
+          "frameDuration": 0.5,
+          "loop": false,
+          "region": "direction-row"
+        }
+      },
+      "requiredAnimations": [
+        "idle",
+        "move",
+        "aim",
+        "fire"
+      ],
+      "optionalAnimations": [
+        "aim",
+        "fire",
+        "reload",
+        "hit",
+        "destroy"
+      ],
+      "weaponTopology": "body_mounted",
+      "anchor": {
+        "x": 0.5,
+        "y": 0.55
+      },
+      "worldSize": {
+        "width": 48,
+        "height": 26
+      },
+      "weaponMuzzleAnchor": {
+        "space": "normalized-destination",
+        "forward": 0.68,
+        "lateral": -0.05,
+        "directionAware": true
+      },
+      "fallback": "procedural_light_vehicle",
+      "components": null,
+      "license": "self-authored",
+      "author": "Iron Command",
+      "generated": true,
+      "generationSource": "scripts/generate-stage8-2G-D-A-assets.mjs",
+      "version": 1
+    },
+    {
+      "id": "unit_friendly_repair_vehicle",
+      "category": "unit",
+      "visualClass": "support_vehicle",
+      "type": "repair_vehicle",
+      "side": "friendly",
+      "factionPalette": "military-green-sand",
+      "factionMark": "mint-chevron",
+      "format": "spritesheet",
+      "source": "assets/battle/sprites/unit-friendly-repair-vehicle.png",
+      "directions": 8,
+      "directionOrder": [
+        "N",
+        "NE",
+        "E",
+        "SE",
+        "S",
+        "SW",
+        "W",
+        "NW"
+      ],
+      "spritesheet": {
+        "frameWidth": 96,
+        "frameHeight": 96,
+        "columns": 8,
+        "rows": 8
+      },
+      "animations": {
+        "idle": {
+          "startFrame": 0,
+          "frameCount": 2,
+          "frameDuration": 0.6,
+          "loop": true,
+          "region": "direction-row"
+        },
+        "move": {
+          "startFrame": 2,
+          "frameCount": 4,
+          "frameDuration": 0.14,
+          "loop": true,
+          "region": "direction-row"
+        },
+        "aim": {
+          "startFrame": 6,
+          "frameCount": 1,
+          "frameDuration": 0.5,
+          "loop": false,
+          "region": "direction-row"
+        },
+        "fire": {
+          "startFrame": 7,
+          "frameCount": 1,
+          "frameDuration": 0.18,
+          "loop": false,
+          "region": "direction-row"
+        },
+        "repair": {
+          "startFrame": 6,
+          "frameCount": 1,
+          "frameDuration": 0.38,
+          "loop": true,
+          "region": "direction-row"
+        },
+        "hit": {
+          "startFrame": 1,
+          "frameCount": 1,
+          "frameDuration": 0.22,
+          "loop": false,
+          "region": "direction-row"
+        },
+        "destroy": {
+          "startFrame": 7,
+          "frameCount": 1,
+          "frameDuration": 0.5,
+          "loop": false,
+          "region": "direction-row"
+        }
+      },
+      "requiredAnimations": [
+        "idle",
+        "move",
+        "repair",
+        "hit",
+        "destroy"
+      ],
+      "optionalAnimations": [],
+      "weaponTopology": "unarmed",
+      "anchor": {
+        "x": 0.5,
+        "y": 0.55
+      },
+      "worldSize": {
+        "width": 52,
+        "height": 28
+      },
+      "weaponMuzzleAnchor": null,
+      "fallback": "procedural_support_vehicle",
+      "components": null,
+      "license": "self-authored",
+      "author": "Iron Command",
+      "generated": true,
+      "generationSource": "scripts/generate-stage8-2G-D-A-assets.mjs",
+      "version": 1
+    },
+    {
+      "id": "unit_friendly_support_vehicle",
+      "category": "unit",
+      "visualClass": "support_vehicle",
+      "type": "support_vehicle",
+      "side": "friendly",
+      "factionPalette": "military-green-sand",
+      "factionMark": "mint-chevron",
+      "format": "spritesheet",
+      "source": "assets/battle/sprites/unit-friendly-support-vehicle.png",
+      "directions": 8,
+      "directionOrder": [
+        "N",
+        "NE",
+        "E",
+        "SE",
+        "S",
+        "SW",
+        "W",
+        "NW"
+      ],
+      "spritesheet": {
+        "frameWidth": 96,
+        "frameHeight": 96,
+        "columns": 8,
+        "rows": 8
+      },
+      "animations": {
+        "idle": {
+          "startFrame": 0,
+          "frameCount": 2,
+          "frameDuration": 0.6,
+          "loop": true,
+          "region": "direction-row"
+        },
+        "move": {
+          "startFrame": 2,
+          "frameCount": 4,
+          "frameDuration": 0.14,
+          "loop": true,
+          "region": "direction-row"
+        },
+        "aim": {
+          "startFrame": 6,
+          "frameCount": 1,
+          "frameDuration": 0.5,
+          "loop": false,
+          "region": "direction-row"
+        },
+        "fire": {
+          "startFrame": 7,
+          "frameCount": 1,
+          "frameDuration": 0.18,
+          "loop": false,
+          "region": "direction-row"
+        },
+        "repair": {
+          "startFrame": 6,
+          "frameCount": 1,
+          "frameDuration": 0.38,
+          "loop": true,
+          "region": "direction-row"
+        },
+        "hit": {
+          "startFrame": 1,
+          "frameCount": 1,
+          "frameDuration": 0.22,
+          "loop": false,
+          "region": "direction-row"
+        },
+        "destroy": {
+          "startFrame": 7,
+          "frameCount": 1,
+          "frameDuration": 0.5,
+          "loop": false,
+          "region": "direction-row"
+        }
+      },
+      "requiredAnimations": [
+        "idle",
+        "move",
+        "hit",
+        "destroy"
+      ],
+      "optionalAnimations": [],
+      "weaponTopology": "unarmed",
+      "anchor": {
+        "x": 0.5,
+        "y": 0.55
+      },
+      "worldSize": {
+        "width": 54,
+        "height": 30
+      },
+      "weaponMuzzleAnchor": null,
+      "fallback": "procedural_support_vehicle",
+      "components": null,
+      "license": "self-authored",
+      "author": "Iron Command",
+      "generated": true,
+      "generationSource": "scripts/generate-stage8-2G-D-A-assets.mjs",
+      "version": 1
+    },
+    {
+      "id": "unit_enemy_support_vehicle",
+      "category": "unit",
+      "visualClass": "support_vehicle",
+      "type": "support_vehicle",
+      "side": "enemy",
+      "factionPalette": "rust-red-iron",
+      "factionMark": "orange-slash",
+      "format": "spritesheet",
+      "source": "assets/battle/sprites/unit-enemy-support-vehicle.png",
+      "directions": 8,
+      "directionOrder": [
+        "N",
+        "NE",
+        "E",
+        "SE",
+        "S",
+        "SW",
+        "W",
+        "NW"
+      ],
+      "spritesheet": {
+        "frameWidth": 96,
+        "frameHeight": 96,
+        "columns": 8,
+        "rows": 8
+      },
+      "animations": {
+        "idle": {
+          "startFrame": 0,
+          "frameCount": 2,
+          "frameDuration": 0.6,
+          "loop": true,
+          "region": "direction-row"
+        },
+        "move": {
+          "startFrame": 2,
+          "frameCount": 4,
+          "frameDuration": 0.14,
+          "loop": true,
+          "region": "direction-row"
+        },
+        "aim": {
+          "startFrame": 6,
+          "frameCount": 1,
+          "frameDuration": 0.5,
+          "loop": false,
+          "region": "direction-row"
+        },
+        "fire": {
+          "startFrame": 7,
+          "frameCount": 1,
+          "frameDuration": 0.18,
+          "loop": false,
+          "region": "direction-row"
+        },
+        "repair": {
+          "startFrame": 6,
+          "frameCount": 1,
+          "frameDuration": 0.38,
+          "loop": true,
+          "region": "direction-row"
+        },
+        "hit": {
+          "startFrame": 1,
+          "frameCount": 1,
+          "frameDuration": 0.22,
+          "loop": false,
+          "region": "direction-row"
+        },
+        "destroy": {
+          "startFrame": 7,
+          "frameCount": 1,
+          "frameDuration": 0.5,
+          "loop": false,
+          "region": "direction-row"
+        }
+      },
+      "requiredAnimations": [
+        "idle",
+        "move",
+        "hit",
+        "destroy"
+      ],
+      "optionalAnimations": [],
+      "weaponTopology": "unarmed",
+      "anchor": {
+        "x": 0.5,
+        "y": 0.55
+      },
+      "worldSize": {
+        "width": 54,
+        "height": 30
+      },
+      "weaponMuzzleAnchor": null,
+      "fallback": "procedural_support_vehicle",
+      "components": null,
+      "license": "self-authored",
+      "author": "Iron Command",
+      "generated": true,
+      "generationSource": "scripts/generate-stage8-2G-D-A-assets.mjs",
+      "version": 1
+    },
+    {
+      "id": "unit_friendly_mbt_turret",
+      "category": "unit_component",
+      "visualClass": "mbt",
+      "type": "mbt",
+      "side": "friendly",
+      "factionPalette": "military-green-sand",
+      "factionMark": "mint-chevron",
+      "component": "turret",
+      "format": "spritesheet",
+      "source": "assets/battle/sprites/unit-friendly-mbt-turret.png",
+      "directions": 8,
+      "directionOrder": [
+        "N",
+        "NE",
+        "E",
+        "SE",
+        "S",
+        "SW",
+        "W",
+        "NW"
+      ],
+      "spritesheet": {
+        "frameWidth": 96,
+        "frameHeight": 96,
+        "columns": 8,
+        "rows": 8
+      },
+      "animations": {
+        "idle": {
+          "startFrame": 0,
+          "frameCount": 2,
+          "frameDuration": 0.6,
+          "loop": true,
+          "region": "direction-row"
+        },
+        "move": {
+          "startFrame": 2,
+          "frameCount": 4,
+          "frameDuration": 0.14,
+          "loop": true,
+          "region": "direction-row"
+        },
+        "aim": {
+          "startFrame": 6,
+          "frameCount": 1,
+          "frameDuration": 0.5,
+          "loop": false,
+          "region": "direction-row"
+        },
+        "fire": {
+          "startFrame": 7,
+          "frameCount": 1,
+          "frameDuration": 0.18,
+          "loop": false,
+          "region": "direction-row"
+        },
+        "repair": {
+          "startFrame": 6,
+          "frameCount": 1,
+          "frameDuration": 0.38,
+          "loop": true,
+          "region": "direction-row"
+        },
+        "hit": {
+          "startFrame": 1,
+          "frameCount": 1,
+          "frameDuration": 0.22,
+          "loop": false,
+          "region": "direction-row"
+        },
+        "destroy": {
+          "startFrame": 7,
+          "frameCount": 1,
+          "frameDuration": 0.5,
+          "loop": false,
+          "region": "direction-row"
+        }
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "worldSize": {
+        "width": 60,
+        "height": 36
+      },
       "fallback": "procedural_mbt",
       "license": "self-authored",
       "author": "Iron Command",
       "generated": true,
       "generationSource": "scripts/generate-stage8-2G-D-A-assets.mjs",
-      "versionTag": 1
+      "version": 1
     },
-    { "id": "unit_friendly_mbt_turret", "category": "unit_component", "visualClass": "mbt", "type": "mbt", "side": "friendly", "factionPalette": "military-green-sand", "factionMark": "mint-chevron", "component": "turret", "format": "spritesheet", "source": "assets/battle/sprites/unit-friendly-mbt-turret.png", "directions": 8, "directionOrder": ["N", "NE", "E", "SE", "S", "SW", "W", "NW"], "spritesheet": { "frameWidth": 96, "frameHeight": 96, "columns": 8, "rows": 8 }, "animations": { "idle": { "startFrame": 0, "frameCount": 2, "frameDuration": 0.6, "loop": true, "region": "direction-row" }, "move": { "startFrame": 2, "frameCount": 4, "frameDuration": 0.14, "loop": true, "region": "direction-row" }, "aim": { "startFrame": 6, "frameCount": 1, "frameDuration": 0.5, "loop": false, "region": "direction-row" }, "fire": { "startFrame": 7, "frameCount": 1, "frameDuration": 0.18, "loop": false, "region": "direction-row" }, "hit": { "startFrame": 1, "frameCount": 1, "frameDuration": 0.22, "loop": false, "region": "direction-row" }, "destroy": { "startFrame": 7, "frameCount": 1, "frameDuration": 0.5, "loop": false, "region": "direction-row" } }, "anchor": { "x": 0.5, "y": 0.5 }, "worldSize": { "width": 60, "height": 36 }, "fallback": "procedural_mbt", "license": "self-authored", "author": "Iron Command", "generated": true, "generationSource": "scripts/generate-stage8-2G-D-A-assets.mjs", "versionTag": 1 },
-    { "id": "unit_enemy_mbt_turret", "category": "unit_component", "visualClass": "mbt", "type": "mbt", "side": "enemy", "factionPalette": "rust-red-iron", "factionMark": "orange-slash", "component": "turret", "format": "spritesheet", "source": "assets/battle/sprites/unit-enemy-mbt-turret.png", "directions": 8, "directionOrder": ["N", "NE", "E", "SE", "S", "SW", "W", "NW"], "spritesheet": { "frameWidth": 96, "frameHeight": 96, "columns": 8, "rows": 8 }, "animations": { "idle": { "startFrame": 0, "frameCount": 2, "frameDuration": 0.6, "loop": true, "region": "direction-row" }, "move": { "startFrame": 2, "frameCount": 4, "frameDuration": 0.14, "loop": true, "region": "direction-row" }, "aim": { "startFrame": 6, "frameCount": 1, "frameDuration": 0.5, "loop": false, "region": "direction-row" }, "fire": { "startFrame": 7, "frameCount": 1, "frameDuration": 0.18, "loop": false, "region": "direction-row" }, "hit": { "startFrame": 1, "frameCount": 1, "frameDuration": 0.22, "loop": false, "region": "direction-row" }, "destroy": { "startFrame": 7, "frameCount": 1, "frameDuration": 0.5, "loop": false, "region": "direction-row" } }, "anchor": { "x": 0.5, "y": 0.5 }, "worldSize": { "width": 60, "height": 36 }, "fallback": "procedural_mbt", "license": "self-authored", "author": "Iron Command", "generated": true, "generationSource": "scripts/generate-stage8-2G-D-A-assets.mjs", "versionTag": 1 },
-    { "id": "wreck_friendly_mbt", "category": "wreck", "visualClass": "mbt", "type": "tank_wreck", "side": "friendly", "factionPalette": "military-green-sand", "factionMark": "mint-chevron", "format": "spritesheet", "source": "assets/battle/sprites/wreck-friendly-mbt.png", "directions": 8, "directionOrder": ["N", "NE", "E", "SE", "S", "SW", "W", "NW"], "spritesheet": { "frameWidth": 96, "frameHeight": 96, "columns": 1, "rows": 8 }, "animations": { "idle": { "startFrame": 0, "frameCount": 1, "frameDuration": 1, "loop": false, "region": "direction-row" } }, "anchor": { "x": 0.5, "y": 0.55 }, "worldSize": { "width": 60, "height": 36 }, "fallback": "procedural_wreck", "license": "self-authored", "author": "Iron Command", "generated": true, "generationSource": "scripts/generate-stage8-2G-D-A-assets.mjs", "versionTag": 1 },
-    { "id": "wreck_enemy_mbt", "category": "wreck", "visualClass": "mbt", "type": "tank_wreck", "side": "enemy", "factionPalette": "rust-red-iron", "factionMark": "orange-slash", "format": "spritesheet", "source": "assets/battle/sprites/wreck-enemy-mbt.png", "directions": 8, "directionOrder": ["N", "NE", "E", "SE", "S", "SW", "W", "NW"], "spritesheet": { "frameWidth": 96, "frameHeight": 96, "columns": 1, "rows": 8 }, "animations": { "idle": { "startFrame": 0, "frameCount": 1, "frameDuration": 1, "loop": false, "region": "direction-row" } }, "anchor": { "x": 0.5, "y": 0.55 }, "worldSize": { "width": 60, "height": 36 }, "fallback": "procedural_wreck", "license": "self-authored", "author": "Iron Command", "generated": true, "generationSource": "scripts/generate-stage8-2G-D-A-assets.mjs", "versionTag": 1 },
-    { "id": "wreck_tank", "category": "wreck", "type": "tank_wreck", "source": "assets/battle/sample-assets/wreck-tank.svg", "version": 1, "format": "svg", "fallback": "procedural_wreck", "anchor": { "x": 0.5, "y": 0.5 }, "worldSize": { "width": 60, "height": 36 }, "license": "self-authored", "author": "Iron Command", "generated": false },
-    { "id": "cover_industrial_module", "category": "industrial_prop", "type": "cover", "source": "assets/battle/sample-assets/industrial-cover.svg", "version": 1, "format": "svg", "fallback": "procedural_industrial_cover", "anchor": { "x": 0.5, "y": 0.5 }, "worldSize": { "width": 42, "height": 24 }, "license": "self-authored", "author": "Iron Command", "generated": false },
-    { "id": "terrain_scrap_pile", "category": "terrain", "type": "prop", "source": "assets/battle/sample-assets/terrain-scrap-pile.svg", "version": 1, "format": "svg", "fallback": "procedural_terrain_prop", "anchor": { "x": 0.5, "y": 0.5 }, "worldSize": { "width": 36, "height": 22 }, "license": "self-authored", "author": "Iron Command", "generated": false }
+    {
+      "id": "unit_enemy_mbt_turret",
+      "category": "unit_component",
+      "visualClass": "mbt",
+      "type": "mbt",
+      "side": "enemy",
+      "factionPalette": "rust-red-iron",
+      "factionMark": "orange-slash",
+      "component": "turret",
+      "format": "spritesheet",
+      "source": "assets/battle/sprites/unit-enemy-mbt-turret.png",
+      "directions": 8,
+      "directionOrder": [
+        "N",
+        "NE",
+        "E",
+        "SE",
+        "S",
+        "SW",
+        "W",
+        "NW"
+      ],
+      "spritesheet": {
+        "frameWidth": 96,
+        "frameHeight": 96,
+        "columns": 8,
+        "rows": 8
+      },
+      "animations": {
+        "idle": {
+          "startFrame": 0,
+          "frameCount": 2,
+          "frameDuration": 0.6,
+          "loop": true,
+          "region": "direction-row"
+        },
+        "move": {
+          "startFrame": 2,
+          "frameCount": 4,
+          "frameDuration": 0.14,
+          "loop": true,
+          "region": "direction-row"
+        },
+        "aim": {
+          "startFrame": 6,
+          "frameCount": 1,
+          "frameDuration": 0.5,
+          "loop": false,
+          "region": "direction-row"
+        },
+        "fire": {
+          "startFrame": 7,
+          "frameCount": 1,
+          "frameDuration": 0.18,
+          "loop": false,
+          "region": "direction-row"
+        },
+        "repair": {
+          "startFrame": 6,
+          "frameCount": 1,
+          "frameDuration": 0.38,
+          "loop": true,
+          "region": "direction-row"
+        },
+        "hit": {
+          "startFrame": 1,
+          "frameCount": 1,
+          "frameDuration": 0.22,
+          "loop": false,
+          "region": "direction-row"
+        },
+        "destroy": {
+          "startFrame": 7,
+          "frameCount": 1,
+          "frameDuration": 0.5,
+          "loop": false,
+          "region": "direction-row"
+        }
+      },
+      "anchor": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "worldSize": {
+        "width": 60,
+        "height": 36
+      },
+      "fallback": "procedural_mbt",
+      "license": "self-authored",
+      "author": "Iron Command",
+      "generated": true,
+      "generationSource": "scripts/generate-stage8-2G-D-A-assets.mjs",
+      "version": 1
+    },
+    {
+      "id": "wreck_friendly_mbt",
+      "category": "wreck",
+      "visualClass": "mbt",
+      "type": "tank_wreck",
+      "side": "friendly",
+      "factionPalette": "military-green-sand",
+      "factionMark": "mint-chevron",
+      "format": "spritesheet",
+      "source": "assets/battle/sprites/wreck-friendly-mbt.png",
+      "directions": 8,
+      "directionOrder": [
+        "N",
+        "NE",
+        "E",
+        "SE",
+        "S",
+        "SW",
+        "W",
+        "NW"
+      ],
+      "spritesheet": {
+        "frameWidth": 96,
+        "frameHeight": 96,
+        "columns": 1,
+        "rows": 8
+      },
+      "animations": {
+        "idle": {
+          "startFrame": 0,
+          "frameCount": 1,
+          "frameDuration": 1,
+          "loop": false,
+          "region": "direction-row"
+        }
+      },
+      "requiredAnimations": [
+        "idle"
+      ],
+      "optionalAnimations": [],
+      "weaponTopology": null,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.55
+      },
+      "worldSize": {
+        "width": 60,
+        "height": 36
+      },
+      "weaponMuzzleAnchor": null,
+      "fallback": "procedural_wreck",
+      "license": "self-authored",
+      "author": "Iron Command",
+      "generated": true,
+      "generationSource": "scripts/generate-stage8-2G-D-A-assets.mjs",
+      "version": 1
+    },
+    {
+      "id": "wreck_enemy_mbt",
+      "category": "wreck",
+      "visualClass": "mbt",
+      "type": "tank_wreck",
+      "side": "enemy",
+      "factionPalette": "rust-red-iron",
+      "factionMark": "orange-slash",
+      "format": "spritesheet",
+      "source": "assets/battle/sprites/wreck-enemy-mbt.png",
+      "directions": 8,
+      "directionOrder": [
+        "N",
+        "NE",
+        "E",
+        "SE",
+        "S",
+        "SW",
+        "W",
+        "NW"
+      ],
+      "spritesheet": {
+        "frameWidth": 96,
+        "frameHeight": 96,
+        "columns": 1,
+        "rows": 8
+      },
+      "animations": {
+        "idle": {
+          "startFrame": 0,
+          "frameCount": 1,
+          "frameDuration": 1,
+          "loop": false,
+          "region": "direction-row"
+        }
+      },
+      "requiredAnimations": [
+        "idle"
+      ],
+      "optionalAnimations": [],
+      "weaponTopology": null,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.55
+      },
+      "worldSize": {
+        "width": 60,
+        "height": 36
+      },
+      "weaponMuzzleAnchor": null,
+      "fallback": "procedural_wreck",
+      "license": "self-authored",
+      "author": "Iron Command",
+      "generated": true,
+      "generationSource": "scripts/generate-stage8-2G-D-A-assets.mjs",
+      "version": 1
+    },
+    {
+      "id": "wreck_friendly_scout_car",
+      "category": "wreck",
+      "visualClass": "light_vehicle",
+      "type": "scout_car_wreck",
+      "side": "friendly",
+      "factionPalette": "military-green-sand",
+      "factionMark": "mint-chevron",
+      "format": "spritesheet",
+      "source": "assets/battle/sprites/wreck-friendly-scout-car.png",
+      "directions": 8,
+      "directionOrder": [
+        "N",
+        "NE",
+        "E",
+        "SE",
+        "S",
+        "SW",
+        "W",
+        "NW"
+      ],
+      "spritesheet": {
+        "frameWidth": 96,
+        "frameHeight": 96,
+        "columns": 1,
+        "rows": 8
+      },
+      "animations": {
+        "idle": {
+          "startFrame": 0,
+          "frameCount": 1,
+          "frameDuration": 1,
+          "loop": false,
+          "region": "direction-row"
+        }
+      },
+      "requiredAnimations": [
+        "idle"
+      ],
+      "optionalAnimations": [],
+      "weaponTopology": null,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.55
+      },
+      "worldSize": {
+        "width": 48,
+        "height": 26
+      },
+      "weaponMuzzleAnchor": null,
+      "fallback": "procedural_wreck",
+      "license": "self-authored",
+      "author": "Iron Command",
+      "generated": true,
+      "generationSource": "scripts/generate-stage8-2G-D-A-assets.mjs",
+      "version": 1
+    },
+    {
+      "id": "wreck_enemy_scout_car",
+      "category": "wreck",
+      "visualClass": "light_vehicle",
+      "type": "scout_car_wreck",
+      "side": "enemy",
+      "factionPalette": "rust-red-iron",
+      "factionMark": "orange-slash",
+      "format": "spritesheet",
+      "source": "assets/battle/sprites/wreck-enemy-scout-car.png",
+      "directions": 8,
+      "directionOrder": [
+        "N",
+        "NE",
+        "E",
+        "SE",
+        "S",
+        "SW",
+        "W",
+        "NW"
+      ],
+      "spritesheet": {
+        "frameWidth": 96,
+        "frameHeight": 96,
+        "columns": 1,
+        "rows": 8
+      },
+      "animations": {
+        "idle": {
+          "startFrame": 0,
+          "frameCount": 1,
+          "frameDuration": 1,
+          "loop": false,
+          "region": "direction-row"
+        }
+      },
+      "requiredAnimations": [
+        "idle"
+      ],
+      "optionalAnimations": [],
+      "weaponTopology": null,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.55
+      },
+      "worldSize": {
+        "width": 48,
+        "height": 26
+      },
+      "weaponMuzzleAnchor": null,
+      "fallback": "procedural_wreck",
+      "license": "self-authored",
+      "author": "Iron Command",
+      "generated": true,
+      "generationSource": "scripts/generate-stage8-2G-D-A-assets.mjs",
+      "version": 1
+    },
+    {
+      "id": "wreck_friendly_repair_vehicle",
+      "category": "wreck",
+      "visualClass": "support_vehicle",
+      "type": "repair_vehicle_wreck",
+      "side": "friendly",
+      "factionPalette": "military-green-sand",
+      "factionMark": "mint-chevron",
+      "format": "spritesheet",
+      "source": "assets/battle/sprites/wreck-friendly-repair-vehicle.png",
+      "directions": 8,
+      "directionOrder": [
+        "N",
+        "NE",
+        "E",
+        "SE",
+        "S",
+        "SW",
+        "W",
+        "NW"
+      ],
+      "spritesheet": {
+        "frameWidth": 96,
+        "frameHeight": 96,
+        "columns": 1,
+        "rows": 8
+      },
+      "animations": {
+        "idle": {
+          "startFrame": 0,
+          "frameCount": 1,
+          "frameDuration": 1,
+          "loop": false,
+          "region": "direction-row"
+        }
+      },
+      "requiredAnimations": [
+        "idle"
+      ],
+      "optionalAnimations": [],
+      "weaponTopology": null,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.55
+      },
+      "worldSize": {
+        "width": 52,
+        "height": 28
+      },
+      "weaponMuzzleAnchor": null,
+      "fallback": "procedural_wreck",
+      "license": "self-authored",
+      "author": "Iron Command",
+      "generated": true,
+      "generationSource": "scripts/generate-stage8-2G-D-A-assets.mjs",
+      "version": 1
+    },
+    {
+      "id": "wreck_friendly_support_vehicle",
+      "category": "wreck",
+      "visualClass": "support_vehicle",
+      "type": "support_vehicle_wreck",
+      "side": "friendly",
+      "factionPalette": "military-green-sand",
+      "factionMark": "mint-chevron",
+      "format": "spritesheet",
+      "source": "assets/battle/sprites/wreck-friendly-support-vehicle.png",
+      "directions": 8,
+      "directionOrder": [
+        "N",
+        "NE",
+        "E",
+        "SE",
+        "S",
+        "SW",
+        "W",
+        "NW"
+      ],
+      "spritesheet": {
+        "frameWidth": 96,
+        "frameHeight": 96,
+        "columns": 1,
+        "rows": 8
+      },
+      "animations": {
+        "idle": {
+          "startFrame": 0,
+          "frameCount": 1,
+          "frameDuration": 1,
+          "loop": false,
+          "region": "direction-row"
+        }
+      },
+      "requiredAnimations": [
+        "idle"
+      ],
+      "optionalAnimations": [],
+      "weaponTopology": null,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.55
+      },
+      "worldSize": {
+        "width": 54,
+        "height": 30
+      },
+      "weaponMuzzleAnchor": null,
+      "fallback": "procedural_wreck",
+      "license": "self-authored",
+      "author": "Iron Command",
+      "generated": true,
+      "generationSource": "scripts/generate-stage8-2G-D-A-assets.mjs",
+      "version": 1
+    },
+    {
+      "id": "wreck_enemy_support_vehicle",
+      "category": "wreck",
+      "visualClass": "support_vehicle",
+      "type": "support_vehicle_wreck",
+      "side": "enemy",
+      "factionPalette": "rust-red-iron",
+      "factionMark": "orange-slash",
+      "format": "spritesheet",
+      "source": "assets/battle/sprites/wreck-enemy-support-vehicle.png",
+      "directions": 8,
+      "directionOrder": [
+        "N",
+        "NE",
+        "E",
+        "SE",
+        "S",
+        "SW",
+        "W",
+        "NW"
+      ],
+      "spritesheet": {
+        "frameWidth": 96,
+        "frameHeight": 96,
+        "columns": 1,
+        "rows": 8
+      },
+      "animations": {
+        "idle": {
+          "startFrame": 0,
+          "frameCount": 1,
+          "frameDuration": 1,
+          "loop": false,
+          "region": "direction-row"
+        }
+      },
+      "requiredAnimations": [
+        "idle"
+      ],
+      "optionalAnimations": [],
+      "weaponTopology": null,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.55
+      },
+      "worldSize": {
+        "width": 54,
+        "height": 30
+      },
+      "weaponMuzzleAnchor": null,
+      "fallback": "procedural_wreck",
+      "license": "self-authored",
+      "author": "Iron Command",
+      "generated": true,
+      "generationSource": "scripts/generate-stage8-2G-D-A-assets.mjs",
+      "version": 1
+    },
+    {
+      "id": "wreck_tank",
+      "category": "wreck",
+      "type": "tank_wreck",
+      "source": "assets/battle/sample-assets/wreck-tank.svg",
+      "version": 1,
+      "format": "svg",
+      "fallback": "procedural_wreck",
+      "anchor": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "worldSize": {
+        "width": 60,
+        "height": 36
+      },
+      "license": "self-authored",
+      "author": "Iron Command",
+      "generated": false
+    },
+    {
+      "id": "cover_industrial_module",
+      "category": "industrial_prop",
+      "type": "cover",
+      "source": "assets/battle/sample-assets/industrial-cover.svg",
+      "version": 1,
+      "format": "svg",
+      "fallback": "procedural_industrial_cover",
+      "anchor": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "worldSize": {
+        "width": 42,
+        "height": 24
+      },
+      "license": "self-authored",
+      "author": "Iron Command",
+      "generated": false
+    },
+    {
+      "id": "terrain_scrap_pile",
+      "category": "terrain",
+      "type": "prop",
+      "source": "assets/battle/sample-assets/terrain-scrap-pile.svg",
+      "version": 1,
+      "format": "svg",
+      "fallback": "procedural_terrain_prop",
+      "anchor": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "worldSize": {
+        "width": 36,
+        "height": 22
+      },
+      "license": "self-authored",
+      "author": "Iron Command",
+      "generated": false
+    }
+  ],
+  "directions": 8,
+  "directionOrder": [
+    "N",
+    "NE",
+    "E",
+    "SE",
+    "S",
+    "SW",
+    "W",
+    "NW"
+  ],
+  "requiredAnimations": [
+    "idle",
+    "move",
+    "fire"
   ]
 }

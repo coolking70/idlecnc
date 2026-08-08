@@ -1,53 +1,71 @@
 const TERRAIN_LABELS = { open: '废弃矿区', road: '公路', fortified: '防御阵地' };
 const RESULT_LABELS = { victory: '目标完成', pyrrhic: '代价取胜', withdraw: '有序撤离', defeat: '战线失守', wiped: '部队覆灭' };
+const PHASE_LABELS = { deploy: '部署', approach: '接近', first_contact: '首次接敌', main_engagement: '主战交锋', critical_event: '关键事件', battle_end: '战斗结束' };
+const STATUS_LABELS = {
+  idle: '待命', deploy: '部署', move: '移动', turn: '转向', brake: '减速', aim: '瞄准', fire: '射击', reload: '装填', hit: '受击', destroying: '损毁', wreck: '已摧毁',
+  suppressed: '受压制', take_cover: '进入掩体', retreat: '撤退', cover_fire: '掩护射击', search_target: '搜索目标', in_cover: '掩体内', repairing: '维修中', repair: '维修'
+};
+const UNIT_LABELS = { infantry: '步兵班', at_infantry: '反装甲班', scout_car: '侦察车', enemy_scout_car: '侦察车', mbt: '主战坦克', repair_vehicle: '维修车', support_vehicle: '支援车', enemy_support_vehicle: '支援车' };
+const WEAPON_LABELS = { small_arms: '轻武器', rocket: '反装甲火箭', cannon: '坦克主炮', repair: '维修工具', none: '无武器' };
 
-function phaseFor(state) {
-  if (state?.returning) return '返航';
-  const time = Number(state?.time || 0); const duration = Math.max(1, Number(state?.duration || 30));
-  if (time >= duration * 0.8) return '结局';
-  if (time >= duration * 0.32) return '接敌';
-  if (time >= duration * 0.13) return '展开';
-  return '侦察';
+function clamp(value, min = 0, max = 1) { return Math.max(min, Math.min(max, Number(value) || 0)); }
+function terrainName(plan) { return TERRAIN_LABELS[plan?.scene?.terrain?.id] || '战术地域'; }
+function displayName(actor) { return actor ? (UNIT_LABELS[actor.type] || (actor.side === 'enemy' ? '敌方单位' : '友军单位')) : '未选择单位'; }
+function factionName(side) { return side === 'enemy' ? '敌方' : side === 'friendly' ? '友军' : '中立'; }
+function statusLabel(actor) { return STATUS_LABELS[actor?.visualStatus] || STATUS_LABELS[actor?.visualState] || STATUS_LABELS[actor?.currentAction] || '待命'; }
+function phaseFor(state) { return state?.visualPhase?.id || state?.visualStage || 'deploy'; }
+function phaseLabel(state) { return PHASE_LABELS[phaseFor(state)] || '战术行动'; }
+function resultOutcome(result) { return RESULT_LABELS[result] || '战斗进行中'; }
+function objectiveData(plan, state) {
+  const objective = plan?.scene?.objective || plan?.intent?.objective || {};
+  const stateLabel = { contested: '争夺中', controlled: '已控制', limited_control: '有限控制', enemy_controlled: '敌方控制' }[state?.objectiveState] || '争夺中';
+  return { label: objective.label || objective.name || '主要任务目标', kind: objective.kind || 'formal_objective', status: stateLabel, progress: state?.objectiveState === 'controlled' || state?.objectiveState === 'limited_control' ? 1 : state?.objectiveState === 'enemy_controlled' ? 0 : .5, present: Boolean(objective.label || objective.name || plan?.scene?.objective) };
+}
+function actorView(actor) {
+  if (!actor) return null;
+  const hp = Math.max(0, Number(actor.hp) || 0); const maxHp = Math.max(1, Number(actor.maxHp) || 1);
+  return { id: actor.id, name: displayName(actor), faction: factionName(actor.side), side: actor.side, type: actor.type, hp, maxHp, hpRatio: clamp(hp / maxHp), status: statusLabel(actor), visualState: actor.visualState || 'idle', weapon: WEAPON_LABELS[actor.weapon?.kind] || actor.weapon?.label || '无武器', alive: actor.alive !== false, targetId: actor.targetId || null };
 }
 
-export function buildUniversalBattleHud(activeBattle, presentation, renderState) {
-  const plan = presentation?.plan || {};
-  const terrain = TERRAIN_LABELS[plan.scene?.terrain?.id] || '战术地域';
-  const result = RESULT_LABELS[plan.source?.result] || '战斗进行中';
-  const phase = phaseFor({ ...renderState, duration: plan.timeline?.duration });
-  const duration = Math.max(1, Number(plan.timeline?.duration) || 30);
+export function buildUniversalBattleHud(activeBattle, presentation, renderState, options = {}) {
+  const plan = presentation?.plan || {}; const actors = renderState?.actors || []; const selectedId = options.selectedActorId && actors.some((actor) => actor.id === options.selectedActorId) ? options.selectedActorId : actors.find((actor) => actor.side === 'friendly' && actor.alive)?.id || actors[0]?.id || null; const selected = actors.find((actor) => actor.id === selectedId) || null; const hovered = actors.find((actor) => actor.id === options.hoveredActorId) || null; const target = selected?.targetId ? actors.find((actor) => actor.id === selected.targetId) : null; const duration = Math.max(1, Number(renderState?.duration || plan.timeline?.duration) || 30); const elapsed = clamp(Number(renderState?.time || 0) / duration) * duration; const friendly = actors.filter((actor) => actor.side === 'friendly'); const enemy = actors.filter((actor) => actor.side === 'enemy'); const result = plan.source?.result || null; const settled = Boolean(renderState?.returning || (Number(renderState?.time || 0) >= duration - .001)); const objective = objectiveData(plan, renderState); const report = activeBattle?.report || null;
   return {
-    title: terrain,
-    subtitle: result,
-    phase,
-    phaseLabel: `战术阶段：${phase}`,
-    progressLabel: `战斗进度  ${Math.floor(Math.max(0, Math.min(duration, Number(renderState?.time || 0))))} / ${Math.floor(duration)}`,
-    modeLabel: '演出：通用RTS',
-    viewLabel: `UNIVERSAL RTS · ${renderState?.camera?.label || '全局态势'}`,
-    cameraLabel: renderState?.camera?.label || '全局态势',
-    footer: renderState?.returning ? '作战结束 · 编队正在返航' : `${plan.scene?.objective?.label || '目标区域'} · ${result}`
+    title: terrainName(plan), subtitle: objective.label, phase: phaseFor(renderState), phaseLabel: `战术阶段：${phaseLabel(renderState)}`, progressLabel: `战斗计时  ${Math.floor(elapsed)} / ${Math.floor(duration)}`, modeLabel: 'IRON COMMAND · PRODUCTION', viewLabel: 'UNIVERSAL RTS · PRODUCTION', cameraLabel: renderState?.camera?.label || '全局态势', footer: renderState?.returning ? '战斗结束 · 编队正在返航' : '战场信息链路稳定 · 指挥界面在线',
+    safeArea: { top: 58, left: 12, right: 12, bottom: 12 },
+    selection: { selectedActorId: selected?.id || null, hoveredActorId: hovered?.id || null, targetActorId: target?.id || null, selected: actorView(selected), hovered: actorView(hovered), target: actorView(target) },
+    friendlyStatus: { alive: friendly.filter((actor) => actor.alive).length, total: friendly.length, damaged: friendly.filter((actor) => actor.alive && Number(actor.hp) < Number(actor.maxHp)).length },
+    enemyStatus: { alive: enemy.filter((actor) => actor.alive).length, total: enemy.length, contact: enemy.some((actor) => actor.alive && ['fire', 'aim', 'reload', 'cover_fire', 'suppressed'].includes(actor.visualState)) },
+    objective: { ...objective, source: 'formal_objective_data' },
+    resultPanel: { visible: settled && Boolean(result), result, label: resultOutcome(result), objectiveOutcome: objective.status, survivors: friendly.filter((actor) => actor.alive).length, losses: friendly.filter((actor) => !actor.alive).length, rewards: report?.rewards && Object.keys(report.rewards).length ? { ...report.rewards } : null, settlement: activeBattle?.settlementReceipt ? { ...activeBattle.settlementReceipt } : null },
+    icons: { selected: 'bracket', hovered: 'corner_bracket', target: 'crosshair', objective: 'diamond', repair: 'wrench' },
+    sources: { health: 'renderState.actor.hp', status: 'renderState.actor.visualState', objective: 'formal_objective_data', battlePhase: 'presentationPhaseResolver', result: 'formal_result', settlement: 'formal_settlement' }
   };
 }
 
 export function validateUniversalHud(hud) {
   if (!hud || typeof hud !== 'object') return { ok: false, errors: ['hud is not an object'] };
-  const errors = [];
-  for (const key of ['title', 'subtitle', 'phase', 'phaseLabel', 'progressLabel', 'modeLabel', 'viewLabel', 'cameraLabel', 'footer']) if (typeof hud[key] !== 'string') errors.push(`missing universal HUD field: ${key}`);
-  if (/report|seed|authority/i.test(JSON.stringify(hud))) errors.push('universal HUD contains diagnostic identity');
+  const errors = []; for (const key of ['title', 'subtitle', 'phase', 'phaseLabel', 'progressLabel', 'modeLabel', 'viewLabel', 'cameraLabel', 'footer']) if (typeof hud[key] !== 'string') errors.push(`missing universal HUD field: ${key}`);
+  if (!hud.safeArea || !hud.selection || !hud.objective || !hud.resultPanel) errors.push('production HUD contract incomplete');
+  if (/\b(report|seed|authority|debug|actor_[a-z])\b/i.test(JSON.stringify(hud))) errors.push('production HUD contains diagnostic identity');
   return { ok: errors.length === 0, errors };
 }
 
+function panel(context, x, y, width, height, accent = '#8bbca0') { context.fillStyle = 'rgba(5,14,15,.86)'; context.beginPath(); if (typeof context.roundRect === 'function') context.roundRect(x, y, width, height, 7); else context.rect(x, y, width, height); context.fill(); context.strokeStyle = `${accent}88`; context.lineWidth = 1; context.stroke(); context.fillStyle = accent; context.fillRect(x, y, 3, height); }
+function text(context, value, x, y, font = '11px sans-serif', color = '#dcebd0') { context.font = font; context.fillStyle = color; context.textAlign = 'left'; context.fillText(String(value ?? ''), x, y); }
+function hpBar(context, x, y, width, ratio) { context.fillStyle = 'rgba(0,0,0,.62)'; context.fillRect(x, y, width, 5); context.fillStyle = ratio < .35 ? '#d97968' : ratio < .7 ? '#d6bd70' : '#75c99c'; context.fillRect(x, y, width * clamp(ratio), 5); }
+function unitGlyph(context, x, y, side, type, size = 10) { const color = side === 'enemy' ? '#d97968' : '#76cba2'; context.save(); context.translate(x, y); context.strokeStyle = color; context.fillStyle = `${color}33`; context.lineWidth = 1.4; if (type === 'mbt') { context.fillRect(-size, -size * .45, size * 2, size * .9); context.strokeRect(-size, -size * .45, size * 2, size * .9); context.beginPath(); context.moveTo(0, 0); context.lineTo(size * 1.35, 0); context.stroke(); } else if (type === 'scout_car' || type === 'enemy_scout_car') { context.fillRect(-size * .85, -size * .35, size * 1.7, size * .7); context.strokeRect(-size * .85, -size * .35, size * 1.7, size * .7); context.beginPath(); context.moveTo(0, -size * .35); context.lineTo(0, -size * 1.1); context.stroke(); } else if (type === 'repair_vehicle') { context.strokeRect(-size, -size * .45, size * 2, size * .9); context.beginPath(); context.moveTo(size * .2, -size * .35); context.lineTo(size * 1.15, -size * 1.1); context.stroke(); } else if (type === 'support_vehicle' || type === 'enemy_support_vehicle') { context.strokeRect(-size, -size * .5, size * 2, size); context.beginPath(); context.moveTo(-size * .55, -size * .5); context.lineTo(size * .55, size * .5); context.stroke(); } else { context.beginPath(); context.arc(0, 0, size * .7, 0, Math.PI * 2); context.fill(); context.stroke(); } context.restore(); }
+function drawBracket(context, x, y, width, height, color, crosshair = false) { context.save(); context.strokeStyle = color; context.lineWidth = 1.8; const w = width / 2; const h = height / 2; const c = Math.min(8, w * .35, h * .35); context.beginPath(); context.moveTo(x - w, y - h + c); context.lineTo(x - w, y - h); context.lineTo(x - w + c, y - h); context.moveTo(x + w - c, y - h); context.lineTo(x + w, y - h); context.lineTo(x + w, y - h + c); context.moveTo(x - w, y + h - c); context.lineTo(x - w, y + h); context.lineTo(x - w + c, y + h); context.moveTo(x + w - c, y + h); context.lineTo(x + w, y + h); context.lineTo(x + w, y + h - c); context.stroke(); if (crosshair) { context.beginPath(); context.moveTo(x - w - 4, y); context.lineTo(x - w + 2, y); context.moveTo(x + w - 2, y); context.lineTo(x + w + 4, y); context.moveTo(x, y - h - 4); context.lineTo(x, y - h + 2); context.moveTo(x, y + h - 2); context.lineTo(x, y + h + 4); context.stroke(); } context.restore(); }
+
 export function drawUniversalBattleHud(context, hud, renderState, options = {}) {
   if (!context || options.showHud === false) return;
-  const width = Number(options.screenWidth || 960); const height = Number(options.screenHeight || 540); const dpr = Number(options.screenDpr || 1);
-  const compact = width < 680; const stacked = width < 500; const leftWidth = stacked ? width - 24 : compact ? Math.min(232, width - 24) : 330; const rightWidth = stacked ? width - 24 : compact ? 150 : 252; const rightX = stacked ? 12 : Math.max(12, width - rightWidth - 12); const rightY = stacked ? 56 : 8;
+  const width = Number(options.screenWidth || 960); const height = Number(options.screenHeight || 540); const dpr = Number(options.screenDpr || 1); const compact = width < 720; const narrow = width < 520; const pad = 12; const topWidth = narrow ? width - pad * 2 : Math.min(360, width * .42); const topRightWidth = narrow ? width - pad * 2 : Math.min(244, width * .28); const selectedWidth = narrow ? width - pad * 2 : Math.min(320, width * .36); const objectiveWidth = narrow ? width - pad * 2 : Math.min(292, width * .32); const selectedHeight = narrow ? 78 : 86; const objectiveHeight = narrow ? 52 : 64;
   context.save(); context.setTransform(dpr, 0, 0, dpr, 0, 0);
-  context.fillStyle = 'rgba(5,14,15,.78)'; context.beginPath(); context.roundRect(12, 8, leftWidth, 42, 6); context.fill(); context.strokeStyle = 'rgba(147,205,172,.42)'; context.stroke();
-  context.fillStyle = '#f0d597'; context.font = '700 14px sans-serif'; context.fillText(`${hud.title} · ${hud.subtitle}`, 22, 26);
-  context.fillStyle = '#bfe6c9'; context.font = '11px sans-serif'; context.fillText(`${hud.phaseLabel} · ${hud.progressLabel}`, 22, 43);
-  context.fillStyle = 'rgba(5,14,15,.78)'; context.beginPath(); context.roundRect(rightX, rightY, rightWidth, 42, 6); context.fill();
-  context.fillStyle = '#e7d7aa'; context.font = '700 12px sans-serif'; context.fillText(hud.modeLabel, rightX + 10, rightY + 18);
-  context.fillStyle = '#bfe6c9'; context.font = '10px sans-serif'; context.fillText(hud.viewLabel, rightX + 10, rightY + 34);
-  context.fillStyle = 'rgba(5,14,15,.68)'; context.beginPath(); context.roundRect(12, Math.max(58, height - 28), Math.min(width - 24, compact ? 300 : 430), 20, 5); context.fill();
-  context.fillStyle = '#b7c4a0'; context.font = '10px sans-serif'; context.fillText(hud.footer, 21, Math.max(71, height - 14)); context.restore();
+  const leftWidth = topWidth; context.fillStyle = 'rgba(5,14,15,.86)'; context.beginPath(); if (typeof context.roundRect === 'function') context.roundRect(12, 8, leftWidth, 42, 7); else context.rect(12, 8, leftWidth, 42); context.fill(); context.strokeStyle = '#9bc7a888'; context.lineWidth = 1; context.stroke(); context.fillStyle = '#9bc7a8'; context.fillRect(12, 8, 3, 42); text(context, `${hud.title} · ${hud.subtitle}`, pad + 12, 26, '700 14px sans-serif', '#f0d597'); text(context, `${hud.phaseLabel} · ${hud.progressLabel}`, pad + 12, 43, '10px sans-serif', '#bfe6c9');
+  const rightX = narrow ? pad : width - topRightWidth - pad; const rightY = narrow ? 62 : 8; panel(context, rightX, rightY, topRightWidth, 48, '#d2b873'); text(context, hud.modeLabel, rightX + 12, rightY + 20, '700 11px sans-serif', '#e7d7aa'); text(context, `友军 ${hud.friendlyStatus.alive}/${hud.friendlyStatus.total}  ·  敌情 ${hud.enemyStatus.alive}/${hud.enemyStatus.total}`, rightX + 12, rightY + 37, '10px sans-serif', hud.enemyStatus.contact ? '#e28a78' : '#bfe6c9');
+  const bottomY = height - (narrow ? selectedHeight + objectiveHeight + 26 : selectedHeight + 12); const selection = hud.selection.selected; panel(context, pad, bottomY, selectedWidth, selectedHeight, selection?.side === 'enemy' ? '#d97968' : '#79cda5'); if (selection) { unitGlyph(context, pad + 25, bottomY + 25, selection.side, selection.type, 10); text(context, 'SELECTED UNIT', pad + 46, bottomY + 18, '700 9px sans-serif', '#9db9a6'); text(context, `${selection.name} · ${selection.faction}`, pad + 46, bottomY + 36, '700 13px sans-serif', '#f0d597'); text(context, `${selection.status}  ·  ${selection.weapon}`, pad + 46, bottomY + 53, '10px sans-serif', '#bfe6c9'); hpBar(context, pad + 46, bottomY + 63, selectedWidth - 62, selection.hpRatio); text(context, `${Math.round(selection.hp)} / ${Math.round(selection.maxHp)}`, pad + selectedWidth - 54, bottomY + 61, '9px sans-serif', '#dcebd0'); } else text(context, '未选择单位', pad + 14, bottomY + 30, '12px sans-serif', '#b7c4a0');
+  const objectiveY = narrow ? bottomY + selectedHeight + 8 : bottomY + 10; const objectiveX = narrow ? pad : width - objectiveWidth - pad; panel(context, objectiveX, objectiveY, objectiveWidth, objectiveHeight, '#d2b873'); text(context, 'OBJECTIVE', objectiveX + 12, objectiveY + 17, '700 9px sans-serif', '#d2b873'); text(context, hud.objective.label, objectiveX + 12, objectiveY + 34, '700 11px sans-serif', '#f0d597'); text(context, hud.objective.status, objectiveX + objectiveWidth - 58, objectiveY + 34, '10px sans-serif', '#bfe6c9'); hpBar(context, objectiveX + 12, objectiveY + objectiveHeight - 12, objectiveWidth - 24, hud.objective.progress);
+  if (hud.resultPanel.visible) { const resultColor = ['victory', 'pyrrhic'].includes(hud.resultPanel.result) ? '#7fd7a6' : '#df8a78'; const resultWidth = Math.min(width - 32, 380); const resultX = (width - resultWidth) / 2; const resultY = Math.max(narrow ? 144 : 112, height * .38); panel(context, resultX, resultY, resultWidth, 94, resultColor); text(context, hud.resultPanel.label, resultX + 20, resultY + 30, '700 22px sans-serif', resultColor); text(context, `${hud.resultPanel.objectiveOutcome}  ·  生还 ${hud.resultPanel.survivors}  ·  损失 ${hud.resultPanel.losses}`, resultX + 20, resultY + 55, '11px sans-serif', '#dcebd0'); text(context, '战斗结算已锁定 · 可返回战区', resultX + 20, resultY + 76, '10px sans-serif', '#b7c4a0'); }
+  context.restore();
 }
+
+export { displayName, factionName, statusLabel, UNIT_LABELS };

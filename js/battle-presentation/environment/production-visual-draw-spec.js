@@ -2,6 +2,7 @@ import { OFFLINE_ASSET_MANIFEST, resolveAsset, resolveEnvironmentAsset, resolveU
 import { normalizeVisualUnitClass, visualUnitClassFamily } from './visual-unit-class.js';
 import { directionIndexFromRadians, directionName, resolveActorAnimationState, resolveMuzzleAnchor, resolveSpriteFrame } from './animation-resolver.js';
 import { PRESENTATION_WORLD_HEIGHT, PRESENTATION_WORLD_WIDTH } from '../presentation-viewport.js';
+import { resolveWeaponTopology } from './presentation-facing-policy.js';
 
 export const MINIMUM_SCREEN_FOOTPRINT = Object.freeze({
   infantry: 24,
@@ -173,7 +174,7 @@ export function buildActorDrawSpec(actor, camera = {}, options = {}) {
   const manifest = options.manifest || OFFLINE_ASSET_MANIFEST;
   const sources = sourceSet(manifest, options.availableSources);
   const visualClass = normalizeVisualUnitClass(actor);
-  const requestedMode = options.modeByType?.[visualClass] || (visualClass === 'mbt' ? 'hybrid' : ['infantry', 'anti_armor_infantry'].includes(visualClass) ? 'sprite' : 'procedural');
+  const requestedMode = options.modeByType?.[visualClass] || (visualClass === 'mbt' ? 'hybrid' : ['infantry', 'anti_armor_infantry', 'light_vehicle', 'support_vehicle'].includes(visualClass) ? 'sprite' : 'procedural');
   const resolved = { ...resolveUnitAsset(actor, manifest, sources, requestedMode), visualClass };
   const animationState = resolveActorAnimationState(actor, actor?.visualState, options.presentationSeconds ?? actor?.presentationSeconds ?? 0, { entry: resolved.entry, seed: options.seed ?? actor?.seed ?? 0 });
   const spriteFrame = resolveSpriteFrame(resolved.entry, animationState);
@@ -200,10 +201,12 @@ export function buildActorDrawSpec(actor, camera = {}, options = {}) {
     muzzleAnchor,
     finalDrawGeometry: geometry,
     weaponProfileId: actor?.weapon?.id || null,
+    weaponTopology: actor?.weaponTopology || resolved.entry?.weaponTopology || resolveWeaponTopology({ actor, visualClass }),
     weaponPresentation: actor?.weaponPresentation || null,
     hybridComponents: resolved.mode === 'hybrid' && visualClass === 'mbt' ? ['sprite_hull', 'sprite_turret', 'procedural_selection', 'procedural_weapon_effects'] : []
   };
-  spec.policy = actor?.facingPolicy || (visualClass === 'mbt' ? 'turret_weapon' : ['infantry', 'anti_armor_infantry', 'light_vehicle'].includes(visualClass) ? 'body_aims_weapon' : 'movement_only');
+  spec.weaponTopology = actor?.weaponTopology || resolved.entry?.weaponTopology || resolveWeaponTopology({ actor, visualClass });
+  spec.policy = actor?.facingPolicy || (spec.weaponTopology === 'independent_turret' ? 'turret_weapon' : spec.weaponTopology === 'body_mounted' ? 'body_aims_weapon' : 'movement_only');
   spec.movementFacing = Number.isFinite(Number(actor?.movementFacing)) ? roundFacing(actor.movementFacing) : null;
   spec.aimFacing = Number.isFinite(Number(actor?.aimFacing)) ? roundFacing(actor.aimFacing) : null;
   spec.bodyFacing = Number.isFinite(Number(actor?.bodyFacing ?? actor?.facing)) ? roundFacing(actor?.bodyFacing ?? actor?.facing) : null;
@@ -234,7 +237,7 @@ export function buildActorScreenMetrics(args = {}) { return buildActorFinalDrawG
 export function buildWreckDrawSpec(wreck, options = {}) {
   const manifest = options.manifest || OFFLINE_ASSET_MANIFEST; const sources = sourceSet(manifest, options.availableSources);
   const resolved = resolveWreckAsset(wreck, manifest, sources); const animationState = resolveActorAnimationState({ ...wreck, id: wreck?.id || wreck?.sourceActorId, visualState: 'idle', facing: wreck?.angle || 0 }, 'idle', options.presentationSeconds ?? 0, { entry: resolved.entry, seed: wreck?.seed ?? 0 }); const spriteFrame = resolveSpriteFrame(resolved.entry, animationState);
-  return { wreckId: wreck?.id || wreck?.sourceActorId || null, wreckType: wreck?.wreckType || 'unknown_wreck', side: wreck?.side || null, lastHullFacing: Number(wreck?.angle) || 0, ...assetSpecForResolved(resolved, 'wreck'), animationState, spriteFrame, sourceRect: spriteFrame.sourceRect || null };
+  return { wreckId: wreck?.id || wreck?.sourceActorId || null, sourceActorId: wreck?.sourceActorId || null, sourceType: wreck?.sourceType || null, wreckType: wreck?.wreckType || 'unknown_wreck', side: wreck?.side || null, lastHullFacing: Number(wreck?.angle) || 0, ...assetSpecForResolved(resolved, 'wreck'), animationState, spriteFrame, sourceRect: spriteFrame.sourceRect || null };
 }
 
 export function buildEnvironmentDrawSpecs(environment, options = {}) {

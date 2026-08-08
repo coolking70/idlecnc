@@ -51,12 +51,41 @@ function tankTurretFrame(image, side, direction, frame) {
   if (firing) { const muzzle = transform(cx, cy, 39, -1, angle); ellipse(image, muzzle.x, muzzle.y, 7, 5, palette.accent, angle, 240); }
 }
 
+function scoutFrame(image, side, direction, frame) {
+  const palette = palettes[side]; const cx = CELL / 2; const cy = CELL / 2 + 4; const angle = DIRECTION_ANGLES[direction]; const moving = frame >= 2 && frame <= 5; const firing = frame === 7;
+  ellipse(image, cx + 3, cy + 14, 28, 6, [7, 14, 12], 0, 170); rect(image, cx, cy, 46, 20, palette.dark, angle); polygon(image, [[-22, -8], [15, -8], [22, -3], [18, 8], [-21, 8]], palette.primary, cx, cy, angle); rect(image, cx - 2, cy - 1, 22, 10, palette.light, angle); rect(image, cx + 7, cy - 2, 10, 8, palette.accent, angle);
+  for (const wheel of [-15, 15]) { const wheelPoint = transform(cx, cy, wheel, 11, angle); ellipse(image, wheelPoint.x, wheelPoint.y, 5, 4, palette.dark, angle); }
+  localLine(image, cx + 5, cy - 1, 28 - (firing ? 4 : 0), -2, angle, palette.accent, 3); localLine(image, cx + 6, cy - 3, 29 - (firing ? 4 : 0), -4, angle, palette.mark, 1.5); localLine(image, cx - 12, cy - 9, -12, moving ? -24 : -20, angle, palette.mark, 2);
+  if (firing) { const muzzle = transform(cx, cy, 30, -2, angle); ellipse(image, muzzle.x, muzzle.y, 5, 3, palette.accent, angle, 235); }
+}
+
+function repairFrame(image, side, direction, frame) {
+  const palette = palettes[side]; const cx = CELL / 2; const cy = CELL / 2 + 4; const angle = DIRECTION_ANGLES[direction]; const repairing = frame === 6 || frame === 7;
+  ellipse(image, cx + 3, cy + 15, 29, 6, [7, 14, 12], 0, 170); rect(image, cx, cy, 48, 22, palette.dark, angle); polygon(image, [[-23, -8], [17, -8], [22, 1], [16, 9], [-22, 8]], palette.primary, cx, cy, angle); rect(image, cx - 7, cy - 1, 17, 12, palette.light, angle); rect(image, cx + 8, cy - 5, 10, 8, palette.accent, angle);
+  localLine(image, cx + 11, cy - 3, 25, -18, angle, palette.accent, 3); localLine(image, cx + 25, cy - 18, 31, -10, angle, palette.mark, 2); localLine(image, cx + 31, cy - 10, 35, -4, angle, palette.accent, 3);
+  if (repairing) { const tip = transform(cx, cy, 35, -4, angle); for (let index = 0; index < 5; index += 1) { const spark = transform(tip.x, tip.y, Math.cos(index * 1.25) * 6, Math.sin(index * 1.25) * 6, 0); line(image, tip.x, tip.y, spark.x, spark.y, palette.mark, 2, 230); } }
+}
+
+function supportFrame(image, side, direction, frame) {
+  const palette = palettes[side]; const cx = CELL / 2; const cy = CELL / 2 + 4; const angle = DIRECTION_ANGLES[direction]; const moving = frame >= 2 && frame <= 5;
+  ellipse(image, cx + 3, cy + 16, 31, 6, [7, 14, 12], 0, 170); rect(image, cx, cy, 54, 24, palette.dark, angle); polygon(image, [[-26, -9], [22, -9], [25, 5], [17, 10], [-25, 8]], palette.primary, cx, cy, angle); rect(image, cx - 1, cy - 2, 30, 13, palette.light, angle);
+  for (let index = -1; index <= 1; index += 1) rect(image, cx + index * 8, cy - 1, 4, 11, palette.accent, angle); localLine(image, cx + 12, cy - 8, 12, -24, angle, palette.mark, 2); const antenna = transform(cx, cy, 12, -24, angle); ellipse(image, antenna.x, antenna.y, 3, 3, palette.accent, angle); if (moving) localLine(image, cx - 22, cy + 8, 20, 8, angle, palette.accent, 2);
+}
+
 function wreckFrame(image, side, direction) {
   const palette = palettes[side]; const cx = CELL / 2; const cy = CELL / 2; const angle = DIRECTION_ANGLES[direction]; ellipse(image, cx + 4, cy + 17, 30, 6, [5, 9, 8], 0, 170); rect(image, cx, cy, 54, 25, palette.dark, angle); polygon(image, [[-24, -10], [13, -11], [24, -3], [18, 10], [-22, 9]], [62, 66, 57], cx, cy, angle); rect(image, cx - 2, cy, 9, 4, palette.primary, angle); localLine(image, cx - 17, cy - 9, 16, 9, angle, palette.light, 3, 185); localLine(image, cx + 16, cy - 10, -13, 10, angle, palette.light, 2, 185); const flame = transform(cx, cy, -5, -1, angle); ellipse(image, flame.x, flame.y, 6, 4, palette.mark, angle, 180); }
 
+function wreckVehicleFrame(image, side, direction, kind) {
+  const palette = palettes[side]; const cx = CELL / 2; const cy = CELL / 2; const angle = DIRECTION_ANGLES[direction]; const width = kind === 'support' ? 48 : kind === 'repair' ? 45 : 40;
+  ellipse(image, cx + 3, cy + 15, width * .58, 6, [5, 9, 8], 0, 170); rect(image, cx, cy, width, kind === 'support' ? 22 : 19, palette.dark, angle); polygon(image, [[-width / 2, -8], [width * .34, -8], [width / 2, -2], [width * .38, 8], [-width / 2, 7]], [62, 66, 57], cx, cy, angle); rect(image, cx - 2, cy, 10, 4, palette.primary, angle);
+  if (kind === 'repair') localLine(image, cx + 9, cy - 3, 24, -15, angle, palette.light, 3, 185);
+  if (kind === 'support') localLine(image, cx - 18, cy - 7, 18, 7, angle, palette.accent, 3, 185);
+  localLine(image, cx - 15, cy - 8, 14, 9, angle, palette.light, 2, 185); const flame = transform(cx, cy, -5, -1, angle); ellipse(image, flame.x, flame.y, 6, 4, palette.mark, angle, 180);
+}
+
 function unitSheet(kind, side) { const image = canvas(CELL * 8, CELL * DIRECTIONS); for (let direction = 0; direction < DIRECTIONS; direction += 1) for (let frame = 0; frame < 8; frame += 1) { if (kind === 'infantry') infantryFrame({ ...image, pixels: image.pixels, width: image.width, height: image.height }, side, false, direction, frame); } return image; }
-function drawCell(image, kind, side, direction, frame, component = null) { const cell = canvas(CELL, CELL); if (kind === 'infantry') infantryFrame(cell, side, false, direction, frame); if (kind === 'at_infantry') infantryFrame(cell, side, true, direction, frame); if (kind === 'mbt_hull') tankHullFrame(cell, side, direction, frame); if (kind === 'mbt_turret') tankTurretFrame(cell, side, direction, frame); if (kind === 'wreck') wreckFrame(cell, side, direction); return cell; }
-function sheet(kind, side, columns = 8) { const image = canvas(CELL * columns, CELL * DIRECTIONS); const frameCount = kind === 'wreck' ? 1 : 8; for (let direction = 0; direction < DIRECTIONS; direction += 1) for (let frame = 0; frame < frameCount; frame += 1) { const cell = drawCell(image, kind, side, direction, frame); const x = frame * CELL; const y = direction * CELL; for (let row = 0; row < CELL; row += 1) Buffer.from(cell.pixels.buffer, row * CELL * 4, CELL * 4).copy(Buffer.from(image.pixels.buffer, (y + row) * image.width * 4 + x * 4, CELL * 4)); } return image; }
+function drawCell(image, kind, side, direction, frame, component = null) { const cell = canvas(CELL, CELL); if (kind === 'infantry') infantryFrame(cell, side, false, direction, frame); if (kind === 'at_infantry') infantryFrame(cell, side, true, direction, frame); if (kind === 'mbt_hull') tankHullFrame(cell, side, direction, frame); if (kind === 'mbt_turret') tankTurretFrame(cell, side, direction, frame); if (kind === 'scout') scoutFrame(cell, side, direction, frame); if (kind === 'repair') repairFrame(cell, side, direction, frame); if (kind === 'support') supportFrame(cell, side, direction, frame); if (kind === 'wreck') wreckFrame(cell, side, direction); if (kind === 'wreck_scout') wreckVehicleFrame(cell, side, direction, 'scout'); if (kind === 'wreck_repair') wreckVehicleFrame(cell, side, direction, 'repair'); if (kind === 'wreck_support') wreckVehicleFrame(cell, side, direction, 'support'); return cell; }
+function sheet(kind, side, columns = 8) { const image = canvas(CELL * columns, CELL * DIRECTIONS); const frameCount = kind === 'wreck' || kind.startsWith('wreck_') ? 1 : 8; for (let direction = 0; direction < DIRECTIONS; direction += 1) for (let frame = 0; frame < frameCount; frame += 1) { const cell = drawCell(image, kind, side, direction, frame); const x = frame * CELL; const y = direction * CELL; for (let row = 0; row < CELL; row += 1) Buffer.from(cell.pixels.buffer, row * CELL * 4, CELL * 4).copy(Buffer.from(image.pixels.buffer, (y + row) * image.width * 4 + x * 4, CELL * 4)); } return image; }
 function write(name, image) { fs.mkdirSync(outDir, { recursive: true }); fs.writeFileSync(path.join(outDir, name), encodePng(image.width, image.height, image.pixels)); }
 
 for (const side of ['friendly', 'enemy']) {
@@ -65,5 +94,10 @@ for (const side of ['friendly', 'enemy']) {
   write(`unit-${side}-mbt-hull.png`, sheet('mbt_hull', side));
   write(`unit-${side}-mbt-turret.png`, sheet('mbt_turret', side));
   write(`wreck-${side}-mbt.png`, sheet('wreck', side, 1));
+  write(`unit-${side}-scout-car.png`, sheet('scout', side));
+  write(`unit-${side}-support-vehicle.png`, sheet('support', side));
+  write(`wreck-${side}-scout-car.png`, sheet('wreck_scout', side, 1));
+  write(`wreck-${side}-support-vehicle.png`, sheet('wreck_support', side, 1));
+  if (side === 'friendly') { write('unit-friendly-repair-vehicle.png', sheet('repair', side)); write('wreck-friendly-repair-vehicle.png', sheet('wreck_repair', side, 1)); }
 }
 console.log(JSON.stringify({ ok: true, stage: '8.2G-D-A', cell: CELL, directions: DIRECTIONS, files: fs.readdirSync(outDir).sort() }));

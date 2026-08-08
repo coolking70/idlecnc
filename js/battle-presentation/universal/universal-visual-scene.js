@@ -232,8 +232,8 @@ export function buildUniversalVisualScene(plan, seconds, sampler, runtime = {}) 
     const movementFacing = movementFacingFor(positioned, positioned.movementFacing);
     const aimFacing = aimFacingFor(positioned, seconds, shot, visual, movementFacing);
     const visualClass = normalizeVisualUnitClass(actor);
-    const facingPolicy = resolvePresentationFacingPolicy({ actor, visualClass, visualState: visual.id, movementFacing, aimFacing, shot });
-    const { bodyFacing, weaponFacing, facing, turretFacing, shotFacing } = facingPolicy;
+    const facingPolicy = resolvePresentationFacingPolicy({ actor, visualClass, weaponTopology: actor.weaponTopology, visualState: visual.id, movementFacing, aimFacing, shot });
+    const { bodyFacing, weaponFacing, facing, turretFacing, shotFacing, weaponTopology } = facingPolicy;
     const recoil = visual.id === 'fire' ? Math.sin(clamp(visual.progress, 0, 1) * Math.PI) * weapon.recoil : 0;
     const visible = visual.id !== 'wreck';
     return {
@@ -241,15 +241,15 @@ export function buildUniversalVisualScene(plan, seconds, sampler, runtime = {}) 
       hp: actor.hp, maxHp: actor.maxHp, alive: actor.alive, visible, visualCenter: { ...positioned.visualCenter },
       routePosition: { ...positioned.routePosition }, plannedPosition: { ...positioned.plannedPosition }, preSeparationPosition: { ...positioned.preSeparationPosition }, visualPosition: { ...positioned.visualCenter }, presentationMode: positioned.presentationMode,
       footprint: positioned.footprint,
-      anchorPosition: { ...positioned.preSeparationPosition }, visualOffset: { x: positioned.visualCenter.x - positioned.preSeparationPosition.x, y: positioned.visualCenter.y - positioned.preSeparationPosition.y }, nextPosition: { ...positioned.nextPosition }, facing, facingPolicy: facingPolicy.policy, bodyFacing, weaponFacing, hullFacing: visualClass === 'mbt' ? bodyFacing : null, movementFacing, aimFacing, turretFacing, shotFacing,
-      visualState: normalizeVisualState(visual.id), stateProgress: visual.progress, currentAction: actor.currentAction, weapon: { id: weapon.id, kind: weapon.kind, label: weapon.label, presentation: { ...(weapon.presentation || {}) } }, weaponPresentation: { ...(weapon.presentation || {}) },
+      anchorPosition: { ...positioned.preSeparationPosition }, visualOffset: { x: positioned.visualCenter.x - positioned.preSeparationPosition.x, y: positioned.visualCenter.y - positioned.preSeparationPosition.y }, nextPosition: { ...positioned.nextPosition }, facing, facingPolicy: facingPolicy.policy, weaponTopology, bodyFacing, weaponFacing, hullFacing: visualClass === 'mbt' ? bodyFacing : null, movementFacing, aimFacing, turretFacing, shotFacing,
+      visualState: normalizeVisualState(visual.id), visualStatus: visual.id === 'idle' && actor.currentAction === 'repair' ? 'repairing' : normalizeVisualState(visual.id), stateProgress: visual.progress, currentAction: actor.currentAction, weapon: { id: weapon.id, kind: weapon.kind, label: weapon.label, presentation: { ...(weapon.presentation || {}) } }, weaponPresentation: { ...(weapon.presentation || {}) },
       firing: visual.id === 'fire', aiming: visual.id === 'aim', reloading: visual.id === 'reload', recoil, walkCycle: visual.id === 'move' ? seconds * (actor.type === 'mbt' ? 1.5 : 5) : 0,
       memberPositions: memberPositions(actor, positioned, bodyFacing, visual.id === 'retreat' ? 'move' : visual.id, seconds), visualAuthorityAnchorId: visual.authorityAnchorId || shot?.authorityAnchorId || null,
       targetId: shot?.targetId || visual.assignment?.targetId || null, targetAssignmentId: visual.assignment?.id || null, suppression: visual.suppression ? { ...visual.suppression, sourceIds: [...visual.suppression.sourceIds], targetIds: [...visual.suppression.targetIds], area: { ...visual.suppression.area, center: { ...(visual.suppression.area?.center || {}) } } } : null, retreat: visual.retreat ? { ...visual.retreat, exit: { ...visual.retreat.exit } } : null
     };
   });
   const finalActors = actors.filter((actor) => actor.visualState !== 'wreck');
-  const fallbackWrecks = actors.filter((actor) => actor.visualState === 'wreck' || (!actor.alive && !latestDestroy(plan, actor.id))).map((actor) => ({ id: `wreck_${actor.id}`, sourceActorId: actor.id, side: actor.side, visualClass: normalizeVisualUnitClass(actor), x: actor.visualCenter.x, y: actor.visualCenter.y, angle: actor.facing || 0, wreckType: normalizeVisualUnitClass(actor) === 'infantry' || normalizeVisualUnitClass(actor) === 'anti_armor_infantry' ? 'infantry_casualty_marker' : normalizeVisualUnitClass(actor) === 'mbt' ? 'tank_wreck' : 'light_vehicle_wreck', persistent: true }));
+  const fallbackWrecks = actors.filter((actor) => actor.visualState === 'wreck' || (!actor.alive && !latestDestroy(plan, actor.id))).map((actor) => ({ id: `wreck_${actor.id}`, sourceActorId: actor.id, sourceType: actor.type || null, side: actor.side, visualClass: normalizeVisualUnitClass(actor), x: actor.visualCenter.x, y: actor.visualCenter.y, angle: actor.facing || 0, wreckType: normalizeVisualUnitClass(actor) === 'infantry' || normalizeVisualUnitClass(actor) === 'anti_armor_infantry' ? 'infantry_casualty_marker' : normalizeVisualUnitClass(actor) === 'mbt' ? 'tank_wreck' : 'light_vehicle_wreck', persistent: true }));
   // Keep destroyed actors in the lookup used by projectiles/effects: the wreck and
   // its smoke must remain at the last authoritative position after the actor leaves
   // the live-actor layer.

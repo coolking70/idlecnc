@@ -490,3 +490,15 @@
 - [x] D-A.1a 完整封包 clean verifier 已通过：ZIP SHA-256 `b5bb32b9c9beff297346b065af6953c6d6d2188332b1af29e068ed4cf948b1b8`，56,472,094 bytes，890 entries；clean install 后完整 `npm test` exitCode=0。
 - [x] D-A.1a 浏览器证据、13/13 唯一 PNG、5 类新增 tamper、150 发 authority 不变性和 D-A.1/D-A/C.1.1a/B.1.1a 回归均已通过；GitHub Actions Run `31266612353` / Job `93125668996` 为 success，D-A.1a gate 已实际执行。
 - [ ] 独立审计方仍需按最终 D-A.1a ZIP 重新验收；audit JSON 仅为失败基线和回归样本，不代表独立批准。
+
+# Stage 8.2G-D-B progress
+
+- [x] 以 `stage8_2g_da1a_independent_audit.json` 作为上一轮失败基线与回归参考；JSON 未导入生产代码，失败样本未删除或过滤。
+- [x] 冻结 combat core、planner、choreographer、正式战报/奖励/结算/存档；新增 `body_mounted`、`independent_turret`、`unarmed` 仅作为生产视觉拓扑，不改变战斗逻辑。
+- [x] 新增友军/敌方 Scout、友军 Repair、友军/敌方 Support 的离线确定性 PNG、8 方向动画矩阵、阵营色板/标记、维修动画与对应 Scout/Support/Repair 残骸；运行时不调用外部图像生成服务。
+- [x] 生产 Renderer 接通选中、悬停、目标十字标记、选中单位 HUD、正式 HP/状态/武器/阶段/目标、Victory/Withdraw 结果和结算来源；默认与窄屏均受安全区约束，素材失败保留显式程序化回退。
+- [x] 资产覆盖机器证据 100%；正式维修事件产生 `repair` 动画；报告权威 hash、奖励和结算均保持只读；新增资产、拓扑、残骸、HUD selection/health/objective/result/responsive/performance 证据。
+- [x] 当前 Chromium 真实页面生成 16 张 D-B PNG，唯一哈希 16、pageErrors=0、consoleErrors=0；覆盖全阵容、Scout、Repair、Support、掩体推进、撤退后卫、HUD、损伤、Victory/Defeat、窄屏和 fallback。
+- [x] 12 类证据篡改回归全部拒绝；官方 `develop-web-game` Playwright 客户端已执行，正式页面 `render_game_to_text` 正常且无控制台错误。
+- [x] D-B 测试已接入 npm 与 CI；完整 clean-package gate 已通过（隔离安装与包内 `npm test` 均 exitCode=0），外部 ZIP `iron-command-stage8-2G-D-B-full-unit-art-hud.zip` SHA-256 `5275a6e6cdfd9505ef9cbf65e6a8a4267a1934c4673150c28a96e7e49e476278`，61,147,511 bytes，945 entries；当前 `stage8_2g_db_*` JSON 仍仅为机器证据，未作为正式运行资源。
+- [ ] 待完成：提交、推送并等待 GitHub Actions；独立审计方仍需按最终 D-B ZIP 重新验收。

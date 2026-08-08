@@ -30,6 +30,48 @@ function roundedRect(context, x, y, width, height, radius = 4) { if (typeof cont
 function path(context, points) { if (!points.length) return; context.beginPath(); points.forEach((point, index) => index ? context.lineTo(point.x, point.y) : context.moveTo(point.x, point.y)); }
 function hash(x, y = 0) { const value = Math.sin(x * 12.9898 + y * 78.233) * 43758.5453; return value - Math.floor(value); }
 
+function logicalPointFromCanvasPoint(point, viewport, camera) {
+  const scale = Math.max(.0001, Number(viewport?.scale) || 1);
+  const logicalX = (Number(point?.x) - Number(viewport?.offsetX || 0)) / scale;
+  const logicalY = (Number(point?.y) - Number(viewport?.offsetY || 0)) / scale;
+  const zoom = Math.max(.1, Number(camera?.zoom) || .86);
+  return { x: Number(camera?.x || 640) + (logicalX - VIEW_WIDTH / 2) / zoom, y: Number(camera?.y || 360) + (logicalY - VIEW_HEIGHT / 2) / zoom };
+}
+
+function actorIdAtCanvasPoint(point, state, plan, viewport, drawSpecs) {
+  if (!state?.actors?.length) return null;
+  const worldPointAtCursor = logicalPointFromCanvasPoint(point, viewport, state.camera);
+  const bounds = plan.layout?.bounds || { width: 1200, height: 700 };
+  const specs = new Map((drawSpecs?.actorSpecs || []).map((spec) => [spec.actorId, spec]));
+  const candidates = state.actors.filter((actor) => actor.visible !== false && actor.alive !== false).map((actor) => {
+    const center = worldPoint(actor.visualCenter, bounds);
+    const geometry = specs.get(actor.id)?.finalDrawGeometry || specs.get(actor.id) || {};
+    const width = Math.max(30, Number(geometry.drawRect?.width || geometry.width) || 30) / 2 + 9;
+    const height = Math.max(24, Number(geometry.drawRect?.height || geometry.height) || 24) / 2 + 9;
+    const dx = (worldPointAtCursor.x - center.x) / width;
+    const dy = (worldPointAtCursor.y - center.y) / height;
+    return { actor, distance: dx * dx + dy * dy, depth: Number(actor.visualCenter?.y) || 0 };
+  }).filter((item) => item.distance <= 1).sort((left, right) => right.depth - left.depth || left.distance - right.distance);
+  return candidates[0]?.actor.id || null;
+}
+
+function drawSelectionDecorations(context, actor, point, geometry, selection = {}) {
+  const selected = selection.selectedActorId === actor.id;
+  const hovered = selection.hoveredActorId === actor.id && !selected;
+  const target = selection.targetActorId === actor.id;
+  const width = Math.max(30, Number(geometry?.drawRect?.width || geometry?.width) || 30);
+  const height = Math.max(24, Number(geometry?.drawRect?.height || geometry?.height) || 24);
+  if (target) {
+    context.save(); context.strokeStyle = actor.side === 'enemy' ? '#f0a06f' : '#e4d181'; context.lineWidth = 2; context.setLineDash([5, 4]); context.beginPath(); context.arc(point.x, point.y, Math.max(width, height) * .62 + 10, 0, TAU); context.stroke(); context.setLineDash([]); context.beginPath(); context.moveTo(point.x - 17, point.y); context.lineTo(point.x - 6, point.y); context.moveTo(point.x + 6, point.y); context.lineTo(point.x + 17, point.y); context.moveTo(point.x, point.y - 17); context.lineTo(point.x, point.y - 6); context.moveTo(point.x, point.y + 6); context.lineTo(point.x, point.y + 17); context.stroke(); context.restore();
+  }
+  if (!selected && !hovered) return;
+  const color = selected ? (actor.side === 'enemy' ? '#f0a06f' : '#f2d77f') : '#d8efe0';
+  const halfWidth = width / 2 + (selected ? 10 : 7); const halfHeight = height / 2 + (selected ? 10 : 7); const corner = selected ? 13 : 8;
+  context.save(); context.strokeStyle = color; context.lineWidth = selected ? 2.4 : 1.7; context.beginPath();
+  const drawCorner = (x, y, sx, sy) => { context.moveTo(x, y + sy * corner); context.lineTo(x, y); context.lineTo(x + sx * corner, y); };
+  drawCorner(point.x - halfWidth, point.y - halfHeight, 1, 1); drawCorner(point.x + halfWidth, point.y - halfHeight, -1, 1); drawCorner(point.x - halfWidth, point.y + halfHeight, 1, -1); drawCorner(point.x + halfWidth, point.y + halfHeight, -1, -1); context.stroke(); context.restore();
+}
+
 function drawTerrain(context, plan, bounds) {
   const style = terrainStyle(plan);
   context.fillStyle = style.base; context.fillRect(0, 0, VIEW_WIDTH, VIEW_HEIGHT);
@@ -126,6 +168,7 @@ function drawActor(context, actor, plan, options) {
   if (actor.alive && actor.visualState === 'retreat') { context.save(); context.strokeStyle = '#9ee2c1'; context.lineWidth = 2; context.setLineDash([7, 4]); context.beginPath(); context.arc(point.x, point.y, radius + 8, 0, TAU); context.stroke(); context.setLineDash([]); context.restore(); }
   if (actor.alive && actor.visualState === 'search_target') { context.save(); context.strokeStyle = '#b7c9da'; context.lineWidth = 1.5; context.beginPath(); context.arc(point.x, point.y, radius + 6, 0, TAU); context.stroke(); context.restore(); }
   const hpRatio = Math.max(0, Math.min(1, actor.hp / Math.max(1, actor.maxHp))); if (hpRatio < 1 && actor.alive) { context.fillStyle = 'rgba(5,10,8,.75)'; context.fillRect(point.x - 24, point.y - radius - 10, 48, 4); context.fillStyle = hpRatio < .35 ? '#df7d63' : '#d6c375'; context.fillRect(point.x - 24, point.y - radius - 10, 48 * hpRatio, 4); }
+  drawSelectionDecorations(context, actor, point, geometry, options.selection);
 }
 
 function drawWreck(context, wreck, bounds, options = {}) {
@@ -192,7 +235,7 @@ function drawScene(context, plan, state, options = {}) {
   const bounds = plan.layout?.bounds || { width: 1200, height: 700 }; const camera = state.camera || { x: 640, y: 360, zoom: .86 };
   context.clearRect(0, 0, VIEW_WIDTH, VIEW_HEIGHT); context.fillStyle = '#0d1716'; context.fillRect(0, 0, VIEW_WIDTH, VIEW_HEIGHT);
   context.save(); context.translate(VIEW_WIDTH / 2, VIEW_HEIGHT / 2); context.scale(camera.zoom, camera.zoom); context.translate(-camera.x, -camera.y);
-  drawEnvironmentScene(context, state.environment, bounds, { width: VIEW_WIDTH, height: VIEW_HEIGHT, drawSpecs: options.runtimeDrawSpecs || state.drawSpecs, assetRuntime: options.assetRuntime }); drawDecals(context, state.decals, bounds); drawDebris(context, state.debris, bounds); drawWorldRenderQueue(context, plan, state, { ...options, assetRuntime: options.assetRuntime });
+  drawEnvironmentScene(context, state.environment, bounds, { width: VIEW_WIDTH, height: VIEW_HEIGHT, drawSpecs: options.runtimeDrawSpecs || state.drawSpecs, assetRuntime: options.assetRuntime }); drawDecals(context, state.decals, bounds); drawDebris(context, state.debris, bounds); drawWorldRenderQueue(context, plan, state, { ...options, assetRuntime: options.assetRuntime, selection: options.selection });
   drawProjectiles(context, state.projectiles, bounds); drawEffects(context, state.effects, bounds); drawSmoke(context, state.smoke, bounds); drawUniversalDebugOverlay(context, plan, state, options); context.restore();
   // 战术状态、镜头和结果均由 screen-space HUD 绘制；地图层不再在角落叠加文字，
   // 避免自动镜头移动后把状态标签压到单位/目标上。
@@ -213,6 +256,7 @@ function buildScreenMetricRow(spec, assetRuntime) {
     factionVisualMode: spec.factionVisualMode,
     factionPalette: spec.factionPalette,
     factionMark: spec.factionMark,
+    weaponTopology: spec.weaponTopology || null,
     animation: spec.animation,
     direction: spec.animationState?.direction || null,
     directionIndex: spec.animationState?.directionIndex ?? null,
@@ -246,7 +290,7 @@ function buildScreenMetricRow(spec, assetRuntime) {
 
 export class UniversalBattleRenderer {
   constructor(canvas, options = {}) {
-    this.canvas = canvas; this.context = canvas?.getContext?.('2d'); this.options = normalizeDebugOverlayOptions({ showHud: true, ...options }); this.options.showHud = options.showHud !== false; this.assetRuntime = createAssetRuntime(); this.presentation = null; this.lastState = null; this.lastRuntimeDrawSpecs = null; this.lastScreenMetrics = null; this.lastTime = 0; this.activeBattle = null; this.cameraMode = 'overview'; this.autoCamera = true; this.cameraOverride = null; this.viewport = null; this.pointer = null;
+    this.canvas = canvas; this.context = canvas?.getContext?.('2d'); this.options = normalizeDebugOverlayOptions({ showHud: true, ...options }); this.options.showHud = options.showHud !== false; this.assetRuntime = createAssetRuntime(); this.presentation = null; this.lastState = null; this.lastRuntimeDrawSpecs = null; this.lastScreenMetrics = null; this.lastHud = null; this.lastTime = 0; this.renderOverrideSeconds = null; this.activeBattle = null; this.cameraMode = 'overview'; this.autoCamera = true; this.cameraOverride = null; this.viewport = null; this.pointer = null; this.selection = { selectedActorId: null, hoveredActorId: null };
     this._bindPointer();
     this.resizeObserver = typeof ResizeObserver === 'function' && canvas ? new ResizeObserver(() => this.resize()) : null; if (this.resizeObserver) this.resizeObserver.observe(canvas); this.resize();
   }
@@ -266,7 +310,13 @@ export class UniversalBattleRenderer {
       this.canvas.classList?.add('is-camera-dragging');
     };
     this._onPointerMove = (event) => {
-      if (!this.pointer || event.pointerId !== this.pointer.id) return;
+      if (!this.pointer) {
+        if (!this.activeBattle || !this.lastState) return;
+        const point = canvasPointFromEvent(this.canvas, event); const hoveredActorId = actorIdAtCanvasPoint(point, this.lastState, this.presentation?.plan || {}, this.resize(), this.lastRuntimeDrawSpecs);
+        if (hoveredActorId !== this.selection.hoveredActorId) { this.selection.hoveredActorId = hoveredActorId; this.render(this.activeBattle); }
+        return;
+      }
+      if (event.pointerId !== this.pointer.id) return;
       const point = canvasPointFromEvent(this.canvas, event); const viewport = this.resize();
       const dx = screenDeltaToWorld(point.x - this.pointer.x, viewport, this.cameraOverride?.zoom); const dy = screenDeltaToWorld(point.y - this.pointer.y, viewport, this.cameraOverride?.zoom);
       if (Math.abs(dx) + Math.abs(dy) < .001) return;
@@ -276,7 +326,9 @@ export class UniversalBattleRenderer {
     };
     this._finishPointer = (event) => {
       if (!this.pointer || event.pointerId !== this.pointer.id) return;
+      const point = canvasPointFromEvent(this.canvas, event); const wasClick = !this.pointer.moved;
       this.canvas.releasePointerCapture?.(event.pointerId); this.canvas.classList?.remove('is-camera-dragging'); this.pointer = null;
+      if (wasClick && this.activeBattle && this.lastState) { const actorId = actorIdAtCanvasPoint(point, this.lastState, this.presentation?.plan || {}, this.resize(), this.lastRuntimeDrawSpecs); this.selection.selectedActorId = actorId || this.selection.selectedActorId; this.selection.hoveredActorId = actorId; this.render(this.activeBattle); }
     };
     this._onWheel = (event) => {
       if (!this.activeBattle) return;
@@ -287,12 +339,17 @@ export class UniversalBattleRenderer {
     this.canvas.addEventListener('pointerdown', this._onPointerDown); this.canvas.addEventListener('pointermove', this._onPointerMove); this.canvas.addEventListener('pointerup', this._finishPointer); this.canvas.addEventListener('pointercancel', this._finishPointer); this.canvas.addEventListener('wheel', this._onWheel, { passive: false }); this.canvas.addEventListener('dblclick', this._onDoubleClick);
   }
   setPresentation(presentation) { const changed = this.presentation?.plan !== presentation?.plan || this.presentation?.reportFingerprint !== presentation?.reportFingerprint; this.presentation = presentation || null; if (changed) { this.cameraOverride = null; this.autoCamera = true; } this.lastState = null; }
-  reset() { this.presentation = null; this.activeBattle = null; this.lastState = null; this.lastRuntimeDrawSpecs = null; this.lastScreenMetrics = null; this.lastTime = 0; this.cameraOverride = null; this.autoCamera = true; this.pointer = null; this.canvas?.classList?.remove('is-camera-dragging'); }
+  reset() { this.presentation = null; this.activeBattle = null; this.lastState = null; this.lastRuntimeDrawSpecs = null; this.lastScreenMetrics = null; this.lastHud = null; this.lastTime = 0; this.renderOverrideSeconds = null; this.cameraOverride = null; this.autoCamera = true; this.pointer = null; this.selection = { selectedActorId: null, hoveredActorId: null }; this.canvas?.classList?.remove('is-camera-dragging'); }
   render(activeBattle, _dtReal = 0, exactSeconds = null) {
     if (!this.presentation?.ok) return false;
     this.activeBattle = activeBattle;
-    const returning = activeBattle?.presentationPhase === 'returning'; const plan = this.presentation.plan; const duration = Math.max(.001, Number(activeBattle?.duration || plan.timeline.sourceDuration || 1)); const seconds = exactSeconds == null ? (returning ? plan.timeline.duration : Math.max(0, Number(activeBattle?.elapsed || 0) / duration * plan.timeline.duration)) : Math.max(0, Math.min(Number(plan.timeline.duration) || 1, Number(exactSeconds) || 0));
-    const state = this.presentation.renderState.atTime(seconds, { presentationPhase: activeBattle?.presentationPhase, returnElapsed: activeBattle?.returnElapsed, returnDuration: activeBattle?.returnDuration, cameraMode: this.cameraMode, autoCamera: this.autoCamera, cameraOverride: this.cameraOverride }); this.assetRuntime.ensureAll(); const hud = buildUniversalBattleHud(activeBattle, this.presentation, state); const check = validateUniversalHud(hud); if (!check.ok) throw new Error(`invalid_universal_runtime_state:${check.errors.join(',')}`);
+    const returning = activeBattle?.presentationPhase === 'returning'; const plan = this.presentation.plan; const duration = Math.max(.001, Number(activeBattle?.duration || plan.timeline.sourceDuration || 1)); const seekSeconds = exactSeconds == null ? this.renderOverrideSeconds : exactSeconds; const seconds = seekSeconds == null ? (returning ? plan.timeline.duration : Math.max(0, Number(activeBattle?.elapsed || 0) / duration * plan.timeline.duration)) : Math.max(0, Math.min(Number(plan.timeline.duration) || 1, Number(seekSeconds) || 0));
+    const state = this.presentation.renderState.atTime(seconds, { presentationPhase: activeBattle?.presentationPhase, returnElapsed: activeBattle?.returnElapsed, returnDuration: activeBattle?.returnDuration, cameraMode: this.cameraMode, autoCamera: this.autoCamera, cameraOverride: this.cameraOverride }); this.assetRuntime.ensureAll();
+    const selectable = state.actors.filter((actor) => actor.visible !== false && actor.alive !== false);
+    if (!selectable.some((actor) => actor.id === this.selection.selectedActorId)) this.selection.selectedActorId = selectable.find((actor) => actor.side === 'friendly')?.id || selectable[0]?.id || null;
+    if (!selectable.some((actor) => actor.id === this.selection.hoveredActorId)) this.selection.hoveredActorId = null;
+    const selectedActor = selectable.find((actor) => actor.id === this.selection.selectedActorId); const targetActorId = selectedActor?.targetId || null;
+    const hud = buildUniversalBattleHud(activeBattle, this.presentation, state, { selectedActorId: this.selection.selectedActorId, hoveredActorId: this.selection.hoveredActorId }); const check = validateUniversalHud(hud); if (!check.ok) throw new Error(`invalid_universal_runtime_state:${check.errors.join(',')}`);
     this.lastState = state; this.lastTime = seconds; const viewport = this.resize(); const runtimeDrawSpecs = buildProductionDrawSpecs({ actors: state.actors, wrecks: state.wrecks, environment: state.environment, camera: state.camera, options: { battlefieldBounds: plan.layout?.bounds || { width: 1200, height: 700 }, viewport, manifest: undefined, presentationSeconds: seconds, seed: plan.source?.seed ?? 0 } });
     // buildUniversalRenderState is the deterministic presentation clock source.
     // Reuse its animation/frame metadata while recomputing only viewport-dependent
@@ -300,11 +357,11 @@ export class UniversalBattleRenderer {
     const stateSpecByActor = new Map((state.drawSpecs?.actorSpecs || []).map((spec) => [spec.actorId, spec]));
     for (const spec of runtimeDrawSpecs.actorSpecs) {
       const source = stateSpecByActor.get(spec.actorId); if (!source) continue;
-      Object.assign(spec, { animation: source.animation, animationState: source.animationState, hullAnimationState: source.hullAnimationState, spriteFrame: source.spriteFrame, sourceRect: source.sourceRect, hullSourceRect: source.hullSourceRect, turretAnimationState: source.turretAnimationState, turretSourceRect: source.turretSourceRect, muzzleAnchor: source.muzzleAnchor, policy: source.policy, movementFacing: source.movementFacing, aimFacing: source.aimFacing, bodyFacing: source.bodyFacing, facing: source.facing, bodyDirection: source.bodyDirection, bodyDirectionIndex: source.bodyDirectionIndex, weaponFacing: source.weaponFacing, weaponDirection: source.weaponDirection, weaponDirectionIndex: source.weaponDirectionIndex, hullFacing: source.hullFacing, hullDirection: source.hullDirection, hullDirectionIndex: source.hullDirectionIndex, turretFacing: source.turretFacing, turretDirection: source.turretDirection, turretDirectionIndex: source.turretDirectionIndex, shotFacing: source.shotFacing, muzzleFacing: source.muzzleFacing, visualMuzzlePoint: source.visualMuzzlePoint });
+      Object.assign(spec, { animation: source.animation, animationState: source.animationState, hullAnimationState: source.hullAnimationState, spriteFrame: source.spriteFrame, sourceRect: source.sourceRect, hullSourceRect: source.hullSourceRect, turretAnimationState: source.turretAnimationState, turretSourceRect: source.turretSourceRect, muzzleAnchor: source.muzzleAnchor, policy: source.policy, weaponTopology: source.weaponTopology, movementFacing: source.movementFacing, aimFacing: source.aimFacing, bodyFacing: source.bodyFacing, facing: source.facing, bodyDirection: source.bodyDirection, bodyDirectionIndex: source.bodyDirectionIndex, weaponFacing: source.weaponFacing, weaponDirection: source.weaponDirection, weaponDirectionIndex: source.weaponDirectionIndex, hullFacing: source.hullFacing, hullDirection: source.hullDirection, hullDirectionIndex: source.hullDirectionIndex, turretFacing: source.turretFacing, turretDirection: source.turretDirection, turretDirectionIndex: source.turretDirectionIndex, shotFacing: source.shotFacing, muzzleFacing: source.muzzleFacing, visualMuzzlePoint: source.visualMuzzlePoint });
     }
-    this.lastRuntimeDrawSpecs = runtimeDrawSpecs; this.lastScreenMetrics = { metricSpace: 'final_css_pixels', geometrySource: 'production-final-draw-geometry', viewport: { ...viewport }, camera: { ...state.camera }, actors: runtimeDrawSpecs.actorSpecs.map((spec) => buildScreenMetricRow(spec, this.assetRuntime)) }; if (!this.context) return true; const { width: cssWidth, height: cssHeight, dpr } = viewport; this.context.save(); this.context.setTransform(dpr, 0, 0, dpr, 0, 0); this.context.clearRect(0, 0, cssWidth, cssHeight); this.context.fillStyle = '#0d1716'; this.context.fillRect(0, 0, cssWidth, cssHeight); this.context.save(); applyPresentationWorldTransform(this.context, viewport); drawScene(this.context, plan, state, { ...this.options, assetRuntime: this.assetRuntime, runtimeDrawSpecs, drawSpecByActor: new Map(runtimeDrawSpecs.actorSpecs.map((spec) => [spec.actorId, spec])) }); this.context.restore(); this.context.restore(); drawUniversalBattleHud(this.context, hud, state, { showHud: this.options.showHud, screenSpace: true, screenWidth: cssWidth, screenHeight: cssHeight, screenDpr: dpr }); return true;
+    this.lastRuntimeDrawSpecs = runtimeDrawSpecs; this.lastHud = hud; this.lastScreenMetrics = { metricSpace: 'final_css_pixels', geometrySource: 'production-final-draw-geometry', viewport: { ...viewport }, camera: { ...state.camera }, actors: runtimeDrawSpecs.actorSpecs.map((spec) => buildScreenMetricRow(spec, this.assetRuntime)) }; if (!this.context) return true; const { width: cssWidth, height: cssHeight, dpr } = viewport; this.context.save(); this.context.setTransform(dpr, 0, 0, dpr, 0, 0); this.context.clearRect(0, 0, cssWidth, cssHeight); this.context.fillStyle = '#0d1716'; this.context.fillRect(0, 0, cssWidth, cssHeight); this.context.save(); applyPresentationWorldTransform(this.context, viewport); drawScene(this.context, plan, state, { ...this.options, assetRuntime: this.assetRuntime, runtimeDrawSpecs, selection: { ...this.selection, targetActorId }, drawSpecByActor: new Map(runtimeDrawSpecs.actorSpecs.map((spec) => [spec.actorId, spec])) }); this.context.restore(); this.context.restore(); drawUniversalBattleHud(this.context, hud, state, { showHud: this.options.showHud, screenSpace: true, screenWidth: cssWidth, screenHeight: cssHeight, screenDpr: dpr }); return true;
   }
-  getTextState(options = {}) { if (!this.presentation?.ok) return null; const runtime = { ...(options.runtime || {}), cameraMode: options.cameraMode || this.cameraMode, autoCamera: options.autoCamera ?? this.autoCamera, cameraOverride: options.cameraOverride || this.cameraOverride }; return this.presentation.renderState.textAt(this.lastTime, { ...options, debugOverlay: this.options.debugOverlay, runtime }); }
+  getTextState(options = {}) { if (!this.presentation?.ok) return null; const runtime = { ...(options.runtime || {}), cameraMode: options.cameraMode || this.cameraMode, autoCamera: options.autoCamera ?? this.autoCamera, cameraOverride: options.cameraOverride || this.cameraOverride }; const textState = this.presentation.renderState.textAt(this.lastTime, { ...options, debugOverlay: this.options.debugOverlay, runtime }); const hud = this.lastState ? buildUniversalBattleHud(this.activeBattle, this.presentation, this.lastState, { selectedActorId: this.selection.selectedActorId, hoveredActorId: this.selection.hoveredActorId }) : this.lastHud; this.lastHud = hud; return { ...textState, hudContract: hud ? { selection: hud.selection, objective: hud.objective, resultPanel: hud.resultPanel, sources: hud.sources, safeArea: hud.safeArea } : null }; }
   getAssetRuntimeState() { return { assets: this.assetRuntime.snapshot(), allReady: this.assetRuntime.allReady() }; }
   getActorScreenMetrics() { return this.lastScreenMetrics ? JSON.parse(JSON.stringify(this.lastScreenMetrics)) : null; }
   getActorRenderedBounds() { return this.lastScreenMetrics ? { ...this.getActorScreenMetrics(), rendererTime: this.lastTime } : null; }
@@ -315,11 +372,16 @@ export class UniversalBattleRenderer {
     return { metricSpace: 'final_css_pixels', geometrySource: 'production-final-draw-geometry', viewport: { ...viewport }, camera: { ...state.camera }, actors: specs.actorSpecs.map((spec) => buildScreenMetricRow(spec, this.assetRuntime)) };
   }
   setAssetDisabled(assetId, value = true) { const result = this.assetRuntime.setDisabled(assetId, value); if (this.activeBattle) this.render(this.activeBattle); return { assets: result, allReady: this.assetRuntime.allReady() }; }
+  setRenderOverride(seconds = null) { this.renderOverrideSeconds = seconds == null ? null : Math.max(0, Number(seconds) || 0); if (this.activeBattle) this.render(this.activeBattle); return this.renderOverrideSeconds; }
+  clearRenderOverride() { return this.setRenderOverride(null); }
   setCameraMode(mode) { if (UNIVERSAL_CAMERA_MODES.includes(mode)) { this.cameraMode = mode; return true; } return false; }
   setAutoCamera(enabled) { this.autoCamera = enabled !== false; if (this.autoCamera) this.cameraOverride = null; return this.autoCamera; }
   setDebugOverlay(enabled, options = {}) { this.options = normalizeDebugOverlayOptions({ ...this.options, ...options, debugOverlay: enabled === true }); if (this.activeBattle) this.render(this.activeBattle); return this.options.debugOverlay; }
   getDebugOverlayState() { return { ...this.options }; }
   resetCamera() { this.cameraOverride = null; this.autoCamera = true; if (this.activeBattle) this.render(this.activeBattle); return true; }
-  getInteractionState() { return { manual: Boolean(this.cameraOverride), dragging: Boolean(this.pointer), autoCamera: this.autoCamera, viewport: this.viewport ? { ...this.viewport } : null }; }
+  getSelectionState() { return { ...this.selection, targetActorId: this.lastHud?.selection?.targetActorId || null }; }
+  setSelection(actorId) { const actor = this.lastState?.actors?.find((item) => item.id === actorId && item.visible !== false && item.alive !== false); if (!actor) return { ok: false, reason: 'actor_not_selectable', ...this.getSelectionState() }; this.selection.selectedActorId = actor.id; if (this.activeBattle) this.render(this.activeBattle); return { ok: true, ...this.getSelectionState() }; }
+  clearSelection() { this.selection.selectedActorId = null; if (this.activeBattle) this.render(this.activeBattle); return this.getSelectionState(); }
+  getInteractionState() { return { manual: Boolean(this.cameraOverride), dragging: Boolean(this.pointer), autoCamera: this.autoCamera, viewport: this.viewport ? { ...this.viewport } : null, ...this.getSelectionState() }; }
   destroy() { this.resizeObserver?.disconnect(); this.resizeObserver = null; if (this.canvas?.removeEventListener) { this.canvas.removeEventListener('pointerdown', this._onPointerDown); this.canvas.removeEventListener('pointermove', this._onPointerMove); this.canvas.removeEventListener('pointerup', this._finishPointer); this.canvas.removeEventListener('pointercancel', this._finishPointer); this.canvas.removeEventListener('wheel', this._onWheel); this.canvas.removeEventListener('dblclick', this._onDoubleClick); } this.reset(); }
 }

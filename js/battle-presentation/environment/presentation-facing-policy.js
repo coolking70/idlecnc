@@ -9,16 +9,33 @@ export const PRESENTATION_FACING_POLICY = Object.freeze({
   MOVEMENT_ONLY: 'movement_only'
 });
 
+export const WEAPON_TOPOLOGY = Object.freeze({
+  BODY_MOUNTED: 'body_mounted',
+  INDEPENDENT_TURRET: 'independent_turret',
+  UNARMED: 'unarmed'
+});
+
+const VALID_TOPOLOGIES = new Set(Object.values(WEAPON_TOPOLOGY));
+
 const BODY_AIM_STATES = new Set(['aim', 'fire', 'reload', 'cover_fire']);
 
 function finiteFacing(value, fallback = 0) {
   return Number.isFinite(Number(value)) ? Number(value) : fallback;
 }
 
-export function resolvePresentationFacingPolicy({ actor = {}, visualClass = 'unknown', visualState = 'idle', movementFacing = 0, aimFacing = null, shot = null } = {}) {
-  const policy = visualClass === 'mbt'
+export function resolveWeaponTopology({ actor = {}, visualClass = 'unknown', weaponTopology = null } = {}) {
+  const explicit = weaponTopology || actor.weaponTopology || actor.presentationWeaponTopology;
+  if (VALID_TOPOLOGIES.has(explicit)) return explicit;
+  if (visualClass === 'mbt') return WEAPON_TOPOLOGY.INDEPENDENT_TURRET;
+  if (['infantry', 'anti_armor_infantry', 'light_vehicle'].includes(visualClass)) return WEAPON_TOPOLOGY.BODY_MOUNTED;
+  return WEAPON_TOPOLOGY.UNARMED;
+}
+
+export function resolvePresentationFacingPolicy({ actor = {}, visualClass = 'unknown', weaponTopology = null, visualState = 'idle', movementFacing = 0, aimFacing = null, shot = null } = {}) {
+  const topology = resolveWeaponTopology({ actor, visualClass, weaponTopology });
+  const policy = topology === WEAPON_TOPOLOGY.INDEPENDENT_TURRET
     ? PRESENTATION_FACING_POLICY.TURRET_WEAPON
-    : visualClass === 'infantry' || visualClass === 'anti_armor_infantry' || visualClass === 'light_vehicle'
+    : topology === WEAPON_TOPOLOGY.BODY_MOUNTED
       ? PRESENTATION_FACING_POLICY.BODY_AIMS_WEAPON
       : PRESENTATION_FACING_POLICY.MOVEMENT_ONLY;
   const movement = finiteFacing(movementFacing);
@@ -35,6 +52,7 @@ export function resolvePresentationFacingPolicy({ actor = {}, visualClass = 'unk
   const shotFacing = Number.isFinite(Number(shot?.sourceFacingAtFire)) ? Number(shot.sourceFacingAtFire) : null;
   return {
     policy,
+    weaponTopology: topology,
     movementFacing: movement,
     aimFacing: aim,
     bodyFacing,
@@ -48,7 +66,8 @@ export function resolvePresentationFacingPolicy({ actor = {}, visualClass = 'unk
 
 export function presentationFacingPolicyFor(actor = {}, visualClass = null) {
   const resolvedClass = visualClass || actor.visualClass || actor.visualClassName;
-  if (resolvedClass === 'mbt') return PRESENTATION_FACING_POLICY.TURRET_WEAPON;
-  if (['infantry', 'anti_armor_infantry', 'light_vehicle'].includes(resolvedClass)) return PRESENTATION_FACING_POLICY.BODY_AIMS_WEAPON;
-  return PRESENTATION_FACING_POLICY.MOVEMENT_ONLY;
+  const topology = resolveWeaponTopology({ actor, visualClass: resolvedClass });
+  return topology === WEAPON_TOPOLOGY.INDEPENDENT_TURRET
+    ? PRESENTATION_FACING_POLICY.TURRET_WEAPON
+    : topology === WEAPON_TOPOLOGY.BODY_MOUNTED ? PRESENTATION_FACING_POLICY.BODY_AIMS_WEAPON : PRESENTATION_FACING_POLICY.MOVEMENT_ONLY;
 }

@@ -30,6 +30,7 @@ function animationForState(actor, visualState) {
   const state = String(visualState || actor?.visualState || actor?.presentationMode || 'idle').toLowerCase();
   if (['destroying', 'destroy'].includes(state)) return 'destroy';
   if (state === 'hit' || actor?.visualState === 'hit') return 'hit';
+  if (state === 'repair' || actor?.visualStatus === 'repairing' || actor?.currentAction === 'repair') return 'repair';
   if (state === 'fire' || actor?.firing) return 'fire';
   if (state === 'aim' || actor?.aiming) return 'aim';
   if (['move', 'deploy', 'turn', 'brake', 'retreat', 'cover_advance', 'retreat_route'].includes(state) || ['move', 'deploy', 'advance', 'screen', 'take_cover', 'disengage', 'repair_approach'].includes(actor?.currentAction)) return 'move';

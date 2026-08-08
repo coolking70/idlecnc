@@ -265,7 +265,7 @@ export function buildUniversalRenderState(plan, seconds = 0, runtime = {}, preco
   const visualById = new Map(visualScene.actors.map((actor) => [actor.id, actor]));
   const presentationActors = actors.map((actor) => {
     const visual = visualById.get(actor.id) || {};
-    return { ...actor, ...visual, visualCenter: returning ? actor.visualCenter : visual.visualCenter, anchorPosition: returning ? actor.anchorPosition : visual.anchorPosition, visualStatus: visual.visualState || actor.visualStatus };
+    return { ...actor, ...visual, visualCenter: returning ? actor.visualCenter : visual.visualCenter, anchorPosition: returning ? actor.anchorPosition : visual.anchorPosition, visualStatus: visual.visualStatus || visual.visualState || actor.visualStatus };
   });
   const wrecks = visualScene.wrecks;
   const sceneObjects = (plan.spatialEntities || [])

@@ -22,11 +22,12 @@ const units = OFFLINE_ASSET_MANIFEST.assets.filter((asset) => asset.category ===
 const wrecks = OFFLINE_ASSET_MANIFEST.assets.filter((asset) => asset.category === 'wreck' && asset.id !== 'wreck_tank');
 const requiredUnitIds = ['unit_friendly_infantry', 'unit_friendly_at_infantry', 'unit_friendly_mbt', 'unit_enemy_infantry', 'unit_enemy_at_infantry', 'unit_enemy_mbt'];
 const requiredWreckIds = ['wreck_friendly_mbt', 'wreck_enemy_mbt'];
+const legacyUnitIds = new Set(requiredUnitIds); const legacyWreckIds = new Set(requiredWreckIds);
 assert.equal(OFFLINE_ASSET_MANIFEST.version, 2);
 assert.equal(OFFLINE_ASSET_MANIFEST.runtimeGeneration, false);
 assert.equal(OFFLINE_ASSET_MANIFEST.directions, 8);
-assert.deepEqual(units.map((asset) => asset.id).sort(), requiredUnitIds.slice().sort());
-assert.deepEqual(wrecks.map((asset) => asset.id).sort(), requiredWreckIds.slice().sort());
+assert.deepEqual(units.filter((asset) => legacyUnitIds.has(asset.id)).map((asset) => asset.id).sort(), requiredUnitIds.slice().sort());
+assert.deepEqual(wrecks.filter((asset) => legacyWreckIds.has(asset.id)).map((asset) => asset.id).sort(), requiredWreckIds.slice().sort());
 const invalidAssets = []; const missingFrames = []; const pngRows = [];
 for (const asset of [...units, ...wrecks]) {
   assert.equal(asset.format, 'spritesheet', `${asset.id} format`); assert.equal(asset.directions, 8); assert.deepEqual(asset.directionOrder, OFFLINE_ASSET_MANIFEST.directionOrder); assert.ok(asset.license && asset.author && asset.generationSource);
