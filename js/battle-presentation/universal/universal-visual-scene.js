@@ -53,11 +53,21 @@ function stateWindow(plan, actorId, seconds) {
   return { progress: clamp((seconds - start) / Math.max(.001, end - start), 0, 1), start, end, action: current?.type || 'holding' };
 }
 
-function facingFor(actor, seconds, shot, presentationFacing = null) {
-  if (shot && seconds >= shot.t - shot.weapon.aimDuration) return shot.sourceFacingAtFire;
+function movementFacingFor(actor, presentationFacing = null) {
+  if (Number.isFinite(actor?.movementFacing)) return actor.movementFacing;
   if (Number.isFinite(presentationFacing)) return presentationFacing;
   const current = point(actor); const later = actor.nextPosition || current;
   return distance(current, later) > .01 ? Math.atan2(later.y - current.y, later.x - current.x) : Number(actor.facing) || 0;
+}
+
+function aimFacingFor(actor, seconds, shot, visual, movementFacing) {
+  if (shot && seconds >= shot.t - shot.weapon.aimDuration) {
+    const shotFacing = Number(shot.sourceFacingAtFire);
+    return Number.isFinite(shotFacing) ? shotFacing : movementFacing;
+  }
+  if (Number.isFinite(visual?.presentationFacing)) return visual.presentationFacing;
+  if (Number.isFinite(actor?.aimFacing)) return actor.aimFacing;
+  return movementFacing;
 }
 
 function unitAssetEntry(actor) {
@@ -146,11 +156,13 @@ export function pointOnPresentationRoute(route, seconds) {
 function positionFor(actor, plan, seconds, sampler, engagementSchedule) {
   const current = sampler(actor.actorId, seconds) || actor.position || { x: 0, y: 0 };
   const next = sampler(actor.actorId, seconds + .08) || current;
-  let presentation = { ...current }; let presentationFacing = null; let presentationMode = 'route';
+  let presentation = { ...current }; let presentationFacing = null; let movementFacing = null; let aimFacing = null; let presentationMode = 'route';
   const retreat = retreatAtTime(engagementSchedule, actor.actorId, seconds);
   if (retreat) {
     presentation = pointOnPresentationRoute(retreat.presentationRoute, seconds) || presentation;
-    presentationFacing = retreat.coverFire ? retreat.presentationFacing.rearGuardEnemyFacing : retreat.presentationFacing.move;
+    movementFacing = retreat.presentationFacing.move;
+    aimFacing = retreat.coverFire ? retreat.presentationFacing.rearGuardEnemyFacing : movementFacing;
+    presentationFacing = retreat.coverFire ? retreat.presentationFacing.rearGuardEnemyFacing : movementFacing;
     presentationMode = retreat.coverFire ? 'rear_guard_hold' : 'retreat_route';
   } else {
     const move = (engagementSchedule?.coverMoves || []).find((item) => seconds >= item.start - .000001 && seconds <= item.end + .000001 && (item.fireGroupIds.includes(actor.actorId) || item.maneuverGroupIds.includes(actor.actorId)));
@@ -166,7 +178,8 @@ function positionFor(actor, plan, seconds, sampler, engagementSchedule) {
       }
     }
   }
-  return { ...actor, routePosition: { ...current }, plannedPosition: { ...current }, preSeparationPosition: { ...current }, visualCenter: { ...presentation }, nextPosition: { ...next }, presentationFacing, presentationMode };
+  if (!Number.isFinite(movementFacing)) movementFacing = distance(current, next) > .01 ? Math.atan2(next.y - current.y, next.x - current.x) : Number(actor.facing) || 0;
+  return { ...actor, routePosition: { ...current }, plannedPosition: { ...current }, preSeparationPosition: { ...current }, visualCenter: { ...presentation }, nextPosition: { ...next }, movementFacing, aimFacing, presentationFacing, presentationMode };
 }
 
 function projectileFor(shot, seconds, actors) {
@@ -214,7 +227,15 @@ export function buildUniversalVisualScene(plan, seconds, sampler, runtime = {}) 
   const actorById = new Map(raw.map((actor) => [actor.actorId, actor]));
   const actors = rows.map((actor) => {
     const positioned = actorById.get(actor.actorId); const visual = resolveVisualState(plan, positioned, seconds, schedule, runtime.engagementSchedule); const shot = visual.shot || null;
-    const weapon = visualWeaponProfile(actor); const facing = facingFor(positioned, seconds, shot, visual.presentationFacing || positioned.presentationFacing); const turretFacing = shot ? shot.sourceFacingAtFire : facing;
+    const weapon = visualWeaponProfile(actor);
+    const movementFacing = movementFacingFor(positioned, positioned.movementFacing);
+    const aimFacing = aimFacingFor(positioned, seconds, shot, visual, movementFacing);
+    const visualClass = normalizeVisualUnitClass(actor);
+    // `facing` is the production body's/hull's direction.  A turret may
+    // follow an active target/shot without rotating the vehicle body or any
+    // route/footprint geometry.
+    const facing = movementFacing;
+    const turretFacing = visualClass === 'mbt' ? aimFacing : null;
     const recoil = visual.id === 'fire' ? Math.sin(clamp(visual.progress, 0, 1) * Math.PI) * weapon.recoil : 0;
     const visible = visual.id !== 'wreck';
     return {
@@ -222,7 +243,7 @@ export function buildUniversalVisualScene(plan, seconds, sampler, runtime = {}) 
       hp: actor.hp, maxHp: actor.maxHp, alive: actor.alive, visible, visualCenter: { ...positioned.visualCenter },
       routePosition: { ...positioned.routePosition }, plannedPosition: { ...positioned.plannedPosition }, preSeparationPosition: { ...positioned.preSeparationPosition }, visualPosition: { ...positioned.visualCenter }, presentationMode: positioned.presentationMode,
       footprint: positioned.footprint,
-      anchorPosition: { ...positioned.preSeparationPosition }, visualOffset: { x: positioned.visualCenter.x - positioned.preSeparationPosition.x, y: positioned.visualCenter.y - positioned.preSeparationPosition.y }, nextPosition: { ...positioned.nextPosition }, facing, turretFacing,
+      anchorPosition: { ...positioned.preSeparationPosition }, visualOffset: { x: positioned.visualCenter.x - positioned.preSeparationPosition.x, y: positioned.visualCenter.y - positioned.preSeparationPosition.y }, nextPosition: { ...positioned.nextPosition }, facing, hullFacing: facing, movementFacing: facing, aimFacing, turretFacing, shotFacing: shot ? Number(shot.sourceFacingAtFire) || 0 : null,
       visualState: normalizeVisualState(visual.id), stateProgress: visual.progress, currentAction: actor.currentAction, weapon: { id: weapon.id, kind: weapon.kind, label: weapon.label, presentation: { ...(weapon.presentation || {}) } }, weaponPresentation: { ...(weapon.presentation || {}) },
       firing: visual.id === 'fire', aiming: visual.id === 'aim', reloading: visual.id === 'reload', recoil, walkCycle: visual.id === 'move' ? seconds * (actor.type === 'mbt' ? 1.5 : 5) : 0,
       memberPositions: memberPositions(actor, positioned, facing, visual.id === 'retreat' ? 'move' : visual.id, seconds), visualAuthorityAnchorId: visual.authorityAnchorId || shot?.authorityAnchorId || null,

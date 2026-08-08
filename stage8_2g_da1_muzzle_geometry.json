@@ -1,0 +1,163 @@
+{
+  "stage": "8.2G-D-A.1",
+  "geometrySource": "production-final-draw-geometry",
+  "rows": [
+    {
+      "visualClass": "infantry",
+      "actorId": "enemy_infantry_1",
+      "shotId": "visual_shot_1_anchor_0006",
+      "authoritativeStart": {
+        "x": 862.8,
+        "y": 550,
+        "ratio": 0.4,
+        "state": "moving",
+        "entityId": "enemy_infantry_1",
+        "actorId": "enemy_infantry_1"
+      },
+      "visualStart": {
+        "x": 854.4,
+        "y": 551.4933,
+        "space": "battlefield-world",
+        "source": "production-final-draw-geometry",
+        "anchor": {
+          "forward": 0.56,
+          "lateral": -0.08,
+          "facing": 3.141593,
+          "directionIndex": 6
+        }
+      },
+      "defaultMuzzlePoint": {
+        "x": 854.4,
+        "y": 551.4933,
+        "space": "battlefield-world",
+        "source": "production-final-draw-geometry",
+        "anchor": {
+          "forward": 0.56,
+          "lateral": -0.08,
+          "facing": 3.141593,
+          "directionIndex": 6
+        }
+      },
+      "narrowMuzzlePoint": {
+        "x": 847.5571,
+        "y": 552.7098,
+        "space": "battlefield-world",
+        "source": "production-final-draw-geometry",
+        "anchor": {
+          "forward": 0.56,
+          "lateral": -0.08,
+          "facing": 3.141593,
+          "directionIndex": 6
+        }
+      },
+      "narrowScreenFootprint": 24,
+      "minimumScreenFootprint": 24
+    },
+    {
+      "visualClass": "anti_armor_infantry",
+      "actorId": "art-enemy-at",
+      "shotId": "choreographed_shot_1",
+      "authoritativeStart": {
+        "x": 856.2226663462051,
+        "y": 430,
+        "ratio": 0.4126487185649903,
+        "state": "moving",
+        "entityId": "art-enemy-at",
+        "actorId": "art-enemy-at"
+      },
+      "visualStart": {
+        "x": 844.6627,
+        "y": 433.3185,
+        "space": "battlefield-world",
+        "source": "production-final-draw-geometry",
+        "anchor": {
+          "forward": 0.68,
+          "lateral": -0.16,
+          "facing": 3.141593,
+          "directionIndex": 6
+        }
+      },
+      "defaultMuzzlePoint": {
+        "x": 844.6627,
+        "y": 433.3185,
+        "space": "battlefield-world",
+        "source": "production-final-draw-geometry",
+        "anchor": {
+          "forward": 0.68,
+          "lateral": -0.16,
+          "facing": 3.141593,
+          "directionIndex": 6
+        }
+      },
+      "narrowMuzzlePoint": {
+        "x": 837.3432,
+        "y": 435.4197,
+        "space": "battlefield-world",
+        "source": "production-final-draw-geometry",
+        "anchor": {
+          "forward": 0.68,
+          "lateral": -0.16,
+          "facing": 3.141593,
+          "directionIndex": 6
+        }
+      },
+      "narrowScreenFootprint": 24,
+      "minimumScreenFootprint": 24
+    },
+    {
+      "visualClass": "mbt",
+      "actorId": "unit_stage8g-c1-mining-3",
+      "shotId": "choreographed_shot_109",
+      "authoritativeStart": {
+        "x": 517.7935825534115,
+        "y": 508,
+        "ratio": 0.42446973208545846,
+        "state": "moving",
+        "entityId": "unit_stage8g-c1-mining-3",
+        "actorId": "unit_stage8g-c1-mining-3"
+      },
+      "visualStart": {
+        "x": 539.7659,
+        "y": 516.3549,
+        "space": "battlefield-world",
+        "source": "production-final-draw-geometry",
+        "anchor": {
+          "forward": 0.78,
+          "lateral": -0.02,
+          "facing": 0.366828,
+          "directionIndex": 2
+        }
+      },
+      "defaultMuzzlePoint": {
+        "x": 539.7659,
+        "y": 516.3549,
+        "space": "battlefield-world",
+        "source": "production-final-draw-geometry",
+        "anchor": {
+          "forward": 0.78,
+          "lateral": -0.02,
+          "facing": 0.366828,
+          "directionIndex": 2
+        }
+      },
+      "narrowMuzzlePoint": {
+        "x": 563.6461,
+        "y": 525.4353,
+        "space": "battlefield-world",
+        "source": "production-final-draw-geometry",
+        "anchor": {
+          "forward": 0.78,
+          "lateral": -0.02,
+          "facing": 0.366828,
+          "directionIndex": 2
+        }
+      },
+      "narrowScreenFootprint": 46,
+      "minimumScreenFootprint": 46
+    }
+  ],
+  "maxWorldError": 0,
+  "authoritativeStartUnchanged": true,
+  "defaultAndNarrowChecked": true,
+  "passed": true
+}

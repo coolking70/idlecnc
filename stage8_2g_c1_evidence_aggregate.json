@@ -32,12 +32,12 @@
       },
       {
         "type": "at_infantry",
-        "screenFootprint": 33.4507,
+        "screenFootprint": 47.7867,
         "minimum": 24
       },
       {
         "type": "infantry",
-        "screenFootprint": 33.4507,
+        "screenFootprint": 43.008,
         "minimum": 24
       },
       {
@@ -52,17 +52,17 @@
       },
       {
         "type": "enemy_infantry",
-        "screenFootprint": 45.3973,
+        "screenFootprint": 43.008,
         "minimum": 24
       },
       {
         "type": "enemy_infantry",
-        "screenFootprint": 45.3973,
+        "screenFootprint": 43.008,
         "minimum": 24
       },
       {
         "type": "enemy_infantry",
-        "screenFootprint": 45.3973,
+        "screenFootprint": 43.008,
         "minimum": 24
       }
     ],
@@ -71,13 +71,13 @@
         "type": "infantry",
         "minimum": 24,
         "screenFootprint": 24,
-        "visualScaleBoost": 4.0179
+        "visualScaleBoost": 3.125
       },
       {
         "type": "anti_armor_infantry",
         "minimum": 24,
         "screenFootprint": 24,
-        "visualScaleBoost": 4.0179
+        "visualScaleBoost": 2.8125
       },
       {
         "type": "light_vehicle",
@@ -122,10 +122,10 @@
   },
   "performance": {
     "sampleCount": 160,
-    "averageRenderMs": 0.25,
-    "medianRenderMs": 0.2427,
-    "p95RenderMs": 0.3418,
-    "maxRenderMs": 0.4062,
+    "averageRenderMs": 1.5078,
+    "medianRenderMs": 1.49,
+    "p95RenderMs": 1.6655,
+    "maxRenderMs": 1.9119,
     "samplesAreMeasured": true,
     "percentileMethod": "nearest-rank(sorted samples)"
   },

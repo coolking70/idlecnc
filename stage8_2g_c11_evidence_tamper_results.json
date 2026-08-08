@@ -6,17 +6,17 @@
     {
       "label": "duplicate PNG hash",
       "rejected": true,
-      "output": "file:///Users/coolking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-C-1-1-evidence.mjs:11\nconst fail = (message) => { throw new Error(message); };\n                                  ^\n\nError: browser state binding readability-01-friendly-vs-enemy-infantry.png\n    at fail (file:///Users/coolking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-C-1-1-evidence.mjs:11:35)\n    at file:///Users/coolking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-C-1-1-evidence.mjs:30:130\n\nNode.js v25.2.1\n"
+      "output": "file:///Users/coolking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-C-1-1-evidence.mjs:11\nconst fail = (message) => { throw new Error(message); };\n                                  ^\n\nError: duplicate PNG readability-02-friendly-vs-enemy-armor.png\n    at fail (file:///Users/coolking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-C-1-1-evidence.mjs:11:35)\n    at file:///Users/coolking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-C-1-1-evidence.mjs:28:43\n\nNode.js v25.2.1\n"
     },
     {
       "label": "screen metric mutation",
       "rejected": true,
-      "output": "file:///Users/coolking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-C-1-1-evidence.mjs:11\nconst fail = (message) => { throw new Error(message); };\n                                  ^\n\nError: browser state binding readability-01-friendly-vs-enemy-infantry.png\n    at fail (file:///Users/coolking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-C-1-1-evidence.mjs:11:35)\n    at file:///Users/coolking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-C-1-1-evidence.mjs:30:130\n\nNode.js v25.2.1\n"
+      "output": "file:///Users/coolking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-C-1-1-evidence.mjs:11\nconst fail = (message) => { throw new Error(message); };\n                                  ^\n\nError: browser CSS metric binding screen-02-narrow-footprint.png\n    at fail (file:///Users/coolking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-C-1-1-evidence.mjs:11:35)\n    at file:///Users/coolking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-C-1-1-evidence.mjs:32:1249\n\nNode.js v25.2.1\n"
     },
     {
       "label": "route violation mutation",
       "rejected": true,
-      "output": "file:///Users/coolking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-C-1-1-evidence.mjs:11\nconst fail = (message) => { throw new Error(message); };\n                                  ^\n\nError: browser state binding readability-01-friendly-vs-enemy-infantry.png\n    at fail (file:///Users/coolking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-C-1-1-evidence.mjs:11:35)\n    at file:///Users/coolking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-C-1-1-evidence.mjs:30:130\n\nNode.js v25.2.1\n"
+      "output": "file:///Users/coolking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-C-1-1-evidence.mjs:11\nconst fail = (message) => { throw new Error(message); };\n                                  ^\n\nError: machine route clearance binding route-01-cover-advance-clear.png\n    at fail (file:///Users/coolking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-C-1-1-evidence.mjs:11:35)\n    at file:///Users/coolking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-C-1-1-evidence.mjs:26:186\n\nNode.js v25.2.1\n"
     }
   ],
   "duplicatePngProtected": true,

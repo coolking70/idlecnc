@@ -71,7 +71,7 @@ for (const id of cover.fireGroupIds) { const before = coverBefore.find((actor) =
 
 // 7. Retreat routes are actual routes; rear guard starts after the main group and faces the enemy.
 assert.ok(withdraw.schedule.retreatOrders.length >= 2); const first = withdraw.schedule.retreatOrders[0]; const rear = withdraw.schedule.retreatOrders.find((row) => row.role === 'rear_guard'); assert.ok(rear && rear.start > first.start);
-assert.ok(rear.presentationRoute.length >= 3 && rear.distanceToExitAtStart > rear.distanceToExitAtEnd); const rearFrame = withdraw.presentation.renderState.atTime(rear.start + .01).actors.find((actor) => actor.id === rear.actorId); assert.ok(Math.abs(rearFrame.facing - rear.presentationFacing.rearGuardEnemyFacing) < 1e-9);
+assert.ok(rear.presentationRoute.length >= 3 && rear.distanceToExitAtStart > rear.distanceToExitAtEnd); const rearFrame = withdraw.presentation.renderState.atTime(rear.start + .01).actors.find((actor) => actor.id === rear.actorId); assert.ok(Math.abs(rearFrame.aimFacing - rear.presentationFacing.rearGuardEnemyFacing) < 1e-9);
 assert.equal(wiped.schedule.retreatOrders.length, 0);
 
 // 8. Target hold/cooldown reasons are explicit and no legacy phase-change churn remains.

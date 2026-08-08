@@ -39,6 +39,27 @@ function normalizedBounds(bounds = {}) {
 }
 
 function roundMetric(value) { return Number(Number(value || 0).toFixed(4)); }
+function roundFacing(value) { return Number(Number(value || 0).toFixed(6)); }
+
+function visualMuzzlePointForSpec(actor, spec, battlefieldBounds = {}) {
+  const anchor = spec?.muzzleAnchor;
+  const rect = spec?.drawRect;
+  if (!anchor?.ok || !rect) return null;
+  const bounds = normalizedBounds(battlefieldBounds);
+  const center = { x: Number(rect.x) + Number(rect.width) / 2, y: Number(rect.y) + Number(rect.height) / 2 };
+  const facing = Number(anchor.facing) || 0;
+  const forward = Number(anchor.forward) || 0;
+  const lateral = Number(anchor.lateral) || 0;
+  const dx = Math.cos(facing) * forward * Number(rect.width) / 2 - Math.sin(facing) * lateral * Number(rect.height) / 2;
+  const dy = Math.sin(facing) * forward * Number(rect.width) / 2 + Math.cos(facing) * lateral * Number(rect.height) / 2;
+  return {
+    x: roundMetric((center.x + dx) * bounds.width / PRESENTATION_WORLD_WIDTH),
+    y: roundMetric((center.y + dy) * bounds.height / PRESENTATION_WORLD_HEIGHT),
+    space: 'battlefield-world',
+    source: 'production-final-draw-geometry',
+    anchor: { forward: Number(anchor.forward) || 0, lateral: Number(anchor.lateral) || 0, facing, directionIndex: anchor.directionIndex ?? null }
+  };
+}
 
 function resolvedWorldSize(resolved, visualClass) {
   return resolved?.worldSize ? { width: Number(resolved.worldSize.width), height: Number(resolved.worldSize.height), source: 'manifest.worldSize' }
@@ -157,9 +178,10 @@ export function buildActorDrawSpec(actor, camera = {}, options = {}) {
   const turretEntry = resolved.componentAssetIds?.turretAssetId ? (manifest.assets || []).find((asset) => asset.id === resolved.componentAssetIds.turretAssetId) : null;
   const turretAnimationState = turretEntry ? resolveActorAnimationState({ ...actor, facing: actor?.turretFacing ?? actor?.facing }, actor?.visualState, options.presentationSeconds ?? actor?.presentationSeconds ?? 0, { entry: turretEntry, seed: options.seed ?? actor?.seed ?? 0 }) : null;
   const turretSpriteFrame = turretEntry ? resolveSpriteFrame(turretEntry, turretAnimationState) : null;
-  const muzzleAnchor = resolveMuzzleAnchor(actor, resolved.entry, animationState.directionIndex);
+  const turretDirectionIndex = turretAnimationState?.directionIndex ?? null;
+  const muzzleAnchor = resolveMuzzleAnchor(actor, resolved.entry, turretDirectionIndex ?? animationState.directionIndex);
   const geometry = buildActorFinalDrawGeometry({ actor, resolved, visualClass, camera, battlefieldBounds: options.battlefieldBounds, viewport: options.viewport, visualScaleBoost: options.visualScaleBoostByActor?.[actor?.id || actor?.actorId] });
-  return {
+  const spec = {
     actorId: actor?.id || actor?.actorId || null,
     type: actor?.type || null,
     visualClass,
@@ -167,8 +189,10 @@ export function buildActorDrawSpec(actor, camera = {}, options = {}) {
     ...assetSpecForResolved(resolved, 'actor'),
     animation: animationState.animation,
     animationState,
+    hullAnimationState: animationState,
     spriteFrame,
     sourceRect: spriteFrame.sourceRect || null,
+    hullSourceRect: spriteFrame.sourceRect || null,
     turretAnimationState,
     turretSourceRect: turretSpriteFrame?.sourceRect || null,
     muzzleAnchor,
@@ -177,7 +201,18 @@ export function buildActorDrawSpec(actor, camera = {}, options = {}) {
     weaponPresentation: actor?.weaponPresentation || null,
     hybridComponents: resolved.mode === 'hybrid' && visualClass === 'mbt' ? ['sprite_hull', 'sprite_turret', 'procedural_selection', 'procedural_weapon_effects'] : []
   };
+  spec.hullFacing = visualClass === 'mbt' ? roundFacing(actor?.facing) : null;
+  spec.hullDirection = visualClass === 'mbt' ? animationState.direction : null;
+  spec.hullDirectionIndex = visualClass === 'mbt' ? animationState.directionIndex : null;
+  spec.turretFacing = visualClass === 'mbt' ? roundFacing(actor?.turretFacing ?? actor?.facing) : null;
+  spec.turretDirection = visualClass === 'mbt' ? turretAnimationState?.direction || null : null;
+  spec.turretDirectionIndex = visualClass === 'mbt' ? turretDirectionIndex : null;
+  spec.shotFacing = Number.isFinite(Number(actor?.shotFacing)) ? roundFacing(actor.shotFacing) : null;
+  spec.visualMuzzlePoint = visualMuzzlePointForSpec(actor, spec, options.battlefieldBounds);
+  return spec;
 }
+
+export { visualMuzzlePointForSpec };
 
 /** Compatibility name retained for historical tests; it delegates completely
  * to the production geometry and contains no second metric formula. */

@@ -1,0 +1,15 @@
+{
+  "stage": "8.2G-D-A.1",
+  "sceneId": "stage8g-da1-formal-mining",
+  "fixtureType": "formal-unmodified",
+  "sourceReportHash": "63fc42f860565f16cab4200effac1fbc46319c06906a4379b3d35f49874e6abe",
+  "regeneratedSourceReportHash": "63fc42f860565f16cab4200effac1fbc46319c06906a4379b3d35f49874e6abe",
+  "syntheticActorIds": [],
+  "requiredFriendlyClasses": [
+    "infantry",
+    "anti_armor_infantry",
+    "mbt"
+  ],
+  "formalReportUnmodified": true,
+  "passed": true
+}

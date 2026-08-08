@@ -1,0 +1,1299 @@
+{
+  "stage": "8.2G-D-A.1",
+  "clock": "presentation-seconds-plus-seed",
+  "rows": [
+    {
+      "time": 0,
+      "linear": [
+        {
+          "id": "art-friendly-mbt-wreck",
+          "hullDirectionIndex": 2,
+          "turretDirectionIndex": 2,
+          "muzzle": {
+            "x": 128.4,
+            "y": 324.6267,
+            "space": "battlefield-world",
+            "source": "production-final-draw-geometry",
+            "anchor": {
+              "forward": 0.78,
+              "lateral": -0.02,
+              "facing": 0,
+              "directionIndex": 2
+            }
+          }
+        },
+        {
+          "id": "unit_stage8g-c1-mining-3",
+          "hullDirectionIndex": 2,
+          "turretDirectionIndex": 2,
+          "muzzle": {
+            "x": 128.4,
+            "y": 374.6267,
+            "space": "battlefield-world",
+            "source": "production-final-draw-geometry",
+            "anchor": {
+              "forward": 0.78,
+              "lateral": -0.02,
+              "facing": 0,
+              "directionIndex": 2
+            }
+          }
+        },
+        {
+          "id": "art-enemy-mbt",
+          "hullDirectionIndex": 6,
+          "turretDirectionIndex": 6,
+          "muzzle": {
+            "x": 1071.6,
+            "y": 350.3733,
+            "space": "battlefield-world",
+            "source": "production-final-draw-geometry",
+            "anchor": {
+              "forward": 0.78,
+              "lateral": -0.02,
+              "facing": 3.141593,
+              "directionIndex": 6
+            }
+          }
+        }
+      ],
+      "direct": [
+        {
+          "id": "art-friendly-mbt-wreck",
+          "hullDirectionIndex": 2,
+          "turretDirectionIndex": 2,
+          "muzzle": {
+            "x": 128.4,
+            "y": 324.6267,
+            "space": "battlefield-world",
+            "source": "production-final-draw-geometry",
+            "anchor": {
+              "forward": 0.78,
+              "lateral": -0.02,
+              "facing": 0,
+              "directionIndex": 2
+            }
+          }
+        },
+        {
+          "id": "unit_stage8g-c1-mining-3",
+          "hullDirectionIndex": 2,
+          "turretDirectionIndex": 2,
+          "muzzle": {
+            "x": 128.4,
+            "y": 374.6267,
+            "space": "battlefield-world",
+            "source": "production-final-draw-geometry",
+            "anchor": {
+              "forward": 0.78,
+              "lateral": -0.02,
+              "facing": 0,
+              "directionIndex": 2
+            }
+          }
+        },
+        {
+          "id": "art-enemy-mbt",
+          "hullDirectionIndex": 6,
+          "turretDirectionIndex": 6,
+          "muzzle": {
+            "x": 1071.6,
+            "y": 350.3733,
+            "space": "battlefield-world",
+            "source": "production-final-draw-geometry",
+            "anchor": {
+              "forward": 0.78,
+              "lateral": -0.02,
+              "facing": 3.141593,
+              "directionIndex": 6
+            }
+          }
+        }
+      ],
+      "rewind": [
+        {
+          "id": "art-friendly-mbt-wreck",
+          "hullDirectionIndex": 2,
+          "turretDirectionIndex": 2,
+          "muzzle": {
+            "x": 128.4,
+            "y": 324.6267,
+            "space": "battlefield-world",
+            "source": "production-final-draw-geometry",
+            "anchor": {
+              "forward": 0.78,
+              "lateral": -0.02,
+              "facing": 0,
+              "directionIndex": 2
+            }
+          }
+        },
+        {
+          "id": "unit_stage8g-c1-mining-3",
+          "hullDirectionIndex": 2,
+          "turretDirectionIndex": 2,
+          "muzzle": {
+            "x": 128.4,
+            "y": 374.6267,
+            "space": "battlefield-world",
+            "source": "production-final-draw-geometry",
+            "anchor": {
+              "forward": 0.78,
+              "lateral": -0.02,
+              "facing": 0,
+              "directionIndex": 2
+            }
+          }
+        },
+        {
+          "id": "art-enemy-mbt",
+          "hullDirectionIndex": 6,
+          "turretDirectionIndex": 6,
+          "muzzle": {
+            "x": 1071.6,
+            "y": 350.3733,
+            "space": "battlefield-world",
+            "source": "production-final-draw-geometry",
+            "anchor": {
+              "forward": 0.78,
+              "lateral": -0.02,
+              "facing": 3.141593,
+              "directionIndex": 6
+            }
+          }
+        }
+      ],
+      "replay": [
+        {
+          "id": "art-friendly-mbt-wreck",
+          "hullDirectionIndex": 2,
+          "turretDirectionIndex": 2,
+          "muzzle": {
+            "x": 128.4,
+            "y": 324.6267,
+            "space": "battlefield-world",
+            "source": "production-final-draw-geometry",
+            "anchor": {
+              "forward": 0.78,
+              "lateral": -0.02,
+              "facing": 0,
+              "directionIndex": 2
+            }
+          }
+        },
+        {
+          "id": "unit_stage8g-c1-mining-3",
+          "hullDirectionIndex": 2,
+          "turretDirectionIndex": 2,
+          "muzzle": {
+            "x": 128.4,
+            "y": 374.6267,
+            "space": "battlefield-world",
+            "source": "production-final-draw-geometry",
+            "anchor": {
+              "forward": 0.78,
+              "lateral": -0.02,
+              "facing": 0,
+              "directionIndex": 2
+            }
+          }
+        },
+        {
+          "id": "art-enemy-mbt",
+          "hullDirectionIndex": 6,
+          "turretDirectionIndex": 6,
+          "muzzle": {
+            "x": 1071.6,
+            "y": 350.3733,
+            "space": "battlefield-world",
+            "source": "production-final-draw-geometry",
+            "anchor": {
+              "forward": 0.78,
+              "lateral": -0.02,
+              "facing": 3.141593,
+              "directionIndex": 6
+            }
+          }
+        }
+      ]
+    },
+    {
+      "time": 6.6375,
+      "linear": [
+        {
+          "id": "art-friendly-mbt-wreck",
+          "hullDirectionIndex": 2,
+          "turretDirectionIndex": 2,
+          "muzzle": {
+            "x": 343.4,
+            "y": 403.6267,
+            "space": "battlefield-world",
+            "source": "production-final-draw-geometry",
+            "anchor": {
+              "forward": 0.78,
+              "lateral": -0.02,
+              "facing": 0,
+              "directionIndex": 2
+            }
+          }
+        },
+        {
+          "id": "unit_stage8g-c1-mining-3",
+          "hullDirectionIndex": 2,
+          "turretDirectionIndex": 2,
+          "muzzle": {
+            "x": 343.4,
+            "y": 507.6267,
+            "space": "battlefield-world",
+            "source": "production-final-draw-geometry",
+            "anchor": {
+              "forward": 0.78,
+              "lateral": -0.02,
+              "facing": 0,
+              "directionIndex": 2
+            }
+          }
+        },
+        {
+          "id": "art-enemy-mbt",
+          "hullDirectionIndex": 2,
+          "turretDirectionIndex": 2,
+          "muzzle": {
+            "x": 888.4,
+            "y": 377.6267,
+            "space": "battlefield-world",
+            "source": "production-final-draw-geometry",
+            "anchor": {
+              "forward": 0.78,
+              "lateral": -0.02,
+              "facing": 0,
+              "directionIndex": 2
+            }
+          }
+        }
+      ],
+      "direct": [
+        {
+          "id": "art-friendly-mbt-wreck",
+          "hullDirectionIndex": 2,
+          "turretDirectionIndex": 2,
+          "muzzle": {
+            "x": 343.4,
+            "y": 403.6267,
+            "space": "battlefield-world",
+            "source": "production-final-draw-geometry",
+            "anchor": {
+              "forward": 0.78,
+              "lateral": -0.02,
+              "facing": 0,
+              "directionIndex": 2
+            }
+          }
+        },
+        {
+          "id": "unit_stage8g-c1-mining-3",
+          "hullDirectionIndex": 2,
+          "turretDirectionIndex": 2,
+          "muzzle": {
+            "x": 343.4,
+            "y": 507.6267,
+            "space": "battlefield-world",
+            "source": "production-final-draw-geometry",
+            "anchor": {
+              "forward": 0.78,
+              "lateral": -0.02,
+              "facing": 0,
+              "directionIndex": 2
+            }
+          }
+        },
+        {
+          "id": "art-enemy-mbt",
+          "hullDirectionIndex": 2,
+          "turretDirectionIndex": 2,
+          "muzzle": {
+            "x": 888.4,
+            "y": 377.6267,
+            "space": "battlefield-world",
+            "source": "production-final-draw-geometry",
+            "anchor": {
+              "forward": 0.78,
+              "lateral": -0.02,
+              "facing": 0,
+              "directionIndex": 2
+            }
+          }
+        }
+      ],
+      "rewind": [
+        {
+          "id": "art-friendly-mbt-wreck",
+          "hullDirectionIndex": 2,
+          "turretDirectionIndex": 2,
+          "muzzle": {
+            "x": 343.4,
+            "y": 403.6267,
+            "space": "battlefield-world",
+            "source": "production-final-draw-geometry",
+            "anchor": {
+              "forward": 0.78,
+              "lateral": -0.02,
+              "facing": 0,
+              "directionIndex": 2
+            }
+          }
+        },
+        {
+          "id": "unit_stage8g-c1-mining-3",
+          "hullDirectionIndex": 2,
+          "turretDirectionIndex": 2,
+          "muzzle": {
+            "x": 343.4,
+            "y": 507.6267,
+            "space": "battlefield-world",
+            "source": "production-final-draw-geometry",
+            "anchor": {
+              "forward": 0.78,
+              "lateral": -0.02,
+              "facing": 0,
+              "directionIndex": 2
+            }
+          }
+        },
+        {
+          "id": "art-enemy-mbt",
+          "hullDirectionIndex": 2,
+          "turretDirectionIndex": 2,
+          "muzzle": {
+            "x": 888.4,
+            "y": 377.6267,
+            "space": "battlefield-world",
+            "source": "production-final-draw-geometry",
+            "anchor": {
+              "forward": 0.78,
+              "lateral": -0.02,
+              "facing": 0,
+              "directionIndex": 2
+            }
+          }
+        }
+      ],
+      "replay": [
+        {
+          "id": "art-friendly-mbt-wreck",
+          "hullDirectionIndex": 2,
+          "turretDirectionIndex": 2,
+          "muzzle": {
+            "x": 343.4,
+            "y": 403.6267,
+            "space": "battlefield-world",
+            "source": "production-final-draw-geometry",
+            "anchor": {
+              "forward": 0.78,
+              "lateral": -0.02,
+              "facing": 0,
+              "directionIndex": 2
+            }
+          }
+        },
+        {
+          "id": "unit_stage8g-c1-mining-3",
+          "hullDirectionIndex": 2,
+          "turretDirectionIndex": 2,
+          "muzzle": {
+            "x": 343.4,
+            "y": 507.6267,
+            "space": "battlefield-world",
+            "source": "production-final-draw-geometry",
+            "anchor": {
+              "forward": 0.78,
+              "lateral": -0.02,
+              "facing": 0,
+              "directionIndex": 2
+            }
+          }
+        },
+        {
+          "id": "art-enemy-mbt",
+          "hullDirectionIndex": 2,
+          "turretDirectionIndex": 2,
+          "muzzle": {
+            "x": 888.4,
+            "y": 377.6267,
+            "space": "battlefield-world",
+            "source": "production-final-draw-geometry",
+            "anchor": {
+              "forward": 0.78,
+              "lateral": -0.02,
+              "facing": 0,
+              "directionIndex": 2
+            }
+          }
+        }
+      ]
+    },
+    {
+      "time": 14.5125,
+      "linear": [
+        {
+          "id": "art-friendly-mbt-wreck",
+          "hullDirectionIndex": 2,
+          "turretDirectionIndex": 2,
+          "muzzle": {
+            "x": 546.3919,
+            "y": 401.704,
+            "space": "battlefield-world",
+            "source": "production-final-draw-geometry",
+            "anchor": {
+              "forward": 0.78,
+              "lateral": -0.02,
+              "facing": -0.079361,
+              "directionIndex": 2
+            }
+          }
+        },
+        {
+          "id": "unit_stage8g-c1-mining-3",
+          "hullDirectionIndex": 2,
+          "turretDirectionIndex": 3,
+          "muzzle": {
+            "x": 544.7042,
+            "y": 517.3155,
+            "space": "battlefield-world",
+            "source": "production-final-draw-geometry",
+            "anchor": {
+              "forward": 0.78,
+              "lateral": -0.02,
+              "facing": 0.409331,
+              "directionIndex": 3
+            }
+          }
+        },
+        {
+          "id": "art-enemy-mbt",
+          "hullDirectionIndex": 6,
+          "turretDirectionIndex": 6,
+          "muzzle": {
+            "x": 824.6855,
+            "y": 387.5483,
+            "space": "battlefield-world",
+            "source": "production-final-draw-geometry",
+            "anchor": {
+              "forward": 0.78,
+              "lateral": -0.02,
+              "facing": 2.752619,
+              "directionIndex": 6
+            }
+          }
+        }
+      ],
+      "direct": [
+        {
+          "id": "art-friendly-mbt-wreck",
+          "hullDirectionIndex": 2,
+          "turretDirectionIndex": 2,
+          "muzzle": {
+            "x": 546.3919,
+            "y": 401.704,
+            "space": "battlefield-world",
+            "source": "production-final-draw-geometry",
+            "anchor": {
+              "forward": 0.78,
+              "lateral": -0.02,
+              "facing": -0.079361,
+              "directionIndex": 2
+            }
+          }
+        },
+        {
+          "id": "unit_stage8g-c1-mining-3",
+          "hullDirectionIndex": 2,
+          "turretDirectionIndex": 3,
+          "muzzle": {
+            "x": 544.7042,
+            "y": 517.3155,
+            "space": "battlefield-world",
+            "source": "production-final-draw-geometry",
+            "anchor": {
+              "forward": 0.78,
+              "lateral": -0.02,
+              "facing": 0.409331,
+              "directionIndex": 3
+            }
+          }
+        },
+        {
+          "id": "art-enemy-mbt",
+          "hullDirectionIndex": 6,
+          "turretDirectionIndex": 6,
+          "muzzle": {
+            "x": 824.6855,
+            "y": 387.5483,
+            "space": "battlefield-world",
+            "source": "production-final-draw-geometry",
+            "anchor": {
+              "forward": 0.78,
+              "lateral": -0.02,
+              "facing": 2.752619,
+              "directionIndex": 6
+            }
+          }
+        }
+      ],
+      "rewind": [
+        {
+          "id": "art-friendly-mbt-wreck",
+          "hullDirectionIndex": 2,
+          "turretDirectionIndex": 2,
+          "muzzle": {
+            "x": 539.493,
+            "y": 401.704,
+            "space": "battlefield-world",
+            "source": "production-final-draw-geometry",
+            "anchor": {
+              "forward": 0.78,
+              "lateral": -0.02,
+              "facing": -0.079361,
+              "directionIndex": 2
+            }
+          }
+        },
+        {
+          "id": "unit_stage8g-c1-mining-3",
+          "hullDirectionIndex": 2,
+          "turretDirectionIndex": 2,
+          "muzzle": {
+            "x": 538.1675,
+            "y": 516.3549,
+            "space": "battlefield-world",
+            "source": "production-final-draw-geometry",
+            "anchor": {
+              "forward": 0.78,
+              "lateral": -0.02,
+              "facing": 0.366828,
+              "directionIndex": 2
+            }
+          }
+        },
+        {
+          "id": "art-enemy-mbt",
+          "hullDirectionIndex": 6,
+          "turretDirectionIndex": 6,
+          "muzzle": {
+            "x": 830.4806,
+            "y": 387.5483,
+            "space": "battlefield-world",
+            "source": "production-final-draw-geometry",
+            "anchor": {
+              "forward": 0.78,
+              "lateral": -0.02,
+              "facing": 2.752619,
+              "directionIndex": 6
+            }
+          }
+        }
+      ],
+      "replay": [
+        {
+          "id": "art-friendly-mbt-wreck",
+          "hullDirectionIndex": 2,
+          "turretDirectionIndex": 2,
+          "muzzle": {
+            "x": 546.3919,
+            "y": 401.704,
+            "space": "battlefield-world",
+            "source": "production-final-draw-geometry",
+            "anchor": {
+              "forward": 0.78,
+              "lateral": -0.02,
+              "facing": -0.079361,
+              "directionIndex": 2
+            }
+          }
+        },
+        {
+          "id": "unit_stage8g-c1-mining-3",
+          "hullDirectionIndex": 2,
+          "turretDirectionIndex": 3,
+          "muzzle": {
+            "x": 544.7042,
+            "y": 517.3155,
+            "space": "battlefield-world",
+            "source": "production-final-draw-geometry",
+            "anchor": {
+              "forward": 0.78,
+              "lateral": -0.02,
+              "facing": 0.409331,
+              "directionIndex": 3
+            }
+          }
+        },
+        {
+          "id": "art-enemy-mbt",
+          "hullDirectionIndex": 6,
+          "turretDirectionIndex": 6,
+          "muzzle": {
+            "x": 824.6855,
+            "y": 387.5483,
+            "space": "battlefield-world",
+            "source": "production-final-draw-geometry",
+            "anchor": {
+              "forward": 0.78,
+              "lateral": -0.02,
+              "facing": 2.752619,
+              "directionIndex": 6
+            }
+          }
+        }
+      ]
+    },
+    {
+      "time": 18.5,
+      "linear": [
+        {
+          "id": "art-friendly-mbt-wreck",
+          "hullDirectionIndex": 2,
+          "turretDirectionIndex": 2,
+          "muzzle": {
+            "x": 623.9962,
+            "y": 400.5826,
+            "space": "battlefield-world",
+            "source": "production-final-draw-geometry",
+            "anchor": {
+              "forward": 0.78,
+              "lateral": -0.02,
+              "facing": -0.125896,
+              "directionIndex": 2
+            }
+          }
+        },
+        {
+          "id": "unit_stage8g-c1-mining-3",
+          "hullDirectionIndex": 2,
+          "turretDirectionIndex": 3,
+          "muzzle": {
+            "x": 609.3223,
+            "y": 521.6927,
+            "space": "battlefield-world",
+            "source": "production-final-draw-geometry",
+            "anchor": {
+              "forward": 0.78,
+              "lateral": -0.02,
+              "facing": 0.614838,
+              "directionIndex": 3
+            }
+          }
+        },
+        {
+          "id": "art-enemy-mbt",
+          "hullDirectionIndex": 2,
+          "turretDirectionIndex": 5,
+          "muzzle": {
+            "x": 778.7163,
+            "y": 391.8956,
+            "space": "battlefield-world",
+            "source": "production-final-draw-geometry",
+            "anchor": {
+              "forward": 0.78,
+              "lateral": -0.02,
+              "facing": 2.547358,
+              "directionIndex": 5
+            }
+          }
+        }
+      ],
+      "direct": [
+        {
+          "id": "art-friendly-mbt-wreck",
+          "hullDirectionIndex": 2,
+          "turretDirectionIndex": 2,
+          "muzzle": {
+            "x": 623.9962,
+            "y": 400.5826,
+            "space": "battlefield-world",
+            "source": "production-final-draw-geometry",
+            "anchor": {
+              "forward": 0.78,
+              "lateral": -0.02,
+              "facing": -0.125896,
+              "directionIndex": 2
+            }
+          }
+        },
+        {
+          "id": "unit_stage8g-c1-mining-3",
+          "hullDirectionIndex": 2,
+          "turretDirectionIndex": 3,
+          "muzzle": {
+            "x": 609.3223,
+            "y": 521.6927,
+            "space": "battlefield-world",
+            "source": "production-final-draw-geometry",
+            "anchor": {
+              "forward": 0.78,
+              "lateral": -0.02,
+              "facing": 0.614838,
+              "directionIndex": 3
+            }
+          }
+        },
+        {
+          "id": "art-enemy-mbt",
+          "hullDirectionIndex": 2,
+          "turretDirectionIndex": 5,
+          "muzzle": {
+            "x": 778.7163,
+            "y": 391.8956,
+            "space": "battlefield-world",
+            "source": "production-final-draw-geometry",
+            "anchor": {
+              "forward": 0.78,
+              "lateral": -0.02,
+              "facing": 2.547358,
+              "directionIndex": 5
+            }
+          }
+        }
+      ],
+      "rewind": [
+        {
+          "id": "art-friendly-mbt-wreck",
+          "hullDirectionIndex": 2,
+          "turretDirectionIndex": 2,
+          "muzzle": {
+            "x": 613.9615,
+            "y": 400.5826,
+            "space": "battlefield-world",
+            "source": "production-final-draw-geometry",
+            "anchor": {
+              "forward": 0.78,
+              "lateral": -0.02,
+              "facing": -0.125896,
+              "directionIndex": 2
+            }
+          }
+        },
+        {
+          "id": "unit_stage8g-c1-mining-3",
+          "hullDirectionIndex": 2,
+          "turretDirectionIndex": 3,
+          "muzzle": {
+            "x": 609.3223,
+            "y": 521.6927,
+            "space": "battlefield-world",
+            "source": "production-final-draw-geometry",
+            "anchor": {
+              "forward": 0.78,
+              "lateral": -0.02,
+              "facing": 0.614838,
+              "directionIndex": 3
+            }
+          }
+        },
+        {
+          "id": "art-enemy-mbt",
+          "hullDirectionIndex": 2,
+          "turretDirectionIndex": 5,
+          "muzzle": {
+            "x": 771.391,
+            "y": 391.8956,
+            "space": "battlefield-world",
+            "source": "production-final-draw-geometry",
+            "anchor": {
+              "forward": 0.78,
+              "lateral": -0.02,
+              "facing": 2.547358,
+              "directionIndex": 5
+            }
+          }
+        }
+      ],
+      "replay": [
+        {
+          "id": "art-friendly-mbt-wreck",
+          "hullDirectionIndex": 2,
+          "turretDirectionIndex": 2,
+          "muzzle": {
+            "x": 623.9962,
+            "y": 400.5826,
+            "space": "battlefield-world",
+            "source": "production-final-draw-geometry",
+            "anchor": {
+              "forward": 0.78,
+              "lateral": -0.02,
+              "facing": -0.125896,
+              "directionIndex": 2
+            }
+          }
+        },
+        {
+          "id": "unit_stage8g-c1-mining-3",
+          "hullDirectionIndex": 2,
+          "turretDirectionIndex": 3,
+          "muzzle": {
+            "x": 609.3223,
+            "y": 521.6927,
+            "space": "battlefield-world",
+            "source": "production-final-draw-geometry",
+            "anchor": {
+              "forward": 0.78,
+              "lateral": -0.02,
+              "facing": 0.614838,
+              "directionIndex": 3
+            }
+          }
+        },
+        {
+          "id": "art-enemy-mbt",
+          "hullDirectionIndex": 2,
+          "turretDirectionIndex": 5,
+          "muzzle": {
+            "x": 778.7163,
+            "y": 391.8956,
+            "space": "battlefield-world",
+            "source": "production-final-draw-geometry",
+            "anchor": {
+              "forward": 0.78,
+              "lateral": -0.02,
+              "facing": 2.547358,
+              "directionIndex": 5
+            }
+          }
+        }
+      ]
+    },
+    {
+      "time": 28.25,
+      "linear": [
+        {
+          "id": "art-friendly-mbt-wreck",
+          "hullDirectionIndex": 2,
+          "turretDirectionIndex": 2,
+          "muzzle": {
+            "x": 920.3796,
+            "y": 424.5525,
+            "space": "battlefield-world",
+            "source": "production-final-draw-geometry",
+            "anchor": {
+              "forward": 0.78,
+              "lateral": -0.02,
+              "facing": 0.19926,
+              "directionIndex": 2
+            }
+          }
+        },
+        {
+          "id": "unit_stage8g-c1-mining-3",
+          "hullDirectionIndex": 1,
+          "turretDirectionIndex": 1,
+          "muzzle": {
+            "x": 835.0448,
+            "y": 453.1549,
+            "space": "battlefield-world",
+            "source": "production-final-draw-geometry",
+            "anchor": {
+              "forward": 0.78,
+              "lateral": -0.02,
+              "facing": -0.756504,
+              "directionIndex": 1
+            }
+          }
+        },
+        {
+          "id": "art-enemy-mbt",
+          "hullDirectionIndex": 0,
+          "turretDirectionIndex": 0,
+          "muzzle": {
+            "x": 936.1372,
+            "y": 344.0229,
+            "space": "battlefield-world",
+            "source": "production-final-draw-geometry",
+            "anchor": {
+              "forward": 0.78,
+              "lateral": -0.02,
+              "facing": -1.570796,
+              "directionIndex": 0
+            }
+          }
+        }
+      ],
+      "direct": [
+        {
+          "id": "art-friendly-mbt-wreck",
+          "hullDirectionIndex": 2,
+          "turretDirectionIndex": 2,
+          "muzzle": {
+            "x": 920.3796,
+            "y": 424.5525,
+            "space": "battlefield-world",
+            "source": "production-final-draw-geometry",
+            "anchor": {
+              "forward": 0.78,
+              "lateral": -0.02,
+              "facing": 0.19926,
+              "directionIndex": 2
+            }
+          }
+        },
+        {
+          "id": "unit_stage8g-c1-mining-3",
+          "hullDirectionIndex": 1,
+          "turretDirectionIndex": 1,
+          "muzzle": {
+            "x": 835.0448,
+            "y": 453.1549,
+            "space": "battlefield-world",
+            "source": "production-final-draw-geometry",
+            "anchor": {
+              "forward": 0.78,
+              "lateral": -0.02,
+              "facing": -0.756504,
+              "directionIndex": 1
+            }
+          }
+        },
+        {
+          "id": "art-enemy-mbt",
+          "hullDirectionIndex": 0,
+          "turretDirectionIndex": 0,
+          "muzzle": {
+            "x": 936.1372,
+            "y": 344.0229,
+            "space": "battlefield-world",
+            "source": "production-final-draw-geometry",
+            "anchor": {
+              "forward": 0.78,
+              "lateral": -0.02,
+              "facing": -1.570796,
+              "directionIndex": 0
+            }
+          }
+        }
+      ],
+      "rewind": [
+        {
+          "id": "art-friendly-mbt-wreck",
+          "hullDirectionIndex": 2,
+          "turretDirectionIndex": 2,
+          "muzzle": {
+            "x": 897.366,
+            "y": 422.5625,
+            "space": "battlefield-world",
+            "source": "production-final-draw-geometry",
+            "anchor": {
+              "forward": 0.78,
+              "lateral": -0.02,
+              "facing": 0.19926,
+              "directionIndex": 2
+            }
+          }
+        },
+        {
+          "id": "unit_stage8g-c1-mining-3",
+          "hullDirectionIndex": 1,
+          "turretDirectionIndex": 1,
+          "muzzle": {
+            "x": 838.5473,
+            "y": 455.6834,
+            "space": "battlefield-world",
+            "source": "production-final-draw-geometry",
+            "anchor": {
+              "forward": 0.78,
+              "lateral": -0.02,
+              "facing": -0.756504,
+              "directionIndex": 1
+            }
+          }
+        },
+        {
+          "id": "art-enemy-mbt",
+          "hullDirectionIndex": 0,
+          "turretDirectionIndex": 0,
+          "muzzle": {
+            "x": 935.64,
+            "y": 345.3634,
+            "space": "battlefield-world",
+            "source": "production-final-draw-geometry",
+            "anchor": {
+              "forward": 0.78,
+              "lateral": -0.02,
+              "facing": -1.570796,
+              "directionIndex": 0
+            }
+          }
+        }
+      ],
+      "replay": [
+        {
+          "id": "art-friendly-mbt-wreck",
+          "hullDirectionIndex": 2,
+          "turretDirectionIndex": 2,
+          "muzzle": {
+            "x": 920.3796,
+            "y": 424.5525,
+            "space": "battlefield-world",
+            "source": "production-final-draw-geometry",
+            "anchor": {
+              "forward": 0.78,
+              "lateral": -0.02,
+              "facing": 0.19926,
+              "directionIndex": 2
+            }
+          }
+        },
+        {
+          "id": "unit_stage8g-c1-mining-3",
+          "hullDirectionIndex": 1,
+          "turretDirectionIndex": 1,
+          "muzzle": {
+            "x": 835.0448,
+            "y": 453.1549,
+            "space": "battlefield-world",
+            "source": "production-final-draw-geometry",
+            "anchor": {
+              "forward": 0.78,
+              "lateral": -0.02,
+              "facing": -0.756504,
+              "directionIndex": 1
+            }
+          }
+        },
+        {
+          "id": "art-enemy-mbt",
+          "hullDirectionIndex": 0,
+          "turretDirectionIndex": 0,
+          "muzzle": {
+            "x": 936.1372,
+            "y": 344.0229,
+            "space": "battlefield-world",
+            "source": "production-final-draw-geometry",
+            "anchor": {
+              "forward": 0.78,
+              "lateral": -0.02,
+              "facing": -1.570796,
+              "directionIndex": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "time": 48,
+      "linear": [
+        {
+          "id": "art-friendly-mbt-wreck",
+          "hullDirectionIndex": 2,
+          "turretDirectionIndex": 2,
+          "muzzle": {
+            "x": 1031.9,
+            "y": 317.6267,
+            "space": "battlefield-world",
+            "source": "production-final-draw-geometry",
+            "anchor": {
+              "forward": 0.78,
+              "lateral": -0.02,
+              "facing": 0,
+              "directionIndex": 2
+            }
+          }
+        },
+        {
+          "id": "unit_stage8g-c1-mining-3",
+          "hullDirectionIndex": 2,
+          "turretDirectionIndex": 2,
+          "muzzle": {
+            "x": 953.509,
+            "y": 395.5159,
+            "space": "battlefield-world",
+            "source": "production-final-draw-geometry",
+            "anchor": {
+              "forward": 0.78,
+              "lateral": -0.02,
+              "facing": 0,
+              "directionIndex": 2
+            }
+          }
+        },
+        {
+          "id": "art-enemy-mbt",
+          "hullDirectionIndex": 2,
+          "turretDirectionIndex": 2,
+          "muzzle": {
+            "x": 964.4939,
+            "y": 336.5863,
+            "space": "battlefield-world",
+            "source": "production-final-draw-geometry",
+            "anchor": {
+              "forward": 0.78,
+              "lateral": -0.02,
+              "facing": 0,
+              "directionIndex": 2
+            }
+          }
+        }
+      ],
+      "direct": [
+        {
+          "id": "art-friendly-mbt-wreck",
+          "hullDirectionIndex": 2,
+          "turretDirectionIndex": 2,
+          "muzzle": {
+            "x": 1031.9,
+            "y": 317.6267,
+            "space": "battlefield-world",
+            "source": "production-final-draw-geometry",
+            "anchor": {
+              "forward": 0.78,
+              "lateral": -0.02,
+              "facing": 0,
+              "directionIndex": 2
+            }
+          }
+        },
+        {
+          "id": "unit_stage8g-c1-mining-3",
+          "hullDirectionIndex": 2,
+          "turretDirectionIndex": 2,
+          "muzzle": {
+            "x": 953.509,
+            "y": 395.5159,
+            "space": "battlefield-world",
+            "source": "production-final-draw-geometry",
+            "anchor": {
+              "forward": 0.78,
+              "lateral": -0.02,
+              "facing": 0,
+              "directionIndex": 2
+            }
+          }
+        },
+        {
+          "id": "art-enemy-mbt",
+          "hullDirectionIndex": 2,
+          "turretDirectionIndex": 2,
+          "muzzle": {
+            "x": 964.4939,
+            "y": 336.5863,
+            "space": "battlefield-world",
+            "source": "production-final-draw-geometry",
+            "anchor": {
+              "forward": 0.78,
+              "lateral": -0.02,
+              "facing": 0,
+              "directionIndex": 2
+            }
+          }
+        }
+      ],
+      "rewind": [
+        {
+          "id": "art-friendly-mbt-wreck",
+          "hullDirectionIndex": 2,
+          "turretDirectionIndex": 2,
+          "muzzle": {
+            "x": 1031.9,
+            "y": 317.6267,
+            "space": "battlefield-world",
+            "source": "production-final-draw-geometry",
+            "anchor": {
+              "forward": 0.78,
+              "lateral": -0.02,
+              "facing": 0,
+              "directionIndex": 2
+            }
+          }
+        },
+        {
+          "id": "unit_stage8g-c1-mining-3",
+          "hullDirectionIndex": 2,
+          "turretDirectionIndex": 2,
+          "muzzle": {
+            "x": 953.509,
+            "y": 395.5159,
+            "space": "battlefield-world",
+            "source": "production-final-draw-geometry",
+            "anchor": {
+              "forward": 0.78,
+              "lateral": -0.02,
+              "facing": 0,
+              "directionIndex": 2
+            }
+          }
+        },
+        {
+          "id": "art-enemy-mbt",
+          "hullDirectionIndex": 2,
+          "turretDirectionIndex": 2,
+          "muzzle": {
+            "x": 964.4939,
+            "y": 336.5863,
+            "space": "battlefield-world",
+            "source": "production-final-draw-geometry",
+            "anchor": {
+              "forward": 0.78,
+              "lateral": -0.02,
+              "facing": 0,
+              "directionIndex": 2
+            }
+          }
+        }
+      ],
+      "replay": [
+        {
+          "id": "art-friendly-mbt-wreck",
+          "hullDirectionIndex": 2,
+          "turretDirectionIndex": 2,
+          "muzzle": {
+            "x": 1031.9,
+            "y": 317.6267,
+            "space": "battlefield-world",
+            "source": "production-final-draw-geometry",
+            "anchor": {
+              "forward": 0.78,
+              "lateral": -0.02,
+              "facing": 0,
+              "directionIndex": 2
+            }
+          }
+        },
+        {
+          "id": "unit_stage8g-c1-mining-3",
+          "hullDirectionIndex": 2,
+          "turretDirectionIndex": 2,
+          "muzzle": {
+            "x": 953.509,
+            "y": 395.5159,
+            "space": "battlefield-world",
+            "source": "production-final-draw-geometry",
+            "anchor": {
+              "forward": 0.78,
+              "lateral": -0.02,
+              "facing": 0,
+              "directionIndex": 2
+            }
+          }
+        },
+        {
+          "id": "art-enemy-mbt",
+          "hullDirectionIndex": 2,
+          "turretDirectionIndex": 2,
+          "muzzle": {
+            "x": 964.4939,
+            "y": 336.5863,
+            "space": "battlefield-world",
+            "source": "production-final-draw-geometry",
+            "anchor": {
+              "forward": 0.78,
+              "lateral": -0.02,
+              "facing": 0,
+              "directionIndex": 2
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "directSeekMatchesLinear": true,
+  "rewindReplayMatches": true,
+  "passed": true
+}

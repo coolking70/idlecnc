@@ -198,6 +198,42 @@ function drawScene(context, plan, state, options = {}) {
   // 避免自动镜头移动后把状态标签压到单位/目标上。
 }
 
+function buildScreenMetricRow(spec, assetRuntime) {
+  const geometry = spec.finalDrawGeometry;
+  const ready = spec.assetId ? assetRuntime.get(spec.assetId)?.status === 'ready' : false;
+  const componentReady = spec.componentAssetIds?.turretAssetId ? assetRuntime.get(spec.componentAssetIds.turretAssetId)?.status === 'ready' : true;
+  return {
+    ...geometry,
+    actorId: spec.actorId,
+    side: spec.faction,
+    type: spec.type,
+    assetId: spec.assetId,
+    assetStatus: spec.assetStatus,
+    assetMode: spec.assetMode,
+    factionVisualMode: spec.factionVisualMode,
+    factionPalette: spec.factionPalette,
+    factionMark: spec.factionMark,
+    animation: spec.animation,
+    direction: spec.animationState?.direction || null,
+    directionIndex: spec.animationState?.directionIndex ?? null,
+    frameIndex: spec.animationState?.frameIndex ?? null,
+    sourceRect: spec.sourceRect || null,
+    hullSourceRect: spec.hullSourceRect || spec.sourceRect || null,
+    turretSourceRect: spec.turretSourceRect || null,
+    hullFacing: spec.hullFacing ?? null,
+    hullDirection: spec.hullDirection || null,
+    hullDirectionIndex: spec.hullDirectionIndex ?? null,
+    turretFacing: spec.turretFacing ?? null,
+    turretDirection: spec.turretDirection || null,
+    turretDirectionIndex: spec.turretDirectionIndex ?? null,
+    shotFacing: spec.shotFacing ?? null,
+    muzzleAnchor: spec.muzzleAnchor || null,
+    visualMuzzlePoint: spec.visualMuzzlePoint || null,
+    actualDrawPath: ready && componentReady ? (spec.assetMode === 'hybrid' ? 'drawImage:components' : 'drawImage') : 'procedural-fallback',
+    rendererGeometrySource: 'production-final-draw-geometry'
+  };
+}
+
 export class UniversalBattleRenderer {
   constructor(canvas, options = {}) {
     this.canvas = canvas; this.context = canvas?.getContext?.('2d'); this.options = normalizeDebugOverlayOptions({ showHud: true, ...options }); this.options.showHud = options.showHud !== false; this.assetRuntime = createAssetRuntime(); this.presentation = null; this.lastState = null; this.lastRuntimeDrawSpecs = null; this.lastScreenMetrics = null; this.lastTime = 0; this.activeBattle = null; this.cameraMode = 'overview'; this.autoCamera = true; this.cameraOverride = null; this.viewport = null; this.pointer = null;
@@ -254,9 +290,9 @@ export class UniversalBattleRenderer {
     const stateSpecByActor = new Map((state.drawSpecs?.actorSpecs || []).map((spec) => [spec.actorId, spec]));
     for (const spec of runtimeDrawSpecs.actorSpecs) {
       const source = stateSpecByActor.get(spec.actorId); if (!source) continue;
-      Object.assign(spec, { animation: source.animation, animationState: source.animationState, spriteFrame: source.spriteFrame, sourceRect: source.sourceRect, turretAnimationState: source.turretAnimationState, turretSourceRect: source.turretSourceRect, muzzleAnchor: source.muzzleAnchor });
+      Object.assign(spec, { animation: source.animation, animationState: source.animationState, hullAnimationState: source.hullAnimationState, spriteFrame: source.spriteFrame, sourceRect: source.sourceRect, hullSourceRect: source.hullSourceRect, turretAnimationState: source.turretAnimationState, turretSourceRect: source.turretSourceRect, muzzleAnchor: source.muzzleAnchor, hullFacing: source.hullFacing, hullDirection: source.hullDirection, hullDirectionIndex: source.hullDirectionIndex, turretFacing: source.turretFacing, turretDirection: source.turretDirection, turretDirectionIndex: source.turretDirectionIndex, shotFacing: source.shotFacing, visualMuzzlePoint: source.visualMuzzlePoint });
     }
-    this.lastRuntimeDrawSpecs = runtimeDrawSpecs; this.lastScreenMetrics = { metricSpace: 'final_css_pixels', geometrySource: 'production-final-draw-geometry', viewport: { ...viewport }, camera: { ...state.camera }, actors: runtimeDrawSpecs.actorSpecs.map((spec) => { const geometry = spec.finalDrawGeometry; const ready = spec.assetId ? this.assetRuntime.get(spec.assetId)?.status === 'ready' : false; const componentReady = spec.componentAssetIds?.turretAssetId ? this.assetRuntime.get(spec.componentAssetIds.turretAssetId)?.status === 'ready' : true; return { ...geometry, actorId: spec.actorId, side: spec.faction, type: spec.type, assetId: spec.assetId, assetStatus: spec.assetStatus, assetMode: spec.assetMode, factionVisualMode: spec.factionVisualMode, factionPalette: spec.factionPalette, factionMark: spec.factionMark, animation: spec.animation, direction: spec.animationState?.direction || null, directionIndex: spec.animationState?.directionIndex ?? null, frameIndex: spec.animationState?.frameIndex ?? null, sourceRect: spec.sourceRect || null, turretSourceRect: spec.turretSourceRect || null, muzzleAnchor: spec.muzzleAnchor || null, actualDrawPath: ready && componentReady ? (spec.assetMode === 'hybrid' ? 'drawImage:components' : 'drawImage') : 'procedural-fallback', rendererGeometrySource: 'production-final-draw-geometry' }; }) }; if (!this.context) return true; const { width: cssWidth, height: cssHeight, dpr } = viewport; this.context.save(); this.context.setTransform(dpr, 0, 0, dpr, 0, 0); this.context.clearRect(0, 0, cssWidth, cssHeight); this.context.fillStyle = '#0d1716'; this.context.fillRect(0, 0, cssWidth, cssHeight); this.context.save(); applyPresentationWorldTransform(this.context, viewport); drawScene(this.context, plan, state, { ...this.options, assetRuntime: this.assetRuntime, runtimeDrawSpecs, drawSpecByActor: new Map(runtimeDrawSpecs.actorSpecs.map((spec) => [spec.actorId, spec])) }); this.context.restore(); this.context.restore(); drawUniversalBattleHud(this.context, hud, state, { showHud: this.options.showHud, screenSpace: true, screenWidth: cssWidth, screenHeight: cssHeight, screenDpr: dpr }); return true;
+    this.lastRuntimeDrawSpecs = runtimeDrawSpecs; this.lastScreenMetrics = { metricSpace: 'final_css_pixels', geometrySource: 'production-final-draw-geometry', viewport: { ...viewport }, camera: { ...state.camera }, actors: runtimeDrawSpecs.actorSpecs.map((spec) => buildScreenMetricRow(spec, this.assetRuntime)) }; if (!this.context) return true; const { width: cssWidth, height: cssHeight, dpr } = viewport; this.context.save(); this.context.setTransform(dpr, 0, 0, dpr, 0, 0); this.context.clearRect(0, 0, cssWidth, cssHeight); this.context.fillStyle = '#0d1716'; this.context.fillRect(0, 0, cssWidth, cssHeight); this.context.save(); applyPresentationWorldTransform(this.context, viewport); drawScene(this.context, plan, state, { ...this.options, assetRuntime: this.assetRuntime, runtimeDrawSpecs, drawSpecByActor: new Map(runtimeDrawSpecs.actorSpecs.map((spec) => [spec.actorId, spec])) }); this.context.restore(); this.context.restore(); drawUniversalBattleHud(this.context, hud, state, { showHud: this.options.showHud, screenSpace: true, screenWidth: cssWidth, screenHeight: cssHeight, screenDpr: dpr }); return true;
   }
   getTextState(options = {}) { if (!this.presentation?.ok) return null; const runtime = { ...(options.runtime || {}), cameraMode: options.cameraMode || this.cameraMode, autoCamera: options.autoCamera ?? this.autoCamera, cameraOverride: options.cameraOverride || this.cameraOverride }; return this.presentation.renderState.textAt(this.lastTime, { ...options, debugOverlay: this.options.debugOverlay, runtime }); }
   getAssetRuntimeState() { return { assets: this.assetRuntime.snapshot(), allReady: this.assetRuntime.allReady() }; }
@@ -266,7 +302,7 @@ export class UniversalBattleRenderer {
     if (!this.lastScreenMetrics || !Number.isFinite(Number(seconds))) return null;
     if (!this.presentation?.ok) return null;
     const state = this.presentation.renderState.atTime(Number(seconds)); const viewport = this.resize(); const specs = buildProductionDrawSpecs({ actors: state.actors, wrecks: state.wrecks, environment: state.environment, camera: state.camera, options: { battlefieldBounds: this.presentation.plan.layout?.bounds || { width: 1200, height: 700 }, viewport, presentationSeconds: Number(seconds), seed: this.presentation.plan.source?.seed ?? 0 } });
-    return { metricSpace: 'final_css_pixels', geometrySource: 'production-final-draw-geometry', viewport: { ...viewport }, camera: { ...state.camera }, actors: specs.actorSpecs.map((spec) => { const ready = spec.assetId ? this.assetRuntime.get(spec.assetId)?.status === 'ready' : false; const componentReady = spec.componentAssetIds?.turretAssetId ? this.assetRuntime.get(spec.componentAssetIds.turretAssetId)?.status === 'ready' : true; return { ...spec.finalDrawGeometry, actorId: spec.actorId, side: spec.faction, type: spec.type, assetId: spec.assetId, assetMode: spec.assetMode, assetStatus: spec.assetStatus, factionVisualMode: spec.factionVisualMode, factionPalette: spec.factionPalette, factionMark: spec.factionMark, animation: spec.animation, direction: spec.animationState?.direction || null, directionIndex: spec.animationState?.directionIndex ?? null, frameIndex: spec.animationState?.frameIndex ?? null, sourceRect: spec.sourceRect || null, turretSourceRect: spec.turretSourceRect || null, muzzleAnchor: spec.muzzleAnchor || null, actualDrawPath: ready && componentReady ? (spec.assetMode === 'hybrid' ? 'drawImage:components' : 'drawImage') : 'procedural-fallback', rendererGeometrySource: 'production-final-draw-geometry' }; }) };
+    return { metricSpace: 'final_css_pixels', geometrySource: 'production-final-draw-geometry', viewport: { ...viewport }, camera: { ...state.camera }, actors: specs.actorSpecs.map((spec) => buildScreenMetricRow(spec, this.assetRuntime)) };
   }
   setAssetDisabled(assetId, value = true) { const result = this.assetRuntime.setDisabled(assetId, value); if (this.activeBattle) this.render(this.activeBattle); return { assets: result, allReady: this.assetRuntime.allReady() }; }
   setCameraMode(mode) { if (UNIVERSAL_CAMERA_MODES.includes(mode)) { this.cameraMode = mode; return true; } return false; }

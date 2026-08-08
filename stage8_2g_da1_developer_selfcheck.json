@@ -1,0 +1,109 @@
+{
+  "stage": "8.2G-D-A.1",
+  "baseline": {
+    "stage": "8.2G-D-A",
+    "audit": "stage8_2g_da_github_independent_audit.json",
+    "commit": "8bf559a1eab3d54c2552cfa06c7c71d93608c968"
+  },
+  "scope": {
+    "combatCoreModified": false,
+    "choreographerModified": false,
+    "formalRouteModified": false,
+    "spriteArtExpanded": false
+  },
+  "turretIndependence": {
+    "productionStateSeparated": true,
+    "runtimeSampleCount": 1,
+    "browserProof": true,
+    "shotFacingPreserved": true,
+    "sample": {
+      "actorId": "unit_stage8g-c1-mining-3",
+      "timeMs": 14512.5,
+      "hullDirection": "E",
+      "turretDirection": "SE",
+      "hullDirectionIndex": 2,
+      "turretDirectionIndex": 3,
+      "shotFacing": 0.409331
+    }
+  },
+  "semanticEvidence": {
+    "fixedRatiosRemoved": true,
+    "resolverImplemented": true,
+    "friendlyAtFireResolved": true,
+    "enemyAtFireResolved": true,
+    "tankFireResolved": true,
+    "tankHullTurretSeparatedResolved": true,
+    "friendlyAtFire": {
+      "timeMs": 14075,
+      "animation": "fire",
+      "actorId": "unit_stage8g-c1-mining-1"
+    },
+    "enemyAtFire": {
+      "timeMs": 13837.5,
+      "animation": "fire",
+      "actorId": "art-enemy-at"
+    },
+    "tankFire": {
+      "timeMs": 14237.5,
+      "animation": "fire",
+      "actorId": "unit_stage8g-c1-mining-3"
+    },
+    "unresolvedFrames": []
+  },
+  "muzzleGeometry": {
+    "usesFinalGeometry": true,
+    "defaultViewport": true,
+    "narrowViewport": true,
+    "visualScaleBoostSynchronized": true,
+    "authoritativeStartUnchanged": true
+  },
+  "formalEvidence": {
+    "syntheticFixture": true,
+    "unmodifiedFormalFixture": true,
+    "formalSourceReportHashStable": true
+  },
+  "tamper": {
+    "caseCount": 17,
+    "semanticPredicateRejected": true,
+    "wrongTurretDirectionRejected": true,
+    "wrongTimestampRejected": true,
+    "pngAndBindingTamperRejected": true
+  },
+  "authority": {
+    "authorityShotCount": 21,
+    "shotFacingChanged": false,
+    "shotTimeChanged": false,
+    "impactChanged": false,
+    "resultChanged": false,
+    "hpDamageDestroyRewardSaveChanged": false
+  },
+  "animation": {
+    "wreckHullOrientationPreserved": true,
+    "hit": "hit",
+    "destroy": "destroying",
+    "seekDeterministic": true,
+    "hullTurretDeterministic": true
+  },
+  "tests": {
+    "da1": "passed",
+    "daRegression": "passed",
+    "c11aRegression": "passed",
+    "b11aRegression": "passed",
+    "fullSuite": "passed",
+    "browserCaptureCount": 13,
+    "uniquePngHashes": 13,
+    "pageErrors": [],
+    "consoleErrors": []
+  },
+  "package": {
+    "cleanPackageGate": "passed",
+    "cleanInstallStatus": 0,
+    "npmTestStatus": 0,
+    "tamperStatus": "passed"
+  },
+  "readyForStage8_2G_D_B": true,
+  "passed": true,
+  "knownIssues": [
+    "External independent audit remains required; local evidence and package gates have passed."
+  ]
+}

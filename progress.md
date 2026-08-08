@@ -466,3 +466,15 @@
 - [x] Refreshed C.1.1a machine/browser evidence after the shared animation clock and screen-metrics contract changes; C.1.1a verifier and tamper regression pass.
 - [x] Added default npm/CI gates and clean-package builder/verifier entry points for D-A, with B.1.1a and C.1.1a regression retention.
 - [ ] Remaining handoff: run the default clean-package verifier, inspect the final ZIP hash, commit and push `agent/stage8-2G-D-A-production-unit-art`.
+
+# Stage 8.2G-D-A.1 progress
+
+- [x] 以 `stage8_2g_da_github_independent_audit.json` 作为上一轮失败基线与回归样本；JSON 未导入生产代码，失败样本未删除或过滤。
+- [x] Production Hull/body facing 与 Turret/aim facing 已分离；Tank draw spec、Renderer screen metrics 和 shot evidence 同时公开 Hull/Turret direction、sourceRect 与 `visualMuzzlePoint`。
+- [x] 新增 fail-closed Semantic Frame Resolver 与文件级 predicates；12 个合成艺术语义帧和 1 个 `formal-unmodified` 正式矿区语义帧均由真实状态解析，不使用固定比例切片。
+- [x] 新增机器证据与当前 Chromium 浏览器证据：13/13 帧、13 个唯一 PNG、pageErrors=0、consoleErrors=0，浏览器逐帧重新计算共享 semantic predicate，时间误差不超过 16.7ms。
+- [x] 新增 authority facing/impact/time 不变检查、三类单位最终绘制几何炮口检查、hit/destroy/wreck 朝向和 direct/linear/rewind 确定性检查；正式 `miningVictoryReport()` 与合成艺术场景分离。
+- [x] 新增 17 类 evidence tamper regression；错误 asset、方向、Hull/Turret、semantic frame/predicate、matched actor、muzzle visualStart、timestamp、reload 重标开火、PNG hash、重复 PNG 与 source report 均被 verifier 拒绝。
+- [x] 新增 D-A.1 npm/CI gate、外部 ZIP builder/verifier 和 `STAGE8-2G-D-A-1-DELIVERY.md`；ZIP 不提交到 Git，最终 package record 放在 ZIP 外。
+- [x] D-A.1 external ZIP 已完成 hygiene 与 clean package verifier：`npm install --ignore-scripts --no-audit --no-fund`、完整 `npm test` 均通过；最终包 SHA/字节数以 ZIP 外 `stage8_2g_da1_final_package_record.json` 为准。
+- [x] 最终 D-A.1 本地 clean-package verifier、完整 `npm test`、浏览器证据与 17 类 tamper gate 均通过；已提交 `agent/stage8-2G-D-A-1-semantic-turret-closure`，独立验收仍需按最终外部 ZIP 重新执行。

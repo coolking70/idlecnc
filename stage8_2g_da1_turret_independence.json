@@ -1,0 +1,16 @@
+{
+  "semanticFrameId": "tank-hull-turret-separated",
+  "actorId": "unit_stage8g-c1-mining-3",
+  "visualClass": "mbt",
+  "hullFacing": 0,
+  "turretFacing": 0.409331,
+  "hullDirectionIndex": 2,
+  "turretDirectionIndex": 3,
+  "matchedShotIds": [
+    "choreographed_shot_109",
+    "choreographed_shot_110"
+  ],
+  "routeBodyUnaffected": true,
+  "turretFollowsAuthorityShot": true,
+  "passed": true
+}

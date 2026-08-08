@@ -1,0 +1,265 @@
+{
+  "stage": "8.2G-D-A.1",
+  "frameCount": 13,
+  "scenes": [
+    {
+      "sceneId": "stage8g-da1-art-showcase",
+      "frames": [
+        {
+          "semanticFrameId": "stage8g-da1-art-showcase::friendly-lineup::default",
+          "semantic": "friendly-lineup",
+          "timeMs": 0,
+          "predicate": {
+            "id": "friendly-lineup",
+            "passed": true,
+            "matchedActorIds": [
+              "art-friendly-mbt-wreck",
+              "unit_stage8g-c1-mining-3",
+              "unit_stage8g-c1-mining-1",
+              "unit_stage8g-c1-mining-0"
+            ],
+            "matchedShotIds": [],
+            "requiredClasses": [
+              "infantry",
+              "anti_armor_infantry",
+              "mbt"
+            ]
+          }
+        },
+        {
+          "semanticFrameId": "stage8g-da1-art-showcase::enemy-lineup::default",
+          "semantic": "enemy-lineup",
+          "timeMs": 0,
+          "predicate": {
+            "id": "enemy-lineup",
+            "passed": true,
+            "matchedActorIds": [
+              "art-enemy-mbt",
+              "art-enemy-at",
+              "enemy_infantry_1",
+              "enemy_infantry_2",
+              "enemy_infantry_3"
+            ],
+            "matchedShotIds": [],
+            "requiredClasses": [
+              "infantry",
+              "anti_armor_infantry",
+              "mbt"
+            ]
+          }
+        },
+        {
+          "semanticFrameId": "stage8g-da1-art-showcase::friendly-infantry-move::default",
+          "semantic": "friendly-infantry-move",
+          "timeMs": 6637.5,
+          "predicate": {
+            "id": "friendly-infantry-move",
+            "passed": true,
+            "matchedActorIds": [
+              "unit_stage8g-c1-mining-0"
+            ],
+            "matchedShotIds": []
+          }
+        },
+        {
+          "semanticFrameId": "stage8g-da1-art-showcase::infantry-fire::default",
+          "semantic": "infantry-fire",
+          "timeMs": 13412.5,
+          "predicate": {
+            "id": "infantry-fire",
+            "passed": true,
+            "matchedActorIds": [
+              "enemy_infantry_1"
+            ],
+            "matchedShotIds": [
+              "visual_shot_1_anchor_0006"
+            ]
+          }
+        },
+        {
+          "semanticFrameId": "stage8g-da1-art-showcase::friendly-at-fire::default",
+          "semantic": "friendly-at-fire",
+          "timeMs": 14075,
+          "predicate": {
+            "id": "friendly-at-fire",
+            "passed": true,
+            "matchedActorIds": [
+              "unit_stage8g-c1-mining-1"
+            ],
+            "matchedShotIds": [
+              "choreographed_shot_88"
+            ],
+            "side": "friendly",
+            "animation": "fire",
+            "weaponKind": "rocket"
+          }
+        },
+        {
+          "semanticFrameId": "stage8g-da1-art-showcase::enemy-at-fire::default",
+          "semantic": "enemy-at-fire",
+          "timeMs": 13837.5,
+          "predicate": {
+            "id": "enemy-at-fire",
+            "passed": true,
+            "matchedActorIds": [
+              "art-enemy-at"
+            ],
+            "matchedShotIds": [
+              "choreographed_shot_1"
+            ],
+            "side": "enemy",
+            "animation": "fire",
+            "weaponKind": "rocket"
+          }
+        },
+        {
+          "semanticFrameId": "stage8g-da1-art-showcase::tank-hull-turret-separated::default",
+          "semantic": "tank-hull-turret-separated",
+          "timeMs": 14512.5,
+          "predicate": {
+            "id": "tank-hull-turret-separated",
+            "passed": true,
+            "matchedActorIds": [
+              "unit_stage8g-c1-mining-3"
+            ],
+            "matchedShotIds": [
+              "choreographed_shot_109",
+              "choreographed_shot_110"
+            ],
+            "separated": true,
+            "directionPairs": [
+              {
+                "actorId": "unit_stage8g-c1-mining-3",
+                "hullDirectionIndex": 2,
+                "turretDirectionIndex": 3
+              }
+            ]
+          }
+        },
+        {
+          "semanticFrameId": "stage8g-da1-art-showcase::tank-fire::default",
+          "semantic": "tank-fire",
+          "timeMs": 14237.5,
+          "predicate": {
+            "id": "tank-fire",
+            "passed": true,
+            "matchedActorIds": [
+              "unit_stage8g-c1-mining-3"
+            ],
+            "matchedShotIds": [
+              "choreographed_shot_109"
+            ],
+            "turretMatchesShot": true,
+            "animation": "fire"
+          }
+        },
+        {
+          "semanticFrameId": "stage8g-da1-art-showcase::mixed-battle::default",
+          "semantic": "mixed-battle",
+          "timeMs": 13775,
+          "predicate": {
+            "id": "mixed-battle",
+            "passed": true,
+            "matchedActorIds": [
+              "art-friendly-mbt-wreck",
+              "unit_stage8g-c1-mining-3",
+              "unit_stage8g-c1-mining-1",
+              "unit_stage8g-c1-mining-0",
+              "art-enemy-mbt",
+              "art-enemy-at",
+              "enemy_infantry_1",
+              "enemy_infantry_2",
+              "enemy_infantry_3"
+            ],
+            "matchedShotIds": [
+              "visual_shot_1_anchor_0006",
+              "choreographed_shot_77",
+              "choreographed_shot_58",
+              "choreographed_shot_39",
+              "choreographed_shot_20",
+              "choreographed_shot_78",
+              "choreographed_shot_59",
+              "choreographed_shot_40",
+              "choreographed_shot_98"
+            ],
+            "weaponFamilies": [
+              "infantry_light",
+              "scout_autocannon"
+            ]
+          }
+        },
+        {
+          "semanticFrameId": "stage8g-da1-art-showcase::friendly-enemy-wrecks::default",
+          "semantic": "friendly-enemy-wrecks",
+          "timeMs": 33520,
+          "predicate": {
+            "id": "friendly-enemy-wrecks",
+            "passed": true,
+            "matchedActorIds": [],
+            "matchedShotIds": [],
+            "wreckAssets": [
+              "wreck_friendly_mbt",
+              "wreck_enemy_mbt"
+            ]
+          }
+        },
+        {
+          "semanticFrameId": "stage8g-da1-art-showcase::narrow-readability::narrow",
+          "semantic": "narrow-readability",
+          "timeMs": 0,
+          "predicate": {
+            "id": "narrow-readability",
+            "passed": true,
+            "matchedActorIds": [
+              "art-friendly-mbt-wreck",
+              "unit_stage8g-c1-mining-3",
+              "unit_stage8g-c1-mining-1",
+              "unit_stage8g-c1-mining-0"
+            ],
+            "matchedShotIds": [],
+            "viewportKind": "narrow",
+            "requiredCount": 4
+          }
+        },
+        {
+          "semanticFrameId": "stage8g-da1-art-showcase::asset-fallback::default",
+          "semantic": "asset-fallback",
+          "timeMs": 0,
+          "predicate": {
+            "id": "asset-fallback",
+            "passed": true,
+            "matchedActorIds": [
+              "unit_stage8g-c1-mining-0"
+            ],
+            "matchedShotIds": [],
+            "fallbackPath": "procedural-fallback"
+          }
+        }
+      ]
+    },
+    {
+      "sceneId": "stage8g-da1-formal-mining",
+      "frames": [
+        {
+          "semanticFrameId": "stage8g-da1-formal-mining::formal-unmodified-production::default",
+          "semantic": "formal-unmodified-production",
+          "timeMs": 13512.5,
+          "predicate": {
+            "id": "formal-unmodified-production",
+            "passed": true,
+            "matchedActorIds": [
+              "unit_stage8g-c1-mining-3",
+              "unit_stage8g-c1-mining-1",
+              "unit_stage8g-c1-mining-0"
+            ],
+            "matchedShotIds": [
+              "choreographed_shot_52"
+            ],
+            "fixtureType": "formal-unmodified"
+          }
+        }
+      ]
+    }
+  ],
+  "passed": true
+}

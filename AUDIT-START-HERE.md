@@ -1,4 +1,36 @@
-# Stage 8.2G-D-A Audit Start Here
+# Stage 8.2G-D-A.1 Audit Start Here
+
+当前最高阶段为 Stage 8.2G-D-A.1：Production Semantic Animation Evidence & Turret Independence Closure。
+需求主体是 D-A.1 开发提示词；`stage8_2g_da_github_independent_audit.json` 仅作为上一轮失败基线和回归样本，未导入生产代码，也未删除/过滤失败样本。
+
+## D-A.1 entry points
+
+```bash
+npm run test:stage8-2G-D-A-1
+npm run browser:stage8-2G-D-A-1
+npm run build:stage8-2G-D-A-1
+npm run verify:stage8-2G-D-A-1 -- --skip-full
+npm run verify:stage8-2G-D-A-1
+```
+
+D-A.1 的 12 张合成覆盖截图和 1 张正式未改写矿区截图位于
+`screenshots/stage8-2G-D-A-1/`；机器证据、浏览器证据与篡改记录分别为：
+
+- `stage8_2g_da1_machine_semantic_evidence.json`
+- `stage8_2g_da1_browser_capture_manifest.json`
+- `stage8_2g_da1_tamper_results.json`
+
+外部 ZIP 为 `iron-command-stage8-2G-D-A-1-semantic-turret-closure.zip`，不提交到 Git；最终记录为 `stage8_2g_da1_final_package_record.json`。
+
+## D-A.1 closure claims
+
+- 生产坦克 Hull/body 朝向与 Turret/aim 朝向独立；权威 Shot 的 sourceFacing、impact 和时间字段保持不变。
+- Semantic Frame Resolver 以文件级 predicate 解析并 fail-closed；浏览器使用当前页面 Renderer 状态和当前屏幕几何重新计算 predicate。
+- 炮口 `visualMuzzlePoint` 来自最终 draw geometry，并区分 authoritative projectile start 与视觉 tracer start；命中、摧毁、残骸朝向和 seek/replay 均有确定性测试。
+- 正式 `miningVictoryReport()` 作为未修改 fixture 单独采集；合成艺术覆盖不会替代正式战报。
+
+以下仍需独立验收方按新外部 ZIP 重新执行审计；本地开发者验证通过不等同于独立审计批准。
+
 
 本交付的需求主体是 Stage 8.2G-D-A 开发提示词。当前工作基线为
 `dcbab21` 之后的 D-A 分支，上一轮参考为

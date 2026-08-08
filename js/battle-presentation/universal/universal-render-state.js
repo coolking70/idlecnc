@@ -8,7 +8,7 @@ import { buildCameraDirector, resolveDirectedCamera } from './universal-camera-d
 import { buildEnvironmentScene } from '../environment/environment-scene-builder.js';
 import { buildEnvironmentState } from '../environment/environment-state.js';
 import { OFFLINE_ASSET_MANIFEST } from '../environment/asset-provider.js';
-import { buildProductionDrawSpecs } from '../environment/production-visual-draw-spec.js';
+import { buildActorDrawSpec, buildProductionDrawSpecs } from '../environment/production-visual-draw-spec.js';
 import { normalizeVisualUnitClass } from '../environment/visual-unit-class.js';
 
 const clamp = (value, min, max) => Math.max(min, Math.min(max, Number(value) || 0));
@@ -20,6 +20,47 @@ function cloneTree(value) {
   if (Array.isArray(value)) return value.map(cloneTree);
   if (!value || typeof value !== 'object') return value;
   return Object.fromEntries(Object.entries(value).map(([key, child]) => [key, cloneTree(child)]));
+}
+
+function alignVisualMuzzleGeometry({ state, actors, camera, battlefieldBounds, viewport, presentationSeconds, seed, manifest }) {
+  const actorById = new Map(actors.map((actor) => [actor.id, actor]));
+  const neededShotIds = new Set([
+    ...(state.projectiles || []).map((projectile) => projectile.shotId),
+    ...(state.effects || [])
+      .filter((effect) => effect.kind === 'muzzle_flash')
+      .map((effect) => String(effect.id || '').replace(/:muzzle$/, ''))
+  ]);
+  const specForShot = (shot) => {
+    const actor = actorById.get(shot.actorId);
+    if (!actor || !shot.sourcePositionAtFire) return null;
+    const visualClass = normalizeVisualUnitClass(actor);
+    const shotFacing = Number(shot.sourceFacingAtFire);
+    const finiteShotFacing = Number.isFinite(shotFacing) ? shotFacing : Number(actor.facing) || 0;
+    const sourceActor = {
+      ...actor,
+      visualCenter: { ...shot.sourcePositionAtFire },
+      facing: actor.facing,
+      turretFacing: visualClass === 'mbt' ? finiteShotFacing : actor.turretFacing,
+      shotFacing: finiteShotFacing,
+      visualState: 'fire',
+      firing: true
+    };
+    return buildActorDrawSpec(sourceActor, camera, { manifest, availableSources: new Set(manifest.assets.map((asset) => asset.source)), battlefieldBounds, viewport, presentationSeconds, seed });
+  };
+  const muzzleByShot = new Map((state.shotSchedule || [])
+    .filter((shot) => neededShotIds.has(shot.id))
+    .map((shot) => [shot.id, specForShot(shot)]));
+  const projectiles = (state.projectiles || []).map((projectile) => {
+    const spec = muzzleByShot.get(projectile.shotId);
+    return spec?.visualMuzzlePoint ? { ...projectile, visualStart: { ...spec.visualMuzzlePoint }, muzzleAnchor: spec.muzzleAnchor ? { ...spec.muzzleAnchor } : projectile.muzzleAnchor } : projectile;
+  });
+  const effects = (state.effects || []).map((effect) => {
+    if (effect.kind !== 'muzzle_flash') return effect;
+    const shotId = String(effect.id || '').replace(/:muzzle$/, '');
+    const spec = muzzleByShot.get(shotId);
+    return spec?.visualMuzzlePoint ? { ...effect, x: spec.visualMuzzlePoint.x, y: spec.visualMuzzlePoint.y, visualMuzzlePoint: { ...spec.visualMuzzlePoint }, muzzleAnchor: spec.muzzleAnchor ? { ...spec.muzzleAnchor } : effect.muzzleAnchor } : effect;
+  });
+  return { projectiles, effects };
 }
 
 function actorRows(plan) {
@@ -241,7 +282,7 @@ export function buildUniversalRenderState(plan, seconds = 0, runtime = {}, preco
   const activeRetreats = actors.map((actor) => retreatAtTime(engagementSchedule, actor.id, battleTime)).filter(Boolean).map((item) => ({ ...item, exit: { ...item.exit } }));
   const camera = resolveDirectedCamera(plan, { actors, activeAnchors, effects, time: battleTime, returning }, cameraDirector, { mode: runtime.cameraMode || 'overview', autoCamera: runtime.autoCamera !== false, cameraOverride: runtime.cameraOverride || null });
   const cameraWithFallback = camera || { x: 640, y: 360, zoom: .86 };
-  const drawSpecs = buildProductionDrawSpecs({ actors: presentationActors, wrecks, environment: environmentState, camera: cameraWithFallback, options: { manifest: OFFLINE_ASSET_MANIFEST, availableSources: new Set(OFFLINE_ASSET_MANIFEST.assets.map((asset) => asset.source)), battlefieldBounds: plan.layout?.bounds || { width: 1200, height: 700 }, presentationSeconds: battleTime, seed: plan.source?.seed ?? 0 } });
+  const drawSpecs = buildProductionDrawSpecs({ actors: presentationActors, wrecks, environment: environmentState, camera: cameraWithFallback, options: { manifest: OFFLINE_ASSET_MANIFEST, availableSources: new Set(OFFLINE_ASSET_MANIFEST.assets.map((asset) => asset.source)), battlefieldBounds: plan.layout?.bounds || { width: 1200, height: 700 }, viewport: runtime.viewport, presentationSeconds: battleTime, seed: plan.source?.seed ?? 0 } });
   const actorByDrawSpec = new Map(drawSpecs.actorSpecs.map((spec) => [spec.actorId, spec]));
   // Keep the text/evidence state graph tree-shaped.  Sharing a Draw Spec object
   // between `state.drawSpecs` and `actor.drawSpec` is semantically harmless but
@@ -257,6 +298,7 @@ export function buildUniversalRenderState(plan, seconds = 0, runtime = {}, preco
   const wreckByDrawSpec = new Map(drawSpecs.wreckSpecs.map((spec) => [spec.wreckId, spec]));
   const wrecksWithSpecs = wrecks.map((wreck) => ({ ...wreck, drawSpec: copyDrawSpec(wreckByDrawSpec.get(wreck.id || wreck.sourceActorId)) }));
   const stateDrawSpecs = cloneTree(drawSpecs);
+  const alignedMuzzle = alignVisualMuzzleGeometry({ state: { ...visualScene, effects, projectiles: visualScene.projectiles }, actors: presentationActors, camera: cameraWithFallback, battlefieldBounds: plan.layout?.bounds || { width: 1200, height: 700 }, viewport: runtime.viewport, presentationSeconds: battleTime, seed: plan.source?.seed ?? 0, manifest: OFFLINE_ASSET_MANIFEST });
   return {
     sceneHash: plan.planFingerprint || plan.source?.reportFingerprint || null,
     duration,
@@ -268,7 +310,7 @@ export function buildUniversalRenderState(plan, seconds = 0, runtime = {}, preco
     authority,
     actors: actorsWithSpecs,
     wrecks: wrecksWithSpecs,
-    projectiles: visualScene.projectiles,
+    projectiles: alignedMuzzle.projectiles,
     decals: visualScene.decals,
     smoke: visualScene.smoke,
     debris: visualScene.debris || [],
@@ -278,7 +320,7 @@ export function buildUniversalRenderState(plan, seconds = 0, runtime = {}, preco
     visualStage: visualScene.visualStage,
     visualPhase: visualScene.visualPhase,
     sceneObjects,
-    effects,
+    effects: alignedMuzzle.effects,
     activeAnchors,
     activeActions: (plan.timeline?.actions || []).filter((action) => Math.abs(Number(action.t) - battleTime) < .8),
     objectiveState: objectiveState(plan, battleTime),
