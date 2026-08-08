@@ -12,6 +12,7 @@ import { buildPersistentDestructionLayer } from '../environment/destruction-laye
 import { normalizeVisualUnitClass } from '../environment/visual-unit-class.js';
 import { OFFLINE_ASSET_MANIFEST } from '../environment/asset-provider.js';
 import { resolveMuzzleAnchor } from '../environment/animation-resolver.js';
+import { resolvePresentationFacingPolicy } from '../environment/presentation-facing-policy.js';
 
 const clamp = (value, min, max) => Math.max(min, Math.min(max, Number(value) || 0));
 const TAU = Math.PI * 2;
@@ -231,11 +232,8 @@ export function buildUniversalVisualScene(plan, seconds, sampler, runtime = {}) 
     const movementFacing = movementFacingFor(positioned, positioned.movementFacing);
     const aimFacing = aimFacingFor(positioned, seconds, shot, visual, movementFacing);
     const visualClass = normalizeVisualUnitClass(actor);
-    // `facing` is the production body's/hull's direction.  A turret may
-    // follow an active target/shot without rotating the vehicle body or any
-    // route/footprint geometry.
-    const facing = movementFacing;
-    const turretFacing = visualClass === 'mbt' ? aimFacing : null;
+    const facingPolicy = resolvePresentationFacingPolicy({ actor, visualClass, visualState: visual.id, movementFacing, aimFacing, shot });
+    const { bodyFacing, weaponFacing, facing, turretFacing, shotFacing } = facingPolicy;
     const recoil = visual.id === 'fire' ? Math.sin(clamp(visual.progress, 0, 1) * Math.PI) * weapon.recoil : 0;
     const visible = visual.id !== 'wreck';
     return {
@@ -243,10 +241,10 @@ export function buildUniversalVisualScene(plan, seconds, sampler, runtime = {}) 
       hp: actor.hp, maxHp: actor.maxHp, alive: actor.alive, visible, visualCenter: { ...positioned.visualCenter },
       routePosition: { ...positioned.routePosition }, plannedPosition: { ...positioned.plannedPosition }, preSeparationPosition: { ...positioned.preSeparationPosition }, visualPosition: { ...positioned.visualCenter }, presentationMode: positioned.presentationMode,
       footprint: positioned.footprint,
-      anchorPosition: { ...positioned.preSeparationPosition }, visualOffset: { x: positioned.visualCenter.x - positioned.preSeparationPosition.x, y: positioned.visualCenter.y - positioned.preSeparationPosition.y }, nextPosition: { ...positioned.nextPosition }, facing, hullFacing: facing, movementFacing: facing, aimFacing, turretFacing, shotFacing: shot ? Number(shot.sourceFacingAtFire) || 0 : null,
+      anchorPosition: { ...positioned.preSeparationPosition }, visualOffset: { x: positioned.visualCenter.x - positioned.preSeparationPosition.x, y: positioned.visualCenter.y - positioned.preSeparationPosition.y }, nextPosition: { ...positioned.nextPosition }, facing, facingPolicy: facingPolicy.policy, bodyFacing, weaponFacing, hullFacing: visualClass === 'mbt' ? bodyFacing : null, movementFacing, aimFacing, turretFacing, shotFacing,
       visualState: normalizeVisualState(visual.id), stateProgress: visual.progress, currentAction: actor.currentAction, weapon: { id: weapon.id, kind: weapon.kind, label: weapon.label, presentation: { ...(weapon.presentation || {}) } }, weaponPresentation: { ...(weapon.presentation || {}) },
       firing: visual.id === 'fire', aiming: visual.id === 'aim', reloading: visual.id === 'reload', recoil, walkCycle: visual.id === 'move' ? seconds * (actor.type === 'mbt' ? 1.5 : 5) : 0,
-      memberPositions: memberPositions(actor, positioned, facing, visual.id === 'retreat' ? 'move' : visual.id, seconds), visualAuthorityAnchorId: visual.authorityAnchorId || shot?.authorityAnchorId || null,
+      memberPositions: memberPositions(actor, positioned, bodyFacing, visual.id === 'retreat' ? 'move' : visual.id, seconds), visualAuthorityAnchorId: visual.authorityAnchorId || shot?.authorityAnchorId || null,
       targetId: shot?.targetId || visual.assignment?.targetId || null, targetAssignmentId: visual.assignment?.id || null, suppression: visual.suppression ? { ...visual.suppression, sourceIds: [...visual.suppression.sourceIds], targetIds: [...visual.suppression.targetIds], area: { ...visual.suppression.area, center: { ...(visual.suppression.area?.center || {}) } } } : null, retreat: visual.retreat ? { ...visual.retreat, exit: { ...visual.retreat.exit } } : null
     };
   });

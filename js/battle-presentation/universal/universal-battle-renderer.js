@@ -226,7 +226,17 @@ function buildScreenMetricRow(spec, assetRuntime) {
     turretFacing: spec.turretFacing ?? null,
     turretDirection: spec.turretDirection || null,
     turretDirectionIndex: spec.turretDirectionIndex ?? null,
+    policy: spec.policy || null,
+    movementFacing: spec.movementFacing ?? null,
+    aimFacing: spec.aimFacing ?? null,
+    bodyFacing: spec.bodyFacing ?? null,
+    bodyDirection: spec.bodyDirection || null,
+    bodyDirectionIndex: spec.bodyDirectionIndex ?? null,
+    weaponFacing: spec.weaponFacing ?? null,
+    weaponDirection: spec.weaponDirection || null,
+    weaponDirectionIndex: spec.weaponDirectionIndex ?? null,
     shotFacing: spec.shotFacing ?? null,
+    muzzleFacing: spec.muzzleFacing ?? spec.muzzleAnchor?.facing ?? null,
     muzzleAnchor: spec.muzzleAnchor || null,
     visualMuzzlePoint: spec.visualMuzzlePoint || null,
     actualDrawPath: ready && componentReady ? (spec.assetMode === 'hybrid' ? 'drawImage:components' : 'drawImage') : 'procedural-fallback',
@@ -290,7 +300,7 @@ export class UniversalBattleRenderer {
     const stateSpecByActor = new Map((state.drawSpecs?.actorSpecs || []).map((spec) => [spec.actorId, spec]));
     for (const spec of runtimeDrawSpecs.actorSpecs) {
       const source = stateSpecByActor.get(spec.actorId); if (!source) continue;
-      Object.assign(spec, { animation: source.animation, animationState: source.animationState, hullAnimationState: source.hullAnimationState, spriteFrame: source.spriteFrame, sourceRect: source.sourceRect, hullSourceRect: source.hullSourceRect, turretAnimationState: source.turretAnimationState, turretSourceRect: source.turretSourceRect, muzzleAnchor: source.muzzleAnchor, hullFacing: source.hullFacing, hullDirection: source.hullDirection, hullDirectionIndex: source.hullDirectionIndex, turretFacing: source.turretFacing, turretDirection: source.turretDirection, turretDirectionIndex: source.turretDirectionIndex, shotFacing: source.shotFacing, visualMuzzlePoint: source.visualMuzzlePoint });
+      Object.assign(spec, { animation: source.animation, animationState: source.animationState, hullAnimationState: source.hullAnimationState, spriteFrame: source.spriteFrame, sourceRect: source.sourceRect, hullSourceRect: source.hullSourceRect, turretAnimationState: source.turretAnimationState, turretSourceRect: source.turretSourceRect, muzzleAnchor: source.muzzleAnchor, policy: source.policy, movementFacing: source.movementFacing, aimFacing: source.aimFacing, bodyFacing: source.bodyFacing, facing: source.facing, bodyDirection: source.bodyDirection, bodyDirectionIndex: source.bodyDirectionIndex, weaponFacing: source.weaponFacing, weaponDirection: source.weaponDirection, weaponDirectionIndex: source.weaponDirectionIndex, hullFacing: source.hullFacing, hullDirection: source.hullDirection, hullDirectionIndex: source.hullDirectionIndex, turretFacing: source.turretFacing, turretDirection: source.turretDirection, turretDirectionIndex: source.turretDirectionIndex, shotFacing: source.shotFacing, muzzleFacing: source.muzzleFacing, visualMuzzlePoint: source.visualMuzzlePoint });
     }
     this.lastRuntimeDrawSpecs = runtimeDrawSpecs; this.lastScreenMetrics = { metricSpace: 'final_css_pixels', geometrySource: 'production-final-draw-geometry', viewport: { ...viewport }, camera: { ...state.camera }, actors: runtimeDrawSpecs.actorSpecs.map((spec) => buildScreenMetricRow(spec, this.assetRuntime)) }; if (!this.context) return true; const { width: cssWidth, height: cssHeight, dpr } = viewport; this.context.save(); this.context.setTransform(dpr, 0, 0, dpr, 0, 0); this.context.clearRect(0, 0, cssWidth, cssHeight); this.context.fillStyle = '#0d1716'; this.context.fillRect(0, 0, cssWidth, cssHeight); this.context.save(); applyPresentationWorldTransform(this.context, viewport); drawScene(this.context, plan, state, { ...this.options, assetRuntime: this.assetRuntime, runtimeDrawSpecs, drawSpecByActor: new Map(runtimeDrawSpecs.actorSpecs.map((spec) => [spec.actorId, spec])) }); this.context.restore(); this.context.restore(); drawUniversalBattleHud(this.context, hud, state, { showHud: this.options.showHud, screenSpace: true, screenWidth: cssWidth, screenHeight: cssHeight, screenDpr: dpr }); return true;
   }

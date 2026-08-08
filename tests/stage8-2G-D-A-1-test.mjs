@@ -117,7 +117,7 @@ const wreckSpec = buildWreckDrawSpec(wreck, { manifest: OFFLINE_ASSET_MANIFEST, 
 assert.ok(angleError(wreck.angle, destroyedActor.facing) < 1e-7);
 assert.equal(wreckSpec.lastHullFacing, wreck.angle);
 const animationDeterminism = { stage: '8.2G-D-A.1', directLinearRewind: true, hitAnimation: 'hit', destroyAnimation: 'destroying', wreckOrientationPreserved: true, hitAnchorId: firstDamage.id, destroyAnchorId: firstDestroy.id, wreckAssetId: wreckSpec.assetId, passed: true };
-write('stage8_2g_da1_animation_determinism.json', animationDeterminism);
+write('stage8_2g_da1_animation_transition_check.json', animationDeterminism);
 
 const seekTimes = [0, 6.6375, tankFrame.visualTimeSeconds, 18.5, 28.25, artReport.duration];
 const seekRows = seekTimes.map((time) => {

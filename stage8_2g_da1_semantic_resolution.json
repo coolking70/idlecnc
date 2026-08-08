@@ -73,6 +73,27 @@
             ],
             "matchedShotIds": [
               "visual_shot_1_anchor_0006"
+            ],
+            "animation": "fire",
+            "bodyFacesShot": true,
+            "spriteDirectionMatchesShot": true,
+            "muzzleFacingMatchesShot": true,
+            "facingEvidence": [
+              {
+                "actorId": "enemy_infantry_1",
+                "shotId": "visual_shot_1_anchor_0006",
+                "bodyFacing": 2.829066,
+                "shotFacing": 2.82906593131216,
+                "bodyShotErrorRadians": 6.868783986035965e-8,
+                "spriteDirectionIndex": 6,
+                "shotDirectionIndex": 6,
+                "muzzleFacing": 2.829066,
+                "muzzleShotErrorRadians": 6.868783986035965e-8,
+                "bodyFacesShot": true,
+                "spriteDirectionMatchesShot": true,
+                "muzzleFacingMatchesShot": true,
+                "passed": true
+              }
             ]
           }
         },
@@ -91,7 +112,27 @@
             ],
             "side": "friendly",
             "animation": "fire",
-            "weaponKind": "rocket"
+            "weaponKind": "rocket",
+            "bodyFacesShot": true,
+            "spriteDirectionMatchesShot": true,
+            "muzzleFacingMatchesShot": true,
+            "facingEvidence": [
+              {
+                "actorId": "unit_stage8g-c1-mining-1",
+                "shotId": "choreographed_shot_88",
+                "bodyFacing": -0.613194,
+                "shotFacing": -0.61319395343221,
+                "bodyShotErrorRadians": 4.6567790068507975e-8,
+                "spriteDirectionIndex": 1,
+                "shotDirectionIndex": 1,
+                "muzzleFacing": -0.613194,
+                "muzzleShotErrorRadians": 4.6567790068507975e-8,
+                "bodyFacesShot": true,
+                "spriteDirectionMatchesShot": true,
+                "muzzleFacingMatchesShot": true,
+                "passed": true
+              }
+            ]
           }
         },
         {
@@ -109,7 +150,27 @@
             ],
             "side": "enemy",
             "animation": "fire",
-            "weaponKind": "rocket"
+            "weaponKind": "rocket",
+            "bodyFacesShot": true,
+            "spriteDirectionMatchesShot": true,
+            "muzzleFacingMatchesShot": true,
+            "facingEvidence": [
+              {
+                "actorId": "art-enemy-at",
+                "shotId": "choreographed_shot_1",
+                "bodyFacing": -3.065154,
+                "shotFacing": -3.065153640978324,
+                "bodyShotErrorRadians": 3.590216759441489e-7,
+                "spriteDirectionIndex": 6,
+                "shotDirectionIndex": 6,
+                "muzzleFacing": -3.065154,
+                "muzzleShotErrorRadians": 3.590216759441489e-7,
+                "bodyFacesShot": true,
+                "spriteDirectionMatchesShot": true,
+                "muzzleFacingMatchesShot": true,
+                "passed": true
+              }
+            ]
           }
         },
         {

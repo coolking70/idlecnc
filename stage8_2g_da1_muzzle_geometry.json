@@ -15,38 +15,38 @@
         "actorId": "enemy_infantry_1"
       },
       "visualStart": {
-        "x": 854.4,
-        "y": 551.4933,
+        "x": 855.2496,
+        "y": 554.0993,
         "space": "battlefield-world",
         "source": "production-final-draw-geometry",
         "anchor": {
           "forward": 0.56,
           "lateral": -0.08,
-          "facing": 3.141593,
+          "facing": 2.829066,
           "directionIndex": 6
         }
       },
       "defaultMuzzlePoint": {
-        "x": 854.4,
-        "y": 551.4933,
+        "x": 855.2496,
+        "y": 554.0993,
         "space": "battlefield-world",
         "source": "production-final-draw-geometry",
         "anchor": {
           "forward": 0.56,
           "lateral": -0.08,
-          "facing": 3.141593,
+          "facing": 2.829066,
           "directionIndex": 6
         }
       },
       "narrowMuzzlePoint": {
-        "x": 847.5571,
-        "y": 552.7098,
+        "x": 849.0989,
+        "y": 557.4388,
         "space": "battlefield-world",
         "source": "production-final-draw-geometry",
         "anchor": {
           "forward": 0.56,
           "lateral": -0.08,
-          "facing": 3.141593,
+          "facing": 2.829066,
           "directionIndex": 6
         }
       },
@@ -66,38 +66,38 @@
         "actorId": "art-enemy-at"
       },
       "visualStart": {
-        "x": 844.6627,
-        "y": 433.3185,
+        "x": 844.4521,
+        "y": 432.3934,
         "space": "battlefield-world",
         "source": "production-final-draw-geometry",
         "anchor": {
           "forward": 0.68,
           "lateral": -0.16,
-          "facing": 3.141593,
+          "facing": -3.065154,
           "directionIndex": 6
         }
       },
       "defaultMuzzlePoint": {
-        "x": 844.6627,
-        "y": 433.3185,
+        "x": 844.4521,
+        "y": 432.3934,
         "space": "battlefield-world",
         "source": "production-final-draw-geometry",
         "anchor": {
           "forward": 0.68,
           "lateral": -0.16,
-          "facing": 3.141593,
+          "facing": -3.065154,
           "directionIndex": 6
         }
       },
       "narrowMuzzlePoint": {
-        "x": 837.3432,
-        "y": 435.4197,
+        "x": 836.9992,
+        "y": 433.9088,
         "space": "battlefield-world",
         "source": "production-final-draw-geometry",
         "anchor": {
           "forward": 0.68,
           "lateral": -0.16,
-          "facing": 3.141593,
+          "facing": -3.065154,
           "directionIndex": 6
         }
       },

@@ -1,6 +1,6 @@
 import { OFFLINE_ASSET_MANIFEST, resolveAsset, resolveEnvironmentAsset, resolveUnitAsset, resolveWreckAsset } from './asset-provider.js';
 import { normalizeVisualUnitClass, visualUnitClassFamily } from './visual-unit-class.js';
-import { resolveActorAnimationState, resolveMuzzleAnchor, resolveSpriteFrame } from './animation-resolver.js';
+import { directionIndexFromRadians, directionName, resolveActorAnimationState, resolveMuzzleAnchor, resolveSpriteFrame } from './animation-resolver.js';
 import { PRESENTATION_WORLD_HEIGHT, PRESENTATION_WORLD_WIDTH } from '../presentation-viewport.js';
 
 export const MINIMUM_SCREEN_FOOTPRINT = Object.freeze({
@@ -40,6 +40,8 @@ function normalizedBounds(bounds = {}) {
 
 function roundMetric(value) { return Number(Number(value || 0).toFixed(4)); }
 function roundFacing(value) { return Number(Number(value || 0).toFixed(6)); }
+function directionIndexForFacing(value) { return directionIndexFromRadians(value); }
+function directionNameForFacing(value) { return directionName(directionIndexForFacing(value)); }
 
 function visualMuzzlePointForSpec(actor, spec, battlefieldBounds = {}) {
   const anchor = spec?.muzzleAnchor;
@@ -201,13 +203,24 @@ export function buildActorDrawSpec(actor, camera = {}, options = {}) {
     weaponPresentation: actor?.weaponPresentation || null,
     hybridComponents: resolved.mode === 'hybrid' && visualClass === 'mbt' ? ['sprite_hull', 'sprite_turret', 'procedural_selection', 'procedural_weapon_effects'] : []
   };
-  spec.hullFacing = visualClass === 'mbt' ? roundFacing(actor?.facing) : null;
+  spec.policy = actor?.facingPolicy || (visualClass === 'mbt' ? 'turret_weapon' : ['infantry', 'anti_armor_infantry', 'light_vehicle'].includes(visualClass) ? 'body_aims_weapon' : 'movement_only');
+  spec.movementFacing = Number.isFinite(Number(actor?.movementFacing)) ? roundFacing(actor.movementFacing) : null;
+  spec.aimFacing = Number.isFinite(Number(actor?.aimFacing)) ? roundFacing(actor.aimFacing) : null;
+  spec.bodyFacing = Number.isFinite(Number(actor?.bodyFacing ?? actor?.facing)) ? roundFacing(actor?.bodyFacing ?? actor?.facing) : null;
+  spec.weaponFacing = Number.isFinite(Number(actor?.weaponFacing ?? actor?.facing)) ? roundFacing(actor?.weaponFacing ?? actor?.facing) : null;
+  spec.facing = spec.bodyFacing;
+  spec.bodyDirection = animationState.direction;
+  spec.bodyDirectionIndex = animationState.directionIndex;
+  spec.weaponDirection = spec.weaponFacing == null ? null : directionNameForFacing(spec.weaponFacing);
+  spec.weaponDirectionIndex = spec.weaponFacing == null ? null : directionIndexForFacing(spec.weaponFacing);
+  spec.hullFacing = visualClass === 'mbt' ? roundFacing(actor?.bodyFacing ?? actor?.facing) : null;
   spec.hullDirection = visualClass === 'mbt' ? animationState.direction : null;
   spec.hullDirectionIndex = visualClass === 'mbt' ? animationState.directionIndex : null;
   spec.turretFacing = visualClass === 'mbt' ? roundFacing(actor?.turretFacing ?? actor?.facing) : null;
   spec.turretDirection = visualClass === 'mbt' ? turretAnimationState?.direction || null : null;
   spec.turretDirectionIndex = visualClass === 'mbt' ? turretDirectionIndex : null;
   spec.shotFacing = Number.isFinite(Number(actor?.shotFacing)) ? roundFacing(actor.shotFacing) : null;
+  spec.muzzleFacing = spec.muzzleAnchor?.ok ? roundFacing(spec.muzzleAnchor.facing) : null;
   spec.visualMuzzlePoint = visualMuzzlePointForSpec(actor, spec, options.battlefieldBounds);
   return spec;
 }

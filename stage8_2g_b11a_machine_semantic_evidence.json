@@ -1875,7 +1875,7 @@
           "timeMs": 13546,
           "phase": "first_contact",
           "sceneHash": "upf_b7f3e811",
-          "stateSignature": "19a5d2911099f11c11d3c23201b0aa66faf0004d74033719db7ed6beceb343c0",
+          "stateSignature": "94a658515262b8f7e7364ccb38b8962589ce599575a2387337ce9742f6c17cc9",
           "semanticPredicates": {
             "firstContact": true,
             "mixedFire": false,
@@ -1959,8 +1959,8 @@
                 "x": 843.1242,
                 "y": 419.45
               },
-              "bodyFacing": 3.14159,
-              "turretFacing": 3.14159,
+              "bodyFacing": -2.94587,
+              "turretFacing": -2.94587,
               "alive": true,
               "wreck": false
             },
@@ -2146,8 +2146,8 @@
                   "x": 843.1242,
                   "y": 419.45
                 },
-                "bodyFacing": 3.14159,
-                "turretFacing": 3.14159,
+                "bodyFacing": -2.94587,
+                "turretFacing": -2.94587,
                 "alive": true,
                 "wreck": false
               },
@@ -2407,7 +2407,7 @@
           "timeMs": 13690.031,
           "phase": "first_contact",
           "sceneHash": "upf_b7f3e811",
-          "stateSignature": "22f14c2fcd7a9e5a4bcdc45748c1501f2bb60d7a6fdfba8e219600bba68074cd",
+          "stateSignature": "89cd435354a347a0a763c5cd2ce22608b87a9adf160820d59a9f7256be319a0a",
           "semanticPredicates": {
             "firstContact": true,
             "mixedFire": true,
@@ -2471,8 +2471,8 @@
                 "x": 840.5917,
                 "y": 391
               },
-              "bodyFacing": 3.14159,
-              "turretFacing": 3.14159,
+              "bodyFacing": 2.84617,
+              "turretFacing": 2.84617,
               "alive": true,
               "wreck": false
             },
@@ -2501,8 +2501,8 @@
                 "x": 840.5917,
                 "y": 419.45
               },
-              "bodyFacing": 3.14159,
-              "turretFacing": 3.14159,
+              "bodyFacing": -2.93955,
+              "turretFacing": -2.93955,
               "alive": true,
               "wreck": false
             },
@@ -2516,8 +2516,8 @@
                 "x": 840.5917,
                 "y": 474
               },
-              "bodyFacing": 3.14159,
-              "turretFacing": 3.14159,
+              "bodyFacing": -2.67471,
+              "turretFacing": -2.67471,
               "alive": true,
               "wreck": false
             },
@@ -2531,8 +2531,8 @@
                 "x": 840.5917,
                 "y": 516
               },
-              "bodyFacing": 3.14159,
-              "turretFacing": 3.14159,
+              "bodyFacing": -2.46807,
+              "turretFacing": -2.46807,
               "alive": true,
               "wreck": false
             },
@@ -2546,8 +2546,8 @@
                 "x": 840.5917,
                 "y": 558
               },
-              "bodyFacing": 3.14159,
-              "turretFacing": 3.14159,
+              "bodyFacing": -2.30703,
+              "turretFacing": -2.30703,
               "alive": true,
               "wreck": false
             },
@@ -2561,8 +2561,8 @@
                 "x": 569.6284,
                 "y": 371.7619
               },
-              "bodyFacing": 0,
-              "turretFacing": 0,
+              "bodyFacing": 0.15888,
+              "turretFacing": 0.15888,
               "alive": true,
               "wreck": false
             },
@@ -2658,8 +2658,8 @@
                   "x": 840.5917,
                   "y": 391
                 },
-                "bodyFacing": 3.14159,
-                "turretFacing": 3.14159,
+                "bodyFacing": 2.84617,
+                "turretFacing": 2.84617,
                 "alive": true,
                 "wreck": false
               },
@@ -2688,8 +2688,8 @@
                   "x": 840.5917,
                   "y": 419.45
                 },
-                "bodyFacing": 3.14159,
-                "turretFacing": 3.14159,
+                "bodyFacing": -2.93955,
+                "turretFacing": -2.93955,
                 "alive": true,
                 "wreck": false
               },
@@ -2703,8 +2703,8 @@
                   "x": 840.5917,
                   "y": 474
                 },
-                "bodyFacing": 3.14159,
-                "turretFacing": 3.14159,
+                "bodyFacing": -2.67471,
+                "turretFacing": -2.67471,
                 "alive": true,
                 "wreck": false
               },
@@ -2718,8 +2718,8 @@
                   "x": 840.5917,
                   "y": 516
                 },
-                "bodyFacing": 3.14159,
-                "turretFacing": 3.14159,
+                "bodyFacing": -2.46807,
+                "turretFacing": -2.46807,
                 "alive": true,
                 "wreck": false
               },
@@ -2733,8 +2733,8 @@
                   "x": 840.5917,
                   "y": 558
                 },
-                "bodyFacing": 3.14159,
-                "turretFacing": 3.14159,
+                "bodyFacing": -2.30703,
+                "turretFacing": -2.30703,
                 "alive": true,
                 "wreck": false
               },
@@ -2748,8 +2748,8 @@
                   "x": 569.6284,
                   "y": 371.7619
                 },
-                "bodyFacing": 0,
-                "turretFacing": 0,
+                "bodyFacing": 0.15888,
+                "turretFacing": 0.15888,
                 "alive": true,
                 "wreck": false
               },
@@ -3035,7 +3035,7 @@
           "timeMs": 13728.114,
           "phase": "first_contact",
           "sceneHash": "upf_b7f3e811",
-          "stateSignature": "ed4703b4c6f06ae69869594487aedf1aabbf28827f69da7251680c15522ea56c",
+          "stateSignature": "98f4a3fccc52d2a7ccba7c48420b5d34194b57e014b85c2149a0838af0cd1881",
           "semanticPredicates": {
             "firstContact": true,
             "mixedFire": true,
@@ -3100,8 +3100,8 @@
                 "x": 839.9221,
                 "y": 391
               },
-              "bodyFacing": 3.14159,
-              "turretFacing": 3.14159,
+              "bodyFacing": 2.84617,
+              "turretFacing": 2.84617,
               "alive": true,
               "wreck": false
             },
@@ -3130,8 +3130,8 @@
                 "x": 839.9221,
                 "y": 419.45
               },
-              "bodyFacing": 3.14159,
-              "turretFacing": 3.14159,
+              "bodyFacing": -2.93955,
+              "turretFacing": -2.93955,
               "alive": true,
               "wreck": false
             },
@@ -3145,8 +3145,8 @@
                 "x": 839.9221,
                 "y": 474
               },
-              "bodyFacing": 3.14159,
-              "turretFacing": 3.14159,
+              "bodyFacing": -2.67471,
+              "turretFacing": -2.67471,
               "alive": true,
               "wreck": false
             },
@@ -3160,8 +3160,8 @@
                 "x": 839.9221,
                 "y": 516
               },
-              "bodyFacing": 3.14159,
-              "turretFacing": 3.14159,
+              "bodyFacing": -2.4635,
+              "turretFacing": -2.4635,
               "alive": true,
               "wreck": false
             },
@@ -3175,8 +3175,8 @@
                 "x": 839.9221,
                 "y": 558
               },
-              "bodyFacing": 3.14159,
-              "turretFacing": 3.14159,
+              "bodyFacing": -2.30703,
+              "turretFacing": -2.30703,
               "alive": true,
               "wreck": false
             },
@@ -3190,8 +3190,8 @@
                 "x": 570.2963,
                 "y": 371.7612
               },
-              "bodyFacing": 0,
-              "turretFacing": 0,
+              "bodyFacing": 0.15888,
+              "turretFacing": 0.15888,
               "alive": true,
               "wreck": false
             },
@@ -3220,8 +3220,8 @@
                 "x": 569.3302,
                 "y": 408.6486
               },
-              "bodyFacing": 0,
-              "turretFacing": 0,
+              "bodyFacing": 0.36413,
+              "turretFacing": 0.36413,
               "alive": true,
               "wreck": false
             },
@@ -3287,8 +3287,8 @@
                   "x": 839.9221,
                   "y": 391
                 },
-                "bodyFacing": 3.14159,
-                "turretFacing": 3.14159,
+                "bodyFacing": 2.84617,
+                "turretFacing": 2.84617,
                 "alive": true,
                 "wreck": false
               },
@@ -3317,8 +3317,8 @@
                   "x": 839.9221,
                   "y": 419.45
                 },
-                "bodyFacing": 3.14159,
-                "turretFacing": 3.14159,
+                "bodyFacing": -2.93955,
+                "turretFacing": -2.93955,
                 "alive": true,
                 "wreck": false
               },
@@ -3332,8 +3332,8 @@
                   "x": 839.9221,
                   "y": 474
                 },
-                "bodyFacing": 3.14159,
-                "turretFacing": 3.14159,
+                "bodyFacing": -2.67471,
+                "turretFacing": -2.67471,
                 "alive": true,
                 "wreck": false
               },
@@ -3347,8 +3347,8 @@
                   "x": 839.9221,
                   "y": 516
                 },
-                "bodyFacing": 3.14159,
-                "turretFacing": 3.14159,
+                "bodyFacing": -2.4635,
+                "turretFacing": -2.4635,
                 "alive": true,
                 "wreck": false
               },
@@ -3362,8 +3362,8 @@
                   "x": 839.9221,
                   "y": 558
                 },
-                "bodyFacing": 3.14159,
-                "turretFacing": 3.14159,
+                "bodyFacing": -2.30703,
+                "turretFacing": -2.30703,
                 "alive": true,
                 "wreck": false
               },
@@ -3377,8 +3377,8 @@
                   "x": 570.2963,
                   "y": 371.7612
                 },
-                "bodyFacing": 0,
-                "turretFacing": 0,
+                "bodyFacing": 0.15888,
+                "turretFacing": 0.15888,
                 "alive": true,
                 "wreck": false
               },
@@ -3407,8 +3407,8 @@
                   "x": 569.3302,
                   "y": 408.6486
                 },
-                "bodyFacing": 0,
-                "turretFacing": 0,
+                "bodyFacing": 0.36413,
+                "turretFacing": 0.36413,
                 "alive": true,
                 "wreck": false
               },
@@ -3680,7 +3680,7 @@
           "timeMs": 14255,
           "phase": "main_engagement",
           "sceneHash": "upf_b7f3e811",
-          "stateSignature": "8b53a04cfa9bd1b6a4ba7055c468316e4ab82e5988e8fe49414b26e990a08052",
+          "stateSignature": "37872043a5064896e122442e1e3d4478882aacb945cb9660971a7a83886c8977",
           "semanticPredicates": {
             "firstContact": false,
             "mixedFire": true,
@@ -3763,8 +3763,8 @@
                 "x": 830.658,
                 "y": 391
               },
-              "bodyFacing": 3.14159,
-              "turretFacing": 3.14159,
+              "bodyFacing": 2.8109,
+              "turretFacing": 2.8109,
               "alive": true,
               "wreck": false
             },
@@ -3778,8 +3778,8 @@
                 "x": 830.658,
                 "y": 445.55
               },
-              "bodyFacing": 3.14159,
-              "turretFacing": 3.14159,
+              "bodyFacing": 2.95926,
+              "turretFacing": 2.95926,
               "alive": true,
               "wreck": false
             },
@@ -3793,8 +3793,8 @@
                 "x": 830.658,
                 "y": 419.45
               },
-              "bodyFacing": 3.14159,
-              "turretFacing": 3.14159,
+              "bodyFacing": -2.94245,
+              "turretFacing": -2.94245,
               "alive": true,
               "wreck": false
             },
@@ -3808,8 +3808,8 @@
                 "x": 830.658,
                 "y": 474
               },
-              "bodyFacing": 3.14159,
-              "turretFacing": 3.14159,
+              "bodyFacing": -2.67092,
+              "turretFacing": -2.67092,
               "alive": true,
               "wreck": false
             },
@@ -3823,8 +3823,8 @@
                 "x": 830.658,
                 "y": 516
               },
-              "bodyFacing": 3.14159,
-              "turretFacing": 3.14159,
+              "bodyFacing": -2.38738,
+              "turretFacing": -2.38738,
               "alive": true,
               "wreck": false
             },
@@ -3838,8 +3838,8 @@
                 "x": 830.658,
                 "y": 558
               },
-              "bodyFacing": 3.14159,
-              "turretFacing": 3.14159,
+              "bodyFacing": -2.27275,
+              "turretFacing": -2.27275,
               "alive": true,
               "wreck": false
             },
@@ -3853,8 +3853,8 @@
                 "x": 579.5358,
                 "y": 371.7531
               },
-              "bodyFacing": 0,
-              "turretFacing": 0,
+              "bodyFacing": 0.17092,
+              "turretFacing": 0.17092,
               "alive": true,
               "wreck": false
             },
@@ -3883,8 +3883,8 @@
                 "x": 578.6792,
                 "y": 408.6432
               },
-              "bodyFacing": 0,
-              "turretFacing": 0,
+              "bodyFacing": 0.36754,
+              "turretFacing": 0.36754,
               "alive": true,
               "wreck": false
             },
@@ -3950,8 +3950,8 @@
                   "x": 830.658,
                   "y": 391
                 },
-                "bodyFacing": 3.14159,
-                "turretFacing": 3.14159,
+                "bodyFacing": 2.8109,
+                "turretFacing": 2.8109,
                 "alive": true,
                 "wreck": false
               },
@@ -3965,8 +3965,8 @@
                   "x": 830.658,
                   "y": 445.55
                 },
-                "bodyFacing": 3.14159,
-                "turretFacing": 3.14159,
+                "bodyFacing": 2.95926,
+                "turretFacing": 2.95926,
                 "alive": true,
                 "wreck": false
               },
@@ -3980,8 +3980,8 @@
                   "x": 830.658,
                   "y": 419.45
                 },
-                "bodyFacing": 3.14159,
-                "turretFacing": 3.14159,
+                "bodyFacing": -2.94245,
+                "turretFacing": -2.94245,
                 "alive": true,
                 "wreck": false
               },
@@ -3995,8 +3995,8 @@
                   "x": 830.658,
                   "y": 474
                 },
-                "bodyFacing": 3.14159,
-                "turretFacing": 3.14159,
+                "bodyFacing": -2.67092,
+                "turretFacing": -2.67092,
                 "alive": true,
                 "wreck": false
               },
@@ -4010,8 +4010,8 @@
                   "x": 830.658,
                   "y": 516
                 },
-                "bodyFacing": 3.14159,
-                "turretFacing": 3.14159,
+                "bodyFacing": -2.38738,
+                "turretFacing": -2.38738,
                 "alive": true,
                 "wreck": false
               },
@@ -4025,8 +4025,8 @@
                   "x": 830.658,
                   "y": 558
                 },
-                "bodyFacing": 3.14159,
-                "turretFacing": 3.14159,
+                "bodyFacing": -2.27275,
+                "turretFacing": -2.27275,
                 "alive": true,
                 "wreck": false
               },
@@ -4040,8 +4040,8 @@
                   "x": 579.5358,
                   "y": 371.7531
                 },
-                "bodyFacing": 0,
-                "turretFacing": 0,
+                "bodyFacing": 0.17092,
+                "turretFacing": 0.17092,
                 "alive": true,
                 "wreck": false
               },
@@ -4070,8 +4070,8 @@
                   "x": 578.6792,
                   "y": 408.6432
                 },
-                "bodyFacing": 0,
-                "turretFacing": 0,
+                "bodyFacing": 0.36754,
+                "turretFacing": 0.36754,
                 "alive": true,
                 "wreck": false
               },
@@ -4371,7 +4371,7 @@
           "timeMs": 14588.163,
           "phase": "main_engagement",
           "sceneHash": "upf_b7f3e811",
-          "stateSignature": "29c1fa7a31e3d210ed31a5b54f63bf6fdce109b1ce3838bdfefcdf38444100e6",
+          "stateSignature": "8a6943503024b7c1305b334d8efa24738578da67eaf6708f8914c5cc7ede1099",
           "semanticPredicates": {
             "firstContact": false,
             "mixedFire": true,
@@ -4464,8 +4464,8 @@
                 "x": 824.8001,
                 "y": 391
               },
-              "bodyFacing": 3.14159,
-              "turretFacing": 3.14159,
+              "bodyFacing": 2.82083,
+              "turretFacing": 2.82083,
               "alive": true,
               "wreck": false
             },
@@ -4479,8 +4479,8 @@
                 "x": 824.8001,
                 "y": 445.55
               },
-              "bodyFacing": 3.14159,
-              "turretFacing": 3.14159,
+              "bodyFacing": 2.95926,
+              "turretFacing": 2.95926,
               "alive": true,
               "wreck": false
             },
@@ -4494,8 +4494,8 @@
                 "x": 824.8001,
                 "y": 419.45
               },
-              "bodyFacing": 3.14159,
-              "turretFacing": 3.14159,
+              "bodyFacing": -2.94245,
+              "turretFacing": -2.94245,
               "alive": true,
               "wreck": false
             },
@@ -4509,8 +4509,8 @@
                 "x": 824.8001,
                 "y": 474
               },
-              "bodyFacing": 3.14159,
-              "turretFacing": 3.14159,
+              "bodyFacing": -2.6361,
+              "turretFacing": -2.6361,
               "alive": true,
               "wreck": false
             },
@@ -4524,8 +4524,8 @@
                 "x": 824.8001,
                 "y": 516
               },
-              "bodyFacing": 3.14159,
-              "turretFacing": 3.14159,
+              "bodyFacing": -2.32341,
+              "turretFacing": -2.32341,
               "alive": true,
               "wreck": false
             },
@@ -4539,8 +4539,8 @@
                 "x": 824.8001,
                 "y": 558
               },
-              "bodyFacing": 3.14159,
-              "turretFacing": 3.14159,
+              "bodyFacing": -2.26777,
+              "turretFacing": -2.26777,
               "alive": true,
               "wreck": false
             },
@@ -4554,8 +4554,8 @@
                 "x": 585.3781,
                 "y": 371.7485
               },
-              "bodyFacing": 0,
-              "turretFacing": 0,
+              "bodyFacing": 0.17275,
+              "turretFacing": 0.17275,
               "alive": true,
               "wreck": false
             },
@@ -4584,8 +4584,8 @@
                 "x": 584.5911,
                 "y": 408.6401
               },
-              "bodyFacing": 0,
-              "turretFacing": 0,
+              "bodyFacing": 0.39552,
+              "turretFacing": 0.39552,
               "alive": true,
               "wreck": false
             },
@@ -4651,8 +4651,8 @@
                   "x": 824.8001,
                   "y": 391
                 },
-                "bodyFacing": 3.14159,
-                "turretFacing": 3.14159,
+                "bodyFacing": 2.82083,
+                "turretFacing": 2.82083,
                 "alive": true,
                 "wreck": false
               },
@@ -4666,8 +4666,8 @@
                   "x": 824.8001,
                   "y": 445.55
                 },
-                "bodyFacing": 3.14159,
-                "turretFacing": 3.14159,
+                "bodyFacing": 2.95926,
+                "turretFacing": 2.95926,
                 "alive": true,
                 "wreck": false
               },
@@ -4681,8 +4681,8 @@
                   "x": 824.8001,
                   "y": 419.45
                 },
-                "bodyFacing": 3.14159,
-                "turretFacing": 3.14159,
+                "bodyFacing": -2.94245,
+                "turretFacing": -2.94245,
                 "alive": true,
                 "wreck": false
               },
@@ -4696,8 +4696,8 @@
                   "x": 824.8001,
                   "y": 474
                 },
-                "bodyFacing": 3.14159,
-                "turretFacing": 3.14159,
+                "bodyFacing": -2.6361,
+                "turretFacing": -2.6361,
                 "alive": true,
                 "wreck": false
               },
@@ -4711,8 +4711,8 @@
                   "x": 824.8001,
                   "y": 516
                 },
-                "bodyFacing": 3.14159,
-                "turretFacing": 3.14159,
+                "bodyFacing": -2.32341,
+                "turretFacing": -2.32341,
                 "alive": true,
                 "wreck": false
               },
@@ -4726,8 +4726,8 @@
                   "x": 824.8001,
                   "y": 558
                 },
-                "bodyFacing": 3.14159,
-                "turretFacing": 3.14159,
+                "bodyFacing": -2.26777,
+                "turretFacing": -2.26777,
                 "alive": true,
                 "wreck": false
               },
@@ -4741,8 +4741,8 @@
                   "x": 585.3781,
                   "y": 371.7485
                 },
-                "bodyFacing": 0,
-                "turretFacing": 0,
+                "bodyFacing": 0.17275,
+                "turretFacing": 0.17275,
                 "alive": true,
                 "wreck": false
               },
@@ -4771,8 +4771,8 @@
                   "x": 584.5911,
                   "y": 408.6401
                 },
-                "bodyFacing": 0,
-                "turretFacing": 0,
+                "bodyFacing": 0.39552,
+                "turretFacing": 0.39552,
                 "alive": true,
                 "wreck": false
               },
@@ -5096,7 +5096,7 @@
           "timeMs": 16619.078,
           "phase": "main_engagement",
           "sceneHash": "upf_b7f3e811",
-          "stateSignature": "0469ea3dbb05021524d92ec5795328ffa771e4e4960786bbc9280ef3d9a75214",
+          "stateSignature": "03f97068f501daf1465e883456572b97df5b9f09972af2cbeee3467405831d26",
           "semanticPredicates": {
             "firstContact": false,
             "mixedFire": true,
@@ -5187,8 +5187,8 @@
                 "x": 789.091,
                 "y": 445.55
               },
-              "bodyFacing": 3.14159,
-              "turretFacing": 3.14159,
+              "bodyFacing": 2.91021,
+              "turretFacing": 2.91021,
               "alive": true,
               "wreck": false
             },
@@ -5202,8 +5202,8 @@
                 "x": 789.091,
                 "y": 419.45
               },
-              "bodyFacing": 3.14159,
-              "turretFacing": 3.14159,
+              "bodyFacing": -2.85717,
+              "turretFacing": -2.85717,
               "alive": true,
               "wreck": false
             },
@@ -5262,8 +5262,8 @@
                 "x": 735.7666,
                 "y": 391
               },
-              "bodyFacing": 0,
-              "turretFacing": 0,
+              "bodyFacing": 0.25734,
+              "turretFacing": 0.25734,
               "alive": true,
               "wreck": false
             },
@@ -5292,8 +5292,8 @@
                 "x": 647.1728,
                 "y": 406.2863
               },
-              "bodyFacing": 0,
-              "turretFacing": 0,
+              "bodyFacing": 0.54533,
+              "turretFacing": 0.54533,
               "alive": true,
               "wreck": false
             },
@@ -5374,8 +5374,8 @@
                   "x": 789.091,
                   "y": 445.55
                 },
-                "bodyFacing": 3.14159,
-                "turretFacing": 3.14159,
+                "bodyFacing": 2.91021,
+                "turretFacing": 2.91021,
                 "alive": true,
                 "wreck": false
               },
@@ -5389,8 +5389,8 @@
                   "x": 789.091,
                   "y": 419.45
                 },
-                "bodyFacing": 3.14159,
-                "turretFacing": 3.14159,
+                "bodyFacing": -2.85717,
+                "turretFacing": -2.85717,
                 "alive": true,
                 "wreck": false
               },
@@ -5449,8 +5449,8 @@
                   "x": 735.7666,
                   "y": 391
                 },
-                "bodyFacing": 0,
-                "turretFacing": 0,
+                "bodyFacing": 0.25734,
+                "turretFacing": 0.25734,
                 "alive": true,
                 "wreck": false
               },
@@ -5479,8 +5479,8 @@
                   "x": 647.1728,
                   "y": 406.2863
                 },
-                "bodyFacing": 0,
-                "turretFacing": 0,
+                "bodyFacing": 0.54533,
+                "turretFacing": 0.54533,
                 "alive": true,
                 "wreck": false
               },
@@ -5721,7 +5721,7 @@
           "timeMs": 13768.114,
           "phase": "first_contact",
           "sceneHash": "upf_b7f3e811",
-          "stateSignature": "d5165dfeb60eac3feabaa2d79c6c62dd829935a8880edd123b64cb4c9f038cb1",
+          "stateSignature": "ecb3463b0b1735bf257e7729e8a9ea11caeed67ad50fc2fbae62ebb4292ad794",
           "semanticPredicates": {
             "firstContact": true,
             "mixedFire": true,
@@ -5788,8 +5788,8 @@
                 "x": 839.2188,
                 "y": 391
               },
-              "bodyFacing": 3.14159,
-              "turretFacing": 3.14159,
+              "bodyFacing": 2.84617,
+              "turretFacing": 2.84617,
               "alive": true,
               "wreck": false
             },
@@ -5803,8 +5803,8 @@
                 "x": 839.2188,
                 "y": 445.55
               },
-              "bodyFacing": 3.14159,
-              "turretFacing": 3.14159,
+              "bodyFacing": 2.99856,
+              "turretFacing": 2.99856,
               "alive": true,
               "wreck": false
             },
@@ -5818,8 +5818,8 @@
                 "x": 839.2188,
                 "y": 419.45
               },
-              "bodyFacing": 3.14159,
-              "turretFacing": 3.14159,
+              "bodyFacing": -2.93955,
+              "turretFacing": -2.93955,
               "alive": true,
               "wreck": false
             },
@@ -5833,8 +5833,8 @@
                 "x": 839.2188,
                 "y": 474
               },
-              "bodyFacing": 3.14159,
-              "turretFacing": 3.14159,
+              "bodyFacing": -2.67092,
+              "turretFacing": -2.67092,
               "alive": true,
               "wreck": false
             },
@@ -5848,8 +5848,8 @@
                 "x": 839.2188,
                 "y": 516
               },
-              "bodyFacing": 3.14159,
-              "turretFacing": 3.14159,
+              "bodyFacing": -2.4635,
+              "turretFacing": -2.4635,
               "alive": true,
               "wreck": false
             },
@@ -5863,8 +5863,8 @@
                 "x": 839.2188,
                 "y": 558
               },
-              "bodyFacing": 3.14159,
-              "turretFacing": 3.14159,
+              "bodyFacing": -2.30703,
+              "turretFacing": -2.30703,
               "alive": true,
               "wreck": false
             },
@@ -5878,8 +5878,8 @@
                 "x": 570.9977,
                 "y": 371.7606
               },
-              "bodyFacing": 0,
-              "turretFacing": 0,
+              "bodyFacing": 0.15888,
+              "turretFacing": 0.15888,
               "alive": true,
               "wreck": false
             },
@@ -5908,8 +5908,8 @@
                 "x": 570.0399,
                 "y": 408.6482
               },
-              "bodyFacing": 0,
-              "turretFacing": 0,
+              "bodyFacing": 0.36413,
+              "turretFacing": 0.36413,
               "alive": true,
               "wreck": false
             },
@@ -5975,8 +5975,8 @@
                   "x": 839.2188,
                   "y": 391
                 },
-                "bodyFacing": 3.14159,
-                "turretFacing": 3.14159,
+                "bodyFacing": 2.84617,
+                "turretFacing": 2.84617,
                 "alive": true,
                 "wreck": false
               },
@@ -5990,8 +5990,8 @@
                   "x": 839.2188,
                   "y": 445.55
                 },
-                "bodyFacing": 3.14159,
-                "turretFacing": 3.14159,
+                "bodyFacing": 2.99856,
+                "turretFacing": 2.99856,
                 "alive": true,
                 "wreck": false
               },
@@ -6005,8 +6005,8 @@
                   "x": 839.2188,
                   "y": 419.45
                 },
-                "bodyFacing": 3.14159,
-                "turretFacing": 3.14159,
+                "bodyFacing": -2.93955,
+                "turretFacing": -2.93955,
                 "alive": true,
                 "wreck": false
               },
@@ -6020,8 +6020,8 @@
                   "x": 839.2188,
                   "y": 474
                 },
-                "bodyFacing": 3.14159,
-                "turretFacing": 3.14159,
+                "bodyFacing": -2.67092,
+                "turretFacing": -2.67092,
                 "alive": true,
                 "wreck": false
               },
@@ -6035,8 +6035,8 @@
                   "x": 839.2188,
                   "y": 516
                 },
-                "bodyFacing": 3.14159,
-                "turretFacing": 3.14159,
+                "bodyFacing": -2.4635,
+                "turretFacing": -2.4635,
                 "alive": true,
                 "wreck": false
               },
@@ -6050,8 +6050,8 @@
                   "x": 839.2188,
                   "y": 558
                 },
-                "bodyFacing": 3.14159,
-                "turretFacing": 3.14159,
+                "bodyFacing": -2.30703,
+                "turretFacing": -2.30703,
                 "alive": true,
                 "wreck": false
               },
@@ -6065,8 +6065,8 @@
                   "x": 570.9977,
                   "y": 371.7606
                 },
-                "bodyFacing": 0,
-                "turretFacing": 0,
+                "bodyFacing": 0.15888,
+                "turretFacing": 0.15888,
                 "alive": true,
                 "wreck": false
               },
@@ -6095,8 +6095,8 @@
                   "x": 570.0399,
                   "y": 408.6482
                 },
-                "bodyFacing": 0,
-                "turretFacing": 0,
+                "bodyFacing": 0.36413,
+                "turretFacing": 0.36413,
                 "alive": true,
                 "wreck": false
               },
@@ -6390,7 +6390,7 @@
           "timeMs": 16480.38,
           "phase": "main_engagement",
           "sceneHash": "upf_b7f3e811",
-          "stateSignature": "c31d4fc9f8087566b3787fb660b776027d2b649965fc6b7bfdd5cac914f5702e",
+          "stateSignature": "e8606579844696d692af21aa794208895f1fdf07eaf567ea01b7615ce7120aca",
           "semanticPredicates": {
             "firstContact": false,
             "mixedFire": true,
@@ -6463,8 +6463,8 @@
                 "x": 791.5297,
                 "y": 391
               },
-              "bodyFacing": 3.14159,
-              "turretFacing": 3.14159,
+              "bodyFacing": 2.75638,
+              "turretFacing": 2.75638,
               "alive": true,
               "wreck": false
             },
@@ -6478,8 +6478,8 @@
                 "x": 791.5297,
                 "y": 445.55
               },
-              "bodyFacing": 3.14159,
-              "turretFacing": 3.14159,
+              "bodyFacing": 2.93364,
+              "turretFacing": 2.93364,
               "alive": true,
               "wreck": false
             },
@@ -6493,8 +6493,8 @@
                 "x": 791.5297,
                 "y": 419.45
               },
-              "bodyFacing": 3.14159,
-              "turretFacing": 3.14159,
+              "bodyFacing": -2.85717,
+              "turretFacing": -2.85717,
               "alive": true,
               "wreck": false
             },
@@ -6523,8 +6523,8 @@
                 "x": 791.5297,
                 "y": 516
               },
-              "bodyFacing": 3.14159,
-              "turretFacing": 3.14159,
+              "bodyFacing": -2.30155,
+              "turretFacing": -2.30155,
               "alive": true,
               "wreck": false
             },
@@ -6583,8 +6583,8 @@
                 "x": 644.8973,
                 "y": 406.3194
               },
-              "bodyFacing": 0,
-              "turretFacing": 0,
+              "bodyFacing": 0.54533,
+              "turretFacing": 0.54533,
               "alive": true,
               "wreck": false
             },
@@ -6650,8 +6650,8 @@
                   "x": 791.5297,
                   "y": 391
                 },
-                "bodyFacing": 3.14159,
-                "turretFacing": 3.14159,
+                "bodyFacing": 2.75638,
+                "turretFacing": 2.75638,
                 "alive": true,
                 "wreck": false
               },
@@ -6665,8 +6665,8 @@
                   "x": 791.5297,
                   "y": 445.55
                 },
-                "bodyFacing": 3.14159,
-                "turretFacing": 3.14159,
+                "bodyFacing": 2.93364,
+                "turretFacing": 2.93364,
                 "alive": true,
                 "wreck": false
               },
@@ -6680,8 +6680,8 @@
                   "x": 791.5297,
                   "y": 419.45
                 },
-                "bodyFacing": 3.14159,
-                "turretFacing": 3.14159,
+                "bodyFacing": -2.85717,
+                "turretFacing": -2.85717,
                 "alive": true,
                 "wreck": false
               },
@@ -6710,8 +6710,8 @@
                   "x": 791.5297,
                   "y": 516
                 },
-                "bodyFacing": 3.14159,
-                "turretFacing": 3.14159,
+                "bodyFacing": -2.30155,
+                "turretFacing": -2.30155,
                 "alive": true,
                 "wreck": false
               },
@@ -6770,8 +6770,8 @@
                   "x": 644.8973,
                   "y": 406.3194
                 },
-                "bodyFacing": 0,
-                "turretFacing": 0,
+                "bodyFacing": 0.54533,
+                "turretFacing": 0.54533,
                 "alive": true,
                 "wreck": false
               },
@@ -10588,7 +10588,7 @@
           "timeMs": 29957.14,
           "phase": "critical_event",
           "sceneHash": "upf_7af1e100",
-          "stateSignature": "e78e9a1c81d36f2d9880b5906f27e47a25c63821cf774f18eec7c976ebe18763",
+          "stateSignature": "a40f7aab9b7c1210d42a5d0f3beb6764a9e77c2db8b68e3263a2ca19fe29ac50",
           "semanticPredicates": {
             "firstContact": false,
             "mixedFire": false,
@@ -10767,8 +10767,8 @@
                 "x": 412.7414,
                 "y": 462.8228
               },
-              "bodyFacing": 2.71389,
-              "turretFacing": 2.71389,
+              "bodyFacing": 0.04401,
+              "turretFacing": 0.04401,
               "alive": true,
               "wreck": false
             },
@@ -10939,8 +10939,8 @@
                   "x": 412.7414,
                   "y": 462.8228
                 },
-                "bodyFacing": 2.71389,
-                "turretFacing": 2.71389,
+                "bodyFacing": 0.04401,
+                "turretFacing": 0.04401,
                 "alive": true,
                 "wreck": false
               },
@@ -11097,7 +11097,7 @@
           "timeMs": 29977,
           "phase": "critical_event",
           "sceneHash": "upf_7af1e100",
-          "stateSignature": "737be18d7cb0c9396d9166a1a8b030175fabb744381d321f8ef0ccbddc26d2be",
+          "stateSignature": "25d9a47d8a882d72efa0e56f393e3ea9bdf300639dab9b4edb428bb2ac9c4d6e",
           "semanticPredicates": {
             "firstContact": false,
             "mixedFire": false,
@@ -11276,8 +11276,8 @@
                 "x": 410.1254,
                 "y": 464.0153
               },
-              "bodyFacing": 2.71389,
-              "turretFacing": 2.71389,
+              "bodyFacing": 0.04401,
+              "turretFacing": 0.04401,
               "alive": true,
               "wreck": false
             },
@@ -11448,8 +11448,8 @@
                   "x": 410.1254,
                   "y": 464.0153
                 },
-                "bodyFacing": 2.71389,
-                "turretFacing": 2.71389,
+                "bodyFacing": 0.04401,
+                "turretFacing": 0.04401,
                 "alive": true,
                 "wreck": false
               },
@@ -11606,7 +11606,7 @@
           "timeMs": 29627,
           "phase": "critical_event",
           "sceneHash": "upf_7af1e100",
-          "stateSignature": "b0c1bf29f14a120bc221a08d66f09821ccae25a952adfb7e2e32357889665524",
+          "stateSignature": "555c90cf337d975dc1f7559219fc07f11b45538c0f83de8cd1eb040e3d6fd488",
           "semanticPredicates": {
             "firstContact": false,
             "mixedFire": false,
@@ -11782,8 +11782,8 @@
                 "x": 456.2272,
                 "y": 443
               },
-              "bodyFacing": 2.71389,
-              "turretFacing": 2.71389,
+              "bodyFacing": -0.09976,
+              "turretFacing": -0.09976,
               "alive": true,
               "wreck": false
             },
@@ -11954,8 +11954,8 @@
                   "x": 456.2272,
                   "y": 443
                 },
-                "bodyFacing": 2.71389,
-                "turretFacing": 2.71389,
+                "bodyFacing": -0.09976,
+                "turretFacing": -0.09976,
                 "alive": true,
                 "wreck": false
               },
@@ -12095,7 +12095,7 @@
           "timeMs": 13418,
           "phase": "first_contact",
           "sceneHash": "upf_7af1e100",
-          "stateSignature": "07d4a5589f2f0c48fc4474d5549d34fff3bc5c585f6b7a6208f1783149676be9",
+          "stateSignature": "0134295437d8f2ea8d74efa96547a443ac0177b598f57d0cbb32a25af5b212d8",
           "semanticPredicates": {
             "firstContact": true,
             "mixedFire": false,
@@ -12180,8 +12180,8 @@
                 "x": 843.1225,
                 "y": 419.45
               },
-              "bodyFacing": 3.14159,
-              "turretFacing": 3.14159,
+              "bodyFacing": -3.12494,
+              "turretFacing": -3.12494,
               "alive": true,
               "wreck": false
             },
@@ -12225,8 +12225,8 @@
                 "x": 843.1225,
                 "y": 558
               },
-              "bodyFacing": 3.14159,
-              "turretFacing": 3.14159,
+              "bodyFacing": -2.51127,
+              "turretFacing": -2.51127,
               "alive": true,
               "wreck": false
             },
@@ -12352,8 +12352,8 @@
                   "x": 843.1225,
                   "y": 419.45
                 },
-                "bodyFacing": 3.14159,
-                "turretFacing": 3.14159,
+                "bodyFacing": -3.12494,
+                "turretFacing": -3.12494,
                 "alive": true,
                 "wreck": false
               },
@@ -12397,8 +12397,8 @@
                   "x": 843.1225,
                   "y": 558
                 },
-                "bodyFacing": 3.14159,
-                "turretFacing": 3.14159,
+                "bodyFacing": -2.51127,
+                "turretFacing": -2.51127,
                 "alive": true,
                 "wreck": false
               },
@@ -12598,7 +12598,7 @@
           "timeMs": 33520,
           "phase": "battle_end",
           "sceneHash": "upf_7af1e100",
-          "stateSignature": "4da6a7a315cf512e76c0458098e25f2e5d2257fed4b0c5844dd1d53080d5c7f5",
+          "stateSignature": "dd5838e938000352b428a366eecc7dbabd90eeec3a076ee04ccae05e83c25cf8",
           "semanticPredicates": {
             "firstContact": false,
             "mixedFire": false,
@@ -12769,8 +12769,8 @@
                 "x": 46,
                 "y": 644
               },
-              "bodyFacing": 2.71389,
-              "turretFacing": 2.71389,
+              "bodyFacing": -0.09976,
+              "turretFacing": -0.09976,
               "alive": true,
               "wreck": false
             },
@@ -12941,8 +12941,8 @@
                   "x": 46,
                   "y": 644
                 },
-                "bodyFacing": 2.71389,
-                "turretFacing": 2.71389,
+                "bodyFacing": -0.09976,
+                "turretFacing": -0.09976,
                 "alive": true,
                 "wreck": false
               },
@@ -15121,7 +15121,7 @@
           "timeMs": 13418,
           "phase": "first_contact",
           "sceneHash": "upf_7af1e100",
-          "stateSignature": "8a267ac8995407f88239596a9a53bd5d7096e9cdb81b5bfc7abfaeec012ec9a5",
+          "stateSignature": "e4826381daef036710e781514a6671592da34be7bac4d7853c9eb01d796176b7",
           "semanticPredicates": {
             "firstContact": true,
             "mixedFire": false,
@@ -15206,8 +15206,8 @@
                 "x": 843.1225,
                 "y": 419.45
               },
-              "bodyFacing": 3.14159,
-              "turretFacing": 3.14159,
+              "bodyFacing": -3.12494,
+              "turretFacing": -3.12494,
               "alive": true,
               "wreck": false
             },
@@ -15251,8 +15251,8 @@
                 "x": 843.1225,
                 "y": 558
               },
-              "bodyFacing": 3.14159,
-              "turretFacing": 3.14159,
+              "bodyFacing": -2.51127,
+              "turretFacing": -2.51127,
               "alive": true,
               "wreck": false
             },
@@ -15378,8 +15378,8 @@
                   "x": 843.1225,
                   "y": 419.45
                 },
-                "bodyFacing": 3.14159,
-                "turretFacing": 3.14159,
+                "bodyFacing": -3.12494,
+                "turretFacing": -3.12494,
                 "alive": true,
                 "wreck": false
               },
@@ -15423,8 +15423,8 @@
                   "x": 843.1225,
                   "y": 558
                 },
-                "bodyFacing": 3.14159,
-                "turretFacing": 3.14159,
+                "bodyFacing": -2.51127,
+                "turretFacing": -2.51127,
                 "alive": true,
                 "wreck": false
               },
@@ -15624,7 +15624,7 @@
           "timeMs": 29977,
           "phase": "critical_event",
           "sceneHash": "upf_7af1e100",
-          "stateSignature": "e7a926d93b2096fc4c7a8988097ef265225da907a2378cf651d907dc1def6a6e",
+          "stateSignature": "7dc9e8b08916395c8a0cdba46b4f978b5bc9f5f8a61fdb4ae2187326d0753dba",
           "semanticPredicates": {
             "firstContact": false,
             "mixedFire": false,
@@ -15803,8 +15803,8 @@
                 "x": 410.1254,
                 "y": 464.0153
               },
-              "bodyFacing": 2.71389,
-              "turretFacing": 2.71389,
+              "bodyFacing": 0.04401,
+              "turretFacing": 0.04401,
               "alive": true,
               "wreck": false
             },
@@ -15975,8 +15975,8 @@
                   "x": 410.1254,
                   "y": 464.0153
                 },
-                "bodyFacing": 2.71389,
-                "turretFacing": 2.71389,
+                "bodyFacing": 0.04401,
+                "turretFacing": 0.04401,
                 "alive": true,
                 "wreck": false
               },
@@ -16133,7 +16133,7 @@
           "timeMs": 13418,
           "phase": "first_contact",
           "sceneHash": "upf_7af1e100",
-          "stateSignature": "8a267ac8995407f88239596a9a53bd5d7096e9cdb81b5bfc7abfaeec012ec9a5",
+          "stateSignature": "e4826381daef036710e781514a6671592da34be7bac4d7853c9eb01d796176b7",
           "semanticPredicates": {
             "firstContact": true,
             "mixedFire": false,
@@ -16218,8 +16218,8 @@
                 "x": 843.1225,
                 "y": 419.45
               },
-              "bodyFacing": 3.14159,
-              "turretFacing": 3.14159,
+              "bodyFacing": -3.12494,
+              "turretFacing": -3.12494,
               "alive": true,
               "wreck": false
             },
@@ -16263,8 +16263,8 @@
                 "x": 843.1225,
                 "y": 558
               },
-              "bodyFacing": 3.14159,
-              "turretFacing": 3.14159,
+              "bodyFacing": -2.51127,
+              "turretFacing": -2.51127,
               "alive": true,
               "wreck": false
             },
@@ -16390,8 +16390,8 @@
                   "x": 843.1225,
                   "y": 419.45
                 },
-                "bodyFacing": 3.14159,
-                "turretFacing": 3.14159,
+                "bodyFacing": -3.12494,
+                "turretFacing": -3.12494,
                 "alive": true,
                 "wreck": false
               },
@@ -16435,8 +16435,8 @@
                   "x": 843.1225,
                   "y": 558
                 },
-                "bodyFacing": 3.14159,
-                "turretFacing": 3.14159,
+                "bodyFacing": -2.51127,
+                "turretFacing": -2.51127,
                 "alive": true,
                 "wreck": false
               },
@@ -16636,7 +16636,7 @@
           "timeMs": 29977,
           "phase": "critical_event",
           "sceneHash": "upf_7af1e100",
-          "stateSignature": "e7a926d93b2096fc4c7a8988097ef265225da907a2378cf651d907dc1def6a6e",
+          "stateSignature": "7dc9e8b08916395c8a0cdba46b4f978b5bc9f5f8a61fdb4ae2187326d0753dba",
           "semanticPredicates": {
             "firstContact": false,
             "mixedFire": false,
@@ -16815,8 +16815,8 @@
                 "x": 410.1254,
                 "y": 464.0153
               },
-              "bodyFacing": 2.71389,
-              "turretFacing": 2.71389,
+              "bodyFacing": 0.04401,
+              "turretFacing": 0.04401,
               "alive": true,
               "wreck": false
             },
@@ -16987,8 +16987,8 @@
                   "x": 410.1254,
                   "y": 464.0153
                 },
-                "bodyFacing": 2.71389,
-                "turretFacing": 2.71389,
+                "bodyFacing": 0.04401,
+                "turretFacing": 0.04401,
                 "alive": true,
                 "wreck": false
               },
@@ -19000,7 +19000,7 @@
           "timeMs": 13690.031,
           "phase": "first_contact",
           "sceneHash": "upf_b7f3e811",
-          "stateSignature": "5156ac39cd524dfd3c676c11bd0985ac81ebe359da9b3a7c784bdfd45a980939",
+          "stateSignature": "d5ea4690689b722e9ed7ebff95809625c061adfc92182e8dbf386e167717b9ca",
           "semanticPredicates": {
             "firstContact": true,
             "mixedFire": true,
@@ -19064,8 +19064,8 @@
                 "x": 840.5917,
                 "y": 391
               },
-              "bodyFacing": 3.14159,
-              "turretFacing": 3.14159,
+              "bodyFacing": 2.84617,
+              "turretFacing": 2.84617,
               "alive": true,
               "wreck": false
             },
@@ -19094,8 +19094,8 @@
                 "x": 840.5917,
                 "y": 419.45
               },
-              "bodyFacing": 3.14159,
-              "turretFacing": 3.14159,
+              "bodyFacing": -2.93955,
+              "turretFacing": -2.93955,
               "alive": true,
               "wreck": false
             },
@@ -19109,8 +19109,8 @@
                 "x": 840.5917,
                 "y": 474
               },
-              "bodyFacing": 3.14159,
-              "turretFacing": 3.14159,
+              "bodyFacing": -2.67471,
+              "turretFacing": -2.67471,
               "alive": true,
               "wreck": false
             },
@@ -19124,8 +19124,8 @@
                 "x": 840.5917,
                 "y": 516
               },
-              "bodyFacing": 3.14159,
-              "turretFacing": 3.14159,
+              "bodyFacing": -2.46807,
+              "turretFacing": -2.46807,
               "alive": true,
               "wreck": false
             },
@@ -19139,8 +19139,8 @@
                 "x": 840.5917,
                 "y": 558
               },
-              "bodyFacing": 3.14159,
-              "turretFacing": 3.14159,
+              "bodyFacing": -2.30703,
+              "turretFacing": -2.30703,
               "alive": true,
               "wreck": false
             },
@@ -19154,8 +19154,8 @@
                 "x": 569.6284,
                 "y": 371.7619
               },
-              "bodyFacing": 0,
-              "turretFacing": 0,
+              "bodyFacing": 0.15888,
+              "turretFacing": 0.15888,
               "alive": true,
               "wreck": false
             },
@@ -19251,8 +19251,8 @@
                   "x": 840.5917,
                   "y": 391
                 },
-                "bodyFacing": 3.14159,
-                "turretFacing": 3.14159,
+                "bodyFacing": 2.84617,
+                "turretFacing": 2.84617,
                 "alive": true,
                 "wreck": false
               },
@@ -19281,8 +19281,8 @@
                   "x": 840.5917,
                   "y": 419.45
                 },
-                "bodyFacing": 3.14159,
-                "turretFacing": 3.14159,
+                "bodyFacing": -2.93955,
+                "turretFacing": -2.93955,
                 "alive": true,
                 "wreck": false
               },
@@ -19296,8 +19296,8 @@
                   "x": 840.5917,
                   "y": 474
                 },
-                "bodyFacing": 3.14159,
-                "turretFacing": 3.14159,
+                "bodyFacing": -2.67471,
+                "turretFacing": -2.67471,
                 "alive": true,
                 "wreck": false
               },
@@ -19311,8 +19311,8 @@
                   "x": 840.5917,
                   "y": 516
                 },
-                "bodyFacing": 3.14159,
-                "turretFacing": 3.14159,
+                "bodyFacing": -2.46807,
+                "turretFacing": -2.46807,
                 "alive": true,
                 "wreck": false
               },
@@ -19326,8 +19326,8 @@
                   "x": 840.5917,
                   "y": 558
                 },
-                "bodyFacing": 3.14159,
-                "turretFacing": 3.14159,
+                "bodyFacing": -2.30703,
+                "turretFacing": -2.30703,
                 "alive": true,
                 "wreck": false
               },
@@ -19341,8 +19341,8 @@
                   "x": 569.6284,
                   "y": 371.7619
                 },
-                "bodyFacing": 0,
-                "turretFacing": 0,
+                "bodyFacing": 0.15888,
+                "turretFacing": 0.15888,
                 "alive": true,
                 "wreck": false
               },
@@ -19628,7 +19628,7 @@
           "timeMs": 13690.031,
           "phase": "first_contact",
           "sceneHash": "upf_b7f3e811",
-          "stateSignature": "5156ac39cd524dfd3c676c11bd0985ac81ebe359da9b3a7c784bdfd45a980939",
+          "stateSignature": "d5ea4690689b722e9ed7ebff95809625c061adfc92182e8dbf386e167717b9ca",
           "semanticPredicates": {
             "firstContact": true,
             "mixedFire": true,
@@ -19692,8 +19692,8 @@
                 "x": 840.5917,
                 "y": 391
               },
-              "bodyFacing": 3.14159,
-              "turretFacing": 3.14159,
+              "bodyFacing": 2.84617,
+              "turretFacing": 2.84617,
               "alive": true,
               "wreck": false
             },
@@ -19722,8 +19722,8 @@
                 "x": 840.5917,
                 "y": 419.45
               },
-              "bodyFacing": 3.14159,
-              "turretFacing": 3.14159,
+              "bodyFacing": -2.93955,
+              "turretFacing": -2.93955,
               "alive": true,
               "wreck": false
             },
@@ -19737,8 +19737,8 @@
                 "x": 840.5917,
                 "y": 474
               },
-              "bodyFacing": 3.14159,
-              "turretFacing": 3.14159,
+              "bodyFacing": -2.67471,
+              "turretFacing": -2.67471,
               "alive": true,
               "wreck": false
             },
@@ -19752,8 +19752,8 @@
                 "x": 840.5917,
                 "y": 516
               },
-              "bodyFacing": 3.14159,
-              "turretFacing": 3.14159,
+              "bodyFacing": -2.46807,
+              "turretFacing": -2.46807,
               "alive": true,
               "wreck": false
             },
@@ -19767,8 +19767,8 @@
                 "x": 840.5917,
                 "y": 558
               },
-              "bodyFacing": 3.14159,
-              "turretFacing": 3.14159,
+              "bodyFacing": -2.30703,
+              "turretFacing": -2.30703,
               "alive": true,
               "wreck": false
             },
@@ -19782,8 +19782,8 @@
                 "x": 569.6284,
                 "y": 371.7619
               },
-              "bodyFacing": 0,
-              "turretFacing": 0,
+              "bodyFacing": 0.15888,
+              "turretFacing": 0.15888,
               "alive": true,
               "wreck": false
             },
@@ -19879,8 +19879,8 @@
                   "x": 840.5917,
                   "y": 391
                 },
-                "bodyFacing": 3.14159,
-                "turretFacing": 3.14159,
+                "bodyFacing": 2.84617,
+                "turretFacing": 2.84617,
                 "alive": true,
                 "wreck": false
               },
@@ -19909,8 +19909,8 @@
                   "x": 840.5917,
                   "y": 419.45
                 },
-                "bodyFacing": 3.14159,
-                "turretFacing": 3.14159,
+                "bodyFacing": -2.93955,
+                "turretFacing": -2.93955,
                 "alive": true,
                 "wreck": false
               },
@@ -19924,8 +19924,8 @@
                   "x": 840.5917,
                   "y": 474
                 },
-                "bodyFacing": 3.14159,
-                "turretFacing": 3.14159,
+                "bodyFacing": -2.67471,
+                "turretFacing": -2.67471,
                 "alive": true,
                 "wreck": false
               },
@@ -19939,8 +19939,8 @@
                   "x": 840.5917,
                   "y": 516
                 },
-                "bodyFacing": 3.14159,
-                "turretFacing": 3.14159,
+                "bodyFacing": -2.46807,
+                "turretFacing": -2.46807,
                 "alive": true,
                 "wreck": false
               },
@@ -19954,8 +19954,8 @@
                   "x": 840.5917,
                   "y": 558
                 },
-                "bodyFacing": 3.14159,
-                "turretFacing": 3.14159,
+                "bodyFacing": -2.30703,
+                "turretFacing": -2.30703,
                 "alive": true,
                 "wreck": false
               },
@@ -19969,8 +19969,8 @@
                   "x": 569.6284,
                   "y": 371.7619
                 },
-                "bodyFacing": 0,
-                "turretFacing": 0,
+                "bodyFacing": 0.15888,
+                "turretFacing": 0.15888,
                 "alive": true,
                 "wreck": false
               },

@@ -1,0 +1,208 @@
+{
+  "stage": "8.2G-D-A.1a",
+  "geometrySource": "production-final-draw-geometry",
+  "rows": [
+    {
+      "actorId": "enemy_infantry_1",
+      "side": "enemy",
+      "visualClass": "infantry",
+      "shotId": "visual_shot_1_anchor_0006",
+      "shotFacing": 2.82906593131216,
+      "defaultMuzzleFacing": 2.829066,
+      "narrowMuzzleFacing": 2.829066,
+      "defaultMuzzlePoint": {
+        "x": 855.2496,
+        "y": 554.0993,
+        "space": "battlefield-world",
+        "source": "production-final-draw-geometry",
+        "anchor": {
+          "forward": 0.56,
+          "lateral": -0.08,
+          "facing": 2.829066,
+          "directionIndex": 6
+        }
+      },
+      "narrowMuzzlePoint": {
+        "x": 849.0989,
+        "y": 557.4388,
+        "space": "battlefield-world",
+        "source": "production-final-draw-geometry",
+        "anchor": {
+          "forward": 0.56,
+          "lateral": -0.08,
+          "facing": 2.829066,
+          "directionIndex": 6
+        }
+      },
+      "defaultScreenFootprint": 30.0894,
+      "narrowScreenFootprint": 24,
+      "minimumScreenFootprint": 24,
+      "defaultFacingMatchesShot": true,
+      "narrowFacingMatchesShot": true,
+      "passed": true
+    },
+    {
+      "actorId": "unit_stage8g-c1-mining-0",
+      "side": "friendly",
+      "visualClass": "infantry",
+      "shotId": "choreographed_shot_78",
+      "shotFacing": -0.02890528062502164,
+      "defaultMuzzleFacing": -0.028905,
+      "narrowMuzzleFacing": -0.028905,
+      "defaultMuzzlePoint": {
+        "x": 517.5082,
+        "y": 558.2555,
+        "space": "battlefield-world",
+        "source": "production-final-draw-geometry",
+        "anchor": {
+          "forward": 0.56,
+          "lateral": -0.08,
+          "facing": -0.028905,
+          "directionIndex": 2
+        }
+      },
+      "narrowMuzzlePoint": {
+        "x": 524.3144,
+        "y": 556.8344,
+        "space": "battlefield-world",
+        "source": "production-final-draw-geometry",
+        "anchor": {
+          "forward": 0.56,
+          "lateral": -0.08,
+          "facing": -0.028905,
+          "directionIndex": 2
+        }
+      },
+      "defaultScreenFootprint": 30.0894,
+      "narrowScreenFootprint": 24,
+      "minimumScreenFootprint": 24,
+      "defaultFacingMatchesShot": true,
+      "narrowFacingMatchesShot": true,
+      "passed": true
+    },
+    {
+      "actorId": "art-enemy-at",
+      "side": "enemy",
+      "visualClass": "anti_armor_infantry",
+      "shotId": "choreographed_shot_1",
+      "shotFacing": -3.065153640978324,
+      "defaultMuzzleFacing": -3.065154,
+      "narrowMuzzleFacing": -3.065154,
+      "defaultMuzzlePoint": {
+        "x": 844.4521,
+        "y": 432.3934,
+        "space": "battlefield-world",
+        "source": "production-final-draw-geometry",
+        "anchor": {
+          "forward": 0.68,
+          "lateral": -0.16,
+          "facing": -3.065154,
+          "directionIndex": 6
+        }
+      },
+      "narrowMuzzlePoint": {
+        "x": 836.9992,
+        "y": 433.9088,
+        "space": "battlefield-world",
+        "source": "production-final-draw-geometry",
+        "anchor": {
+          "forward": 0.68,
+          "lateral": -0.16,
+          "facing": -3.065154,
+          "directionIndex": 6
+        }
+      },
+      "defaultScreenFootprint": 33.4327,
+      "narrowScreenFootprint": 24,
+      "minimumScreenFootprint": 24,
+      "defaultFacingMatchesShot": true,
+      "narrowFacingMatchesShot": true,
+      "passed": true
+    },
+    {
+      "actorId": "unit_stage8g-c1-mining-1",
+      "side": "friendly",
+      "visualClass": "anti_armor_infantry",
+      "shotId": "choreographed_shot_88",
+      "shotFacing": -0.61319395343221,
+      "defaultMuzzleFacing": -0.613194,
+      "narrowMuzzleFacing": -0.613194,
+      "defaultMuzzlePoint": {
+        "x": 522.9628,
+        "y": 602.3871,
+        "space": "battlefield-world",
+        "source": "production-final-draw-geometry",
+        "anchor": {
+          "forward": 0.68,
+          "lateral": -0.16,
+          "facing": -0.613194,
+          "directionIndex": 1
+        }
+      },
+      "narrowMuzzlePoint": {
+        "x": 527.7827,
+        "y": 596.3005,
+        "space": "battlefield-world",
+        "source": "production-final-draw-geometry",
+        "anchor": {
+          "forward": 0.68,
+          "lateral": -0.16,
+          "facing": -0.613194,
+          "directionIndex": 1
+        }
+      },
+      "defaultScreenFootprint": 33.4327,
+      "narrowScreenFootprint": 24,
+      "minimumScreenFootprint": 24,
+      "defaultFacingMatchesShot": true,
+      "narrowFacingMatchesShot": true,
+      "passed": true
+    },
+    {
+      "actorId": "unit_stage8g-c1-mining-3",
+      "side": "friendly",
+      "visualClass": "mbt",
+      "shotId": "choreographed_shot_110",
+      "shotFacing": 0.40933109243816806,
+      "defaultMuzzleFacing": 0.409331,
+      "narrowMuzzleFacing": 0.409331,
+      "defaultMuzzlePoint": {
+        "x": 559.8766,
+        "y": 517.3155,
+        "space": "battlefield-world",
+        "source": "production-final-draw-geometry",
+        "anchor": {
+          "forward": 0.78,
+          "lateral": -0.02,
+          "facing": 0.409331,
+          "directionIndex": 3
+        }
+      },
+      "narrowMuzzlePoint": {
+        "x": 579.8261,
+        "y": 525.9152,
+        "space": "battlefield-world",
+        "source": "production-final-draw-geometry",
+        "anchor": {
+          "forward": 0.78,
+          "lateral": -0.02,
+          "facing": 0.409331,
+          "directionIndex": 3
+        }
+      },
+      "defaultScreenFootprint": 54.417,
+      "narrowScreenFootprint": 46,
+      "minimumScreenFootprint": 46,
+      "defaultFacingMatchesShot": true,
+      "narrowFacingMatchesShot": true,
+      "passed": true
+    }
+  ],
+  "requiredClasses": [
+    "infantry",
+    "anti_armor_infantry",
+    "mbt"
+  ],
+  "defaultAndNarrowChecked": true,
+  "passed": true
+}

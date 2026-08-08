@@ -1,0 +1,152 @@
+{
+  "stage": "8.2G-D-A.1a",
+  "frameCount": 12,
+  "frames": [
+    {
+      "semantic": "friendly-lineup",
+      "timeMs": 0,
+      "matchedActorIds": [
+        "art-friendly-mbt-wreck",
+        "unit_stage8g-c1-mining-3",
+        "unit_stage8g-c1-mining-1",
+        "unit_stage8g-c1-mining-0"
+      ],
+      "matchedShotIds": [],
+      "predicatePassed": true
+    },
+    {
+      "semantic": "enemy-lineup",
+      "timeMs": 0,
+      "matchedActorIds": [
+        "art-enemy-mbt",
+        "art-enemy-at",
+        "enemy_infantry_1",
+        "enemy_infantry_2",
+        "enemy_infantry_3"
+      ],
+      "matchedShotIds": [],
+      "predicatePassed": true
+    },
+    {
+      "semantic": "friendly-infantry-move",
+      "timeMs": 6637.5,
+      "matchedActorIds": [
+        "unit_stage8g-c1-mining-0"
+      ],
+      "matchedShotIds": [],
+      "predicatePassed": true
+    },
+    {
+      "semantic": "infantry-fire",
+      "timeMs": 13412.5,
+      "matchedActorIds": [
+        "enemy_infantry_1"
+      ],
+      "matchedShotIds": [
+        "visual_shot_1_anchor_0006"
+      ],
+      "predicatePassed": true
+    },
+    {
+      "semantic": "friendly-at-fire",
+      "timeMs": 14075,
+      "matchedActorIds": [
+        "unit_stage8g-c1-mining-1"
+      ],
+      "matchedShotIds": [
+        "choreographed_shot_88"
+      ],
+      "predicatePassed": true
+    },
+    {
+      "semantic": "enemy-at-fire",
+      "timeMs": 13837.5,
+      "matchedActorIds": [
+        "art-enemy-at"
+      ],
+      "matchedShotIds": [
+        "choreographed_shot_1"
+      ],
+      "predicatePassed": true
+    },
+    {
+      "semantic": "tank-hull-turret-separated",
+      "timeMs": 14512.5,
+      "matchedActorIds": [
+        "unit_stage8g-c1-mining-3"
+      ],
+      "matchedShotIds": [
+        "choreographed_shot_109",
+        "choreographed_shot_110"
+      ],
+      "predicatePassed": true
+    },
+    {
+      "semantic": "tank-fire",
+      "timeMs": 14237.5,
+      "matchedActorIds": [
+        "unit_stage8g-c1-mining-3"
+      ],
+      "matchedShotIds": [
+        "choreographed_shot_109"
+      ],
+      "predicatePassed": true
+    },
+    {
+      "semantic": "mixed-battle",
+      "timeMs": 13775,
+      "matchedActorIds": [
+        "art-friendly-mbt-wreck",
+        "unit_stage8g-c1-mining-3",
+        "unit_stage8g-c1-mining-1",
+        "unit_stage8g-c1-mining-0",
+        "art-enemy-mbt",
+        "art-enemy-at",
+        "enemy_infantry_1",
+        "enemy_infantry_2",
+        "enemy_infantry_3"
+      ],
+      "matchedShotIds": [
+        "visual_shot_1_anchor_0006",
+        "choreographed_shot_77",
+        "choreographed_shot_58",
+        "choreographed_shot_39",
+        "choreographed_shot_20",
+        "choreographed_shot_78",
+        "choreographed_shot_59",
+        "choreographed_shot_40",
+        "choreographed_shot_98"
+      ],
+      "predicatePassed": true
+    },
+    {
+      "semantic": "friendly-enemy-wrecks",
+      "timeMs": 33520,
+      "matchedActorIds": [],
+      "matchedShotIds": [],
+      "predicatePassed": true
+    },
+    {
+      "semantic": "narrow-readability",
+      "timeMs": 0,
+      "matchedActorIds": [
+        "art-friendly-mbt-wreck",
+        "unit_stage8g-c1-mining-3",
+        "unit_stage8g-c1-mining-1",
+        "unit_stage8g-c1-mining-0"
+      ],
+      "matchedShotIds": [],
+      "predicatePassed": true
+    },
+    {
+      "semantic": "asset-fallback",
+      "timeMs": 0,
+      "matchedActorIds": [
+        "unit_stage8g-c1-mining-0"
+      ],
+      "matchedShotIds": [],
+      "predicatePassed": true
+    }
+  ],
+  "passed": true
+}

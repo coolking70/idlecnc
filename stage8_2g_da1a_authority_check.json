@@ -1,0 +1,11 @@
+{
+  "stage": "8.2G-D-A.1a",
+  "shotCount": 150,
+  "changedSourceFacingCount": 0,
+  "changedSourcePositionCount": 0,
+  "changedTargetCount": 0,
+  "changedImpactCount": 0,
+  "changedShotTimeCount": 0,
+  "resultChanged": false,
+  "passed": true
+}

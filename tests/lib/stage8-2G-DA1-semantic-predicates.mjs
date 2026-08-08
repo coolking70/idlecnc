@@ -2,6 +2,7 @@ import { normalizeVisualUnitClass } from '../../js/battle-presentation/environme
 import { directionIndexFromRadians } from '../../js/battle-presentation/environment/animation-resolver.js';
 
 const EPS = 1e-7;
+const FACING_EPS = 1e-6;
 
 export const DA1_FRAME_DEFINITIONS = Object.freeze([
   { id: 'friendly-lineup', file: 'd-a1-01-friendly-unit-lineup.png', semantic: 'friendly-lineup', viewportKind: 'default', fallbackExpected: false },
@@ -71,6 +72,51 @@ function fireWeaponMatches(shot, kind) {
   return true;
 }
 
+function angleError(left, right) {
+  let delta = (Number(left) || 0) - (Number(right) || 0);
+  while (delta <= -Math.PI) delta += Math.PI * 2;
+  while (delta > Math.PI) delta -= Math.PI * 2;
+  return Math.abs(delta);
+}
+
+function nonTurretFacingProof(context, actor, shots) {
+  const row = rowFor(context, actor.id);
+  const shot = shots.find((candidate) => candidate.actorId === actor.id);
+  if (!row || !shot) return { passed: false, reason: 'matched_active_shot_or_screen_row_missing' };
+  const shotFacing = Number(shot.sourceFacingAtFire);
+  const bodyFacing = Number(row.bodyFacing ?? row.facing);
+  const muzzleFacing = Number(row.muzzleFacing ?? row.muzzleAnchor?.facing);
+  const bodyShotErrorRadians = angleError(bodyFacing, shotFacing);
+  const muzzleShotErrorRadians = angleError(muzzleFacing, shotFacing);
+  const spriteDirectionIndex = row.bodyDirectionIndex ?? row.directionIndex;
+  const shotDirectionIndex = directionIndexFromRadians(shotFacing);
+  const bodyFacesShot = Number.isFinite(bodyFacing) && bodyShotErrorRadians <= FACING_EPS;
+  const spriteDirectionMatchesShot = spriteDirectionIndex === shotDirectionIndex;
+  const muzzleFacingMatchesShot = Number.isFinite(muzzleFacing) && muzzleShotErrorRadians <= FACING_EPS;
+  return {
+    actorId: actor.id,
+    shotId: shot.id,
+    bodyFacing,
+    shotFacing,
+    bodyShotErrorRadians,
+    spriteDirectionIndex,
+    shotDirectionIndex,
+    muzzleFacing,
+    muzzleShotErrorRadians,
+    bodyFacesShot,
+    spriteDirectionMatchesShot,
+    muzzleFacingMatchesShot,
+    passed: bodyFacesShot && spriteDirectionMatchesShot && muzzleFacingMatchesShot
+  };
+}
+
+function nonTurretFireMatches(context, actor, visualClass, weaponKind = null) {
+  if (classOf(actor) !== visualClass || !firingActor(context, actor, visualClass) || !productionRow(context, actor)) return null;
+  const shots = activeShotFor(context, actor).filter((shot) => !weaponKind || fireWeaponMatches(shot, weaponKind));
+  const proof = nonTurretFacingProof(context, actor, shots);
+  return proof.passed ? proof : null;
+}
+
 function result(id, passed, matchedActorIds = [], matchedShotIds = [], details = {}) {
   return { id, passed: passed === true, matchedActorIds: [...new Set(matchedActorIds.filter(Boolean))], matchedShotIds: [...new Set(matchedShotIds.filter(Boolean))], ...details };
 }
@@ -92,13 +138,13 @@ export function evaluateDA1SemanticPredicate(id, context) {
     return result(id, matched.length > 0, matched.map(actorId));
   }
   if (id === 'infantry-fire') {
-    const matched = actors.filter((actor) => classOf(actor) === 'infantry' && firingActor(context, actor, 'infantry') && activeShotFor(context, actor).length > 0);
-    return result(id, matched.length > 0, matched.map(actorId), matched.flatMap((actor) => activeShotFor(context, actor).map((shot) => shot.id)));
+    const proofs = actors.map((actor) => nonTurretFireMatches(context, actor, 'infantry')).filter(Boolean);
+    return result(id, proofs.length > 0, proofs.map((proof) => proof.actorId), proofs.map((proof) => proof.shotId), { animation: 'fire', bodyFacesShot: proofs.length > 0, spriteDirectionMatchesShot: proofs.length > 0, muzzleFacingMatchesShot: proofs.length > 0, facingEvidence: proofs });
   }
   if (id === 'friendly-at-fire' || id === 'enemy-at-fire') {
     const side = id.startsWith('friendly') ? 'friendly' : 'enemy';
-    const matched = actors.filter((actor) => actor.side === side && classOf(actor) === 'anti_armor_infantry' && firingActor(context, actor, 'anti_armor_infantry') && activeShotFor(context, actor).some((shot) => fireWeaponMatches(shot, 'rocket')));
-    return result(id, matched.length > 0, matched.map(actorId), matched.flatMap((actor) => activeShotFor(context, actor).filter((shot) => fireWeaponMatches(shot, 'rocket')).map((shot) => shot.id)), { side, animation: 'fire', weaponKind: 'rocket' });
+    const proofs = actors.filter((actor) => actor.side === side).map((actor) => nonTurretFireMatches(context, actor, 'anti_armor_infantry', 'rocket')).filter(Boolean);
+    return result(id, proofs.length > 0, proofs.map((proof) => proof.actorId), proofs.map((proof) => proof.shotId), { side, animation: 'fire', weaponKind: 'rocket', bodyFacesShot: proofs.length > 0, spriteDirectionMatchesShot: proofs.length > 0, muzzleFacingMatchesShot: proofs.length > 0, facingEvidence: proofs });
   }
   if (id === 'tank-hull-turret-separated') {
     const matched = actors.filter((actor) => classOf(actor) === 'mbt' && (actor.aiming === true || actor.firing === true) && rowMatches(context, actor, (row) => row.actualDrawPath === 'drawImage:components' && row.hullDirectionIndex != null && row.turretDirectionIndex != null && row.hullDirectionIndex !== row.turretDirectionIndex));

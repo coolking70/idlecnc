@@ -478,3 +478,15 @@
 - [x] 新增 D-A.1 npm/CI gate、外部 ZIP builder/verifier 和 `STAGE8-2G-D-A-1-DELIVERY.md`；ZIP 不提交到 Git，最终 package record 放在 ZIP 外。
 - [x] D-A.1 external ZIP 已完成 hygiene 与 clean package verifier：`npm install --ignore-scripts --no-audit --no-fund`、完整 `npm test` 均通过；最终包 SHA/字节数以 ZIP 外 `stage8_2g_da1_final_package_record.json` 为准。
 - [x] 最终 D-A.1 本地 clean-package verifier、完整 `npm test`、浏览器证据与 17 类 tamper gate 均通过；已提交 `agent/stage8-2G-D-A-1-semantic-turret-closure`，独立验收仍需按最终外部 ZIP 重新执行。
+
+# Stage 8.2G-D-A.1a progress
+
+- [x] 读取 `stage8_2g_da1_final_head_reaudit.json` 作为失败基线；未导入生产代码、未删除或过滤失败样本。上一轮唯一阻断确认是 Infantry/AT 身体仍跟随 movementFacing。
+- [x] 新增集中式 `presentation-facing-policy.js`：`turret_weapon`、`body_aims_weapon`、`movement_only`；Infantry/AT/light vehicle 在 aim/fire/reload/cover-fire 时身体与武器指向 aim，MBT 保持 hull/turret 分离，support vehicle 不自动瞄准。
+- [x] Production Actor、Animation/Direction Resolver、Final Draw Spec、muzzle anchor、Universal Renderer screen metrics 统一暴露并消费 movement/aim/body/weapon/turret/shot facing；未修改 combat core、planner、choreographer、authority、environment、HUD 或 sprite art。
+- [x] 强化 `infantry-fire`、`friendly-at-fire`、`enemy-at-fire` 谓词，逐 Actor 使用 `shot.actorId` 匹配的 active shot，重新计算 body error、Sprite directionIndex 和 muzzle facing；新增 5 类 D-A.1a tamper，全部拒绝。
+- [x] D-A.1a Node/Chromium 证据：13/13 帧、13 个唯一 PNG、pageErrors=0、consoleErrors=0；覆盖友军/敌军 Infantry、友军/敌军 AT、友军 MBT hull/turret 分离、default/narrow muzzle 与 footprint。
+- [x] D-A.1 原有 13 帧和 17 类 tamper 已按新谓词重生成并通过；官方 `develop-web-game` Playwright 客户端已检查正式页面，`render_game_to_text` 正常、无控制台错误。
+- [x] D-A.1a 完整封包 clean verifier 已通过：ZIP SHA-256 `b5bb32b9c9beff297346b065af6953c6d6d2188332b1af29e068ed4cf948b1b8`，56,472,094 bytes，890 entries；clean install 后完整 `npm test` exitCode=0。
+- [x] D-A.1a 浏览器证据、13/13 唯一 PNG、5 类新增 tamper、150 发 authority 不变性和 D-A.1/D-A/C.1.1a/B.1.1a 回归均已通过；GitHub Actions 新 gate、提交/推送已进入收尾。
+- [ ] 独立审计方仍需按最终 D-A.1a ZIP 重新验收；audit JSON 仅为失败基线和回归样本，不代表独立批准。

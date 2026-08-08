@@ -39,7 +39,9 @@ function alignVisualMuzzleGeometry({ state, actors, camera, battlefieldBounds, v
     const sourceActor = {
       ...actor,
       visualCenter: { ...shot.sourcePositionAtFire },
-      facing: actor.facing,
+      facing: actor.bodyFacing ?? actor.facing,
+      bodyFacing: actor.bodyFacing ?? actor.facing,
+      weaponFacing: visualClass === 'mbt' ? finiteShotFacing : (actor.weaponFacing ?? actor.bodyFacing ?? actor.facing),
       turretFacing: visualClass === 'mbt' ? finiteShotFacing : actor.turretFacing,
       shotFacing: finiteShotFacing,
       visualState: 'fire',
