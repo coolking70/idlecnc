@@ -1,4 +1,5 @@
 import { PROHIBITED_UNARMED_VISUAL_STATES, WEAPON_TOPOLOGY } from '../environment/presentation-facing-policy.js';
+import { isRepairCapableActor } from './presentation-action-attribution.js';
 
 const lower = (value) => String(value || '').toLowerCase();
 const activeAt = (item, seconds) => Number(seconds) >= Number(item?.start ?? item?.t ?? item?.time ?? 0) - 1e-6 && Number(seconds) <= Number(item?.end ?? item?.impactTime ?? item?.t ?? item?.time ?? 0) + 1e-6;
@@ -31,9 +32,15 @@ export function evaluateProductionSemanticPredicate(name, state) {
     return result('scout-fire', matched.length > 0 && shotIds.length > 0, matched.map((actor) => actor.id), shotIds, { state: 'fire', activeShot: shotIds.length > 0 });
   }
   if (id.includes('repair')) {
-    const repairIds = new Set((state?.formalRepairEvents || []).filter((event) => Math.abs(Number(event.t) - seconds) < 1).map((event) => event.targetId));
-    const matched = actors.filter((actor) => repairIds.has(actor.id) && (actor.visualState === 'repair' || actor.visualStatus === 'repairing') && actor.drawSpec?.animation === 'repair');
-    return result('repair-action', matched.length > 0, matched.map((actor) => actor.id), [], { formalRepairEvent: matched.length > 0 });
+    const events = (state?.formalRepairEvents || []).filter((event) => seconds >= Number(event.t) - 1e-6 && seconds <= Number(event.t) + .42 + 1e-6 && event.sourceActorId && event.targetActorId);
+    for (const event of events) {
+      const source = actors.find((actor) => actor.id === event.sourceActorId);
+      const target = actors.find((actor) => actor.id === event.targetActorId);
+      const sourceBound = Boolean(source && source.id === event.sourceActorId && isRepairCapableActor(source) && source.repairSource === true && source.formalRepairSourceActive === true && source.visualState === 'repair' && source.visualStatus === 'repairing' && source.drawSpec?.animation === 'repair');
+      const targetBound = Boolean(target && target.id === event.targetActorId && target.id !== event.sourceActorId && target.repairTargeted === true && target.visualStatus === 'being_repaired' && target.drawSpec?.animation !== 'repair');
+      if (sourceBound && targetBound) return { ...result('repair-action', true, [source.id, target.id], [], { formalRepairEvent: true, formalRepairEventId: event.id || null, sourceActorId: source.id, targetActorId: target.id, sourceType: source.type || null, targetType: target.type || null, sourceAnimation: source.drawSpec.animation, sourceVisualState: source.visualState, targetBound: true, targetAnimation: target.drawSpec?.animation || null }), repairSourceActorId: source.id, repairTargetActorId: target.id, sourceAnimation: source.drawSpec.animation, sourceVisualState: source.visualState, targetBound: true, formalRepairEventId: event.id || null };
+    }
+    return { ...result('repair-action', false, [], [], { formalRepairEvent: false, targetBound: false, reason: 'repair_source_target_binding_missing' }), repairSourceActorId: null, repairTargetActorId: null, sourceAnimation: null, sourceVisualState: null, targetBound: false, formalRepairEventId: null };
   }
   if (id.includes('support')) {
     const matched = actors.filter((actor) => actorName(actor).includes('support') && actor.weaponTopology === WEAPON_TOPOLOGY.UNARMED && !PROHIBITED_UNARMED_VISUAL_STATES.includes(lower(actor.visualState)) && actor.firing !== true && actor.aiming !== true && actor.reloading !== true);
@@ -46,9 +53,11 @@ export function evaluateProductionSemanticPredicate(name, state) {
   }
   if (id.includes('retreat') || id.includes('rear-guard')) {
     const activeRetreats = (state?.engagementSchedule?.retreatOrders || []).filter((order) => activeAt(order, seconds));
-    const matched = actors.filter((actor) => actor.presentationMode === 'rear_guard_hold' && activeRetreats.some((order) => order.role === 'rear_guard' && (order.actorId === actor.id || (order.actorIds || []).includes(actor.id))));
-    const retreatPresent = actors.some((actor) => actor.presentationMode === 'retreat_route' || matched.some((guard) => guard.id === actor.id));
-    return result('retreat-rear-guard', matched.length > 0 && retreatPresent, matched.map((actor) => actor.id), activeShots(state).filter((shot) => matched.some((actor) => actor.id === shot.actorId)).map((shot) => shot.id), { retreatPresent, rearGuardPresent: matched.length > 0 });
+    const retreatActorIds = activeRetreats.filter((order) => order.role !== 'rear_guard').map((order) => order.actorId).filter((actorId) => actors.some((actor) => actor.id === actorId && actor.presentationMode === 'retreat_route'));
+    const rearGuardActorIds = activeRetreats.filter((order) => order.role === 'rear_guard').map((order) => order.actorId).filter((actorId) => actors.some((actor) => actor.id === actorId && actor.presentationMode === 'rear_guard_hold'));
+    const distinctPair = retreatActorIds.some((actorId) => rearGuardActorIds.every((guardId) => guardId !== actorId));
+    const matchedActorIds = [...new Set([...retreatActorIds, ...rearGuardActorIds])];
+    return result('retreat-rear-guard', retreatActorIds.length > 0 && rearGuardActorIds.length > 0 && distinctPair, matchedActorIds, activeShots(state).filter((shot) => rearGuardActorIds.includes(shot.actorId)).map((shot) => shot.id), { retreatPresent: retreatActorIds.length > 0, rearGuardPresent: rearGuardActorIds.length > 0, retreatActorIds, rearGuardActorIds, distinctPair });
   }
   return result(id || 'unknown', false, [], [], { reason: 'unknown_semantic_id' });
 }

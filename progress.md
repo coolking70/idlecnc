@@ -518,3 +518,17 @@
 - [x] ordinary `npm test` 通过并通过 `posttest` 纳入 D-B.1 浏览器/篡改链；CI 新增 `npm run test:stage8-2G-D-B-1`；clean install + package 内普通 `npm test` verifier 通过。
 - [x] 最终 ZIP：`iron-command-stage8-2G-D-B-1-semantic-responsive-closure.zip`，SHA-256 `e87f06a63d8770482501022c51ca6f6c20f27f6eb858bd80dad1192cbd8b9007`，62,690,107 bytes，980 entries；ZIP 不作为 Git 运行资源提交，外部 record 保留 package hash。
 - [ ] 独立审计方仍需按最终 D-B.1 ZIP 重新验收；审计 JSON 仍仅是外部失败基线，不代表独立批准。
+
+# Stage 8.2G-D-B.1a progress
+
+- [x] 以 D-B.1 commit `758e921df6360e1636a6f65e1be108b769d38559` 为基线；继续冻结 Formal Repair Authority、solver、planner、choreographer、routes、combat core、HUD art 与 responsive CSS。
+- [x] 新增 Presentation-only `presentation-action-attribution.js`：`actorId` 精确归属、`actorIds` 列表归属、`scope:'global'` 显式全局归属；缺少 actor id 不再默认广播。
+- [x] Formal Repair Event 只让合法 Repair Vehicle Source 进入 `repair` / `repairing` / `animation=repair`；Target 暴露 `being_repaired` / `repairTargeted`，保持自身 `idle` 等单位动画，不再被误判为 Source。
+- [x] Render State 的 `formalRepairEvents` 完整暴露 `id/t/actorId/targetId/sourceActorId/targetActorId/amount/sourceType/targetType`；Repair Predicate 同时绑定 Source、Target 与 Formal Event，并加入缺 Source/Target/错误 Source 负向测试。
+- [x] Retreat-Rear-Guard Predicate 现在必须同时存在独立 `retreat_route` Actor 与 `rear_guard_hold` Actor；只保留任一角色的篡改样本均失败。
+- [x] 新增 D-B.1a 时间轴扫描：Formal Victory、Formal Withdraw、Synthetic 三场景共 13 个 Repair Event，50ms 扫描异常 Repair 动画 `0`。
+- [x] 当前 Chromium 证据 7/7、唯一 PNG 7、pageErrors/consoleErrors `0`；Repair 截图四层绑定 `Screenshot = Browser Selection = HUD = Repair Source`，Formal Target 绑定一致；480/390 responsive 与 production leak 回归通过。
+- [x] 新增 action attribution、Repair attribution、Repair semantic binding、Retreat binding、Authority hash、12 类 D-B.1a tamper 与 developer selfcheck；D-B.1a tamper `12/12` 拒绝。
+- [x] `npm test`（含 posttest D-B.1a）、D-B.1/D-B/D-A.1a/D-A.1/D-A/C.1.1a/B.1.1a 回归及默认 clean package verifier 均通过。
+- [x] 最终 ZIP：`iron-command-stage8-2G-D-B-1a-repair-semantic-final.zip`，SHA-256 `da7a9263022441806a38fa37600f4aac935a715b07454fe77bb0c9bcc83adca9`，63,936,583 bytes，1009 entries；ZIP 内无 stale final package record，最终记录位于 ZIP 外。
+- [ ] 待创建 D-B.1a 分支并推送后确认 GitHub Actions Run/Job；独立审计方仍需按最终 D-B.1a ZIP 重新验收。

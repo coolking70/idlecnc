@@ -50,7 +50,7 @@ export function resolvePresentationVisualState({ actor = {}, visualClass = 'unkn
   if (topology !== WEAPON_TOPOLOGY.UNARMED || !PROHIBITED_UNARMED_VISUAL_STATES.includes(requested)) {
     return { visualState: requested, weaponTopology: topology, filtered: false, reason: null };
   }
-  if (formalRepair || normalizeVisualState(action) === 'repair') return { visualState: 'repair', weaponTopology: topology, filtered: true, reason: 'formal_repair_event_precedes_generic_fire' };
+  if (formalRepair) return { visualState: 'repair', weaponTopology: topology, filtered: true, reason: 'formal_repair_event_precedes_generic_fire' };
   return { visualState: unarmedFallbackState(action, fallback), weaponTopology: topology, filtered: true, reason: 'unarmed_combat_visual_prohibited' };
 }
 

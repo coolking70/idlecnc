@@ -1875,7 +1875,7 @@
           "timeMs": 13546,
           "phase": "first_contact",
           "sceneHash": "upf_b7f3e811",
-          "stateSignature": "60fd84979219ba5babfe9ae2335d96a4a1ff888d0a5bae22a007e3ee24f852ac",
+          "stateSignature": "777a22a5aff0cca89747858a948e7094ccf2dadda726666f99594df5626013f7",
           "semanticPredicates": {
             "firstContact": true,
             "mixedFire": false,
@@ -1924,7 +1924,7 @@
               "side": "enemy",
               "type": "enemy_at",
               "visualState": "search_target",
-              "currentAction": "fire",
+              "currentAction": "deploy",
               "presentationPosition": {
                 "x": 843.1242,
                 "y": 391
@@ -1939,7 +1939,7 @@
               "side": "enemy",
               "type": "enemy_at",
               "visualState": "search_target",
-              "currentAction": "fire",
+              "currentAction": "deploy",
               "presentationPosition": {
                 "x": 843.1242,
                 "y": 445.55
@@ -1969,7 +1969,7 @@
               "side": "enemy",
               "type": "enemy_infantry",
               "visualState": "search_target",
-              "currentAction": "fire",
+              "currentAction": "deploy",
               "presentationPosition": {
                 "x": 843.1242,
                 "y": 474
@@ -1984,7 +1984,7 @@
               "side": "enemy",
               "type": "enemy_infantry",
               "visualState": "search_target",
-              "currentAction": "fire",
+              "currentAction": "deploy",
               "presentationPosition": {
                 "x": 843.1242,
                 "y": 516
@@ -1999,7 +1999,7 @@
               "side": "enemy",
               "type": "enemy_infantry",
               "visualState": "search_target",
-              "currentAction": "fire",
+              "currentAction": "deploy",
               "presentationPosition": {
                 "x": 843.1242,
                 "y": 558
@@ -2014,7 +2014,7 @@
               "side": "friendly",
               "type": "infantry",
               "visualState": "search_target",
-              "currentAction": "fire",
+              "currentAction": "establish_fire_line",
               "presentationPosition": {
                 "x": 567.1026,
                 "y": 371.7643
@@ -2028,8 +2028,8 @@
               "actorId": "unit_fixture-u-2",
               "side": "friendly",
               "type": "at_infantry",
-              "visualState": "fire",
-              "currentAction": "fire",
+              "visualState": "idle",
+              "currentAction": "establish_fire_line",
               "presentationPosition": {
                 "x": 568.5965,
                 "y": 438.0466
@@ -2044,7 +2044,7 @@
               "side": "friendly",
               "type": "scout_car",
               "visualState": "search_target",
-              "currentAction": "fire",
+              "currentAction": "establish_fire_line",
               "presentationPosition": {
                 "x": 566.0989,
                 "y": 408.6506
@@ -2059,7 +2059,7 @@
               "side": "friendly",
               "type": "mbt",
               "visualState": "search_target",
-              "currentAction": "fire",
+              "currentAction": "establish_fire_line",
               "presentationPosition": {
                 "x": 564.9111,
                 "y": 477.7838
@@ -2074,7 +2074,7 @@
               "side": "friendly",
               "type": "mbt",
               "visualState": "aim",
-              "currentAction": "fire",
+              "currentAction": "establish_fire_line",
               "presentationPosition": {
                 "x": 566.2729,
                 "y": 534.7547
@@ -2089,7 +2089,7 @@
               "side": "friendly",
               "type": "repair_vehicle",
               "visualState": "idle",
-              "currentAction": "fire",
+              "currentAction": "establish_fire_line",
               "presentationPosition": {
                 "x": 697.0313,
                 "y": 403
@@ -2111,7 +2111,7 @@
                 "side": "enemy",
                 "type": "enemy_at",
                 "visualState": "search_target",
-                "currentAction": "fire",
+                "currentAction": "deploy",
                 "presentationPosition": {
                   "x": 843.1242,
                   "y": 391
@@ -2126,7 +2126,7 @@
                 "side": "enemy",
                 "type": "enemy_at",
                 "visualState": "search_target",
-                "currentAction": "fire",
+                "currentAction": "deploy",
                 "presentationPosition": {
                   "x": 843.1242,
                   "y": 445.55
@@ -2156,7 +2156,7 @@
                 "side": "enemy",
                 "type": "enemy_infantry",
                 "visualState": "search_target",
-                "currentAction": "fire",
+                "currentAction": "deploy",
                 "presentationPosition": {
                   "x": 843.1242,
                   "y": 474
@@ -2171,7 +2171,7 @@
                 "side": "enemy",
                 "type": "enemy_infantry",
                 "visualState": "search_target",
-                "currentAction": "fire",
+                "currentAction": "deploy",
                 "presentationPosition": {
                   "x": 843.1242,
                   "y": 516
@@ -2186,7 +2186,7 @@
                 "side": "enemy",
                 "type": "enemy_infantry",
                 "visualState": "search_target",
-                "currentAction": "fire",
+                "currentAction": "deploy",
                 "presentationPosition": {
                   "x": 843.1242,
                   "y": 558
@@ -2201,7 +2201,7 @@
                 "side": "friendly",
                 "type": "infantry",
                 "visualState": "search_target",
-                "currentAction": "fire",
+                "currentAction": "establish_fire_line",
                 "presentationPosition": {
                   "x": 567.1026,
                   "y": 371.7643
@@ -2215,8 +2215,8 @@
                 "actorId": "unit_fixture-u-2",
                 "side": "friendly",
                 "type": "at_infantry",
-                "visualState": "fire",
-                "currentAction": "fire",
+                "visualState": "idle",
+                "currentAction": "establish_fire_line",
                 "presentationPosition": {
                   "x": 568.5965,
                   "y": 438.0466
@@ -2231,7 +2231,7 @@
                 "side": "friendly",
                 "type": "scout_car",
                 "visualState": "search_target",
-                "currentAction": "fire",
+                "currentAction": "establish_fire_line",
                 "presentationPosition": {
                   "x": 566.0989,
                   "y": 408.6506
@@ -2246,7 +2246,7 @@
                 "side": "friendly",
                 "type": "mbt",
                 "visualState": "search_target",
-                "currentAction": "fire",
+                "currentAction": "establish_fire_line",
                 "presentationPosition": {
                   "x": 564.9111,
                   "y": 477.7838
@@ -2261,7 +2261,7 @@
                 "side": "friendly",
                 "type": "mbt",
                 "visualState": "aim",
-                "currentAction": "fire",
+                "currentAction": "establish_fire_line",
                 "presentationPosition": {
                   "x": 566.2729,
                   "y": 534.7547
@@ -2276,7 +2276,7 @@
                 "side": "friendly",
                 "type": "repair_vehicle",
                 "visualState": "idle",
-                "currentAction": "fire",
+                "currentAction": "establish_fire_line",
                 "presentationPosition": {
                   "x": 697.0313,
                   "y": 403
@@ -2407,7 +2407,7 @@
           "timeMs": 13690.031,
           "phase": "first_contact",
           "sceneHash": "upf_b7f3e811",
-          "stateSignature": "89cd435354a347a0a763c5cd2ce22608b87a9adf160820d59a9f7256be319a0a",
+          "stateSignature": "db0ca5f5f4f1c9dd303b4416b6c5ecfdb04a43fd77ef777b83d72a22929b3fe5",
           "semanticPredicates": {
             "firstContact": true,
             "mixedFire": true,
@@ -2466,7 +2466,7 @@
               "side": "enemy",
               "type": "enemy_at",
               "visualState": "aim",
-              "currentAction": "damage",
+              "currentAction": "deploy",
               "presentationPosition": {
                 "x": 840.5917,
                 "y": 391
@@ -2481,7 +2481,7 @@
               "side": "enemy",
               "type": "enemy_at",
               "visualState": "search_target",
-              "currentAction": "damage",
+              "currentAction": "deploy",
               "presentationPosition": {
                 "x": 840.5917,
                 "y": 445.55
@@ -2511,7 +2511,7 @@
               "side": "enemy",
               "type": "enemy_infantry",
               "visualState": "aim",
-              "currentAction": "damage",
+              "currentAction": "deploy",
               "presentationPosition": {
                 "x": 840.5917,
                 "y": 474
@@ -2526,7 +2526,7 @@
               "side": "enemy",
               "type": "enemy_infantry",
               "visualState": "aim",
-              "currentAction": "damage",
+              "currentAction": "deploy",
               "presentationPosition": {
                 "x": 840.5917,
                 "y": 516
@@ -2541,7 +2541,7 @@
               "side": "enemy",
               "type": "enemy_infantry",
               "visualState": "aim",
-              "currentAction": "damage",
+              "currentAction": "deploy",
               "presentationPosition": {
                 "x": 840.5917,
                 "y": 558
@@ -2556,7 +2556,7 @@
               "side": "friendly",
               "type": "infantry",
               "visualState": "aim",
-              "currentAction": "damage",
+              "currentAction": "establish_fire_line",
               "presentationPosition": {
                 "x": 569.6284,
                 "y": 371.7619
@@ -2570,8 +2570,8 @@
               "actorId": "unit_fixture-u-2",
               "side": "friendly",
               "type": "at_infantry",
-              "visualState": "move",
-              "currentAction": "damage",
+              "visualState": "idle",
+              "currentAction": "establish_fire_line",
               "presentationPosition": {
                 "x": 571.0771,
                 "y": 438.0466
@@ -2586,7 +2586,7 @@
               "side": "friendly",
               "type": "scout_car",
               "visualState": "search_target",
-              "currentAction": "damage",
+              "currentAction": "establish_fire_line",
               "presentationPosition": {
                 "x": 568.6545,
                 "y": 408.649
@@ -2601,7 +2601,7 @@
               "side": "friendly",
               "type": "mbt",
               "visualState": "search_target",
-              "currentAction": "damage",
+              "currentAction": "establish_fire_line",
               "presentationPosition": {
                 "x": 567.5032,
                 "y": 477.7874
@@ -2616,7 +2616,7 @@
               "side": "friendly",
               "type": "mbt",
               "visualState": "aim",
-              "currentAction": "damage",
+              "currentAction": "establish_fire_line",
               "presentationPosition": {
                 "x": 568.8237,
                 "y": 534.755
@@ -2631,7 +2631,7 @@
               "side": "friendly",
               "type": "repair_vehicle",
               "visualState": "hit",
-              "currentAction": "damage",
+              "currentAction": "establish_fire_line",
               "presentationPosition": {
                 "x": 697.0313,
                 "y": 403
@@ -2653,7 +2653,7 @@
                 "side": "enemy",
                 "type": "enemy_at",
                 "visualState": "aim",
-                "currentAction": "damage",
+                "currentAction": "deploy",
                 "presentationPosition": {
                   "x": 840.5917,
                   "y": 391
@@ -2668,7 +2668,7 @@
                 "side": "enemy",
                 "type": "enemy_at",
                 "visualState": "search_target",
-                "currentAction": "damage",
+                "currentAction": "deploy",
                 "presentationPosition": {
                   "x": 840.5917,
                   "y": 445.55
@@ -2698,7 +2698,7 @@
                 "side": "enemy",
                 "type": "enemy_infantry",
                 "visualState": "aim",
-                "currentAction": "damage",
+                "currentAction": "deploy",
                 "presentationPosition": {
                   "x": 840.5917,
                   "y": 474
@@ -2713,7 +2713,7 @@
                 "side": "enemy",
                 "type": "enemy_infantry",
                 "visualState": "aim",
-                "currentAction": "damage",
+                "currentAction": "deploy",
                 "presentationPosition": {
                   "x": 840.5917,
                   "y": 516
@@ -2728,7 +2728,7 @@
                 "side": "enemy",
                 "type": "enemy_infantry",
                 "visualState": "aim",
-                "currentAction": "damage",
+                "currentAction": "deploy",
                 "presentationPosition": {
                   "x": 840.5917,
                   "y": 558
@@ -2743,7 +2743,7 @@
                 "side": "friendly",
                 "type": "infantry",
                 "visualState": "aim",
-                "currentAction": "damage",
+                "currentAction": "establish_fire_line",
                 "presentationPosition": {
                   "x": 569.6284,
                   "y": 371.7619
@@ -2757,8 +2757,8 @@
                 "actorId": "unit_fixture-u-2",
                 "side": "friendly",
                 "type": "at_infantry",
-                "visualState": "move",
-                "currentAction": "damage",
+                "visualState": "idle",
+                "currentAction": "establish_fire_line",
                 "presentationPosition": {
                   "x": 571.0771,
                   "y": 438.0466
@@ -2773,7 +2773,7 @@
                 "side": "friendly",
                 "type": "scout_car",
                 "visualState": "search_target",
-                "currentAction": "damage",
+                "currentAction": "establish_fire_line",
                 "presentationPosition": {
                   "x": 568.6545,
                   "y": 408.649
@@ -2788,7 +2788,7 @@
                 "side": "friendly",
                 "type": "mbt",
                 "visualState": "search_target",
-                "currentAction": "damage",
+                "currentAction": "establish_fire_line",
                 "presentationPosition": {
                   "x": 567.5032,
                   "y": 477.7874
@@ -2803,7 +2803,7 @@
                 "side": "friendly",
                 "type": "mbt",
                 "visualState": "aim",
-                "currentAction": "damage",
+                "currentAction": "establish_fire_line",
                 "presentationPosition": {
                   "x": 568.8237,
                   "y": 534.755
@@ -2818,7 +2818,7 @@
                 "side": "friendly",
                 "type": "repair_vehicle",
                 "visualState": "hit",
-                "currentAction": "damage",
+                "currentAction": "establish_fire_line",
                 "presentationPosition": {
                   "x": 697.0313,
                   "y": 403
@@ -3035,7 +3035,7 @@
           "timeMs": 13728.114,
           "phase": "first_contact",
           "sceneHash": "upf_b7f3e811",
-          "stateSignature": "98f4a3fccc52d2a7ccba7c48420b5d34194b57e014b85c2149a0838af0cd1881",
+          "stateSignature": "0e4c332ca680d73dd16caee36403148d61ac86dcbb65ec94bcb8c3a0716bf5e5",
           "semanticPredicates": {
             "firstContact": true,
             "mixedFire": true,
@@ -3095,7 +3095,7 @@
               "side": "enemy",
               "type": "enemy_at",
               "visualState": "aim",
-              "currentAction": "damage",
+              "currentAction": "deploy",
               "presentationPosition": {
                 "x": 839.9221,
                 "y": 391
@@ -3110,7 +3110,7 @@
               "side": "enemy",
               "type": "enemy_at",
               "visualState": "search_target",
-              "currentAction": "damage",
+              "currentAction": "deploy",
               "presentationPosition": {
                 "x": 839.9221,
                 "y": 445.55
@@ -3140,7 +3140,7 @@
               "side": "enemy",
               "type": "enemy_infantry",
               "visualState": "aim",
-              "currentAction": "damage",
+              "currentAction": "deploy",
               "presentationPosition": {
                 "x": 839.9221,
                 "y": 474
@@ -3155,7 +3155,7 @@
               "side": "enemy",
               "type": "enemy_infantry",
               "visualState": "aim",
-              "currentAction": "damage",
+              "currentAction": "deploy",
               "presentationPosition": {
                 "x": 839.9221,
                 "y": 516
@@ -3170,7 +3170,7 @@
               "side": "enemy",
               "type": "enemy_infantry",
               "visualState": "aim",
-              "currentAction": "damage",
+              "currentAction": "deploy",
               "presentationPosition": {
                 "x": 839.9221,
                 "y": 558
@@ -3185,7 +3185,7 @@
               "side": "friendly",
               "type": "infantry",
               "visualState": "aim",
-              "currentAction": "damage",
+              "currentAction": "establish_fire_line",
               "presentationPosition": {
                 "x": 570.2963,
                 "y": 371.7612
@@ -3199,8 +3199,8 @@
               "actorId": "unit_fixture-u-2",
               "side": "friendly",
               "type": "at_infantry",
-              "visualState": "move",
-              "currentAction": "damage",
+              "visualState": "idle",
+              "currentAction": "establish_fire_line",
               "presentationPosition": {
                 "x": 571.733,
                 "y": 438.0467
@@ -3215,7 +3215,7 @@
               "side": "friendly",
               "type": "scout_car",
               "visualState": "aim",
-              "currentAction": "damage",
+              "currentAction": "establish_fire_line",
               "presentationPosition": {
                 "x": 569.3302,
                 "y": 408.6486
@@ -3230,7 +3230,7 @@
               "side": "friendly",
               "type": "mbt",
               "visualState": "search_target",
-              "currentAction": "damage",
+              "currentAction": "establish_fire_line",
               "presentationPosition": {
                 "x": 568.1885,
                 "y": 477.7884
@@ -3245,7 +3245,7 @@
               "side": "friendly",
               "type": "mbt",
               "visualState": "aim",
-              "currentAction": "damage",
+              "currentAction": "establish_fire_line",
               "presentationPosition": {
                 "x": 569.4982,
                 "y": 534.7551
@@ -3260,7 +3260,7 @@
               "side": "friendly",
               "type": "repair_vehicle",
               "visualState": "hit",
-              "currentAction": "damage",
+              "currentAction": "establish_fire_line",
               "presentationPosition": {
                 "x": 697.0313,
                 "y": 403
@@ -3282,7 +3282,7 @@
                 "side": "enemy",
                 "type": "enemy_at",
                 "visualState": "aim",
-                "currentAction": "damage",
+                "currentAction": "deploy",
                 "presentationPosition": {
                   "x": 839.9221,
                   "y": 391
@@ -3297,7 +3297,7 @@
                 "side": "enemy",
                 "type": "enemy_at",
                 "visualState": "search_target",
-                "currentAction": "damage",
+                "currentAction": "deploy",
                 "presentationPosition": {
                   "x": 839.9221,
                   "y": 445.55
@@ -3327,7 +3327,7 @@
                 "side": "enemy",
                 "type": "enemy_infantry",
                 "visualState": "aim",
-                "currentAction": "damage",
+                "currentAction": "deploy",
                 "presentationPosition": {
                   "x": 839.9221,
                   "y": 474
@@ -3342,7 +3342,7 @@
                 "side": "enemy",
                 "type": "enemy_infantry",
                 "visualState": "aim",
-                "currentAction": "damage",
+                "currentAction": "deploy",
                 "presentationPosition": {
                   "x": 839.9221,
                   "y": 516
@@ -3357,7 +3357,7 @@
                 "side": "enemy",
                 "type": "enemy_infantry",
                 "visualState": "aim",
-                "currentAction": "damage",
+                "currentAction": "deploy",
                 "presentationPosition": {
                   "x": 839.9221,
                   "y": 558
@@ -3372,7 +3372,7 @@
                 "side": "friendly",
                 "type": "infantry",
                 "visualState": "aim",
-                "currentAction": "damage",
+                "currentAction": "establish_fire_line",
                 "presentationPosition": {
                   "x": 570.2963,
                   "y": 371.7612
@@ -3386,8 +3386,8 @@
                 "actorId": "unit_fixture-u-2",
                 "side": "friendly",
                 "type": "at_infantry",
-                "visualState": "move",
-                "currentAction": "damage",
+                "visualState": "idle",
+                "currentAction": "establish_fire_line",
                 "presentationPosition": {
                   "x": 571.733,
                   "y": 438.0467
@@ -3402,7 +3402,7 @@
                 "side": "friendly",
                 "type": "scout_car",
                 "visualState": "aim",
-                "currentAction": "damage",
+                "currentAction": "establish_fire_line",
                 "presentationPosition": {
                   "x": 569.3302,
                   "y": 408.6486
@@ -3417,7 +3417,7 @@
                 "side": "friendly",
                 "type": "mbt",
                 "visualState": "search_target",
-                "currentAction": "damage",
+                "currentAction": "establish_fire_line",
                 "presentationPosition": {
                   "x": 568.1885,
                   "y": 477.7884
@@ -3432,7 +3432,7 @@
                 "side": "friendly",
                 "type": "mbt",
                 "visualState": "aim",
-                "currentAction": "damage",
+                "currentAction": "establish_fire_line",
                 "presentationPosition": {
                   "x": 569.4982,
                   "y": 534.7551
@@ -3447,7 +3447,7 @@
                 "side": "friendly",
                 "type": "repair_vehicle",
                 "visualState": "hit",
-                "currentAction": "damage",
+                "currentAction": "establish_fire_line",
                 "presentationPosition": {
                   "x": 697.0313,
                   "y": 403
@@ -3680,7 +3680,7 @@
           "timeMs": 14255,
           "phase": "main_engagement",
           "sceneHash": "upf_b7f3e811",
-          "stateSignature": "37872043a5064896e122442e1e3d4478882aacb945cb9660971a7a83886c8977",
+          "stateSignature": "f175ac5f0629b9d16217345b130c89758a9d11f8a2f188e3e1c45a77c4d6f190",
           "semanticPredicates": {
             "firstContact": false,
             "mixedFire": true,
@@ -3758,7 +3758,7 @@
               "side": "enemy",
               "type": "enemy_at",
               "visualState": "aim",
-              "currentAction": "damage",
+              "currentAction": "deploy",
               "presentationPosition": {
                 "x": 830.658,
                 "y": 391
@@ -3773,7 +3773,7 @@
               "side": "enemy",
               "type": "enemy_at",
               "visualState": "aim",
-              "currentAction": "damage",
+              "currentAction": "deploy",
               "presentationPosition": {
                 "x": 830.658,
                 "y": 445.55
@@ -3833,7 +3833,7 @@
               "side": "enemy",
               "type": "enemy_infantry",
               "visualState": "aim",
-              "currentAction": "damage",
+              "currentAction": "deploy",
               "presentationPosition": {
                 "x": 830.658,
                 "y": 558
@@ -3848,7 +3848,7 @@
               "side": "friendly",
               "type": "infantry",
               "visualState": "aim",
-              "currentAction": "damage",
+              "currentAction": "establish_fire_line",
               "presentationPosition": {
                 "x": 579.5358,
                 "y": 371.7531
@@ -3862,8 +3862,8 @@
               "actorId": "unit_fixture-u-2",
               "side": "friendly",
               "type": "at_infantry",
-              "visualState": "move",
-              "currentAction": "damage",
+              "visualState": "idle",
+              "currentAction": "establish_fire_line",
               "presentationPosition": {
                 "x": 580.8071,
                 "y": 438.0468
@@ -3878,7 +3878,7 @@
               "side": "friendly",
               "type": "scout_car",
               "visualState": "reload",
-              "currentAction": "damage",
+              "currentAction": "establish_fire_line",
               "presentationPosition": {
                 "x": 578.6792,
                 "y": 408.6432
@@ -3893,7 +3893,7 @@
               "side": "friendly",
               "type": "mbt",
               "visualState": "aim",
-              "currentAction": "damage",
+              "currentAction": "establish_fire_line",
               "presentationPosition": {
                 "x": 577.6708,
                 "y": 477.8007
@@ -3908,7 +3908,7 @@
               "side": "friendly",
               "type": "mbt",
               "visualState": "aim",
-              "currentAction": "damage",
+              "currentAction": "establish_fire_line",
               "presentationPosition": {
                 "x": 578.8295,
                 "y": 534.7562
@@ -3923,7 +3923,7 @@
               "side": "friendly",
               "type": "repair_vehicle",
               "visualState": "hit",
-              "currentAction": "damage",
+              "currentAction": "establish_fire_line",
               "presentationPosition": {
                 "x": 697.0313,
                 "y": 403
@@ -3945,7 +3945,7 @@
                 "side": "enemy",
                 "type": "enemy_at",
                 "visualState": "aim",
-                "currentAction": "damage",
+                "currentAction": "deploy",
                 "presentationPosition": {
                   "x": 830.658,
                   "y": 391
@@ -3960,7 +3960,7 @@
                 "side": "enemy",
                 "type": "enemy_at",
                 "visualState": "aim",
-                "currentAction": "damage",
+                "currentAction": "deploy",
                 "presentationPosition": {
                   "x": 830.658,
                   "y": 445.55
@@ -4020,7 +4020,7 @@
                 "side": "enemy",
                 "type": "enemy_infantry",
                 "visualState": "aim",
-                "currentAction": "damage",
+                "currentAction": "deploy",
                 "presentationPosition": {
                   "x": 830.658,
                   "y": 558
@@ -4035,7 +4035,7 @@
                 "side": "friendly",
                 "type": "infantry",
                 "visualState": "aim",
-                "currentAction": "damage",
+                "currentAction": "establish_fire_line",
                 "presentationPosition": {
                   "x": 579.5358,
                   "y": 371.7531
@@ -4049,8 +4049,8 @@
                 "actorId": "unit_fixture-u-2",
                 "side": "friendly",
                 "type": "at_infantry",
-                "visualState": "move",
-                "currentAction": "damage",
+                "visualState": "idle",
+                "currentAction": "establish_fire_line",
                 "presentationPosition": {
                   "x": 580.8071,
                   "y": 438.0468
@@ -4065,7 +4065,7 @@
                 "side": "friendly",
                 "type": "scout_car",
                 "visualState": "reload",
-                "currentAction": "damage",
+                "currentAction": "establish_fire_line",
                 "presentationPosition": {
                   "x": 578.6792,
                   "y": 408.6432
@@ -4080,7 +4080,7 @@
                 "side": "friendly",
                 "type": "mbt",
                 "visualState": "aim",
-                "currentAction": "damage",
+                "currentAction": "establish_fire_line",
                 "presentationPosition": {
                   "x": 577.6708,
                   "y": 477.8007
@@ -4095,7 +4095,7 @@
                 "side": "friendly",
                 "type": "mbt",
                 "visualState": "aim",
-                "currentAction": "damage",
+                "currentAction": "establish_fire_line",
                 "presentationPosition": {
                   "x": 578.8295,
                   "y": 534.7562
@@ -4110,7 +4110,7 @@
                 "side": "friendly",
                 "type": "repair_vehicle",
                 "visualState": "hit",
-                "currentAction": "damage",
+                "currentAction": "establish_fire_line",
                 "presentationPosition": {
                   "x": 697.0313,
                   "y": 403
@@ -4371,7 +4371,7 @@
           "timeMs": 14588.163,
           "phase": "main_engagement",
           "sceneHash": "upf_b7f3e811",
-          "stateSignature": "8a6943503024b7c1305b334d8efa24738578da67eaf6708f8914c5cc7ede1099",
+          "stateSignature": "4f59b952aef75e84216f70b5a8b11449c038155a2d97a0a5ba88a5b4186826e0",
           "semanticPredicates": {
             "firstContact": false,
             "mixedFire": true,
@@ -4459,7 +4459,7 @@
               "side": "enemy",
               "type": "enemy_at",
               "visualState": "aim",
-              "currentAction": "damage",
+              "currentAction": "deploy",
               "presentationPosition": {
                 "x": 824.8001,
                 "y": 391
@@ -4474,7 +4474,7 @@
               "side": "enemy",
               "type": "enemy_at",
               "visualState": "fire",
-              "currentAction": "damage",
+              "currentAction": "deploy",
               "presentationPosition": {
                 "x": 824.8001,
                 "y": 445.55
@@ -4549,7 +4549,7 @@
               "side": "friendly",
               "type": "infantry",
               "visualState": "reload",
-              "currentAction": "damage",
+              "currentAction": "establish_fire_line",
               "presentationPosition": {
                 "x": 585.3781,
                 "y": 371.7485
@@ -4563,8 +4563,8 @@
               "actorId": "unit_fixture-u-2",
               "side": "friendly",
               "type": "at_infantry",
-              "visualState": "move",
-              "currentAction": "damage",
+              "visualState": "idle",
+              "currentAction": "establish_fire_line",
               "presentationPosition": {
                 "x": 586.5445,
                 "y": 438.0469
@@ -4579,7 +4579,7 @@
               "side": "friendly",
               "type": "scout_car",
               "visualState": "fire",
-              "currentAction": "damage",
+              "currentAction": "establish_fire_line",
               "presentationPosition": {
                 "x": 584.5911,
                 "y": 408.6401
@@ -4594,7 +4594,7 @@
               "side": "friendly",
               "type": "mbt",
               "visualState": "aim",
-              "currentAction": "damage",
+              "currentAction": "establish_fire_line",
               "presentationPosition": {
                 "x": 583.6668,
                 "y": 477.8077
@@ -4609,7 +4609,7 @@
               "side": "friendly",
               "type": "mbt",
               "visualState": "reload",
-              "currentAction": "damage",
+              "currentAction": "establish_fire_line",
               "presentationPosition": {
                 "x": 584.7299,
                 "y": 534.7568
@@ -4624,7 +4624,7 @@
               "side": "friendly",
               "type": "repair_vehicle",
               "visualState": "hit",
-              "currentAction": "damage",
+              "currentAction": "establish_fire_line",
               "presentationPosition": {
                 "x": 697.0313,
                 "y": 403
@@ -4646,7 +4646,7 @@
                 "side": "enemy",
                 "type": "enemy_at",
                 "visualState": "aim",
-                "currentAction": "damage",
+                "currentAction": "deploy",
                 "presentationPosition": {
                   "x": 824.8001,
                   "y": 391
@@ -4661,7 +4661,7 @@
                 "side": "enemy",
                 "type": "enemy_at",
                 "visualState": "fire",
-                "currentAction": "damage",
+                "currentAction": "deploy",
                 "presentationPosition": {
                   "x": 824.8001,
                   "y": 445.55
@@ -4736,7 +4736,7 @@
                 "side": "friendly",
                 "type": "infantry",
                 "visualState": "reload",
-                "currentAction": "damage",
+                "currentAction": "establish_fire_line",
                 "presentationPosition": {
                   "x": 585.3781,
                   "y": 371.7485
@@ -4750,8 +4750,8 @@
                 "actorId": "unit_fixture-u-2",
                 "side": "friendly",
                 "type": "at_infantry",
-                "visualState": "move",
-                "currentAction": "damage",
+                "visualState": "idle",
+                "currentAction": "establish_fire_line",
                 "presentationPosition": {
                   "x": 586.5445,
                   "y": 438.0469
@@ -4766,7 +4766,7 @@
                 "side": "friendly",
                 "type": "scout_car",
                 "visualState": "fire",
-                "currentAction": "damage",
+                "currentAction": "establish_fire_line",
                 "presentationPosition": {
                   "x": 584.5911,
                   "y": 408.6401
@@ -4781,7 +4781,7 @@
                 "side": "friendly",
                 "type": "mbt",
                 "visualState": "aim",
-                "currentAction": "damage",
+                "currentAction": "establish_fire_line",
                 "presentationPosition": {
                   "x": 583.6668,
                   "y": 477.8077
@@ -4796,7 +4796,7 @@
                 "side": "friendly",
                 "type": "mbt",
                 "visualState": "reload",
-                "currentAction": "damage",
+                "currentAction": "establish_fire_line",
                 "presentationPosition": {
                   "x": 584.7299,
                   "y": 534.7568
@@ -4811,7 +4811,7 @@
                 "side": "friendly",
                 "type": "repair_vehicle",
                 "visualState": "hit",
-                "currentAction": "damage",
+                "currentAction": "establish_fire_line",
                 "presentationPosition": {
                   "x": 697.0313,
                   "y": 403
@@ -5096,7 +5096,7 @@
           "timeMs": 16619.078,
           "phase": "main_engagement",
           "sceneHash": "upf_b7f3e811",
-          "stateSignature": "03f97068f501daf1465e883456572b97df5b9f09972af2cbeee3467405831d26",
+          "stateSignature": "a1af7ea8477bc7164a13fbf2d846ecb051de7d74391d62ccb0bec77b9c876ea1",
           "semanticPredicates": {
             "firstContact": false,
             "mixedFire": true,
@@ -5197,7 +5197,7 @@
               "side": "enemy",
               "type": "enemy_infantry",
               "visualState": "reload",
-              "currentAction": "suppress",
+              "currentAction": "damage",
               "presentationPosition": {
                 "x": 789.091,
                 "y": 419.45
@@ -5212,7 +5212,7 @@
               "side": "enemy",
               "type": "enemy_infantry",
               "visualState": "suppressed",
-              "currentAction": "suppress",
+              "currentAction": "damage",
               "presentationPosition": {
                 "x": 789.091,
                 "y": 474
@@ -5227,7 +5227,7 @@
               "side": "enemy",
               "type": "enemy_infantry",
               "visualState": "suppressed",
-              "currentAction": "suppress",
+              "currentAction": "damage",
               "presentationPosition": {
                 "x": 789.091,
                 "y": 516
@@ -5242,7 +5242,7 @@
               "side": "enemy",
               "type": "enemy_infantry",
               "visualState": "hit",
-              "currentAction": "suppress",
+              "currentAction": "damage",
               "presentationPosition": {
                 "x": 789.091,
                 "y": 558
@@ -5257,7 +5257,7 @@
               "side": "friendly",
               "type": "infantry",
               "visualState": "aim",
-              "currentAction": "suppress",
+              "currentAction": "establish_fire_line",
               "presentationPosition": {
                 "x": 735.7666,
                 "y": 391
@@ -5272,7 +5272,7 @@
               "side": "friendly",
               "type": "at_infantry",
               "visualState": "cover_fire",
-              "currentAction": "suppress",
+              "currentAction": "establish_fire_line",
               "presentationPosition": {
                 "x": 652.7703,
                 "y": 441.5297
@@ -5287,7 +5287,7 @@
               "side": "friendly",
               "type": "scout_car",
               "visualState": "aim",
-              "currentAction": "suppress",
+              "currentAction": "damage",
               "presentationPosition": {
                 "x": 647.1728,
                 "y": 406.2863
@@ -5331,8 +5331,8 @@
               "actorId": "unit_fixture-u-6",
               "side": "friendly",
               "type": "repair_vehicle",
-              "visualState": "idle",
-              "currentAction": "suppress",
+              "visualState": "move",
+              "currentAction": "repair_approach",
               "presentationPosition": {
                 "x": 699.8585,
                 "y": 402.8137
@@ -5384,7 +5384,7 @@
                 "side": "enemy",
                 "type": "enemy_infantry",
                 "visualState": "reload",
-                "currentAction": "suppress",
+                "currentAction": "damage",
                 "presentationPosition": {
                   "x": 789.091,
                   "y": 419.45
@@ -5399,7 +5399,7 @@
                 "side": "enemy",
                 "type": "enemy_infantry",
                 "visualState": "suppressed",
-                "currentAction": "suppress",
+                "currentAction": "damage",
                 "presentationPosition": {
                   "x": 789.091,
                   "y": 474
@@ -5414,7 +5414,7 @@
                 "side": "enemy",
                 "type": "enemy_infantry",
                 "visualState": "suppressed",
-                "currentAction": "suppress",
+                "currentAction": "damage",
                 "presentationPosition": {
                   "x": 789.091,
                   "y": 516
@@ -5429,7 +5429,7 @@
                 "side": "enemy",
                 "type": "enemy_infantry",
                 "visualState": "hit",
-                "currentAction": "suppress",
+                "currentAction": "damage",
                 "presentationPosition": {
                   "x": 789.091,
                   "y": 558
@@ -5444,7 +5444,7 @@
                 "side": "friendly",
                 "type": "infantry",
                 "visualState": "aim",
-                "currentAction": "suppress",
+                "currentAction": "establish_fire_line",
                 "presentationPosition": {
                   "x": 735.7666,
                   "y": 391
@@ -5459,7 +5459,7 @@
                 "side": "friendly",
                 "type": "at_infantry",
                 "visualState": "cover_fire",
-                "currentAction": "suppress",
+                "currentAction": "establish_fire_line",
                 "presentationPosition": {
                   "x": 652.7703,
                   "y": 441.5297
@@ -5474,7 +5474,7 @@
                 "side": "friendly",
                 "type": "scout_car",
                 "visualState": "aim",
-                "currentAction": "suppress",
+                "currentAction": "damage",
                 "presentationPosition": {
                   "x": 647.1728,
                   "y": 406.2863
@@ -5518,8 +5518,8 @@
                 "actorId": "unit_fixture-u-6",
                 "side": "friendly",
                 "type": "repair_vehicle",
-                "visualState": "idle",
-                "currentAction": "suppress",
+                "visualState": "move",
+                "currentAction": "repair_approach",
                 "presentationPosition": {
                   "x": 699.8585,
                   "y": 402.8137
@@ -5721,7 +5721,7 @@
           "timeMs": 13768.114,
           "phase": "first_contact",
           "sceneHash": "upf_b7f3e811",
-          "stateSignature": "ecb3463b0b1735bf257e7729e8a9ea11caeed67ad50fc2fbae62ebb4292ad794",
+          "stateSignature": "217e55faa425c8afa1eb0b7fb731124953479b369863e405ef98f6f632c25b63",
           "semanticPredicates": {
             "firstContact": true,
             "mixedFire": true,
@@ -5783,7 +5783,7 @@
               "side": "enemy",
               "type": "enemy_at",
               "visualState": "aim",
-              "currentAction": "damage",
+              "currentAction": "deploy",
               "presentationPosition": {
                 "x": 839.2188,
                 "y": 391
@@ -5798,7 +5798,7 @@
               "side": "enemy",
               "type": "enemy_at",
               "visualState": "aim",
-              "currentAction": "damage",
+              "currentAction": "deploy",
               "presentationPosition": {
                 "x": 839.2188,
                 "y": 445.55
@@ -5828,7 +5828,7 @@
               "side": "enemy",
               "type": "enemy_infantry",
               "visualState": "aim",
-              "currentAction": "damage",
+              "currentAction": "deploy",
               "presentationPosition": {
                 "x": 839.2188,
                 "y": 474
@@ -5843,7 +5843,7 @@
               "side": "enemy",
               "type": "enemy_infantry",
               "visualState": "aim",
-              "currentAction": "damage",
+              "currentAction": "deploy",
               "presentationPosition": {
                 "x": 839.2188,
                 "y": 516
@@ -5858,7 +5858,7 @@
               "side": "enemy",
               "type": "enemy_infantry",
               "visualState": "aim",
-              "currentAction": "damage",
+              "currentAction": "deploy",
               "presentationPosition": {
                 "x": 839.2188,
                 "y": 558
@@ -5873,7 +5873,7 @@
               "side": "friendly",
               "type": "infantry",
               "visualState": "aim",
-              "currentAction": "damage",
+              "currentAction": "establish_fire_line",
               "presentationPosition": {
                 "x": 570.9977,
                 "y": 371.7606
@@ -5887,8 +5887,8 @@
               "actorId": "unit_fixture-u-2",
               "side": "friendly",
               "type": "at_infantry",
-              "visualState": "move",
-              "currentAction": "damage",
+              "visualState": "idle",
+              "currentAction": "establish_fire_line",
               "presentationPosition": {
                 "x": 572.4219,
                 "y": 438.0467
@@ -5903,7 +5903,7 @@
               "side": "friendly",
               "type": "scout_car",
               "visualState": "aim",
-              "currentAction": "damage",
+              "currentAction": "establish_fire_line",
               "presentationPosition": {
                 "x": 570.0399,
                 "y": 408.6482
@@ -5918,7 +5918,7 @@
               "side": "friendly",
               "type": "mbt",
               "visualState": "search_target",
-              "currentAction": "damage",
+              "currentAction": "establish_fire_line",
               "presentationPosition": {
                 "x": 568.9084,
                 "y": 477.7894
@@ -5933,7 +5933,7 @@
               "side": "friendly",
               "type": "mbt",
               "visualState": "aim",
-              "currentAction": "damage",
+              "currentAction": "establish_fire_line",
               "presentationPosition": {
                 "x": 570.2066,
                 "y": 534.7552
@@ -5948,7 +5948,7 @@
               "side": "friendly",
               "type": "repair_vehicle",
               "visualState": "hit",
-              "currentAction": "damage",
+              "currentAction": "establish_fire_line",
               "presentationPosition": {
                 "x": 697.0313,
                 "y": 403
@@ -5970,7 +5970,7 @@
                 "side": "enemy",
                 "type": "enemy_at",
                 "visualState": "aim",
-                "currentAction": "damage",
+                "currentAction": "deploy",
                 "presentationPosition": {
                   "x": 839.2188,
                   "y": 391
@@ -5985,7 +5985,7 @@
                 "side": "enemy",
                 "type": "enemy_at",
                 "visualState": "aim",
-                "currentAction": "damage",
+                "currentAction": "deploy",
                 "presentationPosition": {
                   "x": 839.2188,
                   "y": 445.55
@@ -6015,7 +6015,7 @@
                 "side": "enemy",
                 "type": "enemy_infantry",
                 "visualState": "aim",
-                "currentAction": "damage",
+                "currentAction": "deploy",
                 "presentationPosition": {
                   "x": 839.2188,
                   "y": 474
@@ -6030,7 +6030,7 @@
                 "side": "enemy",
                 "type": "enemy_infantry",
                 "visualState": "aim",
-                "currentAction": "damage",
+                "currentAction": "deploy",
                 "presentationPosition": {
                   "x": 839.2188,
                   "y": 516
@@ -6045,7 +6045,7 @@
                 "side": "enemy",
                 "type": "enemy_infantry",
                 "visualState": "aim",
-                "currentAction": "damage",
+                "currentAction": "deploy",
                 "presentationPosition": {
                   "x": 839.2188,
                   "y": 558
@@ -6060,7 +6060,7 @@
                 "side": "friendly",
                 "type": "infantry",
                 "visualState": "aim",
-                "currentAction": "damage",
+                "currentAction": "establish_fire_line",
                 "presentationPosition": {
                   "x": 570.9977,
                   "y": 371.7606
@@ -6074,8 +6074,8 @@
                 "actorId": "unit_fixture-u-2",
                 "side": "friendly",
                 "type": "at_infantry",
-                "visualState": "move",
-                "currentAction": "damage",
+                "visualState": "idle",
+                "currentAction": "establish_fire_line",
                 "presentationPosition": {
                   "x": 572.4219,
                   "y": 438.0467
@@ -6090,7 +6090,7 @@
                 "side": "friendly",
                 "type": "scout_car",
                 "visualState": "aim",
-                "currentAction": "damage",
+                "currentAction": "establish_fire_line",
                 "presentationPosition": {
                   "x": 570.0399,
                   "y": 408.6482
@@ -6105,7 +6105,7 @@
                 "side": "friendly",
                 "type": "mbt",
                 "visualState": "search_target",
-                "currentAction": "damage",
+                "currentAction": "establish_fire_line",
                 "presentationPosition": {
                   "x": 568.9084,
                   "y": 477.7894
@@ -6120,7 +6120,7 @@
                 "side": "friendly",
                 "type": "mbt",
                 "visualState": "aim",
-                "currentAction": "damage",
+                "currentAction": "establish_fire_line",
                 "presentationPosition": {
                   "x": 570.2066,
                   "y": 534.7552
@@ -6135,7 +6135,7 @@
                 "side": "friendly",
                 "type": "repair_vehicle",
                 "visualState": "hit",
-                "currentAction": "damage",
+                "currentAction": "establish_fire_line",
                 "presentationPosition": {
                   "x": 697.0313,
                   "y": 403
@@ -6390,7 +6390,7 @@
           "timeMs": 16480.38,
           "phase": "main_engagement",
           "sceneHash": "upf_b7f3e811",
-          "stateSignature": "e8606579844696d692af21aa794208895f1fdf07eaf567ea01b7615ce7120aca",
+          "stateSignature": "c2db4cadd5342ed2f5a22de635128c7d0bfc8cafdbedb22db5b993a2e514e7b2",
           "semanticPredicates": {
             "firstContact": false,
             "mixedFire": true,
@@ -6458,7 +6458,7 @@
               "side": "enemy",
               "type": "enemy_at",
               "visualState": "reload",
-              "currentAction": "damage",
+              "currentAction": "suppress",
               "presentationPosition": {
                 "x": 791.5297,
                 "y": 391
@@ -6473,7 +6473,7 @@
               "side": "enemy",
               "type": "enemy_at",
               "visualState": "reload",
-              "currentAction": "damage",
+              "currentAction": "suppress",
               "presentationPosition": {
                 "x": 791.5297,
                 "y": 445.55
@@ -6548,7 +6548,7 @@
               "side": "friendly",
               "type": "infantry",
               "visualState": "turn",
-              "currentAction": "damage",
+              "currentAction": "establish_fire_line",
               "presentationPosition": {
                 "x": 731.1976,
                 "y": 389.11
@@ -6563,7 +6563,7 @@
               "side": "friendly",
               "type": "at_infantry",
               "visualState": "cover_fire",
-              "currentAction": "damage",
+              "currentAction": "establish_fire_line",
               "presentationPosition": {
                 "x": 650,
                 "y": 443.9
@@ -6593,7 +6593,7 @@
               "side": "friendly",
               "type": "mbt",
               "visualState": "reload",
-              "currentAction": "damage",
+              "currentAction": "suppress",
               "presentationPosition": {
                 "x": 618.2053,
                 "y": 469
@@ -6622,8 +6622,8 @@
               "actorId": "unit_fixture-u-6",
               "side": "friendly",
               "type": "repair_vehicle",
-              "visualState": "idle",
-              "currentAction": "damage",
+              "visualState": "move",
+              "currentAction": "repair_approach",
               "presentationPosition": {
                 "x": 697.6715,
                 "y": 404.6706
@@ -6645,7 +6645,7 @@
                 "side": "enemy",
                 "type": "enemy_at",
                 "visualState": "reload",
-                "currentAction": "damage",
+                "currentAction": "suppress",
                 "presentationPosition": {
                   "x": 791.5297,
                   "y": 391
@@ -6660,7 +6660,7 @@
                 "side": "enemy",
                 "type": "enemy_at",
                 "visualState": "reload",
-                "currentAction": "damage",
+                "currentAction": "suppress",
                 "presentationPosition": {
                   "x": 791.5297,
                   "y": 445.55
@@ -6735,7 +6735,7 @@
                 "side": "friendly",
                 "type": "infantry",
                 "visualState": "turn",
-                "currentAction": "damage",
+                "currentAction": "establish_fire_line",
                 "presentationPosition": {
                   "x": 731.1976,
                   "y": 389.11
@@ -6750,7 +6750,7 @@
                 "side": "friendly",
                 "type": "at_infantry",
                 "visualState": "cover_fire",
-                "currentAction": "damage",
+                "currentAction": "establish_fire_line",
                 "presentationPosition": {
                   "x": 650,
                   "y": 443.9
@@ -6780,7 +6780,7 @@
                 "side": "friendly",
                 "type": "mbt",
                 "visualState": "reload",
-                "currentAction": "damage",
+                "currentAction": "suppress",
                 "presentationPosition": {
                   "x": 618.2053,
                   "y": 469
@@ -6809,8 +6809,8 @@
                 "actorId": "unit_fixture-u-6",
                 "side": "friendly",
                 "type": "repair_vehicle",
-                "visualState": "idle",
-                "currentAction": "damage",
+                "visualState": "move",
+                "currentAction": "repair_approach",
                 "presentationPosition": {
                   "x": 697.6715,
                   "y": 404.6706
@@ -7012,7 +7012,7 @@
           "timeMs": 33840,
           "phase": "battle_end",
           "sceneHash": "upf_b7f3e811",
-          "stateSignature": "d3be25ba1742cd3140b3e533264bfc6f8282a3fe907629a410c0ff9aade5d498",
+          "stateSignature": "35fd1b654f60b99e5aa59dacabd2a6dc8622301fc1ef8eaab2778157cbc0d3e9",
           "semanticPredicates": {
             "firstContact": false,
             "mixedFire": false,
@@ -7058,7 +7058,7 @@
               "side": "enemy",
               "type": "enemy_at",
               "visualState": "wreck",
-              "currentAction": "result",
+              "currentAction": "damage",
               "presentationPosition": {
                 "x": 886,
                 "y": 276.3759
@@ -7073,7 +7073,7 @@
               "side": "enemy",
               "type": "enemy_at",
               "visualState": "wreck",
-              "currentAction": "result",
+              "currentAction": "destroy",
               "presentationPosition": {
                 "x": 903.3081,
                 "y": 433
@@ -7088,7 +7088,7 @@
               "side": "enemy",
               "type": "enemy_infantry",
               "visualState": "wreck",
-              "currentAction": "result",
+              "currentAction": "damage",
               "presentationPosition": {
                 "x": 838.6376,
                 "y": 432
@@ -7103,7 +7103,7 @@
               "side": "enemy",
               "type": "enemy_infantry",
               "visualState": "wreck",
-              "currentAction": "result",
+              "currentAction": "damage",
               "presentationPosition": {
                 "x": 942.5497,
                 "y": 421.8395
@@ -7118,7 +7118,7 @@
               "side": "enemy",
               "type": "enemy_infantry",
               "visualState": "wreck",
-              "currentAction": "result",
+              "currentAction": "damage",
               "presentationPosition": {
                 "x": 768.4489,
                 "y": 516
@@ -7133,7 +7133,7 @@
               "side": "enemy",
               "type": "enemy_infantry",
               "visualState": "wreck",
-              "currentAction": "result",
+              "currentAction": "damage",
               "presentationPosition": {
                 "x": 788.56,
                 "y": 558
@@ -7193,7 +7193,7 @@
               "side": "friendly",
               "type": "mbt",
               "visualState": "wreck",
-              "currentAction": "result",
+              "currentAction": "suppress",
               "presentationPosition": {
                 "x": 759.903,
                 "y": 469
@@ -7245,7 +7245,7 @@
                 "side": "enemy",
                 "type": "enemy_at",
                 "visualState": "wreck",
-                "currentAction": "result",
+                "currentAction": "damage",
                 "presentationPosition": {
                   "x": 886,
                   "y": 276.3759
@@ -7260,7 +7260,7 @@
                 "side": "enemy",
                 "type": "enemy_at",
                 "visualState": "wreck",
-                "currentAction": "result",
+                "currentAction": "destroy",
                 "presentationPosition": {
                   "x": 903.3081,
                   "y": 433
@@ -7275,7 +7275,7 @@
                 "side": "enemy",
                 "type": "enemy_infantry",
                 "visualState": "wreck",
-                "currentAction": "result",
+                "currentAction": "damage",
                 "presentationPosition": {
                   "x": 838.6376,
                   "y": 432
@@ -7290,7 +7290,7 @@
                 "side": "enemy",
                 "type": "enemy_infantry",
                 "visualState": "wreck",
-                "currentAction": "result",
+                "currentAction": "damage",
                 "presentationPosition": {
                   "x": 942.5497,
                   "y": 421.8395
@@ -7305,7 +7305,7 @@
                 "side": "enemy",
                 "type": "enemy_infantry",
                 "visualState": "wreck",
-                "currentAction": "result",
+                "currentAction": "damage",
                 "presentationPosition": {
                   "x": 768.4489,
                   "y": 516
@@ -7320,7 +7320,7 @@
                 "side": "enemy",
                 "type": "enemy_infantry",
                 "visualState": "wreck",
-                "currentAction": "result",
+                "currentAction": "damage",
                 "presentationPosition": {
                   "x": 788.56,
                   "y": 558
@@ -7380,7 +7380,7 @@
                 "side": "friendly",
                 "type": "mbt",
                 "visualState": "wreck",
-                "currentAction": "result",
+                "currentAction": "suppress",
                 "presentationPosition": {
                   "x": 759.903,
                   "y": 469
@@ -9552,7 +9552,7 @@
           "timeMs": 28837,
           "phase": "critical_event",
           "sceneHash": "upf_7af1e100",
-          "stateSignature": "d78e9ba2eb0ea21de21985d319575e0f33809cb15873aa37414030c65e30743b",
+          "stateSignature": "627272c0cb0dadada9acce2231cc26f2ccf9ce43f7be63789366898a55189ad7",
           "semanticPredicates": {
             "firstContact": false,
             "mixedFire": false,
@@ -9607,7 +9607,7 @@
               "side": "enemy",
               "type": "enemy_at",
               "visualState": "wreck",
-              "currentAction": "retreat",
+              "currentAction": "damage",
               "presentationPosition": {
                 "x": 886,
                 "y": 326.7612
@@ -9622,7 +9622,7 @@
               "side": "enemy",
               "type": "enemy_at",
               "visualState": "wreck",
-              "currentAction": "retreat",
+              "currentAction": "damage",
               "presentationPosition": {
                 "x": 834.7196,
                 "y": 433
@@ -9637,7 +9637,7 @@
               "side": "enemy",
               "type": "enemy_infantry",
               "visualState": "wreck",
-              "currentAction": "retreat",
+              "currentAction": "damage",
               "presentationPosition": {
                 "x": 784.2364,
                 "y": 432
@@ -9652,7 +9652,7 @@
               "side": "enemy",
               "type": "enemy_infantry",
               "visualState": "turn",
-              "currentAction": "retreat",
+              "currentAction": "destroy",
               "presentationPosition": {
                 "x": 917.4655,
                 "y": 297.6911
@@ -9667,7 +9667,7 @@
               "side": "enemy",
               "type": "enemy_infantry",
               "visualState": "suppressed",
-              "currentAction": "retreat",
+              "currentAction": "damage",
               "presentationPosition": {
                 "x": 886,
                 "y": 455.4067
@@ -9682,7 +9682,7 @@
               "side": "enemy",
               "type": "enemy_infantry",
               "visualState": "destroying",
-              "currentAction": "retreat",
+              "currentAction": "damage",
               "presentationPosition": {
                 "x": 946,
                 "y": 573.8333
@@ -9779,7 +9779,7 @@
                 "side": "enemy",
                 "type": "enemy_at",
                 "visualState": "wreck",
-                "currentAction": "retreat",
+                "currentAction": "damage",
                 "presentationPosition": {
                   "x": 886,
                   "y": 326.7612
@@ -9794,7 +9794,7 @@
                 "side": "enemy",
                 "type": "enemy_at",
                 "visualState": "wreck",
-                "currentAction": "retreat",
+                "currentAction": "damage",
                 "presentationPosition": {
                   "x": 834.7196,
                   "y": 433
@@ -9809,7 +9809,7 @@
                 "side": "enemy",
                 "type": "enemy_infantry",
                 "visualState": "wreck",
-                "currentAction": "retreat",
+                "currentAction": "damage",
                 "presentationPosition": {
                   "x": 784.2364,
                   "y": 432
@@ -9824,7 +9824,7 @@
                 "side": "enemy",
                 "type": "enemy_infantry",
                 "visualState": "turn",
-                "currentAction": "retreat",
+                "currentAction": "destroy",
                 "presentationPosition": {
                   "x": 917.4655,
                   "y": 297.6911
@@ -9839,7 +9839,7 @@
                 "side": "enemy",
                 "type": "enemy_infantry",
                 "visualState": "suppressed",
-                "currentAction": "retreat",
+                "currentAction": "damage",
                 "presentationPosition": {
                   "x": 886,
                   "y": 455.4067
@@ -9854,7 +9854,7 @@
                 "side": "enemy",
                 "type": "enemy_infantry",
                 "visualState": "destroying",
-                "currentAction": "retreat",
+                "currentAction": "damage",
                 "presentationPosition": {
                   "x": 946,
                   "y": 573.8333
@@ -10090,7 +10090,7 @@
           "timeMs": 29177,
           "phase": "critical_event",
           "sceneHash": "upf_7af1e100",
-          "stateSignature": "ce9ce293256b7c5763be4f74bb7dea9150dde1af116d28b1b53d8b1fcefdaa9a",
+          "stateSignature": "ffa9d2bb0dc7d737839b4617d5a23828522f64a34e56e760f5027f233eb82295",
           "semanticPredicates": {
             "firstContact": false,
             "mixedFire": false,
@@ -10140,7 +10140,7 @@
               "side": "enemy",
               "type": "enemy_at",
               "visualState": "wreck",
-              "currentAction": "retreat",
+              "currentAction": "damage",
               "presentationPosition": {
                 "x": 886,
                 "y": 326.7612
@@ -10155,7 +10155,7 @@
               "side": "enemy",
               "type": "enemy_at",
               "visualState": "wreck",
-              "currentAction": "retreat",
+              "currentAction": "damage",
               "presentationPosition": {
                 "x": 834.7196,
                 "y": 433
@@ -10170,7 +10170,7 @@
               "side": "enemy",
               "type": "enemy_infantry",
               "visualState": "wreck",
-              "currentAction": "retreat",
+              "currentAction": "damage",
               "presentationPosition": {
                 "x": 784.2364,
                 "y": 432
@@ -10185,7 +10185,7 @@
               "side": "enemy",
               "type": "enemy_infantry",
               "visualState": "search_target",
-              "currentAction": "retreat",
+              "currentAction": "destroy",
               "presentationPosition": {
                 "x": 927.3995,
                 "y": 326.9681
@@ -10200,7 +10200,7 @@
               "side": "enemy",
               "type": "enemy_infantry",
               "visualState": "suppressed",
-              "currentAction": "retreat",
+              "currentAction": "damage",
               "presentationPosition": {
                 "x": 886,
                 "y": 449.2785
@@ -10215,7 +10215,7 @@
               "side": "enemy",
               "type": "enemy_infantry",
               "visualState": "destroying",
-              "currentAction": "retreat",
+              "currentAction": "damage",
               "presentationPosition": {
                 "x": 946,
                 "y": 573.8333
@@ -10312,7 +10312,7 @@
                 "side": "enemy",
                 "type": "enemy_at",
                 "visualState": "wreck",
-                "currentAction": "retreat",
+                "currentAction": "damage",
                 "presentationPosition": {
                   "x": 886,
                   "y": 326.7612
@@ -10327,7 +10327,7 @@
                 "side": "enemy",
                 "type": "enemy_at",
                 "visualState": "wreck",
-                "currentAction": "retreat",
+                "currentAction": "damage",
                 "presentationPosition": {
                   "x": 834.7196,
                   "y": 433
@@ -10342,7 +10342,7 @@
                 "side": "enemy",
                 "type": "enemy_infantry",
                 "visualState": "wreck",
-                "currentAction": "retreat",
+                "currentAction": "damage",
                 "presentationPosition": {
                   "x": 784.2364,
                   "y": 432
@@ -10357,7 +10357,7 @@
                 "side": "enemy",
                 "type": "enemy_infantry",
                 "visualState": "search_target",
-                "currentAction": "retreat",
+                "currentAction": "destroy",
                 "presentationPosition": {
                   "x": 927.3995,
                   "y": 326.9681
@@ -10372,7 +10372,7 @@
                 "side": "enemy",
                 "type": "enemy_infantry",
                 "visualState": "suppressed",
-                "currentAction": "retreat",
+                "currentAction": "damage",
                 "presentationPosition": {
                   "x": 886,
                   "y": 449.2785
@@ -10387,7 +10387,7 @@
                 "side": "enemy",
                 "type": "enemy_infantry",
                 "visualState": "destroying",
-                "currentAction": "retreat",
+                "currentAction": "damage",
                 "presentationPosition": {
                   "x": 946,
                   "y": 573.8333
@@ -10588,7 +10588,7 @@
           "timeMs": 29957.14,
           "phase": "critical_event",
           "sceneHash": "upf_7af1e100",
-          "stateSignature": "a40f7aab9b7c1210d42a5d0f3beb6764a9e77c2db8b68e3263a2ca19fe29ac50",
+          "stateSignature": "46631c7cf63f02d07235e0be046c19c9b23b70e38399783dbad5005c02d657f6",
           "semanticPredicates": {
             "firstContact": false,
             "mixedFire": false,
@@ -10642,7 +10642,7 @@
               "side": "enemy",
               "type": "enemy_at",
               "visualState": "wreck",
-              "currentAction": "retreat",
+              "currentAction": "damage",
               "presentationPosition": {
                 "x": 886,
                 "y": 326.7612
@@ -10657,7 +10657,7 @@
               "side": "enemy",
               "type": "enemy_at",
               "visualState": "wreck",
-              "currentAction": "retreat",
+              "currentAction": "damage",
               "presentationPosition": {
                 "x": 834.7196,
                 "y": 433
@@ -10672,7 +10672,7 @@
               "side": "enemy",
               "type": "enemy_infantry",
               "visualState": "wreck",
-              "currentAction": "retreat",
+              "currentAction": "damage",
               "presentationPosition": {
                 "x": 784.2364,
                 "y": 432
@@ -10687,7 +10687,7 @@
               "side": "enemy",
               "type": "enemy_infantry",
               "visualState": "search_target",
-              "currentAction": "retreat",
+              "currentAction": "destroy",
               "presentationPosition": {
                 "x": 926.0822,
                 "y": 333.9933
@@ -10702,7 +10702,7 @@
               "side": "enemy",
               "type": "enemy_infantry",
               "visualState": "suppressed",
-              "currentAction": "retreat",
+              "currentAction": "damage",
               "presentationPosition": {
                 "x": 913.8707,
                 "y": 450.9007
@@ -10717,7 +10717,7 @@
               "side": "enemy",
               "type": "enemy_infantry",
               "visualState": "wreck",
-              "currentAction": "retreat",
+              "currentAction": "damage",
               "presentationPosition": {
                 "x": 946,
                 "y": 573.8333
@@ -10814,7 +10814,7 @@
                 "side": "enemy",
                 "type": "enemy_at",
                 "visualState": "wreck",
-                "currentAction": "retreat",
+                "currentAction": "damage",
                 "presentationPosition": {
                   "x": 886,
                   "y": 326.7612
@@ -10829,7 +10829,7 @@
                 "side": "enemy",
                 "type": "enemy_at",
                 "visualState": "wreck",
-                "currentAction": "retreat",
+                "currentAction": "damage",
                 "presentationPosition": {
                   "x": 834.7196,
                   "y": 433
@@ -10844,7 +10844,7 @@
                 "side": "enemy",
                 "type": "enemy_infantry",
                 "visualState": "wreck",
-                "currentAction": "retreat",
+                "currentAction": "damage",
                 "presentationPosition": {
                   "x": 784.2364,
                   "y": 432
@@ -10859,7 +10859,7 @@
                 "side": "enemy",
                 "type": "enemy_infantry",
                 "visualState": "search_target",
-                "currentAction": "retreat",
+                "currentAction": "destroy",
                 "presentationPosition": {
                   "x": 926.0822,
                   "y": 333.9933
@@ -10874,7 +10874,7 @@
                 "side": "enemy",
                 "type": "enemy_infantry",
                 "visualState": "suppressed",
-                "currentAction": "retreat",
+                "currentAction": "damage",
                 "presentationPosition": {
                   "x": 913.8707,
                   "y": 450.9007
@@ -10889,7 +10889,7 @@
                 "side": "enemy",
                 "type": "enemy_infantry",
                 "visualState": "wreck",
-                "currentAction": "retreat",
+                "currentAction": "damage",
                 "presentationPosition": {
                   "x": 946,
                   "y": 573.8333
@@ -11097,7 +11097,7 @@
           "timeMs": 29977,
           "phase": "critical_event",
           "sceneHash": "upf_7af1e100",
-          "stateSignature": "25d9a47d8a882d72efa0e56f393e3ea9bdf300639dab9b4edb428bb2ac9c4d6e",
+          "stateSignature": "470c5d982a71b29c01525d1623fde88e8b5ab8f19f1d24570ab0ba2a4cca8ed0",
           "semanticPredicates": {
             "firstContact": false,
             "mixedFire": false,
@@ -11151,7 +11151,7 @@
               "side": "enemy",
               "type": "enemy_at",
               "visualState": "wreck",
-              "currentAction": "retreat",
+              "currentAction": "damage",
               "presentationPosition": {
                 "x": 886,
                 "y": 326.7612
@@ -11166,7 +11166,7 @@
               "side": "enemy",
               "type": "enemy_at",
               "visualState": "wreck",
-              "currentAction": "retreat",
+              "currentAction": "damage",
               "presentationPosition": {
                 "x": 834.7196,
                 "y": 433
@@ -11181,7 +11181,7 @@
               "side": "enemy",
               "type": "enemy_infantry",
               "visualState": "wreck",
-              "currentAction": "retreat",
+              "currentAction": "damage",
               "presentationPosition": {
                 "x": 784.2364,
                 "y": 432
@@ -11196,7 +11196,7 @@
               "side": "enemy",
               "type": "enemy_infantry",
               "visualState": "search_target",
-              "currentAction": "retreat",
+              "currentAction": "destroy",
               "presentationPosition": {
                 "x": 926.4764,
                 "y": 333.0162
@@ -11211,7 +11211,7 @@
               "side": "enemy",
               "type": "enemy_infantry",
               "visualState": "suppressed",
-              "currentAction": "retreat",
+              "currentAction": "damage",
               "presentationPosition": {
                 "x": 915.0752,
                 "y": 451.2205
@@ -11226,7 +11226,7 @@
               "side": "enemy",
               "type": "enemy_infantry",
               "visualState": "wreck",
-              "currentAction": "retreat",
+              "currentAction": "damage",
               "presentationPosition": {
                 "x": 946,
                 "y": 573.8333
@@ -11323,7 +11323,7 @@
                 "side": "enemy",
                 "type": "enemy_at",
                 "visualState": "wreck",
-                "currentAction": "retreat",
+                "currentAction": "damage",
                 "presentationPosition": {
                   "x": 886,
                   "y": 326.7612
@@ -11338,7 +11338,7 @@
                 "side": "enemy",
                 "type": "enemy_at",
                 "visualState": "wreck",
-                "currentAction": "retreat",
+                "currentAction": "damage",
                 "presentationPosition": {
                   "x": 834.7196,
                   "y": 433
@@ -11353,7 +11353,7 @@
                 "side": "enemy",
                 "type": "enemy_infantry",
                 "visualState": "wreck",
-                "currentAction": "retreat",
+                "currentAction": "damage",
                 "presentationPosition": {
                   "x": 784.2364,
                   "y": 432
@@ -11368,7 +11368,7 @@
                 "side": "enemy",
                 "type": "enemy_infantry",
                 "visualState": "search_target",
-                "currentAction": "retreat",
+                "currentAction": "destroy",
                 "presentationPosition": {
                   "x": 926.4764,
                   "y": 333.0162
@@ -11383,7 +11383,7 @@
                 "side": "enemy",
                 "type": "enemy_infantry",
                 "visualState": "suppressed",
-                "currentAction": "retreat",
+                "currentAction": "damage",
                 "presentationPosition": {
                   "x": 915.0752,
                   "y": 451.2205
@@ -11398,7 +11398,7 @@
                 "side": "enemy",
                 "type": "enemy_infantry",
                 "visualState": "wreck",
-                "currentAction": "retreat",
+                "currentAction": "damage",
                 "presentationPosition": {
                   "x": 946,
                   "y": 573.8333
@@ -11606,7 +11606,7 @@
           "timeMs": 29627,
           "phase": "critical_event",
           "sceneHash": "upf_7af1e100",
-          "stateSignature": "555c90cf337d975dc1f7559219fc07f11b45538c0f83de8cd1eb040e3d6fd488",
+          "stateSignature": "34a04691abde37697c3f5d38ec6d27c91a98fe3c499eec59fd8ba61ea63b8d3f",
           "semanticPredicates": {
             "firstContact": false,
             "mixedFire": false,
@@ -11657,7 +11657,7 @@
               "side": "enemy",
               "type": "enemy_at",
               "visualState": "wreck",
-              "currentAction": "retreat",
+              "currentAction": "damage",
               "presentationPosition": {
                 "x": 886,
                 "y": 326.7612
@@ -11672,7 +11672,7 @@
               "side": "enemy",
               "type": "enemy_at",
               "visualState": "wreck",
-              "currentAction": "retreat",
+              "currentAction": "damage",
               "presentationPosition": {
                 "x": 834.7196,
                 "y": 433
@@ -11687,7 +11687,7 @@
               "side": "enemy",
               "type": "enemy_infantry",
               "visualState": "wreck",
-              "currentAction": "retreat",
+              "currentAction": "damage",
               "presentationPosition": {
                 "x": 784.2364,
                 "y": 432
@@ -11702,7 +11702,7 @@
               "side": "enemy",
               "type": "enemy_infantry",
               "visualState": "search_target",
-              "currentAction": "retreat",
+              "currentAction": "destroy",
               "presentationPosition": {
                 "x": 919.5287,
                 "y": 350.2366
@@ -11717,7 +11717,7 @@
               "side": "enemy",
               "type": "enemy_infantry",
               "visualState": "suppressed",
-              "currentAction": "retreat",
+              "currentAction": "damage",
               "presentationPosition": {
                 "x": 893.848,
                 "y": 445.5839
@@ -11732,7 +11732,7 @@
               "side": "enemy",
               "type": "enemy_infantry",
               "visualState": "destroying",
-              "currentAction": "retreat",
+              "currentAction": "damage",
               "presentationPosition": {
                 "x": 946,
                 "y": 573.8333
@@ -11829,7 +11829,7 @@
                 "side": "enemy",
                 "type": "enemy_at",
                 "visualState": "wreck",
-                "currentAction": "retreat",
+                "currentAction": "damage",
                 "presentationPosition": {
                   "x": 886,
                   "y": 326.7612
@@ -11844,7 +11844,7 @@
                 "side": "enemy",
                 "type": "enemy_at",
                 "visualState": "wreck",
-                "currentAction": "retreat",
+                "currentAction": "damage",
                 "presentationPosition": {
                   "x": 834.7196,
                   "y": 433
@@ -11859,7 +11859,7 @@
                 "side": "enemy",
                 "type": "enemy_infantry",
                 "visualState": "wreck",
-                "currentAction": "retreat",
+                "currentAction": "damage",
                 "presentationPosition": {
                   "x": 784.2364,
                   "y": 432
@@ -11874,7 +11874,7 @@
                 "side": "enemy",
                 "type": "enemy_infantry",
                 "visualState": "search_target",
-                "currentAction": "retreat",
+                "currentAction": "destroy",
                 "presentationPosition": {
                   "x": 919.5287,
                   "y": 350.2366
@@ -11889,7 +11889,7 @@
                 "side": "enemy",
                 "type": "enemy_infantry",
                 "visualState": "suppressed",
-                "currentAction": "retreat",
+                "currentAction": "damage",
                 "presentationPosition": {
                   "x": 893.848,
                   "y": 445.5839
@@ -11904,7 +11904,7 @@
                 "side": "enemy",
                 "type": "enemy_infantry",
                 "visualState": "destroying",
-                "currentAction": "retreat",
+                "currentAction": "damage",
                 "presentationPosition": {
                   "x": 946,
                   "y": 573.8333
@@ -12095,7 +12095,7 @@
           "timeMs": 13418,
           "phase": "first_contact",
           "sceneHash": "upf_7af1e100",
-          "stateSignature": "9c6c3bc4a9176678f725bc878dcb8e188a0b3f99f26b52dd2b84a50f762fc98e",
+          "stateSignature": "6fa2dd6da67989f83aca55be7436fc9c9f369e39eac40d209aa7a21ad329d551",
           "semanticPredicates": {
             "firstContact": true,
             "mixedFire": false,
@@ -12145,7 +12145,7 @@
               "side": "enemy",
               "type": "enemy_at",
               "visualState": "search_target",
-              "currentAction": "fire",
+              "currentAction": "deploy",
               "presentationPosition": {
                 "x": 843.1225,
                 "y": 391
@@ -12160,7 +12160,7 @@
               "side": "enemy",
               "type": "enemy_at",
               "visualState": "search_target",
-              "currentAction": "fire",
+              "currentAction": "deploy",
               "presentationPosition": {
                 "x": 843.1225,
                 "y": 445.55
@@ -12190,7 +12190,7 @@
               "side": "enemy",
               "type": "enemy_infantry",
               "visualState": "search_target",
-              "currentAction": "fire",
+              "currentAction": "deploy",
               "presentationPosition": {
                 "x": 843.1225,
                 "y": 474
@@ -12205,7 +12205,7 @@
               "side": "enemy",
               "type": "enemy_infantry",
               "visualState": "search_target",
-              "currentAction": "fire",
+              "currentAction": "deploy",
               "presentationPosition": {
                 "x": 843.1225,
                 "y": 516
@@ -12220,7 +12220,7 @@
               "side": "enemy",
               "type": "enemy_infantry",
               "visualState": "aim",
-              "currentAction": "fire",
+              "currentAction": "deploy",
               "presentationPosition": {
                 "x": 843.1225,
                 "y": 558
@@ -12235,7 +12235,7 @@
               "side": "friendly",
               "type": "infantry",
               "visualState": "search_target",
-              "currentAction": "fire",
+              "currentAction": "establish_fire_line",
               "presentationPosition": {
                 "x": 605.5969,
                 "y": 391
@@ -12249,8 +12249,8 @@
               "actorId": "unit_fixture-u-2",
               "side": "friendly",
               "type": "at_infantry",
-              "visualState": "fire",
-              "currentAction": "fire",
+              "visualState": "idle",
+              "currentAction": "establish_fire_line",
               "presentationPosition": {
                 "x": 566.8775,
                 "y": 433
@@ -12265,7 +12265,7 @@
               "side": "friendly",
               "type": "scout_car",
               "visualState": "search_target",
-              "currentAction": "fire",
+              "currentAction": "establish_fire_line",
               "presentationPosition": {
                 "x": 605.5969,
                 "y": 443
@@ -12280,7 +12280,7 @@
               "side": "friendly",
               "type": "mbt",
               "visualState": "search_target",
-              "currentAction": "fire",
+              "currentAction": "establish_fire_line",
               "presentationPosition": {
                 "x": 566.179,
                 "y": 495
@@ -12295,7 +12295,7 @@
               "side": "friendly",
               "type": "repair_vehicle",
               "visualState": "idle",
-              "currentAction": "fire",
+              "currentAction": "establish_fire_line",
               "presentationPosition": {
                 "x": 663.1217,
                 "y": 429
@@ -12317,7 +12317,7 @@
                 "side": "enemy",
                 "type": "enemy_at",
                 "visualState": "search_target",
-                "currentAction": "fire",
+                "currentAction": "deploy",
                 "presentationPosition": {
                   "x": 843.1225,
                   "y": 391
@@ -12332,7 +12332,7 @@
                 "side": "enemy",
                 "type": "enemy_at",
                 "visualState": "search_target",
-                "currentAction": "fire",
+                "currentAction": "deploy",
                 "presentationPosition": {
                   "x": 843.1225,
                   "y": 445.55
@@ -12362,7 +12362,7 @@
                 "side": "enemy",
                 "type": "enemy_infantry",
                 "visualState": "search_target",
-                "currentAction": "fire",
+                "currentAction": "deploy",
                 "presentationPosition": {
                   "x": 843.1225,
                   "y": 474
@@ -12377,7 +12377,7 @@
                 "side": "enemy",
                 "type": "enemy_infantry",
                 "visualState": "search_target",
-                "currentAction": "fire",
+                "currentAction": "deploy",
                 "presentationPosition": {
                   "x": 843.1225,
                   "y": 516
@@ -12392,7 +12392,7 @@
                 "side": "enemy",
                 "type": "enemy_infantry",
                 "visualState": "aim",
-                "currentAction": "fire",
+                "currentAction": "deploy",
                 "presentationPosition": {
                   "x": 843.1225,
                   "y": 558
@@ -12407,7 +12407,7 @@
                 "side": "friendly",
                 "type": "infantry",
                 "visualState": "search_target",
-                "currentAction": "fire",
+                "currentAction": "establish_fire_line",
                 "presentationPosition": {
                   "x": 605.5969,
                   "y": 391
@@ -12421,8 +12421,8 @@
                 "actorId": "unit_fixture-u-2",
                 "side": "friendly",
                 "type": "at_infantry",
-                "visualState": "fire",
-                "currentAction": "fire",
+                "visualState": "idle",
+                "currentAction": "establish_fire_line",
                 "presentationPosition": {
                   "x": 566.8775,
                   "y": 433
@@ -12437,7 +12437,7 @@
                 "side": "friendly",
                 "type": "scout_car",
                 "visualState": "search_target",
-                "currentAction": "fire",
+                "currentAction": "establish_fire_line",
                 "presentationPosition": {
                   "x": 605.5969,
                   "y": 443
@@ -12452,7 +12452,7 @@
                 "side": "friendly",
                 "type": "mbt",
                 "visualState": "search_target",
-                "currentAction": "fire",
+                "currentAction": "establish_fire_line",
                 "presentationPosition": {
                   "x": 566.179,
                   "y": 495
@@ -12467,7 +12467,7 @@
                 "side": "friendly",
                 "type": "repair_vehicle",
                 "visualState": "idle",
-                "currentAction": "fire",
+                "currentAction": "establish_fire_line",
                 "presentationPosition": {
                   "x": 663.1217,
                   "y": 429
@@ -12598,7 +12598,7 @@
           "timeMs": 33520,
           "phase": "battle_end",
           "sceneHash": "upf_7af1e100",
-          "stateSignature": "dd5838e938000352b428a366eecc7dbabd90eeec3a076ee04ccae05e83c25cf8",
+          "stateSignature": "c14a5b69ea6cb46ce83ecfd929f2e84ef9dd585b51a1b91f8c8d19d6bb24a352",
           "semanticPredicates": {
             "firstContact": false,
             "mixedFire": false,
@@ -12644,7 +12644,7 @@
               "side": "enemy",
               "type": "enemy_at",
               "visualState": "wreck",
-              "currentAction": "result",
+              "currentAction": "damage",
               "presentationPosition": {
                 "x": 886,
                 "y": 326.7612
@@ -12659,7 +12659,7 @@
               "side": "enemy",
               "type": "enemy_at",
               "visualState": "wreck",
-              "currentAction": "result",
+              "currentAction": "damage",
               "presentationPosition": {
                 "x": 834.7196,
                 "y": 433
@@ -12674,7 +12674,7 @@
               "side": "enemy",
               "type": "enemy_infantry",
               "visualState": "wreck",
-              "currentAction": "result",
+              "currentAction": "damage",
               "presentationPosition": {
                 "x": 784.2364,
                 "y": 432
@@ -12689,7 +12689,7 @@
               "side": "enemy",
               "type": "enemy_infantry",
               "visualState": "brake",
-              "currentAction": "result",
+              "currentAction": "destroy",
               "presentationPosition": {
                 "x": 916,
                 "y": 146
@@ -12704,7 +12704,7 @@
               "side": "enemy",
               "type": "enemy_infantry",
               "visualState": "brake",
-              "currentAction": "result",
+              "currentAction": "damage",
               "presentationPosition": {
                 "x": 886,
                 "y": 371
@@ -12719,7 +12719,7 @@
               "side": "enemy",
               "type": "enemy_infantry",
               "visualState": "wreck",
-              "currentAction": "result",
+              "currentAction": "damage",
               "presentationPosition": {
                 "x": 946,
                 "y": 573.8333
@@ -12816,7 +12816,7 @@
                 "side": "enemy",
                 "type": "enemy_at",
                 "visualState": "wreck",
-                "currentAction": "result",
+                "currentAction": "damage",
                 "presentationPosition": {
                   "x": 886,
                   "y": 326.7612
@@ -12831,7 +12831,7 @@
                 "side": "enemy",
                 "type": "enemy_at",
                 "visualState": "wreck",
-                "currentAction": "result",
+                "currentAction": "damage",
                 "presentationPosition": {
                   "x": 834.7196,
                   "y": 433
@@ -12846,7 +12846,7 @@
                 "side": "enemy",
                 "type": "enemy_infantry",
                 "visualState": "wreck",
-                "currentAction": "result",
+                "currentAction": "damage",
                 "presentationPosition": {
                   "x": 784.2364,
                   "y": 432
@@ -12861,7 +12861,7 @@
                 "side": "enemy",
                 "type": "enemy_infantry",
                 "visualState": "brake",
-                "currentAction": "result",
+                "currentAction": "destroy",
                 "presentationPosition": {
                   "x": 916,
                   "y": 146
@@ -12876,7 +12876,7 @@
                 "side": "enemy",
                 "type": "enemy_infantry",
                 "visualState": "brake",
-                "currentAction": "result",
+                "currentAction": "damage",
                 "presentationPosition": {
                   "x": 886,
                   "y": 371
@@ -12891,7 +12891,7 @@
                 "side": "enemy",
                 "type": "enemy_infantry",
                 "visualState": "wreck",
-                "currentAction": "result",
+                "currentAction": "damage",
                 "presentationPosition": {
                   "x": 946,
                   "y": 573.8333
@@ -15121,7 +15121,7 @@
           "timeMs": 13418,
           "phase": "first_contact",
           "sceneHash": "upf_7af1e100",
-          "stateSignature": "73459de448a15315293d0b710c85686a02d6e2e9aef3fe4d8a40ed4ebcc04c8b",
+          "stateSignature": "3681af3cbfb20f67b5d421e72138303280a33e06c1ed27f25d558d3316ece9ed",
           "semanticPredicates": {
             "firstContact": true,
             "mixedFire": false,
@@ -15171,7 +15171,7 @@
               "side": "enemy",
               "type": "enemy_at",
               "visualState": "search_target",
-              "currentAction": "fire",
+              "currentAction": "deploy",
               "presentationPosition": {
                 "x": 843.1225,
                 "y": 391
@@ -15186,7 +15186,7 @@
               "side": "enemy",
               "type": "enemy_at",
               "visualState": "search_target",
-              "currentAction": "fire",
+              "currentAction": "deploy",
               "presentationPosition": {
                 "x": 843.1225,
                 "y": 445.55
@@ -15216,7 +15216,7 @@
               "side": "enemy",
               "type": "enemy_infantry",
               "visualState": "search_target",
-              "currentAction": "fire",
+              "currentAction": "deploy",
               "presentationPosition": {
                 "x": 843.1225,
                 "y": 474
@@ -15231,7 +15231,7 @@
               "side": "enemy",
               "type": "enemy_infantry",
               "visualState": "search_target",
-              "currentAction": "fire",
+              "currentAction": "deploy",
               "presentationPosition": {
                 "x": 843.1225,
                 "y": 516
@@ -15246,7 +15246,7 @@
               "side": "enemy",
               "type": "enemy_infantry",
               "visualState": "aim",
-              "currentAction": "fire",
+              "currentAction": "deploy",
               "presentationPosition": {
                 "x": 843.1225,
                 "y": 558
@@ -15261,7 +15261,7 @@
               "side": "friendly",
               "type": "infantry",
               "visualState": "search_target",
-              "currentAction": "fire",
+              "currentAction": "establish_fire_line",
               "presentationPosition": {
                 "x": 605.5969,
                 "y": 391
@@ -15275,8 +15275,8 @@
               "actorId": "unit_fixture-u-2",
               "side": "friendly",
               "type": "at_infantry",
-              "visualState": "fire",
-              "currentAction": "fire",
+              "visualState": "idle",
+              "currentAction": "establish_fire_line",
               "presentationPosition": {
                 "x": 566.8775,
                 "y": 433
@@ -15291,7 +15291,7 @@
               "side": "friendly",
               "type": "scout_car",
               "visualState": "search_target",
-              "currentAction": "fire",
+              "currentAction": "establish_fire_line",
               "presentationPosition": {
                 "x": 605.5969,
                 "y": 443
@@ -15306,7 +15306,7 @@
               "side": "friendly",
               "type": "mbt",
               "visualState": "search_target",
-              "currentAction": "fire",
+              "currentAction": "establish_fire_line",
               "presentationPosition": {
                 "x": 566.179,
                 "y": 495
@@ -15321,7 +15321,7 @@
               "side": "friendly",
               "type": "repair_vehicle",
               "visualState": "idle",
-              "currentAction": "fire",
+              "currentAction": "establish_fire_line",
               "presentationPosition": {
                 "x": 663.1217,
                 "y": 429
@@ -15343,7 +15343,7 @@
                 "side": "enemy",
                 "type": "enemy_at",
                 "visualState": "search_target",
-                "currentAction": "fire",
+                "currentAction": "deploy",
                 "presentationPosition": {
                   "x": 843.1225,
                   "y": 391
@@ -15358,7 +15358,7 @@
                 "side": "enemy",
                 "type": "enemy_at",
                 "visualState": "search_target",
-                "currentAction": "fire",
+                "currentAction": "deploy",
                 "presentationPosition": {
                   "x": 843.1225,
                   "y": 445.55
@@ -15388,7 +15388,7 @@
                 "side": "enemy",
                 "type": "enemy_infantry",
                 "visualState": "search_target",
-                "currentAction": "fire",
+                "currentAction": "deploy",
                 "presentationPosition": {
                   "x": 843.1225,
                   "y": 474
@@ -15403,7 +15403,7 @@
                 "side": "enemy",
                 "type": "enemy_infantry",
                 "visualState": "search_target",
-                "currentAction": "fire",
+                "currentAction": "deploy",
                 "presentationPosition": {
                   "x": 843.1225,
                   "y": 516
@@ -15418,7 +15418,7 @@
                 "side": "enemy",
                 "type": "enemy_infantry",
                 "visualState": "aim",
-                "currentAction": "fire",
+                "currentAction": "deploy",
                 "presentationPosition": {
                   "x": 843.1225,
                   "y": 558
@@ -15433,7 +15433,7 @@
                 "side": "friendly",
                 "type": "infantry",
                 "visualState": "search_target",
-                "currentAction": "fire",
+                "currentAction": "establish_fire_line",
                 "presentationPosition": {
                   "x": 605.5969,
                   "y": 391
@@ -15447,8 +15447,8 @@
                 "actorId": "unit_fixture-u-2",
                 "side": "friendly",
                 "type": "at_infantry",
-                "visualState": "fire",
-                "currentAction": "fire",
+                "visualState": "idle",
+                "currentAction": "establish_fire_line",
                 "presentationPosition": {
                   "x": 566.8775,
                   "y": 433
@@ -15463,7 +15463,7 @@
                 "side": "friendly",
                 "type": "scout_car",
                 "visualState": "search_target",
-                "currentAction": "fire",
+                "currentAction": "establish_fire_line",
                 "presentationPosition": {
                   "x": 605.5969,
                   "y": 443
@@ -15478,7 +15478,7 @@
                 "side": "friendly",
                 "type": "mbt",
                 "visualState": "search_target",
-                "currentAction": "fire",
+                "currentAction": "establish_fire_line",
                 "presentationPosition": {
                   "x": 566.179,
                   "y": 495
@@ -15493,7 +15493,7 @@
                 "side": "friendly",
                 "type": "repair_vehicle",
                 "visualState": "idle",
-                "currentAction": "fire",
+                "currentAction": "establish_fire_line",
                 "presentationPosition": {
                   "x": 663.1217,
                   "y": 429
@@ -15624,7 +15624,7 @@
           "timeMs": 29977,
           "phase": "critical_event",
           "sceneHash": "upf_7af1e100",
-          "stateSignature": "7dc9e8b08916395c8a0cdba46b4f978b5bc9f5f8a61fdb4ae2187326d0753dba",
+          "stateSignature": "977c579e690f94c22864180a49aee57fa1437234c43e7f81dd339169b722be5f",
           "semanticPredicates": {
             "firstContact": false,
             "mixedFire": false,
@@ -15678,7 +15678,7 @@
               "side": "enemy",
               "type": "enemy_at",
               "visualState": "wreck",
-              "currentAction": "retreat",
+              "currentAction": "damage",
               "presentationPosition": {
                 "x": 886,
                 "y": 326.7612
@@ -15693,7 +15693,7 @@
               "side": "enemy",
               "type": "enemy_at",
               "visualState": "wreck",
-              "currentAction": "retreat",
+              "currentAction": "damage",
               "presentationPosition": {
                 "x": 834.7196,
                 "y": 433
@@ -15708,7 +15708,7 @@
               "side": "enemy",
               "type": "enemy_infantry",
               "visualState": "wreck",
-              "currentAction": "retreat",
+              "currentAction": "damage",
               "presentationPosition": {
                 "x": 784.2364,
                 "y": 432
@@ -15723,7 +15723,7 @@
               "side": "enemy",
               "type": "enemy_infantry",
               "visualState": "search_target",
-              "currentAction": "retreat",
+              "currentAction": "destroy",
               "presentationPosition": {
                 "x": 926.4764,
                 "y": 333.0162
@@ -15738,7 +15738,7 @@
               "side": "enemy",
               "type": "enemy_infantry",
               "visualState": "suppressed",
-              "currentAction": "retreat",
+              "currentAction": "damage",
               "presentationPosition": {
                 "x": 915.0752,
                 "y": 451.2205
@@ -15753,7 +15753,7 @@
               "side": "enemy",
               "type": "enemy_infantry",
               "visualState": "wreck",
-              "currentAction": "retreat",
+              "currentAction": "damage",
               "presentationPosition": {
                 "x": 946,
                 "y": 573.8333
@@ -15850,7 +15850,7 @@
                 "side": "enemy",
                 "type": "enemy_at",
                 "visualState": "wreck",
-                "currentAction": "retreat",
+                "currentAction": "damage",
                 "presentationPosition": {
                   "x": 886,
                   "y": 326.7612
@@ -15865,7 +15865,7 @@
                 "side": "enemy",
                 "type": "enemy_at",
                 "visualState": "wreck",
-                "currentAction": "retreat",
+                "currentAction": "damage",
                 "presentationPosition": {
                   "x": 834.7196,
                   "y": 433
@@ -15880,7 +15880,7 @@
                 "side": "enemy",
                 "type": "enemy_infantry",
                 "visualState": "wreck",
-                "currentAction": "retreat",
+                "currentAction": "damage",
                 "presentationPosition": {
                   "x": 784.2364,
                   "y": 432
@@ -15895,7 +15895,7 @@
                 "side": "enemy",
                 "type": "enemy_infantry",
                 "visualState": "search_target",
-                "currentAction": "retreat",
+                "currentAction": "destroy",
                 "presentationPosition": {
                   "x": 926.4764,
                   "y": 333.0162
@@ -15910,7 +15910,7 @@
                 "side": "enemy",
                 "type": "enemy_infantry",
                 "visualState": "suppressed",
-                "currentAction": "retreat",
+                "currentAction": "damage",
                 "presentationPosition": {
                   "x": 915.0752,
                   "y": 451.2205
@@ -15925,7 +15925,7 @@
                 "side": "enemy",
                 "type": "enemy_infantry",
                 "visualState": "wreck",
-                "currentAction": "retreat",
+                "currentAction": "damage",
                 "presentationPosition": {
                   "x": 946,
                   "y": 573.8333
@@ -16133,7 +16133,7 @@
           "timeMs": 13418,
           "phase": "first_contact",
           "sceneHash": "upf_7af1e100",
-          "stateSignature": "73459de448a15315293d0b710c85686a02d6e2e9aef3fe4d8a40ed4ebcc04c8b",
+          "stateSignature": "3681af3cbfb20f67b5d421e72138303280a33e06c1ed27f25d558d3316ece9ed",
           "semanticPredicates": {
             "firstContact": true,
             "mixedFire": false,
@@ -16183,7 +16183,7 @@
               "side": "enemy",
               "type": "enemy_at",
               "visualState": "search_target",
-              "currentAction": "fire",
+              "currentAction": "deploy",
               "presentationPosition": {
                 "x": 843.1225,
                 "y": 391
@@ -16198,7 +16198,7 @@
               "side": "enemy",
               "type": "enemy_at",
               "visualState": "search_target",
-              "currentAction": "fire",
+              "currentAction": "deploy",
               "presentationPosition": {
                 "x": 843.1225,
                 "y": 445.55
@@ -16228,7 +16228,7 @@
               "side": "enemy",
               "type": "enemy_infantry",
               "visualState": "search_target",
-              "currentAction": "fire",
+              "currentAction": "deploy",
               "presentationPosition": {
                 "x": 843.1225,
                 "y": 474
@@ -16243,7 +16243,7 @@
               "side": "enemy",
               "type": "enemy_infantry",
               "visualState": "search_target",
-              "currentAction": "fire",
+              "currentAction": "deploy",
               "presentationPosition": {
                 "x": 843.1225,
                 "y": 516
@@ -16258,7 +16258,7 @@
               "side": "enemy",
               "type": "enemy_infantry",
               "visualState": "aim",
-              "currentAction": "fire",
+              "currentAction": "deploy",
               "presentationPosition": {
                 "x": 843.1225,
                 "y": 558
@@ -16273,7 +16273,7 @@
               "side": "friendly",
               "type": "infantry",
               "visualState": "search_target",
-              "currentAction": "fire",
+              "currentAction": "establish_fire_line",
               "presentationPosition": {
                 "x": 605.5969,
                 "y": 391
@@ -16287,8 +16287,8 @@
               "actorId": "unit_fixture-u-2",
               "side": "friendly",
               "type": "at_infantry",
-              "visualState": "fire",
-              "currentAction": "fire",
+              "visualState": "idle",
+              "currentAction": "establish_fire_line",
               "presentationPosition": {
                 "x": 566.8775,
                 "y": 433
@@ -16303,7 +16303,7 @@
               "side": "friendly",
               "type": "scout_car",
               "visualState": "search_target",
-              "currentAction": "fire",
+              "currentAction": "establish_fire_line",
               "presentationPosition": {
                 "x": 605.5969,
                 "y": 443
@@ -16318,7 +16318,7 @@
               "side": "friendly",
               "type": "mbt",
               "visualState": "search_target",
-              "currentAction": "fire",
+              "currentAction": "establish_fire_line",
               "presentationPosition": {
                 "x": 566.179,
                 "y": 495
@@ -16333,7 +16333,7 @@
               "side": "friendly",
               "type": "repair_vehicle",
               "visualState": "idle",
-              "currentAction": "fire",
+              "currentAction": "establish_fire_line",
               "presentationPosition": {
                 "x": 663.1217,
                 "y": 429
@@ -16355,7 +16355,7 @@
                 "side": "enemy",
                 "type": "enemy_at",
                 "visualState": "search_target",
-                "currentAction": "fire",
+                "currentAction": "deploy",
                 "presentationPosition": {
                   "x": 843.1225,
                   "y": 391
@@ -16370,7 +16370,7 @@
                 "side": "enemy",
                 "type": "enemy_at",
                 "visualState": "search_target",
-                "currentAction": "fire",
+                "currentAction": "deploy",
                 "presentationPosition": {
                   "x": 843.1225,
                   "y": 445.55
@@ -16400,7 +16400,7 @@
                 "side": "enemy",
                 "type": "enemy_infantry",
                 "visualState": "search_target",
-                "currentAction": "fire",
+                "currentAction": "deploy",
                 "presentationPosition": {
                   "x": 843.1225,
                   "y": 474
@@ -16415,7 +16415,7 @@
                 "side": "enemy",
                 "type": "enemy_infantry",
                 "visualState": "search_target",
-                "currentAction": "fire",
+                "currentAction": "deploy",
                 "presentationPosition": {
                   "x": 843.1225,
                   "y": 516
@@ -16430,7 +16430,7 @@
                 "side": "enemy",
                 "type": "enemy_infantry",
                 "visualState": "aim",
-                "currentAction": "fire",
+                "currentAction": "deploy",
                 "presentationPosition": {
                   "x": 843.1225,
                   "y": 558
@@ -16445,7 +16445,7 @@
                 "side": "friendly",
                 "type": "infantry",
                 "visualState": "search_target",
-                "currentAction": "fire",
+                "currentAction": "establish_fire_line",
                 "presentationPosition": {
                   "x": 605.5969,
                   "y": 391
@@ -16459,8 +16459,8 @@
                 "actorId": "unit_fixture-u-2",
                 "side": "friendly",
                 "type": "at_infantry",
-                "visualState": "fire",
-                "currentAction": "fire",
+                "visualState": "idle",
+                "currentAction": "establish_fire_line",
                 "presentationPosition": {
                   "x": 566.8775,
                   "y": 433
@@ -16475,7 +16475,7 @@
                 "side": "friendly",
                 "type": "scout_car",
                 "visualState": "search_target",
-                "currentAction": "fire",
+                "currentAction": "establish_fire_line",
                 "presentationPosition": {
                   "x": 605.5969,
                   "y": 443
@@ -16490,7 +16490,7 @@
                 "side": "friendly",
                 "type": "mbt",
                 "visualState": "search_target",
-                "currentAction": "fire",
+                "currentAction": "establish_fire_line",
                 "presentationPosition": {
                   "x": 566.179,
                   "y": 495
@@ -16505,7 +16505,7 @@
                 "side": "friendly",
                 "type": "repair_vehicle",
                 "visualState": "idle",
-                "currentAction": "fire",
+                "currentAction": "establish_fire_line",
                 "presentationPosition": {
                   "x": 663.1217,
                   "y": 429
@@ -16636,7 +16636,7 @@
           "timeMs": 29977,
           "phase": "critical_event",
           "sceneHash": "upf_7af1e100",
-          "stateSignature": "7dc9e8b08916395c8a0cdba46b4f978b5bc9f5f8a61fdb4ae2187326d0753dba",
+          "stateSignature": "977c579e690f94c22864180a49aee57fa1437234c43e7f81dd339169b722be5f",
           "semanticPredicates": {
             "firstContact": false,
             "mixedFire": false,
@@ -16690,7 +16690,7 @@
               "side": "enemy",
               "type": "enemy_at",
               "visualState": "wreck",
-              "currentAction": "retreat",
+              "currentAction": "damage",
               "presentationPosition": {
                 "x": 886,
                 "y": 326.7612
@@ -16705,7 +16705,7 @@
               "side": "enemy",
               "type": "enemy_at",
               "visualState": "wreck",
-              "currentAction": "retreat",
+              "currentAction": "damage",
               "presentationPosition": {
                 "x": 834.7196,
                 "y": 433
@@ -16720,7 +16720,7 @@
               "side": "enemy",
               "type": "enemy_infantry",
               "visualState": "wreck",
-              "currentAction": "retreat",
+              "currentAction": "damage",
               "presentationPosition": {
                 "x": 784.2364,
                 "y": 432
@@ -16735,7 +16735,7 @@
               "side": "enemy",
               "type": "enemy_infantry",
               "visualState": "search_target",
-              "currentAction": "retreat",
+              "currentAction": "destroy",
               "presentationPosition": {
                 "x": 926.4764,
                 "y": 333.0162
@@ -16750,7 +16750,7 @@
               "side": "enemy",
               "type": "enemy_infantry",
               "visualState": "suppressed",
-              "currentAction": "retreat",
+              "currentAction": "damage",
               "presentationPosition": {
                 "x": 915.0752,
                 "y": 451.2205
@@ -16765,7 +16765,7 @@
               "side": "enemy",
               "type": "enemy_infantry",
               "visualState": "wreck",
-              "currentAction": "retreat",
+              "currentAction": "damage",
               "presentationPosition": {
                 "x": 946,
                 "y": 573.8333
@@ -16862,7 +16862,7 @@
                 "side": "enemy",
                 "type": "enemy_at",
                 "visualState": "wreck",
-                "currentAction": "retreat",
+                "currentAction": "damage",
                 "presentationPosition": {
                   "x": 886,
                   "y": 326.7612
@@ -16877,7 +16877,7 @@
                 "side": "enemy",
                 "type": "enemy_at",
                 "visualState": "wreck",
-                "currentAction": "retreat",
+                "currentAction": "damage",
                 "presentationPosition": {
                   "x": 834.7196,
                   "y": 433
@@ -16892,7 +16892,7 @@
                 "side": "enemy",
                 "type": "enemy_infantry",
                 "visualState": "wreck",
-                "currentAction": "retreat",
+                "currentAction": "damage",
                 "presentationPosition": {
                   "x": 784.2364,
                   "y": 432
@@ -16907,7 +16907,7 @@
                 "side": "enemy",
                 "type": "enemy_infantry",
                 "visualState": "search_target",
-                "currentAction": "retreat",
+                "currentAction": "destroy",
                 "presentationPosition": {
                   "x": 926.4764,
                   "y": 333.0162
@@ -16922,7 +16922,7 @@
                 "side": "enemy",
                 "type": "enemy_infantry",
                 "visualState": "suppressed",
-                "currentAction": "retreat",
+                "currentAction": "damage",
                 "presentationPosition": {
                   "x": 915.0752,
                   "y": 451.2205
@@ -16937,7 +16937,7 @@
                 "side": "enemy",
                 "type": "enemy_infantry",
                 "visualState": "wreck",
-                "currentAction": "retreat",
+                "currentAction": "damage",
                 "presentationPosition": {
                   "x": 946,
                   "y": 573.8333
@@ -19000,7 +19000,7 @@
           "timeMs": 13690.031,
           "phase": "first_contact",
           "sceneHash": "upf_b7f3e811",
-          "stateSignature": "d5ea4690689b722e9ed7ebff95809625c061adfc92182e8dbf386e167717b9ca",
+          "stateSignature": "664fad18647984fcf5a48ae1a11ad9087855d4ba5b76d1b625ebb6e641894b7e",
           "semanticPredicates": {
             "firstContact": true,
             "mixedFire": true,
@@ -19059,7 +19059,7 @@
               "side": "enemy",
               "type": "enemy_at",
               "visualState": "aim",
-              "currentAction": "damage",
+              "currentAction": "deploy",
               "presentationPosition": {
                 "x": 840.5917,
                 "y": 391
@@ -19074,7 +19074,7 @@
               "side": "enemy",
               "type": "enemy_at",
               "visualState": "search_target",
-              "currentAction": "damage",
+              "currentAction": "deploy",
               "presentationPosition": {
                 "x": 840.5917,
                 "y": 445.55
@@ -19104,7 +19104,7 @@
               "side": "enemy",
               "type": "enemy_infantry",
               "visualState": "aim",
-              "currentAction": "damage",
+              "currentAction": "deploy",
               "presentationPosition": {
                 "x": 840.5917,
                 "y": 474
@@ -19119,7 +19119,7 @@
               "side": "enemy",
               "type": "enemy_infantry",
               "visualState": "aim",
-              "currentAction": "damage",
+              "currentAction": "deploy",
               "presentationPosition": {
                 "x": 840.5917,
                 "y": 516
@@ -19134,7 +19134,7 @@
               "side": "enemy",
               "type": "enemy_infantry",
               "visualState": "aim",
-              "currentAction": "damage",
+              "currentAction": "deploy",
               "presentationPosition": {
                 "x": 840.5917,
                 "y": 558
@@ -19149,7 +19149,7 @@
               "side": "friendly",
               "type": "infantry",
               "visualState": "aim",
-              "currentAction": "damage",
+              "currentAction": "establish_fire_line",
               "presentationPosition": {
                 "x": 569.6284,
                 "y": 371.7619
@@ -19163,8 +19163,8 @@
               "actorId": "unit_fixture-u-2",
               "side": "friendly",
               "type": "at_infantry",
-              "visualState": "move",
-              "currentAction": "damage",
+              "visualState": "idle",
+              "currentAction": "establish_fire_line",
               "presentationPosition": {
                 "x": 571.0771,
                 "y": 438.0466
@@ -19179,7 +19179,7 @@
               "side": "friendly",
               "type": "scout_car",
               "visualState": "search_target",
-              "currentAction": "damage",
+              "currentAction": "establish_fire_line",
               "presentationPosition": {
                 "x": 568.6545,
                 "y": 408.649
@@ -19194,7 +19194,7 @@
               "side": "friendly",
               "type": "mbt",
               "visualState": "search_target",
-              "currentAction": "damage",
+              "currentAction": "establish_fire_line",
               "presentationPosition": {
                 "x": 567.5032,
                 "y": 477.7874
@@ -19209,7 +19209,7 @@
               "side": "friendly",
               "type": "mbt",
               "visualState": "aim",
-              "currentAction": "damage",
+              "currentAction": "establish_fire_line",
               "presentationPosition": {
                 "x": 568.8237,
                 "y": 534.755
@@ -19224,7 +19224,7 @@
               "side": "friendly",
               "type": "repair_vehicle",
               "visualState": "hit",
-              "currentAction": "damage",
+              "currentAction": "establish_fire_line",
               "presentationPosition": {
                 "x": 697.0313,
                 "y": 403
@@ -19246,7 +19246,7 @@
                 "side": "enemy",
                 "type": "enemy_at",
                 "visualState": "aim",
-                "currentAction": "damage",
+                "currentAction": "deploy",
                 "presentationPosition": {
                   "x": 840.5917,
                   "y": 391
@@ -19261,7 +19261,7 @@
                 "side": "enemy",
                 "type": "enemy_at",
                 "visualState": "search_target",
-                "currentAction": "damage",
+                "currentAction": "deploy",
                 "presentationPosition": {
                   "x": 840.5917,
                   "y": 445.55
@@ -19291,7 +19291,7 @@
                 "side": "enemy",
                 "type": "enemy_infantry",
                 "visualState": "aim",
-                "currentAction": "damage",
+                "currentAction": "deploy",
                 "presentationPosition": {
                   "x": 840.5917,
                   "y": 474
@@ -19306,7 +19306,7 @@
                 "side": "enemy",
                 "type": "enemy_infantry",
                 "visualState": "aim",
-                "currentAction": "damage",
+                "currentAction": "deploy",
                 "presentationPosition": {
                   "x": 840.5917,
                   "y": 516
@@ -19321,7 +19321,7 @@
                 "side": "enemy",
                 "type": "enemy_infantry",
                 "visualState": "aim",
-                "currentAction": "damage",
+                "currentAction": "deploy",
                 "presentationPosition": {
                   "x": 840.5917,
                   "y": 558
@@ -19336,7 +19336,7 @@
                 "side": "friendly",
                 "type": "infantry",
                 "visualState": "aim",
-                "currentAction": "damage",
+                "currentAction": "establish_fire_line",
                 "presentationPosition": {
                   "x": 569.6284,
                   "y": 371.7619
@@ -19350,8 +19350,8 @@
                 "actorId": "unit_fixture-u-2",
                 "side": "friendly",
                 "type": "at_infantry",
-                "visualState": "move",
-                "currentAction": "damage",
+                "visualState": "idle",
+                "currentAction": "establish_fire_line",
                 "presentationPosition": {
                   "x": 571.0771,
                   "y": 438.0466
@@ -19366,7 +19366,7 @@
                 "side": "friendly",
                 "type": "scout_car",
                 "visualState": "search_target",
-                "currentAction": "damage",
+                "currentAction": "establish_fire_line",
                 "presentationPosition": {
                   "x": 568.6545,
                   "y": 408.649
@@ -19381,7 +19381,7 @@
                 "side": "friendly",
                 "type": "mbt",
                 "visualState": "search_target",
-                "currentAction": "damage",
+                "currentAction": "establish_fire_line",
                 "presentationPosition": {
                   "x": 567.5032,
                   "y": 477.7874
@@ -19396,7 +19396,7 @@
                 "side": "friendly",
                 "type": "mbt",
                 "visualState": "aim",
-                "currentAction": "damage",
+                "currentAction": "establish_fire_line",
                 "presentationPosition": {
                   "x": 568.8237,
                   "y": 534.755
@@ -19411,7 +19411,7 @@
                 "side": "friendly",
                 "type": "repair_vehicle",
                 "visualState": "hit",
-                "currentAction": "damage",
+                "currentAction": "establish_fire_line",
                 "presentationPosition": {
                   "x": 697.0313,
                   "y": 403
@@ -19628,7 +19628,7 @@
           "timeMs": 13690.031,
           "phase": "first_contact",
           "sceneHash": "upf_b7f3e811",
-          "stateSignature": "d5ea4690689b722e9ed7ebff95809625c061adfc92182e8dbf386e167717b9ca",
+          "stateSignature": "664fad18647984fcf5a48ae1a11ad9087855d4ba5b76d1b625ebb6e641894b7e",
           "semanticPredicates": {
             "firstContact": true,
             "mixedFire": true,
@@ -19687,7 +19687,7 @@
               "side": "enemy",
               "type": "enemy_at",
               "visualState": "aim",
-              "currentAction": "damage",
+              "currentAction": "deploy",
               "presentationPosition": {
                 "x": 840.5917,
                 "y": 391
@@ -19702,7 +19702,7 @@
               "side": "enemy",
               "type": "enemy_at",
               "visualState": "search_target",
-              "currentAction": "damage",
+              "currentAction": "deploy",
               "presentationPosition": {
                 "x": 840.5917,
                 "y": 445.55
@@ -19732,7 +19732,7 @@
               "side": "enemy",
               "type": "enemy_infantry",
               "visualState": "aim",
-              "currentAction": "damage",
+              "currentAction": "deploy",
               "presentationPosition": {
                 "x": 840.5917,
                 "y": 474
@@ -19747,7 +19747,7 @@
               "side": "enemy",
               "type": "enemy_infantry",
               "visualState": "aim",
-              "currentAction": "damage",
+              "currentAction": "deploy",
               "presentationPosition": {
                 "x": 840.5917,
                 "y": 516
@@ -19762,7 +19762,7 @@
               "side": "enemy",
               "type": "enemy_infantry",
               "visualState": "aim",
-              "currentAction": "damage",
+              "currentAction": "deploy",
               "presentationPosition": {
                 "x": 840.5917,
                 "y": 558
@@ -19777,7 +19777,7 @@
               "side": "friendly",
               "type": "infantry",
               "visualState": "aim",
-              "currentAction": "damage",
+              "currentAction": "establish_fire_line",
               "presentationPosition": {
                 "x": 569.6284,
                 "y": 371.7619
@@ -19791,8 +19791,8 @@
               "actorId": "unit_fixture-u-2",
               "side": "friendly",
               "type": "at_infantry",
-              "visualState": "move",
-              "currentAction": "damage",
+              "visualState": "idle",
+              "currentAction": "establish_fire_line",
               "presentationPosition": {
                 "x": 571.0771,
                 "y": 438.0466
@@ -19807,7 +19807,7 @@
               "side": "friendly",
               "type": "scout_car",
               "visualState": "search_target",
-              "currentAction": "damage",
+              "currentAction": "establish_fire_line",
               "presentationPosition": {
                 "x": 568.6545,
                 "y": 408.649
@@ -19822,7 +19822,7 @@
               "side": "friendly",
               "type": "mbt",
               "visualState": "search_target",
-              "currentAction": "damage",
+              "currentAction": "establish_fire_line",
               "presentationPosition": {
                 "x": 567.5032,
                 "y": 477.7874
@@ -19837,7 +19837,7 @@
               "side": "friendly",
               "type": "mbt",
               "visualState": "aim",
-              "currentAction": "damage",
+              "currentAction": "establish_fire_line",
               "presentationPosition": {
                 "x": 568.8237,
                 "y": 534.755
@@ -19852,7 +19852,7 @@
               "side": "friendly",
               "type": "repair_vehicle",
               "visualState": "hit",
-              "currentAction": "damage",
+              "currentAction": "establish_fire_line",
               "presentationPosition": {
                 "x": 697.0313,
                 "y": 403
@@ -19874,7 +19874,7 @@
                 "side": "enemy",
                 "type": "enemy_at",
                 "visualState": "aim",
-                "currentAction": "damage",
+                "currentAction": "deploy",
                 "presentationPosition": {
                   "x": 840.5917,
                   "y": 391
@@ -19889,7 +19889,7 @@
                 "side": "enemy",
                 "type": "enemy_at",
                 "visualState": "search_target",
-                "currentAction": "damage",
+                "currentAction": "deploy",
                 "presentationPosition": {
                   "x": 840.5917,
                   "y": 445.55
@@ -19919,7 +19919,7 @@
                 "side": "enemy",
                 "type": "enemy_infantry",
                 "visualState": "aim",
-                "currentAction": "damage",
+                "currentAction": "deploy",
                 "presentationPosition": {
                   "x": 840.5917,
                   "y": 474
@@ -19934,7 +19934,7 @@
                 "side": "enemy",
                 "type": "enemy_infantry",
                 "visualState": "aim",
-                "currentAction": "damage",
+                "currentAction": "deploy",
                 "presentationPosition": {
                   "x": 840.5917,
                   "y": 516
@@ -19949,7 +19949,7 @@
                 "side": "enemy",
                 "type": "enemy_infantry",
                 "visualState": "aim",
-                "currentAction": "damage",
+                "currentAction": "deploy",
                 "presentationPosition": {
                   "x": 840.5917,
                   "y": 558
@@ -19964,7 +19964,7 @@
                 "side": "friendly",
                 "type": "infantry",
                 "visualState": "aim",
-                "currentAction": "damage",
+                "currentAction": "establish_fire_line",
                 "presentationPosition": {
                   "x": 569.6284,
                   "y": 371.7619
@@ -19978,8 +19978,8 @@
                 "actorId": "unit_fixture-u-2",
                 "side": "friendly",
                 "type": "at_infantry",
-                "visualState": "move",
-                "currentAction": "damage",
+                "visualState": "idle",
+                "currentAction": "establish_fire_line",
                 "presentationPosition": {
                   "x": 571.0771,
                   "y": 438.0466
@@ -19994,7 +19994,7 @@
                 "side": "friendly",
                 "type": "scout_car",
                 "visualState": "search_target",
-                "currentAction": "damage",
+                "currentAction": "establish_fire_line",
                 "presentationPosition": {
                   "x": 568.6545,
                   "y": 408.649
@@ -20009,7 +20009,7 @@
                 "side": "friendly",
                 "type": "mbt",
                 "visualState": "search_target",
-                "currentAction": "damage",
+                "currentAction": "establish_fire_line",
                 "presentationPosition": {
                   "x": 567.5032,
                   "y": 477.7874
@@ -20024,7 +20024,7 @@
                 "side": "friendly",
                 "type": "mbt",
                 "visualState": "aim",
-                "currentAction": "damage",
+                "currentAction": "establish_fire_line",
                 "presentationPosition": {
                   "x": 568.8237,
                   "y": 534.755
@@ -20039,7 +20039,7 @@
                 "side": "friendly",
                 "type": "repair_vehicle",
                 "visualState": "hit",
-                "currentAction": "damage",
+                "currentAction": "establish_fire_line",
                 "presentationPosition": {
                   "x": 697.0313,
                   "y": 403
@@ -22296,7 +22296,7 @@
           "timeMs": 29177,
           "phase": "critical_event",
           "sceneHash": "upf_7af1e100",
-          "stateSignature": "5f574c113d8de3d6bff5781cab7e84e9f6bb0be360f34fcf15c622d3b330c843",
+          "stateSignature": "ea51bed89d5d6c93cc50f56010c4dbcef640913ff22da9599b0bec5594748bec",
           "semanticPredicates": {
             "firstContact": false,
             "mixedFire": false,
@@ -22346,7 +22346,7 @@
               "side": "enemy",
               "type": "enemy_at",
               "visualState": "wreck",
-              "currentAction": "retreat",
+              "currentAction": "damage",
               "presentationPosition": {
                 "x": 886,
                 "y": 326.7612
@@ -22361,7 +22361,7 @@
               "side": "enemy",
               "type": "enemy_at",
               "visualState": "wreck",
-              "currentAction": "retreat",
+              "currentAction": "damage",
               "presentationPosition": {
                 "x": 834.7196,
                 "y": 433
@@ -22376,7 +22376,7 @@
               "side": "enemy",
               "type": "enemy_infantry",
               "visualState": "wreck",
-              "currentAction": "retreat",
+              "currentAction": "damage",
               "presentationPosition": {
                 "x": 784.2364,
                 "y": 432
@@ -22391,7 +22391,7 @@
               "side": "enemy",
               "type": "enemy_infantry",
               "visualState": "search_target",
-              "currentAction": "retreat",
+              "currentAction": "destroy",
               "presentationPosition": {
                 "x": 927.3995,
                 "y": 326.9681
@@ -22406,7 +22406,7 @@
               "side": "enemy",
               "type": "enemy_infantry",
               "visualState": "suppressed",
-              "currentAction": "retreat",
+              "currentAction": "damage",
               "presentationPosition": {
                 "x": 886,
                 "y": 449.2785
@@ -22421,7 +22421,7 @@
               "side": "enemy",
               "type": "enemy_infantry",
               "visualState": "destroying",
-              "currentAction": "retreat",
+              "currentAction": "damage",
               "presentationPosition": {
                 "x": 946,
                 "y": 573.8333
@@ -22518,7 +22518,7 @@
                 "side": "enemy",
                 "type": "enemy_at",
                 "visualState": "wreck",
-                "currentAction": "retreat",
+                "currentAction": "damage",
                 "presentationPosition": {
                   "x": 886,
                   "y": 326.7612
@@ -22533,7 +22533,7 @@
                 "side": "enemy",
                 "type": "enemy_at",
                 "visualState": "wreck",
-                "currentAction": "retreat",
+                "currentAction": "damage",
                 "presentationPosition": {
                   "x": 834.7196,
                   "y": 433
@@ -22548,7 +22548,7 @@
                 "side": "enemy",
                 "type": "enemy_infantry",
                 "visualState": "wreck",
-                "currentAction": "retreat",
+                "currentAction": "damage",
                 "presentationPosition": {
                   "x": 784.2364,
                   "y": 432
@@ -22563,7 +22563,7 @@
                 "side": "enemy",
                 "type": "enemy_infantry",
                 "visualState": "search_target",
-                "currentAction": "retreat",
+                "currentAction": "destroy",
                 "presentationPosition": {
                   "x": 927.3995,
                   "y": 326.9681
@@ -22578,7 +22578,7 @@
                 "side": "enemy",
                 "type": "enemy_infantry",
                 "visualState": "suppressed",
-                "currentAction": "retreat",
+                "currentAction": "damage",
                 "presentationPosition": {
                   "x": 886,
                   "y": 449.2785
@@ -22593,7 +22593,7 @@
                 "side": "enemy",
                 "type": "enemy_infantry",
                 "visualState": "destroying",
-                "currentAction": "retreat",
+                "currentAction": "damage",
                 "presentationPosition": {
                   "x": 946,
                   "y": 573.8333
@@ -22794,7 +22794,7 @@
           "timeMs": 29177,
           "phase": "critical_event",
           "sceneHash": "upf_7af1e100",
-          "stateSignature": "5f574c113d8de3d6bff5781cab7e84e9f6bb0be360f34fcf15c622d3b330c843",
+          "stateSignature": "ea51bed89d5d6c93cc50f56010c4dbcef640913ff22da9599b0bec5594748bec",
           "semanticPredicates": {
             "firstContact": false,
             "mixedFire": false,
@@ -22844,7 +22844,7 @@
               "side": "enemy",
               "type": "enemy_at",
               "visualState": "wreck",
-              "currentAction": "retreat",
+              "currentAction": "damage",
               "presentationPosition": {
                 "x": 886,
                 "y": 326.7612
@@ -22859,7 +22859,7 @@
               "side": "enemy",
               "type": "enemy_at",
               "visualState": "wreck",
-              "currentAction": "retreat",
+              "currentAction": "damage",
               "presentationPosition": {
                 "x": 834.7196,
                 "y": 433
@@ -22874,7 +22874,7 @@
               "side": "enemy",
               "type": "enemy_infantry",
               "visualState": "wreck",
-              "currentAction": "retreat",
+              "currentAction": "damage",
               "presentationPosition": {
                 "x": 784.2364,
                 "y": 432
@@ -22889,7 +22889,7 @@
               "side": "enemy",
               "type": "enemy_infantry",
               "visualState": "search_target",
-              "currentAction": "retreat",
+              "currentAction": "destroy",
               "presentationPosition": {
                 "x": 927.3995,
                 "y": 326.9681
@@ -22904,7 +22904,7 @@
               "side": "enemy",
               "type": "enemy_infantry",
               "visualState": "suppressed",
-              "currentAction": "retreat",
+              "currentAction": "damage",
               "presentationPosition": {
                 "x": 886,
                 "y": 449.2785
@@ -22919,7 +22919,7 @@
               "side": "enemy",
               "type": "enemy_infantry",
               "visualState": "destroying",
-              "currentAction": "retreat",
+              "currentAction": "damage",
               "presentationPosition": {
                 "x": 946,
                 "y": 573.8333
@@ -23016,7 +23016,7 @@
                 "side": "enemy",
                 "type": "enemy_at",
                 "visualState": "wreck",
-                "currentAction": "retreat",
+                "currentAction": "damage",
                 "presentationPosition": {
                   "x": 886,
                   "y": 326.7612
@@ -23031,7 +23031,7 @@
                 "side": "enemy",
                 "type": "enemy_at",
                 "visualState": "wreck",
-                "currentAction": "retreat",
+                "currentAction": "damage",
                 "presentationPosition": {
                   "x": 834.7196,
                   "y": 433
@@ -23046,7 +23046,7 @@
                 "side": "enemy",
                 "type": "enemy_infantry",
                 "visualState": "wreck",
-                "currentAction": "retreat",
+                "currentAction": "damage",
                 "presentationPosition": {
                   "x": 784.2364,
                   "y": 432
@@ -23061,7 +23061,7 @@
                 "side": "enemy",
                 "type": "enemy_infantry",
                 "visualState": "search_target",
-                "currentAction": "retreat",
+                "currentAction": "destroy",
                 "presentationPosition": {
                   "x": 927.3995,
                   "y": 326.9681
@@ -23076,7 +23076,7 @@
                 "side": "enemy",
                 "type": "enemy_infantry",
                 "visualState": "suppressed",
-                "currentAction": "retreat",
+                "currentAction": "damage",
                 "presentationPosition": {
                   "x": 886,
                   "y": 449.2785
@@ -23091,7 +23091,7 @@
                 "side": "enemy",
                 "type": "enemy_infantry",
                 "visualState": "destroying",
-                "currentAction": "retreat",
+                "currentAction": "damage",
                 "presentationPosition": {
                   "x": 946,
                   "y": 573.8333

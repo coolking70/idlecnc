@@ -10,6 +10,7 @@ import { buildEnvironmentState } from '../environment/environment-state.js';
 import { OFFLINE_ASSET_MANIFEST } from '../environment/asset-provider.js';
 import { buildActorDrawSpec, buildProductionDrawSpecs } from '../environment/production-visual-draw-spec.js';
 import { normalizeVisualUnitClass } from '../environment/visual-unit-class.js';
+import { actionForActor, isRepairCapableActor } from './presentation-action-attribution.js';
 
 const clamp = (value, min, max) => Math.max(min, Math.min(max, Number(value) || 0));
 
@@ -102,9 +103,7 @@ function applyAuthorityAnchors(plan, seconds) {
 }
 
 function actionFor(plan, actorId, seconds) {
-  return (plan.timeline?.actions || [])
-    .filter((action) => Number(action.t) <= seconds + 1e-9 && (!action.actorIds || action.actorIds.includes(actorId)))
-    .at(-1)?.type || 'holding';
+  return actionForActor(plan, actorId, seconds)?.type || 'holding';
 }
 
 function memberCount(actor) {
@@ -247,7 +246,7 @@ export function buildUniversalRenderState(plan, seconds = 0, runtime = {}, preco
       minimumScreenFootprint: ({ mbt: 46, infantry: 24, anti_armor_infantry: 24, light_vehicle: 34, support_vehicle: 34, unknown: 30 })[normalizeVisualUnitClass(actor)] || 30,
       currentAction,
       cover,
-      visualStatus: !alive ? 'destroyed' : cover.inCover ? 'in_cover' : currentAction === 'repair' ? 'being_repaired' : currentAction === 'repair_approach' ? 'repairing' : currentAction === 'damage' || currentAction === 'fire' ? 'engaging' : currentAction
+      visualStatus: !alive ? 'destroyed' : cover.inCover ? 'in_cover' : currentAction === 'repair' && isRepairCapableActor(actor) ? 'repairing' : currentAction === 'repair' ? 'being_repaired' : currentAction === 'repair_approach' ? 'repairing' : currentAction === 'damage' || currentAction === 'fire' ? 'engaging' : currentAction
     };
   });
   const authorityShotSchedule = runtime.authorityShotSchedule || buildVisualShotSchedule(plan, positionSampler);
@@ -384,7 +383,8 @@ function buildUniversalTextState(plan, state, options = {}) {
     quality: plan.quality,
     objective: { status: state.objectiveState },
     activeAnchors: state.activeAnchors,
-    actors: state.actors.map((actor) => ({ id: actor.id, side: actor.side, type: actor.type, hp: actor.hp, maxHp: actor.maxHp, alive: actor.alive, visible: actor.visible !== false, x: Math.round(actor.visualCenter.x), y: Math.round(actor.visualCenter.y), routePosition: actor.routePosition, plannedPosition: actor.plannedPosition, preSeparationPosition: actor.preSeparationPosition, visualPosition: actor.visualPosition, visualOffset: actor.visualOffset, currentAction: actor.currentAction, plannerAction: actor.plannerAction || actor.currentAction, presentationVisualState: actor.presentationVisualState || actor.visualState, presentationFiltered: actor.presentationFiltered === true, visualState: actor.visualState, visualStatus: actor.visualStatus, firing: actor.firing === true, aiming: actor.aiming === true, reloading: actor.reloading === true, presentationMode: actor.presentationMode || null, weaponTopology: actor.weaponTopology || null, stateProgress: Number(actor.stateProgress?.toFixed?.(3) || actor.stateProgress || 0), weapon: actor.weapon, weaponPresentation: actor.weaponPresentation || null, drawSpec: actor.drawSpec || null, targetId: actor.targetId || null, targetAssignmentId: actor.targetAssignmentId || null, suppression: actor.suppression || null, retreat: actor.retreat || null, cover: actor.cover })),
+    actors: state.actors.map((actor) => ({ id: actor.id, side: actor.side, type: actor.type, hp: actor.hp, maxHp: actor.maxHp, alive: actor.alive, visible: actor.visible !== false, x: Math.round(actor.visualCenter.x), y: Math.round(actor.visualCenter.y), routePosition: actor.routePosition, plannedPosition: actor.plannedPosition, preSeparationPosition: actor.preSeparationPosition, visualPosition: actor.visualPosition, visualOffset: actor.visualOffset, currentAction: actor.currentAction, plannerAction: actor.plannerAction || actor.currentAction, presentationAction: actor.presentationAction || actor.presentationVisualState || actor.visualState, presentationActionSource: actor.presentationActionSource || null, presentationVisualState: actor.presentationVisualState || actor.visualState, presentationFiltered: actor.presentationFiltered === true, visualState: actor.visualState, visualStatus: actor.visualStatus, repairSource: actor.repairSource === true, repairTargeted: actor.repairTargeted === true, repairSourceId: actor.repairSourceId || null, repairTargetId: actor.repairTargetId || null, firing: actor.firing === true, aiming: actor.aiming === true, reloading: actor.reloading === true, presentationMode: actor.presentationMode || null, weaponTopology: actor.weaponTopology || null, stateProgress: Number(actor.stateProgress?.toFixed?.(3) || actor.stateProgress || 0), weapon: actor.weapon, weaponPresentation: actor.weaponPresentation || null, drawSpec: actor.drawSpec || null, targetId: actor.targetId || null, targetAssignmentId: actor.targetAssignmentId || null, suppression: actor.suppression || null, retreat: actor.retreat || null, cover: actor.cover })),
+    formalRepairEvents: state.formalRepairEvents || [],
     visualStage: state.visualStage,
     visualPhase: state.visualPhase,
     shotSchedule: state.shotSchedule.map((shot) => ({ id: shot.id, source: shot.source || null, presentationOnly: shot.presentationOnly !== false, authorityAnchorId: shot.authorityAnchorId || null, actorId: shot.actorId, targetId: shot.targetId, t: shot.t, impactTime: shot.impactTime, sourcePositionAtFire: shot.sourcePositionAtFire, sourceFacingAtFire: Number.isFinite(shot.sourceFacingAtFire) ? shot.sourceFacingAtFire : 0, targetPositionAtAim: shot.targetPositionAtAim, impactPositionAtImpact: shot.impactPositionAtImpact })),

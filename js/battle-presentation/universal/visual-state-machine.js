@@ -3,7 +3,7 @@
  */
 export const VISUAL_STATES = Object.freeze([
   'idle', 'deploy', 'move', 'turn', 'brake', 'aim', 'fire', 'reload', 'hit', 'destroying', 'wreck',
-  'suppressed', 'take_cover', 'retreat', 'cover_fire', 'search_target'
+  'suppressed', 'take_cover', 'retreat', 'cover_fire', 'search_target', 'repair', 'being_repaired'
 ]);
 
 const STATE_SET = new Set(VISUAL_STATES);

@@ -13,6 +13,7 @@ import { normalizeVisualUnitClass } from '../environment/visual-unit-class.js';
 import { OFFLINE_ASSET_MANIFEST } from '../environment/asset-provider.js';
 import { resolveMuzzleAnchor } from '../environment/animation-resolver.js';
 import { resolvePresentationFacingPolicy, resolvePresentationVisualState, resolveWeaponTopology, WEAPON_TOPOLOGY } from '../environment/presentation-facing-policy.js';
+import { actionForActor, isRepairCapableActor, nextActionForActor, repairEventRole } from './presentation-action-attribution.js';
 
 const clamp = (value, min, max) => Math.max(min, Math.min(max, Number(value) || 0));
 const TAU = Math.PI * 2;
@@ -38,17 +39,15 @@ function activeShot(schedule, actorId, seconds) {
 }
 
 function nextAction(plan, actorId, seconds) {
-  return (plan?.timeline?.actions || []).filter((action) => action.actorIds?.includes?.(actorId) && Number(action.t) > seconds).sort((a, b) => Number(a.t) - Number(b.t))[0] || null;
+  return nextActionForActor(plan, actorId, seconds);
 }
 
 function currentAction(plan, actorId, seconds) {
-  return (plan?.timeline?.actions || [])
-    .filter((action) => Number(action.t) <= seconds + 1e-9 && (!action.actorIds || action.actorIds.includes(actorId)))
-    .at(-1)?.type || 'holding';
+  return actionForActor(plan, actorId, seconds)?.type || 'holding';
 }
 
 function stateWindow(plan, actorId, seconds) {
-  const current = (plan?.timeline?.actions || []).filter((action) => action.actorIds?.includes?.(actorId) && Number(action.t) <= seconds + 1e-9).at(-1);
+  const current = actionForActor(plan, actorId, seconds);
   const following = nextAction(plan, actorId, seconds);
   const start = Number(current?.t) || 0; const end = Number(following?.t ?? plan?.timeline?.duration ?? start + 1);
   return { progress: clamp((seconds - start) / Math.max(.001, end - start), 0, 1), start, end, action: current?.type || 'holding' };
@@ -119,9 +118,12 @@ function resolveVisualState(plan, actor, seconds, schedule, engagementSchedule) 
   }
   const damage = latestDamage(plan, actor.actorId, seconds);
   if (damage && seconds - Number(damage.t) < .42) return { id: 'hit', progress: clamp((seconds - damage.t) / .42, 0, 1), authorityAnchorId: damage.id };
-  const repairAnchor = latestAnchor(plan, (anchor) => anchor.type === 'repair' && anchor.targetId === actor.actorId, seconds);
-  const formalRepair = repairAnchor && seconds - Number(repairAnchor.t) < .42;
-  if (formalRepair) return { id: 'repair', progress: clamp((seconds - Number(repairAnchor.t)) / .42, 0, 1), authorityAnchorId: repairAnchor.id || null, formalRepair: true };
+  const repairAnchor = latestAnchor(plan, (anchor) => anchor.type === 'repair' && (anchor.actorId === actor.actorId || anchor.targetId === actor.actorId), seconds);
+  const repairAge = repairAnchor ? seconds - Number(repairAnchor.t) : Infinity;
+  const repairActive = repairAnchor && repairAge >= -1e-9 && repairAge < .42;
+  const repairRole = repairActive ? repairEventRole(repairAnchor, actor.actorId) : null;
+  if (repairActive && repairRole === 'source' && isRepairCapableActor(actor)) return { id: 'repair', progress: clamp(repairAge / .42, 0, 1), authorityAnchorId: repairAnchor.id || null, formalRepair: true, formalRepairSource: true, repairEvent: repairAnchor };
+  if (repairActive && repairRole === 'target') return { id: 'being_repaired', progress: clamp(repairAge / .42, 0, 1), authorityAnchorId: repairAnchor.id || null, formalRepairTarget: true, repairEvent: repairAnchor };
   const action = currentAction(plan, actor.actorId, seconds);
   const shot = activeShot(schedule, actor.actorId, seconds);
   if (shot) {
@@ -133,7 +135,7 @@ function resolveVisualState(plan, actor, seconds, schedule, engagementSchedule) 
   const window = stateWindow(plan, actor.actorId, seconds);
   const previous = actor.previousPosition || actor.visualCenter;
   const movement = movementVisualState({ seconds, current: actor.visualCenter, previous, next: actor.nextPosition, deploymentEnd: deploymentSemanticEnd(plan, actor.actorId) });
-  const actionRecord = (plan.timeline?.actions || []).filter((item) => item.actorIds?.includes?.(actor.actorId) && Number(item.t) <= seconds + 1e-9).at(-1);
+  const actionRecord = actionForActor(plan, actor.actorId, seconds);
   const actionAge = actionRecord ? seconds - Number(actionRecord.t) : Infinity;
   const transition = action === 'advance' && actionAge < .6 ? 'turn' : action === 'take_cover' && actionAge < .7 ? 'brake' : movement;
   const suppressionSource = suppressionSourceAtTime(engagementSchedule, actor.actorId, seconds);
@@ -257,7 +259,7 @@ export function buildUniversalVisualScene(plan, seconds, sampler, runtime = {}) 
       routePosition: { ...positioned.routePosition }, plannedPosition: { ...positioned.plannedPosition }, preSeparationPosition: { ...positioned.preSeparationPosition }, visualPosition: { ...positioned.visualCenter }, presentationMode: positioned.presentationMode,
       footprint: positioned.footprint,
       anchorPosition: { ...positioned.preSeparationPosition }, visualOffset: { x: positioned.visualCenter.x - positioned.preSeparationPosition.x, y: positioned.visualCenter.y - positioned.preSeparationPosition.y }, nextPosition: { ...positioned.nextPosition }, facing, facingPolicy: facingPolicy.policy, weaponTopology, bodyFacing, weaponFacing, hullFacing: visualClass === 'mbt' ? bodyFacing : null, movementFacing, aimFacing, turretFacing, shotFacing,
-      visualState: normalizeVisualState(visual.id), visualStatus: visual.id === 'repair' || (visual.id === 'idle' && actor.currentAction === 'repair') ? 'repairing' : normalizeVisualState(visual.id), presentationVisualState: normalizeVisualState(visual.id), presentationFiltered: capability.filtered, presentationFilterReason: capability.reason, plannerAction: actor.currentAction, stateProgress: visual.progress, currentAction: actor.currentAction, weapon: { id: weapon.id, kind: weapon.kind, label: weapon.label, presentation: { ...(weapon.presentation || {}) } }, weaponPresentation: { ...(weapon.presentation || {}) },
+      visualState: normalizeVisualState(visual.id), visualStatus: visual.id === 'repair' && visual.formalRepairSource === true ? 'repairing' : visual.formalRepairTarget === true ? 'being_repaired' : normalizeVisualState(visual.id), presentationVisualState: normalizeVisualState(visual.id), presentationFiltered: capability.filtered, presentationFilterReason: capability.reason, plannerAction: actor.currentAction, presentationAction: normalizeVisualState(visual.id), presentationActionSource: visual.repairEvent ? { eventId: visual.repairEvent.id || null, sourceActorId: visual.repairEvent.actorId || null, targetActorId: visual.repairEvent.targetId || null, role: visual.formalRepairSource ? 'source' : visual.formalRepairTarget ? 'target' : null } : null, repairSource: visual.formalRepairSource === true, repairTargeted: visual.formalRepairTarget === true, formalRepairSourceActive: visual.formalRepairSource === true, formalRepairEventActive: Boolean(visual.repairEvent), repairSourceId: visual.repairEvent?.actorId || null, repairTargetId: visual.repairEvent?.targetId || null, stateProgress: visual.progress, currentAction: actor.currentAction, weapon: { id: weapon.id, kind: weapon.kind, label: weapon.label, presentation: { ...(weapon.presentation || {}) } }, weaponPresentation: { ...(weapon.presentation || {}) },
       firing: visual.id === 'fire', aiming: visual.id === 'aim', reloading: visual.id === 'reload', recoil, walkCycle: visual.id === 'move' ? seconds * (actor.type === 'mbt' ? 1.5 : 5) : 0,
       memberPositions: memberPositions(actor, positioned, bodyFacing, visual.id === 'retreat' ? 'move' : visual.id, seconds), visualAuthorityAnchorId: visual.authorityAnchorId || shot?.authorityAnchorId || null,
       targetId: effectiveShot?.targetId || visual.assignment?.targetId || null, targetAssignmentId: visual.assignment?.id || null, suppression: visual.suppression ? { ...visual.suppression, sourceIds: [...visual.suppression.sourceIds], targetIds: [...visual.suppression.targetIds], area: { ...visual.suppression.area, center: { ...(visual.suppression.area?.center || {}) } } } : null, retreat: visual.retreat ? { ...visual.retreat, exit: { ...visual.retreat.exit } } : null
@@ -274,5 +276,7 @@ export function buildUniversalVisualScene(plan, seconds, sampler, runtime = {}) 
   const destruction = buildPersistentDestructionLayer(plan, seconds, { visualShotSchedule: schedule, actors, windVector: environment.windVector });
   const wrecks = [...new Map([...fallbackWrecks, ...destruction.wrecks].map((wreck) => [wreck.id, wreck])).values()];
   const visualPhase = resolveBattlePhase(plan, seconds);
-  return { actors, wrecks, projectiles, effects: [...effects.effects, ...destruction.effects], decals: destruction.decals, smoke: destruction.smoke, debris: destruction.debris, destruction: { version: destruction.version, limits: { ...destruction.limits }, signature: destruction.signature, eventCount: schedule.length }, environment, shotSchedule: schedule, formalRepairEvents: (plan.timeline?.anchors || []).filter((anchor) => anchor.type === 'repair').map((anchor) => ({ id: anchor.id || null, targetId: anchor.targetId || null, t: Number(anchor.t), value: Number(anchor.value) || 0 })), visualStage: visualPhase.id, visualPhase, sceneSeed: plan.source?.seed ?? 0, engagementSchedule: runtime.engagementSchedule || null };
+  const actorsById = new Map(actorRows(plan).map((actor) => [actor.actorId, actor]));
+  const formalRepairEvents = (plan.timeline?.anchors || []).filter((anchor) => anchor.type === 'repair').map((anchor) => ({ id: anchor.id || null, t: Number(anchor.t), actorId: anchor.actorId || null, targetId: anchor.targetId || null, sourceActorId: anchor.actorId || null, targetActorId: anchor.targetId || null, sourceType: actorsById.get(anchor.actorId)?.type || null, targetType: actorsById.get(anchor.targetId)?.type || null, amount: Number(anchor.value) || 0, value: Number(anchor.value) || 0 }));
+  return { actors, wrecks, projectiles, effects: [...effects.effects, ...destruction.effects], decals: destruction.decals, smoke: destruction.smoke, debris: destruction.debris, destruction: { version: destruction.version, limits: { ...destruction.limits }, signature: destruction.signature, eventCount: schedule.length }, environment, shotSchedule: schedule, formalRepairEvents, visualStage: visualPhase.id, visualPhase, sceneSeed: plan.source?.seed ?? 0, engagementSchedule: runtime.engagementSchedule || null };
 }

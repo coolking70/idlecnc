@@ -29,10 +29,11 @@ export function directionRadians(directionIndex) { return DIRECTION_ANGLES[Numbe
 
 function animationForState(actor, visualState) {
   const requested = String(visualState || actor?.visualState || actor?.presentationMode || 'idle').toLowerCase();
-  const state = resolvePresentationVisualState({ actor, visualClass: normalizeVisualUnitClass(actor), weaponTopology: actor?.weaponTopology, visualState: requested, action: actor?.currentAction, formalRepair: actor?.visualStatus === 'repairing' }).visualState;
+  const formalRepairSource = actor?.formalRepairSourceActive === true && actor?.formalRepairEventActive === true && actor?.repairSource === true;
+  const state = resolvePresentationVisualState({ actor, visualClass: normalizeVisualUnitClass(actor), weaponTopology: actor?.weaponTopology, visualState: requested, action: actor?.currentAction, formalRepair: formalRepairSource }).visualState;
   if (['destroying', 'destroy'].includes(state)) return 'destroy';
   if (state === 'hit' || actor?.visualState === 'hit') return 'hit';
-  if (state === 'repair' || actor?.visualStatus === 'repairing' || actor?.currentAction === 'repair') return 'repair';
+  if (state === 'repair' && formalRepairSource) return 'repair';
   if (state === 'fire' || (actor?.firing && state !== 'idle')) return 'fire';
   if (state === 'aim' || (actor?.aiming && state !== 'idle')) return 'aim';
   if (['move', 'deploy', 'turn', 'brake', 'retreat', 'cover_advance', 'retreat_route'].includes(state) || ['move', 'deploy', 'advance', 'screen', 'take_cover', 'disengage', 'repair_approach'].includes(actor?.currentAction)) return 'move';
