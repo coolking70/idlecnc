@@ -602,3 +602,14 @@
 - [x] 原 E-A 13/13、E-A.1 focused 5/5、D-C.1 回归、完整 clean `npm test`、clean install、clean package browser rerun、strong/tamper verifier 均通过。
 - [x] 最终 ZIP：`iron-command-stage8-2G-E-A-1-replay-persistence-closure.zip`；最终 SHA、bytes、entries、clean gate 见 ZIP 外 `stage8_2g_ea1_final_package_record.json`，ZIP 不作为 Git 运行资源提交。
 - [ ] 独立审计方仍需按 E-A.1 最终 ZIP 重新验收；本阶段未进入 E-B。
+
+# Stage 8.2G-E-B progress
+
+- [x] 以 E-A.1 HEAD `17a965df9772ef0beb65b0e1d48c88c4671ae311` 为基线；Authority Freeze 保持，未导入或修改任何独立审计 JSON。
+- [x] 新增 Mission / Deployment UI：战役与重复任务类型、资格/失败原因、权威成本与冷却、部署确认面板，以及真实 `buildDispatchSnapshot` 单位 HP/状态清单。
+- [x] 确认派遣仍由核心层重新校验；新增同步 busy lock，双击只产生一个 battle session；冷却、资格、资源和 solver 失败路径保持零副作用。
+- [x] E-A.1 verifier 加固为独立重算正向 `timeOrigin`、reason 覆盖、loader 唯一性；E-B verifier 额外校验部署快照语义、任务冷却、会话/战报/结算身份和 authority hash。
+- [x] 真实浏览器证据覆盖 18 帧、4 次 `Page.reload`（deployment review / running battle / result / replay），真实 DOM click provenance、pageErrors/consoleErrors 均通过；部署确认与重复任务确认截图已用图像检查。
+- [x] E-B focused Node 12/12；性能门禁 warmup 20、samples 120、p95 严格 `<16.7ms`；D-C.1 victory p95 继续作为回归检查。
+- [x] true-value tamper `48/48` 拒绝，`passedFlagOnlyCases=0`，包含 fake reload 数值倒退/相等、reason 缺失、loader 复用、冷却、快照、会话交换、回放写入和 authority hash 篡改。
+- [ ] 交付 ZIP、无 `--skip-full` clean verifier、最终 head CI 和独立审计仍待本轮最后收口。

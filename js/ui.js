@@ -31,9 +31,12 @@ import {
 import {
   listTheaters, listStrategies, getTheaterIntel, getMissionCost, formatMissionCost,
   canDispatch, canDispatchOperationMission, getOperation,
-  getActiveBattle, getReports, hasRadar
+  getActiveBattle, getReports, hasRadar, buildDispatchSnapshot
 } from './theater.js';
 import { getOperationCost } from './operations.js';
+import {
+  missionKindLabel, dispatchEligibilityText, operationCooldownText, unitStatusLabel
+} from './mission-command-presentation.js';
 import { BATTLE_EVENT, resultLabel } from './battle.js';
 import {
   qs, el, setText, toggleClass, formatInt, formatRate, formatClock,
@@ -76,6 +79,9 @@ export class UI {
     this.dispatchFormationId = null;
     this.selectedStrategyId = 'cautious';
     this.selectedOperationId = null;
+    /** 仅 UI 内存中的部署确认；刷新后安全回退，不写入 production save。 */
+    this.dispatchReview = null;
+    this._lastState = null;
     /** 战报页选中的战报 ID（阶段5） */
     this.selectedReportId = null;
     this.presentationState = { preference: 'auto', mode: 'legacy' };
@@ -1390,7 +1396,7 @@ export class UI {
     this._theaterLocked = true;
     try {
       const fn = this.handlers[handlerName];
-      if (typeof fn === 'function') fn(...args);
+      if (typeof fn === 'function') return fn(...args);
     } finally {
       this._theaterLocked = false;
     }
@@ -1475,6 +1481,8 @@ export class UI {
 
     r.th.dsTarget = el('div', 'th-ds-target', '请先在上方选择一个作战目标。');
     ds.appendChild(r.th.dsTarget);
+    r.th.dsMission = el('div', 'th-ds-mission', '任务类型：未选择');
+    ds.appendChild(r.th.dsMission);
 
     // 编队下拉
     const fRow = el('div', 'th-ds-row');
@@ -1482,6 +1490,7 @@ export class UI {
     r.th.dsSelect = el('select', 'th-select');
     r.th.dsSelect.addEventListener('change', () => {
       this.dispatchFormationId = r.th.dsSelect.value || null;
+      this.dispatchReview = null;
       if (this.refs.th) this.refs.th.sig.cost = '';
     });
     fRow.appendChild(r.th.dsSelect);
@@ -1518,6 +1527,7 @@ export class UI {
 
       card.addEventListener('click', () => {
         this.selectedStrategyId = st.id;
+        this.dispatchReview = null;
         if (this.refs.th) this.refs.th.sig.cost = '';
       });
       sWrap.appendChild(card);
@@ -1538,16 +1548,18 @@ export class UI {
     r.th.dsBtn = el('button', 'btn primary th-dispatch-btn', '派遣出击');
     r.th.dsBtn.type = 'button';
     r.th.dsBtn.dataset.action = 'launch-battle';
-    r.th.dsBtn.addEventListener('click', () => {
-      this._onTheaterAction('onDispatch',
-        this.dispatchFormationId, this.selectedTheaterId, this.selectedStrategyId, this.selectedOperationId);
-    });
+    r.th.dsBtn.addEventListener('click', () => this._openDispatchReview(this._lastState));
     ds.appendChild(r.th.dsBtn);
     r.th.dsReason = el('div', 'bc-reason');
     r.th.dsReason.hidden = true;
     ds.appendChild(r.th.dsReason);
 
     page.appendChild(ds);
+
+    // —— 部署编成确认 ——
+    r.th.review = el('div', 'card th-deployment-review');
+    r.th.review.hidden = true;
+    page.appendChild(r.th.review);
 
     const note = el('div', 'hint');
     note.innerHTML = '<b>说明：</b>同一时间只能进行一场作战。战斗结果在派遣时即由求解器一次性算出，'
@@ -1561,7 +1573,10 @@ export class UI {
     const t = this.refs.th;
     if (!t || !t.list) return;
 
+    this._lastState = state;
+
     const active = getActiveBattle(state);
+    if (active && this.dispatchReview) this.dispatchReview = null;
     this._updateBattlePanel(state, active);
 
     // —— 战区列表 ——
@@ -1657,7 +1672,16 @@ export class UI {
         box.appendChild(el('div', 'th-reward', `成本系数 ×${operation.supplyMultiplier} · 奖励范围 ${Object.keys(operation.rewards || {}).map((key) => `${key} ${operation.rewards[key].min}-${operation.rewards[key].max}`).join(' / ')}`));
         box.appendChild(el('div', 'bc-reason', op.cooldownText));
         const btn = el('button', 'btn primary small', '选择任务'); btn.type = 'button'; btn.disabled = op.cooldownRemaining > 0;
-        btn.addEventListener('click', (event) => { event.stopPropagation(); this.selectedTheaterId = view.id; this.selectedOperationId = operation.id; this.refs.th.sig.list = ''; this.refs.th.sig.cost = ''; });
+        btn.dataset.action = 'select-operation';
+        btn.dataset.operationId = operation.id;
+        btn.addEventListener('click', (event) => {
+          event.stopPropagation();
+          this.dispatchReview = null;
+          this.selectedTheaterId = view.id;
+          this.selectedOperationId = operation.id;
+          this.refs.th.sig.list = '';
+          this.refs.th.sig.cost = '';
+        });
         box.appendChild(btn); card.appendChild(box);
       });
     }
@@ -1673,6 +1697,7 @@ export class UI {
     }
 
     card.addEventListener('click', () => {
+      this.dispatchReview = null;
       this.selectedTheaterId = view.id;
       this.selectedOperationId = null;
       if (this.refs.th) { this.refs.th.sig.list = ''; this.refs.th.sig.cost = ''; }
@@ -1693,6 +1718,10 @@ export class UI {
     setText(t.dsTarget, target
       ? `${selectedOperation ? `任务：${selectedOperation.name}` : `目标：${target.name}`} · ${target.terrainName} · 补给系数 ×${selectedOperation ? selectedOperation.supplyMultiplier : target.supplyMultiplier}`
       : '请先在上方选择一个作战目标。');
+    const selectedOperationState = selectedOperation ? getOperation(state, selectedOperation.id) : null;
+    setText(t.dsMission, target
+      ? `任务类型：${missionKindLabel(selectedOperation ? 'operation' : 'campaign')} · ${selectedOperation ? operationCooldownText(selectedOperationState) : '战区首次占领任务，无重复任务冷却'}`
+      : '任务类型：未选择');
 
     // 编队下拉（结构变化才重建，避免刷新时丢失选择）
     const formations = Array.isArray(state.formations) ? state.formations : [];
@@ -1787,11 +1816,173 @@ export class UI {
     }
 
     const blocked = !check.ok || !!active;
-    t.dsBtn.disabled = blocked;
-    t.dsBtn.textContent = active ? '作战进行中' : '派遣出击';
-    const reason = active ? '已有一场作战正在进行，请先返回基地。' : (check.ok ? '' : check.reason);
+    t.dsBtn.textContent = active ? '作战进行中' : (this.dispatchReview ? '等待确认' : '查看部署确认');
+    const reason = active ? '已有一场作战正在进行，请先返回基地。' : (check.ok ? '' : dispatchEligibilityText(check));
     t.dsReason.hidden = !reason;
     setText(t.dsReason, reason);
+    t.dsBtn.disabled = blocked || Boolean(this.dispatchReview);
+    this._updateDispatchReview(state);
+  }
+
+  /*
+   * 打开部署确认。确认面板只保存 UI 内存态；真正派遣时仍由
+   * theater.js 重新执行资格校验、成本扣除、快照构建与生产会话建立。
+   */
+  _openDispatchReview(state) {
+    if (!state || state.activeBattle) {
+      this.toast('已有一场作战正在进行，无法重复派遣', 'warn');
+      return { ok: false, code: 'battle_active', reason: '已有一场作战正在进行' };
+    }
+    const selectedOperation = this.selectedOperationId && OPERATIONS[this.selectedOperationId]
+      && OPERATIONS[this.selectedOperationId].theaterId === this.selectedTheaterId
+      ? OPERATIONS[this.selectedOperationId] : null;
+    const missionKind = selectedOperation ? 'operation' : 'campaign';
+    const missionId = selectedOperation ? selectedOperation.id : this.selectedTheaterId;
+    const check = selectedOperation
+      ? canDispatchOperationMission(state, this.dispatchFormationId, missionId, this.selectedStrategyId)
+      : canDispatch(state, this.dispatchFormationId, this.selectedTheaterId, this.selectedStrategyId);
+    if (!check.ok) {
+      this.toast(dispatchEligibilityText(check), 'warn');
+      this._updateDispatchConsole(state, getActiveBattle(state));
+      return check;
+    }
+    const formation = (state.formations || []).find((row) => row && row.id === this.dispatchFormationId);
+    if (!formation) {
+      const result = { ok: false, code: 'formation_not_found', reason: '未找到出击编队' };
+      this.toast(result.reason, 'warn');
+      return result;
+    }
+    const cost = selectedOperation
+      ? getOperationCost(state, formation.id, missionId, this.selectedStrategyId)
+      : getMissionCost(state, formation.id, this.selectedTheaterId, this.selectedStrategyId);
+    const snapshot = buildDispatchSnapshot(
+      state, formation, this.selectedTheaterId, this.selectedStrategyId, missionKind, missionId
+    );
+    this.dispatchReview = {
+      formationId: formation.id,
+      theaterId: this.selectedTheaterId,
+      strategyId: this.selectedStrategyId,
+      operationId: selectedOperation?.id || null,
+      missionKind,
+      missionId,
+      cost: { ...(cost.cost || {}) },
+      snapshot,
+      openedAtGameTime: safeNumber(state.time?.game, 0)
+    };
+    this._updateDispatchReview(state);
+    if (this.refs.th?.review && typeof this.refs.th.review.scrollIntoView === 'function') {
+      this.refs.th.review.scrollIntoView({ block: 'nearest' });
+    }
+    return { ok: true, review: this.dispatchReview };
+  }
+
+  /** 部署确认面板：展示 buildDispatchSnapshot 的同一份快照数据。 */
+  _updateDispatchReview(state) {
+    const t = this.refs.th;
+    if (!t?.review) return;
+    const review = this.dispatchReview;
+    if (!review) {
+      t.review.hidden = true;
+      t.review.innerHTML = '';
+      t.sig.review = '';
+      return;
+    }
+    const snapshot = review.snapshot || {};
+    const operation = review.operationId ? OPERATIONS[review.operationId] : null;
+    const sourceUnits = new Map((state.units || []).map((unit) => [unit.id, unit]));
+    const sourceUnitSignature = (snapshot.units || []).map((unit) => {
+      const source = sourceUnits.get(unit.id);
+      return [unit.id, unit.hp, unit.maxHp, source?.status || '', source?.damage || ''].join(':');
+    }).join('|');
+    const operationState = operation ? getOperation(state, operation.id) : null;
+    const reviewSignature = [
+      review.formationId, review.theaterId, review.strategyId, review.missionKind, review.missionId,
+      formatMissionCost(review.cost), Math.floor(review.openedAtGameTime), sourceUnitSignature,
+      operationState?.cooldownRemaining || 0, operationState?.cooldownUntil || 0, operationState?.cooldownText || ''
+    ].join('#');
+    t.review.hidden = false;
+    if (t.sig.review === reviewSignature) return;
+    t.sig.review = reviewSignature;
+    t.review.dataset.action = 'deployment-review';
+    t.review.dataset.formationId = review.formationId;
+    t.review.dataset.theaterId = review.theaterId || '';
+    t.review.dataset.strategyId = review.strategyId || '';
+    t.review.dataset.snapshotUnitIds = (snapshot.units || []).map((unit) => unit.id).join(',');
+    t.review.innerHTML = '';
+
+    const head = el('div', 'card-head');
+    head.appendChild(el('span', '', '部署确认 / DEPLOYMENT REVIEW'));
+    head.appendChild(el('span', 'tag warn', '待确认'));
+    t.review.appendChild(head);
+
+    const targetName = THEATERS[review.theaterId]?.name || review.theaterId;
+    t.review.appendChild(el('div', 'th-review-title', (snapshot.formation?.name || '编队') + ' → ' + targetName));
+    const strategy = listStrategies().find((row) => row.id === review.strategyId);
+    t.review.appendChild(el('div', 'th-review-meta',
+      missionKindLabel(review.missionKind) + ' · 策略 ' + (strategy?.name || review.strategyId)
+      + (operation ? ' · ' + operation.name : '')));
+
+    const facts = el('div', 'th-review-facts');
+    const addFact = (label, value) => {
+      const row = el('div', 'kv');
+      row.appendChild(el('span', '', label));
+      row.appendChild(el('span', '', value));
+      facts.appendChild(row);
+    };
+    addFact('目标战区', targetName || '未选择');
+    addFact('预计消耗', formatMissionCost(review.cost));
+    addFact('冷却安排', operationCooldownText(operationState));
+    addFact('确认时游戏时间', Math.floor(review.openedAtGameTime) + ' 秒');
+    t.review.appendChild(facts);
+
+    const unitHead = el('div', 'section-head sub');
+    unitHead.appendChild(el('span', '', '实际派遣快照 · 参战单位'));
+    unitHead.appendChild(el('span', 'tag', (snapshot.units || []).length + ' 个'));
+    t.review.appendChild(unitHead);
+    const list = el('div', 'th-review-units');
+    (snapshot.units || []).forEach((unit) => {
+      const source = sourceUnits.get(unit.id);
+      const row = el('div', 'th-review-unit');
+      row.dataset.unitId = unit.id;
+      row.appendChild(el('span', 'th-review-unit-name', unit.callsign || UNITS[unit.type]?.name || unit.type));
+      row.appendChild(el('span', 'th-review-unit-meta',
+        'HP ' + formatInt(unit.hp) + '/' + formatInt(unit.maxHp)
+        + ' · 状态 ' + unitStatusLabel(source?.status) + ' · ' + (unit.rankName || '普通')
+        + (source?.damage ? ' · ' + source.damage : '')));
+      list.appendChild(row);
+    });
+    t.review.appendChild(list);
+
+    const note = el('div', 'hint th-review-source');
+    note.textContent = '以上清单来自本次派遣将写入的 dispatchSnapshot；确认时核心层会再次校验资格与资源。';
+    t.review.appendChild(note);
+
+    const actions = el('div', 'th-review-actions');
+    const cancel = el('button', 'btn', '取消派遣');
+    cancel.type = 'button';
+    cancel.dataset.action = 'cancel-deployment-review';
+    cancel.addEventListener('click', () => {
+      this.dispatchReview = null;
+      this._updateDispatchReview(state);
+      this._updateDispatchConsole(state, getActiveBattle(state));
+    });
+    actions.appendChild(cancel);
+    const confirm = el('button', 'btn primary', '确认派遣');
+    confirm.type = 'button';
+    confirm.dataset.action = 'confirm-dispatch';
+    confirm.addEventListener('click', () => {
+      const current = this.dispatchReview;
+      if (!current) return;
+      this.dispatchReview = null;
+      this._updateDispatchReview(state);
+      return this._onTheaterAction(
+        'onConfirmDispatch', current.formationId, current.theaterId,
+        current.strategyId, current.operationId
+      );
+    });
+    confirm.disabled = Boolean(state.activeBattle);
+    actions.appendChild(confirm);
+    t.review.appendChild(actions);
   }
 
   /** 刷新「当前作战」面板 */

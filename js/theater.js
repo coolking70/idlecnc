@@ -487,7 +487,7 @@ function operationIdFor(activeOrParams) {
   return activeOrParams && activeOrParams.missionKind === 'operation' ? activeOrParams.missionId : null;
 }
 
-function buildDispatchSnapshot(state, formation, theaterId, strategyId, missionKind = 'campaign', missionId = theaterId) {
+export function buildDispatchSnapshot(state, formation, theaterId, strategyId, missionKind = 'campaign', missionId = theaterId) {
   const units = (formation.unitIds || []).map((unitId) => {
     const unit = findUnit(state, unitId);
     if (!unit || !UNITS[unit.type]) return null;

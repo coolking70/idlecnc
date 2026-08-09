@@ -214,7 +214,7 @@ function verifyBrowserManifest(manifest, root, errors) {
         && typeof afterTimeOrigin === 'number'
         && Number.isFinite(afterTimeOrigin);
       const recomputedTimeOriginChanged = timeOriginsValid
-        && beforeTimeOrigin !== afterTimeOrigin;
+        && afterTimeOrigin > beforeTimeOrigin;
       const beforeLoaderId = typeof row?.beforeLoaderId === 'string' ? row.beforeLoaderId.trim() : '';
       const afterLoaderId = typeof row?.afterLoaderId === 'string'
         ? row.afterLoaderId.trim()
@@ -223,6 +223,7 @@ function verifyBrowserManifest(manifest, root, errors) {
       if (row?.method !== 'Page.reload') errors.push(`browser_real_reload_method:${index}`);
       if (!timeOriginsValid || !recomputedTimeOriginChanged) errors.push(`browser_real_reload_time_origin:${index}`);
       if (row?.timeOriginChanged !== recomputedTimeOriginChanged) errors.push(`browser_real_reload_time_origin_declaration:${index}`);
+      if (!['running_battle', 'replay'].includes(row?.reason)) errors.push(`browser_real_reload_reason:${index}`);
       if (!beforeLoaderId || !afterLoaderId || beforeLoaderId === afterLoaderId) errors.push(`browser_real_reload_loader:${index}`);
       if (typeof row?.afterLoaderId === 'string' && row.afterLoaderId.trim() !== row.loaderId) errors.push(`browser_real_reload_loader_declaration:${index}`);
       afterLoaderIds.push(afterLoaderId);
@@ -230,6 +231,8 @@ function verifyBrowserManifest(manifest, root, errors) {
     if (afterLoaderIds.some((loaderId) => !loaderId) || new Set(afterLoaderIds).size !== afterLoaderIds.length) {
       errors.push('browser_real_reload_loader_uniqueness');
     }
+    const reasons = new Set(realReloads.map((row) => row?.reason));
+    if (!reasons.has('running_battle') || !reasons.has('replay')) errors.push('browser_real_reload_reason_coverage');
   }
   if ((manifest?.actionProvenance || []).some((row) => row.source !== 'production_ui' || row.syntheticApiCall !== false)) errors.push('browser_action_provenance');
   const seen = new Set();

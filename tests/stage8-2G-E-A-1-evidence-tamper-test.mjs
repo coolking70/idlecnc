@@ -20,8 +20,15 @@ tamper('fake_real_reload_same_time_origin', (candidate) => {
   candidate.browser.realReloads[0].after.timeOrigin = candidate.browser.realReloads[0].before.timeOrigin;
   candidate.browser.realReloads[0].timeOriginChanged = true;
 });
+tamper('fake_real_reload_time_origin_regression', (candidate) => {
+  candidate.browser.realReloads[0].after.timeOrigin = candidate.browser.realReloads[0].before.timeOrigin - 1;
+  candidate.browser.realReloads[0].timeOriginChanged = true;
+});
 tamper('fake_real_reload_flag_mismatch', (candidate) => {
   candidate.browser.realReloads[0].timeOriginChanged = false;
+});
+tamper('fake_real_reload_reason_coverage', (candidate) => {
+  candidate.browser.realReloads[1].reason = 'running_battle';
 });
 tamper('fake_real_reload_same_loader_id', (candidate) => {
   const loaderId = candidate.browser.realReloads[0].loaderId;

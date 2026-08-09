@@ -131,6 +131,8 @@ function togglePause() {
 
 /** 正在处理建造请求的标记，杜绝同一帧内的重复提交 */
 let buildBusy = false;
+/** 派遣确认提交锁：阻止同一同步调用链上的重复核心请求。 */
+let dispatchBusy = false;
 
 /**
  * 批准建设。
@@ -371,8 +373,16 @@ function handleRemoveUnit(formationId, unitId) {
  * 结果由 theater.dispatchFormation 一次性求解，这里只负责提示、落盘与刷新界面。
  */
 function handleDispatch(formationId, theaterId, strategyId, operationId = null) {
+  if (dispatchBusy) {
+    const blocked = { ok: false, code: 'dispatch_busy', reason: '正在处理上一次派遣请求', activeBattle: null };
+    if (ui) ui.toast(blocked.reason, 'warn');
+    return blocked;
+  }
+  dispatchBusy = true;
+  let res = { ok: false, code: 'dispatch_failed', reason: '派遣失败', activeBattle: null };
+  try {
   const state = getState();
-  const res = operationId
+  res = operationId
     ? dispatchOperation(state, formationId, operationId, strategyId)
     : dispatchFormation(state, formationId, theaterId, strategyId);
   if (!res.ok) {
@@ -386,6 +396,14 @@ function handleDispatch(formationId, theaterId, strategyId, operationId = null) 
     ui.toast('编队已出击');
   }
   return res;
+  } catch (err) {
+    console.error('[main] 派遣请求处理失败：', err);
+    const failure = { ok: false, code: 'dispatch_error', reason: '派遣请求处理失败，请稍后重试', activeBattle: null };
+    if (ui) ui.toast(failure.reason, 'danger');
+    return failure;
+  } finally {
+    dispatchBusy = false;
+  }
 }
 
 function handleRenameUnit(unitId, callsign) {
@@ -859,6 +877,7 @@ function boot() {
     onSelectFormation: (formationId) => syncSelectedFormation(formationId),
     /* 阶段5：战区与战斗 */
     onDispatch: (formationId, theaterId, strategyId, operationId) => handleDispatch(formationId, theaterId, strategyId, operationId),
+    onConfirmDispatch: (formationId, theaterId, strategyId, operationId) => handleDispatch(formationId, theaterId, strategyId, operationId),
     onCloseBattle: () => handleCloseBattle(),
     onSkipBattleReturn: () => handleSkipBattleReturn(),
     onSelectTheater: () => {},
