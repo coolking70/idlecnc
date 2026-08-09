@@ -562,3 +562,10 @@
 - [x] D-C.1 npm gate、官方 Playwright client、Chromium 证据、强重算和解包级 package verifier 已接入；14/14 浏览器 PNG 唯一，pageErrors/consoleErrors `0`，package clean install 与完整 clean `npm test` 均通过。
 - [x] 交付包：`iron-command-stage8-2G-D-C-1-strong-evidence-performance.zip`，SHA-256 `468b1e41a3983a75c99b3164e834059c17d6dfc040b2c67d792d18f2a6d87a5b`，`66,550,138` bytes，`1097` entries；ZIP 无旧/新 ZIP、`.git`、`node_modules`、browser profile 或 stale final record。
 - [ ] CI Run/Job 与独立审计方仍需按最终 D-C.1 ZIP 重新验收；审计 JSON 仅为失败基线和回归样本，不代表独立批准。
+
+# Stage 8.2G-D-C.1 final delivery closure
+
+- [x] focused `npm run test:stage8-2G-D-C-1`、普通 `npm test`、clean install 与无 `--skip-full` 的完整 package verifier 均通过；D-C.1 证据为 14/14 帧、14/14 唯一 PNG、24/24 tamper rejection，正式报告/Repair Authority 保持只读。
+- [x] 首轮真实 `core-regression` 已完成：Run `31291451206` / Job `93189235124`，head `6a15193dabe2eac398e69dee61eba0efef416977`，D-C 与其后的 D-C.1 步骤均 `success`。
+- [x] CI workflow 已固定为 D-C 后执行 D-C.1；selfcheck generator 会保留最终交付元数据中的真实 CI 记录与 `readyToCloseStage8_2G_D_C` 标志。
+- [ ] 最终元数据提交后的 head CI 与最终 ZIP 尚待收口；无 D-C.2，独立审计 JSON 仍只作回归参考，未导入生产代码。
