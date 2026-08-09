@@ -21,6 +21,33 @@ export const EFFECT_LIMITS = Object.freeze({
   reducedMotionZoomDelta: 0
 });
 
+/**
+ * Exact Formal Weapon -> Presentation Effect Family mapping.
+ *
+ * This is deliberately allow-listed and fail-closed.  In particular,
+ * `scout_autocannon` must never be classified as `tank_cannon` merely because
+ * its name contains the word "cannon".  The returned family is presentation
+ * metadata only; the Formal shot/weapon objects are never mutated.
+ */
+export const EFFECT_WEAPON_FAMILY_MAP = Object.freeze({
+  infantry_light: 'infantry_light',
+  infantry_rifle: 'infantry_light',
+  infantry_small_arms: 'infantry_light',
+  anti_armor: 'anti_armor',
+  anti_armor_rocket: 'anti_armor',
+  rocket_launcher: 'anti_armor',
+  scout_autocannon: 'scout_autocannon',
+  scout_machine_gun: 'scout_autocannon',
+  tank_cannon: 'tank_cannon',
+  tank_main_gun: 'tank_cannon'
+});
+
+const EFFECT_WEAPON_KIND_FALLBACK_MAP = Object.freeze({
+  small_arms: 'infantry_light',
+  rocket: 'anti_armor',
+  cannon: 'tank_cannon'
+});
+
 const EPSILON = 1e-6;
 const clamp = (value, min, max) => Math.max(min, Math.min(max, Number(value) || 0));
 const point = (actor) => ({ ...(actor?.visualCenter || actor?.position || { x: 0, y: 0 }) });
@@ -51,12 +78,14 @@ function progress(seconds, start, life) { return clamp(ageAt(seconds, start) / M
 function alpha(seconds, start, life) { return 1 - progress(seconds, start, life); }
 
 export function normalizeEffectWeaponFamily(shot = {}) {
-  const family = String(shot.weapon?.family || shot.weaponFamily || shot.weapon?.id || '').toLowerCase();
-  if (family.includes('tank') || family.includes('cannon') || shot.weaponKind === 'cannon') return 'tank_cannon';
-  if (family.includes('anti') || family.includes('rocket') || shot.weaponKind === 'rocket') return 'anti_armor';
-  if (family.includes('scout')) return 'scout_autocannon';
-  if (family.includes('repair')) return 'repair';
-  return 'infantry_light';
+  const weaponId = String(shot.weapon?.id || shot.weaponId || '').toLowerCase();
+  const formalFamily = String(shot.weapon?.family || shot.weaponFamily || '').toLowerCase();
+  const weaponKind = String(shot.weapon?.kind || shot.weaponKind || '').toLowerCase();
+  if (EFFECT_WEAPON_FAMILY_MAP[weaponId]) return EFFECT_WEAPON_FAMILY_MAP[weaponId];
+  if (EFFECT_WEAPON_FAMILY_MAP[formalFamily]) return EFFECT_WEAPON_FAMILY_MAP[formalFamily];
+  if (formalFamily === 'repair' || weaponId === 'repair_tool' || weaponKind === 'repair') return 'repair';
+  if (EFFECT_WEAPON_KIND_FALLBACK_MAP[weaponKind]) return EFFECT_WEAPON_KIND_FALLBACK_MAP[weaponKind];
+  return 'generic';
 }
 
 function effectPosition(actor, fallback = { x: 0, y: 0 }) { return actor ? point(actor) : { ...fallback }; }

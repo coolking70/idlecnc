@@ -1,10 +1,21 @@
 import { PROHIBITED_UNARMED_VISUAL_STATES, WEAPON_TOPOLOGY } from '../environment/presentation-facing-policy.js';
 import { isRepairCapableActor } from './presentation-action-attribution.js';
+import { normalizeEffectWeaponFamily } from '../effects/presentation-effects-runtime.js';
 
 const lower = (value) => String(value || '').toLowerCase();
 const activeAt = (item, seconds) => Number(seconds) >= Number(item?.start ?? item?.t ?? item?.time ?? 0) - 1e-6 && Number(seconds) <= Number(item?.end ?? item?.impactTime ?? item?.t ?? item?.time ?? 0) + 1e-6;
 const actorClass = (actor) => lower(actor?.drawSpec?.visualClass || actor?.visualClass || actor?.type);
 const actorName = (actor) => `${actorClass(actor)} ${lower(actor?.type)} ${lower(actor?.role)}`;
+const formalWeaponId = (shot) => lower(shot?.weapon?.id || shot?.weaponId);
+const formalWeaponFamily = (shot) => lower(shot?.weapon?.family || shot?.weaponFamily);
+const isInfantryActor = (actor) => ['infantry', 'enemy_infantry'].includes(lower(actor?.type)) || actorClass(actor) === 'infantry';
+const isAntiArmorActor = (actor) => ['at_infantry', 'enemy_at'].includes(lower(actor?.type)) || actorClass(actor) === 'anti_armor_infantry';
+const isScoutActor = (actor) => ['scout_car', 'enemy_scout_car'].includes(lower(actor?.type)) || (actorClass(actor) === 'light_vehicle' && lower(actor?.shape).includes('scout'));
+const isMbtActor = (actor) => lower(actor?.type) === 'mbt' || actorClass(actor) === 'mbt';
+const formalWeaponMatches = (shot, ids, families, kinds = []) => {
+  const id = formalWeaponId(shot); const family = formalWeaponFamily(shot); const kind = lower(shot?.weapon?.kind || shot?.weaponKind);
+  return ids.includes(id) || families.includes(family) || kinds.includes(kind);
+};
 
 function activeShots(state) {
   const seconds = Number(state?.time) || 0;
@@ -15,7 +26,7 @@ function result(id, passed, matchedActorIds = [], matchedShotIds = [], details =
   return { id, passed: Boolean(passed), matchedActorIds: [...new Set(matchedActorIds)].sort(), matchedShotIds: [...new Set(matchedShotIds)].sort(), details };
 }
 
-export const PRODUCTION_SEMANTIC_IDS = Object.freeze(['scout-move', 'scout-fire', 'repair-action', 'support-unarmed', 'cover-advance', 'retreat-rear-guard', 'infantry-muzzle', 'at-rocket-launch', 'mbt-cannon-fire', 'small-arms-impact', 'rocket-impact', 'tank-impact', 'damaged-smoke', 'unit-destroy', 'wreck-smoke', 'repair-effect', 'battle-intro', 'victory-outro', 'withdraw-outro']);
+export const PRODUCTION_SEMANTIC_IDS = Object.freeze(['scout-move', 'scout-fire', 'scout-impact', 'repair-action', 'support-unarmed', 'cover-advance', 'retreat-rear-guard', 'infantry-muzzle', 'at-rocket-launch', 'mbt-cannon-fire', 'small-arms-impact', 'rocket-impact', 'tank-impact', 'damaged-smoke', 'unit-destroy', 'wreck-smoke', 'repair-effect', 'battle-intro', 'victory-outro', 'withdraw-outro']);
 
 export function evaluateProductionSemanticPredicate(name, state) {
   const id = lower(name).replace(/_/g, '-');
@@ -25,25 +36,38 @@ export function evaluateProductionSemanticPredicate(name, state) {
     const matched = actors.filter((actor) => actorName(actor).includes('scout') && actor.visualState === 'move' && actor.drawSpec?.animation === 'move');
     return result('scout-move', matched.length > 0, matched.map((actor) => actor.id), [], { state: 'move', animation: 'move' });
   }
-  if (id.includes('scout-fire')) {
+  if (id.includes('scout-fire') && !(state?.effects || []).some((effect) => effect.kind === 'muzzle_flash')) {
     const shots = activeShots(state);
-    const matched = actors.filter((actor) => actorName(actor).includes('scout') && actor.visualState === 'fire' && actor.firing === true && actor.weaponTopology !== WEAPON_TOPOLOGY.UNARMED && actor.drawSpec?.animation === 'fire');
-    const shotIds = shots.filter((shot) => matched.some((actor) => actor.id === shot.actorId)).map((shot) => shot.id);
+    const matched = actors.filter((actor) => isScoutActor(actor) && actor.visualState === 'fire' && actor.firing === true && actor.weaponTopology !== WEAPON_TOPOLOGY.UNARMED && actor.drawSpec?.animation === 'fire');
+    const shotIds = shots.filter((shot) => matched.some((actor) => actor.id === shot.actorId) && normalizeEffectWeaponFamily(shot) === 'scout_autocannon' && formalWeaponMatches(shot, ['scout_machine_gun'], ['scout_autocannon'], ['small_arms'])).map((shot) => shot.id);
     return result('scout-fire', matched.length > 0 && shotIds.length > 0, matched.map((actor) => actor.id), shotIds, { state: 'fire', activeShot: shotIds.length > 0 });
   }
   const presentationEffects = state?.effects || [];
   const hasEffect = (predicate) => presentationEffects.filter((effect) => predicate(effect)).filter((effect) => Number(effect.life ?? 1) > 0);
-  const semanticWeapon = (family, stateId) => {
+  const actorById = new Map(actors.map((actor) => [actor.id, actor]));
+  const semanticWeapon = (family, stateId, actorPredicate, weaponPredicate) => {
     const matches = hasEffect((effect) => effect.kind === 'muzzle_flash' && effect.weaponFamily === family);
-    const shots = matches.map((effect) => state?.shotSchedule?.find((shot) => shot.id === effect.shotId)).filter(Boolean);
-    return result(stateId, matches.length > 0 && shots.every((shot) => shot.presentationOnly !== false && shot.actorId && shot.targetId && shot.sourcePositionAtFire && shot.impactPositionAtImpact), matches.map((effect) => effect.actorId).filter(Boolean), matches.map((effect) => effect.shotId).filter(Boolean), { effectCount: matches.length, weaponFamily: family, formalShotBinding: matches.every((effect) => Boolean(effect.shotId && effect.authoritySource)) });
+    const shotsById = new Map((state?.shotSchedule || []).map((shot) => [shot.id, shot]));
+    const valid = matches.filter((effect) => {
+      const shot = shotsById.get(effect.shotId); const actor = actorById.get(effect.actorId);
+      return Boolean(shot && actor && effect.actorId === shot.actorId && normalizeEffectWeaponFamily(shot) === family && actorPredicate(actor) && weaponPredicate(shot) && shot.presentationOnly !== false && shot.actorId && shot.targetId && shot.sourcePositionAtFire && shot.impactPositionAtImpact && effect.authoritySource?.shotId === shot.id);
+    });
+    return result(stateId, matches.length > 0 && valid.length === matches.length, valid.map((effect) => effect.actorId).filter(Boolean), valid.map((effect) => effect.shotId).filter(Boolean), { effectCount: matches.length, weaponFamily: family, formalShotBinding: valid.length === matches.length });
   };
-  if (id === 'infantry-muzzle') return semanticWeapon('infantry_light', 'infantry-muzzle');
-  if (id === 'at-rocket-launch') return semanticWeapon('anti_armor', 'at-rocket-launch');
-  if (id === 'mbt-cannon-fire') return semanticWeapon('tank_cannon', 'mbt-cannon-fire');
-  if (id === 'small-arms-impact') return result('small-arms-impact', hasEffect((effect) => effect.kind === 'impact_spark' && effect.weaponFamily === 'infantry_light').length > 0, [], hasEffect((effect) => effect.kind === 'impact_spark' && effect.weaponFamily === 'infantry_light').map((effect) => effect.shotId).filter(Boolean), { effectKind: 'impact_spark', formalAnchorBound: true });
-  if (id === 'rocket-impact') return result('rocket-impact', hasEffect((effect) => effect.kind === 'rocket_impact' && effect.weaponFamily === 'anti_armor').length > 0, [], hasEffect((effect) => effect.kind === 'rocket_impact' && effect.weaponFamily === 'anti_armor').map((effect) => effect.shotId).filter(Boolean), { effectKind: 'rocket_impact', formalAnchorBound: true });
-  if (id === 'tank-impact') return result('tank-impact', hasEffect((effect) => effect.kind === 'cannon_impact' && effect.weaponFamily === 'tank_cannon').length > 0, [], hasEffect((effect) => effect.kind === 'cannon_impact' && effect.weaponFamily === 'tank_cannon').map((effect) => effect.shotId).filter(Boolean), { effectKind: 'cannon_impact', formalAnchorBound: true });
+  if (id === 'infantry-muzzle') return semanticWeapon('infantry_light', 'infantry-muzzle', isInfantryActor, (shot) => formalWeaponMatches(shot, ['infantry_light'], ['infantry_light', 'infantry_rifle'], ['small_arms']));
+  if (id === 'at-rocket-launch') return semanticWeapon('anti_armor', 'at-rocket-launch', isAntiArmorActor, (shot) => formalWeaponMatches(shot, ['anti_armor_rocket'], ['anti_armor', 'rocket_launcher'], ['rocket']));
+  if (id === 'mbt-cannon-fire') return semanticWeapon('tank_cannon', 'mbt-cannon-fire', isMbtActor, (shot) => formalWeaponMatches(shot, ['tank_main_gun'], ['tank_cannon', 'tank_main_gun'], ['cannon']));
+  if (id === 'scout-fire') return semanticWeapon('scout_autocannon', 'scout-fire', isScoutActor, (shot) => formalWeaponMatches(shot, ['scout_machine_gun'], ['scout_autocannon'], ['small_arms']));
+  const impactSemantic = (stateId, family, kind, actorPredicate, weaponPredicate) => {
+    const matches = hasEffect((effect) => effect.kind === kind && effect.weaponFamily === family);
+    const shotsById = new Map((state?.shotSchedule || []).map((shot) => [shot.id, shot]));
+    const valid = matches.filter((effect) => { const shot = shotsById.get(effect.shotId); const actor = actorById.get(effect.actorId); return Boolean(shot && actor && effect.actorId === shot.actorId && effect.targetActorId === shot.targetId && normalizeEffectWeaponFamily(shot) === family && actorPredicate(actor) && weaponPredicate(shot) && effect.authoritySource?.shotId === shot.id && effect.authoritySource?.impactAnchorId); });
+    return result(stateId, matches.length > 0 && valid.length === matches.length, valid.map((effect) => effect.actorId).filter(Boolean), valid.map((effect) => effect.shotId).filter(Boolean), { effectKind: kind, formalAnchorBound: valid.length === matches.length });
+  };
+  if (id === 'small-arms-impact') return impactSemantic('small-arms-impact', 'infantry_light', 'impact_spark', isInfantryActor, (shot) => formalWeaponMatches(shot, ['infantry_light'], ['infantry_light', 'infantry_rifle'], ['small_arms']));
+  if (id === 'rocket-impact') return impactSemantic('rocket-impact', 'anti_armor', 'rocket_impact', isAntiArmorActor, (shot) => formalWeaponMatches(shot, ['anti_armor_rocket'], ['anti_armor', 'rocket_launcher'], ['rocket']));
+  if (id === 'scout-impact') return impactSemantic('scout-impact', 'scout_autocannon', 'impact_spark', isScoutActor, (shot) => formalWeaponMatches(shot, ['scout_machine_gun'], ['scout_autocannon'], ['small_arms']));
+  if (id === 'tank-impact') return impactSemantic('tank-impact', 'tank_cannon', 'cannon_impact', isMbtActor, (shot) => formalWeaponMatches(shot, ['tank_main_gun'], ['tank_cannon', 'tank_main_gun'], ['cannon']));
   if (id === 'damaged-smoke') {
     const matches = hasEffect((effect) => effect.kind === 'damage_smoke' && ['damaged', 'critical'].includes(effect.damageTier));
     return result('damaged-smoke', matches.length > 0 && matches.every((effect) => Boolean(effect.damageEventId && effect.targetActorId && effect.authoritySource?.anchorId)), matches.map((effect) => effect.targetActorId).filter(Boolean), [], { effectKind: 'damage_smoke', damageAnchorBound: matches.every((effect) => Boolean(effect.damageEventId)) });

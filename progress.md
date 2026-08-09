@@ -549,3 +549,16 @@
 - [x] D-C npm/CI gate、clean package builder/verifier 已接入；CI 在 D-B.1a 后执行 `npm run test:stage8-2G-D-C`，完整 extracted `npm test` exitCode `0`。
 - [x] 最终 ZIP：`iron-command-stage8-2G-D-C-battle-polish.zip`，SHA-256 `25500d32d82b89a582c6cf5c225cfa5631a4cc2202fe788f1aa063a5d8878c86`，`66,325,942` bytes，`1058` entries；ZIP 无 ZIP、`.git`、`node_modules`、browser profile 或 stale final record，clean install 与包内 `npm test` 均通过。
 - [ ] 独立审计方仍需按最终 D-C ZIP 重新验收；本地缺失的 D-B.1a audit JSON 仅记录为未导入基线，不代表独立批准。
+
+# Stage 8.2G-D-C.1 progress
+
+- [x] 以 D-C commit `5071428a479c6d095e377ddb8f73c5c84017f73c` 和上一轮 ZIP SHA `25500d32d82b89a582c6cf5c225cfa5631a4cc2202fe788f1aa063a5d8878c86` 为失败基线；audit JSON 未导入生产代码，失败样本未删除或过滤。
+- [x] `normalizeEffectWeaponFamily` 改为 exact allow-list：Scout `scout_machine_gun/scout_autocannon -> scout_autocannon`，MBT `tank_main_gun/tank_cannon -> tank_cannon`，未知输入 fail-closed 为 `generic`；正式 shot/report 只读且未被修改。
+- [x] 修正真实回归样本：`choreographed_shot_102` 为 `unit_fixture-u-3` Scout，效果族为 `scout_autocannon`；真实 MBT 帧为 `unit_fixture-u-5 / choreographed_shot_113 / tank_main_gun / tank_cannon`；D-C-11 改为显式 `d-c-11-scout-fire.png`，D-C-03 保持真实 MBT。
+- [x] 强化 Production-State verifier：从每个 scene 的正式 `sourceReport` 和当前 presentation code 重算 predicate、actor/shot/effect/wreck 归属、effect family、镜头、音频、transition、终局 cue、PNG SHA-256 与唯一性；浏览器新增终端检查和 wreck faction/orientation 绑定。
+- [x] 新增 24 个 true-value tamper cases；所有用例 `declaredPassedPreserved=true`，均被 verifier 拒绝；旧 D-C 18 项 tamper gate 兼容回归通过。
+- [x] 性能闭环使用 20 次 warmup、每场景 120 次完整 `renderState.atTime()` 样本，覆盖 victory/withdraw/synthetic art；最终实测 p95 为 `7.219/5.598/8.205ms`，最坏 `8.205ms < 16.7ms`，effect/smoke/projectile/environment 统计已落盘。
+- [x] Reduced Motion 运行态验证通过：相同 effect/audio/result 保留，camera amplitude/offset/zoom 归零，`reducedMotionApplied=true`；确定性和 authority 不变检查通过。
+- [x] D-C.1 npm gate、官方 Playwright client、Chromium 证据、强重算和解包级 package verifier 已接入；14/14 浏览器 PNG 唯一，pageErrors/consoleErrors `0`，package clean install 与完整 clean `npm test` 均通过。
+- [x] 交付包：`iron-command-stage8-2G-D-C-1-strong-evidence-performance.zip`，SHA-256 `468b1e41a3983a75c99b3164e834059c17d6dfc040b2c67d792d18f2a6d87a5b`，`66,550,138` bytes，`1097` entries；ZIP 无旧/新 ZIP、`.git`、`node_modules`、browser profile 或 stale final record。
+- [ ] CI Run/Job 与独立审计方仍需按最终 D-C.1 ZIP 重新验收；审计 JSON 仅为失败基线和回归样本，不代表独立批准。

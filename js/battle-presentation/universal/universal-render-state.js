@@ -211,15 +211,16 @@ function sceneObjectState(plan, entity, seconds, index) {
 }
 
 export function buildUniversalRenderState(plan, seconds = 0, runtime = {}, precomputed = null) {
-  const compiled = compileUniversalPlan(plan);
+  const cached = precomputed && precomputed.engagementSchedule ? precomputed : null;
+  const compiled = runtime.compiledPlan || cached?.compiledPlan || compileUniversalPlan(plan);
   const duration = Math.max(1, Number(plan.timeline?.duration) || 30);
   const returning = runtime.presentationPhase === 'returning' || runtime.returning === true;
   const battleTime = returning ? duration : clamp(seconds, 0, duration);
   const returnDuration = Math.max(0.001, Number(runtime.returnDuration) || 5);
   const returnProgress = returning ? clamp(Number(runtime.returnElapsed) / returnDuration, 0, 1) : 0;
   const positionSampler = (actorId, time) => sampleSpatialEntityPosition(compiled, actorId, time);
-  const engagementSchedule = precomputed || runtime.engagementSchedule || buildUniversalEngagementSchedule(plan, positionSampler);
-  const cameraDirector = buildCameraDirector(engagementSchedule);
+  const engagementSchedule = cached?.engagementSchedule || (precomputed?.shots ? precomputed : null) || runtime.engagementSchedule || buildUniversalEngagementSchedule(plan, positionSampler);
+  const cameraDirector = runtime.cameraDirector || cached?.cameraDirector || buildCameraDirector(engagementSchedule);
   const authority = applyAuthorityAnchors(plan, battleTime);
   const actors = actorRows(plan).map((actor, index) => {
     const base = sampleSpatialEntityPosition(compiled, actor.actorId, battleTime) || { x: 0, y: 0 };
@@ -250,11 +251,11 @@ export function buildUniversalRenderState(plan, seconds = 0, runtime = {}, preco
       visualStatus: !alive ? 'destroyed' : cover.inCover ? 'in_cover' : currentAction === 'repair' && isRepairCapableActor(actor) ? 'repairing' : currentAction === 'repair' ? 'being_repaired' : currentAction === 'repair_approach' ? 'repairing' : currentAction === 'damage' || currentAction === 'fire' ? 'engaging' : currentAction
     };
   });
-  const authorityShotSchedule = runtime.authorityShotSchedule || buildVisualShotSchedule(plan, positionSampler);
-  const visualShotSchedule = (runtime.visualShotSchedule || [...authorityShotSchedule, ...(engagementSchedule.shots || [])].sort((left, right) => Number(left.t) - Number(right.t) || String(left.id).localeCompare(String(right.id)))).map((shot) => ({ ...shot, weapon: { ...(shot.weapon || {}), validTargetClasses: [...(shot.weapon?.validTargetClasses || [])], presentation: { ...(shot.weapon?.presentation || {}) } } }));
+  const authorityShotSchedule = runtime.authorityShotSchedule || cached?.authorityShotSchedule || buildVisualShotSchedule(plan, positionSampler);
+  const visualShotSchedule = (runtime.visualShotSchedule || cached?.visualShotSchedule || [...authorityShotSchedule, ...(engagementSchedule.shots || [])].sort((left, right) => Number(left.t) - Number(right.t) || String(left.id).localeCompare(String(right.id)))).map((shot) => ({ ...shot, weapon: { ...(shot.weapon || {}), validTargetClasses: [...(shot.weapon?.validTargetClasses || [])], presentation: { ...(shot.weapon?.presentation || {}) } } }));
   // The environment is visual-only, but its clearance audit must see every
   // presentation corridor selected by the same deterministic choreography.
-  const environment = runtime.environmentScene || buildEnvironmentScene(plan, { engagementSchedule });
+  const environment = runtime.environmentScene || cached?.environmentScene || buildEnvironmentScene(plan, { engagementSchedule });
   const environmentState = buildEnvironmentState(environment, battleTime);
   const visualScene = buildUniversalVisualScene(plan, battleTime, (actorId, time) => sampleSpatialEntityPosition(compiled, actorId, time), {
     visualShotSchedule,
@@ -347,11 +348,18 @@ export function buildUniversalRenderState(plan, seconds = 0, runtime = {}, preco
 export function createUniversalRenderState(presentation) {
   const { plan } = presentation;
   const compiled = compileUniversalPlan(plan);
-  const choreographer = buildUniversalEngagementSchedule(plan, (actorId, time) => sampleSpatialEntityPosition(compiled, actorId, time));
+  const positionSampler = (actorId, time) => sampleSpatialEntityPosition(compiled, actorId, time);
+  const choreographer = buildUniversalEngagementSchedule(plan, positionSampler);
+  const authorityShotSchedule = buildVisualShotSchedule(plan, positionSampler);
+  const visualShotSchedule = [...authorityShotSchedule, ...(choreographer.shots || [])]
+    .sort((left, right) => Number(left.t) - Number(right.t) || String(left.id).localeCompare(String(right.id)));
+  const cameraDirector = buildCameraDirector(choreographer);
+  const environmentScene = buildEnvironmentScene(plan, { engagementSchedule: choreographer });
+  const cached = { compiledPlan: compiled, engagementSchedule: choreographer, authorityShotSchedule, visualShotSchedule, cameraDirector, environmentScene };
   return Object.freeze({
-    atTime(seconds, runtime = {}) { return buildUniversalRenderState(plan, seconds, runtime, choreographer); },
+    atTime(seconds, runtime = {}) { return buildUniversalRenderState(plan, seconds, runtime, cached); },
     textAt(seconds, options = {}) {
-      const state = buildUniversalRenderState(plan, seconds, options.runtime || {}, choreographer);
+      const state = buildUniversalRenderState(plan, seconds, options.runtime || {}, cached);
       return buildUniversalTextState(plan, state, options);
     }
   });
