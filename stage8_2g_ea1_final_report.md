@@ -5,7 +5,7 @@
 1. 阶段：8.2G-E-A.1 Replay Persistence, Real UI Path & Save-Diff Closure。
 2. 工作分支：`agent/stage8-2G-E-A-1-replay-persistence-closure`。
 3. 实现基线：E-A commit `58cb6c97fd2000fd6c7c7bb11a8e54e053c0ebac`。
-4. 最终 HEAD：以 `stage8_2g_ea1_final_package_record.json` 的 `finalHead` 为准。
+4. 最终 HEAD：`11b057de46b22991655cd4ba0c34a5cd0c53aa65`（提交后重建最终 ZIP）。
 5. PR：本分支以 E-A production-loop branch 为基线，等待推送后创建/更新 Draft PR。
 6. 直接修改文件：`js/theater.js`、`js/ui.js`、`index.html`、`js/save-diff.js`、`package.json`、`.github/workflows/core-regression.yml`。
 7. 新增模型测试：`tests/stage8-2G-E-A-1-replay-reload-test.mjs`，5/5 通过。
