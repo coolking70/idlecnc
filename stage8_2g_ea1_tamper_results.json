@@ -63,7 +63,7 @@
       "rejected": true,
       "recomputedPassed": false,
       "unexpectedChangedPaths": [
-        "buildings[id=bld_mslsdh55_59].level"
+        "buildings[id=bld_mslsyka2_59].level"
       ],
       "source": "recursive save diff"
     },
@@ -99,7 +99,7 @@
       "rejected": true,
       "recomputedPassed": false,
       "unexpectedChangedPaths": [
-        "buildings[id=bld_mslsdh55_59].level"
+        "buildings[id=bld_mslsyka2_59].level"
       ],
       "source": "recursive save diff"
     },
@@ -108,7 +108,7 @@
       "rejected": true,
       "recomputedPassed": false,
       "unexpectedChangedPaths": [
-        "buildings[id=bld_mslsdh55_59].level"
+        "buildings[id=bld_mslsyka2_59].level"
       ],
       "source": "recursive save diff"
     },
