@@ -233,16 +233,27 @@ async function main() {
 
     const beforeDispatch = await state();
     const launchSelector = '[data-action="launch-battle"]';
-    const launchDetails = await cdp.evaluate(`(() => {
-      const node = document.querySelector(${JSON.stringify(launchSelector)});
-      if (!node || node.disabled) return { ok: false, reason: 'launch disabled' };
+    await click(launchSelector, { action: 'open-deployment-review' });
+    await cdp.evaluate(`new Promise((resolve, reject) => {
+      const start = performance.now();
+      const poll = () => document.querySelector('[data-action="confirm-dispatch"]')
+        ? resolve(true)
+        : performance.now() - start > 5000
+          ? reject(new Error('deployment review confirm control timeout'))
+          : setTimeout(poll, 25);
+      poll();
+    })`);
+    const confirmSelector = '[data-action="confirm-dispatch"]';
+    const confirmDetails = await cdp.evaluate(`(() => {
+      const node = document.querySelector(${JSON.stringify(confirmSelector)});
+      if (!node || node.disabled) return { ok: false, reason: 'confirm disabled' };
       const label = (node.innerText || '').trim();
       node.click();
       node.click();
       return { ok: true, label };
     })()`);
-    if (!launchDetails?.ok) throw new Error('production launch button disabled');
-    provenance('double_click', launchSelector, { label: launchDetails.label, action: 'launch-battle', duplicateGuard: true });
+    if (!confirmDetails?.ok) throw new Error('production confirm dispatch disabled');
+    provenance('double_click', confirmSelector, { label: confirmDetails.label, action: 'confirm-dispatch', duplicateGuard: true });
     const dispatched = await waitUntil((current) => Boolean(current.activeBattle?.battleSessionId), 'formal battle launched');
     const launchSessionCount = Object.keys(dispatched.battleSessions || {}).length;
     if (launchSessionCount !== Object.keys(beforeDispatch.battleSessions || {}).length + 1) throw new Error('double-click created more than one battle session');

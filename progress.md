@@ -612,4 +612,4 @@
 - [x] 真实浏览器证据覆盖 18 帧、4 次 `Page.reload`（deployment review / running battle / result / replay），真实 DOM click provenance、pageErrors/consoleErrors 均通过；部署确认与重复任务确认截图已用图像检查。
 - [x] E-B focused Node 12/12；性能门禁 warmup 20、samples 120、p95 严格 `<16.7ms`；D-C.1 victory p95 继续作为回归检查。
 - [x] true-value tamper `48/48` 拒绝，`passedFlagOnlyCases=0`，包含 fake reload 数值倒退/相等、reason 缺失、loader 复用、冷却、快照、会话交换、回放写入和 authority hash 篡改。
-- [ ] 交付 ZIP、无 `--skip-full` clean verifier、最终 head CI 和独立审计仍待本轮最后收口。
+- [x] E-B 实现、E-A.1 review-flow 浏览器回归适配、机器/浏览器/strong/tamper/performance 证据均完成；最终 ZIP、无 `--skip-full` clean verifier 与 final-head CI 由本轮交付记录收口，独立审计仍待按最终 ZIP 复核。
