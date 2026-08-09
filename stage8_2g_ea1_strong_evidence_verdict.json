@@ -14,10 +14,10 @@
     "noAuthorityScopeExpansion": true
   },
   "replay": {
-    "sourceSessionId": "battle-session-0-scrap_mine-68ee15f9ef5a282fe73b-1",
-    "sessionHash": "447d5e0d21d81dbdc68fe09c262d12d9e34d227b765136271680cc0d02fe68d5",
-    "ledgerHash": "21f32b7673aa90c83d52031f694fa0f5f719c29e1824a50f9116e73422e5d7bf",
-    "formalReportId": "battle_82101_fm_mslmi3z0_5v_scrap_mine_cautious",
+    "sourceSessionId": "battle-session-0-scrap_mine-f8f0d6e82de832ed3502-1",
+    "sessionHash": "618a7b018a24faa7f5b206a07cab7c6df97dfe7be95792fd9c8a3f2ad133f231",
+    "ledgerHash": "519d35f1887b4573e32c09cf2871dcd6b5b1d932ecee76f457cae9a748796825",
+    "formalReportId": "battle_82101_fm_msln6539_5v_scrap_mine_cautious",
     "startInvariant": true,
     "midInvariant": true,
     "reloadInvariant": true,
@@ -27,10 +27,10 @@
     "passed": true
   },
   "settlement": {
-    "beforeHash": "dfed87a27918abe553e46f7efdd6eb319eba2cf623f336db52e7b025cd6526ab",
-    "afterHash": "f2665c30c9a4824dbae8b9d3f52f0632ef7d5eb0b426a63d1ab040566b9dc3a3",
-    "beforeProductionSignature": "f06f2d112a9477fdd7b9fb9d42c1baf8ef944456027bbb91943f0fb88d29fec0",
-    "afterProductionSignature": "40c17a2580c3a4dea994eb8d6fa1b6041cb4ee78d928d1a27de741c67c56c3b1",
+    "beforeHash": "523f603aa47f698af60e9927988fcbbd4745d1a8ad2376b56b39035302c5fa93",
+    "afterHash": "f43a5bbfa1b38e181885d5b09771ca4e5dbad47bbf4f1fa9ae4f1cae95394f5c",
+    "beforeProductionSignature": "cf4dbec1c2b88784d49ff44abca9124e8959ed5bc8fffa2e85c70cd9b2991c7a",
+    "afterProductionSignature": "784138fb08b9d09f6dcf9fd9df284938315ee5909931aed84bfff849dac197f3",
     "changedPaths": [
       "activeBattle.elapsed",
       "activeBattle.playing",
@@ -48,25 +48,25 @@
       "activeBattle.settled",
       "activeBattle.settlementAttempted",
       "activeBattle.settlementReceipt",
-      "battleSessions.battle-session-0-scrap_mine-48f294c746aa1c88c54a-1.lifecycle",
-      "battleSessions.battle-session-0-scrap_mine-48f294c746aa1c88c54a-1.presentationState.elapsed",
-      "battleSessions.battle-session-0-scrap_mine-48f294c746aa1c88c54a-1.presentationState.phase",
-      "battleSessions.battle-session-0-scrap_mine-48f294c746aa1c88c54a-1.presentationTime",
-      "battleSessions.battle-session-0-scrap_mine-48f294c746aa1c88c54a-1.settledAtGameTime",
-      "battleSessions.battle-session-0-scrap_mine-48f294c746aa1c88c54a-1.settlementLocked",
-      "battleSessions.battle-session-0-scrap_mine-48f294c746aa1c88c54a-1.settlementReceipt",
-      "battleSessions.battle-session-0-scrap_mine-48f294c746aa1c88c54a-1.settlementState.locked",
-      "battleSessions.battle-session-0-scrap_mine-48f294c746aa1c88c54a-1.settlementState.status",
-      "battleSessions.battle-session-0-scrap_mine-48f294c746aa1c88c54a-1.settlementStatus",
-      "battleSettlementLedger.settlement-95764e82ef56aeee245104deb7fe28c49b7423f1b869777f8ae644f048dcce42",
-      "battles[id=battle_82101_fm_mslmi3y4_5g_scrap_mine_cautious]",
+      "battleSessions.battle-session-0-scrap_mine-c3c80b43dfcc6a4d0e43-1.lifecycle",
+      "battleSessions.battle-session-0-scrap_mine-c3c80b43dfcc6a4d0e43-1.presentationState.elapsed",
+      "battleSessions.battle-session-0-scrap_mine-c3c80b43dfcc6a4d0e43-1.presentationState.phase",
+      "battleSessions.battle-session-0-scrap_mine-c3c80b43dfcc6a4d0e43-1.presentationTime",
+      "battleSessions.battle-session-0-scrap_mine-c3c80b43dfcc6a4d0e43-1.settledAtGameTime",
+      "battleSessions.battle-session-0-scrap_mine-c3c80b43dfcc6a4d0e43-1.settlementLocked",
+      "battleSessions.battle-session-0-scrap_mine-c3c80b43dfcc6a4d0e43-1.settlementReceipt",
+      "battleSessions.battle-session-0-scrap_mine-c3c80b43dfcc6a4d0e43-1.settlementState.locked",
+      "battleSessions.battle-session-0-scrap_mine-c3c80b43dfcc6a4d0e43-1.settlementState.status",
+      "battleSessions.battle-session-0-scrap_mine-c3c80b43dfcc6a4d0e43-1.settlementStatus",
+      "battleSettlementLedger.settlement-4e22ed2f80a4a34551dc77c4d701a1ecc2daf8cf5e08c48e87f39e8316735757",
+      "battles[id=battle_82101_fm_msln652c_5g_scrap_mine_cautious]",
       "battles[*order]",
       "command.used",
-      "formations[id=fm_mslmi3y4_5g].battles",
-      "formations[id=fm_mslmi3y4_5g].experience",
-      "formations[id=fm_mslmi3y4_5g].status",
-      "formations[id=fm_mslmi3y4_5g].unitIds[3]",
-      "log[id=log_mslmi3y7_5n]",
+      "formations[id=fm_msln652c_5g].battles",
+      "formations[id=fm_msln652c_5g].experience",
+      "formations[id=fm_msln652c_5g].status",
+      "formations[id=fm_msln652c_5g].unitIds[3]",
+      "log[id=log_msln652f_5n]",
       "log[*order]",
       "power.used",
       "rates.supply",
@@ -102,15 +102,15 @@
       "units[id=ea1-strong-unit-2].**",
       "units[id=ea1-strong-unit-3]",
       "units[id=ea1-strong-unit-3].**",
-      "formations[id=fm_mslmi3y4_5g].**",
+      "formations[id=fm_msln652c_5g].**",
       "theaters.scrap_mine.**",
       "stats.battlesFought",
       "stats.victories",
-      "battles[id=battle_82101_fm_mslmi3y4_5g_scrap_mine_cautious]",
+      "battles[id=battle_82101_fm_msln652c_5g_scrap_mine_cautious]",
       "battles[*order]",
-      "battleSettlementLedger.settlement-95764e82ef56aeee245104deb7fe28c49b7423f1b869777f8ae644f048dcce42",
-      "battleSettlementLedger.settlement-95764e82ef56aeee245104deb7fe28c49b7423f1b869777f8ae644f048dcce42.**",
-      "battleSessions.battle-session-0-scrap_mine-48f294c746aa1c88c54a-1.**",
+      "battleSettlementLedger.settlement-4e22ed2f80a4a34551dc77c4d701a1ecc2daf8cf5e08c48e87f39e8316735757",
+      "battleSettlementLedger.settlement-4e22ed2f80a4a34551dc77c4d701a1ecc2daf8cf5e08c48e87f39e8316735757.**",
+      "battleSessions.battle-session-0-scrap_mine-c3c80b43dfcc6a4d0e43-1.**",
       "formations[*order]",
       "units[*order]"
     ],
@@ -127,7 +127,7 @@
         "rejected": true,
         "recomputedPassed": false,
         "unexpectedChangedPaths": [
-          "buildings[id=bld_mslmi3y4_59].level"
+          "buildings[id=bld_msln652c_59].level"
         ]
       },
       {
@@ -159,7 +159,7 @@
         "rejected": true,
         "recomputedPassed": false,
         "unexpectedChangedPaths": [
-          "buildings[id=bld_mslmi3y4_59].level"
+          "buildings[id=bld_msln652c_59].level"
         ]
       },
       {
@@ -167,7 +167,7 @@
         "rejected": true,
         "recomputedPassed": false,
         "unexpectedChangedPaths": [
-          "buildings[id=bld_mslmi3y4_59].level"
+          "buildings[id=bld_msln652c_59].level"
         ]
       },
       {

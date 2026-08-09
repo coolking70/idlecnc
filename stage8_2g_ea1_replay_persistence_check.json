@@ -1,8 +1,8 @@
 {
   "stage": "8.2G-E-A.1",
-  "sourceSessionId": "battle-session-0-scrap_mine-7742bc677f556b802517-1",
-  "canonicalSessionHash": "49e2e87f6331fcd3b958d43d1ee69ffb90e13e33260be8825efd871f617d759c",
-  "ledgerHash": "da2d3ab5f8b44a5f224fccf3ec6e2a067dc1129abb9f1e5d13026565aee16129",
+  "sourceSessionId": "battle-session-0-scrap_mine-d9cc163d7f1dff9ad391-1",
+  "canonicalSessionHash": "55e8881bd495f625874ea82122da6070093f60d284bf701785187ec584b14139",
+  "ledgerHash": "223fa4444a85f8eb9dd664ee1df3d18b6cd31bdc49a0aa66d3874d66888be33c",
   "startInvariant": true,
   "midReplayInvariant": true,
   "finishInvariant": true,
