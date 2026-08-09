@@ -1,0 +1,11 @@
+{
+  "stage": "8.2G-E-A.1",
+  "sourceSessionId": "battle-session-0-scrap_mine-7742bc677f556b802517-1",
+  "canonicalSessionHash": "49e2e87f6331fcd3b958d43d1ee69ffb90e13e33260be8825efd871f617d759c",
+  "ledgerHash": "da2d3ab5f8b44a5f224fccf3ec6e2a067dc1129abb9f1e5d13026565aee16129",
+  "startInvariant": true,
+  "midReplayInvariant": true,
+  "finishInvariant": true,
+  "canonicalImmutable": true,
+  "passed": true
+}

@@ -370,6 +370,8 @@ export class UI {
     const btn = el('button', 'btn primary build-btn', CONSTRUCTION_UI.buttonLabel.ready);
     btn.type = 'button';
     btn.dataset.type = def.id;
+    btn.dataset.action = 'build';
+    btn.dataset.buildingType = def.id;
     btn.addEventListener('click', () => this._onBuildClick(def.id));
     root.appendChild(btn);
 
@@ -685,6 +687,8 @@ export class UI {
     const btn = el('button', 'btn primary unit-btn', verb);
     btn.type = 'button';
     btn.dataset.type = def.id;
+    btn.dataset.action = 'produce';
+    btn.dataset.unitType = def.id;
     btn.addEventListener('click', () => this._onProduceClick(def.id));
     root.appendChild(btn);
 
@@ -1000,6 +1004,7 @@ export class UI {
     emptyCard.appendChild(el('p', 'bc-desc', '先建立一支空编队，再手动挑选库存单位编入。'));
     r.fm.createBtn = el('button', 'btn primary', '新建空编队');
     r.fm.createBtn.type = 'button';
+    r.fm.createBtn.dataset.action = 'create-formation';
     r.fm.createBtn.addEventListener('click', () => this._onFormationAction('onCreateFormation'));
     emptyCard.appendChild(r.fm.createBtn);
     r.fm.createReason = el('div', 'bc-reason');
@@ -1353,6 +1358,7 @@ export class UI {
         const btn = el('button', 'btn tiny primary', '加入');
         btn.type = 'button';
         btn.dataset.unitId = first.id;
+        btn.dataset.action = 'add-unit';
         btn.disabled = !check.ok;
         btn.addEventListener('click', () => this._onFormationAction('onAddUnit', formation.id, first.id));
         item.appendChild(btn);
@@ -1434,10 +1440,12 @@ export class UI {
     const actions = el('div', 'th-battle-actions');
     r.th.skipReturnBtn = el('button', 'btn primary', '跳过返航动画');
     r.th.skipReturnBtn.type = 'button';
+    r.th.skipReturnBtn.dataset.action = 'return-from-battle';
     r.th.skipReturnBtn.addEventListener('click', () => this._onTheaterAction('onSkipBattleReturn'));
     actions.appendChild(r.th.skipReturnBtn);
     r.th.viewReportBtn = el('button', 'btn', '查看完整战报');
     r.th.viewReportBtn.type = 'button';
+    r.th.viewReportBtn.dataset.action = 'view-report';
     r.th.viewReportBtn.addEventListener('click', () => this._openActiveBattleReport());
     actions.appendChild(r.th.viewReportBtn);
     r.th.battleActions = actions;
@@ -1492,6 +1500,7 @@ export class UI {
     listStrategies().forEach((st) => {
       const card = el('article', 'th-strategy');
       card.dataset.strategy = st.id;
+      card.dataset.action = 'select-strategy';
 
       const head = el('div', 'bc-head');
       head.appendChild(el('span', 'bc-name', st.name));
@@ -1528,6 +1537,7 @@ export class UI {
 
     r.th.dsBtn = el('button', 'btn primary th-dispatch-btn', '派遣出击');
     r.th.dsBtn.type = 'button';
+    r.th.dsBtn.dataset.action = 'launch-battle';
     r.th.dsBtn.addEventListener('click', () => {
       this._onTheaterAction('onDispatch',
         this.dispatchFormationId, this.selectedTheaterId, this.selectedStrategyId, this.selectedOperationId);
@@ -1587,6 +1597,7 @@ export class UI {
   _renderTheaterCard(state, view) {
     const card = el('article', 'th-card');
     card.dataset.theater = view.id;
+    card.dataset.action = 'select-theater';
     if (view.id === this.selectedTheaterId) card.classList.add('is-active');
     if (!view.unlocked) card.classList.add('is-locked');
     if (view.captured) card.classList.add('is-captured');
@@ -2171,8 +2182,18 @@ export class UI {
     const current = reports.find((x) => x.id === this.selectedReportId) || null;
     p.detail.hidden = !current;
     if (!current) { p.sig.detail = ''; return; }
-    if (p.sig.detail === current.id) return;
-    p.sig.detail = current.id;
+    // The replay control depends on settlement having been applied and on
+    // there being no active battle. A report id alone is therefore not a
+    // sufficient render signature: after returning from the result panel,
+    // the same report must be rebuilt so its read-only replay button becomes
+    // enabled without requiring a manual page reload.
+    const active = getActiveBattle(state);
+    const session = Object.values(state?.battleSessions || {})
+      .find((row) => row && row.formalReportId === current.id);
+    const settlementApplied = Boolean(session?.settlementId && state?.battleSettlementLedger?.[session.settlementId]);
+    const detailSig = `${current.id}#${active?.battleSessionId || ''}#${settlementApplied ? 1 : 0}`;
+    if (p.sig.detail === detailSig) return;
+    p.sig.detail = detailSig;
     this._renderReportDetail(p.detail, current, state);
   }
 
@@ -2180,6 +2201,7 @@ export class UI {
   _renderReportRow(report) {
     const row = el('div', 'rp-row');
     row.dataset.reportId = report.id;
+    row.dataset.action = 'select-report';
     if (report.id === this.selectedReportId) row.classList.add('is-active');
 
     const head = el('div', 'rp-row-head');
@@ -2225,6 +2247,8 @@ export class UI {
       sessionBox.appendChild(el('span', '', `正式会话 ${session.battleSessionId} · ${applied ? '结算已应用' : '结算未完成'}`));
       const replay = el('button', 'btn', '只读回放');
       replay.type = 'button';
+      replay.dataset.action = 'replay-report';
+      replay.dataset.reportId = report.id;
       replay.disabled = !applied || !!getActiveBattle(state);
       replay.addEventListener('click', () => this._onTheaterAction('onReplayReport', report.id));
       sessionBox.appendChild(replay);

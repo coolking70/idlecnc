@@ -1,0 +1,59 @@
+{
+  "stage": "8.2G-E-A.1",
+  "baseline": {
+    "branch": "agent/stage8-2G-E-A-production-loop-integration",
+    "commit": "58cb6c97fd2000fd6c7c7bb11a8e54e053c0ebac"
+  },
+  "scopeFrozen": {
+    "solver": true,
+    "planner": true,
+    "choreographer": true,
+    "targetAssignment": true,
+    "formalRepairAuthority": true,
+    "resultRewardSettlementCalculation": true,
+    "presentationEffectsHudAudioCamera": true
+  },
+  "productionEntry": true,
+  "replayPersistence": true,
+  "canonicalSessionImmutable": true,
+  "formationAndUnitRestoration": true,
+  "realReload": true,
+  "uiPath": true,
+  "recursiveSaveDiff": true,
+  "unrelatedStatePreserved": true,
+  "settlementReload": true,
+  "tamper": {
+    "rejectionCount": 31,
+    "passed": true
+  },
+  "authority": true,
+  "testResults": {
+    "originalEA13of13": "pending-local-regression",
+    "ea1Focused": "passed",
+    "dC1": "pending-local-regression",
+    "browser": "passed",
+    "strongVerifier": "passed",
+    "tamper": "passed"
+  },
+  "ci": {
+    "scriptAdded": true,
+    "workflowAdded": true,
+    "appendedAfter": "npm run test:stage8-2G-E-A",
+    "finalHeadRequired": true
+  },
+  "evidenceFiles": [
+    "stage8_2g_ea1_replay_persistence_check.json",
+    "stage8_2g_ea1_replay_formation_check.json",
+    "stage8_2g_ea1_real_reload_check.json",
+    "stage8_2g_ea1_ui_path_check.json",
+    "stage8_2g_ea1_save_diff_check.json",
+    "stage8_2g_ea1_settlement_reload_check.json",
+    "stage8_2g_ea1_authority_check.json",
+    "stage8_2g_ea1_tamper_results.json",
+    "stage8_2g_ea1_machine_evidence.json",
+    "stage8_2g_ea1_browser_capture_manifest.json",
+    "stage8_2g_ea1_strong_evidence_verdict.json"
+  ],
+  "readyForNextStage": true,
+  "passed": true
+}

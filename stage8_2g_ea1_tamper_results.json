@@ -1,0 +1,230 @@
+{
+  "stage": "8.2G-E-A.1",
+  "cases": [
+    {
+      "case": "formal_report_swap",
+      "rejected": true,
+      "source": "E-A regression"
+    },
+    {
+      "case": "replay_settlement",
+      "rejected": true,
+      "source": "E-A regression"
+    },
+    {
+      "case": "settlement_id",
+      "rejected": true,
+      "code": "report_invalid",
+      "reason": "ProductionBattleSession：settlement ID mismatch",
+      "source": "E-A regression"
+    },
+    {
+      "case": "deployment_hash",
+      "rejected": true,
+      "code": "report_invalid",
+      "reason": "ProductionBattleSession：deployment hash binding mismatch",
+      "source": "E-A regression"
+    },
+    {
+      "case": "stale_save_revision",
+      "rejected": true,
+      "code": "report_invalid",
+      "reason": "ProductionBattleSession：source save revision mismatch",
+      "source": "E-A regression"
+    },
+    {
+      "case": "debug_settlement",
+      "rejected": true,
+      "code": "report_invalid",
+      "reason": "ProductionBattleSession：session origin is not production",
+      "source": "E-A regression"
+    },
+    {
+      "case": "session_swap",
+      "rejected": true,
+      "code": "report_invalid",
+      "reason": "ProductionBattleSession：battle session ID mismatch",
+      "source": "E-A regression"
+    },
+    {
+      "case": "deployment_snapshot",
+      "rejected": true,
+      "code": "report_invalid",
+      "reason": "ProductionBattleSession：deployment hash mismatch",
+      "source": "E-A regression"
+    },
+    {
+      "case": "reward_ledger",
+      "rejected": true,
+      "source": "E-A regression"
+    },
+    {
+      "case": "unrelated_building_mutation",
+      "rejected": true,
+      "recomputedPassed": false,
+      "unexpectedChangedPaths": [
+        "buildings[id=bld_mslmi3tl_59].level"
+      ],
+      "source": "recursive save diff"
+    },
+    {
+      "case": "unrelated_unit_mutation",
+      "rejected": true,
+      "recomputedPassed": false,
+      "unexpectedChangedPaths": [
+        "units[id=ea1-strong-unrelated-unit].hp"
+      ],
+      "source": "recursive save diff"
+    },
+    {
+      "case": "unrelated_research_mutation",
+      "rejected": true,
+      "recomputedPassed": false,
+      "unexpectedChangedPaths": [
+        "research.current.elapsed"
+      ],
+      "source": "recursive save diff"
+    },
+    {
+      "case": "unrelated_theater_mutation",
+      "rejected": true,
+      "recomputedPassed": false,
+      "unexpectedChangedPaths": [
+        "theaters.border_road.captured"
+      ],
+      "source": "recursive save diff"
+    },
+    {
+      "case": "fake_save_diff_passed",
+      "rejected": true,
+      "recomputedPassed": false,
+      "unexpectedChangedPaths": [
+        "buildings[id=bld_mslmi3tl_59].level"
+      ],
+      "source": "recursive save diff"
+    },
+    {
+      "case": "fake_save_diff_allowed_path",
+      "rejected": true,
+      "recomputedPassed": false,
+      "unexpectedChangedPaths": [
+        "buildings[id=bld_mslmi3tl_59].level"
+      ],
+      "source": "recursive save diff"
+    },
+    {
+      "case": "primitive_unexpected_mutation",
+      "rejected": true,
+      "recomputedPassed": false,
+      "unexpectedChangedPaths": [
+        "resources.intel"
+      ],
+      "source": "recursive save diff"
+    },
+    {
+      "case": "array_report_insertion_mutation",
+      "rejected": true,
+      "recomputedPassed": false,
+      "unexpectedChangedPaths": [
+        "battles[id=fake-report]"
+      ],
+      "source": "recursive save diff"
+    },
+    {
+      "case": "replay_canonical_lifecycle",
+      "rejected": true,
+      "source": "replay persistence"
+    },
+    {
+      "case": "replay_presentation_time",
+      "rejected": true,
+      "source": "replay persistence"
+    },
+    {
+      "case": "replay_formation_status",
+      "rejected": true,
+      "source": "replay persistence"
+    },
+    {
+      "case": "replay_unit_status",
+      "rejected": true,
+      "source": "replay persistence"
+    },
+    {
+      "case": "replay_ledger_hash",
+      "rejected": true,
+      "source": "replay persistence"
+    },
+    {
+      "case": "replay_source_binding",
+      "rejected": true,
+      "source": "replay persistence"
+    },
+    {
+      "case": "replay_settlement_permission",
+      "rejected": true,
+      "source": "replay persistence"
+    },
+    {
+      "case": "fake_ui_provenance",
+      "rejected": true,
+      "errors": [
+        "browser_action_provenance",
+        "independent_probe"
+      ]
+    },
+    {
+      "case": "fake_reload_method",
+      "rejected": true,
+      "errors": [
+        "browser_real_reload",
+        "independent_probe"
+      ]
+    },
+    {
+      "case": "fake_reload_time_origin",
+      "rejected": true,
+      "errors": [
+        "browser_real_reload",
+        "independent_probe"
+      ]
+    },
+    {
+      "case": "fake_production_entry",
+      "rejected": true,
+      "errors": [
+        "browser_production_entry",
+        "independent_probe"
+      ]
+    },
+    {
+      "case": "fake_dispatch_api_used",
+      "rejected": true,
+      "errors": [
+        "browser_api_shortcut",
+        "independent_probe"
+      ]
+    },
+    {
+      "case": "fake_replay_api_used",
+      "rejected": true,
+      "errors": [
+        "browser_api_shortcut",
+        "independent_probe"
+      ]
+    },
+    {
+      "case": "tampered_png_hash",
+      "rejected": true,
+      "errors": [
+        "browser_png_hash:e-a1-01-base-before-battle.png",
+        "independent_probe"
+      ]
+    }
+  ],
+  "coreRejectionCount": 24,
+  "evidenceTamperRejectionCount": 7,
+  "rejectionCount": 31,
+  "declaredPassedPreserved": true,
+  "passed": true
+}

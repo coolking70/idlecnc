@@ -1,0 +1,7 @@
+{
+  "stage": "8.2G-E-A.1",
+  "exactlyOnceFormalReport": true,
+  "exactlyOnceLedger": true,
+  "duplicateSettlementBlocked": true,
+  "passed": true
+}

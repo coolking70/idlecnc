@@ -1,0 +1,3684 @@
+{
+  "stage": "8.2G-E-A.1",
+  "replayPersistence": {
+    "stage": "8.2G-E-A.1",
+    "sourceSessionId": "battle-session-0-scrap_mine-7742bc677f556b802517-1",
+    "canonicalSessionHash": "49e2e87f6331fcd3b958d43d1ee69ffb90e13e33260be8825efd871f617d759c",
+    "ledgerHash": "da2d3ab5f8b44a5f224fccf3ec6e2a067dc1129abb9f1e5d13026565aee16129",
+    "startInvariant": true,
+    "midReplayInvariant": true,
+    "finishInvariant": true,
+    "canonicalImmutable": true,
+    "passed": true
+  },
+  "replayFormation": {
+    "stage": "8.2G-E-A.1",
+    "replayFormationRestored": true,
+    "unitStatusesReadOnly": true,
+    "activeBattleSessionIdCleared": true,
+    "passed": true
+  },
+  "realReload": {
+    "stage": "8.2G-E-A.1",
+    "reloads": [
+      {
+        "reason": "running_battle",
+        "method": "Page.reload",
+        "before": {
+          "timeOrigin": 1786269082174.9,
+          "readyState": "complete",
+          "stage": 8,
+          "navigationType": "navigate",
+          "navigationStart": 0
+        },
+        "after": {
+          "timeOrigin": 1786269096064.6,
+          "readyState": "complete",
+          "stage": 8,
+          "navigationType": "reload",
+          "navigationStart": 0
+        },
+        "loaderId": "1C7E565AC67ACB0015A6EA04DE996E1E",
+        "timeOriginChanged": true
+      },
+      {
+        "reason": "replay",
+        "method": "Page.reload",
+        "before": {
+          "timeOrigin": 1786269096064.6,
+          "readyState": "complete",
+          "stage": 8,
+          "navigationType": "reload",
+          "navigationStart": 0
+        },
+        "after": {
+          "timeOrigin": 1786269098880.7,
+          "readyState": "complete",
+          "stage": 8,
+          "navigationType": "reload",
+          "navigationStart": 0
+        },
+        "loaderId": "26E1BA1024BB2E46257874511F0F2A93",
+        "timeOriginChanged": true
+      }
+    ],
+    "runningReloadPreserved": true,
+    "replayReloadPreserved": true,
+    "loaderIdsCaptured": true,
+    "performanceTimeOriginChanged": true,
+    "passed": true
+  },
+  "uiPath": {
+    "stage": "8.2G-E-A.1",
+    "productionEntry": true,
+    "fixtureLoaderUsed": false,
+    "dispatchApiUsed": false,
+    "replayApiUsed": false,
+    "actionCount": 36,
+    "allActionsFromProductionUi": true,
+    "launchDoubleClickSessionGuard": true,
+    "passed": true
+  },
+  "saveDiff": {
+    "stage": "8.2G-E-A.1",
+    "beforeHash": "8e7d912fc4e3c975e0f042d79eff0c5348c8451a85f468fe946340a7c7186489",
+    "afterHash": "2686010665ca8eeed45173d93d939cca10a8e4bb60f0cfe4ef104ad8b2c90d0b",
+    "changedPaths": [
+      "activeBattle.elapsed",
+      "activeBattle.playing",
+      "activeBattle.presentationPhase",
+      "activeBattle.productionSession.lifecycle",
+      "activeBattle.productionSession.presentationState.elapsed",
+      "activeBattle.productionSession.presentationState.phase",
+      "activeBattle.productionSession.presentationTime",
+      "activeBattle.productionSession.settledAtGameTime",
+      "activeBattle.productionSession.settlementLocked",
+      "activeBattle.productionSession.settlementReceipt",
+      "activeBattle.productionSession.settlementState.locked",
+      "activeBattle.productionSession.settlementState.status",
+      "activeBattle.productionSession.settlementStatus",
+      "activeBattle.settled",
+      "activeBattle.settlementAttempted",
+      "activeBattle.settlementReceipt",
+      "battleSessions.battle-session-0-scrap_mine-9c24e545dbfa071d1934-1.lifecycle",
+      "battleSessions.battle-session-0-scrap_mine-9c24e545dbfa071d1934-1.presentationState.elapsed",
+      "battleSessions.battle-session-0-scrap_mine-9c24e545dbfa071d1934-1.presentationState.phase",
+      "battleSessions.battle-session-0-scrap_mine-9c24e545dbfa071d1934-1.presentationTime",
+      "battleSessions.battle-session-0-scrap_mine-9c24e545dbfa071d1934-1.settledAtGameTime",
+      "battleSessions.battle-session-0-scrap_mine-9c24e545dbfa071d1934-1.settlementLocked",
+      "battleSessions.battle-session-0-scrap_mine-9c24e545dbfa071d1934-1.settlementReceipt",
+      "battleSessions.battle-session-0-scrap_mine-9c24e545dbfa071d1934-1.settlementState.locked",
+      "battleSessions.battle-session-0-scrap_mine-9c24e545dbfa071d1934-1.settlementState.status",
+      "battleSessions.battle-session-0-scrap_mine-9c24e545dbfa071d1934-1.settlementStatus",
+      "battleSettlementLedger.settlement-27ffac3549d43dd366b16d173e9d446db9a86624c2aefb78f6caa772462a4011",
+      "battles[id=battle_82101_fm_mslmi3tl_5g_scrap_mine_cautious]",
+      "battles[*order]",
+      "command.used",
+      "formations[id=fm_mslmi3tl_5g].battles",
+      "formations[id=fm_mslmi3tl_5g].experience",
+      "formations[id=fm_mslmi3tl_5g].status",
+      "formations[id=fm_mslmi3tl_5g].unitIds[3]",
+      "log[id=log_mslmi3to_5n]",
+      "log[*order]",
+      "power.used",
+      "rates.supply",
+      "stats.battlesFought",
+      "theaters.scrap_mine.lastBattleId",
+      "theaters.scrap_mine.lastResult",
+      "units[id=ea1-strong-unit-0].battles",
+      "units[id=ea1-strong-unit-0].experience",
+      "units[id=ea1-strong-unit-1].battles",
+      "units[id=ea1-strong-unit-1].damage",
+      "units[id=ea1-strong-unit-1].experience",
+      "units[id=ea1-strong-unit-1].hp",
+      "units[id=ea1-strong-unit-2].battles",
+      "units[id=ea1-strong-unit-2].experience",
+      "units[id=ea1-strong-unit-3]",
+      "units[*order]"
+    ],
+    "allowedChangedPaths": [
+      "savedAt",
+      "saveRevision",
+      "activeBattle.**",
+      "activeBattleSessionId",
+      "log[**]",
+      "command.used",
+      "command.capacity",
+      "power.used",
+      "rates.supply",
+      "units[id=ea1-strong-unit-0]",
+      "units[id=ea1-strong-unit-0].**",
+      "units[id=ea1-strong-unit-1]",
+      "units[id=ea1-strong-unit-1].**",
+      "units[id=ea1-strong-unit-2]",
+      "units[id=ea1-strong-unit-2].**",
+      "units[id=ea1-strong-unit-3]",
+      "units[id=ea1-strong-unit-3].**",
+      "formations[id=fm_mslmi3tl_5g].**",
+      "theaters.scrap_mine.**",
+      "stats.battlesFought",
+      "stats.victories",
+      "battles[id=battle_82101_fm_mslmi3tl_5g_scrap_mine_cautious]",
+      "battles[*order]",
+      "battleSettlementLedger.settlement-27ffac3549d43dd366b16d173e9d446db9a86624c2aefb78f6caa772462a4011",
+      "battleSettlementLedger.settlement-27ffac3549d43dd366b16d173e9d446db9a86624c2aefb78f6caa772462a4011.**",
+      "battleSessions.battle-session-0-scrap_mine-9c24e545dbfa071d1934-1.**",
+      "formations[*order]",
+      "units[*order]"
+    ],
+    "unexpectedChangedPaths": [],
+    "ignoredSaveDiffPaths": [
+      "savedAt"
+    ],
+    "formalPlanProblems": [],
+    "unrelatedStatePreserved": true,
+    "recursiveRecomputed": true,
+    "passed": true
+  },
+  "settlementReload": {
+    "stage": "8.2G-E-A.1",
+    "exactlyOnceFormalReport": true,
+    "exactlyOnceLedger": true,
+    "duplicateSettlementBlocked": true,
+    "passed": true
+  },
+  "authority": {
+    "stage": "8.2G-E-A.1",
+    "solverModified": false,
+    "plannerModified": false,
+    "choreographerModified": false,
+    "formalRepairAuthorityModified": false,
+    "settlementCalculationModified": false,
+    "authorityFrozen": true,
+    "passed": true
+  },
+  "tamper": {
+    "stage": "8.2G-E-A.1",
+    "cases": [
+      {
+        "case": "formal_report_swap",
+        "rejected": true,
+        "source": "E-A regression"
+      },
+      {
+        "case": "replay_settlement",
+        "rejected": true,
+        "source": "E-A regression"
+      },
+      {
+        "case": "settlement_id",
+        "rejected": true,
+        "code": "report_invalid",
+        "reason": "ProductionBattleSession：settlement ID mismatch",
+        "source": "E-A regression"
+      },
+      {
+        "case": "deployment_hash",
+        "rejected": true,
+        "code": "report_invalid",
+        "reason": "ProductionBattleSession：deployment hash binding mismatch",
+        "source": "E-A regression"
+      },
+      {
+        "case": "stale_save_revision",
+        "rejected": true,
+        "code": "report_invalid",
+        "reason": "ProductionBattleSession：source save revision mismatch",
+        "source": "E-A regression"
+      },
+      {
+        "case": "debug_settlement",
+        "rejected": true,
+        "code": "report_invalid",
+        "reason": "ProductionBattleSession：session origin is not production",
+        "source": "E-A regression"
+      },
+      {
+        "case": "session_swap",
+        "rejected": true,
+        "code": "report_invalid",
+        "reason": "ProductionBattleSession：battle session ID mismatch",
+        "source": "E-A regression"
+      },
+      {
+        "case": "deployment_snapshot",
+        "rejected": true,
+        "code": "report_invalid",
+        "reason": "ProductionBattleSession：deployment hash mismatch",
+        "source": "E-A regression"
+      },
+      {
+        "case": "reward_ledger",
+        "rejected": true,
+        "source": "E-A regression"
+      },
+      {
+        "case": "unrelated_building_mutation",
+        "rejected": true,
+        "recomputedPassed": false,
+        "unexpectedChangedPaths": [
+          "buildings[id=bld_mslmi3tl_59].level"
+        ],
+        "source": "recursive save diff"
+      },
+      {
+        "case": "unrelated_unit_mutation",
+        "rejected": true,
+        "recomputedPassed": false,
+        "unexpectedChangedPaths": [
+          "units[id=ea1-strong-unrelated-unit].hp"
+        ],
+        "source": "recursive save diff"
+      },
+      {
+        "case": "unrelated_research_mutation",
+        "rejected": true,
+        "recomputedPassed": false,
+        "unexpectedChangedPaths": [
+          "research.current.elapsed"
+        ],
+        "source": "recursive save diff"
+      },
+      {
+        "case": "unrelated_theater_mutation",
+        "rejected": true,
+        "recomputedPassed": false,
+        "unexpectedChangedPaths": [
+          "theaters.border_road.captured"
+        ],
+        "source": "recursive save diff"
+      },
+      {
+        "case": "fake_save_diff_passed",
+        "rejected": true,
+        "recomputedPassed": false,
+        "unexpectedChangedPaths": [
+          "buildings[id=bld_mslmi3tl_59].level"
+        ],
+        "source": "recursive save diff"
+      },
+      {
+        "case": "fake_save_diff_allowed_path",
+        "rejected": true,
+        "recomputedPassed": false,
+        "unexpectedChangedPaths": [
+          "buildings[id=bld_mslmi3tl_59].level"
+        ],
+        "source": "recursive save diff"
+      },
+      {
+        "case": "primitive_unexpected_mutation",
+        "rejected": true,
+        "recomputedPassed": false,
+        "unexpectedChangedPaths": [
+          "resources.intel"
+        ],
+        "source": "recursive save diff"
+      },
+      {
+        "case": "array_report_insertion_mutation",
+        "rejected": true,
+        "recomputedPassed": false,
+        "unexpectedChangedPaths": [
+          "battles[id=fake-report]"
+        ],
+        "source": "recursive save diff"
+      },
+      {
+        "case": "replay_canonical_lifecycle",
+        "rejected": true,
+        "source": "replay persistence"
+      },
+      {
+        "case": "replay_presentation_time",
+        "rejected": true,
+        "source": "replay persistence"
+      },
+      {
+        "case": "replay_formation_status",
+        "rejected": true,
+        "source": "replay persistence"
+      },
+      {
+        "case": "replay_unit_status",
+        "rejected": true,
+        "source": "replay persistence"
+      },
+      {
+        "case": "replay_ledger_hash",
+        "rejected": true,
+        "source": "replay persistence"
+      },
+      {
+        "case": "replay_source_binding",
+        "rejected": true,
+        "source": "replay persistence"
+      },
+      {
+        "case": "replay_settlement_permission",
+        "rejected": true,
+        "source": "replay persistence"
+      }
+    ],
+    "rejectionCount": 24,
+    "expandedCategories": [
+      "canonical_lifecycle",
+      "presentation_time",
+      "formation",
+      "unit",
+      "ledger",
+      "reload",
+      "building",
+      "research",
+      "theater",
+      "save_diff_passed",
+      "save_diff_allowed_paths",
+      "ui_provenance"
+    ],
+    "passed": true
+  },
+  "machineEvidence": {
+    "stage": "8.2G-E-A.1",
+    "version": 1,
+    "generatedBy": "tests/generate-stage8-2G-EA1-machine-evidence.mjs",
+    "productionEntry": true,
+    "fixtureLoaderUsed": false,
+    "debugOverlayUsed": false,
+    "dispatchApiUsed": false,
+    "replayApiUsed": false,
+    "realReloadRequired": true,
+    "frameCount": 11,
+    "frames": [
+      {
+        "frame": 1,
+        "file": "e-a1-01-base-before-battle.png",
+        "semantic": "base_before_battle"
+      },
+      {
+        "frame": 2,
+        "file": "e-a1-02-production-ui-launch-control.png",
+        "semantic": "production_ui_launch_control"
+      },
+      {
+        "frame": 3,
+        "file": "e-a1-03-running-before-real-reload.png",
+        "semantic": "running_before_real_reload"
+      },
+      {
+        "frame": 4,
+        "file": "e-a1-04-running-after-real-reload.png",
+        "semantic": "running_after_real_reload"
+      },
+      {
+        "frame": 5,
+        "file": "e-a1-05-formal-result.png",
+        "semantic": "formal_result"
+      },
+      {
+        "frame": 6,
+        "file": "e-a1-06-base-after-settlement.png",
+        "semantic": "base_after_settlement"
+      },
+      {
+        "frame": 7,
+        "file": "e-a1-07-replay-start.png",
+        "semantic": "replay_start"
+      },
+      {
+        "frame": 8,
+        "file": "e-a1-08-replay-before-real-reload.png",
+        "semantic": "replay_before_real_reload"
+      },
+      {
+        "frame": 9,
+        "file": "e-a1-09-replay-after-real-reload.png",
+        "semantic": "replay_after_real_reload"
+      },
+      {
+        "frame": 10,
+        "file": "e-a1-10-replay-finished-base.png",
+        "semantic": "replay_finished_base"
+      },
+      {
+        "frame": 11,
+        "file": "e-a1-11-save-diff-summary.png",
+        "semantic": "save_diff_summary"
+      }
+    ],
+    "passed": true
+  },
+  "browser": {
+    "stage": "8.2G-E-A.1",
+    "version": 1,
+    "generatedBy": "tests/browser/stage8-2G-E-A-1-replay-persistence.mjs",
+    "productionEntry": true,
+    "fixtureLoaderUsed": false,
+    "debugOverlayUsed": false,
+    "dispatchApiUsed": false,
+    "replayApiUsed": false,
+    "actionProvenance": [
+      {
+        "kind": "click",
+        "selector": "button[data-tab=\"overview\"]",
+        "source": "production_ui",
+        "syntheticApiCall": false,
+        "label": "概览",
+        "tab": "overview"
+      },
+      {
+        "kind": "click",
+        "selector": "button[data-tab=\"construction\"]",
+        "source": "production_ui",
+        "syntheticApiCall": false,
+        "label": "建设",
+        "tab": "construction"
+      },
+      {
+        "kind": "click",
+        "selector": "[data-action=\"build\"][data-building-type=\"barracks\"]",
+        "source": "production_ui",
+        "syntheticApiCall": false,
+        "label": "批准建设",
+        "action": "build"
+      },
+      {
+        "kind": "click",
+        "selector": "button[data-tab=\"production\"]",
+        "source": "production_ui",
+        "syntheticApiCall": false,
+        "label": "生产",
+        "tab": "production"
+      },
+      {
+        "kind": "click",
+        "selector": "[data-action=\"produce\"][data-unit-type=\"infantry\"]",
+        "source": "production_ui",
+        "syntheticApiCall": false,
+        "label": "加入训练队列",
+        "action": "produce",
+        "ordinal": 1
+      },
+      {
+        "kind": "click",
+        "selector": "[data-action=\"produce\"][data-unit-type=\"infantry\"]",
+        "source": "production_ui",
+        "syntheticApiCall": false,
+        "label": "生产中",
+        "action": "produce",
+        "ordinal": 2
+      },
+      {
+        "kind": "click",
+        "selector": "button[data-tab=\"formations\"]",
+        "source": "production_ui",
+        "syntheticApiCall": false,
+        "label": "编队",
+        "tab": "formations"
+      },
+      {
+        "kind": "click",
+        "selector": "[data-action=\"create-formation\"]",
+        "source": "production_ui",
+        "syntheticApiCall": false,
+        "label": "新建空编队",
+        "action": "create-formation"
+      },
+      {
+        "kind": "click",
+        "selector": "[data-action=\"add-unit\"]",
+        "source": "production_ui",
+        "syntheticApiCall": false,
+        "label": "加入",
+        "action": "add-unit",
+        "formationId": "fm_mslmhyfw_s"
+      },
+      {
+        "kind": "click",
+        "selector": "[data-action=\"add-unit\"]",
+        "source": "production_ui",
+        "syntheticApiCall": false,
+        "label": "加入",
+        "action": "add-unit",
+        "formationId": "fm_mslmhyfw_s"
+      },
+      {
+        "kind": "click",
+        "selector": "#btn-save",
+        "source": "production_ui",
+        "syntheticApiCall": false,
+        "label": "保存",
+        "action": "save"
+      },
+      {
+        "kind": "click",
+        "selector": "button[data-tab=\"theater\"]",
+        "source": "production_ui",
+        "syntheticApiCall": false,
+        "label": "战区",
+        "tab": "theater"
+      },
+      {
+        "kind": "click",
+        "selector": "[data-action=\"select-theater\"][data-theater=\"scrap_mine\"]",
+        "source": "production_ui",
+        "syntheticApiCall": false,
+        "label": "废弃矿区\n可进攻\n难度 ★☆☆☆☆\n地形 开阔地\n隐蔽 4\n\n少量敌方步兵驻守的旧采掘场。\n\n敌情（侦察估算）\n兵力 约 1-5\n敌方步兵班 约 2-4\n装甲攻击 ×1.10 · 车辆机动 ×1.10　|　伏击风险 低\n首占奖励 合金 300　|　占领收益 合金+1/s\n尝试 0 次\n胜利 0 次\n尚未交战",
+        "action": "select-theater",
+        "theaterId": "scrap_mine"
+      },
+      {
+        "kind": "click",
+        "selector": "[data-action=\"select-strategy\"][data-strategy=\"cautious\"]",
+        "source": "production_ui",
+        "syntheticApiCall": false,
+        "label": "谨慎推进\n无额外消耗\n\n侦察 +30%，防御 +15%，行军与战斗时间 +25%，伏击概率降低，输出略降约 8%。\n\n侦察充分，提前发现敌方反装甲阵地\n防御稳固，承受首轮打击更稳\n伏击概率显著降低\n整体输出下降约 8%\n行军与战斗时间更长",
+        "action": "select-strategy",
+        "strategyId": "cautious"
+      },
+      {
+        "kind": "double_click",
+        "selector": "[data-action=\"launch-battle\"]",
+        "source": "production_ui",
+        "syntheticApiCall": false,
+        "label": "派遣出击",
+        "action": "launch-battle",
+        "duplicateGuard": true
+      },
+      {
+        "kind": "click",
+        "selector": "#btn-save",
+        "source": "production_ui",
+        "syntheticApiCall": false,
+        "label": "保存",
+        "action": "save"
+      },
+      {
+        "kind": "click",
+        "selector": "button[data-tab=\"theater\"]",
+        "source": "production_ui",
+        "syntheticApiCall": false,
+        "label": "战区",
+        "tab": "theater"
+      },
+      {
+        "kind": "real_reload",
+        "selector": "Page.reload",
+        "source": "production_ui",
+        "syntheticApiCall": false,
+        "reason": "running_battle",
+        "reloadMethod": "Page.reload",
+        "pageReload": true
+      },
+      {
+        "kind": "click",
+        "selector": "button[data-tab=\"theater\"]",
+        "source": "production_ui",
+        "syntheticApiCall": false,
+        "label": "战区",
+        "tab": "theater"
+      },
+      {
+        "kind": "click",
+        "selector": "#btn-save",
+        "source": "production_ui",
+        "syntheticApiCall": false,
+        "label": "保存",
+        "action": "save"
+      },
+      {
+        "kind": "click",
+        "selector": "button[data-tab=\"theater\"]",
+        "source": "production_ui",
+        "syntheticApiCall": false,
+        "label": "战区",
+        "tab": "theater"
+      },
+      {
+        "kind": "click",
+        "selector": "[data-action=\"view-report\"]",
+        "source": "production_ui",
+        "syntheticApiCall": false,
+        "label": "查看完整战报",
+        "action": "view-report"
+      },
+      {
+        "kind": "click",
+        "selector": "button[data-tab=\"theater\"]",
+        "source": "production_ui",
+        "syntheticApiCall": false,
+        "label": "战区",
+        "tab": "theater"
+      },
+      {
+        "kind": "click",
+        "selector": "[data-action=\"return-from-battle\"]",
+        "source": "production_ui",
+        "syntheticApiCall": false,
+        "label": "跳过返航动画",
+        "action": "return-from-battle",
+        "settlementClose": true
+      },
+      {
+        "kind": "click",
+        "selector": "button[data-tab=\"overview\"]",
+        "source": "production_ui",
+        "syntheticApiCall": false,
+        "label": "概览",
+        "tab": "overview"
+      },
+      {
+        "kind": "click",
+        "selector": "button[data-tab=\"reports\"]",
+        "source": "production_ui",
+        "syntheticApiCall": false,
+        "label": "战报",
+        "tab": "reports"
+      },
+      {
+        "kind": "click",
+        "selector": "[data-action=\"replay-report\"]",
+        "source": "production_ui",
+        "syntheticApiCall": false,
+        "label": "只读回放",
+        "action": "replay-report",
+        "reportId": "battle_1248983834_fm_mslmhyfw_s_scrap_mine_cautious"
+      },
+      {
+        "kind": "click",
+        "selector": "button[data-tab=\"theater\"]",
+        "source": "production_ui",
+        "syntheticApiCall": false,
+        "label": "战区",
+        "tab": "theater"
+      },
+      {
+        "kind": "click",
+        "selector": "button[data-tab=\"theater\"]",
+        "source": "production_ui",
+        "syntheticApiCall": false,
+        "label": "战区",
+        "tab": "theater"
+      },
+      {
+        "kind": "click",
+        "selector": "#btn-save",
+        "source": "production_ui",
+        "syntheticApiCall": false,
+        "label": "保存",
+        "action": "save"
+      },
+      {
+        "kind": "real_reload",
+        "selector": "Page.reload",
+        "source": "production_ui",
+        "syntheticApiCall": false,
+        "reason": "replay",
+        "reloadMethod": "Page.reload",
+        "pageReload": true
+      },
+      {
+        "kind": "click",
+        "selector": "button[data-tab=\"theater\"]",
+        "source": "production_ui",
+        "syntheticApiCall": false,
+        "label": "战区",
+        "tab": "theater"
+      },
+      {
+        "kind": "click",
+        "selector": "button[data-tab=\"theater\"]",
+        "source": "production_ui",
+        "syntheticApiCall": false,
+        "label": "战区",
+        "tab": "theater"
+      },
+      {
+        "kind": "click",
+        "selector": "[data-action=\"return-from-battle\"]",
+        "source": "production_ui",
+        "syntheticApiCall": false,
+        "label": "跳过返航动画",
+        "action": "return-from-battle",
+        "replayClose": true
+      },
+      {
+        "kind": "click",
+        "selector": "button[data-tab=\"overview\"]",
+        "source": "production_ui",
+        "syntheticApiCall": false,
+        "label": "概览",
+        "tab": "overview"
+      },
+      {
+        "kind": "click",
+        "selector": "button[data-tab=\"reports\"]",
+        "source": "production_ui",
+        "syntheticApiCall": false,
+        "label": "战报",
+        "tab": "reports"
+      }
+    ],
+    "realReloads": [
+      {
+        "reason": "running_battle",
+        "method": "Page.reload",
+        "before": {
+          "timeOrigin": 1786269082174.9,
+          "readyState": "complete",
+          "stage": 8,
+          "navigationType": "navigate",
+          "navigationStart": 0
+        },
+        "after": {
+          "timeOrigin": 1786269096064.6,
+          "readyState": "complete",
+          "stage": 8,
+          "navigationType": "reload",
+          "navigationStart": 0
+        },
+        "loaderId": "1C7E565AC67ACB0015A6EA04DE996E1E",
+        "timeOriginChanged": true
+      },
+      {
+        "reason": "replay",
+        "method": "Page.reload",
+        "before": {
+          "timeOrigin": 1786269096064.6,
+          "readyState": "complete",
+          "stage": 8,
+          "navigationType": "reload",
+          "navigationStart": 0
+        },
+        "after": {
+          "timeOrigin": 1786269098880.7,
+          "readyState": "complete",
+          "stage": 8,
+          "navigationType": "reload",
+          "navigationStart": 0
+        },
+        "loaderId": "26E1BA1024BB2E46257874511F0F2A93",
+        "timeOriginChanged": true
+      }
+    ],
+    "browser": {
+      "currentCodeCaptured": true,
+      "pageErrors": [],
+      "consoleErrors": [],
+      "screenshotsDir": "screenshots/stage8-2G-E-A-1",
+      "captureCount": 11,
+      "uniqueImageHashes": 11
+    },
+    "scenes": [
+      {
+        "sceneId": "production-replay-persistence",
+        "frames": [
+          {
+            "frame": 1,
+            "file": "e-a1-01-base-before-battle.png",
+            "semantic": "base_before_battle",
+            "phase": "base_before_battle",
+            "actionProvenance": [
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"overview\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "概览",
+                "tab": "overview"
+              }
+            ],
+            "state": {
+              "saveRevision": 0,
+              "activeBattleSessionId": null,
+              "activeBattle": null,
+              "sessionId": null,
+              "sessionLifecycle": null,
+              "sessionHash": null,
+              "formalReportId": null,
+              "formalReportHash": null,
+              "ledgerHash": null,
+              "ledgerCount": 0,
+              "reportCount": 0,
+              "productionSignature": "00f10a5314bb5daa4d60dcdf25b239094e9b98b23a9b76db72cf20e92f61fed9",
+              "formations": [],
+              "units": []
+            },
+            "domTextLength": 1228,
+            "imageSha256": "edb51b0df7df99c0e42ee45c2846ca8e56b0a547a945d7df0e4e173492edcb59",
+            "screenshot": {
+              "path": "screenshots/stage8-2G-E-A-1/e-a1-01-base-before-battle.png",
+              "sha256": "edb51b0df7df99c0e42ee45c2846ca8e56b0a547a945d7df0e4e173492edcb59"
+            }
+          },
+          {
+            "frame": 2,
+            "file": "e-a1-02-production-ui-launch-control.png",
+            "semantic": "production_ui_launch_control",
+            "phase": "production_ui_launch_control",
+            "productionEntry": true,
+            "actionProvenance": [
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"overview\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "概览",
+                "tab": "overview"
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"construction\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "建设",
+                "tab": "construction"
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"build\"][data-building-type=\"barracks\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "批准建设",
+                "action": "build"
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"production\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "生产",
+                "tab": "production"
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"produce\"][data-unit-type=\"infantry\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "加入训练队列",
+                "action": "produce",
+                "ordinal": 1
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"produce\"][data-unit-type=\"infantry\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "生产中",
+                "action": "produce",
+                "ordinal": 2
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"formations\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "编队",
+                "tab": "formations"
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"create-formation\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "新建空编队",
+                "action": "create-formation"
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"add-unit\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "加入",
+                "action": "add-unit",
+                "formationId": "fm_mslmhyfw_s"
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"add-unit\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "加入",
+                "action": "add-unit",
+                "formationId": "fm_mslmhyfw_s"
+              },
+              {
+                "kind": "click",
+                "selector": "#btn-save",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "保存",
+                "action": "save"
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"theater\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "战区",
+                "tab": "theater"
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"select-theater\"][data-theater=\"scrap_mine\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "废弃矿区\n可进攻\n难度 ★☆☆☆☆\n地形 开阔地\n隐蔽 4\n\n少量敌方步兵驻守的旧采掘场。\n\n敌情（侦察估算）\n兵力 约 1-5\n敌方步兵班 约 2-4\n装甲攻击 ×1.10 · 车辆机动 ×1.10　|　伏击风险 低\n首占奖励 合金 300　|　占领收益 合金+1/s\n尝试 0 次\n胜利 0 次\n尚未交战",
+                "action": "select-theater",
+                "theaterId": "scrap_mine"
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"select-strategy\"][data-strategy=\"cautious\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "谨慎推进\n无额外消耗\n\n侦察 +30%，防御 +15%，行军与战斗时间 +25%，伏击概率降低，输出略降约 8%。\n\n侦察充分，提前发现敌方反装甲阵地\n防御稳固，承受首轮打击更稳\n伏击概率显著降低\n整体输出下降约 8%\n行军与战斗时间更长",
+                "action": "select-strategy",
+                "strategyId": "cautious"
+              }
+            ],
+            "state": {
+              "saveRevision": 10,
+              "activeBattleSessionId": null,
+              "activeBattle": null,
+              "sessionId": null,
+              "sessionLifecycle": null,
+              "sessionHash": null,
+              "formalReportId": null,
+              "formalReportHash": null,
+              "ledgerHash": null,
+              "ledgerCount": 0,
+              "reportCount": 0,
+              "productionSignature": "ce95bfde5952261e8f516456f1e32871f1855cfff62dd1c79f0c0957b683a49e",
+              "formations": [
+                {
+                  "id": "fm_mslmhyfw_s",
+                  "status": "idle",
+                  "unitIds": [
+                    "unit_mslmhwe7_m",
+                    "unit_mslmhybn_p"
+                  ]
+                }
+              ],
+              "units": [
+                {
+                  "id": "unit_mslmhwe7_m",
+                  "status": "assigned",
+                  "hp": 100
+                },
+                {
+                  "id": "unit_mslmhybn_p",
+                  "status": "assigned",
+                  "hp": 100
+                }
+              ]
+            },
+            "domTextLength": 1755,
+            "imageSha256": "ec8bdd0e079d4cf4f2e59accc382c4de00867640194500ce8205847615953973",
+            "screenshot": {
+              "path": "screenshots/stage8-2G-E-A-1/e-a1-02-production-ui-launch-control.png",
+              "sha256": "ec8bdd0e079d4cf4f2e59accc382c4de00867640194500ce8205847615953973"
+            }
+          },
+          {
+            "frame": 3,
+            "file": "e-a1-03-running-before-real-reload.png",
+            "semantic": "running_before_real_reload",
+            "phase": "running_before_real_reload",
+            "sessionId": "battle-session-10-scrap_mine-cb4d0ad00fbb393795c6-1",
+            "doubleClickSessionDelta": 1,
+            "actionProvenance": [
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"overview\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "概览",
+                "tab": "overview"
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"construction\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "建设",
+                "tab": "construction"
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"build\"][data-building-type=\"barracks\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "批准建设",
+                "action": "build"
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"production\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "生产",
+                "tab": "production"
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"produce\"][data-unit-type=\"infantry\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "加入训练队列",
+                "action": "produce",
+                "ordinal": 1
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"produce\"][data-unit-type=\"infantry\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "生产中",
+                "action": "produce",
+                "ordinal": 2
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"formations\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "编队",
+                "tab": "formations"
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"create-formation\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "新建空编队",
+                "action": "create-formation"
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"add-unit\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "加入",
+                "action": "add-unit",
+                "formationId": "fm_mslmhyfw_s"
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"add-unit\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "加入",
+                "action": "add-unit",
+                "formationId": "fm_mslmhyfw_s"
+              },
+              {
+                "kind": "click",
+                "selector": "#btn-save",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "保存",
+                "action": "save"
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"theater\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "战区",
+                "tab": "theater"
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"select-theater\"][data-theater=\"scrap_mine\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "废弃矿区\n可进攻\n难度 ★☆☆☆☆\n地形 开阔地\n隐蔽 4\n\n少量敌方步兵驻守的旧采掘场。\n\n敌情（侦察估算）\n兵力 约 1-5\n敌方步兵班 约 2-4\n装甲攻击 ×1.10 · 车辆机动 ×1.10　|　伏击风险 低\n首占奖励 合金 300　|　占领收益 合金+1/s\n尝试 0 次\n胜利 0 次\n尚未交战",
+                "action": "select-theater",
+                "theaterId": "scrap_mine"
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"select-strategy\"][data-strategy=\"cautious\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "谨慎推进\n无额外消耗\n\n侦察 +30%，防御 +15%，行军与战斗时间 +25%，伏击概率降低，输出略降约 8%。\n\n侦察充分，提前发现敌方反装甲阵地\n防御稳固，承受首轮打击更稳\n伏击概率显著降低\n整体输出下降约 8%\n行军与战斗时间更长",
+                "action": "select-strategy",
+                "strategyId": "cautious"
+              },
+              {
+                "kind": "double_click",
+                "selector": "[data-action=\"launch-battle\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "派遣出击",
+                "action": "launch-battle",
+                "duplicateGuard": true
+              },
+              {
+                "kind": "click",
+                "selector": "#btn-save",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "保存",
+                "action": "save"
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"theater\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "战区",
+                "tab": "theater"
+              }
+            ],
+            "state": {
+              "saveRevision": 12,
+              "activeBattleSessionId": "battle-session-10-scrap_mine-cb4d0ad00fbb393795c6-1",
+              "activeBattle": {
+                "battleSessionId": "battle-session-10-scrap_mine-cb4d0ad00fbb393795c6-1",
+                "replaySourceSessionId": null,
+                "replayReadOnly": false,
+                "settled": false,
+                "elapsed": 0,
+                "returnElapsed": 0,
+                "presentationTime": 0
+              },
+              "sessionId": "battle-session-10-scrap_mine-cb4d0ad00fbb393795c6-1",
+              "sessionLifecycle": "running",
+              "sessionHash": "5b5787514ddd51c75c9c41cba6527872d4c8cc75d493f067f3e4a1bb0557d62c",
+              "formalReportId": "battle_1248983834_fm_mslmhyfw_s_scrap_mine_cautious",
+              "formalReportHash": "4015a9bc41fd1ce435b1d2391e0127eab9b388f7b2a5341068e59a40a39f81a7",
+              "ledgerHash": null,
+              "ledgerCount": 0,
+              "reportCount": 0,
+              "productionSignature": "ca9a0d30a4d20dbf783496e207c2db7488f15cd1672b779dd608bba5a31ad799",
+              "formations": [
+                {
+                  "id": "fm_mslmhyfw_s",
+                  "status": "fighting",
+                  "unitIds": [
+                    "unit_mslmhwe7_m",
+                    "unit_mslmhybn_p"
+                  ]
+                }
+              ],
+              "units": [
+                {
+                  "id": "unit_mslmhwe7_m",
+                  "status": "deployed",
+                  "hp": 100
+                },
+                {
+                  "id": "unit_mslmhybn_p",
+                  "status": "deployed",
+                  "hp": 100
+                }
+              ]
+            },
+            "domTextLength": 1890,
+            "imageSha256": "6bce7a782ffd16d7931b404ae4ea1db06c96428735353c87f8e9cd3492419932",
+            "screenshot": {
+              "path": "screenshots/stage8-2G-E-A-1/e-a1-03-running-before-real-reload.png",
+              "sha256": "6bce7a782ffd16d7931b404ae4ea1db06c96428735353c87f8e9cd3492419932"
+            }
+          },
+          {
+            "frame": 4,
+            "file": "e-a1-04-running-after-real-reload.png",
+            "semantic": "running_after_real_reload",
+            "phase": "running_after_real_reload",
+            "realReload": {
+              "reason": "running_battle",
+              "method": "Page.reload",
+              "before": {
+                "timeOrigin": 1786269082174.9,
+                "readyState": "complete",
+                "stage": 8,
+                "navigationType": "navigate",
+                "navigationStart": 0
+              },
+              "after": {
+                "timeOrigin": 1786269096064.6,
+                "readyState": "complete",
+                "stage": 8,
+                "navigationType": "reload",
+                "navigationStart": 0
+              },
+              "loaderId": "1C7E565AC67ACB0015A6EA04DE996E1E",
+              "timeOriginChanged": true
+            },
+            "reloadPreservedSession": true,
+            "actionProvenance": [
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"overview\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "概览",
+                "tab": "overview"
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"construction\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "建设",
+                "tab": "construction"
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"build\"][data-building-type=\"barracks\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "批准建设",
+                "action": "build"
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"production\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "生产",
+                "tab": "production"
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"produce\"][data-unit-type=\"infantry\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "加入训练队列",
+                "action": "produce",
+                "ordinal": 1
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"produce\"][data-unit-type=\"infantry\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "生产中",
+                "action": "produce",
+                "ordinal": 2
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"formations\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "编队",
+                "tab": "formations"
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"create-formation\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "新建空编队",
+                "action": "create-formation"
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"add-unit\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "加入",
+                "action": "add-unit",
+                "formationId": "fm_mslmhyfw_s"
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"add-unit\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "加入",
+                "action": "add-unit",
+                "formationId": "fm_mslmhyfw_s"
+              },
+              {
+                "kind": "click",
+                "selector": "#btn-save",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "保存",
+                "action": "save"
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"theater\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "战区",
+                "tab": "theater"
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"select-theater\"][data-theater=\"scrap_mine\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "废弃矿区\n可进攻\n难度 ★☆☆☆☆\n地形 开阔地\n隐蔽 4\n\n少量敌方步兵驻守的旧采掘场。\n\n敌情（侦察估算）\n兵力 约 1-5\n敌方步兵班 约 2-4\n装甲攻击 ×1.10 · 车辆机动 ×1.10　|　伏击风险 低\n首占奖励 合金 300　|　占领收益 合金+1/s\n尝试 0 次\n胜利 0 次\n尚未交战",
+                "action": "select-theater",
+                "theaterId": "scrap_mine"
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"select-strategy\"][data-strategy=\"cautious\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "谨慎推进\n无额外消耗\n\n侦察 +30%，防御 +15%，行军与战斗时间 +25%，伏击概率降低，输出略降约 8%。\n\n侦察充分，提前发现敌方反装甲阵地\n防御稳固，承受首轮打击更稳\n伏击概率显著降低\n整体输出下降约 8%\n行军与战斗时间更长",
+                "action": "select-strategy",
+                "strategyId": "cautious"
+              },
+              {
+                "kind": "double_click",
+                "selector": "[data-action=\"launch-battle\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "派遣出击",
+                "action": "launch-battle",
+                "duplicateGuard": true
+              },
+              {
+                "kind": "click",
+                "selector": "#btn-save",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "保存",
+                "action": "save"
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"theater\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "战区",
+                "tab": "theater"
+              },
+              {
+                "kind": "real_reload",
+                "selector": "Page.reload",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "reason": "running_battle",
+                "reloadMethod": "Page.reload",
+                "pageReload": true
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"theater\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "战区",
+                "tab": "theater"
+              }
+            ],
+            "state": {
+              "saveRevision": 14,
+              "activeBattleSessionId": "battle-session-10-scrap_mine-cb4d0ad00fbb393795c6-1",
+              "activeBattle": {
+                "battleSessionId": "battle-session-10-scrap_mine-cb4d0ad00fbb393795c6-1",
+                "replaySourceSessionId": null,
+                "replayReadOnly": false,
+                "settled": false,
+                "elapsed": 0,
+                "returnElapsed": 0,
+                "presentationTime": 0
+              },
+              "sessionId": "battle-session-10-scrap_mine-cb4d0ad00fbb393795c6-1",
+              "sessionLifecycle": "running",
+              "sessionHash": "5b5787514ddd51c75c9c41cba6527872d4c8cc75d493f067f3e4a1bb0557d62c",
+              "formalReportId": "battle_1248983834_fm_mslmhyfw_s_scrap_mine_cautious",
+              "formalReportHash": "4015a9bc41fd1ce435b1d2391e0127eab9b388f7b2a5341068e59a40a39f81a7",
+              "ledgerHash": null,
+              "ledgerCount": 0,
+              "reportCount": 0,
+              "productionSignature": "b1c69e6532d8aca4b4bc551bde092acfe58b6f9a19926b7e68456795508fb265",
+              "formations": [
+                {
+                  "id": "fm_mslmhyfw_s",
+                  "status": "fighting",
+                  "unitIds": [
+                    "unit_mslmhwe7_m",
+                    "unit_mslmhybn_p"
+                  ]
+                }
+              ],
+              "units": [
+                {
+                  "id": "unit_mslmhwe7_m",
+                  "status": "deployed",
+                  "hp": 100
+                },
+                {
+                  "id": "unit_mslmhybn_p",
+                  "status": "deployed",
+                  "hp": 100
+                }
+              ]
+            },
+            "domTextLength": 1969,
+            "imageSha256": "f320bae84e16a3c9b86fc4785b42ce11fada3108c9580b1c23183cf3330f1c75",
+            "screenshot": {
+              "path": "screenshots/stage8-2G-E-A-1/e-a1-04-running-after-real-reload.png",
+              "sha256": "f320bae84e16a3c9b86fc4785b42ce11fada3108c9580b1c23183cf3330f1c75"
+            }
+          },
+          {
+            "frame": 5,
+            "file": "e-a1-05-formal-result.png",
+            "semantic": "formal_result",
+            "phase": "formal_result",
+            "settlementApplied": true,
+            "saveDiffSummary": {
+              "beforeHash": "b1c69e6532d8aca4b4bc551bde092acfe58b6f9a19926b7e68456795508fb265",
+              "afterHash": "bd669827fed8e1880696b57a3e818ee7523ab0243fefea6a3081421e441f4542",
+              "changedPathCount": 47,
+              "changedPaths": [
+                "activeBattle.elapsed",
+                "activeBattle.playing",
+                "activeBattle.presentationPhase",
+                "activeBattle.productionSession.lifecycle",
+                "activeBattle.productionSession.presentationState.elapsed",
+                "activeBattle.productionSession.presentationState.phase",
+                "activeBattle.productionSession.presentationTime",
+                "activeBattle.productionSession.settledAtGameTime",
+                "activeBattle.productionSession.settlementLocked",
+                "activeBattle.productionSession.settlementReceipt",
+                "activeBattle.productionSession.settlementState.locked",
+                "activeBattle.productionSession.settlementState.status",
+                "activeBattle.productionSession.settlementStatus",
+                "activeBattle.settled",
+                "activeBattle.settlementAttempted",
+                "activeBattle.settlementReceipt",
+                "battleSessions.battle-session-10-scrap_mine-cb4d0ad00fbb393795c6-1.lifecycle",
+                "battleSessions.battle-session-10-scrap_mine-cb4d0ad00fbb393795c6-1.presentationState.elapsed",
+                "battleSessions.battle-session-10-scrap_mine-cb4d0ad00fbb393795c6-1.presentationState.phase",
+                "battleSessions.battle-session-10-scrap_mine-cb4d0ad00fbb393795c6-1.presentationTime",
+                "battleSessions.battle-session-10-scrap_mine-cb4d0ad00fbb393795c6-1.settledAtGameTime",
+                "battleSessions.battle-session-10-scrap_mine-cb4d0ad00fbb393795c6-1.settlementLocked",
+                "battleSessions.battle-session-10-scrap_mine-cb4d0ad00fbb393795c6-1.settlementReceipt",
+                "battleSessions.battle-session-10-scrap_mine-cb4d0ad00fbb393795c6-1.settlementState.locked",
+                "battleSessions.battle-session-10-scrap_mine-cb4d0ad00fbb393795c6-1.settlementState.status",
+                "battleSessions.battle-session-10-scrap_mine-cb4d0ad00fbb393795c6-1.settlementStatus",
+                "battleSettlementLedger.settlement-89d09a66d75fdefedb858eb2368b711445d2d1c0bd9edbf843612aabbff22921",
+                "battles[id=battle_1248983834_fm_mslmhyfw_s_scrap_mine_cautious]",
+                "battles[*order]",
+                "command.used",
+                "formations[id=fm_mslmhyfw_s].battles",
+                "formations[id=fm_mslmhyfw_s].experience",
+                "formations[id=fm_mslmhyfw_s].status",
+                "formations[id=fm_mslmhyfw_s].unitIds[0]",
+                "formations[id=fm_mslmhyfw_s].unitIds[1]",
+                "log[id=log_mslmi006_8]",
+                "log[*order]",
+                "saveRevision",
+                "stats.battlesFought",
+                "theaters.scrap_mine.lastBattleId",
+                "theaters.scrap_mine.lastResult",
+                "units[id=unit_mslmhwe7_m]",
+                "units[id=unit_mslmhybn_p].battles",
+                "units[id=unit_mslmhybn_p].damage",
+                "units[id=unit_mslmhybn_p].experience",
+                "units[id=unit_mslmhybn_p].hp",
+                "units[*order]"
+              ]
+            },
+            "actionProvenance": [
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"overview\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "概览",
+                "tab": "overview"
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"construction\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "建设",
+                "tab": "construction"
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"build\"][data-building-type=\"barracks\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "批准建设",
+                "action": "build"
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"production\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "生产",
+                "tab": "production"
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"produce\"][data-unit-type=\"infantry\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "加入训练队列",
+                "action": "produce",
+                "ordinal": 1
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"produce\"][data-unit-type=\"infantry\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "生产中",
+                "action": "produce",
+                "ordinal": 2
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"formations\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "编队",
+                "tab": "formations"
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"create-formation\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "新建空编队",
+                "action": "create-formation"
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"add-unit\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "加入",
+                "action": "add-unit",
+                "formationId": "fm_mslmhyfw_s"
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"add-unit\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "加入",
+                "action": "add-unit",
+                "formationId": "fm_mslmhyfw_s"
+              },
+              {
+                "kind": "click",
+                "selector": "#btn-save",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "保存",
+                "action": "save"
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"theater\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "战区",
+                "tab": "theater"
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"select-theater\"][data-theater=\"scrap_mine\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "废弃矿区\n可进攻\n难度 ★☆☆☆☆\n地形 开阔地\n隐蔽 4\n\n少量敌方步兵驻守的旧采掘场。\n\n敌情（侦察估算）\n兵力 约 1-5\n敌方步兵班 约 2-4\n装甲攻击 ×1.10 · 车辆机动 ×1.10　|　伏击风险 低\n首占奖励 合金 300　|　占领收益 合金+1/s\n尝试 0 次\n胜利 0 次\n尚未交战",
+                "action": "select-theater",
+                "theaterId": "scrap_mine"
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"select-strategy\"][data-strategy=\"cautious\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "谨慎推进\n无额外消耗\n\n侦察 +30%，防御 +15%，行军与战斗时间 +25%，伏击概率降低，输出略降约 8%。\n\n侦察充分，提前发现敌方反装甲阵地\n防御稳固，承受首轮打击更稳\n伏击概率显著降低\n整体输出下降约 8%\n行军与战斗时间更长",
+                "action": "select-strategy",
+                "strategyId": "cautious"
+              },
+              {
+                "kind": "double_click",
+                "selector": "[data-action=\"launch-battle\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "派遣出击",
+                "action": "launch-battle",
+                "duplicateGuard": true
+              },
+              {
+                "kind": "click",
+                "selector": "#btn-save",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "保存",
+                "action": "save"
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"theater\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "战区",
+                "tab": "theater"
+              },
+              {
+                "kind": "real_reload",
+                "selector": "Page.reload",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "reason": "running_battle",
+                "reloadMethod": "Page.reload",
+                "pageReload": true
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"theater\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "战区",
+                "tab": "theater"
+              },
+              {
+                "kind": "click",
+                "selector": "#btn-save",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "保存",
+                "action": "save"
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"theater\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "战区",
+                "tab": "theater"
+              }
+            ],
+            "state": {
+              "saveRevision": 16,
+              "activeBattleSessionId": "battle-session-10-scrap_mine-cb4d0ad00fbb393795c6-1",
+              "activeBattle": {
+                "battleSessionId": "battle-session-10-scrap_mine-cb4d0ad00fbb393795c6-1",
+                "replaySourceSessionId": null,
+                "replayReadOnly": false,
+                "settled": true,
+                "elapsed": 60,
+                "returnElapsed": 0,
+                "presentationTime": 60
+              },
+              "sessionId": "battle-session-10-scrap_mine-cb4d0ad00fbb393795c6-1",
+              "sessionLifecycle": "settled",
+              "sessionHash": "833fbf489984c7490b3a228094bafe7256a8d6bb51547d8d2fc665608441e22f",
+              "formalReportId": "battle_1248983834_fm_mslmhyfw_s_scrap_mine_cautious",
+              "formalReportHash": "4015a9bc41fd1ce435b1d2391e0127eab9b388f7b2a5341068e59a40a39f81a7",
+              "ledgerHash": "e3951763a85a09640be79644ba7a483ec50ae1479bd9aa0ec637bf6d7925e3ff",
+              "ledgerCount": 1,
+              "reportCount": 1,
+              "productionSignature": "bd669827fed8e1880696b57a3e818ee7523ab0243fefea6a3081421e441f4542",
+              "formations": [
+                {
+                  "id": "fm_mslmhyfw_s",
+                  "status": "returning",
+                  "unitIds": [
+                    "unit_mslmhybn_p"
+                  ]
+                }
+              ],
+              "units": [
+                {
+                  "id": "unit_mslmhybn_p",
+                  "status": "deployed",
+                  "hp": 51
+                }
+              ]
+            },
+            "domTextLength": 2176,
+            "imageSha256": "ad6972bc2f23dd08ffd97f118eec76e3ef31ef99ec3b50cbed741047d20d347c",
+            "screenshot": {
+              "path": "screenshots/stage8-2G-E-A-1/e-a1-05-formal-result.png",
+              "sha256": "ad6972bc2f23dd08ffd97f118eec76e3ef31ef99ec3b50cbed741047d20d347c"
+            }
+          },
+          {
+            "frame": 6,
+            "file": "e-a1-06-base-after-settlement.png",
+            "semantic": "base_after_settlement",
+            "phase": "base_after_settlement",
+            "settlementClosedByUi": true,
+            "actionProvenance": [
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"overview\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "概览",
+                "tab": "overview"
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"construction\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "建设",
+                "tab": "construction"
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"build\"][data-building-type=\"barracks\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "批准建设",
+                "action": "build"
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"production\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "生产",
+                "tab": "production"
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"produce\"][data-unit-type=\"infantry\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "加入训练队列",
+                "action": "produce",
+                "ordinal": 1
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"produce\"][data-unit-type=\"infantry\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "生产中",
+                "action": "produce",
+                "ordinal": 2
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"formations\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "编队",
+                "tab": "formations"
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"create-formation\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "新建空编队",
+                "action": "create-formation"
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"add-unit\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "加入",
+                "action": "add-unit",
+                "formationId": "fm_mslmhyfw_s"
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"add-unit\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "加入",
+                "action": "add-unit",
+                "formationId": "fm_mslmhyfw_s"
+              },
+              {
+                "kind": "click",
+                "selector": "#btn-save",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "保存",
+                "action": "save"
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"theater\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "战区",
+                "tab": "theater"
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"select-theater\"][data-theater=\"scrap_mine\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "废弃矿区\n可进攻\n难度 ★☆☆☆☆\n地形 开阔地\n隐蔽 4\n\n少量敌方步兵驻守的旧采掘场。\n\n敌情（侦察估算）\n兵力 约 1-5\n敌方步兵班 约 2-4\n装甲攻击 ×1.10 · 车辆机动 ×1.10　|　伏击风险 低\n首占奖励 合金 300　|　占领收益 合金+1/s\n尝试 0 次\n胜利 0 次\n尚未交战",
+                "action": "select-theater",
+                "theaterId": "scrap_mine"
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"select-strategy\"][data-strategy=\"cautious\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "谨慎推进\n无额外消耗\n\n侦察 +30%，防御 +15%，行军与战斗时间 +25%，伏击概率降低，输出略降约 8%。\n\n侦察充分，提前发现敌方反装甲阵地\n防御稳固，承受首轮打击更稳\n伏击概率显著降低\n整体输出下降约 8%\n行军与战斗时间更长",
+                "action": "select-strategy",
+                "strategyId": "cautious"
+              },
+              {
+                "kind": "double_click",
+                "selector": "[data-action=\"launch-battle\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "派遣出击",
+                "action": "launch-battle",
+                "duplicateGuard": true
+              },
+              {
+                "kind": "click",
+                "selector": "#btn-save",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "保存",
+                "action": "save"
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"theater\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "战区",
+                "tab": "theater"
+              },
+              {
+                "kind": "real_reload",
+                "selector": "Page.reload",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "reason": "running_battle",
+                "reloadMethod": "Page.reload",
+                "pageReload": true
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"theater\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "战区",
+                "tab": "theater"
+              },
+              {
+                "kind": "click",
+                "selector": "#btn-save",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "保存",
+                "action": "save"
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"theater\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "战区",
+                "tab": "theater"
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"view-report\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "查看完整战报",
+                "action": "view-report"
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"theater\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "战区",
+                "tab": "theater"
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"return-from-battle\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "跳过返航动画",
+                "action": "return-from-battle",
+                "settlementClose": true
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"overview\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "概览",
+                "tab": "overview"
+              }
+            ],
+            "state": {
+              "saveRevision": 17,
+              "activeBattleSessionId": null,
+              "activeBattle": null,
+              "sessionId": "battle-session-10-scrap_mine-cb4d0ad00fbb393795c6-1",
+              "sessionLifecycle": "returned",
+              "sessionHash": "0d59ded1394350f2a4822d378768e26fd7e5f925b6fef169774fb9cc0ff7e7f6",
+              "formalReportId": "battle_1248983834_fm_mslmhyfw_s_scrap_mine_cautious",
+              "formalReportHash": "4015a9bc41fd1ce435b1d2391e0127eab9b388f7b2a5341068e59a40a39f81a7",
+              "ledgerHash": "e3951763a85a09640be79644ba7a483ec50ae1479bd9aa0ec637bf6d7925e3ff",
+              "ledgerCount": 1,
+              "reportCount": 1,
+              "productionSignature": "6ec3a81b08f367ada3f1379ff6040de423132509265649bdd630b2862bac889a",
+              "formations": [
+                {
+                  "id": "fm_mslmhyfw_s",
+                  "status": "idle",
+                  "unitIds": [
+                    "unit_mslmhybn_p"
+                  ]
+                }
+              ],
+              "units": [
+                {
+                  "id": "unit_mslmhybn_p",
+                  "status": "assigned",
+                  "hp": 51
+                }
+              ]
+            },
+            "domTextLength": 1768,
+            "imageSha256": "3571f1b1a81d76e34ca6db460ccaeba60986d3ddc880e4b3bb4096f05eb92d63",
+            "screenshot": {
+              "path": "screenshots/stage8-2G-E-A-1/e-a1-06-base-after-settlement.png",
+              "sha256": "3571f1b1a81d76e34ca6db460ccaeba60986d3ddc880e4b3bb4096f05eb92d63"
+            }
+          },
+          {
+            "frame": 7,
+            "file": "e-a1-07-replay-start.png",
+            "semantic": "replay_start",
+            "phase": "replay_start",
+            "replayAction": {
+              "ok": true,
+              "disabled": false,
+              "label": "只读回放"
+            },
+            "replayReadOnly": true,
+            "actionProvenance": [
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"overview\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "概览",
+                "tab": "overview"
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"construction\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "建设",
+                "tab": "construction"
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"build\"][data-building-type=\"barracks\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "批准建设",
+                "action": "build"
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"production\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "生产",
+                "tab": "production"
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"produce\"][data-unit-type=\"infantry\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "加入训练队列",
+                "action": "produce",
+                "ordinal": 1
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"produce\"][data-unit-type=\"infantry\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "生产中",
+                "action": "produce",
+                "ordinal": 2
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"formations\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "编队",
+                "tab": "formations"
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"create-formation\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "新建空编队",
+                "action": "create-formation"
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"add-unit\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "加入",
+                "action": "add-unit",
+                "formationId": "fm_mslmhyfw_s"
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"add-unit\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "加入",
+                "action": "add-unit",
+                "formationId": "fm_mslmhyfw_s"
+              },
+              {
+                "kind": "click",
+                "selector": "#btn-save",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "保存",
+                "action": "save"
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"theater\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "战区",
+                "tab": "theater"
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"select-theater\"][data-theater=\"scrap_mine\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "废弃矿区\n可进攻\n难度 ★☆☆☆☆\n地形 开阔地\n隐蔽 4\n\n少量敌方步兵驻守的旧采掘场。\n\n敌情（侦察估算）\n兵力 约 1-5\n敌方步兵班 约 2-4\n装甲攻击 ×1.10 · 车辆机动 ×1.10　|　伏击风险 低\n首占奖励 合金 300　|　占领收益 合金+1/s\n尝试 0 次\n胜利 0 次\n尚未交战",
+                "action": "select-theater",
+                "theaterId": "scrap_mine"
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"select-strategy\"][data-strategy=\"cautious\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "谨慎推进\n无额外消耗\n\n侦察 +30%，防御 +15%，行军与战斗时间 +25%，伏击概率降低，输出略降约 8%。\n\n侦察充分，提前发现敌方反装甲阵地\n防御稳固，承受首轮打击更稳\n伏击概率显著降低\n整体输出下降约 8%\n行军与战斗时间更长",
+                "action": "select-strategy",
+                "strategyId": "cautious"
+              },
+              {
+                "kind": "double_click",
+                "selector": "[data-action=\"launch-battle\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "派遣出击",
+                "action": "launch-battle",
+                "duplicateGuard": true
+              },
+              {
+                "kind": "click",
+                "selector": "#btn-save",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "保存",
+                "action": "save"
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"theater\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "战区",
+                "tab": "theater"
+              },
+              {
+                "kind": "real_reload",
+                "selector": "Page.reload",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "reason": "running_battle",
+                "reloadMethod": "Page.reload",
+                "pageReload": true
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"theater\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "战区",
+                "tab": "theater"
+              },
+              {
+                "kind": "click",
+                "selector": "#btn-save",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "保存",
+                "action": "save"
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"theater\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "战区",
+                "tab": "theater"
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"view-report\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "查看完整战报",
+                "action": "view-report"
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"theater\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "战区",
+                "tab": "theater"
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"return-from-battle\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "跳过返航动画",
+                "action": "return-from-battle",
+                "settlementClose": true
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"overview\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "概览",
+                "tab": "overview"
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"reports\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "战报",
+                "tab": "reports"
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"replay-report\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "只读回放",
+                "action": "replay-report",
+                "reportId": "battle_1248983834_fm_mslmhyfw_s_scrap_mine_cautious"
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"theater\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "战区",
+                "tab": "theater"
+              }
+            ],
+            "state": {
+              "saveRevision": 18,
+              "activeBattleSessionId": null,
+              "activeBattle": {
+                "battleSessionId": "battle-session-10-scrap_mine-cb4d0ad00fbb393795c6-1",
+                "replaySourceSessionId": "battle-session-10-scrap_mine-cb4d0ad00fbb393795c6-1",
+                "replayReadOnly": true,
+                "settled": false,
+                "elapsed": 0,
+                "returnElapsed": 0,
+                "presentationTime": 0
+              },
+              "sessionId": "battle-session-10-scrap_mine-cb4d0ad00fbb393795c6-1",
+              "sessionLifecycle": "returned",
+              "sessionHash": "0d59ded1394350f2a4822d378768e26fd7e5f925b6fef169774fb9cc0ff7e7f6",
+              "formalReportId": "battle_1248983834_fm_mslmhyfw_s_scrap_mine_cautious",
+              "formalReportHash": "4015a9bc41fd1ce435b1d2391e0127eab9b388f7b2a5341068e59a40a39f81a7",
+              "ledgerHash": "e3951763a85a09640be79644ba7a483ec50ae1479bd9aa0ec637bf6d7925e3ff",
+              "ledgerCount": 1,
+              "reportCount": 1,
+              "productionSignature": "6ec3a81b08f367ada3f1379ff6040de423132509265649bdd630b2862bac889a",
+              "formations": [
+                {
+                  "id": "fm_mslmhyfw_s",
+                  "status": "idle",
+                  "unitIds": [
+                    "unit_mslmhybn_p"
+                  ]
+                }
+              ],
+              "units": [
+                {
+                  "id": "unit_mslmhybn_p",
+                  "status": "assigned",
+                  "hp": 51
+                }
+              ]
+            },
+            "domTextLength": 2054,
+            "imageSha256": "68f95413295aa1df6ce9ef5e878414dad6198e4bc4f2fcb355f3f9b7a0a710a9",
+            "screenshot": {
+              "path": "screenshots/stage8-2G-E-A-1/e-a1-07-replay-start.png",
+              "sha256": "68f95413295aa1df6ce9ef5e878414dad6198e4bc4f2fcb355f3f9b7a0a710a9"
+            }
+          },
+          {
+            "frame": 8,
+            "file": "e-a1-08-replay-before-real-reload.png",
+            "semantic": "replay_before_real_reload",
+            "phase": "replay_before_real_reload",
+            "canonicalSessionHash": "0d59ded1394350f2a4822d378768e26fd7e5f925b6fef169774fb9cc0ff7e7f6",
+            "actionProvenance": [
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"overview\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "概览",
+                "tab": "overview"
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"construction\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "建设",
+                "tab": "construction"
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"build\"][data-building-type=\"barracks\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "批准建设",
+                "action": "build"
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"production\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "生产",
+                "tab": "production"
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"produce\"][data-unit-type=\"infantry\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "加入训练队列",
+                "action": "produce",
+                "ordinal": 1
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"produce\"][data-unit-type=\"infantry\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "生产中",
+                "action": "produce",
+                "ordinal": 2
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"formations\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "编队",
+                "tab": "formations"
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"create-formation\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "新建空编队",
+                "action": "create-formation"
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"add-unit\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "加入",
+                "action": "add-unit",
+                "formationId": "fm_mslmhyfw_s"
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"add-unit\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "加入",
+                "action": "add-unit",
+                "formationId": "fm_mslmhyfw_s"
+              },
+              {
+                "kind": "click",
+                "selector": "#btn-save",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "保存",
+                "action": "save"
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"theater\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "战区",
+                "tab": "theater"
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"select-theater\"][data-theater=\"scrap_mine\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "废弃矿区\n可进攻\n难度 ★☆☆☆☆\n地形 开阔地\n隐蔽 4\n\n少量敌方步兵驻守的旧采掘场。\n\n敌情（侦察估算）\n兵力 约 1-5\n敌方步兵班 约 2-4\n装甲攻击 ×1.10 · 车辆机动 ×1.10　|　伏击风险 低\n首占奖励 合金 300　|　占领收益 合金+1/s\n尝试 0 次\n胜利 0 次\n尚未交战",
+                "action": "select-theater",
+                "theaterId": "scrap_mine"
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"select-strategy\"][data-strategy=\"cautious\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "谨慎推进\n无额外消耗\n\n侦察 +30%，防御 +15%，行军与战斗时间 +25%，伏击概率降低，输出略降约 8%。\n\n侦察充分，提前发现敌方反装甲阵地\n防御稳固，承受首轮打击更稳\n伏击概率显著降低\n整体输出下降约 8%\n行军与战斗时间更长",
+                "action": "select-strategy",
+                "strategyId": "cautious"
+              },
+              {
+                "kind": "double_click",
+                "selector": "[data-action=\"launch-battle\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "派遣出击",
+                "action": "launch-battle",
+                "duplicateGuard": true
+              },
+              {
+                "kind": "click",
+                "selector": "#btn-save",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "保存",
+                "action": "save"
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"theater\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "战区",
+                "tab": "theater"
+              },
+              {
+                "kind": "real_reload",
+                "selector": "Page.reload",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "reason": "running_battle",
+                "reloadMethod": "Page.reload",
+                "pageReload": true
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"theater\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "战区",
+                "tab": "theater"
+              },
+              {
+                "kind": "click",
+                "selector": "#btn-save",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "保存",
+                "action": "save"
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"theater\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "战区",
+                "tab": "theater"
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"view-report\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "查看完整战报",
+                "action": "view-report"
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"theater\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "战区",
+                "tab": "theater"
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"return-from-battle\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "跳过返航动画",
+                "action": "return-from-battle",
+                "settlementClose": true
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"overview\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "概览",
+                "tab": "overview"
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"reports\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "战报",
+                "tab": "reports"
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"replay-report\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "只读回放",
+                "action": "replay-report",
+                "reportId": "battle_1248983834_fm_mslmhyfw_s_scrap_mine_cautious"
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"theater\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "战区",
+                "tab": "theater"
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"theater\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "战区",
+                "tab": "theater"
+              },
+              {
+                "kind": "click",
+                "selector": "#btn-save",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "保存",
+                "action": "save"
+              }
+            ],
+            "state": {
+              "saveRevision": 19,
+              "activeBattleSessionId": null,
+              "activeBattle": {
+                "battleSessionId": "battle-session-10-scrap_mine-cb4d0ad00fbb393795c6-1",
+                "replaySourceSessionId": "battle-session-10-scrap_mine-cb4d0ad00fbb393795c6-1",
+                "replayReadOnly": true,
+                "settled": false,
+                "elapsed": 30,
+                "returnElapsed": 0,
+                "presentationTime": 30
+              },
+              "sessionId": "battle-session-10-scrap_mine-cb4d0ad00fbb393795c6-1",
+              "sessionLifecycle": "returned",
+              "sessionHash": "0d59ded1394350f2a4822d378768e26fd7e5f925b6fef169774fb9cc0ff7e7f6",
+              "formalReportId": "battle_1248983834_fm_mslmhyfw_s_scrap_mine_cautious",
+              "formalReportHash": "4015a9bc41fd1ce435b1d2391e0127eab9b388f7b2a5341068e59a40a39f81a7",
+              "ledgerHash": "e3951763a85a09640be79644ba7a483ec50ae1479bd9aa0ec637bf6d7925e3ff",
+              "ledgerCount": 1,
+              "reportCount": 1,
+              "productionSignature": "6ec3a81b08f367ada3f1379ff6040de423132509265649bdd630b2862bac889a",
+              "formations": [
+                {
+                  "id": "fm_mslmhyfw_s",
+                  "status": "idle",
+                  "unitIds": [
+                    "unit_mslmhybn_p"
+                  ]
+                }
+              ],
+              "units": [
+                {
+                  "id": "unit_mslmhybn_p",
+                  "status": "assigned",
+                  "hp": 51
+                }
+              ]
+            },
+            "domTextLength": 2076,
+            "imageSha256": "52872d5868e4d00325e86d11ed482ed4a54b77410ed2e4f4d3cd2e7a9fdb77cb",
+            "screenshot": {
+              "path": "screenshots/stage8-2G-E-A-1/e-a1-08-replay-before-real-reload.png",
+              "sha256": "52872d5868e4d00325e86d11ed482ed4a54b77410ed2e4f4d3cd2e7a9fdb77cb"
+            }
+          },
+          {
+            "frame": 9,
+            "file": "e-a1-09-replay-after-real-reload.png",
+            "semantic": "replay_after_real_reload",
+            "phase": "replay_after_real_reload",
+            "realReload": {
+              "reason": "replay",
+              "method": "Page.reload",
+              "before": {
+                "timeOrigin": 1786269096064.6,
+                "readyState": "complete",
+                "stage": 8,
+                "navigationType": "reload",
+                "navigationStart": 0
+              },
+              "after": {
+                "timeOrigin": 1786269098880.7,
+                "readyState": "complete",
+                "stage": 8,
+                "navigationType": "reload",
+                "navigationStart": 0
+              },
+              "loaderId": "26E1BA1024BB2E46257874511F0F2A93",
+              "timeOriginChanged": true
+            },
+            "reloadPreservedReplay": true,
+            "actionProvenance": [
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"overview\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "概览",
+                "tab": "overview"
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"construction\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "建设",
+                "tab": "construction"
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"build\"][data-building-type=\"barracks\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "批准建设",
+                "action": "build"
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"production\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "生产",
+                "tab": "production"
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"produce\"][data-unit-type=\"infantry\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "加入训练队列",
+                "action": "produce",
+                "ordinal": 1
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"produce\"][data-unit-type=\"infantry\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "生产中",
+                "action": "produce",
+                "ordinal": 2
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"formations\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "编队",
+                "tab": "formations"
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"create-formation\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "新建空编队",
+                "action": "create-formation"
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"add-unit\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "加入",
+                "action": "add-unit",
+                "formationId": "fm_mslmhyfw_s"
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"add-unit\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "加入",
+                "action": "add-unit",
+                "formationId": "fm_mslmhyfw_s"
+              },
+              {
+                "kind": "click",
+                "selector": "#btn-save",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "保存",
+                "action": "save"
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"theater\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "战区",
+                "tab": "theater"
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"select-theater\"][data-theater=\"scrap_mine\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "废弃矿区\n可进攻\n难度 ★☆☆☆☆\n地形 开阔地\n隐蔽 4\n\n少量敌方步兵驻守的旧采掘场。\n\n敌情（侦察估算）\n兵力 约 1-5\n敌方步兵班 约 2-4\n装甲攻击 ×1.10 · 车辆机动 ×1.10　|　伏击风险 低\n首占奖励 合金 300　|　占领收益 合金+1/s\n尝试 0 次\n胜利 0 次\n尚未交战",
+                "action": "select-theater",
+                "theaterId": "scrap_mine"
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"select-strategy\"][data-strategy=\"cautious\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "谨慎推进\n无额外消耗\n\n侦察 +30%，防御 +15%，行军与战斗时间 +25%，伏击概率降低，输出略降约 8%。\n\n侦察充分，提前发现敌方反装甲阵地\n防御稳固，承受首轮打击更稳\n伏击概率显著降低\n整体输出下降约 8%\n行军与战斗时间更长",
+                "action": "select-strategy",
+                "strategyId": "cautious"
+              },
+              {
+                "kind": "double_click",
+                "selector": "[data-action=\"launch-battle\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "派遣出击",
+                "action": "launch-battle",
+                "duplicateGuard": true
+              },
+              {
+                "kind": "click",
+                "selector": "#btn-save",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "保存",
+                "action": "save"
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"theater\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "战区",
+                "tab": "theater"
+              },
+              {
+                "kind": "real_reload",
+                "selector": "Page.reload",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "reason": "running_battle",
+                "reloadMethod": "Page.reload",
+                "pageReload": true
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"theater\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "战区",
+                "tab": "theater"
+              },
+              {
+                "kind": "click",
+                "selector": "#btn-save",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "保存",
+                "action": "save"
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"theater\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "战区",
+                "tab": "theater"
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"view-report\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "查看完整战报",
+                "action": "view-report"
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"theater\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "战区",
+                "tab": "theater"
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"return-from-battle\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "跳过返航动画",
+                "action": "return-from-battle",
+                "settlementClose": true
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"overview\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "概览",
+                "tab": "overview"
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"reports\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "战报",
+                "tab": "reports"
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"replay-report\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "只读回放",
+                "action": "replay-report",
+                "reportId": "battle_1248983834_fm_mslmhyfw_s_scrap_mine_cautious"
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"theater\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "战区",
+                "tab": "theater"
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"theater\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "战区",
+                "tab": "theater"
+              },
+              {
+                "kind": "click",
+                "selector": "#btn-save",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "保存",
+                "action": "save"
+              },
+              {
+                "kind": "real_reload",
+                "selector": "Page.reload",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "reason": "replay",
+                "reloadMethod": "Page.reload",
+                "pageReload": true
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"theater\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "战区",
+                "tab": "theater"
+              }
+            ],
+            "state": {
+              "saveRevision": 21,
+              "activeBattleSessionId": null,
+              "activeBattle": {
+                "battleSessionId": "battle-session-10-scrap_mine-cb4d0ad00fbb393795c6-1",
+                "replaySourceSessionId": "battle-session-10-scrap_mine-cb4d0ad00fbb393795c6-1",
+                "replayReadOnly": true,
+                "settled": false,
+                "elapsed": 30,
+                "returnElapsed": 0,
+                "presentationTime": 30
+              },
+              "sessionId": "battle-session-10-scrap_mine-cb4d0ad00fbb393795c6-1",
+              "sessionLifecycle": "returned",
+              "sessionHash": "0d59ded1394350f2a4822d378768e26fd7e5f925b6fef169774fb9cc0ff7e7f6",
+              "formalReportId": "battle_1248983834_fm_mslmhyfw_s_scrap_mine_cautious",
+              "formalReportHash": "4015a9bc41fd1ce435b1d2391e0127eab9b388f7b2a5341068e59a40a39f81a7",
+              "ledgerHash": "e3951763a85a09640be79644ba7a483ec50ae1479bd9aa0ec637bf6d7925e3ff",
+              "ledgerCount": 1,
+              "reportCount": 1,
+              "productionSignature": "6ec3a81b08f367ada3f1379ff6040de423132509265649bdd630b2862bac889a",
+              "formations": [
+                {
+                  "id": "fm_mslmhyfw_s",
+                  "status": "idle",
+                  "unitIds": [
+                    "unit_mslmhybn_p"
+                  ]
+                }
+              ],
+              "units": [
+                {
+                  "id": "unit_mslmhybn_p",
+                  "status": "assigned",
+                  "hp": 51
+                }
+              ]
+            },
+            "domTextLength": 2156,
+            "imageSha256": "b49cba10575f9ac0840fe8f6b84aa7dd674ee41ad43112a9760ce485c8e2abed",
+            "screenshot": {
+              "path": "screenshots/stage8-2G-E-A-1/e-a1-09-replay-after-real-reload.png",
+              "sha256": "b49cba10575f9ac0840fe8f6b84aa7dd674ee41ad43112a9760ce485c8e2abed"
+            }
+          },
+          {
+            "frame": 10,
+            "file": "e-a1-10-replay-finished-base.png",
+            "semantic": "replay_finished_base",
+            "phase": "replay_finished_base",
+            "replayClosedByUi": true,
+            "actionProvenance": [
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"overview\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "概览",
+                "tab": "overview"
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"construction\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "建设",
+                "tab": "construction"
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"build\"][data-building-type=\"barracks\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "批准建设",
+                "action": "build"
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"production\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "生产",
+                "tab": "production"
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"produce\"][data-unit-type=\"infantry\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "加入训练队列",
+                "action": "produce",
+                "ordinal": 1
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"produce\"][data-unit-type=\"infantry\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "生产中",
+                "action": "produce",
+                "ordinal": 2
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"formations\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "编队",
+                "tab": "formations"
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"create-formation\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "新建空编队",
+                "action": "create-formation"
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"add-unit\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "加入",
+                "action": "add-unit",
+                "formationId": "fm_mslmhyfw_s"
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"add-unit\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "加入",
+                "action": "add-unit",
+                "formationId": "fm_mslmhyfw_s"
+              },
+              {
+                "kind": "click",
+                "selector": "#btn-save",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "保存",
+                "action": "save"
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"theater\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "战区",
+                "tab": "theater"
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"select-theater\"][data-theater=\"scrap_mine\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "废弃矿区\n可进攻\n难度 ★☆☆☆☆\n地形 开阔地\n隐蔽 4\n\n少量敌方步兵驻守的旧采掘场。\n\n敌情（侦察估算）\n兵力 约 1-5\n敌方步兵班 约 2-4\n装甲攻击 ×1.10 · 车辆机动 ×1.10　|　伏击风险 低\n首占奖励 合金 300　|　占领收益 合金+1/s\n尝试 0 次\n胜利 0 次\n尚未交战",
+                "action": "select-theater",
+                "theaterId": "scrap_mine"
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"select-strategy\"][data-strategy=\"cautious\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "谨慎推进\n无额外消耗\n\n侦察 +30%，防御 +15%，行军与战斗时间 +25%，伏击概率降低，输出略降约 8%。\n\n侦察充分，提前发现敌方反装甲阵地\n防御稳固，承受首轮打击更稳\n伏击概率显著降低\n整体输出下降约 8%\n行军与战斗时间更长",
+                "action": "select-strategy",
+                "strategyId": "cautious"
+              },
+              {
+                "kind": "double_click",
+                "selector": "[data-action=\"launch-battle\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "派遣出击",
+                "action": "launch-battle",
+                "duplicateGuard": true
+              },
+              {
+                "kind": "click",
+                "selector": "#btn-save",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "保存",
+                "action": "save"
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"theater\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "战区",
+                "tab": "theater"
+              },
+              {
+                "kind": "real_reload",
+                "selector": "Page.reload",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "reason": "running_battle",
+                "reloadMethod": "Page.reload",
+                "pageReload": true
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"theater\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "战区",
+                "tab": "theater"
+              },
+              {
+                "kind": "click",
+                "selector": "#btn-save",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "保存",
+                "action": "save"
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"theater\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "战区",
+                "tab": "theater"
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"view-report\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "查看完整战报",
+                "action": "view-report"
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"theater\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "战区",
+                "tab": "theater"
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"return-from-battle\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "跳过返航动画",
+                "action": "return-from-battle",
+                "settlementClose": true
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"overview\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "概览",
+                "tab": "overview"
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"reports\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "战报",
+                "tab": "reports"
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"replay-report\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "只读回放",
+                "action": "replay-report",
+                "reportId": "battle_1248983834_fm_mslmhyfw_s_scrap_mine_cautious"
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"theater\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "战区",
+                "tab": "theater"
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"theater\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "战区",
+                "tab": "theater"
+              },
+              {
+                "kind": "click",
+                "selector": "#btn-save",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "保存",
+                "action": "save"
+              },
+              {
+                "kind": "real_reload",
+                "selector": "Page.reload",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "reason": "replay",
+                "reloadMethod": "Page.reload",
+                "pageReload": true
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"theater\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "战区",
+                "tab": "theater"
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"theater\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "战区",
+                "tab": "theater"
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"return-from-battle\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "跳过返航动画",
+                "action": "return-from-battle",
+                "replayClose": true
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"overview\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "概览",
+                "tab": "overview"
+              }
+            ],
+            "state": {
+              "saveRevision": 21,
+              "activeBattleSessionId": null,
+              "activeBattle": null,
+              "sessionId": "battle-session-10-scrap_mine-cb4d0ad00fbb393795c6-1",
+              "sessionLifecycle": "returned",
+              "sessionHash": "0d59ded1394350f2a4822d378768e26fd7e5f925b6fef169774fb9cc0ff7e7f6",
+              "formalReportId": "battle_1248983834_fm_mslmhyfw_s_scrap_mine_cautious",
+              "formalReportHash": "4015a9bc41fd1ce435b1d2391e0127eab9b388f7b2a5341068e59a40a39f81a7",
+              "ledgerHash": "e3951763a85a09640be79644ba7a483ec50ae1479bd9aa0ec637bf6d7925e3ff",
+              "ledgerCount": 1,
+              "reportCount": 1,
+              "productionSignature": "6ec3a81b08f367ada3f1379ff6040de423132509265649bdd630b2862bac889a",
+              "formations": [
+                {
+                  "id": "fm_mslmhyfw_s",
+                  "status": "idle",
+                  "unitIds": [
+                    "unit_mslmhybn_p"
+                  ]
+                }
+              ],
+              "units": [
+                {
+                  "id": "unit_mslmhybn_p",
+                  "status": "assigned",
+                  "hp": 51
+                }
+              ]
+            },
+            "domTextLength": 1877,
+            "imageSha256": "5084678ffb668bb858e9e5218edfe30d6a0ae9bb85a5e5adf9a94de98e3b6fc4",
+            "screenshot": {
+              "path": "screenshots/stage8-2G-E-A-1/e-a1-10-replay-finished-base.png",
+              "sha256": "5084678ffb668bb858e9e5218edfe30d6a0ae9bb85a5e5adf9a94de98e3b6fc4"
+            }
+          },
+          {
+            "frame": 11,
+            "file": "e-a1-11-save-diff-summary.png",
+            "semantic": "save_diff_summary",
+            "phase": "save_diff_summary",
+            "saveDiffSummary": {
+              "beforeHash": "b1c69e6532d8aca4b4bc551bde092acfe58b6f9a19926b7e68456795508fb265",
+              "afterHash": "bd669827fed8e1880696b57a3e818ee7523ab0243fefea6a3081421e441f4542",
+              "changedPathCount": 47,
+              "ledgerCount": 1,
+              "reportCount": 1,
+              "unrelatedPreservationDeferredToIndependentVerifier": true
+            },
+            "actionProvenance": [
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"overview\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "概览",
+                "tab": "overview"
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"construction\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "建设",
+                "tab": "construction"
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"build\"][data-building-type=\"barracks\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "批准建设",
+                "action": "build"
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"production\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "生产",
+                "tab": "production"
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"produce\"][data-unit-type=\"infantry\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "加入训练队列",
+                "action": "produce",
+                "ordinal": 1
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"produce\"][data-unit-type=\"infantry\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "生产中",
+                "action": "produce",
+                "ordinal": 2
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"formations\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "编队",
+                "tab": "formations"
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"create-formation\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "新建空编队",
+                "action": "create-formation"
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"add-unit\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "加入",
+                "action": "add-unit",
+                "formationId": "fm_mslmhyfw_s"
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"add-unit\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "加入",
+                "action": "add-unit",
+                "formationId": "fm_mslmhyfw_s"
+              },
+              {
+                "kind": "click",
+                "selector": "#btn-save",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "保存",
+                "action": "save"
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"theater\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "战区",
+                "tab": "theater"
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"select-theater\"][data-theater=\"scrap_mine\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "废弃矿区\n可进攻\n难度 ★☆☆☆☆\n地形 开阔地\n隐蔽 4\n\n少量敌方步兵驻守的旧采掘场。\n\n敌情（侦察估算）\n兵力 约 1-5\n敌方步兵班 约 2-4\n装甲攻击 ×1.10 · 车辆机动 ×1.10　|　伏击风险 低\n首占奖励 合金 300　|　占领收益 合金+1/s\n尝试 0 次\n胜利 0 次\n尚未交战",
+                "action": "select-theater",
+                "theaterId": "scrap_mine"
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"select-strategy\"][data-strategy=\"cautious\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "谨慎推进\n无额外消耗\n\n侦察 +30%，防御 +15%，行军与战斗时间 +25%，伏击概率降低，输出略降约 8%。\n\n侦察充分，提前发现敌方反装甲阵地\n防御稳固，承受首轮打击更稳\n伏击概率显著降低\n整体输出下降约 8%\n行军与战斗时间更长",
+                "action": "select-strategy",
+                "strategyId": "cautious"
+              },
+              {
+                "kind": "double_click",
+                "selector": "[data-action=\"launch-battle\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "派遣出击",
+                "action": "launch-battle",
+                "duplicateGuard": true
+              },
+              {
+                "kind": "click",
+                "selector": "#btn-save",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "保存",
+                "action": "save"
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"theater\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "战区",
+                "tab": "theater"
+              },
+              {
+                "kind": "real_reload",
+                "selector": "Page.reload",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "reason": "running_battle",
+                "reloadMethod": "Page.reload",
+                "pageReload": true
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"theater\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "战区",
+                "tab": "theater"
+              },
+              {
+                "kind": "click",
+                "selector": "#btn-save",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "保存",
+                "action": "save"
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"theater\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "战区",
+                "tab": "theater"
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"view-report\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "查看完整战报",
+                "action": "view-report"
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"theater\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "战区",
+                "tab": "theater"
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"return-from-battle\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "跳过返航动画",
+                "action": "return-from-battle",
+                "settlementClose": true
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"overview\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "概览",
+                "tab": "overview"
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"reports\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "战报",
+                "tab": "reports"
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"replay-report\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "只读回放",
+                "action": "replay-report",
+                "reportId": "battle_1248983834_fm_mslmhyfw_s_scrap_mine_cautious"
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"theater\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "战区",
+                "tab": "theater"
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"theater\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "战区",
+                "tab": "theater"
+              },
+              {
+                "kind": "click",
+                "selector": "#btn-save",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "保存",
+                "action": "save"
+              },
+              {
+                "kind": "real_reload",
+                "selector": "Page.reload",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "reason": "replay",
+                "reloadMethod": "Page.reload",
+                "pageReload": true
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"theater\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "战区",
+                "tab": "theater"
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"theater\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "战区",
+                "tab": "theater"
+              },
+              {
+                "kind": "click",
+                "selector": "[data-action=\"return-from-battle\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "跳过返航动画",
+                "action": "return-from-battle",
+                "replayClose": true
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"overview\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "概览",
+                "tab": "overview"
+              },
+              {
+                "kind": "click",
+                "selector": "button[data-tab=\"reports\"]",
+                "source": "production_ui",
+                "syntheticApiCall": false,
+                "label": "战报",
+                "tab": "reports"
+              }
+            ],
+            "state": {
+              "saveRevision": 21,
+              "activeBattleSessionId": null,
+              "activeBattle": null,
+              "sessionId": "battle-session-10-scrap_mine-cb4d0ad00fbb393795c6-1",
+              "sessionLifecycle": "returned",
+              "sessionHash": "0d59ded1394350f2a4822d378768e26fd7e5f925b6fef169774fb9cc0ff7e7f6",
+              "formalReportId": "battle_1248983834_fm_mslmhyfw_s_scrap_mine_cautious",
+              "formalReportHash": "4015a9bc41fd1ce435b1d2391e0127eab9b388f7b2a5341068e59a40a39f81a7",
+              "ledgerHash": "e3951763a85a09640be79644ba7a483ec50ae1479bd9aa0ec637bf6d7925e3ff",
+              "ledgerCount": 1,
+              "reportCount": 1,
+              "productionSignature": "6ec3a81b08f367ada3f1379ff6040de423132509265649bdd630b2862bac889a",
+              "formations": [
+                {
+                  "id": "fm_mslmhyfw_s",
+                  "status": "idle",
+                  "unitIds": [
+                    "unit_mslmhybn_p"
+                  ]
+                }
+              ],
+              "units": [
+                {
+                  "id": "unit_mslmhybn_p",
+                  "status": "assigned",
+                  "hp": 51
+                }
+              ]
+            },
+            "domTextLength": 2906,
+            "imageSha256": "0bc6c2460112df9d12f90d0152eb4b17053e1e8c03207b3e499511b74fc35604",
+            "screenshot": {
+              "path": "screenshots/stage8-2G-E-A-1/e-a1-11-save-diff-summary.png",
+              "sha256": "0bc6c2460112df9d12f90d0152eb4b17053e1e8c03207b3e499511b74fc35604"
+            }
+          }
+        ]
+      }
+    ],
+    "saveDiffSummary": {
+      "beforeHash": "b1c69e6532d8aca4b4bc551bde092acfe58b6f9a19926b7e68456795508fb265",
+      "afterHash": "bd669827fed8e1880696b57a3e818ee7523ab0243fefea6a3081421e441f4542",
+      "changedPathCount": 47,
+      "changedPaths": [
+        "activeBattle.elapsed",
+        "activeBattle.playing",
+        "activeBattle.presentationPhase",
+        "activeBattle.productionSession.lifecycle",
+        "activeBattle.productionSession.presentationState.elapsed",
+        "activeBattle.productionSession.presentationState.phase",
+        "activeBattle.productionSession.presentationTime",
+        "activeBattle.productionSession.settledAtGameTime",
+        "activeBattle.productionSession.settlementLocked",
+        "activeBattle.productionSession.settlementReceipt",
+        "activeBattle.productionSession.settlementState.locked",
+        "activeBattle.productionSession.settlementState.status",
+        "activeBattle.productionSession.settlementStatus",
+        "activeBattle.settled",
+        "activeBattle.settlementAttempted",
+        "activeBattle.settlementReceipt",
+        "battleSessions.battle-session-10-scrap_mine-cb4d0ad00fbb393795c6-1.lifecycle",
+        "battleSessions.battle-session-10-scrap_mine-cb4d0ad00fbb393795c6-1.presentationState.elapsed",
+        "battleSessions.battle-session-10-scrap_mine-cb4d0ad00fbb393795c6-1.presentationState.phase",
+        "battleSessions.battle-session-10-scrap_mine-cb4d0ad00fbb393795c6-1.presentationTime",
+        "battleSessions.battle-session-10-scrap_mine-cb4d0ad00fbb393795c6-1.settledAtGameTime",
+        "battleSessions.battle-session-10-scrap_mine-cb4d0ad00fbb393795c6-1.settlementLocked",
+        "battleSessions.battle-session-10-scrap_mine-cb4d0ad00fbb393795c6-1.settlementReceipt",
+        "battleSessions.battle-session-10-scrap_mine-cb4d0ad00fbb393795c6-1.settlementState.locked",
+        "battleSessions.battle-session-10-scrap_mine-cb4d0ad00fbb393795c6-1.settlementState.status",
+        "battleSessions.battle-session-10-scrap_mine-cb4d0ad00fbb393795c6-1.settlementStatus",
+        "battleSettlementLedger.settlement-89d09a66d75fdefedb858eb2368b711445d2d1c0bd9edbf843612aabbff22921",
+        "battles[id=battle_1248983834_fm_mslmhyfw_s_scrap_mine_cautious]",
+        "battles[*order]",
+        "command.used",
+        "formations[id=fm_mslmhyfw_s].battles",
+        "formations[id=fm_mslmhyfw_s].experience",
+        "formations[id=fm_mslmhyfw_s].status",
+        "formations[id=fm_mslmhyfw_s].unitIds[0]",
+        "formations[id=fm_mslmhyfw_s].unitIds[1]",
+        "log[id=log_mslmi006_8]",
+        "log[*order]",
+        "saveRevision",
+        "stats.battlesFought",
+        "theaters.scrap_mine.lastBattleId",
+        "theaters.scrap_mine.lastResult",
+        "units[id=unit_mslmhwe7_m]",
+        "units[id=unit_mslmhybn_p].battles",
+        "units[id=unit_mslmhybn_p].damage",
+        "units[id=unit_mslmhybn_p].experience",
+        "units[id=unit_mslmhybn_p].hp",
+        "units[*order]"
+      ]
+    },
+    "passed": true
+  }
+}

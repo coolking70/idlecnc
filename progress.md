@@ -587,3 +587,18 @@
 - [x] 已提交并推送 `agent/stage8-2G-E-A-production-loop-integration`，commit `1360697`；Draft PR #8 以 `agent/stage8-2G-D-C-1-strong-evidence-performance` 为 base，head/base 正确且 mergeable。
 - [x] GitHub Actions `core-regression` 推送运行 `31296262436` 与 PR 运行 `31296272892` 均 SUCCESS；后者完整执行 D-C、D-C.1 与 E-A，耗时 `13m42s`。
 - [ ] 独立审计方后续仍需按 E-A 最终 ZIP 重新验收；本轮没有独立审计 JSON，E-A evidence JSON 只作运行证据，不作为生产资源。
+
+# Stage 8.2G-E-A.1 progress
+
+- [x] 以 E-A commit `58cb6c97fd2000fd6c7c7bb11a8e54e053c0ebac` 为基线；上一轮 independent-audit JSON 未在本地发现，未导入生产代码，失败样本未删除或过滤。
+- [x] Replay 改为独立 read-only context：保留 source session/report/settlement binding，`activeBattleSessionId=null`，不复用或写入 canonical `ProductionBattleSession`。
+- [x] Replay reload 迁移恢复后保持 canonical session hash、formal report hash、ledger hash 不变；formation 回到 idle，参与单位保持结算后的正式状态，Replay 不可 settlement。
+- [x] 报告详情 render signature 增加 active battle/settlement 状态；正式返航后同一战报的“只读回放”按钮会真实重绘并启用，修复实际 UI 路径 stale disabled 问题。
+- [x] 新增递归 save-diff：覆盖 object/array/identified-array/order/primitive，显式 ignored path 只有 `savedAt`；allowed paths 动态来自 Formal Settlement Plan，unexpected paths 不得硬编码归零。
+- [x] 独立 strong verifier 重跑生产战斗、正式结算、Replay、真实 save diff 与 unrelated building/unit/research/theater preservation；不信任 evidence `passed` 字段。
+- [x] 扩展 tamper：模型 24/24 拒绝，伪造 UI provenance、fake reload method/timeOrigin、fake production entry、dispatch/replay API shortcut、PNG hash 后总计 31/31 拒绝。
+- [x] 真实生产 UI 浏览器证据：11/11 唯一 PNG；launch double-click session delta=1；dispatch/replay debug API 均未用于核心动作；running 与 replay 各完成一次真实 `Page.reload`，loaderId 与 `performance.timeOrigin` 均记录，page/console errors 为 0。
+- [x] E-A.1 package scripts、CI workflow（E-A 后 focused/browser）、machine evidence、browser manifest、save-diff/replay/formation/reload/UI/authority/tamper/selfcheck 与 70 项 final report 已加入交付流程。
+- [x] 原 E-A 13/13、E-A.1 focused 5/5、D-C.1 回归、完整 clean `npm test`、clean install、clean package browser rerun、strong/tamper verifier 均通过。
+- [x] 最终 ZIP：`iron-command-stage8-2G-E-A-1-replay-persistence-closure.zip`；最终 SHA、bytes、entries、clean gate 见 ZIP 外 `stage8_2g_ea1_final_package_record.json`，ZIP 不作为 Git 运行资源提交。
+- [ ] 独立审计方仍需按 E-A.1 最终 ZIP 重新验收；本阶段未进入 E-B。

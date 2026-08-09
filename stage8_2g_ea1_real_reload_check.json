@@ -1,0 +1,50 @@
+{
+  "stage": "8.2G-E-A.1",
+  "reloads": [
+    {
+      "reason": "running_battle",
+      "method": "Page.reload",
+      "before": {
+        "timeOrigin": 1786269082174.9,
+        "readyState": "complete",
+        "stage": 8,
+        "navigationType": "navigate",
+        "navigationStart": 0
+      },
+      "after": {
+        "timeOrigin": 1786269096064.6,
+        "readyState": "complete",
+        "stage": 8,
+        "navigationType": "reload",
+        "navigationStart": 0
+      },
+      "loaderId": "1C7E565AC67ACB0015A6EA04DE996E1E",
+      "timeOriginChanged": true
+    },
+    {
+      "reason": "replay",
+      "method": "Page.reload",
+      "before": {
+        "timeOrigin": 1786269096064.6,
+        "readyState": "complete",
+        "stage": 8,
+        "navigationType": "reload",
+        "navigationStart": 0
+      },
+      "after": {
+        "timeOrigin": 1786269098880.7,
+        "readyState": "complete",
+        "stage": 8,
+        "navigationType": "reload",
+        "navigationStart": 0
+      },
+      "loaderId": "26E1BA1024BB2E46257874511F0F2A93",
+      "timeOriginChanged": true
+    }
+  ],
+  "runningReloadPreserved": true,
+  "replayReloadPreserved": true,
+  "loaderIdsCaptured": true,
+  "performanceTimeOriginChanged": true,
+  "passed": true
+}

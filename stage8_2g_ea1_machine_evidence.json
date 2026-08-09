@@ -1,0 +1,84 @@
+{
+  "stage": "8.2G-E-A.1",
+  "version": 1,
+  "generatedBy": "tests/generate-stage8-2G-EA1-machine-evidence.mjs",
+  "productionEntry": true,
+  "fixtureLoaderUsed": false,
+  "debugOverlayUsed": false,
+  "dispatchApiUsed": false,
+  "replayApiUsed": false,
+  "realReloadRequired": true,
+  "frameCount": 11,
+  "frames": [
+    {
+      "frame": 1,
+      "file": "e-a1-01-base-before-battle.png",
+      "semantic": "base_before_battle"
+    },
+    {
+      "frame": 2,
+      "file": "e-a1-02-production-ui-launch-control.png",
+      "semantic": "production_ui_launch_control"
+    },
+    {
+      "frame": 3,
+      "file": "e-a1-03-running-before-real-reload.png",
+      "semantic": "running_before_real_reload"
+    },
+    {
+      "frame": 4,
+      "file": "e-a1-04-running-after-real-reload.png",
+      "semantic": "running_after_real_reload"
+    },
+    {
+      "frame": 5,
+      "file": "e-a1-05-formal-result.png",
+      "semantic": "formal_result"
+    },
+    {
+      "frame": 6,
+      "file": "e-a1-06-base-after-settlement.png",
+      "semantic": "base_after_settlement"
+    },
+    {
+      "frame": 7,
+      "file": "e-a1-07-replay-start.png",
+      "semantic": "replay_start"
+    },
+    {
+      "frame": 8,
+      "file": "e-a1-08-replay-before-real-reload.png",
+      "semantic": "replay_before_real_reload"
+    },
+    {
+      "frame": 9,
+      "file": "e-a1-09-replay-after-real-reload.png",
+      "semantic": "replay_after_real_reload"
+    },
+    {
+      "frame": 10,
+      "file": "e-a1-10-replay-finished-base.png",
+      "semantic": "replay_finished_base"
+    },
+    {
+      "frame": 11,
+      "file": "e-a1-11-save-diff-summary.png",
+      "semantic": "save_diff_summary"
+    }
+  ],
+  "independentProbe": {
+    "passed": true,
+    "checks": {
+      "originalEATestCoverage": true,
+      "productionEntry": true,
+      "settlementSaveDiffRecomputed": true,
+      "unrelatedStatePreserved": true,
+      "replayReadOnlyPersistence": true,
+      "replayCanonicalImmutable": true,
+      "replayFormationRestored": true,
+      "duplicateSettlementBlocked": true,
+      "browserEvidenceRecomputed": true,
+      "noAuthorityScopeExpansion": true
+    }
+  }
+}

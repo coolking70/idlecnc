@@ -126,7 +126,10 @@ function blockSettlementWithoutLog(state, activeBattle, reason) {
 
 function getProductionSession(state, activeBattle) {
   ensureBattleSessionState(state);
-  if (!activeBattle) return null;
+  // Replay is a presentation context, never a writable production session.
+  // Keep this invariant centralized so ticking, return animation, save and UI
+  // callers cannot accidentally mutate the canonical session store.
+  if (!activeBattle || activeBattle.replayReadOnly === true) return null;
   if (activeBattle.battleSessionId && state.battleSessions[activeBattle.battleSessionId]) {
     return state.battleSessions[activeBattle.battleSessionId];
   }
@@ -140,6 +143,7 @@ function getProductionSession(state, activeBattle) {
 }
 
 function syncProductionSession(state, activeBattle, updates = {}) {
+  if (activeBattle?.replayReadOnly === true) return null;
   const session = getProductionSession(state, activeBattle);
   if (!session) return null;
   Object.assign(session, updates);
@@ -814,13 +818,6 @@ export function replayBattleSession(state, battleSessionId) {
   const binding = validateSessionBinding(source, { report, deploymentSnapshot: source.deploymentSnapshot });
   if (!binding.ok) return fail(THEATER_CODE.REPORT_INVALID, binding.problems.join('；'));
 
-  const replaySession = {
-    ...cloneJson(source),
-    lifecycle: SESSION_LIFECYCLE.REPLAY,
-    replayReadOnly: true,
-    settlementLocked: true,
-    presentationTime: 0
-  };
   const theater = THEATERS[report.theaterId];
   const replay = {
     id: `replay-${source.battleSessionId}`,
@@ -859,12 +856,23 @@ export function replayBattleSession(state, battleSessionId) {
     formalReportHash: source.formalReportHash,
     sourceReportHash: source.sourceReportHash,
     settlementId: source.settlementId,
-    productionSession: replaySession,
     replayReadOnly: true,
-    settlementAllowed: false
+    settlementAllowed: false,
+    replaySourceSessionId: source.battleSessionId,
+    replayContext: {
+      mode: 'replay',
+      sourceBattleSessionId: source.battleSessionId,
+      sourceFormalReportId: source.formalReportId,
+      sourceFormalReportHash: source.formalReportHash,
+      settlementId: source.settlementId,
+      presentationTime: 0,
+      returnElapsed: 0,
+      readOnly: true
+    }
   };
   state.activeBattle = replay;
-  state.activeBattleSessionId = source.battleSessionId;
+  // activeBattleSessionId denotes a real production deployment only.
+  state.activeBattleSessionId = null;
   return pass(THEATER_CODE.OK, { activeBattle: replay, replay: true, readOnly: true });
 }
 
@@ -885,8 +893,13 @@ export function tickActiveBattle(state, dt) {
       ab.settled = true;
       ab.presentationPhase = 'returning';
       ab.returnElapsed = 0;
+      if (ab.replayContext) {
+        ab.replayContext.presentationTime = ab.elapsed;
+        ab.replayContext.returnElapsed = 0;
+      }
       syncProductionSession(state, ab, { lifecycle: SESSION_LIFECYCLE.REPLAY, presentationTime: ab.elapsed });
     }
+    if (ab.replayContext) ab.replayContext.presentationTime = ab.elapsed;
     syncProductionSession(state, ab, { presentationTime: ab.elapsed });
     return pass(THEATER_CODE.OK, { activeBattle: ab, replay: true, settlementLocked: true });
   }
@@ -916,6 +929,10 @@ export function tickBattleReturn(state, dt) {
   ab.presentationPhase = 'returning';
   ab.returnDuration = duration;
   ab.returnElapsed = clamp(safeNumber(ab.returnElapsed, 0) + Math.max(0, safeNumber(dt, 0)), 0, duration);
+  if (ab.replayReadOnly === true && ab.replayContext) {
+    ab.replayContext.presentationTime = safeNumber(ab.elapsed, 0);
+    ab.replayContext.returnElapsed = ab.returnElapsed;
+  }
   syncProductionSession(state, ab, {
     lifecycle: ab.replayReadOnly ? SESSION_LIFECYCLE.REPLAY : SESSION_LIFECYCLE.SETTLED,
     presentationTime: safeNumber(ab.elapsed, 0)
@@ -1698,9 +1715,86 @@ export function sanitizeBattles(state) {
   return { repaired: notes.length > 0, notes };
 }
 
+function sanitizeReplayActiveBattle(state, ab, notes) {
+  const context = isObject(ab.replayContext) ? ab.replayContext : {};
+  const sourceId = context.sourceBattleSessionId || ab.replaySourceSessionId || ab.battleSessionId;
+  const source = sourceId && state.battleSessions[sourceId];
+  const reportId = context.sourceFormalReportId || source?.formalReportId || ab.report?.id;
+  const report = (state.battles || []).find((row) => row && row.id === reportId);
+  const ledger = source?.settlementId ? state.battleSettlementLedger[source.settlementId] : null;
+  const failReplay = (reason) => {
+    state.activeBattle = null;
+    state.activeBattleSessionId = null;
+    notes.push(`丢弃了无效的只读回放（${reason}）。`);
+    return { repaired: true, notes, activeFormationId: null };
+  };
+
+  if (!source || source.sessionOrigin !== SESSION_ORIGIN.PRODUCTION) return failReplay('正式会话不存在');
+  if (!report) return failReplay('正式战报不存在');
+  const ledgerCheck = validateSettlementLedger(ledger, source);
+  if (!ledgerCheck.ok) return failReplay(ledgerCheck.problems.join('；'));
+  const binding = validateSessionBinding(source, { report, deploymentSnapshot: source.deploymentSnapshot });
+  if (!binding.ok) return failReplay(binding.problems.join('；'));
+
+  const formation = findFormation(state, ab.formationId || report.formationId);
+  // Repair only the known legacy Replay contamination. A normal production
+  // battle still receives the active formation handoff below this helper.
+  if (formation) {
+    if (formation.status !== FORMATION_STATUS.IDLE || formation.theaterId || formation.strategy) {
+      formation.status = FORMATION_STATUS.IDLE;
+      formation.theaterId = null;
+      formation.strategy = null;
+      notes.push('只读回放未占用正式编队，已清理历史战斗态。');
+    }
+    (formation.unitIds || []).forEach((uid) => {
+      const unit = findUnit(state, uid);
+      if (unit && unit.formationId === formation.id && (unit.status === 'deployed' || unit.status === 'assigned')) {
+        unit.status = 'assigned';
+      }
+    });
+  }
+
+  const duration = Math.max(1, safeNumber(report.duration, BATTLE.baseDuration));
+  const replayTime = clamp(safeNumber(context.presentationTime, ab.elapsed), 0, duration);
+  ab.replayReadOnly = true;
+  ab.settlementAllowed = false;
+  ab.sessionOrigin = SESSION_ORIGIN.PRODUCTION;
+  ab.battleSessionId = source.battleSessionId;
+  ab.replaySourceSessionId = source.battleSessionId;
+  ab.sourceSaveRevision = source.sourceSaveRevision;
+  ab.deploymentSnapshotId = source.deploymentSnapshotId;
+  ab.deploymentHash = source.deploymentHash;
+  ab.formalReportHash = source.formalReportHash;
+  ab.sourceReportHash = source.sourceReportHash;
+  ab.settlementId = source.settlementId;
+  ab.report = cloneJson(report);
+  ab.dispatchSnapshot = cloneJson(source.deploymentSnapshot) || {};
+  ab.duration = duration;
+  ab.elapsed = replayTime;
+  ab.settled = replayTime >= duration;
+  ab.playing = !ab.settled;
+  ab.presentationPhase = ab.settled ? 'returning' : 'battle';
+  ab.returnDuration = Math.max(0.1, safeNumber(ab.returnDuration, 5));
+  ab.returnElapsed = clamp(safeNumber(context.returnElapsed, ab.returnElapsed), 0, ab.returnDuration);
+  delete ab.productionSession;
+  ab.replayContext = {
+    mode: 'replay',
+    sourceBattleSessionId: source.battleSessionId,
+    sourceFormalReportId: source.formalReportId,
+    sourceFormalReportHash: source.formalReportHash,
+    settlementId: source.settlementId,
+    presentationTime: replayTime,
+    returnElapsed: ab.returnElapsed,
+    readOnly: true
+  };
+  state.activeBattleSessionId = null;
+  return { repaired: notes.length > 0, notes, activeFormationId: null };
+}
+
 /**
- * 活动战斗容错。必须在 sanitizeFormations 之前调用，
- * 以便把 activeFormationId 传给编队容错，避免编队被复位。
+ * 活动战斗容错。必须在 sanitizeFormations 之前调用。
+ * Replay 是独立的 presentation context，不向 sanitizeFormations 透传
+ * activeFormationId；正式活动战斗才会恢复 fighting/deployed。
  * @returns {{repaired:boolean, notes:string[], activeFormationId:string|null}}
  */
 export function sanitizeActiveBattle(state) {
@@ -1733,6 +1827,9 @@ export function sanitizeActiveBattle(state) {
   };
 
   if (!isObject(ab)) return drop('数据结构损坏');
+  if (ab.replayReadOnly === true || isObject(ab.replayContext)) {
+    return sanitizeReplayActiveBattle(state, ab, notes);
+  }
   if (!THEATERS[ab.theaterId]) return drop('战区不存在');
   if (!STRATEGIES[ab.strategyId]) return drop('策略不存在');
 

@@ -1,0 +1,197 @@
+{
+  "stage": "8.2G-E-A.1",
+  "verifier": "independent replay/save-diff/UI/reload recomputation",
+  "checks": {
+    "originalEATestCoverage": true,
+    "productionEntry": true,
+    "settlementSaveDiffRecomputed": true,
+    "unrelatedStatePreserved": true,
+    "replayReadOnlyPersistence": true,
+    "replayCanonicalImmutable": true,
+    "replayFormationRestored": true,
+    "duplicateSettlementBlocked": true,
+    "browserEvidenceRecomputed": true,
+    "noAuthorityScopeExpansion": true
+  },
+  "replay": {
+    "sourceSessionId": "battle-session-0-scrap_mine-68ee15f9ef5a282fe73b-1",
+    "sessionHash": "447d5e0d21d81dbdc68fe09c262d12d9e34d227b765136271680cc0d02fe68d5",
+    "ledgerHash": "21f32b7673aa90c83d52031f694fa0f5f719c29e1824a50f9116e73422e5d7bf",
+    "formalReportId": "battle_82101_fm_mslmi3z0_5v_scrap_mine_cautious",
+    "startInvariant": true,
+    "midInvariant": true,
+    "reloadInvariant": true,
+    "finishInvariant": true,
+    "readonlyStateUnchanged": true,
+    "duplicateSettlementBlocked": true,
+    "passed": true
+  },
+  "settlement": {
+    "beforeHash": "dfed87a27918abe553e46f7efdd6eb319eba2cf623f336db52e7b025cd6526ab",
+    "afterHash": "f2665c30c9a4824dbae8b9d3f52f0632ef7d5eb0b426a63d1ab040566b9dc3a3",
+    "beforeProductionSignature": "f06f2d112a9477fdd7b9fb9d42c1baf8ef944456027bbb91943f0fb88d29fec0",
+    "afterProductionSignature": "40c17a2580c3a4dea994eb8d6fa1b6041cb4ee78d928d1a27de741c67c56c3b1",
+    "changedPaths": [
+      "activeBattle.elapsed",
+      "activeBattle.playing",
+      "activeBattle.presentationPhase",
+      "activeBattle.productionSession.lifecycle",
+      "activeBattle.productionSession.presentationState.elapsed",
+      "activeBattle.productionSession.presentationState.phase",
+      "activeBattle.productionSession.presentationTime",
+      "activeBattle.productionSession.settledAtGameTime",
+      "activeBattle.productionSession.settlementLocked",
+      "activeBattle.productionSession.settlementReceipt",
+      "activeBattle.productionSession.settlementState.locked",
+      "activeBattle.productionSession.settlementState.status",
+      "activeBattle.productionSession.settlementStatus",
+      "activeBattle.settled",
+      "activeBattle.settlementAttempted",
+      "activeBattle.settlementReceipt",
+      "battleSessions.battle-session-0-scrap_mine-48f294c746aa1c88c54a-1.lifecycle",
+      "battleSessions.battle-session-0-scrap_mine-48f294c746aa1c88c54a-1.presentationState.elapsed",
+      "battleSessions.battle-session-0-scrap_mine-48f294c746aa1c88c54a-1.presentationState.phase",
+      "battleSessions.battle-session-0-scrap_mine-48f294c746aa1c88c54a-1.presentationTime",
+      "battleSessions.battle-session-0-scrap_mine-48f294c746aa1c88c54a-1.settledAtGameTime",
+      "battleSessions.battle-session-0-scrap_mine-48f294c746aa1c88c54a-1.settlementLocked",
+      "battleSessions.battle-session-0-scrap_mine-48f294c746aa1c88c54a-1.settlementReceipt",
+      "battleSessions.battle-session-0-scrap_mine-48f294c746aa1c88c54a-1.settlementState.locked",
+      "battleSessions.battle-session-0-scrap_mine-48f294c746aa1c88c54a-1.settlementState.status",
+      "battleSessions.battle-session-0-scrap_mine-48f294c746aa1c88c54a-1.settlementStatus",
+      "battleSettlementLedger.settlement-95764e82ef56aeee245104deb7fe28c49b7423f1b869777f8ae644f048dcce42",
+      "battles[id=battle_82101_fm_mslmi3y4_5g_scrap_mine_cautious]",
+      "battles[*order]",
+      "command.used",
+      "formations[id=fm_mslmi3y4_5g].battles",
+      "formations[id=fm_mslmi3y4_5g].experience",
+      "formations[id=fm_mslmi3y4_5g].status",
+      "formations[id=fm_mslmi3y4_5g].unitIds[3]",
+      "log[id=log_mslmi3y7_5n]",
+      "log[*order]",
+      "power.used",
+      "rates.supply",
+      "stats.battlesFought",
+      "theaters.scrap_mine.lastBattleId",
+      "theaters.scrap_mine.lastResult",
+      "units[id=ea1-strong-unit-0].battles",
+      "units[id=ea1-strong-unit-0].experience",
+      "units[id=ea1-strong-unit-1].battles",
+      "units[id=ea1-strong-unit-1].damage",
+      "units[id=ea1-strong-unit-1].experience",
+      "units[id=ea1-strong-unit-1].hp",
+      "units[id=ea1-strong-unit-2].battles",
+      "units[id=ea1-strong-unit-2].experience",
+      "units[id=ea1-strong-unit-3]",
+      "units[*order]"
+    ],
+    "allowedChangedPaths": [
+      "savedAt",
+      "saveRevision",
+      "activeBattle.**",
+      "activeBattleSessionId",
+      "log[**]",
+      "command.used",
+      "command.capacity",
+      "power.used",
+      "rates.supply",
+      "units[id=ea1-strong-unit-0]",
+      "units[id=ea1-strong-unit-0].**",
+      "units[id=ea1-strong-unit-1]",
+      "units[id=ea1-strong-unit-1].**",
+      "units[id=ea1-strong-unit-2]",
+      "units[id=ea1-strong-unit-2].**",
+      "units[id=ea1-strong-unit-3]",
+      "units[id=ea1-strong-unit-3].**",
+      "formations[id=fm_mslmi3y4_5g].**",
+      "theaters.scrap_mine.**",
+      "stats.battlesFought",
+      "stats.victories",
+      "battles[id=battle_82101_fm_mslmi3y4_5g_scrap_mine_cautious]",
+      "battles[*order]",
+      "battleSettlementLedger.settlement-95764e82ef56aeee245104deb7fe28c49b7423f1b869777f8ae644f048dcce42",
+      "battleSettlementLedger.settlement-95764e82ef56aeee245104deb7fe28c49b7423f1b869777f8ae644f048dcce42.**",
+      "battleSessions.battle-session-0-scrap_mine-48f294c746aa1c88c54a-1.**",
+      "formations[*order]",
+      "units[*order]"
+    ],
+    "unexpectedChangedPaths": [],
+    "ignoredSaveDiffPaths": [
+      "savedAt"
+    ],
+    "formalPlanProblems": [],
+    "unrelatedStatePreserved": true,
+    "passed": true,
+    "tamperCases": [
+      {
+        "case": "unrelated_building_mutation",
+        "rejected": true,
+        "recomputedPassed": false,
+        "unexpectedChangedPaths": [
+          "buildings[id=bld_mslmi3y4_59].level"
+        ]
+      },
+      {
+        "case": "unrelated_unit_mutation",
+        "rejected": true,
+        "recomputedPassed": false,
+        "unexpectedChangedPaths": [
+          "units[id=ea1-strong-unrelated-unit].hp"
+        ]
+      },
+      {
+        "case": "unrelated_research_mutation",
+        "rejected": true,
+        "recomputedPassed": false,
+        "unexpectedChangedPaths": [
+          "research.current.elapsed"
+        ]
+      },
+      {
+        "case": "unrelated_theater_mutation",
+        "rejected": true,
+        "recomputedPassed": false,
+        "unexpectedChangedPaths": [
+          "theaters.border_road.captured"
+        ]
+      },
+      {
+        "case": "fake_save_diff_passed",
+        "rejected": true,
+        "recomputedPassed": false,
+        "unexpectedChangedPaths": [
+          "buildings[id=bld_mslmi3y4_59].level"
+        ]
+      },
+      {
+        "case": "fake_save_diff_allowed_path",
+        "rejected": true,
+        "recomputedPassed": false,
+        "unexpectedChangedPaths": [
+          "buildings[id=bld_mslmi3y4_59].level"
+        ]
+      },
+      {
+        "case": "primitive_unexpected_mutation",
+        "rejected": true,
+        "recomputedPassed": false,
+        "unexpectedChangedPaths": [
+          "resources.intel"
+        ]
+      },
+      {
+        "case": "array_report_insertion_mutation",
+        "rejected": true,
+        "recomputedPassed": false,
+        "unexpectedChangedPaths": [
+          "battles[id=fake-report]"
+        ]
+      }
+    ],
+    "tamperRejectionCount": 8,
+    "unrelatedMutationsRejected": true
+  },
+  "tamperRejectionCount": 24,
+  "screenshots": 11,
+  "errors": [],
+  "passed": true
+}
