@@ -11,6 +11,7 @@ import { OFFLINE_ASSET_MANIFEST } from '../environment/asset-provider.js';
 import { buildActorDrawSpec, buildProductionDrawSpecs } from '../environment/production-visual-draw-spec.js';
 import { normalizeVisualUnitClass } from '../environment/visual-unit-class.js';
 import { actionForActor, isRepairCapableActor } from './presentation-action-attribution.js';
+import { applyPresentationCameraFeedback } from '../effects/presentation-effects-runtime.js';
 
 const clamp = (value, min, max) => Math.max(min, Math.min(max, Number(value) || 0));
 
@@ -176,7 +177,7 @@ function buildEffects(plan, actors, seconds) {
     const source = actorById.get(anchor.actorId)?.visualCenter;
     const target = actorById.get(anchor.targetId)?.visualCenter || source;
     if (!target) continue;
-    const common = { anchorId: anchor.id, source: 'authority_anchor', x: target.x, y: target.y };
+    const common = { anchorId: anchor.id, source: 'authority_anchor', actorId: anchor.actorId || null, targetActorId: anchor.targetId || null, authoritySource: { anchorId: anchor.id || null, type: anchor.type, sourceActorId: anchor.actorId || null, targetActorId: anchor.targetId || null }, x: target.x, y: target.y };
     if (['damage', 'fire', 'ambush', 'suppress'].includes(anchor.type)) {
       if (source && age <= .42) effects.push({ ...common, id: `${anchor.id}:tracer`, kind: anchor.type === 'fire' ? 'cannon' : 'tracer', start: source, end: target, life: .42 - age, maxLife: .42 });
       effects.push({ ...common, id: `${anchor.id}:impact`, kind: 'impact', size: anchor.type === 'suppress' ? 9 : 14, life: 1.05 - age, maxLife: 1.05 });
@@ -191,7 +192,7 @@ function buildEffects(plan, actors, seconds) {
   const outcome = activeOutcomeAction(plan, seconds);
   if (outcome && seconds - Number(outcome.t) <= 1.8) {
     const objective = plan.layout?.zones?.find((zone) => zone.objectiveRole || zone.kind === 'objective')?.center || { x: 950, y: 360 };
-    effects.push({ id: `${outcome.id}:objective`, source: 'outcome_choreography', kind: 'objective_ring', x: objective.x, y: objective.y, size: 38, life: 1.8 - (seconds - Number(outcome.t)), maxLife: 1.8 });
+    effects.push({ id: `${outcome.id}:objective`, source: 'outcome_choreography', sourcePhase: 'outcome', kind: 'objective_ring', x: objective.x, y: objective.y, size: 38, life: 1.8 - (seconds - Number(outcome.t)), maxLife: 1.8, presentationOnly: true });
   }
   return effects.filter((effect) => effect.life > 0);
 }
@@ -259,7 +260,9 @@ export function buildUniversalRenderState(plan, seconds = 0, runtime = {}, preco
     visualShotSchedule,
     engagementSchedule,
     environmentScene: environment,
-    actorState: new Map(actors.map((actor) => [actor.id, actor]))
+    actorState: new Map(actors.map((actor) => [actor.id, actor])),
+    reducedMotion: runtime.reducedMotion === true,
+    returning
   });
   const visualById = new Map(visualScene.actors.map((actor) => [actor.id, actor]));
   const presentationActors = actors.map((actor) => {
@@ -282,7 +285,7 @@ export function buildUniversalRenderState(plan, seconds = 0, runtime = {}, preco
   const activeSuppression = actors.map((actor) => suppressionAtTime(engagementSchedule, actor.id, battleTime)).filter(Boolean);
   const activeRetreats = actors.map((actor) => retreatAtTime(engagementSchedule, actor.id, battleTime)).filter(Boolean).map((item) => ({ ...item, exit: { ...item.exit } }));
   const camera = resolveDirectedCamera(plan, { actors, activeAnchors, effects, time: battleTime, returning }, cameraDirector, { mode: runtime.cameraMode || 'overview', autoCamera: runtime.autoCamera !== false, cameraOverride: runtime.cameraOverride || null });
-  const cameraWithFallback = camera || { x: 640, y: 360, zoom: .86 };
+  const cameraWithFallback = applyPresentationCameraFeedback(camera || { x: 640, y: 360, zoom: .86 }, visualScene.cameraFeedback || {});
   const drawSpecs = buildProductionDrawSpecs({ actors: presentationActors, wrecks, environment: environmentState, camera: cameraWithFallback, options: { manifest: OFFLINE_ASSET_MANIFEST, availableSources: new Set(OFFLINE_ASSET_MANIFEST.assets.map((asset) => asset.source)), battlefieldBounds: plan.layout?.bounds || { width: 1200, height: 700 }, viewport: runtime.viewport, presentationSeconds: battleTime, seed: plan.source?.seed ?? 0 } });
   const actorByDrawSpec = new Map(drawSpecs.actorSpecs.map((spec) => [spec.actorId, spec]));
   // Keep the text/evidence state graph tree-shaped.  Sharing a Draw Spec object
@@ -321,6 +324,12 @@ export function buildUniversalRenderState(plan, seconds = 0, runtime = {}, preco
     formalRepairEvents: cloneTree(visualScene.formalRepairEvents || []),
     visualStage: visualScene.visualStage,
     visualPhase: visualScene.visualPhase,
+    effectRuntime: cloneTree(visualScene.effectRuntime || null),
+    effectInventory: cloneTree(visualScene.effectInventory || null),
+    cameraFeedback: cloneTree(visualScene.cameraFeedback || null),
+    transitions: cloneTree(visualScene.transitions || null),
+    audioCues: cloneTree(visualScene.audioCues || []),
+    determinism: cloneTree(visualScene.determinism || null),
     sceneObjects,
     effects: alignedMuzzle.effects,
     activeAnchors,
@@ -329,7 +338,7 @@ export function buildUniversalRenderState(plan, seconds = 0, runtime = {}, preco
     choreography: { version: engagementSchedule.version, outcome: plan.source?.result, objectiveState: objectiveState(plan, battleTime), activeOutcome: outcomeAction?.type || null, activeEffectCount: effects.length, visualStage: visualScene.visualStage, activeEngagement: activeEngagement ? { ...activeEngagement, attackerIds: [...activeEngagement.attackerIds], defenderIds: [...activeEngagement.defenderIds], authoritativeAnchorIds: [...activeEngagement.authoritativeAnchorIds] } : null, activeAssignments: activeAssignments.map((item) => ({ ...item })), activeSuppression: activeSuppression.map((item) => ({ ...item, sourceIds: [...item.sourceIds], targetIds: [...item.targetIds], area: { ...item.area, center: { ...(item.area?.center || {}) } } })), activeRetreats, targetSwitches: engagementSchedule.targetSwitches.filter((item) => Math.abs(item.time - battleTime) < .8).map((item) => ({ ...item })), limits: { ...engagementSchedule.limits } },
     engagementSchedule: cloneTree(engagementSchedule),
     cameraDirector,
-    camera,
+    camera: cameraWithFallback,
     drawSpecs: stateDrawSpecs,
     finalCompare: { ok: true, errors: [] }
   };
@@ -387,6 +396,12 @@ function buildUniversalTextState(plan, state, options = {}) {
     formalRepairEvents: state.formalRepairEvents || [],
     visualStage: state.visualStage,
     visualPhase: state.visualPhase,
+    effectRuntime: state.effectRuntime || null,
+    effectInventory: state.effectInventory || null,
+    cameraFeedback: state.cameraFeedback || null,
+    transitions: state.transitions || null,
+    audioCues: state.audioCues || [],
+    determinism: state.determinism || null,
     shotSchedule: state.shotSchedule.map((shot) => ({ id: shot.id, source: shot.source || null, presentationOnly: shot.presentationOnly !== false, authorityAnchorId: shot.authorityAnchorId || null, actorId: shot.actorId, targetId: shot.targetId, t: shot.t, impactTime: shot.impactTime, sourcePositionAtFire: shot.sourcePositionAtFire, sourceFacingAtFire: Number.isFinite(shot.sourceFacingAtFire) ? shot.sourceFacingAtFire : 0, targetPositionAtAim: shot.targetPositionAtAim, impactPositionAtImpact: shot.impactPositionAtImpact })),
     projectiles: state.projectiles.map((projectile) => ({ id: projectile.id, shotId: projectile.shotId, kind: projectile.kind, x: Math.round(projectile.x), y: Math.round(projectile.y), start: projectile.start, end: projectile.end, progress: Number(projectile.progress.toFixed(3)) })),
     decals: state.decals.map((decal) => ({ id: decal.id, kind: decal.kind, x: Math.round(decal.x), y: Math.round(decal.y) })),

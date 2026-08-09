@@ -14,6 +14,7 @@ import { OFFLINE_ASSET_MANIFEST } from '../environment/asset-provider.js';
 import { resolveMuzzleAnchor } from '../environment/animation-resolver.js';
 import { resolvePresentationFacingPolicy, resolvePresentationVisualState, resolveWeaponTopology, WEAPON_TOPOLOGY } from '../environment/presentation-facing-policy.js';
 import { actionForActor, isRepairCapableActor, nextActionForActor, repairEventRole } from './presentation-action-attribution.js';
+import { buildPresentationEffects } from '../effects/presentation-effects-runtime.js';
 
 const clamp = (value, min, max) => Math.max(min, Math.min(max, Number(value) || 0));
 const TAU = Math.PI * 2;
@@ -271,12 +272,14 @@ export function buildUniversalVisualScene(plan, seconds, sampler, runtime = {}) 
   // its smoke must remain at the last authoritative position after the actor leaves
   // the live-actor layer.
   const projectiles = schedule.map((shot) => projectileFor(shot, seconds, actors)).filter(Boolean);
-  const effects = visualEffects(plan, actors, schedule, seconds);
   const environment = runtime.environmentScene || buildEnvironmentScene(plan);
   const destruction = buildPersistentDestructionLayer(plan, seconds, { visualShotSchedule: schedule, actors, windVector: environment.windVector });
   const wrecks = [...new Map([...fallbackWrecks, ...destruction.wrecks].map((wreck) => [wreck.id, wreck])).values()];
   const visualPhase = resolveBattlePhase(plan, seconds);
   const actorsById = new Map(actorRows(plan).map((actor) => [actor.actorId, actor]));
   const formalRepairEvents = (plan.timeline?.anchors || []).filter((anchor) => anchor.type === 'repair').map((anchor) => ({ id: anchor.id || null, t: Number(anchor.t), actorId: anchor.actorId || null, targetId: anchor.targetId || null, sourceActorId: anchor.actorId || null, targetActorId: anchor.targetId || null, sourceType: actorsById.get(anchor.actorId)?.type || null, targetType: actorsById.get(anchor.targetId)?.type || null, amount: Number(anchor.value) || 0, value: Number(anchor.value) || 0 }));
-  return { actors, wrecks, projectiles, effects: [...effects.effects, ...destruction.effects], decals: destruction.decals, smoke: destruction.smoke, debris: destruction.debris, destruction: { version: destruction.version, limits: { ...destruction.limits }, signature: destruction.signature, eventCount: schedule.length }, environment, shotSchedule: schedule, formalRepairEvents, visualStage: visualPhase.id, visualPhase, sceneSeed: plan.source?.seed ?? 0, engagementSchedule: runtime.engagementSchedule || null };
+  const effectRuntime = buildPresentationEffects({ plan, actors, shotSchedule: schedule, formalRepairEvents, seconds, sceneSeed: plan.source?.seed ?? 0, reducedMotion: runtime.reducedMotion === true, returning: runtime.returning === true || runtime.presentationPhase === 'returning' });
+  const legacy = visualEffects(plan, actors, schedule, seconds);
+  const effectMap = new Map([...legacy.effects, ...effectRuntime.effects, ...destruction.effects].map((effect) => [effect.id, effect]));
+  return { actors, wrecks, projectiles, effects: [...effectMap.values()], decals: [...destruction.decals, ...legacy.decals].slice(-48), smoke: [...effectRuntime.smoke, ...destruction.smoke].slice(-32), debris: destruction.debris, destruction: { version: destruction.version, limits: { ...destruction.limits }, signature: destruction.signature, eventCount: schedule.length }, environment, shotSchedule: schedule, formalRepairEvents, visualStage: visualPhase.id, visualPhase, sceneSeed: plan.source?.seed ?? 0, engagementSchedule: runtime.engagementSchedule || null, effectRuntime, cameraFeedback: effectRuntime.cameraFeedback, transitions: effectRuntime.transitions, audioCues: effectRuntime.audioCues, effectInventory: effectRuntime.effectInventory, determinism: effectRuntime.determinism };
 }

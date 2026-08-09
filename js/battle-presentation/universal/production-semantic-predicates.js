@@ -15,7 +15,7 @@ function result(id, passed, matchedActorIds = [], matchedShotIds = [], details =
   return { id, passed: Boolean(passed), matchedActorIds: [...new Set(matchedActorIds)].sort(), matchedShotIds: [...new Set(matchedShotIds)].sort(), details };
 }
 
-export const PRODUCTION_SEMANTIC_IDS = Object.freeze(['scout-move', 'scout-fire', 'repair-action', 'support-unarmed', 'cover-advance', 'retreat-rear-guard']);
+export const PRODUCTION_SEMANTIC_IDS = Object.freeze(['scout-move', 'scout-fire', 'repair-action', 'support-unarmed', 'cover-advance', 'retreat-rear-guard', 'infantry-muzzle', 'at-rocket-launch', 'mbt-cannon-fire', 'small-arms-impact', 'rocket-impact', 'tank-impact', 'damaged-smoke', 'unit-destroy', 'wreck-smoke', 'repair-effect', 'battle-intro', 'victory-outro', 'withdraw-outro']);
 
 export function evaluateProductionSemanticPredicate(name, state) {
   const id = lower(name).replace(/_/g, '-');
@@ -30,6 +30,42 @@ export function evaluateProductionSemanticPredicate(name, state) {
     const matched = actors.filter((actor) => actorName(actor).includes('scout') && actor.visualState === 'fire' && actor.firing === true && actor.weaponTopology !== WEAPON_TOPOLOGY.UNARMED && actor.drawSpec?.animation === 'fire');
     const shotIds = shots.filter((shot) => matched.some((actor) => actor.id === shot.actorId)).map((shot) => shot.id);
     return result('scout-fire', matched.length > 0 && shotIds.length > 0, matched.map((actor) => actor.id), shotIds, { state: 'fire', activeShot: shotIds.length > 0 });
+  }
+  const presentationEffects = state?.effects || [];
+  const hasEffect = (predicate) => presentationEffects.filter((effect) => predicate(effect)).filter((effect) => Number(effect.life ?? 1) > 0);
+  const semanticWeapon = (family, stateId) => {
+    const matches = hasEffect((effect) => effect.kind === 'muzzle_flash' && effect.weaponFamily === family);
+    const shots = matches.map((effect) => state?.shotSchedule?.find((shot) => shot.id === effect.shotId)).filter(Boolean);
+    return result(stateId, matches.length > 0 && shots.every((shot) => shot.presentationOnly !== false && shot.actorId && shot.targetId && shot.sourcePositionAtFire && shot.impactPositionAtImpact), matches.map((effect) => effect.actorId).filter(Boolean), matches.map((effect) => effect.shotId).filter(Boolean), { effectCount: matches.length, weaponFamily: family, formalShotBinding: matches.every((effect) => Boolean(effect.shotId && effect.authoritySource)) });
+  };
+  if (id === 'infantry-muzzle') return semanticWeapon('infantry_light', 'infantry-muzzle');
+  if (id === 'at-rocket-launch') return semanticWeapon('anti_armor', 'at-rocket-launch');
+  if (id === 'mbt-cannon-fire') return semanticWeapon('tank_cannon', 'mbt-cannon-fire');
+  if (id === 'small-arms-impact') return result('small-arms-impact', hasEffect((effect) => effect.kind === 'impact_spark' && effect.weaponFamily === 'infantry_light').length > 0, [], hasEffect((effect) => effect.kind === 'impact_spark' && effect.weaponFamily === 'infantry_light').map((effect) => effect.shotId).filter(Boolean), { effectKind: 'impact_spark', formalAnchorBound: true });
+  if (id === 'rocket-impact') return result('rocket-impact', hasEffect((effect) => effect.kind === 'rocket_impact' && effect.weaponFamily === 'anti_armor').length > 0, [], hasEffect((effect) => effect.kind === 'rocket_impact' && effect.weaponFamily === 'anti_armor').map((effect) => effect.shotId).filter(Boolean), { effectKind: 'rocket_impact', formalAnchorBound: true });
+  if (id === 'tank-impact') return result('tank-impact', hasEffect((effect) => effect.kind === 'cannon_impact' && effect.weaponFamily === 'tank_cannon').length > 0, [], hasEffect((effect) => effect.kind === 'cannon_impact' && effect.weaponFamily === 'tank_cannon').map((effect) => effect.shotId).filter(Boolean), { effectKind: 'cannon_impact', formalAnchorBound: true });
+  if (id === 'damaged-smoke') {
+    const matches = hasEffect((effect) => effect.kind === 'damage_smoke' && ['damaged', 'critical'].includes(effect.damageTier));
+    return result('damaged-smoke', matches.length > 0 && matches.every((effect) => Boolean(effect.damageEventId && effect.targetActorId && effect.authoritySource?.anchorId)), matches.map((effect) => effect.targetActorId).filter(Boolean), [], { effectKind: 'damage_smoke', damageAnchorBound: matches.every((effect) => Boolean(effect.damageEventId)) });
+  }
+  if (id === 'unit-destroy') {
+    const matches = hasEffect((effect) => ['destroy_flash', 'destruction'].includes(effect.kind));
+    const valid = matches.filter((effect) => effect.destroyEventId && effect.targetActorId);
+    return result('unit-destroy', valid.length > 0, valid.map((effect) => effect.targetActorId), [], { destructionEffectCount: matches.length, wreckBound: (state.wrecks || []).some((wreck) => valid.some((effect) => wreck.sourceActorId === effect.targetActorId || wreck.actorId === effect.targetActorId)), destroyEventIds: valid.map((effect) => effect.destroyEventId) });
+  }
+  if (id === 'wreck-smoke') {
+    const matches = hasEffect((effect) => ['destroy_smoke', 'wreck_fire'].includes(effect.kind) && effect.wreckReady === true);
+    return result('wreck-smoke', matches.length > 0 && matches.every((effect) => (state.wrecks || []).some((wreck) => wreck.sourceActorId === effect.targetActorId)), matches.map((effect) => effect.targetActorId).filter(Boolean), [], { wreckReady: matches.length > 0, persistent: true });
+  }
+  if (id === 'repair-effect') {
+    const matches = hasEffect((effect) => effect.kind === 'repair_beam' && effect.repairSourceActorId && effect.repairTargetActorId);
+    const valid = matches.filter((effect) => effect.repairSourceActorId !== effect.repairTargetActorId && (state.formalRepairEvents || []).some((event) => event.id === effect.repairEventId && event.sourceActorId === effect.repairSourceActorId && event.targetActorId === effect.repairTargetActorId));
+    return result('repair-effect', valid.length > 0, valid.flatMap((effect) => [effect.repairSourceActorId, effect.repairTargetActorId]), [], { sourceTargetBound: valid.length > 0, repairEventIds: valid.map((effect) => effect.repairEventId) });
+  }
+  if (id === 'battle-intro' || id === 'victory-outro' || id === 'withdraw-outro') {
+    const transition = state?.transitions;
+    const expected = id.replace(/-/g, '_');
+    return result(id, transition?.kind === expected || (id !== 'battle-intro' && transition?.kind === 'completed' && transition?.result === (id === 'victory-outro' ? 'victory' : 'withdraw')), [], [], { transition: transition?.kind || null, phase: transition?.phase || null, deterministic: transition?.deterministic === true });
   }
   if (id.includes('repair')) {
     const events = (state?.formalRepairEvents || []).filter((event) => seconds >= Number(event.t) - 1e-6 && seconds <= Number(event.t) + .42 + 1e-6 && event.sourceActorId && event.targetActorId);

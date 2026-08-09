@@ -534,3 +534,18 @@
 - [x] 已提交并推送 `agent/stage8-2G-D-B-1a-repair-semantic-final`，commit `8f8557239be3f3e7566dbd8179cf9c38fe176620`；Draft PR #5 以 `agent/stage8-2G-D-B-1-semantic-responsive-closure` 为 base。
 - [x] GitHub Actions Run `31276414890` / Job `93150552033` 成功，D-B.1a gate 实际执行；最终 clean-package verifier 的 clean install、包内普通 `npm test`、posttest、证据/封包卫生均通过。
 - [ ] 独立审计方仍需按最终 D-B.1a ZIP 重新验收；audit JSON 仍仅是失败基线和回归样本，不代表独立批准。
+
+# Stage 8.2G-D-C progress
+
+- [x] 以 D-B.1a commit `971d3280bc8df688f24ec1489c31c68550d92d76` 为基线；本地未发现 `stage8_2g_db1a_independent_audit.json`，未导入任何 audit JSON，也未删除或过滤失败样本。
+- [x] 新增 Presentation-only `presentation-effects-runtime.js`：muzzle flash、rocket trail、small-arms/rocket/tank impact、damage smoke、destroy sequence、wreck fire/smoke、repair beam/spark、deterministic camera feedback、battle intro/outro 和 audio cue hooks。
+- [x] 所有 transient 由 formal shot、impact/damage/destroy/repair anchor 或明确 phase 归因；没有 `Math.random`、`Date.now`、`performance.now` 的效果决策，seek/rewind/replay 使用相同 presentation seconds 可重现。
+- [x] Universal Render State 暴露 effect inventory、camera feedback、transitions、audio cues、determinism metadata；Renderer 增加 rocket/impact/smoke/fire/repair 绘制与 screen-space transition，不改变 Formal Solver、HP/damage/repair/destroy authority 或 Formal Repair Authority。
+- [x] 生产语义谓词新增 infantry muzzle、AT launch、MBT cannon、三类 impact、damaged smoke、destroy/wreck、repair effect、battle intro/victory/withdraw outro；Repair 仍严格保持 sourceActorId/targetActorId 绑定。
+- [x] D-C machine evidence 14 帧、Chromium browser evidence 14 张唯一 PNG，覆盖 infantry/rocket/MBT muzzle、三类 impact、damaged vehicle、destroy、burning wreck、repair、heavy battle、intro/victory/withdraw outro；pageErrors/consoleErrors `0`，浏览器逐帧重算 semantic predicate 与 state signature。
+- [x] 新增 18 项 tamper regression：shot/position/family、fake destroy/wreck、Repair source/target、camera event/amplitude、audio event、transition label、duplicate/hash/signature、authority/performance 篡改均被拒绝。
+- [x] 性能预算与边界通过：max effects `96`、smoke particles `32`、camera translation `5`；三场景平均 render samples 约 `3.56–4.98ms`，D-C deterministic/authority/performance checks 均通过。
+- [x] 官方 `develop-web-game` Playwright client 已执行；`render_game_to_text` 正常写出 state，未产生 console/page error；D-C 真实浏览器截图已用图像检查。
+- [x] D-C npm/CI gate、clean package builder/verifier 已接入；CI 在 D-B.1a 后执行 `npm run test:stage8-2G-D-C`，完整 extracted `npm test` exitCode `0`。
+- [x] 最终 ZIP：`iron-command-stage8-2G-D-C-battle-polish.zip`，SHA-256 `25500d32d82b89a582c6cf5c225cfa5631a4cc2202fe788f1aa063a5d8878c86`，`66,325,942` bytes，`1058` entries；ZIP 无 ZIP、`.git`、`node_modules`、browser profile 或 stale final record，clean install 与包内 `npm test` 均通过。
+- [ ] 独立审计方仍需按最终 D-C ZIP 重新验收；本地缺失的 D-B.1a audit JSON 仅记录为未导入基线，不代表独立批准。

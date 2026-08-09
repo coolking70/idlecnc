@@ -1,0 +1,50 @@
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import crypto from 'node:crypto';
+import { fileURLToPath } from 'node:url';
+import { CdpClient, getJson, listenEphemeral, localStaticServer, waitForWebSocket } from './cdp-client.mjs';
+import { launchManagedBrowser, terminateManagedBrowser } from './managed-browser-process.mjs';
+import { buildIsolatedTempEnv, createIsolatedTempRoot, removeIsolatedTempRoot } from './isolated-temp-root.mjs';
+
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
+const machinePath = path.join(root, 'stage8_2g_dc_machine_evidence.json');
+const manifestPath = path.join(root, 'stage8_2g_dc_browser_capture_manifest.json');
+const screenshotDir = path.join(root, 'screenshots/stage8-2G-D-C');
+const sha = (value) => crypto.createHash('sha256').update(value).digest('hex');
+const call = (method, ...args) => `window.__IRON_COMMAND__[${JSON.stringify(method)}](${args.map((value) => JSON.stringify(value)).join(',')})`;
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+const forbiddenProductionStrings = ['Stage 8.2G', 'CURRENT_STAGE_LABEL', 'Production Visual Consumption & Evidence Hardening', 'stage8_2g_'];
+
+async function main() {
+  const machine = JSON.parse(await fs.readFile(machinePath, 'utf8'));
+  if (machine.stage !== '8.2G-D-C' || machine.frameCount !== 14) throw new Error('D-C machine evidence target list invalid');
+  await fs.rm(manifestPath, { force: true }); await fs.rm(screenshotDir, { recursive: true, force: true }); await fs.mkdir(screenshotDir, { recursive: true });
+  const isolatedRoot = createIsolatedTempRoot('iron-command-stage8G-DC-'); const evidenceEnv = buildIsolatedTempEnv(isolatedRoot); const pageErrors = []; const consoleErrors = []; const hashes = new Set(); const scenes = []; let server; let browser; let cdp;
+  try {
+    server = localStaticServer(root); const port = await listenEphemeral(server); browser = await launchManagedBrowser({ url: 'about:blank', env: evidenceEnv, tempDir: path.join(isolatedRoot, 'browser-profiles') }); const targets = await getJson(`http://127.0.0.1:${browser.devtools.devtoolsPort}/json`); const pageTarget = targets.find((target) => target.type === 'page'); cdp = new CdpClient(await waitForWebSocket(pageTarget.webSocketDebuggerUrl));
+    cdp.on('Runtime.exceptionThrown', ({ exceptionDetails }) => pageErrors.push(exceptionDetails?.exception?.description || exceptionDetails?.text || 'page exception')); cdp.on('Runtime.consoleAPICalled', ({ type, args }) => { if (type === 'error') consoleErrors.push((args || []).map((arg) => arg.value ?? arg.description ?? '').join(' ')); });
+    await cdp.send('Page.enable'); await cdp.send('Runtime.enable'); await cdp.send('Log.enable'); await cdp.send('Page.navigate', { url: `http://127.0.0.1:${port}/` }); await cdp.evaluate(`new Promise((resolve, reject) => { const start = performance.now(); const poll = () => window.__IRON_COMMAND__ ? resolve(true) : performance.now() - start > 10000 ? reject(new Error('D-C page bootstrap timeout')) : setTimeout(poll, 25); poll(); })`);
+    const viewport = () => cdp.evaluate(`(() => { const rect = (selector) => { const node = document.querySelector(selector); if (!node) return null; const r = node.getBoundingClientRect(); const style = getComputedStyle(node); return { x: r.x, y: r.y, width: r.width, height: r.height, display: style.display, visibility: style.visibility }; }; return { innerWidth, innerHeight, app: rect('#app'), stage: rect('#stage'), canvas: rect('#base-canvas'), panel: rect('#panel'), logbar: rect('#logbar') }; })()`);
+    const domText = () => cdp.evaluate('document.body?.innerText || ""');
+    for (const scene of machine.scenes) {
+      if (!scene.frames.length) continue;
+      await cdp.evaluate(call('reset')); await cdp.evaluate(call('setPresentationMode', 'universal')); await cdp.evaluate(call('setBattlePresentationDebug', false)); const loaded = await cdp.evaluate(call('loadEvidenceBattle', { id: scene.sceneId, seed: scene.seed, report: scene.sourceReport })); if (!loaded?.ok) throw new Error(`D-C scene load failed ${scene.sceneId}`);
+      const capturedFrames = [];
+      for (const frame of scene.frames) {
+        const width = frame.viewportKind === 'narrow' ? 390 : 1280; const height = frame.viewportKind === 'narrow' ? 844 : 720;
+        await cdp.send('Emulation.setDeviceMetricsOverride', { width, height, deviceScaleFactor: 1, mobile: false }); await cdp.evaluate(call('battlePresentationRenderAt', frame.visualTimeSeconds)); await sleep(95);
+        const evidence = await cdp.evaluate(call('battlePresentationEvidenceStateAt', frame.visualTimeSeconds, { sceneId: scene.sceneId, seed: scene.seed, semanticName: frame.semantic })); if (!evidence?.ok || evidence.productionSemanticPredicate?.passed !== true) throw new Error(`D-C semantic failed ${frame.file}`);
+        if (evidence.stateSignature !== frame.stateSignature) throw new Error(`D-C state signature mismatch ${frame.file}`);
+        const visibleText = await domText(); const leaked = forbiddenProductionStrings.filter((item) => visibleText.includes(item)); if (leaked.length) throw new Error(`D-C production DOM leak ${frame.file}`);
+        const screenMetrics = await cdp.evaluate(call('battlePresentationScreenMetricsAt', frame.visualTimeSeconds)); if (!screenMetrics) throw new Error(`D-C metrics unavailable ${frame.file}`);
+        const pngPath = path.join(screenshotDir, frame.file); await cdp.screenshot(pngPath); const imageSha256 = sha(await fs.readFile(pngPath)); if (hashes.has(imageSha256)) throw new Error(`duplicate D-C PNG ${frame.file}`); hashes.add(imageSha256);
+        capturedFrames.push({ ...frame, captureTimeMs: Number(evidence.state.time) * 1000, timestampDeltaMs: Number(evidence.state.time) * 1000 - frame.timeMs, viewport: await viewport(), screenMetrics, productionDom: { forbiddenStrings: leaked, visibleTextLength: visibleText.length }, productionSemanticPredicate: evidence.productionSemanticPredicate, stateSignature: evidence.stateSignature, effectInventory: evidence.state.effectInventory || null, cameraFeedback: evidence.state.cameraFeedback || null, transitions: evidence.state.transitions || null, audioCues: evidence.state.audioCues || [], effects: (evidence.state.effects || []).map((effect) => ({ id: effect.id, kind: effect.kind, source: effect.source || null, sourcePhase: effect.sourcePhase || null, shotId: effect.shotId || null, actorId: effect.actorId || null, targetActorId: effect.targetActorId || null, weaponFamily: effect.weaponFamily || null, authoritySource: effect.authoritySource || null })), hudContract: evidence.hudContract, imageSha256, screenshot: { path: path.relative(root, pngPath), sha256: imageSha256 } });
+      }
+      scenes.push({ sceneId: scene.sceneId, result: scene.result, seed: scene.seed, frames: capturedFrames });
+    }
+    if (pageErrors.length || consoleErrors.length) throw new Error(`D-C browser errors ${JSON.stringify({ pageErrors, consoleErrors })}`);
+    const browserFrames = scenes.flatMap((scene) => scene.frames); const output = { stage: '8.2G-D-C', version: 1, generatedBy: 'tests/browser/stage8-2G-D-C-evidence.mjs', machineEvidenceFile: path.basename(machinePath), browser: { currentCodeCaptured: true, pageErrors, consoleErrors, screenshotsDir: path.relative(root, screenshotDir), captureCount: browserFrames.length, uniqueImageHashes: hashes.size }, semantic: { checkedFrames: browserFrames.length, browserRecomputed: browserFrames.every((frame) => frame.productionSemanticPredicate?.passed === true), stateSignaturesMatched: browserFrames.every((frame) => frame.stateSignature === machine.scenes.flatMap((scene) => scene.frames).find((item) => item.file === frame.file)?.stateSignature), failClosed: true }, effects: { traceable: browserFrames.every((frame) => frame.effects.every((effect) => effect.shotId || effect.authoritySource || effect.sourcePhase || ['battle-intro', 'victory-outro', 'withdraw-outro'].includes(frame.semantic))), inventoryPresent: browserFrames.every((frame) => Boolean(frame.effectInventory)) }, transitions: { deterministic: browserFrames.filter((frame) => frame.transitions).every((frame) => frame.transitions.deterministic === true) }, audio: { traceable: browserFrames.every((frame) => frame.audioCues.every((cue) => cue.presentationOnly === true || cue.shotId || cue.eventId)) }, scenes, passed: browserFrames.length === 14 && hashes.size === 14 };
+    await fs.writeFile(manifestPath, `${JSON.stringify(output, null, 2)}\n`); console.log(JSON.stringify({ ok: true, stage: output.stage, screenshots: browserFrames.length, uniqueImageHashes: hashes.size, semantic: output.semantic.browserRecomputed, effects: output.effects.traceable, output: manifestPath }));
+  } finally { cdp?.close(); await terminateManagedBrowser(browser).catch(() => {}); await new Promise((resolve) => server?.close(() => resolve())); try { removeIsolatedTempRoot(isolatedRoot); } catch {} }
+}
+main().catch((error) => { console.error(JSON.stringify({ ok: false, code: 'stage8-2G-DC-browser-evidence-failed', message: error.message || String(error) })); console.error(error.stack || error); process.exitCode = 1; });
