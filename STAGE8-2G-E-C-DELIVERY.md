@@ -28,4 +28,11 @@ npm run verify:stage8-2G-E-C
 
 性能门禁为 warmup 20、samples 120、每场景 p95 `< 16.7ms`。E-C true-value tamper 为 80/80 拒绝，`passedFlagOnlyCases=0`，并包含 fake same-timeOrigin、flag mismatch、same-loader 三类真实 reload 篡改。
 
-最终 ZIP 的 SHA-256、字节数、entries、final HEAD、CI 与干净目录全量结果以 `stage8_2g_ec_final_package_record.json` 为准。
+最终 ZIP 的 SHA-256、字节数、entries、final HEAD、CI 与干净目录全量结果以 `stage8_2g_ec_final_package_record.json` 为准。该记录必须在最终源码提交后重新生成；不得沿用提交前封包的旧哈希。
+
+## E-C.1 收口说明
+
+- README、progress 与本交付说明已统一指向 E-C，不再把 C.1.1a 作为当前阶段。
+- 开发方独立复核已重新检查 E-C focused、E-B browser regression、E-C browser、strong verifier、true-value tamper、普通 `npm test` 与清洁目录验证。
+- 本次收口不导入或修改任何 independent-audit JSON，也不删除或过滤历史失败样本。
+- 外部独立审计仍须由独立验收方使用最终 ZIP 执行；本文件中的开发方复核结论不等同于外部批准。

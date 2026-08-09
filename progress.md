@@ -624,5 +624,13 @@
 - [x] E-C focused 12/12；性能 warmup 20、sample 120、idle/construction/battle/replay p95 全部 `<16.7ms`；true-value tamper 80/80 拒绝，`passedFlagOnlyCases=0`，包含 same-timeOrigin、flag mismatch、same-loader。
 - [x] 官方 `develop-web-game` Playwright client 已在生产入口执行并检查截图/`render_game_to_text`；离线报告卡片截图已人工图像检查。
 - [x] E-C npm scripts、CI workflow（E-B 后追加 E-C focused/browser）、机器/浏览器/strong/tamper/selfcheck、builder/verifier 已接入；本地完整 `npm test` 通过，无 `--skip-full` 隔离包 verifier 第二次稳定重跑通过。
-- [x] 当前交付包：`iron-command-stage8-2G-E-C-offline-progression-closure.zip`，SHA-256 `267720b03fec88ea1a3f3b579f372daa03f05b992c7f8e205aa863a3241bfdf8`，`80,995,151` bytes，`1340` entries；clean package gate 已通过，package hygiene 无 forbidden/nested ZIP/stale record。
+- [x] 当前交付包：`iron-command-stage8-2G-E-C-offline-progression-closure.zip`；最终 SHA-256、bytes、entries、final HEAD 与 clean package gate 以仓库外的 `stage8_2g_ec_final_package_record.json` 为准，避免在源码文档中复制会随最终封包变化的哈希。
 - [ ] 独立审计方仍需按 E-C 最终 ZIP 重新验收；audit JSON 仅作为回归参考，不代表独立批准。
+
+# Stage 8.2G-E-C.1 final acceptance and mainline closure
+
+- [x] 已修正 README 与进度文档的当前阶段标识，并将封包数字统一收敛到 final package record，未改动生产规则或历史证据样本。
+- [x] 已完成开发方独立复核：E-C focused 12/12、true-value tamper 80/80、clean package verifier、完整 `npm test` 与 final-head CI 均通过。
+- [x] 已复核最终 ZIP 的 SHA-256、字节数、entries、clean package gate 与 final HEAD 绑定关系；E-C 证据 JSON 仍是验证输出，不是生产资源。
+- [ ] 外部独立审计仍需由独立验收方按最终 ZIP 执行；本节的独立复核不冒充第三方批准。
+- [ ] 主线整合将在本收口提交和最终封包验证通过后完成；Stage 9 尚未开始。
