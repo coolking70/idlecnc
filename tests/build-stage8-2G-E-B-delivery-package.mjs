@@ -13,7 +13,12 @@ const run = (command, args, cwd = root, options = {}) => {
   return result;
 };
 const sha = (file) => crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
-const allowedScreenshots = ['screenshots/stage8-2G-E-B', 'screenshots/stage8-2G-E-A-1'];
+const allowedScreenshots = [
+  'screenshots/stage8-2G-B-1-1a', 'screenshots/stage8-2G-C-1', 'screenshots/stage8-2G-C-1-1', 'screenshots/stage8-2G-C-1-1a',
+  'screenshots/stage8-2G-D-A', 'screenshots/stage8-2G-D-A-1', 'screenshots/stage8-2G-D-A-1a', 'screenshots/stage8-2G-D-B',
+  'screenshots/stage8-2G-D-B-1', 'screenshots/stage8-2G-D-B-1a', 'screenshots/stage8-2G-D-C', 'screenshots/stage8-2G-E-A',
+  'screenshots/stage8-2G-E-A-1', 'screenshots/stage8-2G-E-B'
+];
 const skip = (rel, name) => {
   const lower = name.toLowerCase();
   if (name === '.DS_Store' || lower.endsWith('.zip') || lower.endsWith('.pem') || lower.endsWith('.key')) return true;
