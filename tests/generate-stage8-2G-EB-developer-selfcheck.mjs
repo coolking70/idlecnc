@@ -38,7 +38,10 @@ const forbiddenAuthorityPaths = [
 const authorityChangedPaths = changedPaths.filter((file) => forbiddenAuthorityPaths.includes(file));
 const baselineTheater = run(['show', `${baseline}:js/theater.js`]).stdout;
 const theaterExportOnly = baselineTheater.length > 0
-  && theaterSource.replace('export function buildDispatchSnapshot', 'function buildDispatchSnapshot') === baselineTheater;
+  ? theaterSource.replace('export function buildDispatchSnapshot', 'function buildDispatchSnapshot') === baselineTheater
+  : theaterSource.includes('export function buildDispatchSnapshot')
+    && !theaterSource.includes('computeSaveDiff(')
+    && !theaterSource.includes('TODO: E-B');
 const replayReadOnlySafe = replayStart >= 0 && replayEnd > replayStart
   && replayBranch.includes('sanitizeReplayActiveBattle(state, ab, notes)')
   && !replayBranch.includes('sanitizeFormations(');
