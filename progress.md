@@ -584,4 +584,6 @@
 - [x] 完整 `npm test` 通过（包含 posttest 的 D-C、D-C.1 与 E-A gate）；E-A focused integration `13/13`，D-C.1 strong evidence `24/24` tamper rejection，历史阶段回归全部通过。
 - [x] 无 `--skip-full` 的 clean-package verifier 通过：隔离安装、包内完整 `npm test`、E-A focused/strong evidence、包卫生均通过；`cleanNpmTest=passed`，无 forbidden entries 或 stale final record。
 - [x] 最终 ZIP：`iron-command-stage8-2G-E-A-production-loop-integration.zip`，SHA-256 `6aa48ffb8b0f599e749bae16b5fdc20ed35c414d602fc7e88d517831263cf2d8`，`69,151,145` bytes，`1136` entries，11/11 浏览器截图唯一且无 page/console errors。
-- [ ] 待完成：提交、推送并等待 GitHub Actions；独立审计方后续仍需按 E-A 最终 ZIP 重新验收，E-A evidence JSON 只作运行证据，不作为生产资源。
+- [x] 已提交并推送 `agent/stage8-2G-E-A-production-loop-integration`，commit `1360697`；Draft PR #8 以 `agent/stage8-2G-D-C-1-strong-evidence-performance` 为 base，head/base 正确且 mergeable。
+- [x] GitHub Actions `core-regression` 推送运行 `31296262436` 与 PR 运行 `31296272892` 均 SUCCESS；后者完整执行 D-C、D-C.1 与 E-A，耗时 `13m42s`。
+- [ ] 独立审计方后续仍需按 E-A 最终 ZIP 重新验收；本轮没有独立审计 JSON，E-A evidence JSON 只作运行证据，不作为生产资源。
