@@ -26,7 +26,7 @@ import { safeNumber, clamp, formatDuration, formatInt } from './utils.js';
 /** 单次步进的最小时长，避免浮点误差导致死循环 */
 const MIN_STEP = 0.001;
 /** 步进次数上限（安全阀） */
-const MAX_STEPS = 4096;
+export const MAX_STEPS = 4096;
 
 function isObject(v) {
   return Boolean(v) && typeof v === 'object' && !Array.isArray(v);
@@ -42,15 +42,55 @@ function isObject(v) {
 export function calculateOfflineSeconds(savedAt, now, maxHours) {
   const maxH = Math.max(0, safeNumber(maxHours, TIME.offlineMaxHours));
   const maxSeconds = maxH * 3600;
-  const saved = safeNumber(savedAt, 0);
-  const current = Number.isFinite(now) ? now : Date.now();
+  const saved = Number(savedAt);
+  const current = now === undefined ? Date.now() : Number(now);
 
-  if (saved <= 0 || current <= saved) {
-    return { seconds: 0, rawSeconds: 0, capped: false, maxSeconds };
+  if (!Number.isFinite(saved) || saved <= 0) {
+    return { seconds: 0, rawSeconds: 0, capped: false, maxSeconds, failClosed: true, reason: 'saved_at_invalid' };
+  }
+  if (!Number.isFinite(current)) {
+    return { seconds: 0, rawSeconds: 0, capped: false, maxSeconds, failClosed: true, reason: 'now_invalid' };
+  }
+  if (current <= saved) {
+    return { seconds: 0, rawSeconds: 0, capped: false, maxSeconds, failClosed: true, reason: 'clock_not_advanced' };
   }
   const rawSeconds = Math.floor((current - saved) / 1000);
   const seconds = Math.min(rawSeconds, maxSeconds);
-  return { seconds, rawSeconds, capped: rawSeconds > maxSeconds, maxSeconds };
+  return { seconds, rawSeconds, capped: rawSeconds > maxSeconds, maxSeconds, failClosed: false, reason: 'ok' };
+}
+
+/**
+ * Consume an actual savedAt → now window. This is the only production entry
+ * that combines wall-clock validation with offline progression; callers that
+ * only need deterministic unit tests may continue to use settleOfflineProgress.
+ */
+export function settleOfflineWindow(state, savedAt, now, options = {}) {
+  const info = calculateOfflineSeconds(savedAt, now, options.maxHours);
+  if (info.seconds <= 0) {
+    return { ...info, report: null, consumedSeconds: 0, nextSavedAt: Number(savedAt) };
+  }
+  const token = options.token || `offline:${Number(savedAt)}`;
+  const report = settleOfflineProgress(state, info.seconds, {
+    ...options,
+    token,
+    sourceSavedAt: Number(savedAt),
+    settledAt: Number(now),
+    createReport: options.createReport !== undefined
+      ? options.createReport : info.seconds >= TIME.offlineReportMinSeconds
+  });
+  const truncatedBySteps = report?.truncated === true && info.capped !== true;
+  const consumedPreciseSeconds = Math.max(0, safeNumber(report?.consumedPreciseSeconds, report?.seconds || 0));
+  const nextSavedAt = truncatedBySteps
+    ? Number(savedAt) + consumedPreciseSeconds * 1000
+    : Number(now);
+  return {
+    ...info,
+    report,
+    consumedSeconds: Math.max(0, Math.floor(safeNumber(report?.seconds, 0))),
+    consumedPreciseSeconds,
+    nextSavedAt,
+    truncatedBySteps
+  };
 }
 
 /** 当前施工任务的剩余时间（无任务返回 Infinity） */
@@ -103,7 +143,10 @@ export function settleOfflineProgress(state, seconds, options = {}) {
   });
   const token = typeof options.token === 'string' && options.token ? options.token : null;
   if (token && ledger.lastToken === token) {
-    return { alreadySettled: true, token, settled: false, seconds: 0, gains: {}, lines: ['该离线令牌已经结算过。'] };
+    return {
+      alreadySettled: true, token, settled: false, seconds: 0, consumedSeconds: 0,
+      requestedSeconds: 0, remainingSeconds: 0, truncated: false, gains: {}, lines: ['该离线令牌已经结算过。']
+    };
   }
   const before = snapshotResources(state);
   const operationBefore = Object.keys(OPERATIONS).filter((id) => {
@@ -179,9 +222,15 @@ export function settleOfflineProgress(state, seconds, options = {}) {
   });
 
   const after = snapshotResources(state);
+  const consumedPreciseSeconds = Math.max(0, total - Math.max(0, remaining));
+  const consumedSeconds = Math.min(total, Math.floor(consumedPreciseSeconds + 1e-9));
+  const remainingSeconds = Math.max(0, total - consumedPreciseSeconds);
+  const truncated = remaining > 1e-9;
   const report = buildOfflineReport({
-    seconds: total, before, after, buildingsCompleted, unitsProduced, repairsCompleted,
-    completedResearch, operationsReady, steps, battlePaused: Boolean(state.activeBattle)
+    seconds: consumedSeconds, consumedSeconds, consumedPreciseSeconds, requestedSeconds: total,
+    remainingSeconds, truncated, maxSteps: MAX_STEPS, before, after, buildingsCompleted,
+    unitsProduced, repairsCompleted, completedResearch, operationsReady, steps,
+    battlePaused: Boolean(state.activeBattle)
   });
 
   if (token) {
@@ -198,7 +247,7 @@ export function settleOfflineProgress(state, seconds, options = {}) {
     if (completedResearch.length) logEvent(state, `离线期间完成研究：${completedResearch.join('、')}。`, LOG_LEVEL.GOOD);
     if (operationsReady.length) logEvent(state, `离线期间重新就绪任务：${operationsReady.map((id) => OPERATIONS[id].name).join('、')}。`, LOG_LEVEL.INFO);
     if (report.battlePaused) logEvent(state, '一场活动战斗在离线期间保持暂停。', LOG_LEVEL.INFO);
-    emit('offline:settled', { seconds: total, report });
+    emit('offline:settled', { seconds: consumedSeconds, requestedSeconds: total, report });
   }
   return report;
 }
@@ -210,6 +259,9 @@ export function settleOfflineProgress(state, seconds, options = {}) {
 export function buildOfflineReport(input) {
   const src = isObject(input) ? input : {};
   const seconds = Math.max(0, Math.floor(safeNumber(src.seconds, 0)));
+  const consumedPreciseSeconds = Math.max(seconds, safeNumber(src.consumedPreciseSeconds, seconds));
+  const requestedSeconds = Math.max(seconds, Math.floor(safeNumber(src.requestedSeconds, seconds)));
+  const remainingSeconds = Math.max(0, safeNumber(src.remainingSeconds, Math.max(0, requestedSeconds - consumedPreciseSeconds)));
   const before = isObject(src.before) ? src.before : {};
   const after = isObject(src.after) ? src.after : {};
 
@@ -250,6 +302,12 @@ export function buildOfflineReport(input) {
 
   return {
     seconds,
+    consumedSeconds: seconds,
+    consumedPreciseSeconds,
+    requestedSeconds,
+    remainingSeconds,
+    truncated: src.truncated === true || remainingSeconds > 1e-9,
+    maxSteps: Math.max(0, Math.floor(safeNumber(src.maxSteps, MAX_STEPS))),
     text: seconds > 0 ? formatDuration(seconds) : '0秒',
     gains,
     buildingsCompleted: buildings,
@@ -282,6 +340,6 @@ export function hasPendingOfflineReport(state) {
 
 /** 汇总导出，便于调试面板一次性读取 */
 export const OFFLINE_API = {
-  calculateOfflineSeconds, settleOfflineProgress, buildOfflineReport,
+  calculateOfflineSeconds, settleOfflineWindow, settleOfflineProgress, buildOfflineReport,
   dismissOfflineReport, hasPendingOfflineReport
 };

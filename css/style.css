@@ -1539,6 +1539,7 @@ button {
   margin-top: 8px;
 }
 .offline-actions .btn { width: auto; padding: 5px 18px; }
+.offline-view-btn { margin: 8px 0 2px; width: auto; padding: 5px 14px; }
 
 /* ---------------- 科研页（阶段7） ---------------- */
 .research-tree { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }

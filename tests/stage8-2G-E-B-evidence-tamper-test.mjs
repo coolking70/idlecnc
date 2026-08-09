@@ -58,6 +58,9 @@ tamper('fake_dispatch_api_path', (candidate) => { candidate.browser.dispatchApiU
 tamper('fake_replay_api_path', (candidate) => { candidate.browser.replayApiUsed = true; });
 tamper('fake_action_source', (candidate) => { candidate.browser.actionProvenance[0].source = 'debug_api'; });
 tamper('fake_action_synthetic_call', (candidate) => { candidate.browser.actionProvenance[0].syntheticApiCall = true; });
+tamper('missing_required_confirm_dispatch_action', (candidate) => {
+  candidate.browser.actionProvenance = candidate.browser.actionProvenance.filter((row) => row.action !== 'confirm-dispatch');
+});
 tamper('fake_review_unit_binding', (candidate) => { candidate.browser.scenes[0].frames[2].deploymentReview.unitIds[0] = 'fake-unit'; });
 tamper('fake_review_dom_visibility', (candidate) => {
   candidate.browser.scenes[0].frames[2].domText = candidate.browser.scenes[0].frames[3].domText;

@@ -2897,6 +2897,8 @@ export class UI {
 
     // —— 离线提示（读档时显示） ——
     r.offlineBox = el('div', 'card');
+    r.offlineBox.id = 'offline-report';
+    r.offlineBox.dataset.action = 'offline-report-view';
     r.offlineBox.hidden = true;
     page.appendChild(r.offlineBox);
   }
@@ -3132,6 +3134,15 @@ export class UI {
         head.appendChild(el('span', `tag ${tone}`, o.settled ? '已结算' : '未结算'));
         r.offlineBox.appendChild(head);
 
+        const viewBtn = el('button', 'btn offline-view-btn', '查看报告');
+        viewBtn.type = 'button';
+        viewBtn.dataset.action = 'view-offline-report';
+        viewBtn.addEventListener('click', () => {
+          r.offlineBox.dataset.viewed = 'true';
+          viewBtn.hidden = true;
+        });
+        r.offlineBox.appendChild(viewBtn);
+
         const durRow = el('div', 'kv');
         durRow.appendChild(el('span', '', '离线时长'));
         let durText = o.text || '';
@@ -3150,6 +3161,7 @@ export class UI {
         const btnRow = el('div', 'offline-actions');
         const btn = el('button', 'btn', '知道了');
         btn.type = 'button';
+        btn.dataset.action = 'dismiss-offline-report';
         btn.addEventListener('click', () => {
           if (this.handlers.onDismissOfflineReport) this.handlers.onDismissOfflineReport();
         });

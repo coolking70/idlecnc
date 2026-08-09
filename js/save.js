@@ -18,7 +18,7 @@ import { sanitizeRepairs } from './repairs.js';
 import { sanitizeResearch } from './research.js';
 import { sanitizeOperations } from './operations.js';
 import { sanitizeUnits } from './units.js';
-import { calculateOfflineSeconds, settleOfflineProgress } from './offline.js';
+import { calculateOfflineSeconds, settleOfflineWindow } from './offline.js';
 import { logEvent, emit, LOG_LEVEL } from './events.js';
 import { safeNumber, deepClone, formatDuration } from './utils.js';
 import { damageStateOfUnit } from './unit-status.js';
@@ -40,11 +40,12 @@ function storageAvailable() {
 }
 
 /** 序列化当前状态为可存储对象 */
-export function serialize(state) {
+export function serialize(state, savedAtOverride = null) {
   const data = deepClone(state);
   if (!data) return null;
   data.version = SAVE_VERSION;
-  data.savedAt = Date.now();
+  data.savedAt = Number.isFinite(Number(savedAtOverride)) && Number(savedAtOverride) >= 0
+    ? Number(savedAtOverride) : Date.now();
   return data;
 }
 
@@ -52,10 +53,10 @@ export function serialize(state) {
  * 保存到 localStorage
  * @returns {boolean} 是否成功
  */
-export function saveGame(state, { silent = false } = {}) {
+export function saveGame(state, { silent = false, savedAtOverride = null } = {}) {
   if (!storageAvailable()) return false;
   state.saveRevision = Math.max(0, Math.floor(safeNumber(state.saveRevision, 0))) + 1;
-  const data = serialize(state);
+  const data = serialize(state, savedAtOverride);
   if (!data) return false;
   try {
     const raw = JSON.stringify(data);
@@ -332,7 +333,10 @@ export function migrate(data, report = {}) {
 
   merged.settings = { ...fresh.settings, ...(data.settings || {}) };
   merged.stats = { ...fresh.stats, ...(data.stats || {}) };
-  merged.offline = null;
+  // A pending report is player-facing state, not a transient load result.
+  // Keep it through migration so a reload cannot erase an already-paid report.
+  merged.offline = data.offline && typeof data.offline === 'object'
+    ? deepClone(data.offline) : null;
 
   return merged;
 }
@@ -401,24 +405,30 @@ export function loadGame({ preferManual = false } = {}) {
   // 阶段6：真实离线结算 —— 按事件步进推进资源 / 施工 / 生产 / 维修
   const sourceSavedAt = migrated.savedAt;
   const settledAt = Date.now();
-  const offlineInfo = calculateOfflineSeconds(sourceSavedAt, settledAt, TIME.offlineMaxHours);
-  const offlineSeconds = offlineInfo.seconds;
-
   setState(migrated);
   recalcDerived(migrated);
 
   let offlineReport = null;
-  const offlineToken = `load:${sourceSavedAt}:${settledAt}`;
-  const alreadySettled = migrated.offlineLedger && migrated.offlineLedger.lastToken === offlineToken;
+  const offlineInfo = calculateOfflineSeconds(sourceSavedAt, settledAt, TIME.offlineMaxHours);
+  const offlineSeconds = offlineInfo.seconds;
+  const offlineToken = `offline:${Number(sourceSavedAt)}`;
+  const alreadySettled = migrated.offlineLedger
+    && (migrated.offlineLedger.lastToken === offlineToken
+      || Number(migrated.offlineLedger.lastSourceSavedAt) === Number(sourceSavedAt));
+  let nextSavedAt = settledAt;
   if (offlineSeconds > 0 && !alreadySettled) {
     try {
-      offlineReport = settleOfflineProgress(migrated, offlineSeconds, {
-        token: offlineToken, sourceSavedAt, settledAt,
+      const windowResult = settleOfflineWindow(migrated, sourceSavedAt, settledAt, {
+        token: offlineToken,
         createReport: offlineSeconds >= TIME.offlineReportMinSeconds
       });
+      offlineReport = windowResult.report;
       offlineReport.capped = offlineInfo.capped;
       offlineReport.rawSeconds = offlineInfo.rawSeconds;
       offlineReport.maxSeconds = offlineInfo.maxSeconds;
+      offlineReport.failClosed = offlineInfo.failClosed;
+      offlineReport.windowReason = offlineInfo.reason;
+      nextSavedAt = windowResult.nextSavedAt;
     } catch (err) {
       // 离线结算失败不能让读档失败：退化为「只显示时长」
       console.error('[save] 离线结算失败：', err);
@@ -435,23 +445,34 @@ export function loadGame({ preferManual = false } = {}) {
         shown: false,
         capped: offlineInfo.capped,
         rawSeconds: offlineInfo.rawSeconds,
-        maxSeconds: offlineInfo.maxSeconds
+        maxSeconds: offlineInfo.maxSeconds,
+        requestedSeconds: offlineSeconds,
+        consumedSeconds: 0,
+        remainingSeconds: offlineSeconds,
+        truncated: true,
+        failClosed: false,
+        windowReason: 'settlement_error'
       };
       migrated.offline = offlineReport;
     }
     recalcDerived(migrated);
+    if (offlineReport?.truncated === true && offlineInfo.capped !== true) {
+      nextSavedAt = sourceSavedAt + safeNumber(offlineReport.consumedPreciseSeconds, offlineReport.seconds) * 1000;
+    }
   } else if (alreadySettled) {
-    migrated.offline = null;
-  } else {
+    // Keep an undismissed report visible after reload; the ledger blocks re-pay.
+    nextSavedAt = settledAt;
+  } else if (!migrated.offline || migrated.offline.shown === true) {
     migrated.offline = null;
   }
 
-  // 结算完成后立刻刷新时间戳，避免同一段离线时间被重复结算
-  migrated.savedAt = settledAt;
+  // Fully consumed/capped windows advance to now. A MAX_STEPS partial window
+  // advances only to its consumed wall-clock position, leaving the remainder.
+  migrated.savedAt = Number.isFinite(Number(nextSavedAt)) && nextSavedAt >= 0 ? nextSavedAt : settledAt;
   // 载入阶段的离线结算必须立即落盘，不能依赖稍后才注册的事件监听器。
   setState(migrated);
   recalcDerived(migrated);
-  saveGame(migrated, { silent: true });
+  saveGame(migrated, { silent: true, savedAtOverride: migrated.savedAt });
 
   emit('save:loaded', { offlineSeconds, repaired: Boolean(report.repaired) });
   return {

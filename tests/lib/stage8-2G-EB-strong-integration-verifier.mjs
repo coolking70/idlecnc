@@ -25,6 +25,17 @@ const clone = (value) => JSON.parse(JSON.stringify(value));
 const sha256 = (value) => crypto.createHash('sha256').update(value).digest('hex');
 const equal = (a, b) => JSON.stringify(a) === JSON.stringify(b);
 
+export const REQUIRED_EB_ACTIONS = Object.freeze([
+  'select-theater', 'select-strategy', 'open-deployment-review',
+  'confirm-dispatch', 'view-report', 'return-from-battle', 'replay-report'
+]);
+
+export function requiredActionCoverage(manifest, required = REQUIRED_EB_ACTIONS) {
+  const actions = Array.isArray(manifest?.actionProvenance) ? manifest.actionProvenance : [];
+  const present = new Set(actions.map((row) => row?.action).filter(Boolean));
+  return required.filter((action) => !present.has(action));
+}
+
 // Formation IDs are generated at runtime, so they are not stable evidence
 // identity. Compare the semantic snapshot while retaining every authoritative
 // field (unit order, stats, HP, theater, strategy and mission binding).
@@ -278,6 +289,7 @@ function verifyBrowserManifest(manifest, root, errors, source) {
     && replayState?.activeBattleSessionId === null);
   if (!sessionIdentity) errors.push('browser_session_report_settlement_identity');
   if ((manifest?.actionProvenance || []).some((row) => row.source !== 'production_ui' || row.syntheticApiCall !== false)) errors.push('browser_action_provenance');
+  requiredActionCoverage(manifest).forEach((action) => errors.push('browser_required_action:' + action));
 }
 
 export function runEBStrongProbe({ root = process.cwd(), manifest = null } = {}) {

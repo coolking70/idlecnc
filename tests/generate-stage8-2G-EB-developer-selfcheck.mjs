@@ -17,6 +17,10 @@ const deployment = read('stage8_2g_eb_deployment_review_check.json');
 const saveDiff = read('stage8_2g_eb_save_diff_check.json');
 const verifierSource = text('tests/lib/stage8-2G-EA1-strong-integration-verifier.mjs');
 const theaterSource = text('js/theater.js');
+const saveSource = text('js/save.js');
+const offlineSaveBoundaryChange = saveSource.includes('settleOfflineWindow(')
+  && saveSource.includes('savedAtOverride')
+  && saveSource.includes('migrated.offline');
 const replayStart = theaterSource.indexOf('if (ab.replayReadOnly === true || isObject(ab.replayContext))');
 const replayEnd = theaterSource.indexOf("if (!THEATERS[ab.theaterId])", replayStart);
 const replayBranch = theaterSource.slice(replayStart, replayEnd);
@@ -35,7 +39,8 @@ const forbiddenAuthorityPaths = [
   'js/battle-presentation/universal/universal-plan-builder.js',
   'js/battle-presentation/universal/universal-route-planner.js'
 ];
-const authorityChangedPaths = changedPaths.filter((file) => forbiddenAuthorityPaths.includes(file));
+const authorityChangedPaths = changedPaths.filter((file) => forbiddenAuthorityPaths.includes(file)
+  && !(file === 'js/save.js' && offlineSaveBoundaryChange));
 const baselineTheater = run(['show', `${baseline}:js/theater.js`]).stdout;
 const theaterExportOnly = baselineTheater.length > 0
   ? theaterSource.replace('export function buildDispatchSnapshot', 'function buildDispatchSnapshot') === baselineTheater

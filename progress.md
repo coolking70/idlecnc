@@ -613,3 +613,16 @@
 - [x] E-B focused Node 12/12；性能门禁 warmup 20、samples 120、p95 严格 `<16.7ms`；D-C.1 victory p95 继续作为回归检查。
 - [x] true-value tamper `48/48` 拒绝，`passedFlagOnlyCases=0`，包含 fake reload 数值倒退/相等、reason 缺失、loader 复用、冷却、快照、会话交换、回放写入和 authority hash 篡改。
 - [x] E-B 实现、E-A.1 review-flow 浏览器回归适配、机器/浏览器/strong/tamper/performance 证据均完成；最终 ZIP、无 `--skip-full` clean verifier 与 final-head CI 由本轮交付记录收口，独立审计仍待按最终 ZIP 复核。
+
+# Stage 8.2G-E-C progress
+
+- [x] 以 E-B final HEAD `b41ad940d8fab78038f1b1dedf5a404841b81401` 为基线；未导入任何 independent-audit JSON，失败样本未删除或过滤。
+- [x] 完成离线窗口 fail-closed：非法、未来和回拨 `savedAt` 均为零秒；raw seconds、cap、consumed/remaining 与 `MAX_STEPS=4096` 截断元数据保持真实，部分窗口会保留未消费时间。
+- [x] 完成 Exactly-once 离线结算、待阅报告迁移与 reload 保留；报告查看/关闭进入真实 UI 路径；活动正式战斗不推进 session/elapsed/report/ledger，正式结果不二次结算，Replay 保持 canonical session、编队、单位与 ledger 只读隔离。
+- [x] E-B verifier 加入 `confirm-dispatch` 等关键 action coverage；E-C strong verifier 独立重算窗口、战斗/回放边界、recursive save diff、reload timeOrigin/loaderId、PNG、机器证据、性能与 Authority hash，并拒绝 saveDiff 自洽性伪造。
+- [x] 真实生产浏览器证据覆盖 17 帧、5 次 `Page.reload`、55 条 production UI provenance；离线时间通过 savedAt/localStorage beforeunload 路径注入，`dispatchApiUsed=false`、`replayApiUsed=false`、`offlineApiUsed=false`，page/console errors 均为 0。
+- [x] E-C focused 12/12；性能 warmup 20、sample 120、idle/construction/battle/replay p95 全部 `<16.7ms`；true-value tamper 80/80 拒绝，`passedFlagOnlyCases=0`，包含 same-timeOrigin、flag mismatch、same-loader。
+- [x] 官方 `develop-web-game` Playwright client 已在生产入口执行并检查截图/`render_game_to_text`；离线报告卡片截图已人工图像检查。
+- [x] E-C npm scripts、CI workflow（E-B 后追加 E-C focused/browser）、机器/浏览器/strong/tamper/selfcheck、builder/verifier 已接入；本地完整 `npm test` 通过，无 `--skip-full` 隔离包 verifier 第二次稳定重跑通过。
+- [x] 当前交付包：`iron-command-stage8-2G-E-C-offline-progression-closure.zip`，SHA-256 `267720b03fec88ea1a3f3b579f372daa03f05b992c7f8e205aa863a3241bfdf8`，`80,995,151` bytes，`1340` entries；clean package gate 已通过，package hygiene 无 forbidden/nested ZIP/stale record。
+- [ ] 独立审计方仍需按 E-C 最终 ZIP 重新验收；audit JSON 仅作为回归参考，不代表独立批准。

@@ -30,3 +30,5 @@ jobs:
       - run: npm run browser:stage8-2G-E-A-1
       - run: npm run test:stage8-2G-E-B
       - run: npm run browser:stage8-2G-E-B
+      - run: npm run test:stage8-2G-E-C
+      - run: npm run browser:stage8-2G-E-C
