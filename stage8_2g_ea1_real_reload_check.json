@@ -5,40 +5,44 @@
       "reason": "running_battle",
       "method": "Page.reload",
       "before": {
-        "timeOrigin": 1786270203207.1,
+        "timeOrigin": 1786278943685.8,
         "readyState": "complete",
         "stage": 8,
         "navigationType": "navigate",
         "navigationStart": 0
       },
       "after": {
-        "timeOrigin": 1786270217273.3,
+        "timeOrigin": 1786278957739.4,
         "readyState": "complete",
         "stage": 8,
         "navigationType": "reload",
         "navigationStart": 0
       },
-      "loaderId": "9671408A13D2CB4CD695499270185555",
+      "beforeLoaderId": "911A09751D38181E952166D2BD394B50",
+      "afterLoaderId": "63E3EC5D1873DEDF85E6E217F79664E0",
+      "loaderId": "63E3EC5D1873DEDF85E6E217F79664E0",
       "timeOriginChanged": true
     },
     {
       "reason": "replay",
       "method": "Page.reload",
       "before": {
-        "timeOrigin": 1786270217273.3,
+        "timeOrigin": 1786278957739.4,
         "readyState": "complete",
         "stage": 8,
         "navigationType": "reload",
         "navigationStart": 0
       },
       "after": {
-        "timeOrigin": 1786270220089.6,
+        "timeOrigin": 1786278960555.6,
         "readyState": "complete",
         "stage": 8,
         "navigationType": "reload",
         "navigationStart": 0
       },
-      "loaderId": "8E0E0E543B22F294F48FE26C83FC638C",
+      "beforeLoaderId": "63E3EC5D1873DEDF85E6E217F79664E0",
+      "afterLoaderId": "F03F68F79FF2481283E83B1FA9EFCB05",
+      "loaderId": "F03F68F79FF2481283E83B1FA9EFCB05",
       "timeOriginChanged": true
     }
   ],

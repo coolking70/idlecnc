@@ -63,7 +63,7 @@
       "rejected": true,
       "recomputedPassed": false,
       "unexpectedChangedPaths": [
-        "buildings[id=bld_msln64xm_59].level"
+        "buildings[id=bld_mslsdh55_59].level"
       ],
       "source": "recursive save diff"
     },
@@ -99,7 +99,7 @@
       "rejected": true,
       "recomputedPassed": false,
       "unexpectedChangedPaths": [
-        "buildings[id=bld_msln64xm_59].level"
+        "buildings[id=bld_mslsdh55_59].level"
       ],
       "source": "recursive save diff"
     },
@@ -108,7 +108,7 @@
       "rejected": true,
       "recomputedPassed": false,
       "unexpectedChangedPaths": [
-        "buildings[id=bld_msln64xm_59].level"
+        "buildings[id=bld_mslsdh55_59].level"
       ],
       "source": "recursive save diff"
     },
@@ -177,7 +177,7 @@
       "case": "fake_reload_method",
       "rejected": true,
       "errors": [
-        "browser_real_reload",
+        "browser_real_reload_method:0",
         "independent_probe"
       ]
     },
@@ -185,8 +185,41 @@
       "case": "fake_reload_time_origin",
       "rejected": true,
       "errors": [
-        "browser_real_reload",
+        "browser_real_reload_time_origin_declaration:1",
         "independent_probe"
+      ]
+    },
+    {
+      "case": "fake_real_reload_same_time_origin",
+      "rejected": true,
+      "errors": [
+        "browser_real_reload_time_origin:0",
+        "browser_real_reload_time_origin_declaration:0",
+        "independent_probe"
+      ]
+    },
+    {
+      "case": "fake_real_reload_flag_mismatch",
+      "rejected": true,
+      "errors": [
+        "browser_real_reload_time_origin_declaration:0",
+        "independent_probe"
+      ]
+    },
+    {
+      "case": "fake_real_reload_same_loader_id",
+      "rejected": true,
+      "errors": [
+        "browser_real_reload_loader:1",
+        "browser_real_reload_loader_uniqueness",
+        "independent_probe"
+      ]
+    },
+    {
+      "case": "fake_save_diff_unexpected_paths",
+      "rejected": true,
+      "errors": [
+        "evidence:saveDiffUnexpectedPaths"
       ]
     },
     {
@@ -223,8 +256,8 @@
     }
   ],
   "coreRejectionCount": 24,
-  "evidenceTamperRejectionCount": 7,
-  "rejectionCount": 31,
+  "evidenceTamperRejectionCount": 11,
+  "rejectionCount": 35,
   "declaredPassedPreserved": true,
   "passed": true
 }

@@ -169,6 +169,8 @@ async function main() {
     };
     const reloadPage = async (reason) => {
       const before = await bootInfo();
+      const beforeFrameTree = await cdp.send('Page.getFrameTree');
+      const beforeLoaderId = beforeFrameTree?.frameTree?.frame?.loaderId || null;
       let loaderId = null;
       const off = cdp.on('Page.frameNavigated', (event) => {
         if (!event.frame?.parentId) loaderId = event.frame.loaderId || null;
@@ -177,8 +179,19 @@ async function main() {
       await cdp.send('Page.reload', { ignoreCache: true });
       await waitForBoot(`${reason} real reload`, before.timeOrigin);
       const after = await bootInfo();
+      const afterFrameTree = await cdp.send('Page.getFrameTree');
+      const afterLoaderId = afterFrameTree?.frameTree?.frame?.loaderId || null;
       off();
-      const record = { reason, method: 'Page.reload', before, after, loaderId, timeOriginChanged: before.timeOrigin !== after.timeOrigin };
+      const record = {
+        reason,
+        method: 'Page.reload',
+        before,
+        after,
+        beforeLoaderId,
+        afterLoaderId,
+        loaderId: afterLoaderId || loaderId,
+        timeOriginChanged: before.timeOrigin !== after.timeOrigin
+      };
       reloads.push(record);
       return record;
     };

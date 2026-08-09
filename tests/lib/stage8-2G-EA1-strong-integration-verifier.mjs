@@ -201,7 +201,36 @@ function verifyBrowserManifest(manifest, root, errors) {
   if (manifest?.productionEntry !== true || manifest?.fixtureLoaderUsed === true || manifest?.debugOverlayUsed === true) errors.push('browser_production_entry');
   if (manifest?.dispatchApiUsed === true || manifest?.replayApiUsed === true) errors.push('browser_api_shortcut');
   if (manifest?.browser?.captureCount !== 11 || frames.length !== 11 || manifest?.browser?.uniqueImageHashes !== 11) errors.push('browser_frame_count_or_hashes');
-  if ((manifest?.realReloads || []).length !== 2 || (manifest?.realReloads || []).some((row) => row.method !== 'Page.reload' || row.timeOriginChanged !== true || !row.loaderId)) errors.push('browser_real_reload');
+  const realReloads = manifest?.realReloads || [];
+  if (realReloads.length !== 2) {
+    errors.push('browser_real_reload_count');
+  } else {
+    const afterLoaderIds = [];
+    realReloads.forEach((row, index) => {
+      const beforeTimeOrigin = row?.before?.timeOrigin;
+      const afterTimeOrigin = row?.after?.timeOrigin;
+      const timeOriginsValid = typeof beforeTimeOrigin === 'number'
+        && Number.isFinite(beforeTimeOrigin)
+        && typeof afterTimeOrigin === 'number'
+        && Number.isFinite(afterTimeOrigin);
+      const recomputedTimeOriginChanged = timeOriginsValid
+        && beforeTimeOrigin !== afterTimeOrigin;
+      const beforeLoaderId = typeof row?.beforeLoaderId === 'string' ? row.beforeLoaderId.trim() : '';
+      const afterLoaderId = typeof row?.afterLoaderId === 'string'
+        ? row.afterLoaderId.trim()
+        : (typeof row?.loaderId === 'string' ? row.loaderId.trim() : '');
+
+      if (row?.method !== 'Page.reload') errors.push(`browser_real_reload_method:${index}`);
+      if (!timeOriginsValid || !recomputedTimeOriginChanged) errors.push(`browser_real_reload_time_origin:${index}`);
+      if (row?.timeOriginChanged !== recomputedTimeOriginChanged) errors.push(`browser_real_reload_time_origin_declaration:${index}`);
+      if (!beforeLoaderId || !afterLoaderId || beforeLoaderId === afterLoaderId) errors.push(`browser_real_reload_loader:${index}`);
+      if (typeof row?.afterLoaderId === 'string' && row.afterLoaderId.trim() !== row.loaderId) errors.push(`browser_real_reload_loader_declaration:${index}`);
+      afterLoaderIds.push(afterLoaderId);
+    });
+    if (afterLoaderIds.some((loaderId) => !loaderId) || new Set(afterLoaderIds).size !== afterLoaderIds.length) {
+      errors.push('browser_real_reload_loader_uniqueness');
+    }
+  }
   if ((manifest?.actionProvenance || []).some((row) => row.source !== 'production_ui' || row.syntheticApiCall !== false)) errors.push('browser_action_provenance');
   const seen = new Set();
   frames.forEach((frame) => {
@@ -260,6 +289,11 @@ export function verifyEA1EvidenceBundle(bundle = {}, { root = process.cwd() } = 
   if (bundle.stage !== '8.2G-E-A.1') errors.push('bundle_stage');
   for (const key of ['replayPersistence', 'replayFormation', 'realReload', 'uiPath', 'saveDiff', 'settlementReload', 'authority', 'tamper', 'machineEvidence']) {
     if (bundle[key]?.passed !== true) errors.push(`evidence:${key}`);
+  }
+  if (bundle.saveDiff?.passed === true
+    && Array.isArray(bundle.saveDiff.unexpectedChangedPaths)
+    && bundle.saveDiff.unexpectedChangedPaths.length > 0) {
+    errors.push('evidence:saveDiffUnexpectedPaths');
   }
   if (probe.tamper.rejectionCount < 20) errors.push('tamper_count');
   if (!probe.passed) errors.push('independent_probe');

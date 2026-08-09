@@ -16,6 +16,22 @@ const tamper = (name, mutate) => {
 tamper('fake_ui_provenance', (candidate) => { candidate.browser.actionProvenance[0].source = 'debug_api'; });
 tamper('fake_reload_method', (candidate) => { candidate.browser.realReloads[0].method = 'window.__IRON_COMMAND__.load'; });
 tamper('fake_reload_time_origin', (candidate) => { candidate.browser.realReloads[1].timeOriginChanged = false; });
+tamper('fake_real_reload_same_time_origin', (candidate) => {
+  candidate.browser.realReloads[0].after.timeOrigin = candidate.browser.realReloads[0].before.timeOrigin;
+  candidate.browser.realReloads[0].timeOriginChanged = true;
+});
+tamper('fake_real_reload_flag_mismatch', (candidate) => {
+  candidate.browser.realReloads[0].timeOriginChanged = false;
+});
+tamper('fake_real_reload_same_loader_id', (candidate) => {
+  const loaderId = candidate.browser.realReloads[0].loaderId;
+  candidate.browser.realReloads[1].loaderId = loaderId;
+  candidate.browser.realReloads[1].afterLoaderId = loaderId;
+});
+tamper('fake_save_diff_unexpected_paths', (candidate) => {
+  candidate.saveDiff.passed = true;
+  candidate.saveDiff.unexpectedChangedPaths = ['resources.intel'];
+});
 tamper('fake_production_entry', (candidate) => { candidate.browser.productionEntry = false; });
 tamper('fake_dispatch_api_used', (candidate) => { candidate.browser.dispatchApiUsed = true; });
 tamper('fake_replay_api_used', (candidate) => { candidate.browser.replayApiUsed = true; });
