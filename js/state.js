@@ -18,6 +18,7 @@ export function createInitialState() {
     version: SAVE_VERSION,
     createdAt: Date.now(),
     savedAt: 0,
+    saveRevision: 0,
 
     /** 时间与速度 */
     time: {
@@ -66,6 +67,12 @@ export function createInitialState() {
 
     /** 当前活动战斗（同一时间最多一场；阶段5） */
     activeBattle: null,
+
+    /** Stage E-A：生产战斗会话与 exactly-once 结算账本。 */
+    activeBattleSessionId: null,
+    battleSessionSequence: 0,
+    battleSessions: {},
+    battleSettlementLedger: {},
 
     /** 解锁标记（建筑/单位/科技） */
     unlocks: { units: [], techs: [] },

@@ -1,0 +1,293 @@
+{
+  "stage": "8.2G-E-A",
+  "version": 1,
+  "generatedBy": "tests/browser/stage8-2G-E-A-production-loop.mjs",
+  "machineEvidenceFile": "stage8_2g_ea_machine_evidence.json",
+  "productionEntry": true,
+  "fixtureLoaderUsed": false,
+  "debugOverlayUsed": false,
+  "browser": {
+    "currentCodeCaptured": true,
+    "pageErrors": [],
+    "consoleErrors": [],
+    "screenshotsDir": "screenshots/stage8-2G-E-A",
+    "captureCount": 11,
+    "uniqueImageHashes": 11
+  },
+  "scenes": [
+    {
+      "sceneId": "production-loop",
+      "frames": [
+        {
+          "frame": 1,
+          "file": "e-a-01-base-overview.png",
+          "semantic": "base_overview",
+          "timeMs": 0,
+          "productionEntry": true,
+          "phase": "base",
+          "state": {
+            "saveRevision": 0,
+            "activeBattleSessionId": null,
+            "activeBattle": null,
+            "sessionCount": 0,
+            "ledgerCount": 0
+          },
+          "domTextLength": 1223,
+          "imageSha256": "172b65a8ba100f2bdf6d89e5784f30a5334a169dc11ed971803262cfff4f814b",
+          "screenshot": {
+            "path": "screenshots/stage8-2G-E-A/e-a-01-base-overview.png",
+            "sha256": "172b65a8ba100f2bdf6d89e5784f30a5334a169dc11ed971803262cfff4f814b"
+          }
+        },
+        {
+          "frame": 2,
+          "file": "e-a-02-barracks-ready.png",
+          "semantic": "production_building_ready",
+          "timeMs": 1000,
+          "productionEntry": true,
+          "phase": "barracks_ready",
+          "state": {
+            "saveRevision": 2,
+            "activeBattleSessionId": null,
+            "activeBattle": null,
+            "sessionCount": 0,
+            "ledgerCount": 0
+          },
+          "domTextLength": 1368,
+          "imageSha256": "4e0b3b3e0c6167e470e2710591c7d9b65c9ea67a97d1859aa37ac5e1ddfb313e",
+          "screenshot": {
+            "path": "screenshots/stage8-2G-E-A/e-a-02-barracks-ready.png",
+            "sha256": "4e0b3b3e0c6167e470e2710591c7d9b65c9ea67a97d1859aa37ac5e1ddfb313e"
+          }
+        },
+        {
+          "frame": 3,
+          "file": "e-a-03-production-units-ready.png",
+          "semantic": "production_units_ready",
+          "timeMs": 2000,
+          "productionEntry": true,
+          "phase": "units_ready",
+          "state": {
+            "saveRevision": 6,
+            "activeBattleSessionId": null,
+            "activeBattle": null,
+            "sessionCount": 0,
+            "ledgerCount": 0
+          },
+          "domTextLength": 1493,
+          "imageSha256": "3d58be790abe9a01243732c93a1d77dec855af85f3354e1242555f19752ebad0",
+          "screenshot": {
+            "path": "screenshots/stage8-2G-E-A/e-a-03-production-units-ready.png",
+            "sha256": "3d58be790abe9a01243732c93a1d77dec855af85f3354e1242555f19752ebad0"
+          }
+        },
+        {
+          "frame": 4,
+          "file": "e-a-04-formation-deployment.png",
+          "semantic": "formation_deployment",
+          "timeMs": 3000,
+          "productionEntry": true,
+          "phase": "formation_deployment",
+          "formationId": "fm_mslc4zb6_s",
+          "state": {
+            "saveRevision": 9,
+            "activeBattleSessionId": null,
+            "activeBattle": null,
+            "sessionCount": 0,
+            "ledgerCount": 0
+          },
+          "domTextLength": 1355,
+          "imageSha256": "9de400341c266ef1e9fb748043f963ab8972d685ec891a5be12445fa89c182d7",
+          "screenshot": {
+            "path": "screenshots/stage8-2G-E-A/e-a-04-formation-deployment.png",
+            "sha256": "9de400341c266ef1e9fb748043f963ab8972d685ec891a5be12445fa89c182d7"
+          }
+        },
+        {
+          "frame": 5,
+          "file": "e-a-05-theater-entry.png",
+          "semantic": "formal_theater_entry",
+          "timeMs": 4000,
+          "productionEntry": true,
+          "phase": "formal_theater_entry",
+          "state": {
+            "saveRevision": 10,
+            "activeBattleSessionId": null,
+            "activeBattle": null,
+            "sessionCount": 0,
+            "ledgerCount": 0
+          },
+          "domTextLength": 1776,
+          "imageSha256": "407f887af3a1328fd611c4d78a985c290fd547619a2215c25cd86b7264b66aff",
+          "screenshot": {
+            "path": "screenshots/stage8-2G-E-A/e-a-05-theater-entry.png",
+            "sha256": "407f887af3a1328fd611c4d78a985c290fd547619a2215c25cd86b7264b66aff"
+          }
+        },
+        {
+          "frame": 6,
+          "file": "e-a-06-battle-running.png",
+          "semantic": "battle_running",
+          "timeMs": 5000,
+          "productionEntry": true,
+          "phase": "battle_running",
+          "sessionId": "battle-session-10-scrap_mine-dfc288578b9a75ba9ea1-1",
+          "state": {
+            "saveRevision": 11,
+            "activeBattleSessionId": "battle-session-10-scrap_mine-dfc288578b9a75ba9ea1-1",
+            "activeBattle": {
+              "id": "battle_82001_fm_mslc4zb6_s_scrap_mine_cautious",
+              "battleSessionId": "battle-session-10-scrap_mine-dfc288578b9a75ba9ea1-1",
+              "settled": false,
+              "replayReadOnly": false,
+              "elapsed": 0
+            },
+            "sessionCount": 1,
+            "ledgerCount": 0
+          },
+          "domTextLength": 1895,
+          "imageSha256": "aeabfc9d11ca75df9d6d58bae5a4008c6368dab80d7872ab445d78dd84c8b23b",
+          "screenshot": {
+            "path": "screenshots/stage8-2G-E-A/e-a-06-battle-running.png",
+            "sha256": "aeabfc9d11ca75df9d6d58bae5a4008c6368dab80d7872ab445d78dd84c8b23b"
+          }
+        },
+        {
+          "frame": 7,
+          "file": "e-a-07-reload-running-session.png",
+          "semantic": "reload_running_session",
+          "timeMs": 6000,
+          "productionEntry": true,
+          "phase": "reload_running_session",
+          "reloadPreservedSession": true,
+          "state": {
+            "saveRevision": 13,
+            "activeBattleSessionId": "battle-session-10-scrap_mine-dfc288578b9a75ba9ea1-1",
+            "activeBattle": {
+              "id": "battle_82001_fm_mslc4zb6_s_scrap_mine_cautious",
+              "battleSessionId": "battle-session-10-scrap_mine-dfc288578b9a75ba9ea1-1",
+              "settled": false,
+              "replayReadOnly": false,
+              "elapsed": 0
+            },
+            "sessionCount": 1,
+            "ledgerCount": 0
+          },
+          "domTextLength": 1974,
+          "imageSha256": "1678a5e02fe3df6651dc6cf1da87534b8e44582981c04c428ecc9e2a369a1439",
+          "screenshot": {
+            "path": "screenshots/stage8-2G-E-A/e-a-07-reload-running-session.png",
+            "sha256": "1678a5e02fe3df6651dc6cf1da87534b8e44582981c04c428ecc9e2a369a1439"
+          }
+        },
+        {
+          "frame": 8,
+          "file": "e-a-08-formal-result-settlement.png",
+          "semantic": "formal_result_settlement",
+          "timeMs": 7000,
+          "productionEntry": true,
+          "phase": "formal_result_settlement",
+          "settlementApplied": true,
+          "state": {
+            "saveRevision": 15,
+            "activeBattleSessionId": "battle-session-10-scrap_mine-dfc288578b9a75ba9ea1-1",
+            "activeBattle": {
+              "id": "battle_82001_fm_mslc4zb6_s_scrap_mine_cautious",
+              "battleSessionId": "battle-session-10-scrap_mine-dfc288578b9a75ba9ea1-1",
+              "settled": true,
+              "replayReadOnly": false,
+              "elapsed": 60
+            },
+            "sessionCount": 1,
+            "ledgerCount": 1
+          },
+          "domTextLength": 2193,
+          "imageSha256": "e5ceea169463617709ba889a1704aba83be4af4fddc3bbfdc07ec62887b2c1b4",
+          "screenshot": {
+            "path": "screenshots/stage8-2G-E-A/e-a-08-formal-result-settlement.png",
+            "sha256": "e5ceea169463617709ba889a1704aba83be4af4fddc3bbfdc07ec62887b2c1b4"
+          }
+        },
+        {
+          "frame": 9,
+          "file": "e-a-09-report-bound.png",
+          "semantic": "formal_report_bound",
+          "timeMs": 8000,
+          "productionEntry": true,
+          "phase": "formal_report_bound",
+          "reportBound": true,
+          "state": {
+            "saveRevision": 15,
+            "activeBattleSessionId": "battle-session-10-scrap_mine-dfc288578b9a75ba9ea1-1",
+            "activeBattle": {
+              "id": "battle_82001_fm_mslc4zb6_s_scrap_mine_cautious",
+              "battleSessionId": "battle-session-10-scrap_mine-dfc288578b9a75ba9ea1-1",
+              "settled": true,
+              "replayReadOnly": false,
+              "elapsed": 60
+            },
+            "sessionCount": 1,
+            "ledgerCount": 1
+          },
+          "domTextLength": 2797,
+          "imageSha256": "64627aa0500b06706139ceaddb85e096dd232abeccdb87c125db1bdf87e92222",
+          "screenshot": {
+            "path": "screenshots/stage8-2G-E-A/e-a-09-report-bound.png",
+            "sha256": "64627aa0500b06706139ceaddb85e096dd232abeccdb87c125db1bdf87e92222"
+          }
+        },
+        {
+          "frame": 10,
+          "file": "e-a-10-replay-readonly.png",
+          "semantic": "replay_readonly",
+          "timeMs": 9000,
+          "productionEntry": true,
+          "phase": "replay_readonly",
+          "replayReadOnly": true,
+          "state": {
+            "saveRevision": 17,
+            "activeBattleSessionId": "battle-session-10-scrap_mine-dfc288578b9a75ba9ea1-1",
+            "activeBattle": {
+              "id": "replay-battle-session-10-scrap_mine-dfc288578b9a75ba9ea1-1",
+              "battleSessionId": "battle-session-10-scrap_mine-dfc288578b9a75ba9ea1-1",
+              "settled": false,
+              "replayReadOnly": true,
+              "elapsed": 0
+            },
+            "sessionCount": 1,
+            "ledgerCount": 1
+          },
+          "domTextLength": 2057,
+          "imageSha256": "567e3697bd62201ee0d457727d276702558134f4b9672f6de7f2c3d949bd37cf",
+          "screenshot": {
+            "path": "screenshots/stage8-2G-E-A/e-a-10-replay-readonly.png",
+            "sha256": "567e3697bd62201ee0d457727d276702558134f4b9672f6de7f2c3d949bd37cf"
+          }
+        },
+        {
+          "frame": 11,
+          "file": "e-a-11-returned-base.png",
+          "semantic": "returned_base",
+          "timeMs": 10000,
+          "productionEntry": true,
+          "phase": "returned_base",
+          "replayClosed": true,
+          "state": {
+            "saveRevision": 17,
+            "activeBattleSessionId": null,
+            "activeBattle": null,
+            "sessionCount": 1,
+            "ledgerCount": 1
+          },
+          "domTextLength": 1773,
+          "imageSha256": "4502c278bc7b581fd21a62935c449c906663557753960942d7c677396c34f8ce",
+          "screenshot": {
+            "path": "screenshots/stage8-2G-E-A/e-a-11-returned-base.png",
+            "sha256": "4502c278bc7b581fd21a62935c449c906663557753960942d7c677396c34f8ce"
+          }
+        }
+      ]
+    }
+  ],
+  "passed": true
+}

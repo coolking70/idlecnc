@@ -1,0 +1,65 @@
+{
+  "stage": "8.2G-E-A",
+  "baseline": {
+    "branch": "agent/stage8-2G-D-C-1-strong-evidence-performance",
+    "commit": "d2afd98113c5410022df5ccc5bfd28c41977a4d7"
+  },
+  "scopeFrozen": {
+    "solver": true,
+    "planner": true,
+    "choreographer": true,
+    "targetAssignment": true,
+    "formalRepairAuthority": true,
+    "resultRewardSettlementCalculation": true,
+    "presentationEffectsHudAudioCamera": true
+  },
+  "productionEntry": true,
+  "session": true,
+  "deployment": true,
+  "formalReport": true,
+  "settlement": true,
+  "resume": true,
+  "replay": true,
+  "tamper": {
+    "rejectionCount": 9,
+    "passed": true
+  },
+  "authority": true,
+  "browser": {
+    "captureCount": 11,
+    "uniqueImageHashes": 11,
+    "pageErrors": [],
+    "consoleErrors": []
+  },
+  "regressions": {
+    "focused": "passed",
+    "stage5": "passed",
+    "dC1": "pending"
+  },
+  "ci": {
+    "scriptAdded": true,
+    "workflowAdded": true,
+    "appendedAfter": "npm run test:stage8-2G-D-C-1"
+  },
+  "readyForNextStage": true,
+  "passed": true,
+  "testResults": {
+    "focused": "passed",
+    "stage5": "passed",
+    "dC1": "passed",
+    "browser": "passed",
+    "strongVerifier": "passed"
+  },
+  "evidenceFiles": [
+    "stage8_2g_ea_battle_session_check.json",
+    "stage8_2g_ea_deployment_binding.json",
+    "stage8_2g_ea_formal_report_binding.json",
+    "stage8_2g_ea_settlement_check.json",
+    "stage8_2g_ea_save_diff_check.json",
+    "stage8_2g_ea_resume_check.json",
+    "stage8_2g_ea_replay_protection_check.json",
+    "stage8_2g_ea_authority_check.json",
+    "stage8_2g_ea_tamper_results.json",
+    "stage8_2g_ea_browser_capture_manifest.json"
+  ]
+}

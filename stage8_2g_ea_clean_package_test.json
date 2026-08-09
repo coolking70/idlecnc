@@ -1,0 +1,19 @@
+{
+  "stage": "8.2G-E-A",
+  "package": "iron-command-stage8-2G-E-A-production-loop-integration.zip",
+  "packageSha256": "6aa48ffb8b0f599e749bae16b5fdc20ed35c414d602fc7e88d517831263cf2d8",
+  "packageBytes": 69151145,
+  "entries": 1136,
+  "packageHygiene": {
+    "forbiddenEntries": [],
+    "staleFinalPackageRecordInZip": false
+  },
+  "install": {
+    "command": "npm install --ignore-scripts --no-audit --no-fund",
+    "status": 0
+  },
+  "focused": "passed",
+  "strongEvidence": "passed",
+  "cleanNpmTest": "passed",
+  "passed": true
+}

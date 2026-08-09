@@ -22,6 +22,7 @@ import { calculateOfflineSeconds, settleOfflineProgress } from './offline.js';
 import { logEvent, emit, LOG_LEVEL } from './events.js';
 import { safeNumber, deepClone, formatDuration } from './utils.js';
 import { damageStateOfUnit } from './unit-status.js';
+import { ensureBattleSessionState } from './production-battle-session.js';
 
 export { SAVE_KEY, MANUAL_SAVE_KEY };
 
@@ -53,6 +54,7 @@ export function serialize(state) {
  */
 export function saveGame(state, { silent = false } = {}) {
   if (!storageAvailable()) return false;
+  state.saveRevision = Math.max(0, Math.floor(safeNumber(state.saveRevision, 0))) + 1;
   const data = serialize(state);
   if (!data) return false;
   try {
@@ -134,6 +136,7 @@ export function migrate(data, report = {}) {
   merged.version = SAVE_VERSION;
   merged.createdAt = safeNumber(data.createdAt, fresh.createdAt);
   merged.savedAt = safeNumber(data.savedAt, 0);
+  merged.saveRevision = Math.max(0, Math.floor(safeNumber(data.saveRevision, 0)));
 
   merged.time = {
     game: safeNumber(data.time && data.time.game, fresh.time.game),
@@ -286,6 +289,13 @@ export function migrate(data, report = {}) {
   // 否则那支编队会被当成非法状态复位为待命，读档后战斗就断了。
   merged.activeBattle = data.activeBattle && typeof data.activeBattle === 'object'
     ? data.activeBattle : null;
+  merged.activeBattleSessionId = typeof data.activeBattleSessionId === 'string' ? data.activeBattleSessionId : null;
+  merged.battleSessionSequence = Math.max(0, Math.floor(safeNumber(data.battleSessionSequence, 0)));
+  merged.battleSessions = data.battleSessions && typeof data.battleSessions === 'object' && !Array.isArray(data.battleSessions)
+    ? data.battleSessions : {};
+  merged.battleSettlementLedger = data.battleSettlementLedger && typeof data.battleSettlementLedger === 'object' && !Array.isArray(data.battleSettlementLedger)
+    ? data.battleSettlementLedger : {};
+  ensureBattleSessionState(merged);
   const battleFix = sanitizeActiveBattle(merged);
   if (battleFix.repaired) {
     report.notes = (report.notes || []).concat(battleFix.notes);

@@ -1,0 +1,53 @@
+{
+  "stage": "8.2G-E-A",
+  "recordType": "external_final_package_record",
+  "package": "iron-command-stage8-2G-E-A-production-loop-integration.zip",
+  "packageSha256": "6aa48ffb8b0f599e749bae16b5fdc20ed35c414d602fc7e88d517831263cf2d8",
+  "packageBytes": 69151145,
+  "entries": 1136,
+  "branch": "agent/stage8-2G-E-A-production-loop-integration",
+  "baseline": {
+    "stage": "8.2G-D-C.1",
+    "commit": "d2afd98113c5410022df5ccc5bfd28c41977a4d7"
+  },
+  "scope": {
+    "productionLoopIntegrationOnly": true,
+    "formalReportConsumedAsReadOnly": true,
+    "solverModified": false,
+    "plannerModified": false,
+    "choreographerModified": false,
+    "formalRepairAuthorityModified": false,
+    "settlementCalculationModified": false
+  },
+  "browser": {
+    "captureCount": 11,
+    "uniqueImageHashes": 11,
+    "pageErrors": [],
+    "consoleErrors": []
+  },
+  "tamper": {
+    "rejectionCount": 9,
+    "passed": true
+  },
+  "selfcheck": true,
+  "cleanPackageGate": "passed",
+  "cleanPackageTest": {
+    "stage": "8.2G-E-A",
+    "package": "iron-command-stage8-2G-E-A-production-loop-integration.zip",
+    "packageSha256": "6aa48ffb8b0f599e749bae16b5fdc20ed35c414d602fc7e88d517831263cf2d8",
+    "packageBytes": 69151145,
+    "entries": 1136,
+    "packageHygiene": {
+      "forbiddenEntries": [],
+      "staleFinalPackageRecordInZip": false
+    },
+    "install": {
+      "command": "npm install --ignore-scripts --no-audit --no-fund",
+      "status": 0
+    },
+    "focused": "passed",
+    "strongEvidence": "passed",
+    "cleanNpmTest": "passed",
+    "passed": true
+  }
+}

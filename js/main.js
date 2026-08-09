@@ -42,7 +42,7 @@ import {
   finishBattleReturn, skipBattleReturn, closeBattleResult, abortInvalidBattle,
   getActiveBattle, isBattleFinished, getReports, getReport, hasRadar,
   validateBattleReportForSettlement, buildSettlementPlan, dispatchOperation,
-  listOperations, getOperation, canDispatchOperationMission
+  listOperations, getOperation, canDispatchOperationMission, replayBattleSession
 } from './theater.js';
 import { getOperationCost } from './operations.js';
 import { simulateBattle, resultLabel, rebuildBattleFromDispatchSnapshot } from './battle.js';
@@ -424,6 +424,30 @@ function handleSkipBattleReturn() {
   }
   saveGame(state, { silent: true });
   if (ui) { ui.refreshTheater(state); ui.toast('返航展示已跳过'); }
+  return res;
+}
+
+/** 从历史正式战报启动只读回放，不创建新战斗，也不进入结算路径。 */
+function handleReplayReport(reportId) {
+  const state = getState();
+  const session = Object.values(state.battleSessions || {})
+    .find((row) => row && row.formalReportId === reportId);
+  if (!session) {
+    const result = { ok: false, code: 'report_invalid', reason: '该战报没有正式战斗会话', activeBattle: null };
+    if (ui) ui.toast(result.reason, 'warn');
+    return result;
+  }
+  const res = replayBattleSession(state, session.battleSessionId);
+  if (!res.ok) {
+    if (ui) ui.toast(res.reason || '无法启动战报回放', 'warn');
+    return res;
+  }
+  saveGame(state, { silent: true });
+  if (ui) {
+    ui.switchTab('theater');
+    ui.refreshTheater(state);
+    ui.toast('已进入只读战报回放');
+  }
   return res;
 }
 
@@ -839,6 +863,7 @@ function boot() {
     onSkipBattleReturn: () => handleSkipBattleReturn(),
     onSelectTheater: () => {},
     onSelectReport: () => {},
+    onReplayReport: (reportId) => handleReplayReport(reportId),
     /* 阶段6：维修与离线结算 */
     onRepair: (unitId) => handleRepair(unitId),
     onCancelRepair: (jobId) => handleCancelRepair(jobId),
@@ -1368,6 +1393,16 @@ function boot() {
         return getReport(getState(), reportId);
       } catch (err) {
         return null;
+      }
+    },
+    /** 以正式会话只读回放历史战报；不会重新求解或重复结算。 */
+    replayBattle: (battleSessionId) => {
+      try {
+        const res = replayBattleSession(getState(), battleSessionId);
+        if (res.ok) { saveGame(getState(), { silent: true }); if (ui) ui.refreshTheater(getState()); }
+        return res;
+      } catch (err) {
+        return { ok: false, code: 'error', reason: String(err), activeBattle: null };
       }
     },
     /** 纯求解：不扣资源、不改状态，只算一场战斗的结果（用于验证确定性） */

@@ -2173,7 +2173,7 @@ export class UI {
     if (!current) { p.sig.detail = ''; return; }
     if (p.sig.detail === current.id) return;
     p.sig.detail = current.id;
-    this._renderReportDetail(p.detail, current);
+    this._renderReportDetail(p.detail, current, state);
   }
 
   /** 战报列表中的一行 */
@@ -2206,7 +2206,7 @@ export class UI {
   }
 
   /** 渲染详细战报 */
-  _renderReportDetail(box, report) {
+  _renderReportDetail(box, report, state = null) {
     box.innerHTML = '';
 
     const head = el('div', 'card-head');
@@ -2216,6 +2216,20 @@ export class UI {
 
     box.appendChild(el('div', 'rp-title', `${report.missionKind === 'operation' ? `重复任务 · ${report.missionId}` : report.theaterName} · ${report.formationName}`));
     box.appendChild(el('p', 'rp-summary', report.summary || ''));
+
+    const session = Object.values(state?.battleSessions || {})
+      .find((row) => row && row.formalReportId === report.id);
+    if (session) {
+      const sessionBox = el('div', 'hint');
+      const applied = Boolean(session.settlementId && state?.battleSettlementLedger?.[session.settlementId]);
+      sessionBox.appendChild(el('span', '', `正式会话 ${session.battleSessionId} · ${applied ? '结算已应用' : '结算未完成'}`));
+      const replay = el('button', 'btn', '只读回放');
+      replay.type = 'button';
+      replay.disabled = !applied || !!getActiveBattle(state);
+      replay.addEventListener('click', () => this._onTheaterAction('onReplayReport', report.id));
+      sessionBox.appendChild(replay);
+      box.appendChild(sessionBox);
+    }
 
     const mk = (label, value) => {
       const row = el('div', 'kv');

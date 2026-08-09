@@ -28,6 +28,10 @@ import { getDamageState } from './unit-status.js';
 import { getUnitRank, getUnitEffectiveStats, formatUnitDisplayName } from './units.js';
 import { compareBattleReports, validateBattleOutcomeConsistency, stableStringify } from './integrity.js';
 import { OPERATION_CODE, getOperationCost, canDispatchOperation, operationCooldown } from './operations.js';
+import {
+  SESSION_ORIGIN, SESSION_LIFECYCLE, ensureBattleSessionState, createProductionBattleSession,
+  validateSessionBinding, validateSettlementLedger, buildSettlementLedgerHash, cloneJson
+} from './production-battle-session.js';
 
 /* ============================================================
  * 结果码
@@ -118,6 +122,86 @@ function recordSettlementFailure(state, activeBattle, result, { block = shouldBl
 
 function blockSettlementWithoutLog(state, activeBattle, reason) {
   recordSettlementFailure(state, activeBattle, { code: THEATER_CODE.REPORT_INVALID, reason }, { block: true, log: false });
+}
+
+function getProductionSession(state, activeBattle) {
+  ensureBattleSessionState(state);
+  if (!activeBattle) return null;
+  if (activeBattle.battleSessionId && state.battleSessions[activeBattle.battleSessionId]) {
+    return state.battleSessions[activeBattle.battleSessionId];
+  }
+  // Once an ID exists the save-owned session is canonical. The embedded copy
+  // is only a migration bridge for legacy active battles without an ID.
+  if (!activeBattle.battleSessionId
+    && activeBattle.productionSession && typeof activeBattle.productionSession === 'object') {
+    return activeBattle.productionSession;
+  }
+  return null;
+}
+
+function syncProductionSession(state, activeBattle, updates = {}) {
+  const session = getProductionSession(state, activeBattle);
+  if (!session) return null;
+  Object.assign(session, updates);
+  if (updates.presentationTime !== undefined) {
+    session.presentationState = {
+      ...(session.presentationState || {}),
+      phase: activeBattle?.presentationPhase || session.presentationState?.phase || 'battle',
+      elapsed: safeNumber(updates.presentationTime, 0)
+    };
+  }
+  if (updates.lifecycle === SESSION_LIFECYCLE.SETTLEMENT_PENDING || updates.settlementStatus === 'pending') {
+    session.settlementState = {
+      ...(session.settlementState || {}), status: 'pending', settlementId: session.settlementId, locked: false
+    };
+  }
+  if (updates.lifecycle === SESSION_LIFECYCLE.SETTLED || updates.settlementStatus === 'applied') {
+    session.settlementState = {
+      ...(session.settlementState || {}), status: 'applied', settlementId: session.settlementId, locked: true
+    };
+  }
+  if (updates.lifecycle === SESSION_LIFECYCLE.RETURNED) {
+    session.returnState = {
+      ...(session.returnState || {}), status: updates.settlementStatus === 'blocked' ? 'blocked' : 'returned',
+      elapsed: safeNumber(activeBattle?.returnElapsed, 0), duration: safeNumber(activeBattle?.returnDuration, 5)
+    };
+  }
+  if (activeBattle && activeBattle.battleSessionId === session.battleSessionId) {
+    activeBattle.productionSession = session;
+  }
+  state.battleSessions[session.battleSessionId] = session;
+  return session;
+}
+
+function ensureLegacyProductionSession(state, activeBattle, notes = []) {
+  ensureBattleSessionState(state);
+  if (!activeBattle || activeBattle.replayReadOnly) return null;
+  let session = getProductionSession(state, activeBattle);
+  if (!session) {
+    state.battleSessionSequence += 1;
+    session = createProductionBattleSession({
+      sourceSaveRevision: state.saveRevision,
+      missionId: activeBattle.missionId || activeBattle.theaterId,
+      deploymentSnapshot: activeBattle.dispatchSnapshot || {},
+      report: activeBattle.report || {},
+      sequence: state.battleSessionSequence,
+      sessionOrigin: SESSION_ORIGIN.PRODUCTION,
+      createdAtGameTime: activeBattle.startedGameTime
+    });
+    session.lifecycle = activeBattle.settled ? SESSION_LIFECYCLE.SETTLED : SESSION_LIFECYCLE.RUNNING;
+    state.battleSessions[session.battleSessionId] = session;
+    activeBattle.battleSessionId = session.battleSessionId;
+    activeBattle.sessionOrigin = SESSION_ORIGIN.PRODUCTION;
+    activeBattle.deploymentHash = session.deploymentHash;
+    activeBattle.deploymentSnapshotId = session.deploymentSnapshotId;
+    activeBattle.formalReportHash = session.formalReportHash;
+    activeBattle.sourceReportHash = session.sourceReportHash;
+    activeBattle.settlementId = session.settlementId;
+    activeBattle.productionSession = session;
+    state.activeBattleSessionId = session.battleSessionId;
+    notes.push('旧活动战斗已补齐稳定 ProductionBattleSession。');
+  }
+  return session;
 }
 
 /* ============================================================
@@ -592,6 +676,21 @@ export function dispatchFormation(state, formationId, theaterId, strategyId, see
       `战斗求解失败：${(err && err.message) || '未知错误'}，任务成本已返还`);
   }
 
+  ensureBattleSessionState(state);
+  state.battleSessionSequence += 1;
+  const productionSession = createProductionBattleSession({
+    sourceSaveRevision: state.saveRevision,
+    missionId,
+    deploymentSnapshot: dispatchSnapshot,
+    report,
+    sequence: state.battleSessionSequence,
+    sessionOrigin: SESSION_ORIGIN.PRODUCTION,
+    createdAtGameTime: state.time && state.time.game
+  });
+  productionSession.lifecycle = SESSION_LIFECYCLE.RUNNING;
+  state.battleSessions[productionSession.battleSessionId] = productionSession;
+  state.activeBattleSessionId = productionSession.battleSessionId;
+
   // 参战单位快照：结算只认这份名单，避免结算前编队被改动导致错误写回
   const dispatchedUnitIds = [];
   (formation.unitIds || []).forEach((uid) => {
@@ -630,7 +729,19 @@ export function dispatchFormation(state, formationId, theaterId, strategyId, see
     cost: { ...mission.cost },
     granted: {},
     settlementReceipt: null,
-    startedGameTime: safeNumber(state.time ? state.time.game : 0, 0)
+    startedGameTime: safeNumber(state.time ? state.time.game : 0, 0),
+    battleSessionId: productionSession.battleSessionId,
+    sessionOrigin: SESSION_ORIGIN.PRODUCTION,
+    sourceSaveRevision: productionSession.sourceSaveRevision,
+    deploymentSnapshotId: productionSession.deploymentSnapshotId,
+    deploymentHash: productionSession.deploymentHash,
+    formalReportHash: productionSession.formalReportHash,
+    sourceReportHash: productionSession.sourceReportHash,
+    settlementId: productionSession.settlementId,
+    presentationState: cloneJson(productionSession.presentationState),
+    settlementState: cloneJson(productionSession.settlementState),
+    returnState: cloneJson(productionSession.returnState),
+    productionSession
   };
 
   // 编队进入战斗状态，成员标记为出击中
@@ -682,6 +793,82 @@ export function isBattleFinished(state) {
 }
 
 /**
+ * Open a previously settled production battle as presentation-only replay.
+ * Replay never creates a new report and never enters the settlement path.
+ */
+export function replayBattleSession(state, battleSessionId) {
+  ensureBattleSessionState(state);
+  if (getActiveBattle(state)) return fail(THEATER_CODE.BATTLE_ACTIVE, '已有一场作战正在进行');
+  const source = state.battleSessions[battleSessionId];
+  if (!source || source.sessionOrigin !== SESSION_ORIGIN.PRODUCTION) {
+    return fail(THEATER_CODE.REPORT_INVALID, '找不到正式战斗会话');
+  }
+  const ledger = source.settlementId ? state.battleSettlementLedger[source.settlementId] : null;
+  if (!ledger) {
+    return fail(THEATER_CODE.SETTLEMENT_BLOCKED, '该战斗尚未完成正式结算');
+  }
+  const ledgerCheck = validateSettlementLedger(ledger, source);
+  if (!ledgerCheck.ok) return fail(THEATER_CODE.REPORT_INVALID, ledgerCheck.problems.join('；'));
+  const report = (state.battles || []).find((row) => row && row.id === source.formalReportId);
+  if (!report) return fail(THEATER_CODE.REPORT_INVALID, '正式战报不可用，无法回放');
+  const binding = validateSessionBinding(source, { report, deploymentSnapshot: source.deploymentSnapshot });
+  if (!binding.ok) return fail(THEATER_CODE.REPORT_INVALID, binding.problems.join('；'));
+
+  const replaySession = {
+    ...cloneJson(source),
+    lifecycle: SESSION_LIFECYCLE.REPLAY,
+    replayReadOnly: true,
+    settlementLocked: true,
+    presentationTime: 0
+  };
+  const theater = THEATERS[report.theaterId];
+  const replay = {
+    id: `replay-${source.battleSessionId}`,
+    seed: safeNumber(report.seed, 0) >>> 0,
+    theaterId: report.theaterId,
+    theaterName: theater ? theater.name : report.theaterName,
+    strategyId: report.strategyId,
+    missionKind: report.missionKind || 'campaign',
+    missionId: report.missionId || report.theaterId,
+    formationId: report.formationId,
+    formationName: report.formationName || '历史编队',
+    dispatchedUnitIds: (report.initial?.friendly || []).map((row) => row && row.realId).filter(Boolean),
+    dispatchSnapshot: cloneJson(source.deploymentSnapshot) || {},
+    report: cloneJson(report),
+    elapsed: 0,
+    duration: Math.max(1, safeNumber(report.duration, BATTLE.baseDuration)),
+    playing: true,
+    settled: false,
+    settlementAttempted: false,
+    settlementBlocked: false,
+    settlementError: null,
+    loggedErrors: [],
+    presentationPhase: 'battle',
+    returnElapsed: 0,
+    returnDuration: 5,
+    resultViewed: false,
+    cost: {},
+    granted: {},
+    settlementReceipt: cloneJson(source.settlementReceipt),
+    startedGameTime: safeNumber(state.time?.game, 0),
+    battleSessionId: source.battleSessionId,
+    sessionOrigin: SESSION_ORIGIN.PRODUCTION,
+    sourceSaveRevision: source.sourceSaveRevision,
+    deploymentSnapshotId: source.deploymentSnapshotId,
+    deploymentHash: source.deploymentHash,
+    formalReportHash: source.formalReportHash,
+    sourceReportHash: source.sourceReportHash,
+    settlementId: source.settlementId,
+    productionSession: replaySession,
+    replayReadOnly: true,
+    settlementAllowed: false
+  };
+  state.activeBattle = replay;
+  state.activeBattleSessionId = source.battleSessionId;
+  return pass(THEATER_CODE.OK, { activeBattle: replay, replay: true, readOnly: true });
+}
+
+/**
  * 推进活动战斗播放进度（只推进时间，不改变结果）。
  * @param {object} state
  * @param {number} dt 游戏秒
@@ -690,6 +877,19 @@ export function tickActiveBattle(state, dt) {
   const ab = getActiveBattle(state);
   if (!ab) return pass(THEATER_CODE.NO_BATTLE);
   if (ab.settled) return pass(THEATER_CODE.OK, { activeBattle: ab });
+  if (ab.replayReadOnly === true || ab.settlementAllowed === false) {
+    const step = Math.max(0, safeNumber(dt, 0));
+    ab.elapsed = clamp(safeNumber(ab.elapsed, 0) + step, 0, ab.duration);
+    if (ab.elapsed >= ab.duration) {
+      ab.playing = false;
+      ab.settled = true;
+      ab.presentationPhase = 'returning';
+      ab.returnElapsed = 0;
+      syncProductionSession(state, ab, { lifecycle: SESSION_LIFECYCLE.REPLAY, presentationTime: ab.elapsed });
+    }
+    syncProductionSession(state, ab, { presentationTime: ab.elapsed });
+    return pass(THEATER_CODE.OK, { activeBattle: ab, replay: true, settlementLocked: true });
+  }
   ensureSettlementFields(ab);
   if (ab.settlementBlocked) {
     return fail(THEATER_CODE.SETTLEMENT_BLOCKED, ab.settlementError || '战斗结算已被阻断', { activeBattle: ab });
@@ -697,6 +897,7 @@ export function tickActiveBattle(state, dt) {
 
   const step = Math.max(0, safeNumber(dt, 0));
   ab.elapsed = clamp(safeNumber(ab.elapsed, 0) + step, 0, ab.duration);
+  syncProductionSession(state, ab, { presentationTime: ab.elapsed });
 
   if (ab.elapsed >= ab.duration) {
     ab.playing = false;
@@ -715,6 +916,10 @@ export function tickBattleReturn(state, dt) {
   ab.presentationPhase = 'returning';
   ab.returnDuration = duration;
   ab.returnElapsed = clamp(safeNumber(ab.returnElapsed, 0) + Math.max(0, safeNumber(dt, 0)), 0, duration);
+  syncProductionSession(state, ab, {
+    lifecycle: ab.replayReadOnly ? SESSION_LIFECYCLE.REPLAY : SESSION_LIFECYCLE.SETTLED,
+    presentationTime: safeNumber(ab.elapsed, 0)
+  });
   if (ab.returnElapsed >= duration) return finishBattleReturn(state);
   return pass(THEATER_CODE.OK, { activeBattle: ab });
 }
@@ -773,6 +978,24 @@ export function validateBattleReportForSettlement(state, activeBattle) {
   if (!isObject(report)) {
     problems.push('战报缺失');
     return done(THEATER_CODE.REPORT_INVALID);
+  }
+
+  // Stage E-A integration identity is an additional binding layer. It does
+  // not reinterpret the formal result; it only rejects swapped/tampered
+  // session, deployment, or report inputs.
+  const session = getProductionSession(state, ab);
+  if (ab.sessionOrigin === SESSION_ORIGIN.PRODUCTION || ab.battleSessionId) {
+    const binding = validateSessionBinding(session, {
+      report,
+      deploymentSnapshot: ab.dispatchSnapshot,
+      battleSessionId: ab.battleSessionId,
+      deploymentSnapshotId: ab.deploymentSnapshotId,
+      deploymentHash: ab.deploymentHash,
+      sourceSaveRevision: ab.sourceSaveRevision,
+      settlementId: ab.settlementId,
+      sourceReportHash: ab.sourceReportHash
+    });
+    if (!binding.ok) problems.push(...binding.problems.map((problem) => `ProductionBattleSession：${problem}`));
   }
 
   // —— 元数据一致性 ——
@@ -1048,7 +1271,10 @@ function applySettlementPlan(state, ab, plan) {
       battles: state.battles || [],
       operations: state.operations || {},
       resources: state.resources || {},
-      stats: state.stats || {}
+      stats: state.stats || {},
+      battleSessions: state.battleSessions || {},
+      battleSettlementLedger: state.battleSettlementLedger || {},
+      activeBattleSessionId: state.activeBattleSessionId || null
     });
   } catch (e) {
     snapshot = null;
@@ -1124,6 +1350,37 @@ function applySettlementPlan(state, ab, plan) {
     // 7. 战报入库
     if (plan.reportToStore) pushReport(state, plan.reportToStore);
 
+    // exactly-once ledger + session lifecycle are committed with the same
+    // canonical in-memory transaction as rewards/losses/report.
+    ensureBattleSessionState(state);
+    const session = getProductionSession(state, ab);
+    const settlementId = ab.settlementId || session?.settlementId || null;
+    if (settlementId && state.battleSettlementLedger[settlementId]) {
+      throw new Error('结算凭证已应用，拒绝重复结算');
+    }
+    if (settlementId) {
+      const ledger = {
+        settlementId,
+        battleSessionId: ab.battleSessionId || session?.battleSessionId || null,
+        formalReportHash: ab.formalReportHash || session?.formalReportHash || null,
+        reportId: plan.reportId,
+        result: plan.result,
+        reward: { ...plan.rewards },
+        losses: { unitIds: plan.unitRemovals.slice(), updatedUnitIds: plan.unitUpdates.map((row) => row.unitId) },
+        appliedAtSaveRevision: Math.max(0, Math.floor(safeNumber(state.saveRevision, 0))),
+        status: 'applied'
+      };
+      ledger.ledgerHash = buildSettlementLedgerHash(ledger);
+      state.battleSettlementLedger[settlementId] = ledger;
+    }
+    if (session) {
+      session.lifecycle = SESSION_LIFECYCLE.SETTLED;
+      session.settlementStatus = 'applied';
+      session.settledAtGameTime = safeNumber(state.time?.game, 0);
+      session.settlementLocked = true;
+      state.battleSessions[session.battleSessionId] = session;
+    }
+
     recalcDerived(state);
     return { ok: true, reason: '' };
   } catch (err) {
@@ -1137,6 +1394,9 @@ function applySettlementPlan(state, ab, plan) {
         state.operations = prev.operations;
         state.resources = prev.resources;
         state.stats = prev.stats;
+        state.battleSessions = prev.battleSessions;
+        state.battleSettlementLedger = prev.battleSettlementLedger;
+        state.activeBattleSessionId = prev.activeBattleSessionId;
         recalcDerived(state);
       } catch (e) { /* 回滚失败也不再抛出，避免主循环中断 */ }
     }
@@ -1153,7 +1413,16 @@ function applySettlementPlan(state, ab, plan) {
 export function settleActiveBattle(state) {
   const ab = getActiveBattle(state);
   if (!ab) return fail(THEATER_CODE.NO_BATTLE, '当前没有进行中的作战');
+  if (ab.replayReadOnly === true || ab.settlementAllowed === false) {
+    return fail(THEATER_CODE.SETTLEMENT_BLOCKED, '回放战斗为只读，禁止结算', { activeBattle: ab });
+  }
   if (ab.settled) return pass(THEATER_CODE.OK, { activeBattle: ab });
+  ensureBattleSessionState(state);
+  const session = getProductionSession(state, ab);
+  const settlementId = ab.settlementId || session?.settlementId || null;
+  if (settlementId && state.battleSettlementLedger[settlementId]) {
+    return fail(THEATER_CODE.SETTLEMENT_BLOCKED, '该战斗结算已应用，拒绝重复结算', { activeBattle: ab });
+  }
   ensureSettlementFields(ab);
   if (ab.settlementBlocked) {
     return fail(THEATER_CODE.SETTLEMENT_BLOCKED, ab.settlementError || '战斗结算已被阻断', { activeBattle: ab });
@@ -1172,6 +1441,7 @@ export function settleActiveBattle(state) {
 
   // 2. 计划（只读）
   const plan = buildSettlementPlan(state, ab);
+  if (session) syncProductionSession(state, ab, { lifecycle: SESSION_LIFECYCLE.SETTLEMENT_PENDING, settlementStatus: 'pending' });
 
   // 3. 写入（事务）
   const applied = applySettlementPlan(state, ab, plan);
@@ -1192,6 +1462,9 @@ export function settleActiveBattle(state) {
   ab.loggedErrors = [];
   ab.settlementReceipt = {
     battleId: ab.id,
+    battleSessionId: ab.battleSessionId || null,
+    settlementId: ab.settlementId || null,
+    formalReportHash: ab.formalReportHash || null,
     reportId: plan.reportId,
     formationId: ab.formationId,
     theaterId: ab.theaterId,
@@ -1202,12 +1475,23 @@ export function settleActiveBattle(state) {
     updatedUnitIds: plan.unitUpdates.map((u) => u.unitId),
     settledGameTime: safeNumber(state.time ? state.time.game : 0, 0)
   };
+  if (session) syncProductionSession(state, ab, {
+    lifecycle: SESSION_LIFECYCLE.SETTLED,
+    settlementStatus: 'applied',
+    settlementReceipt: cloneJson(ab.settlementReceipt),
+    presentationTime: safeNumber(ab.elapsed, 0)
+  });
   ab.playing = false;
   ab.elapsed = ab.duration;
   ab.settled = true;
   ab.presentationPhase = 'returning';
   ab.returnElapsed = 0;
   ab.returnDuration = 5;
+  if (session) syncProductionSession(state, ab, {
+    lifecycle: SESSION_LIFECYCLE.SETTLED,
+    settlementStatus: 'applied',
+    presentationTime: safeNumber(ab.elapsed, 0)
+  });
 
   const label = resultLabel(report.result);
   const lostText = plan.lostNames.length ? `，损失：${plan.lostNames.join('、')}` : '，无永久损失';
@@ -1238,6 +1522,16 @@ export function finishBattleReturn(state) {
     return fail(THEATER_CODE.BATTLE_NOT_FINISHED, '战斗尚未结束，暂时无法返回基地', { activeBattle: ab });
   }
 
+  if (ab.replayReadOnly === true) {
+    syncProductionSession(state, ab, {
+      lifecycle: SESSION_LIFECYCLE.RETURNED,
+      presentationTime: safeNumber(ab.elapsed, 0)
+    });
+    state.activeBattle = null;
+    state.activeBattleSessionId = null;
+    return pass(THEATER_CODE.OK, { activeBattle: null, replay: true, readOnly: true });
+  }
+
   const formation = findFormation(state, ab.formationId);
   if (formation) {
     formation.status = FORMATION_STATUS.IDLE;
@@ -1250,7 +1544,13 @@ export function finishBattleReturn(state) {
   }
 
   ab.resultViewed = true;
+  syncProductionSession(state, ab, {
+    lifecycle: SESSION_LIFECYCLE.RETURNED,
+    returnedAtGameTime: safeNumber(state.time?.game, 0),
+    presentationTime: safeNumber(ab.elapsed, 0)
+  });
   state.activeBattle = null;
+  state.activeBattleSessionId = null;
   recalcDerived(state);
 
   logEvent(state, `${ab.formationName}已返回基地。`, LOG_LEVEL.INFO);
@@ -1282,7 +1582,9 @@ export function abortInvalidBattle(state) {
     });
   }
   const battleId = ab.id;
+  syncProductionSession(state, ab, { lifecycle: SESSION_LIFECYCLE.RETURNED, settlementStatus: 'blocked', settlementLocked: true });
   state.activeBattle = null;
+  state.activeBattleSessionId = null;
   recalcDerived(state);
   logEvent(state, '异常战斗已安全关闭，未应用战斗奖励和损失。', LOG_LEVEL.WARN);
   emit('battle:aborted', { battleId });
@@ -1404,6 +1706,7 @@ export function sanitizeBattles(state) {
 export function sanitizeActiveBattle(state) {
   const notes = [];
   if (!state) return { repaired: false, notes, activeFormationId: null };
+  ensureBattleSessionState(state);
 
   const ab = state.activeBattle;
   if (ab === null || ab === undefined) {
@@ -1442,6 +1745,28 @@ export function sanitizeActiveBattle(state) {
     blockSettlementWithoutLog(state, ab, '战报缺失，无法重建可信战报');
     notes.push('活动战斗战报无法重建，已进入结算阻断。');
     return { repaired: true, notes, activeFormationId: formation.id };
+  }
+
+  if (ab.battleSessionId && !state.battleSessions[ab.battleSessionId]) {
+    blockSettlementWithoutLog(state, ab, '战斗会话缺失，无法安全恢复');
+    notes.push('活动战斗会话缺失，已进入结算阻断。');
+    return { repaired: true, notes, activeFormationId: formation.id };
+  }
+  const session = ensureLegacyProductionSession(state, ab, notes);
+  if (session) {
+    ab.productionSession = session;
+    ab.sessionOrigin = session.sessionOrigin;
+    ab.deploymentHash = session.deploymentHash;
+    ab.deploymentSnapshotId = session.deploymentSnapshotId;
+    ab.formalReportHash = session.formalReportHash;
+    ab.sourceReportHash = session.sourceReportHash;
+    ab.sourceSaveRevision = session.sourceSaveRevision;
+    ab.settlementId = session.settlementId;
+    state.activeBattleSessionId = session.battleSessionId;
+    if (ab.settled) {
+      session.lifecycle = SESSION_LIFECYCLE.SETTLED;
+      session.settlementStatus = 'applied';
+    }
   }
 
   // 字段修复
@@ -1534,6 +1859,44 @@ export function sanitizeActiveBattle(state) {
     } else if (receipt.result !== report.result) {
       return drop('结算凭证与战报不匹配');
     }
+    if (session) {
+      if (receipt.battleSessionId && receipt.battleSessionId !== session.battleSessionId) {
+        return drop('结算凭证与战斗会话不匹配');
+      }
+      if (receipt.settlementId && receipt.settlementId !== session.settlementId) {
+        return drop('结算凭证与结算 ID 不匹配');
+      }
+      const ledger = state.battleSettlementLedger[session.settlementId];
+      const migratedLedger = {
+        settlementId: session.settlementId,
+        battleSessionId: session.battleSessionId,
+        formalReportHash: session.formalReportHash,
+        reportId: report.id,
+        result: receipt.result,
+        reward: { ...(receipt.granted || {}) },
+        losses: {
+          unitIds: receipt.removedUnitIds.slice(),
+          updatedUnitIds: receipt.updatedUnitIds.slice()
+        },
+        appliedAtSaveRevision: Math.max(0, Math.floor(safeNumber(state.saveRevision, 0))),
+        status: 'applied'
+      };
+      migratedLedger.ledgerHash = buildSettlementLedgerHash(migratedLedger);
+      if (!ledger) {
+        state.battleSettlementLedger[session.settlementId] = migratedLedger;
+        notes.push('已为历史结算凭证补齐 exactly-once 结算账本。');
+      } else if (ledger.reportId !== migratedLedger.reportId
+        || ledger.formalReportHash !== migratedLedger.formalReportHash
+        || ledger.status !== 'applied') {
+        return drop('结算账本与活动战斗凭证不匹配');
+      }
+      session.settlementReceipt = cloneJson(receipt);
+      session.lifecycle = SESSION_LIFECYCLE.SETTLED;
+      session.settlementStatus = 'applied';
+      session.settlementLocked = true;
+      session.settlementState = { ...(session.settlementState || {}), status: 'applied', settlementId: session.settlementId, locked: true };
+      state.battleSessions[session.battleSessionId] = session;
+    }
   } else if (ab.settlementReceipt) {
     ab.settlementReceipt = null;
     notes.push('未结算的作战携带了结算凭证，已清除。');
@@ -1568,7 +1931,7 @@ export function sanitizeActiveBattle(state) {
 /** 汇总导出，便于调试面板一次性读取 */
 export const THEATER_API = {
   getTheaterState, getTheaterIntel, getMissionCost, getOperation, listOperations, getOperationCost,
-  canDispatch, canDispatchOperationMission, dispatchFormation, dispatchOperation,
+  canDispatch, canDispatchOperationMission, dispatchFormation, dispatchOperation, replayBattleSession,
   tickActiveBattle, tickBattleReturn, settleActiveBattle, finishBattleReturn, skipBattleReturn, closeBattleResult,
   abortInvalidBattle, shouldBlockSettlement,
   sanitizeTheaters, sanitizeActiveBattle, sanitizeBattles,

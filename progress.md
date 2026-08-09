@@ -557,15 +557,31 @@
 - [x] 修正真实回归样本：`choreographed_shot_102` 为 `unit_fixture-u-3` Scout，效果族为 `scout_autocannon`；真实 MBT 帧为 `unit_fixture-u-5 / choreographed_shot_113 / tank_main_gun / tank_cannon`；D-C-11 改为显式 `d-c-11-scout-fire.png`，D-C-03 保持真实 MBT。
 - [x] 强化 Production-State verifier：从每个 scene 的正式 `sourceReport` 和当前 presentation code 重算 predicate、actor/shot/effect/wreck 归属、effect family、镜头、音频、transition、终局 cue、PNG SHA-256 与唯一性；浏览器新增终端检查和 wreck faction/orientation 绑定。
 - [x] 新增 24 个 true-value tamper cases；所有用例 `declaredPassedPreserved=true`，均被 verifier 拒绝；旧 D-C 18 项 tamper gate 兼容回归通过。
-- [x] 性能闭环使用 20 次 warmup、每场景 120 次完整 `renderState.atTime()` 样本，覆盖 victory/withdraw/synthetic art；最终实测 p95 为 `7.219/5.598/8.205ms`，最坏 `8.205ms < 16.7ms`，effect/smoke/projectile/environment 统计已落盘。
+- [x] 性能闭环使用 20 次 warmup、每场景 120 次完整 `renderState.atTime()` 样本，覆盖 victory/withdraw/synthetic art；最终封包实测 p95 为 `3.869/3.305/4.709ms`，最坏 `4.709ms < 16.7ms`，effect/smoke/projectile/environment 统计已落盘。
 - [x] Reduced Motion 运行态验证通过：相同 effect/audio/result 保留，camera amplitude/offset/zoom 归零，`reducedMotionApplied=true`；确定性和 authority 不变检查通过。
 - [x] D-C.1 npm gate、官方 Playwright client、Chromium 证据、强重算和解包级 package verifier 已接入；14/14 浏览器 PNG 唯一，pageErrors/consoleErrors `0`，package clean install 与完整 clean `npm test` 均通过。
-- [x] 交付包：`iron-command-stage8-2G-D-C-1-strong-evidence-performance.zip`，SHA-256 `468b1e41a3983a75c99b3164e834059c17d6dfc040b2c67d792d18f2a6d87a5b`，`66,550,138` bytes，`1097` entries；ZIP 无旧/新 ZIP、`.git`、`node_modules`、browser profile 或 stale final record。
-- [ ] CI Run/Job 与独立审计方仍需按最终 D-C.1 ZIP 重新验收；审计 JSON 仅为失败基线和回归样本，不代表独立批准。
+- [x] 最终交付包：`iron-command-stage8-2G-D-C-1-strong-evidence-performance.zip`，SHA-256 `cfaa506764486963569499ccf9b99175f113a4417519dcd22bedabfea0f132e6`，`66,551,107` bytes，`1097` entries；ZIP 无自身 ZIP、`.git`、`node_modules`、browser profile 或 D-C.1 stale record。
+- [x] 最终 head `d2afd98113c5410022df5ccc5bfd28c41977a4d7` 的 `core-regression` Run `31291989024` / Job `93190637568` 成功，D-C→D-C.1 均成功；PR #7 仍为 Draft、base/head 正确且 mergeable。
 
 # Stage 8.2G-D-C.1 final delivery closure
 
 - [x] focused `npm run test:stage8-2G-D-C-1`、普通 `npm test`、clean install 与无 `--skip-full` 的完整 package verifier 均通过；D-C.1 证据为 14/14 帧、14/14 唯一 PNG、24/24 tamper rejection，正式报告/Repair Authority 保持只读。
 - [x] 首轮真实 `core-regression` 已完成：Run `31291451206` / Job `93189235124`，head `6a15193dabe2eac398e69dee61eba0efef416977`，D-C 与其后的 D-C.1 步骤均 `success`。
 - [x] CI workflow 已固定为 D-C 后执行 D-C.1；selfcheck generator 会保留最终交付元数据中的真实 CI 记录与 `readyToCloseStage8_2G_D_C` 标志。
-- [ ] 最终元数据提交后的 head CI 与最终 ZIP 尚待收口；无 D-C.2，独立审计 JSON 仍只作回归参考，未导入生产代码。
+- [x] 最终元数据提交后的 head CI、最终 ZIP 与无 `--skip-full` 解包 verifier 均收口；`readyToCloseStage8_2G_D_C: true`、D-C closed、ready for next stage；无 D-C.2，独立审计 JSON 仍只作回归参考，未导入生产代码。
+
+# Stage 8.2G-E-A progress
+
+- [x] 以 D-C.1 baseline commit `d2afd98113c5410022df5ccc5bfd28c41977a4d7` 为实现基线；本阶段没有用户提供的 independent-audit JSON，未导入或伪造独立审计结论。
+- [x] 正式战区派遣创建稳定 `ProductionBattleSession`：`battleSessionId`、`missionId`、`deploymentSnapshotId`、`sourceSaveRevision`、`formalReportId`、`formalReportHash/sourceReportHash`、`presentationState`、`settlementState`、`returnState` 均进入可迁移状态；身份只由 save revision、mission、部署快照哈希和序列号组成。
+- [x] 部署快照使用浏览器同步 SHA-256 canonical hash；正式 presentation 继续消费同一份 formal report，session/activeBattle 的重复嵌入副本不能覆盖 `state.battleSessions` 的存档权威。
+- [x] formal result/reward/loss/settlement writeback 保持原计算路径；新增带 hash 的 exactly-once settlement ledger，与战报、资源、单位、编队、战区、统计在同一内存事务中提交并支持回滚。
+- [x] save revision 与 additive migration 已接入；旧存档无 session 时正常加载，历史活动战斗可补齐 session；运行中、正式完成、结算结果可见、结算后和返回基地阶段均可读档续接，损坏 session/report fail-closed。
+- [x] 正式战报页增加只读回放入口；Replay 复用同一 session/report/ledger，不重新求解、不扣资源、不应用奖励/损失、不重复结算；debug/fixture origin 无法进入正式 settlement。
+- [x] 新增 `tests/stage8-2G-E-A-test.mjs` 13/13；覆盖 session、deployment、formal report、settlement、save/reload/resume、replay、authority 与 9 类 tamper rejection，包含 settlement ID、部署 hash、source revision、session swap、debug origin、reward ledger 等回归。
+- [x] 当前 Chromium 正式入口证据完成 11/11 唯一 PNG：建造兵营→训练单位→正式组建编队→战区派遣→手动保存/读取→正式结算→战报→只读回放→返回基地；`fixtureLoaderUsed=false`、`debugOverlayUsed=false`、pageErrors/consoleErrors 为 `0`。官方 `develop-web-game` Playwright 客户端亦已执行并检查真实页面 canvas。
+- [x] 新增 E-A 强 verifier、机器证据、tamper 结果、developer selfcheck、delivery builder/verifier；`npm run test:stage8-2G-E-A` 与 stage5 99/99、D-C.1 focused gate 已通过；CI 已在 D-C.1 后追加 E-A focused gate。
+- [x] 完整 `npm test` 通过（包含 posttest 的 D-C、D-C.1 与 E-A gate）；E-A focused integration `13/13`，D-C.1 strong evidence `24/24` tamper rejection，历史阶段回归全部通过。
+- [x] 无 `--skip-full` 的 clean-package verifier 通过：隔离安装、包内完整 `npm test`、E-A focused/strong evidence、包卫生均通过；`cleanNpmTest=passed`，无 forbidden entries 或 stale final record。
+- [x] 最终 ZIP：`iron-command-stage8-2G-E-A-production-loop-integration.zip`，SHA-256 `6aa48ffb8b0f599e749bae16b5fdc20ed35c414d602fc7e88d517831263cf2d8`，`69,151,145` bytes，`1136` entries，11/11 浏览器截图唯一且无 page/console errors。
+- [ ] 待完成：提交、推送并等待 GitHub Actions；独立审计方后续仍需按 E-A 最终 ZIP 重新验收，E-A evidence JSON 只作运行证据，不作为生产资源。

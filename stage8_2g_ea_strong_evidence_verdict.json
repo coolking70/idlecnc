@@ -1,0 +1,29 @@
+{
+  "stage": "8.2G-E-A",
+  "verifier": "independent production integration recomputation",
+  "recomputedChecks": {
+    "productionEntry": true,
+    "stableSessionShape": true,
+    "deploymentCanonical": true,
+    "deploymentImmutable": true,
+    "formalReportBinding": true,
+    "formalReportConsumed": true,
+    "exactlyOnceLedger": true,
+    "duplicateSettlementBlocked": true,
+    "runningResume": true,
+    "formalCompletionResume": true,
+    "readOnlyReplay": true,
+    "tamperSettlementId": true,
+    "tamperDeploymentHash": true,
+    "tamperSourceRevision": true,
+    "tamperDebugOrigin": true,
+    "tamperSessionSwap": true,
+    "tamperDeploymentSnapshot": true,
+    "tamperRewardLedger": true,
+    "authorityFrozen": true
+  },
+  "tamperRejectionCount": 9,
+  "screenshots": 11,
+  "errors": [],
+  "passed": true
+}

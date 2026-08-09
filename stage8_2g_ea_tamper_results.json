@@ -1,0 +1,55 @@
+{
+  "stage": "8.2G-E-A",
+  "cases": [
+    {
+      "case": "formal_report_swap",
+      "rejected": true
+    },
+    {
+      "case": "replay_settlement",
+      "rejected": true
+    },
+    {
+      "case": "settlement_id",
+      "rejected": true,
+      "code": "report_invalid",
+      "reason": "ProductionBattleSession：settlement ID mismatch"
+    },
+    {
+      "case": "deployment_hash",
+      "rejected": true,
+      "code": "report_invalid",
+      "reason": "ProductionBattleSession：deployment hash binding mismatch"
+    },
+    {
+      "case": "stale_save_revision",
+      "rejected": true,
+      "code": "report_invalid",
+      "reason": "ProductionBattleSession：source save revision mismatch"
+    },
+    {
+      "case": "debug_settlement",
+      "rejected": true,
+      "code": "report_invalid",
+      "reason": "ProductionBattleSession：session origin is not production"
+    },
+    {
+      "case": "session_swap",
+      "rejected": true,
+      "code": "report_invalid",
+      "reason": "ProductionBattleSession：battle session ID mismatch"
+    },
+    {
+      "case": "deployment_snapshot",
+      "rejected": true,
+      "code": "report_invalid",
+      "reason": "ProductionBattleSession：deployment hash mismatch"
+    },
+    {
+      "case": "reward_ledger",
+      "rejected": true
+    }
+  ],
+  "rejectionCount": 9,
+  "passed": true
+}

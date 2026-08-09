@@ -1,0 +1,6 @@
+{
+  "stage": "8.2G-E-A",
+  "exactlyOnceLedger": true,
+  "duplicateSettlementBlocked": true,
+  "passed": true
+}

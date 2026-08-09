@@ -1,0 +1,77 @@
+{
+  "stage": "8.2G-E-A",
+  "version": 1,
+  "generatedBy": "tests/generate-stage8-2G-EA-machine-evidence.mjs",
+  "productionEntry": true,
+  "fixtureLoaderUsed": false,
+  "debugOverlayUsed": false,
+  "frameCount": 11,
+  "frames": [
+    {
+      "frame": 1,
+      "file": "e-a-01-base-overview.png",
+      "semantic": "base_overview",
+      "timeMs": 0
+    },
+    {
+      "frame": 2,
+      "file": "e-a-02-barracks-ready.png",
+      "semantic": "production_building_ready",
+      "timeMs": 1000
+    },
+    {
+      "frame": 3,
+      "file": "e-a-03-production-units-ready.png",
+      "semantic": "production_units_ready",
+      "timeMs": 2000
+    },
+    {
+      "frame": 4,
+      "file": "e-a-04-formation-deployment.png",
+      "semantic": "formation_deployment",
+      "timeMs": 3000
+    },
+    {
+      "frame": 5,
+      "file": "e-a-05-theater-entry.png",
+      "semantic": "formal_theater_entry",
+      "timeMs": 4000
+    },
+    {
+      "frame": 6,
+      "file": "e-a-06-battle-running.png",
+      "semantic": "battle_running",
+      "timeMs": 5000
+    },
+    {
+      "frame": 7,
+      "file": "e-a-07-reload-running-session.png",
+      "semantic": "reload_running_session",
+      "timeMs": 6000
+    },
+    {
+      "frame": 8,
+      "file": "e-a-08-formal-result-settlement.png",
+      "semantic": "formal_result_settlement",
+      "timeMs": 7000
+    },
+    {
+      "frame": 9,
+      "file": "e-a-09-report-bound.png",
+      "semantic": "formal_report_bound",
+      "timeMs": 8000
+    },
+    {
+      "frame": 10,
+      "file": "e-a-10-replay-readonly.png",
+      "semantic": "replay_readonly",
+      "timeMs": 9000
+    },
+    {
+      "frame": 11,
+      "file": "e-a-11-returned-base.png",
+      "semantic": "returned_base",
+      "timeMs": 10000
+    }
+  ]
+}
