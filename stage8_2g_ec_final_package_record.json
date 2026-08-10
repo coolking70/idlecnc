@@ -2,15 +2,15 @@
   "stage": "8.2G-E-C",
   "recordType": "external_final_package_record",
   "package": "iron-command-stage8-2G-E-C-offline-progression-closure.zip",
-  "packageSha256": "8e1aafcd21fb352b9ca12becd162a1893200063160eead1ae079494aa4745c18",
-  "packageBytes": 50668151,
+  "packageSha256": "b10cf10b79b4176457973fabe74e7e6310774345c24eb4dff94a96152fa5f916",
+  "packageBytes": 50684641,
   "entries": 1154,
   "branch": "main",
   "baseline": {
     "stage": "8.2G-E-B",
     "commit": "b41ad940d8fab78038f1b1dedf5a404841b81401"
   },
-  "finalHead": "41d1694b390f05fef9ccdce8e0dc320c24abdf3d",
+  "finalHead": "257c7fdb4898e07d642242850ca275eab9bb02ba",
   "scope": {
     "offlineProgression": true,
     "pendingReportReload": true,
@@ -42,19 +42,19 @@
     "scenarios": [
       {
         "scenario": "idle",
-        "p95Ms": 0.029389000000001886
+        "p95Ms": 0.027338999999997782
       },
       {
         "scenario": "construction",
-        "p95Ms": 0.014899999999997249
+        "p95Ms": 0.016359999999991715
       },
       {
         "scenario": "battle",
-        "p95Ms": 0.03940899999997782
+        "p95Ms": 0.05034899999998288
       },
       {
         "scenario": "replay",
-        "p95Ms": 0.04769899999996596
+        "p95Ms": 0.058177999999998065
       }
     ]
   },
@@ -73,8 +73,8 @@
   "cleanPackageTest": {
     "stage": "8.2G-E-C",
     "package": "iron-command-stage8-2G-E-C-offline-progression-closure.zip",
-    "packageSha256": "8e1aafcd21fb352b9ca12becd162a1893200063160eead1ae079494aa4745c18",
-    "packageBytes": 50668151,
+    "packageSha256": "b10cf10b79b4176457973fabe74e7e6310774345c24eb4dff94a96152fa5f916",
+    "packageBytes": 50684641,
     "entries": 1154,
     "packageHygiene": {
       "forbiddenEntries": [],
