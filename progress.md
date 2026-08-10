@@ -653,3 +653,12 @@
 - [x] 已新增 `.cnb.yml` + `.cnb/Dockerfile`（Node + Chromium）执行 `npm run gate:stage8-2G`，提供独立于 GitHub 的 cnb 原生自动验证；`.github/workflows/core-regression.yml` 保留不删。
 - [x] 未改动 `js/` 下任何运行时源码，未删除/放宽任何 step、断言、tamper 用例或性能阈值；Authority Freeze 约束不变。
 - [x] 新验收基线（`git rev-parse HEAD` / `git status --porcelain` / `npm run gate:stage8-2G` / `npm run verify:clean-clone` / 验收方独立探测与 tamper 复核）已在本文档与 `STAGE8-2G-E-C-DELIVERY.md` 中写明。
+
+# 干净克隆可复现性修复：screenshots/manifest.json 纳入版本控制
+
+- [x] **根因**：`.gitignore` 顶层 `screenshots/` 规则把 `experiments/battle-sandbox/universal-planner/screenshots/` 整目录忽略（git 跟踪 = 0），而 `experiments/battle-sandbox/tests/universal-presentation-delivery-test.mjs` 在模块顶层无条件 `readFileSync` 该目录下的 `manifest.json`（且该测试在 `npm test` 链内）。导致任何干净克隆跑 `npm test`（→ `gate:stage8-2G` → `verify:clean-clone`）必然 ENOENT，仓库此前只在开发者脏工作区能通过。
+- [x] **修复方案（方案 A，`git add -f` 强制纳入）**：该 manifest 是浏览器捕获产出的**交付契约的一部分**——包含 `pngSha256` 哈希、`actualTime`、`planFingerprint`、`currentPositionsHash` 等需要被审查的固定内容，且由 `capture-universal-planner-evidence.mjs` 运行时捕获生成、无法从源码确定性重建，故不采用方案 B。仅把测试真正依赖的最小输入 `screenshots/manifest.json` 纳入版本控制（约 16KB，1 个文件），12 个截图 PNG 仍保持 ignored 不入库。
+- [x] 已逐条核查 `dist` / `output` / `artifacts` / `tests/evidence` / `tests/outputs` 五个目录：仅 `build/verify-*-delivery-package.mjs`（不在 `gate:stage8-2G` 链内）会读取其中内容；`gate:stage8-2G` 链条读取的未跟踪路径**只有** `screenshots/manifest.json` 一处，已修复。其余 `stage8_2g_*.json` 均由门禁链内前置步骤生成后才被读取，干净克隆可自给自足。
+- [x] 未改动 `js/` 下任何运行时源码，未改动 `tests/lib/` 下任何 verifier 判定逻辑，未删除/放宽任何测试断言、tamper 用例或性能阈值（16.7ms 红线不变），未重新引入任何自指 `finalHead`。
+- [x] 本地完整 `npm run gate:stage8-2G` 与 `npm run verify:clean-clone` 实跑均为绿，真实输出见本 Issue 评论与 `STAGE8-2G-E-C-DELIVERY.md`。
+- [x] `.cnb.yml` 流水线在容器内 git checkout 后跑相同门禁链，现可复现通过（本环境已用 Chromium 实跑验证）。
