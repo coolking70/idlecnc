@@ -50,7 +50,7 @@ Stage 8.2G-E-C 通过外部独立验收后，发现 `package.json` 的 `posttest
 
 ## CI 依据与提交绑定
 
-- 收口源码提交（含 `package.json` posttest 修复、`progress.md`、`STAGE8-2G-E-C-DELIVERY.md` 与再生成证据）：`38ef77d` → `41d1694`；record 元数据提交：`3a8828f`。`finalHead` 指向 ZIP 内容对应的源码提交 `41d1694`（record 文件不进 ZIP，故 record 元数据提交不影响 ZIP 内容）。
+- 收口源码提交（含 `package.json` posttest 修复、`progress.md`、`STAGE8-2G-E-C-DELIVERY.md` 与再生成证据）：`38ef77d` → `41d1694`；DELIVERY.md CI 依据补充提交：`853df89`；record 元数据提交：`3a8828f`。`finalHead` 指向 ZIP 内容对应的源码提交 `853df89`（record 文件不进 ZIP，故 record 元数据提交不影响 ZIP 内容）。
 - 本地完整 `npm test` 真实输出已作为本 Issue 附件上传（`npm-test-full.log`），exit=0 且含 `Stage 8.2G-E-B result` / `Stage 8.2G-E-C result`；干净目录全量验证日志也已上传（`ec-verify.log`），全部子项 `passed`。
 - GitHub Actions `core-regression` 为权威门禁：上一交付链所依据的 CI run 为 `31331527716`（commit `1f66a85`），其中 D-C / D-C.1 / E-A / E-A.1 / browser:E-A.1 / E-B / browser:E-B / E-C / browser:E-C 九个 step 全部 success。
 - 本仓库以 CNB 为工作镜像，未配置等价流水线；本收口提交的绿色依据为上述本地完整 `npm test` + 干净目录全量验证（不带 `--skip-full`）的真实输出。
