@@ -627,6 +627,15 @@
 - [x] 当前交付包：`iron-command-stage8-2G-E-C-offline-progression-closure.zip`；最终 SHA-256、bytes、entries、final HEAD 与 clean package gate 以仓库外的 `stage8_2g_ec_final_package_record.json` 为准，避免在源码文档中复制会随最终封包变化的哈希。
 - [ ] 独立审计方仍需按 E-C 最终 ZIP 重新验收；audit JSON 仅作为回归参考，不代表独立批准。
 
+# Stage 8.2G-E-C 收口修复：npm test 纳入 E-B / E-C
+
+- [x] `package.json` 的 `posttest` 补齐 `test:stage8-2G-E-B` 与 `test:stage8-2G-E-C`（只加不减，D-C / D-C.1 / E-A / E-A.1 全部保留）；CI workflow 既有 step 保持不变，两者互不替代。
+- [x] 本地完整 `npm test` exit=0，日志含 `Stage 8.2G-E-B result: 12 passed / 0 failed / 12 total` 与 `Stage 8.2G-E-C result: 12 passed / 0 failed / 12 total`，`ordinaryNpmTest` 现真实覆盖 E-B / E-C。
+- [x] 重建最终交付包并做无 `--skip-full` 干净目录全量验证：install / focusedEC / regressionEBBrowser / cleanPackageBrowserRerun / strongEvidence / tamper / ordinaryNpmTest 全部 `passed`。
+- [x] 新 ZIP 的 SHA-256 / bytes / 非目录 entries 已写入 `stage8_2g_ec_final_package_record.json` 与 `stage8_2g_ec_clean_package_test.json`；`cleanPackageGate = passed`。
+- [x] 交付自检逐条通过：未改动 `js/` 下任何文件，未删除/放宽任何 CI step、测试断言或 tamper 用例；ZIP 内无 `.git` / `node_modules` / 嵌套 zip / `__MACOSX` / `.DS_Store`。
+- [x] 收口提交已推送，`finalHead` 与最终远端 HEAD 一致；该提交的 CI（GitHub Actions `core-regression`）全绿。
+
 # Stage 8.2G-E-C.1 final acceptance and mainline closure
 
 - [x] 已修正 README 与进度文档的当前阶段标识，并将封包数字统一收敛到 final package record，未改动生产规则或历史证据样本。

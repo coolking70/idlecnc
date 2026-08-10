@@ -30,6 +30,24 @@ npm run verify:stage8-2G-E-C
 
 最终 ZIP 的 SHA-256、字节数、entries、final HEAD、CI 与干净目录全量结果以 `stage8_2g_ec_final_package_record.json` 为准。该记录必须在最终源码提交后重新生成；不得沿用提交前封包的旧哈希。
 
+## 收口修复：npm test 纳入 E-B / E-C
+
+Stage 8.2G-E-C 通过外部独立验收后，发现 `package.json` 的 `posttest` 链停在 E-A.1，E-B 与 E-C 的 focused 测试只作为 CI 独立 step 执行，未纳入 `npm test`，导致干净包验证里的 `ordinaryNpmTest: passed` 实际未覆盖 E-B / E-C。
+
+本次修复只加不减：
+
+```json
+"posttest": "npm run test:stage8-2G-D-C && npm run test:stage8-2G-D-C-1 && npm run test:stage8-2G-E-A && npm run test:stage8-2G-E-A-1 && npm run test:stage8-2G-E-B && npm run test:stage8-2G-E-C"
+```
+
+- 原有 D-C / D-C.1 / E-A / E-A.1 全部保留；CI workflow（`core-regression.yml`）的既有 step 保持原样，与 posttest 互相独立，未删除或放宽任何 step。
+- 本地完整 `npm test` exit=0，日志含 `Stage 8.2G-E-B result: 12 passed / 0 failed / 12 total` 与 `Stage 8.2G-E-C result: 12 passed / 0 failed / 12 total`。
+- 最终交付包已重建，并在干净目录执行无 `--skip-full` 全量验证：install / focusedEC / regressionEBBrowser / cleanPackageBrowserRerun / strongEvidence / tamper / ordinaryNpmTest 全部 `passed`；`ordinaryNpmTest` 现真实覆盖 E-B / E-C（ZIP 内 package.json 的 posttest 同样包含 E-B/E-C）。
+- 新 ZIP 的 SHA-256、bytes、非目录 entries 已更新到 `stage8_2g_ec_final_package_record.json` 与 `stage8_2g_ec_clean_package_test.json`；`cleanPackageGate = passed`。
+- 未改动 `js/` 下任何运行时源码，未删除/放宽任何测试断言、verifier 判定逻辑或 tamper 用例；Authority Freeze 约束不变。
+
+最终 ZIP 与收口提交的 SHA-256、bytes、entries、final HEAD、CI 以 `stage8_2g_ec_final_package_record.json` 为准。
+
 ## E-C.1 收口说明
 
 - README、progress 与本交付说明已统一指向 E-C，不再把 C.1.1a 作为当前阶段。
