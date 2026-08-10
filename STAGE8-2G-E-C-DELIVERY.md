@@ -87,3 +87,45 @@ Stage 8.2G-E-C 通过外部独立验收后，发现 `package.json` 的 `posttest
 - 开发方独立复核已重新检查 E-C focused、E-B browser regression、E-C browser、strong verifier、true-value tamper、普通 `npm test` 与清洁目录验证。
 - 本次收口不导入或修改任何 independent-audit JSON，也不删除或过滤历史失败样本。
 - 外部独立审计仍须由独立验收方使用最终 ZIP 执行；本文件中的开发方复核结论不等同于外部批准。
+
+## 干净克隆可复现性修复（阻断项收口）
+
+**验收方在 HEAD `59e5388` 实跑 `npm run verify:clean-clone` 时退出码 1**：`gate:stage8-2G` 步骤 failed，报错
+`ENOENT: no such file or directory, open '<clone>/experiments/battle-sandbox/universal-planner/screenshots/manifest.json'`。
+
+### 根因
+
+`.gitignore` 顶层 `screenshots/` 规则把 `experiments/battle-sandbox/universal-planner/screenshots/` 整目录忽略
+（git 跟踪 = 0，本地实际 = 37 文件）。而 `experiments/battle-sandbox/tests/universal-presentation-delivery-test.mjs`
+在模块顶层（第 8 行）无条件 `readFileSync` 该 manifest，且该测试在 `npm test` 链内。
+因此任何干净克隆 `npm test → gate:stage8-2G → verify:clean-clone` 必然失败。
+顶层 `screenshots/`（117 个被跟踪文件）与嵌套 `universal-planner/screenshots/`（0 个被跟踪）的不一致长期掩盖了问题。
+
+### 修复方式（方案 A：把交付契约纳入版本控制）
+
+- 判定：该 manifest 是浏览器捕获产出的**交付契约**（含 `pngSha256`、`actualTime`、`planFingerprint`、
+  `currentPositionsHash` 等需审查的固定内容），由 `capture-universal-planner-evidence.mjs` 运行时捕获生成，
+  无法从源码确定性重建，故不采用方案 B。
+- 操作：用 `git add -f experiments/battle-sandbox/universal-planner/screenshots/manifest.json`
+  将测试真正依赖的最小输入（1 个 JSON，约 16KB）纳入版本控制；12 个截图 PNG 仍 ignored 不入库。
+  未对测试文件做任何删除/skip/try-catch 包裹/摘链/放宽断言。
+
+### 同类风险排查（干净克隆可用性）
+
+`dist` / `output` / `artifacts` / `tests/evidence` / `tests/outputs` 五个目录逐一确认：
+仅 `build/verify-*-delivery-package.mjs`（**不在** `gate:stage8-2G` 链内）会读取其中内容。
+`gate:stage8-2G` 链条读取的未跟踪路径只有 `screenshots/manifest.json` 一处（已修复）；
+其余 `stage8_2g_*.json` 均由链内前置步骤生成后才被读取，干净克隆可自给自足，无新增风险。
+
+### 修复后实跑
+
+- `npm run gate:stage8-2G`：exit=0，全门禁绿（含此前 CPU 争用下偶发的 D-C.1 性能项，本轮干净实跑 p95 全部 <16.7ms）。
+- `npm run verify:clean-clone`：exit=0，`overallPassed: true`，steps 全部 `passed`，`clonedHead == currentHead`。
+- 真实输出全文见本 Issue 评论。
+
+### 硬性约束核对
+
+- 未改动 `js/` 与 `tests/lib/` 下任何文件（`git diff --name-only` 仅含 manifest.json / progress.md / DELIVERY.md）。
+- 未删除/跳过/放宽 `universal-presentation-delivery-test.mjs` 任何断言。
+- 未删除 `.github/workflows/core-regression.yml` 任何 step；历史阶段（A/B/C/D）证据与 record 原样不动。
+- 未放宽任何性能阈值（16.7ms 红线不变）；未重新引入自指 `finalHead`。

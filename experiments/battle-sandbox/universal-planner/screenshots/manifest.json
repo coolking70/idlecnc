@@ -1,0 +1,534 @@
+{
+  "version": 1,
+  "generatedBy": "capture-universal-planner-evidence.mjs",
+  "serverUrl": "http://127.0.0.1:46591/experiments/battle-sandbox/universal-planner/",
+  "screenshots": [
+    {
+      "file": "01-repair-contact.png",
+      "scenarioId": "canonical-0022",
+      "reportId": "battle_98_corpus-candidate-739_scrap_mine_cautious",
+      "terrain": "open",
+      "missionId": "scrap_mine",
+      "strategyId": "cautious",
+      "result": "pyrrhic",
+      "actorCount": 5,
+      "planFingerprint": "upf_e597d721",
+      "requestedTime": 15.168,
+      "actualTime": 15.168,
+      "currentPositionsHash": "d58abd3ec865d92104c2172a5360a347198379588ea7ecd1764ea9cb00cf13f8",
+      "activeActions": [
+        {
+          "actorId": "unit_corpus-u-candidate-739-1",
+          "action": "damage"
+        },
+        {
+          "actorId": "unit_corpus-u-candidate-739-2",
+          "action": "repair_approach"
+        },
+        {
+          "actorId": "enemy_infantry_1",
+          "action": "damage"
+        },
+        {
+          "actorId": "enemy_infantry_2",
+          "action": "damage"
+        },
+        {
+          "actorId": "enemy_infantry_3",
+          "action": "damage"
+        }
+      ],
+      "pngSha256": "b9f8a547954400fa0b5fc9f06b9d58c9595c85a83b6f1ba9553ba40424ce8a06"
+    },
+    {
+      "file": "02-multiple-repair-contact.png",
+      "scenarioId": "canonical-0038",
+      "reportId": "battle_97_corpus-candidate-172_border_road_breakthrough",
+      "terrain": "road",
+      "missionId": "border_road",
+      "strategyId": "breakthrough",
+      "result": "defeat",
+      "actorCount": 8,
+      "planFingerprint": "upf_6879d694",
+      "requestedTime": 18.256,
+      "actualTime": 18.256,
+      "currentPositionsHash": "f336a88ae91905273facf10ac249d886c7d8bd9326df83ca1c8cc93ec95314df",
+      "activeActions": [
+        {
+          "actorId": "unit_corpus-u-candidate-172-1",
+          "action": "suppress"
+        },
+        {
+          "actorId": "unit_corpus-u-candidate-172-2",
+          "action": "suppress"
+        },
+        {
+          "actorId": "enemy_at_1",
+          "action": "suppress"
+        },
+        {
+          "actorId": "enemy_at_2",
+          "action": "suppress"
+        },
+        {
+          "actorId": "enemy_infantry_1",
+          "action": "suppress"
+        },
+        {
+          "actorId": "enemy_infantry_2",
+          "action": "suppress"
+        },
+        {
+          "actorId": "enemy_infantry_3",
+          "action": "suppress"
+        },
+        {
+          "actorId": "enemy_infantry_4",
+          "action": "suppress"
+        }
+      ],
+      "pngSha256": "92a36f17a7f1ce786cd830a68b33217c3b1e08eb6026c94e0e6d763ce2565aa8"
+    },
+    {
+      "file": "03-convoy-victory-clear.png",
+      "scenarioId": "canonical-0001",
+      "reportId": "battle_125_corpus-candidate-501_operation_convoy_escort_cautious",
+      "terrain": "road",
+      "missionId": "convoy_escort",
+      "strategyId": "cautious",
+      "result": "victory",
+      "actorCount": 6,
+      "planFingerprint": "upf_380ff29d",
+      "requestedTime": 29.348,
+      "actualTime": 29.348,
+      "currentPositionsHash": "53aef804dae1d88f051f5b156636de240201d366fa78f2582482ffc48d10a33b",
+      "activeActions": [
+        {
+          "actorId": "unit_corpus-u-candidate-501-1",
+          "action": "escort_complete"
+        },
+        {
+          "actorId": "unit_corpus-u-candidate-501-2",
+          "action": "escort_complete"
+        },
+        {
+          "actorId": "enemy_at_1",
+          "action": "phase"
+        },
+        {
+          "actorId": "enemy_infantry_1",
+          "action": "phase"
+        },
+        {
+          "actorId": "enemy_infantry_2",
+          "action": "phase"
+        },
+        {
+          "actorId": "enemy_infantry_3",
+          "action": "phase"
+        }
+      ],
+      "pngSha256": "b07a7e8f6ad51ab7ab363bdd84a2ad65d2db30ba8f7912c27b870b2db9b927c8"
+    },
+    {
+      "file": "04-convoy-withdraw-returned.png",
+      "scenarioId": "canonical-0002",
+      "reportId": "battle_47_corpus-candidate-495_operation_convoy_escort_cautious",
+      "terrain": "road",
+      "missionId": "convoy_escort",
+      "strategyId": "cautious",
+      "result": "withdraw",
+      "actorCount": 7,
+      "planFingerprint": "upf_3a3574af",
+      "requestedTime": 31.878,
+      "actualTime": 31.878,
+      "currentPositionsHash": "d27bf3307a766fb4854d71c1cb7a952b121234c43941dd673c2d695786825c80",
+      "activeActions": [
+        {
+          "actorId": "unit_corpus-u-candidate-495-1",
+          "action": "covering_fire_presentation"
+        },
+        {
+          "actorId": "unit_corpus-u-candidate-495-2",
+          "action": "withdraw_to_safe_edge"
+        },
+        {
+          "actorId": "unit_corpus-u-candidate-495-3",
+          "action": "withdraw_to_safe_edge"
+        },
+        {
+          "actorId": "enemy_at_1",
+          "action": "retreat"
+        },
+        {
+          "actorId": "enemy_infantry_1",
+          "action": "retreat"
+        },
+        {
+          "actorId": "enemy_infantry_2",
+          "action": "retreat"
+        },
+        {
+          "actorId": "enemy_infantry_3",
+          "action": "retreat"
+        }
+      ],
+      "pngSha256": "821ef84a357411a2d2ca9333e4066b089b4459ac82a621b5b866850550a0e195"
+    },
+    {
+      "file": "05-convoy-wiped-stopped.png",
+      "scenarioId": "canonical-0003",
+      "reportId": "battle_21_corpus-candidate-493_operation_convoy_escort_cautious",
+      "terrain": "road",
+      "missionId": "convoy_escort",
+      "strategyId": "cautious",
+      "result": "wiped",
+      "actorCount": 5,
+      "planFingerprint": "upf_f8f53c95",
+      "requestedTime": 31.284,
+      "actualTime": 31.284,
+      "currentPositionsHash": "4934c92af474edc0ef82d3011faed8df9fb2b6d8a14c65a60b675156c0e50965",
+      "activeActions": [
+        {
+          "actorId": "unit_corpus-u-candidate-493-1",
+          "action": "enemy_controls_field"
+        },
+        {
+          "actorId": "enemy_at_1",
+          "action": "enemy_controls_field"
+        },
+        {
+          "actorId": "enemy_infantry_1",
+          "action": "enemy_controls_field"
+        },
+        {
+          "actorId": "enemy_infantry_2",
+          "action": "enemy_controls_field"
+        },
+        {
+          "actorId": "enemy_infantry_3",
+          "action": "enemy_controls_field"
+        }
+      ],
+      "pngSha256": "1b91d8cc1af44075c569415579e47f8b1831354904a5b0d770b7219f1c47603b"
+    },
+    {
+      "file": "06-salvage-standoff.png",
+      "scenarioId": "canonical-0016",
+      "reportId": "battle_107_corpus-candidate-377_operation_salvage_run_cautious",
+      "terrain": "open",
+      "missionId": "salvage_run",
+      "strategyId": "cautious",
+      "result": "pyrrhic",
+      "actorCount": 4,
+      "planFingerprint": "upf_b4519157",
+      "requestedTime": 18.154,
+      "actualTime": 18.154,
+      "currentPositionsHash": "74fe6cc97d09d86d4788d8ce0bffb6ba4a40b52675abbbfb1ac1cbebf719fb20",
+      "activeActions": [
+        {
+          "actorId": "unit_corpus-u-candidate-377-1",
+          "action": "damage"
+        },
+        {
+          "actorId": "unit_corpus-u-candidate-377-2",
+          "action": "damage"
+        },
+        {
+          "actorId": "enemy_infantry_1",
+          "action": "damage"
+        },
+        {
+          "actorId": "enemy_infantry_2",
+          "action": "damage"
+        }
+      ],
+      "pngSha256": "71cf945b762573a51c9b5e94f7ece034be76a3673c0344229d8837149725d16d"
+    },
+    {
+      "file": "07-fortified-obstacle-routing.png",
+      "scenarioId": "canonical-0021",
+      "reportId": "battle_234_corpus-candidate-673_operation_outpost_sweep_breakthrough",
+      "terrain": "fortified",
+      "missionId": "outpost_sweep",
+      "strategyId": "breakthrough",
+      "result": "pyrrhic",
+      "actorCount": 11,
+      "planFingerprint": "upf_728355d7",
+      "requestedTime": 21.44,
+      "actualTime": 21.44,
+      "currentPositionsHash": "48d5ec85b49c86af35d85a748b0c9e15f0da9d0ffdcf7ea6042b05916629a63d",
+      "activeActions": [
+        {
+          "actorId": "unit_corpus-u-candidate-673-1",
+          "action": "fire"
+        },
+        {
+          "actorId": "unit_corpus-u-candidate-673-2",
+          "action": "fire"
+        },
+        {
+          "actorId": "unit_corpus-u-candidate-673-3",
+          "action": "fire"
+        },
+        {
+          "actorId": "unit_corpus-u-candidate-673-4",
+          "action": "fire"
+        },
+        {
+          "actorId": "enemy_at_1",
+          "action": "fire"
+        },
+        {
+          "actorId": "enemy_at_2",
+          "action": "fire"
+        },
+        {
+          "actorId": "enemy_infantry_1",
+          "action": "fire"
+        },
+        {
+          "actorId": "enemy_infantry_2",
+          "action": "fire"
+        },
+        {
+          "actorId": "enemy_infantry_3",
+          "action": "fire"
+        },
+        {
+          "actorId": "enemy_infantry_4",
+          "action": "fire"
+        },
+        {
+          "actorId": "enemy_light_armor_1",
+          "action": "fire"
+        }
+      ],
+      "pngSha256": "d2185c915f4dff1a1c0396ff86a34b78869908aadf45cdca0307802ca9401085"
+    },
+    {
+      "file": "08-wreck-avoidance.png",
+      "scenarioId": "canonical-0004",
+      "reportId": "battle_27_corpus-candidate-85_scrap_mine_recon_by_fire",
+      "terrain": "open",
+      "missionId": "scrap_mine",
+      "strategyId": "recon_by_fire",
+      "result": "withdraw",
+      "actorCount": 6,
+      "planFingerprint": "upf_b1ba1723",
+      "requestedTime": 27.434,
+      "actualTime": 27.434,
+      "currentPositionsHash": "edf7a3e0448ae632d5cde40a75f6c2a55d0cfdc1d61e92f444f8e28933b8d0fc",
+      "activeActions": [
+        {
+          "actorId": "unit_corpus-u-candidate-85-1",
+          "action": "covering_fire_presentation"
+        },
+        {
+          "actorId": "unit_corpus-u-candidate-85-2",
+          "action": "organized_disengagement"
+        },
+        {
+          "actorId": "unit_corpus-u-candidate-85-3",
+          "action": "organized_disengagement"
+        },
+        {
+          "actorId": "enemy_infantry_1",
+          "action": "fire"
+        },
+        {
+          "actorId": "enemy_infantry_2",
+          "action": "fire"
+        },
+        {
+          "actorId": "enemy_infantry_3",
+          "action": "fire"
+        }
+      ],
+      "pngSha256": "0ea8433802b34dd561de9f67429d7db385c9807b371c16ea0916b8fcc1519134"
+    },
+    {
+      "file": "09-withdraw-obstacle-routing.png",
+      "scenarioId": "canonical-0005",
+      "reportId": "battle_40_corpus-candidate-86_scrap_mine_recon_by_fire",
+      "terrain": "open",
+      "missionId": "scrap_mine",
+      "strategyId": "recon_by_fire",
+      "result": "withdraw",
+      "actorCount": 5,
+      "planFingerprint": "upf_6625aebe",
+      "requestedTime": 24.648,
+      "actualTime": 24.648,
+      "currentPositionsHash": "5b67d38fa2f3cbdcb028e795ccc1922c270a58cbb37a19040f748115ddf32540",
+      "activeActions": [
+        {
+          "actorId": "unit_corpus-u-candidate-86-2",
+          "action": "covering_fire_presentation"
+        },
+        {
+          "actorId": "unit_corpus-u-candidate-86-1",
+          "action": "organized_disengagement"
+        },
+        {
+          "actorId": "enemy_infantry_1",
+          "action": "damage"
+        },
+        {
+          "actorId": "enemy_infantry_2",
+          "action": "damage"
+        },
+        {
+          "actorId": "enemy_infantry_3",
+          "action": "damage"
+        }
+      ],
+      "pngSha256": "3a71cf235f00e354b4d469772f690407ebc7a5c75144b369be952dc96b8e74af"
+    },
+    {
+      "file": "10-many-actors-no-collision.png",
+      "scenarioId": "canonical-0011",
+      "reportId": "battle_183_corpus-candidate-15_scrap_mine_cautious",
+      "terrain": "open",
+      "missionId": "scrap_mine",
+      "strategyId": "cautious",
+      "result": "victory",
+      "actorCount": 11,
+      "planFingerprint": "upf_c5ea665c",
+      "requestedTime": 12.395,
+      "actualTime": 12.395,
+      "currentPositionsHash": "6f6fcece51fd95dbd5ebc5dec8375a6bc02a2cd0e855f85a42d2a295481f62e9",
+      "activeActions": [
+        {
+          "actorId": "unit_corpus-u-candidate-15-1",
+          "action": "establish_fire_line"
+        },
+        {
+          "actorId": "unit_corpus-u-candidate-15-2",
+          "action": "establish_fire_line"
+        },
+        {
+          "actorId": "unit_corpus-u-candidate-15-3",
+          "action": "establish_fire_line"
+        },
+        {
+          "actorId": "unit_corpus-u-candidate-15-4",
+          "action": "establish_fire_line"
+        },
+        {
+          "actorId": "unit_corpus-u-candidate-15-5",
+          "action": "establish_fire_line"
+        },
+        {
+          "actorId": "unit_corpus-u-candidate-15-6",
+          "action": "establish_fire_line"
+        },
+        {
+          "actorId": "unit_corpus-u-candidate-15-7",
+          "action": "establish_fire_line"
+        },
+        {
+          "actorId": "unit_corpus-u-candidate-15-8",
+          "action": "phase"
+        },
+        {
+          "actorId": "enemy_infantry_1",
+          "action": "phase"
+        },
+        {
+          "actorId": "enemy_infantry_2",
+          "action": "phase"
+        },
+        {
+          "actorId": "enemy_infantry_3",
+          "action": "phase"
+        }
+      ],
+      "pngSha256": "3d3e22794dad24c9707f7f216e64448d326dd5234ee2bf74b2ec8dd8db2d478c"
+    },
+    {
+      "file": "11-pyrrhic-partial-objective.png",
+      "scenarioId": "canonical-0013",
+      "reportId": "battle_92_corpus-candidate-8_scrap_mine_cautious",
+      "terrain": "open",
+      "missionId": "scrap_mine",
+      "strategyId": "cautious",
+      "result": "pyrrhic",
+      "actorCount": 5,
+      "planFingerprint": "upf_5b52655d",
+      "requestedTime": 25.912,
+      "actualTime": 25.912,
+      "currentPositionsHash": "ad4035de95a068268b6450eaace27d1f158c0aedee8093079bac34ebd463bb9e",
+      "activeActions": [
+        {
+          "actorId": "unit_corpus-u-candidate-8-1",
+          "action": "costly_secure"
+        },
+        {
+          "actorId": "unit_corpus-u-candidate-8-2",
+          "action": "costly_secure"
+        },
+        {
+          "actorId": "enemy_infantry_1",
+          "action": "damage"
+        },
+        {
+          "actorId": "enemy_infantry_2",
+          "action": "damage"
+        },
+        {
+          "actorId": "enemy_infantry_3",
+          "action": "damage"
+        }
+      ],
+      "pngSha256": "d7cccb6ca7e350e6e2498f352c853a315544c52b76cfb71db8560307a20a7155"
+    },
+    {
+      "file": "12-spatial-debug-overlay.png",
+      "scenarioId": "canonical-0020",
+      "reportId": "battle_138_corpus-candidate-543_operation_convoy_escort_breakthrough",
+      "terrain": "road",
+      "missionId": "convoy_escort",
+      "strategyId": "breakthrough",
+      "result": "pyrrhic",
+      "actorCount": 7,
+      "planFingerprint": "upf_d1b20904",
+      "requestedTime": 9.982,
+      "actualTime": 9.982,
+      "currentPositionsHash": "779077ee026f19a0f954031f460841cfe2f635df3b99e8399654b313a1671aa1",
+      "activeActions": [
+        {
+          "actorId": "unit_corpus-u-candidate-543-3",
+          "action": "phase"
+        },
+        {
+          "actorId": "unit_corpus-u-candidate-543-1",
+          "action": "phase"
+        },
+        {
+          "actorId": "unit_corpus-u-candidate-543-2",
+          "action": "phase"
+        },
+        {
+          "actorId": "enemy_at_1",
+          "action": "phase"
+        },
+        {
+          "actorId": "enemy_infantry_1",
+          "action": "phase"
+        },
+        {
+          "actorId": "enemy_infantry_2",
+          "action": "phase"
+        },
+        {
+          "actorId": "enemy_infantry_3",
+          "action": "phase"
+        }
+      ],
+      "pngSha256": "b30fb26199b0f2843d49a2c1c9cefbbd92120bb7ecb6b380cf46f9121642ca10"
+    }
+  ],
+  "sha256Unique": true,
+  "pageErrors": [],
+  "consoleErrors": []
+}
