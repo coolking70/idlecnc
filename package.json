@@ -119,6 +119,8 @@
     "verify:stage8-2E-A-2-3": "node tests/verify-stage8-2E-A-2-3-delivery-package.mjs",
     "build:stage8-2E-A-2-3": "node tests/build-stage8-2E-A-2-3-delivery-package.mjs",
     "verify:stage8-2E-A-2-4": "node tests/verify-stage8-2E-A-2-4-delivery-package.mjs",
-    "build:stage8-2E-A-2-4": "node tests/build-stage8-2E-A-2-4-delivery-package.mjs"
+    "build:stage8-2E-A-2-4": "node tests/build-stage8-2E-A-2-4-delivery-package.mjs",
+    "gate:stage8-2G": "npm test && npm run browser:stage8-2G-E-A-1 && npm run browser:stage8-2G-E-B && npm run browser:stage8-2G-E-C",
+    "verify:clean-clone": "node tests/verify-clean-clone.mjs"
   }
 }

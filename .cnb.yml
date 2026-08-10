@@ -1,0 +1,16 @@
+$:
+  push:
+    - name: stage8-2G-gate
+      runner:
+        cpus: 8
+      docker:
+        build:
+          dockerfile: .cnb/Dockerfile
+          by: [package.json, package-lock.json]
+      stages:
+        - name: install
+          script: npm install --ignore-scripts --no-audit --no-fund
+        - name: clean-clone-verification
+          script: npm run verify:clean-clone
+        - name: full-gate
+          script: npm run gate:stage8-2G
