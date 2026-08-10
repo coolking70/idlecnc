@@ -55,6 +55,32 @@ Stage 8.2G-E-C 通过外部独立验收后，发现 `package.json` 的 `posttest
 - GitHub Actions `core-regression` 为权威门禁：上一交付链所依据的 CI run 为 `31331527716`（commit `1f66a85`），其中 D-C / D-C.1 / E-A / E-A.1 / browser:E-A.1 / E-B / browser:E-B / E-C / browser:E-C 九个 step 全部 success。
 - 本仓库以 CNB 为工作镜像，未配置等价流水线；本收口提交的绿色依据为上述本地完整 `npm test` + 干净目录全量验证（不带 `--skip-full`）的真实输出。
 
+## 验收基线切换：干净克隆 + 全门禁实跑（取代 ZIP 与 GitHub CI 依赖）
+
+项目所有者已决定：后续开发与验收**不再依赖 ZIP 交付包**，也不要求 cnb 仓库满足任何依赖 GitHub 的开发/测试条件。本次变更把两条基线落到仓库并清理旧基线残留的误导性证据。
+
+### 变更内容
+
+1. **E-C 两个 ZIP record 标记废弃**：`stage8_2g_ec_final_package_record.json` 与 `stage8_2g_ec_clean_package_test.json` 加入 `"deprecated": true` 与 `"supersededBy": "clean-clone verification"`，并移除 `packageSha256`（final record 中的 `finalHead` 已删除）。不再作为验收依据。
+2. **不再记录任何"指向本次提交自身"的 `finalHead` 字段**：验收方在审计时直接用 `git rev-parse HEAD` 读取真实提交，自指循环被永久消除。
+3. **历史阶段（A/B/C/D 系列）的既有 record 与证据文件原样不动**。
+4. **新增干净克隆可复现性验证** `tests/verify-clean-clone.mjs`：从 `git clone --depth 1 file://<repo>` 克隆当前 HEAD（非复制工作目录），`npm install --ignore-scripts`，跑完整门禁链，输出 JSON，结束后清理临时目录。脚本：`"verify:clean-clone": "node tests/verify-clean-clone.mjs"`。
+5. **新增单一入口门禁** `"gate:stage8-2G": "npm test && npm run browser:stage8-2G-E-A-1 && npm run browser:stage8-2G-E-B && npm run browser:stage8-2G-E-C"`，串起当前有效完整门禁，只加不减。
+6. **性能证据标注环境**：C-1 与 D-A.1 性能生成器输出新增 `environment` 字段（platform/arch/cpuModel/cpuCount/nodeVersion），便于识别机器/负载差异，未调整任何性能阈值（16.7ms 红线不变）。
+7. **新增 cnb 原生流水线** `.cnb.yml` + `.cnb/Dockerfile`（Node + Chromium），执行 `npm run gate:stage8-2G`，为仓库提供独立于 GitHub 的自动验证。
+
+### 新增验收基线（完成后生效）
+
+```
+1. git rev-parse HEAD              读取真实最终提交
+2. git status --porcelain          确认工作区干净
+3. npm run gate:stage8-2G          全门禁实跑
+4. npm run verify:clean-clone      干净克隆可复现性
+5. 验收方自行编写独立探测与 true-value tamper 复核
+```
+
+`.github/workflows/core-regression.yml` 保留在仓库中不删，仅不再作为 cnb 侧验收的必要条件。57 个 build/verify 脚本与 32 个 `build:` / 29 个 `verify:` 脚本全部保留，只是不再作为验收必经步骤。
+
 ## E-C.1 收口说明
 
 - README、progress 与本交付说明已统一指向 E-C，不再把 C.1.1a 作为当前阶段。

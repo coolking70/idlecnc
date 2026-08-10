@@ -1,9 +1,16 @@
 {
   "stage": "8.2G-D-A.1",
   "sampleCount": 60,
-  "p95RenderMs": 9.9786,
-  "maxRenderMs": 12.2254,
+  "p95RenderMs": 10.4484,
+  "maxRenderMs": 10.7093,
   "noWallClockInSemanticResolver": true,
   "bounded": true,
+  "environment": {
+    "platform": "linux",
+    "arch": "x64",
+    "cpuModel": "AMD EPYC 9754 128-Core Processor",
+    "cpuCount": 8,
+    "nodeVersion": "v22.23.2"
+  },
   "passed": true
 }

@@ -643,3 +643,13 @@
 - [x] 已复核最终 ZIP 的 SHA-256、字节数、entries、clean package gate 与 final HEAD 绑定关系；E-C 证据 JSON 仍是验证输出，不是生产资源。
 - [ ] 外部独立审计仍需由独立验收方按最终 ZIP 执行；本节的独立复核不冒充第三方批准。
 - [ ] 主线整合将在本收口提交和最终封包验证通过后完成；Stage 9 尚未开始。
+
+# 验收基线切换：干净克隆 + 全门禁实跑（取代 ZIP 与 GitHub CI 依赖）
+
+- [x] 已删除 E-C 两个 ZIP record 的 `packageSha256`（`stage8_2g_ec_final_package_record.json` 同时移除 `finalHead`），并加入 `deprecated: true` / `supersededBy: clean-clone verification`，不再作为验收依据；历史阶段（A/B/C/D）record 原样不动。
+- [x] 已新增 `tests/verify-clean-clone.mjs`（`verify:clean-clone`）：从 `git clone --depth 1 file://<repo>` 克隆当前 HEAD（非复制工作目录），`npm install --ignore-scripts`，跑完整门禁链，输出 JSON 并清理临时目录。
+- [x] 已新增 `gate:stage8-2G = npm test && browser:stage8-2G-E-A-1 && browser:stage8-2G-E-B && browser:stage8-2G-E-C`，只加不减，作为验收单一入口。
+- [x] 性能生成器（C-1 / D-A.1）输出新增 `environment` 字段（platform/arch/cpuModel/cpuCount/nodeVersion），未调整任何性能阈值（16.7ms 红线不变）。
+- [x] 已新增 `.cnb.yml` + `.cnb/Dockerfile`（Node + Chromium）执行 `npm run gate:stage8-2G`，提供独立于 GitHub 的 cnb 原生自动验证；`.github/workflows/core-regression.yml` 保留不删。
+- [x] 未改动 `js/` 下任何运行时源码，未删除/放宽任何 step、断言、tamper 用例或性能阈值；Authority Freeze 约束不变。
+- [x] 新验收基线（`git rev-parse HEAD` / `git status --porcelain` / `npm run gate:stage8-2G` / `npm run verify:clean-clone` / 验收方独立探测与 tamper 复核）已在本文档与 `STAGE8-2G-E-C-DELIVERY.md` 中写明。
