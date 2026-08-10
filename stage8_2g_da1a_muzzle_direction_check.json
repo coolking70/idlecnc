@@ -101,8 +101,8 @@
         }
       },
       "narrowMuzzlePoint": {
-        "x": 836.9992,
-        "y": 433.9088,
+        "x": 837.101,
+        "y": 433.8881,
         "space": "battlefield-world",
         "source": "production-final-draw-geometry",
         "anchor": {
@@ -112,7 +112,7 @@
           "directionIndex": 6
         }
       },
-      "defaultScreenFootprint": 33.4327,
+      "defaultScreenFootprint": 33.6105,
       "narrowScreenFootprint": 24,
       "minimumScreenFootprint": 24,
       "defaultFacingMatchesShot": true,
@@ -140,8 +140,8 @@
         }
       },
       "narrowMuzzlePoint": {
-        "x": 527.7827,
-        "y": 596.3005,
+        "x": 527.717,
+        "y": 596.3836,
         "space": "battlefield-world",
         "source": "production-final-draw-geometry",
         "anchor": {
@@ -151,7 +151,7 @@
           "directionIndex": 1
         }
       },
-      "defaultScreenFootprint": 33.4327,
+      "defaultScreenFootprint": 33.6105,
       "narrowScreenFootprint": 24,
       "minimumScreenFootprint": 24,
       "defaultFacingMatchesShot": true,
@@ -179,8 +179,8 @@
         }
       },
       "narrowMuzzlePoint": {
-        "x": 579.8261,
-        "y": 525.9152,
+        "x": 579.323,
+        "y": 525.6984,
         "space": "battlefield-world",
         "source": "production-final-draw-geometry",
         "anchor": {
@@ -190,7 +190,7 @@
           "directionIndex": 3
         }
       },
-      "defaultScreenFootprint": 54.417,
+      "defaultScreenFootprint": 55.0839,
       "narrowScreenFootprint": 46,
       "minimumScreenFootprint": 46,
       "defaultFacingMatchesShot": true,

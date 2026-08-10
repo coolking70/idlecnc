@@ -107,32 +107,32 @@
           "finalCssHeight": 27.6,
           "screenFootprint": 46,
           "minimumScreenFootprint": 46,
-          "visualScaleBoost": 1.1564
+          "visualScaleBoost": 1.1424
         },
         {
           "actorId": "unit_fixture-u-2",
           "visualClass": "anti_armor_infantry",
-          "finalCssWidth": 22.542,
-          "finalCssHeight": 26.52,
-          "screenFootprint": 26.52,
+          "finalCssWidth": 22.8182,
+          "finalCssHeight": 26.845,
+          "screenFootprint": 26.845,
           "minimumScreenFootprint": 24,
           "visualScaleBoost": 1
         },
         {
           "actorId": "unit_fixture-u-1",
           "visualClass": "infantry",
-          "finalCssWidth": 20,
-          "finalCssHeight": 24,
-          "screenFootprint": 24,
+          "finalCssWidth": 20.1337,
+          "finalCssHeight": 24.1605,
+          "screenFootprint": 24.1605,
           "minimumScreenFootprint": 24,
-          "visualScaleBoost": 1.0055
+          "visualScaleBoost": 1
         },
         {
           "actorId": "unit_fixture-u-5",
           "visualClass": "support_vehicle",
-          "finalCssWidth": 34.476,
-          "finalCssHeight": 18.564,
-          "screenFootprint": 34.476,
+          "finalCssWidth": 34.8985,
+          "finalCssHeight": 18.7915,
+          "screenFootprint": 34.8985,
           "minimumScreenFootprint": 34,
           "visualScaleBoost": 1
         },
@@ -143,61 +143,61 @@
           "finalCssHeight": 18.4167,
           "screenFootprint": 34,
           "minimumScreenFootprint": 34,
-          "visualScaleBoost": 1.0684
+          "visualScaleBoost": 1.0554
         },
         {
           "actorId": "enemy_at_1",
           "visualClass": "anti_armor_infantry",
-          "finalCssWidth": 22.542,
-          "finalCssHeight": 26.52,
-          "screenFootprint": 26.52,
+          "finalCssWidth": 22.8182,
+          "finalCssHeight": 26.845,
+          "screenFootprint": 26.845,
           "minimumScreenFootprint": 24,
           "visualScaleBoost": 1
         },
         {
           "actorId": "enemy_at_2",
           "visualClass": "anti_armor_infantry",
-          "finalCssWidth": 22.542,
-          "finalCssHeight": 26.52,
-          "screenFootprint": 26.52,
+          "finalCssWidth": 22.8182,
+          "finalCssHeight": 26.845,
+          "screenFootprint": 26.845,
           "minimumScreenFootprint": 24,
           "visualScaleBoost": 1
         },
         {
           "actorId": "enemy_infantry_1",
           "visualClass": "infantry",
-          "finalCssWidth": 20,
-          "finalCssHeight": 24,
-          "screenFootprint": 24,
+          "finalCssWidth": 20.1337,
+          "finalCssHeight": 24.1605,
+          "screenFootprint": 24.1605,
           "minimumScreenFootprint": 24,
-          "visualScaleBoost": 1.0055
+          "visualScaleBoost": 1
         },
         {
           "actorId": "enemy_infantry_2",
           "visualClass": "infantry",
-          "finalCssWidth": 20,
-          "finalCssHeight": 24,
-          "screenFootprint": 24,
+          "finalCssWidth": 20.1337,
+          "finalCssHeight": 24.1605,
+          "screenFootprint": 24.1605,
           "minimumScreenFootprint": 24,
-          "visualScaleBoost": 1.0055
+          "visualScaleBoost": 1
         },
         {
           "actorId": "enemy_infantry_3",
           "visualClass": "infantry",
-          "finalCssWidth": 20,
-          "finalCssHeight": 24,
-          "screenFootprint": 24,
+          "finalCssWidth": 20.1337,
+          "finalCssHeight": 24.1605,
+          "screenFootprint": 24.1605,
           "minimumScreenFootprint": 24,
-          "visualScaleBoost": 1.0055
+          "visualScaleBoost": 1
         },
         {
           "actorId": "enemy_infantry_4",
           "visualClass": "infantry",
-          "finalCssWidth": 20,
-          "finalCssHeight": 24,
-          "screenFootprint": 24,
+          "finalCssWidth": 20.1337,
+          "finalCssHeight": 24.1605,
+          "screenFootprint": 24.1605,
           "minimumScreenFootprint": 24,
-          "visualScaleBoost": 1.0055
+          "visualScaleBoost": 1
         }
       ]
     }
