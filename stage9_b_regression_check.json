@@ -1,0 +1,27 @@
+{
+  "stage": "9-B",
+  "passed": true,
+  "unitTypes": [
+    "infantry",
+    "at_infantry",
+    "scout_car",
+    "mbt",
+    "repair_vehicle"
+  ],
+  "rankIds": [
+    "recruit",
+    "trained",
+    "veteran",
+    "elite"
+  ],
+  "theaterCount": 6,
+  "operationCount": 6,
+  "existingBattleSystems": [
+    "E-A",
+    "E-A.1",
+    "E-B",
+    "E-C",
+    "9-A",
+    "D-C.1"
+  ]
+}

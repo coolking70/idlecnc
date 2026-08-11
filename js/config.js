@@ -11,7 +11,7 @@
  * 存档 / 时间
  * ========================================================== */
 
-export const SAVE_VERSION = 7;
+export const SAVE_VERSION = 8;
 export const SAVE_KEY = 'iron-command.save.v1';
 /** 手动保存槽位：不被静默自动保存覆盖，供玩家点击“读取”时恢复。 */
 export const MANUAL_SAVE_KEY = 'iron-command.save.manual.v1';
@@ -337,6 +337,45 @@ export const UNITS = {
     stats: { attack: 0, antiArmor: 0, defense: 8, scouting: 2, mobility: 8, repair: 20, hp: 110 },
     upkeep: 3, command: 1,
     desc: '降低战后永久损失，战斗中恢复少量装甲耐久，无攻击能力。'
+  }
+};
+
+/* ============================================================
+ * 装备定义（Stage 9-B）
+ *  - 装备是生产侧输入，只能通过部署快照进入正式战斗；
+ *  - hp 不属于可修正属性，避免与 sanitizeUnit 的基础生命上限契约冲突；
+ *  - modifiers 是乘法修正，结合顺序由 units.js 的有效属性解析器统一决定。
+ * ========================================================== */
+
+export const EQUIPMENT_STAT_KEYS = ['attack', 'antiArmor', 'defense', 'scouting', 'mobility', 'repair'];
+
+export const EQUIPMENT_RULES = {
+  maxSlotsPerUnit: 2,
+  roundingDigits: 4,
+  starterInventory: 3
+};
+
+export const EQUIPMENT = {
+  scout_optics: {
+    id: 'scout_optics', name: '战术光学组', slot: 'utility',
+    applicableTypes: ['infantry', 'at_infantry', 'scout_car'],
+    modifiers: { scouting: 1.15, mobility: 1.03 },
+    acquisition: { kind: 'starter', label: '初始装备补给' },
+    desc: '提高侦察与机动效率，不改变生命上限。'
+  },
+  reinforced_chassis: {
+    id: 'reinforced_chassis', name: '强化底盘', slot: 'utility',
+    applicableTypes: ['scout_car', 'mbt', 'repair_vehicle'],
+    modifiers: { defense: 1.08, mobility: 1.04 },
+    acquisition: { kind: 'starter', label: '初始装备补给' },
+    desc: '提高车辆防护与机动效率，不改变生命上限。'
+  },
+  field_toolkit: {
+    id: 'field_toolkit', name: '野战工具包', slot: 'utility',
+    applicableTypes: ['infantry', 'repair_vehicle'],
+    modifiers: { repair: 1.2, defense: 1.02 },
+    acquisition: { kind: 'starter', label: '初始装备补给' },
+    desc: '提高维修效率与野战保障能力，不改变生命上限。'
   }
 };
 
@@ -895,6 +934,7 @@ export const CONFIG = {
   SAVE_VERSION, SAVE_KEY, MANUAL_SAVE_KEY, TIME, LOG, RESOURCE_DEFS, ECONOMY, RENDER, BASE_LAYOUT,
   BUILDINGS, BUILDING_STATUS, CONSTRUCTION, CONSTRUCTION_UI, UNITS, UNIT_RANKS, PRODUCTION, PRODUCTION_UI,
   DAMAGE_STATES, DAMAGE_THRESHOLDS, REPAIR, RESEARCH, TECHNOLOGIES,
+  EQUIPMENT, EQUIPMENT_RULES, EQUIPMENT_STAT_KEYS,
   FORMATION_STATUS, FORMATION_PRESETS, FORMATION, FORMATION_WARNINGS,
   THEATERS, OPERATIONS, ENEMY_UNITS, STRATEGIES, TERRAIN, BATTLE, BATTLE_RESULT,
   PANEL_TABS, STAGE_PLACEHOLDER, CURRENT_STAGE, CURRENT_STAGE_LABEL

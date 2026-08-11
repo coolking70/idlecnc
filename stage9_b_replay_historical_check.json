@@ -1,0 +1,28 @@
+{
+  "stage": "9-B",
+  "passed": true,
+  "sessionId": "battle-session-0-scrap_mine-28afba2e1b62fd63b9f3-1",
+  "historicalEquipment": [
+    {
+      "instanceId": "equipment-starter-2",
+      "equipmentId": "reinforced_chassis",
+      "name": "强化底盘",
+      "slot": "utility",
+      "slotIndex": 0,
+      "modifiers": {
+        "defense": 1.08,
+        "mobility": 1.04
+      },
+      "desc": "提高车辆防护与机动效率，不改变生命上限。"
+    }
+  ],
+  "replayDuringMutation": {
+    "rejected": true,
+    "code": "replay_read_only",
+    "presentationSnapshotUnchanged": true
+  },
+  "replayAfterCurrentEquipmentChanged": {
+    "usesHistoricalSnapshot": true,
+    "currentEquipment": []
+  }
+}

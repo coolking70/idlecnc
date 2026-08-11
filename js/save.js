@@ -18,6 +18,7 @@ import { sanitizeRepairs } from './repairs.js';
 import { sanitizeResearch } from './research.js';
 import { sanitizeOperations } from './operations.js';
 import { sanitizeUnits } from './units.js';
+import { emptyEquipmentState, sanitizeEquipment } from './equipment.js';
 import { calculateOfflineSeconds, settleOfflineWindow } from './offline.js';
 import { logEvent, emit, LOG_LEVEL } from './events.js';
 import { safeNumber, deepClone, formatDuration } from './utils.js';
@@ -251,6 +252,17 @@ export function migrate(data, report = {}) {
   const unitFix = sanitizeUnits(merged);
   if (unitFix.repaired) report.notes = (report.notes || []).concat(unitFix.notes);
 
+  // Stage 9-B 装备清洗必须紧跟单位清洗：此时单位 ID 已经去重且非法单位已被
+  // 移除，装备库存也能同时作为另一端的权威集合。随后按“单位存在 + 装备存在 +
+  // 适用类型 + 唯一实例 + 槽位上限”逐项收敛，故装备→已删除单位与单位→不存在
+  // 装备两种悬空方向都 fail-closed。旧存档没有 equipment 时显式使用空库存，
+  // 不使用 fresh 的 starter inventory，避免迁移凭空生成装备。
+  merged.equipment = data.equipment && typeof data.equipment === 'object'
+    ? data.equipment : emptyEquipmentState();
+  const equipmentFix = sanitizeEquipment(merged);
+  if (equipmentFix.repaired) report.notes = (report.notes || []).concat(equipmentFix.notes);
+  report.equipmentRepaired = equipmentFix.repaired;
+
   merged.repairs = Array.isArray(data.repairs) ? data.repairs : [];
   merged.operations = data.operations && typeof data.operations === 'object' ? data.operations : fresh.operations;
   const operationFix = sanitizeOperations(merged);
@@ -322,6 +334,7 @@ export function migrate(data, report = {}) {
     conFix.repaired || prodFix.repaired || formFix.repaired
     || theaterFix.repaired || battlesFix.repaired || battleFix.repaired
     || repairFix.repaired || researchFix.repaired || operationFix.repaired || unitFix.repaired
+    || equipmentFix.repaired
   );
 
   if (safeNumber(data.version, 0) < SAVE_VERSION) {

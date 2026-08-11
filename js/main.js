@@ -59,6 +59,7 @@ import {
   getResearchModifiers, hasResearchCenter, sanitizeResearch
 } from './research.js';
 import { getUnitRank, renameUnit, getUnitEffectiveStats, filterUnits, sortUnits } from './units.js';
+import { equipEquipment, unequipEquipment } from './equipment.js';
 import { validateResearchHistory, validateBattleOutcomeConsistency, compareBattleReports } from './integrity.js';
 import { buildEvidenceStatePayload, buildEvidenceStateSignature, buildStageC1EvidenceStatePayload, buildStageC1EvidenceStateSignature, stageC1SemanticPredicates } from './battle-presentation/universal/evidence-integrity.js';
 import { evaluateProductionSemanticPredicate } from './battle-presentation/universal/production-semantic-predicates.js';
@@ -413,6 +414,26 @@ function handleRenameUnit(unitId, callsign) {
     saveGame(state, { silent: true });
     if (ui) { ui.refreshUnits(state); ui.refreshFormations(state); ui.refreshTheater(state); ui.toast('单位呼号已保存'); }
   } else if (ui) ui.toast(res.reason || '呼号保存失败', 'warn');
+  return res;
+}
+
+function handleEquipEquipment(unitId, equipmentInstanceId) {
+  const state = getState();
+  const res = equipEquipment(state, unitId, equipmentInstanceId);
+  if (res.ok) {
+    saveGame(state, { silent: true });
+    if (ui) { ui.refreshUnits(state); ui.refreshFormations(state); ui.refreshTheater(state); ui.toast('装备已挂载'); }
+  } else if (ui) ui.toast(res.reason || '装备挂载失败', 'warn');
+  return res;
+}
+
+function handleUnequipEquipment(unitId, equipmentInstanceId) {
+  const state = getState();
+  const res = unequipEquipment(state, unitId, equipmentInstanceId);
+  if (res.ok) {
+    saveGame(state, { silent: true });
+    if (ui) { ui.refreshUnits(state); ui.refreshFormations(state); ui.refreshTheater(state); ui.toast('装备已卸载'); }
+  } else if (ui) ui.toast(res.reason || '装备卸载失败', 'warn');
   return res;
 }
 
@@ -892,6 +913,8 @@ function boot() {
     onCancelQueuedResearch: (taskId, opts) => handleCancelQueuedResearch(taskId, opts),
     onPresentationModeChange: (mode) => battlePresentationRouter?.setPreference(mode)
     ,onRenameUnit: (unitId, callsign) => handleRenameUnit(unitId, callsign)
+    ,onEquipEquipment: (unitId, equipmentInstanceId) => handleEquipEquipment(unitId, equipmentInstanceId)
+    ,onUnequipEquipment: (unitId, equipmentInstanceId) => handleUnequipEquipment(unitId, equipmentInstanceId)
   });
 
   try {
@@ -1113,7 +1136,10 @@ function boot() {
       try { return handleRenameUnit(unitId, callsign); } catch (err) { return { ok: false, code: 'error', reason: String(err) }; }
     },
     unitEffectiveStats: (unitId) => {
-      try { return getUnitEffectiveStats((getState().units || []).find((unit) => unit && unit.id === unitId)); } catch (err) { return null; }
+      try {
+        const state = getState();
+        return getUnitEffectiveStats((state.units || []).find((unit) => unit && unit.id === unitId), state.equipment);
+      } catch (err) { return null; }
     },
 
     /* ---- 阶段4：编队调试接口 ---- */

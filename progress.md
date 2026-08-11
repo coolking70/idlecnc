@@ -672,3 +672,13 @@
 - [x] 性能/回归和浏览器证据脚本接入 package、CI 与完整 gate；浏览器完成 18/18 唯一截图、4 次真实重载，新增战区和重复任务关键动作由生产 DOM 完成。
 - [x] Stage9 强证据与篡改审计通过：80/80 拒绝、`passedFlagOnlyCases=0`；完成 `STAGE9-A-DELIVERY.md` 和全部 `stage9_a_*` 证据文件。
 - [x] 最终完整 `npm test` 与 `npm run gate:stage8-2G` 已通过；新 HEAD 连续两次 clean-clone、提交及远端推送为交付收口步骤。
+
+# Stage 9-B progress
+
+- [x] 新增 `EQUIPMENT` 配置、实例库存、单位绑定、2 槽位规则与 acquisition condition；`sanitizeEquipment` 在 `sanitizeUnits` 之后 fail-closed 清洗两端悬空引用、重复实例、非法数量和不适用单位。
+- [x] `SAVE_VERSION` 从 7 递增到 8；旧存档无装备字段时显式迁移为空库存，不使用新游戏 starter inventory，避免凭空生成装备。
+- [x] 有效属性唯一接入 `getUnitEffectiveStats(unit, equipmentState)`：基础 → 老兵 → 装备，逐次 `toFixed(4)` 确定性舍入；装备不接触 hp/maxHp。
+- [x] `buildDispatchSnapshot()` 记录七个合法数值属性、逐单位装备历史编成和 `equipmentComposition`；Formal Solver、Settlement、Replay 状态机未改动。
+- [x] 运行战斗、结果面板和只读回放期间装备变更 fail-closed；历史回放读取部署快照；结算不修改装备；UI 装备入口使用真实 `data-action` DOM 控件与增量 `equipmentSignature`。
+- [x] Stage 9-B core/performance/independent evidence/tamper/browser 脚本已接入 package posttest、gate 和 GitHub workflow；四次真实 `Page.reload`、8 张唯一截图、84 个真值 tamper cases，`passedFlagOnlyCases=0`。
+- [ ] 最终交付前：完整 `gate:stage8-2G`、`verify:clean-clone`、远端 `git ls-remote`、commit/push SHA 收口。

@@ -1,0 +1,31 @@
+{
+  "stage": "9-B",
+  "independentRecompute": true,
+  "changedFiles": [
+    ".github/workflows/core-regression.yml",
+    "js/config.js",
+    "js/main.js",
+    "js/save.js",
+    "js/state.js",
+    "js/theater.js",
+    "js/ui.js",
+    "js/units.js",
+    "package.json",
+    "progress.md",
+    "tests/stage8-test.mjs"
+  ],
+  "forbiddenPaths": [
+    "js/battle.js",
+    "js/battle-presentation/universal/universal-plan-builder.js",
+    "js/battle-presentation/universal/universal-choreographer.js",
+    "tests/lib/"
+  ],
+  "authorityFieldChanges": 0,
+  "solverPlannerChoreographerChanged": false,
+  "saveDiffChanged": false,
+  "stage9A": {
+    "theaterCount": 6,
+    "operationCount": 6
+  },
+  "passed": true
+}
