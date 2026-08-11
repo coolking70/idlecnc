@@ -8,6 +8,8 @@ import {
   buildChildTestEnv,
   cleanupVerificationRunner,
   createVerificationRunner,
+  getAdaptiveTimeoutMs,
+  getVerificationLoadSnapshot,
   runVerificationStage
 } from './verification-runner.mjs';
 import { runActualGlobalTimeoutFixture } from './fixtures/global-timeout-fixture.mjs';
@@ -34,6 +36,18 @@ const check = async (name, fn) => { await fn(); passed += 1; console.log(`  PASS
 console.log('\n════════════════════════════════════════════');
 console.log('  钢铁指令 阶段8.2E-A.2.4 稳定性测试');
 console.log('════════════════════════════════════════════');
+
+await check('load snapshot records runtime environment', () => {
+  const load = getVerificationLoadSnapshot();
+  assert.ok(load.cpuCount >= 1);
+  assert.equal(load.loadAverage.length, 3);
+  assert.equal(typeof load.cpuModel, 'string');
+  assert.ok(load.timeoutMultiplier >= 1);
+});
+await check('adaptive timeout margin follows load pressure', () => {
+  assert.equal(getAdaptiveTimeoutMs(1000, { timeoutMultiplier: 1.25 }), 1250);
+  assert.equal(getAdaptiveTimeoutMs(1000, { timeoutMultiplier: 2 }), 2000);
+});
 
 async function runStage(stage) {
   const runner = createVerificationRunner({ globalTimeoutMs: 60000, heartbeatMs: 0 });
@@ -95,6 +109,10 @@ await check('ready-before output is preserved on startup failure', async () => {
 await check('ready-after output is preserved on business timeout', async () => {
   const result = await expectTimeout({ name: 'ready-output-timeout', command: process.execPath, args: [timeoutWorker, 'stdout', '10000'], readyPattern: /worker-ready/, startTimeoutAfterReady: true, startupTimeoutMs: 3000, timeoutMs: 1000 }, /stdout-marker/);
   assert.ok(result.error.stdout.includes('worker-ready'));
+  const observation = result.runner.timeoutObservations.at(-1);
+  assert.equal(observation.declaredTimeoutMs, 1000);
+  assert.ok(observation.effectiveTimeoutMs >= observation.declaredTimeoutMs);
+  assert.ok(observation.load.cpuCount >= 1);
 });
 await check('stderr is preserved on business timeout', async () => {
   const result = await expectTimeout({ name: 'ready-stderr-timeout', command: process.execPath, args: [timeoutWorker, 'stderr', '10000'], readyPattern: /worker-ready/, startTimeoutAfterReady: true, startupTimeoutMs: 3000, timeoutMs: 1000 }, /stderr-marker/);

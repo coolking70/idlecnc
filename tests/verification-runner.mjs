@@ -1,4 +1,5 @@
 import fs from 'node:fs';
+import os from 'node:os';
 import { spawn } from 'node:child_process';
 
 const DEFAULT_GLOBAL_TIMEOUT_MS = 900000;
@@ -12,6 +13,10 @@ const DEFAULT_STAGE_TIMEOUTS = Object.freeze({
   browser: 120000,
   serverClose: 3000
 });
+const BASE_READY_TIMEOUT_MULTIPLIER = 1.25;
+const MAX_READY_TIMEOUT_MULTIPLIER = 3;
+const LOAD_NORMALIZATION_THRESHOLD = 0.75;
+const LOAD_MULTIPLIER_SLOPE = 1.25;
 
 const asPositiveInteger = (value) => {
   const number = Number(value);
@@ -45,6 +50,36 @@ function stageName(stage) {
 function stageTimeout(runner, stage) {
   const value = typeof stage === 'object' && stage.timeoutMs;
   return value ?? runner.stageTimeouts[stage.kind || 'node'] ?? runner.stageTimeouts.node;
+}
+
+export function getVerificationLoadSnapshot() {
+  const cpuInfo = os.cpus();
+  const cpuCount = Math.max(1, cpuInfo.length || 1);
+  const loadAverage = os.loadavg().map((value) => Number.isFinite(value) ? Number(value.toFixed(3)) : 0);
+  const normalizedLoad1 = Number((loadAverage[0] / cpuCount).toFixed(3));
+  const pressure = Math.max(0, normalizedLoad1 - LOAD_NORMALIZATION_THRESHOLD);
+  const timeoutMultiplier = Number(Math.min(
+    MAX_READY_TIMEOUT_MULTIPLIER,
+    BASE_READY_TIMEOUT_MULTIPLIER + pressure * LOAD_MULTIPLIER_SLOPE
+  ).toFixed(3));
+  return {
+    platform: process.platform,
+    arch: process.arch,
+    nodeVersion: process.version,
+    cpuCount,
+    cpuModel: cpuInfo[0]?.model || 'unknown',
+    loadAverage,
+    normalizedLoad1,
+    timeoutMultiplier,
+  };
+}
+
+export function getAdaptiveTimeoutMs(requestedMs, load = getVerificationLoadSnapshot()) {
+  const timeoutMs = asPositiveInteger(requestedMs) || 1;
+  const multiplier = Number.isFinite(load?.timeoutMultiplier)
+    ? Math.max(1, Math.min(MAX_READY_TIMEOUT_MULTIPLIER, load.timeoutMultiplier))
+    : BASE_READY_TIMEOUT_MULTIPLIER;
+  return Math.max(timeoutMs, Math.ceil(timeoutMs * multiplier));
 }
 
 function log(runner, line) {
@@ -114,6 +149,9 @@ export function createVerificationRunner(options = {}) {
     abortReason: null,
     stageResults: [],
     stageTimeouts: { ...DEFAULT_STAGE_TIMEOUTS, ...(options.stageTimeouts || {}) },
+    adaptiveTimeouts: options.adaptiveTimeouts !== false,
+    timeoutProfiles: new WeakMap(),
+    timeoutObservations: [],
     stageDelayMs: asPositiveInteger(options.stageDelayMs ?? process.env.IRON_COMMAND_VERIFY_STAGE_DELAY_MS) || 0,
     heartbeatMs: options.heartbeatMs ?? DEFAULT_HEARTBEAT_MS,
     logger: options.logger || console,
@@ -187,12 +225,48 @@ function patternMatches(pattern, value) {
 }
 
 function commandStageWallTimeout(runner, stage) {
-  const timeoutMs = stageTimeout(runner, stage);
-  if (stage?.readyPattern && stage.startTimeoutAfterReady) {
-    const startupTimeoutMs = asPositiveInteger(stage.startupTimeoutMs) || 5000;
-    return startupTimeoutMs + timeoutMs;
+  const profile = commandTimeoutProfile(runner, stage);
+  if (profile.waitsForReady) {
+    return profile.effectiveStartupTimeoutMs + profile.effectiveTimeoutMs;
   }
-  return timeoutMs;
+  return profile.effectiveTimeoutMs;
+}
+
+function commandTimeoutProfile(runner, stage) {
+  const declaredTimeoutMs = stageTimeout(runner, stage);
+  const declaredStartupTimeoutMs = asPositiveInteger(stage.startupTimeoutMs) || 5000;
+  const waitsForReady = Boolean(stage?.readyPattern && stage.startTimeoutAfterReady);
+  if (!waitsForReady || runner.adaptiveTimeouts === false) {
+    return {
+      waitsForReady,
+      declaredTimeoutMs,
+      declaredStartupTimeoutMs,
+      effectiveTimeoutMs: declaredTimeoutMs,
+      effectiveStartupTimeoutMs: declaredStartupTimeoutMs,
+      load: null,
+    };
+  }
+  const cached = runner.timeoutProfiles.get(stage);
+  if (cached) return cached;
+  const load = getVerificationLoadSnapshot();
+  const profile = {
+    waitsForReady,
+    declaredTimeoutMs,
+    declaredStartupTimeoutMs,
+    effectiveTimeoutMs: getAdaptiveTimeoutMs(declaredTimeoutMs, load),
+    effectiveStartupTimeoutMs: getAdaptiveTimeoutMs(declaredStartupTimeoutMs, load),
+    load,
+  };
+  runner.timeoutProfiles.set(stage, profile);
+  runner.timeoutObservations.push({
+    stage: stageName(stage),
+    declaredTimeoutMs,
+    effectiveTimeoutMs: profile.effectiveTimeoutMs,
+    declaredStartupTimeoutMs,
+    effectiveStartupTimeoutMs: profile.effectiveStartupTimeoutMs,
+    load,
+  });
+  return profile;
 }
 
 function structuredCauseCode(output) {
@@ -208,9 +282,10 @@ function structuredCauseCode(output) {
 
 async function executeCommandStage(runner, stage) {
   const name = stageName(stage);
-  const timeoutMs = stageTimeout(runner, stage);
-  const waitsForReady = Boolean(stage.readyPattern && stage.startTimeoutAfterReady);
-  const startupTimeoutMs = asPositiveInteger(stage.startupTimeoutMs) || 5000;
+  const profile = commandTimeoutProfile(runner, stage);
+  const timeoutMs = profile.effectiveTimeoutMs;
+  const startupTimeoutMs = profile.effectiveStartupTimeoutMs;
+  const waitsForReady = profile.waitsForReady;
   const child = spawn(stage.command, stage.args || [], {
     cwd: stage.cwd,
     env: stage.env || process.env,
@@ -241,12 +316,15 @@ async function executeCommandStage(runner, stage) {
       clearTimeout(startupTimer);
       const termination = await terminateChild(runner, record);
       const isStartup = kind === 'startup';
-      const error = new Error(`${name} ${isStartup ? 'startup timeout' : `timeout after ${timeoutMs}ms`}\nstage=${name}\npid=${child.pid}\nkilledBySigkill=${termination.killedBySigkill}\nfinalCode=${termination.code}\nfinalSignal=${termination.signal}\nready=${Boolean(readyAt)}\nrecent stdout:\n${recent(stdout)}\nrecent stderr:\n${recent(stderr)}`);
+      const error = new Error(`${name} ${isStartup ? 'startup timeout' : `timeout after ${profile.declaredTimeoutMs}ms`}\nstage=${name}\npid=${child.pid}\nkilledBySigkill=${termination.killedBySigkill}\nfinalCode=${termination.code}\nfinalSignal=${termination.signal}\nready=${Boolean(readyAt)}\ndeclaredTimeoutMs=${profile.declaredTimeoutMs}\neffectiveTimeoutMs=${timeoutMs}\ndeclaredStartupTimeoutMs=${profile.declaredStartupTimeoutMs}\neffectiveStartupTimeoutMs=${startupTimeoutMs}\nrecent stdout:\n${recent(stdout)}\nrecent stderr:\n${recent(stderr)}`);
       error.code = isStartup ? 'verification_stage_startup_timeout' : 'verification_stage_timeout';
       error.stage = name;
       error.pid = child.pid;
-      error.timeoutMs = timeoutMs;
-      error.startupTimeoutMs = startupTimeoutMs;
+      error.timeoutMs = profile.declaredTimeoutMs;
+      error.effectiveTimeoutMs = timeoutMs;
+      error.startupTimeoutMs = profile.declaredStartupTimeoutMs;
+      error.effectiveStartupTimeoutMs = startupTimeoutMs;
+      error.timeoutLoad = profile.load;
       error.stdout = stdout;
       error.stderr = stderr;
       error.killedBySigkill = termination.killedBySigkill;
@@ -321,20 +399,36 @@ function withStageTimeout(runner, stage, promise) {
 export async function runVerificationStage(runner, stage) {
   if (runner.aborted) throw Object.assign(new Error(`verification aborted: ${runner.abortReason}`), { code: runner.abortReason });
   const name = stageName(stage);
+  const timeoutProfile = commandSpec(stage) ? commandTimeoutProfile(runner, stage) : null;
   runner.currentStage = name;
   if (runner.stageDelayMs) await new Promise((resolve) => setTimeout(resolve, runner.stageDelayMs));
   const startedAt = Date.now();
   log(runner, `START ${name}`);
+  if (timeoutProfile?.load) log(runner, `TIMEOUT_PROFILE ${JSON.stringify(timeoutProfile)}`);
   try {
     const spec = commandSpec(stage);
     const stagePromise = spec ? executeCommandStage(runner, stage) : stage.run(runner);
     const result = await heartbeat(runner, stage, withStageTimeout(runner, stage, stagePromise));
-    const record = { stage: name, status: 'passed', durationMs: Date.now() - startedAt, exitCode: result?.code ?? 0 };
+    const record = {
+      stage: name,
+      status: 'passed',
+      durationMs: Date.now() - startedAt,
+      exitCode: result?.code ?? 0,
+      ...(timeoutProfile?.load ? { timeoutProfile } : {}),
+    };
     runner.stageResults.push(record);
     log(runner, `PASS ${name} duration=${(record.durationMs / 1000).toFixed(2)}s`);
     return result;
   } catch (error) {
-    const record = { stage: name, status: 'failed', durationMs: Date.now() - startedAt, exitCode: error.code ?? 1, causeCode: error.causeCode, error: error.message };
+    const record = {
+      stage: name,
+      status: 'failed',
+      durationMs: Date.now() - startedAt,
+      exitCode: error.code ?? 1,
+      causeCode: error.causeCode,
+      error: error.message,
+      ...(timeoutProfile?.load ? { timeoutProfile } : {}),
+    };
     runner.stageResults.push(record);
     errorLog(runner, `FAIL ${name}\ncode=${record.exitCode}\nduration=${(record.durationMs / 1000).toFixed(2)}s`);
     throw error;

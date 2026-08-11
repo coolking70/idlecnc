@@ -33,6 +33,7 @@ const run = (cmd, args, cwd, opts = {}) => {
 
 const root = process.cwd();
 const steps = [];
+const outputTail = (value, limit = 4000) => String(value || '').slice(-limit);
 
 const record = (step, passed, exitCode = null, extra = {}) => {
   const entry = { step, passed };
@@ -52,7 +53,11 @@ try {
     run('git', ['clone', '--depth', '1', repoUrl, cloneDir], tmpRoot, { timeout: 120000 });
     record('git-clone', true, 0);
   } catch (error) {
-    record('git-clone', false, null, { message: String(error.stderr || error.message) });
+    record('git-clone', false, null, {
+      message: String(error.stderr || error.message),
+      stdout: outputTail(error.stdout),
+      stderr: outputTail(error.stderr),
+    });
     throw error;
   }
 
@@ -68,16 +73,24 @@ try {
     run('npm', ['install', '--ignore-scripts', '--no-audit', '--no-fund'], cloneDir, { timeout: 300000 });
     record('npm-install', true, 0);
   } catch (error) {
-    record('npm-install', false, null, { message: String(error.stderr || error.message) });
+    record('npm-install', false, null, {
+      message: String(error.stderr || error.message),
+      stdout: outputTail(error.stdout),
+      stderr: outputTail(error.stderr),
+    });
     throw error;
   }
 
   // 3. 在干净克隆内跑完整门禁链 gate:stage8-2G（含 npm test 与全部 browser 门禁）
   try {
     const gateOutput = run('npm', ['run', 'gate:stage8-2G'], cloneDir, { timeout: 1800000 });
-    record('gate:stage8-2G', true, 0, { tail: (gateOutput || '').slice(-2000) });
+    record('gate:stage8-2G', true, 0, { tail: outputTail(gateOutput, 2000) });
   } catch (error) {
-    record('gate:stage8-2G', false, null, { message: String(error.stderr || error.message) });
+    record('gate:stage8-2G', false, null, {
+      message: String(error.stderr || error.message),
+      stdout: outputTail(error.stdout),
+      stderr: outputTail(error.stderr),
+    });
     throw error;
   }
 
