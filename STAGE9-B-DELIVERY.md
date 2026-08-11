@@ -37,4 +37,4 @@ Verifier 从当前 source 独立重建有效属性与快照，并逐字段比对
 
 最终交付以真实 `git rev-parse HEAD`、`git status --porcelain`、`npm run gate:stage8-2G`、`npm run verify:clean-clone` 和 `git ls-remote` 为事实来源；selfcheck/evidence 的 `passed` 不替代这些命令的实际输出。
 
-本地完整 `npm run gate:stage8-2G` 已实际 `exit=0`；分支已推送到 cnb，远端 `auto/stage9-b-equipment-system` 当前可查询到 Stage 9-B 提交。clean-clone 将在包含本交付文档收口提交的最终 HEAD 上执行。
+本地完整 `npm run gate:stage8-2G` 已实际 `exit=0`；最终 HEAD 已通过 `verify:clean-clone`：git clone、clone HEAD 对齐、npm install、完整 gate 均为 `passed: true`，且临时目录已清理。分支已推送到 cnb，远端 `auto/stage9-b-equipment-system` 可查询到与最终 HEAD 一致的提交；最终 SHA 与完整 JSON 以交付命令输出为准。

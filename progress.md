@@ -682,5 +682,5 @@
 - [x] 运行战斗、结果面板和只读回放期间装备变更 fail-closed；历史回放读取部署快照；结算不修改装备；UI 装备入口使用真实 `data-action` DOM 控件与增量 `equipmentSignature`。
 - [x] Stage 9-B core/performance/independent evidence/tamper/browser 脚本已接入 package posttest、gate 和 GitHub workflow；四次真实 `Page.reload`、8 张唯一截图、84 个真值 tamper cases，`passedFlagOnlyCases=0`。
 - [x] 完整 `npm run gate:stage8-2G` 实跑 `exit=0`；Stage 8.2G、Stage 9-A 与 Stage 9-B 均通过，Stage 9-B 为 8 帧 / 4 次真实 reload / 84/84 tamper rejection。
-- [x] 分支 `auto/stage9-b-equipment-system` 已推送到 cnb，当前远端探测 SHA 为 `d14d2e88f9e84457b2ac58a218c11a38346dcacf`；最终 clean-clone 结果以收口命令输出为准。
-- [ ] 最终交付前：完成当前最终提交的 `verify:clean-clone`，并将完整 JSON 原样交付。
+- [x] 分支 `auto/stage9-b-equipment-system` 已推送到 cnb；最终远端 SHA、工作树状态与 clean-clone JSON 以收口命令输出为准。
+- [x] 已完成最终 HEAD 的 `verify:clean-clone`：`git-clone`、`clone-head-matches`、`npm-install`、`gate:stage8-2G` 全部通过，`overallPassed: true`，完整 JSON 已原样交付。
