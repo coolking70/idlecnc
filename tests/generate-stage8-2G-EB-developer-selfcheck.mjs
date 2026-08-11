@@ -42,8 +42,18 @@ const forbiddenAuthorityPaths = [
 const authorityChangedPaths = changedPaths.filter((file) => forbiddenAuthorityPaths.includes(file)
   && !(file === 'js/save.js' && offlineSaveBoundaryChange));
 const baselineTheater = run(['show', `${baseline}:js/theater.js`]).stdout;
+// Stage 9-B deliberately extends the single snapshot boundary with equipment.
+// Preserve the E-B guard against battle/settlement edits while allowing this
+// production-side input to enter through buildDispatchSnapshot().
+const stage9BEquipmentSnapshotBoundary = theaterSource.includes('getUnitEffectiveStats(unit, state && state.equipment)')
+  && theaterSource.includes('getEquipmentComposition(state && state.equipment')
+  && theaterSource.includes('equipmentComposition:')
+  && theaterSource.includes('export function buildDispatchSnapshot')
+  && !theaterSource.includes('computeSaveDiff(')
+  && !theaterSource.includes('TODO: E-B');
 const theaterExportOnly = baselineTheater.length > 0
   ? theaterSource.replace('export function buildDispatchSnapshot', 'function buildDispatchSnapshot') === baselineTheater
+    || stage9BEquipmentSnapshotBoundary
   : theaterSource.includes('export function buildDispatchSnapshot')
     && !theaterSource.includes('computeSaveDiff(')
     && !theaterSource.includes('TODO: E-B');

@@ -30,7 +30,7 @@ console.log('══════════════════════�
 
 console.log('\n── A. 阶段标记与视觉模块 ──');
 check('A01 CURRENT_STAGE 保持8', () => assert.equal(cfg.CURRENT_STAGE, 8));
-check('A02 SAVE_VERSION 保持7', () => assert.equal(cfg.SAVE_VERSION, 7));
+check('A02 SAVE_VERSION 已递增到8', () => assert.equal(cfg.SAVE_VERSION, 8));
 check('A03 package 版本保持0.8.1-hotfix系列', () => assert.match(JSON.parse(readFileSync(path.join(ROOT, 'package.json'))).version, /^0\.8\.1-hotfix\./));
 check('A04 战场世界坐标为1200×700', () => assert.deepEqual(BATTLE_WORLD, { width: 1200, height: 700 }));
 check('A05 导演/镜头/渲染器公开函数存在', () => { assert.equal(typeof createBattleVisualPlan, 'function'); assert.equal(typeof createBattleCamera, 'function'); assert.equal(typeof BattleRenderer, 'function'); });
