@@ -40,7 +40,7 @@
     "test:stage8-2G-D-B": "node tests/stage8-2G-D-B-test.mjs && node tests/stage8-2G-D-B-asset-coverage-test.mjs && node tests/stage8-2G-D-B-ui-authority-test.mjs && node tests/stage8-2G-D-B-evidence-tamper-test.mjs",
     "test:stage8-2G-D-B-1": "node tests/stage8-2G-D-B-1-unarmed-visual-state-test.mjs && node tests/stage8-2G-D-B-1-semantic-resolution-test.mjs && node tests/generate-stage8-2G-DB1-machine-evidence.mjs && node tests/stage8-2G-D-B-1-responsive-test.mjs && node tests/stage8-2G-D-B-1-production-leak-test.mjs && node tests/browser/stage8-2G-D-B-1-evidence.mjs && node tests/stage8-2G-D-B-1-evidence-tamper-test.mjs && node tests/generate-stage8-2G-DB1-developer-selfcheck.mjs",
     "test:stage8-2G-D-B-1a": "npm run test:stage8-2G-D-B-1 && node tests/stage8-2G-D-B-1a-action-attribution-test.mjs && node tests/stage8-2G-D-B-1a-repair-attribution-test.mjs && node tests/stage8-2G-D-B-1a-repair-semantic-binding-test.mjs && node tests/stage8-2G-D-B-1a-retreat-binding-test.mjs && node tests/stage8-2G-D-B-1a-authority-test.mjs && node tests/generate-stage8-2G-DB1a-machine-evidence.mjs && node tests/browser/stage8-2G-D-B-1a-evidence.mjs && node tests/stage8-2G-D-B-1a-evidence-tamper-test.mjs && node tests/generate-stage8-2G-DB1a-developer-selfcheck.mjs",
-  "posttest": "npm run test:stage8-2G-D-C && npm run test:stage8-2G-D-C-1 && npm run test:stage8-2G-E-A && npm run test:stage8-2G-E-A-1 && npm run test:stage8-2G-E-B && npm run test:stage8-2G-E-C",
+  "posttest": "npm run test:stage8-2G-D-C && npm run test:stage8-2G-D-C-1 && npm run test:stage8-2G-E-A && npm run test:stage8-2G-E-A-1 && npm run test:stage8-2G-E-B && npm run test:stage8-2G-E-C && npm run test:stage9-A",
     "test:stage8-2G-D-C": "npm run test:stage8-2G-D-B-1a && node tests/generate-stage8-2G-DC-machine-evidence.mjs && node tests/stage8-2G-D-C-test.mjs && node tests/stage8-2G-D-C-effects-test.mjs && node tests/stage8-2G-D-C-camera-test.mjs && node tests/stage8-2G-D-C-audio-cue-test.mjs && node tests/browser/stage8-2G-D-C-evidence.mjs && node tests/stage8-2G-D-C-evidence-tamper-test.mjs && node tests/generate-stage8-2G-DC-developer-selfcheck.mjs",
     "test:stage8-2G-D-C-1": "node tests/generate-stage8-2G-DC1-machine-evidence.mjs && node tests/stage8-2G-D-C-1-weapon-family-test.mjs && node tests/stage8-2G-D-C-1-performance-test.mjs && node tests/stage8-2G-D-C-1-reduced-motion-test.mjs && node tests/browser/stage8-2G-D-C-1-evidence.mjs && node tests/stage8-2G-D-C-1-evidence-tamper-test.mjs && node tests/stage8-2G-D-C-1-strong-evidence-test.mjs && node tests/generate-stage8-2G-DC1-developer-selfcheck.mjs",
   "test:stage8-2G-E-A": "node tests/stage8-2G-E-A-test.mjs",
@@ -51,6 +51,8 @@
   "build:stage8-2G-E-B": "node tests/build-stage8-2G-E-B-delivery-package.mjs",
   "verify:stage8-2G-E-B": "node tests/verify-stage8-2G-E-B-delivery-package.mjs",
   "test:stage8-2G-E-C": "node tests/stage8-2G-E-C-offline-progression-test.mjs && node tests/stage8-2G-E-C-performance-test.mjs",
+  "test:stage9-A": "node tests/stage9-A-theater-expansion-test.mjs && node tests/stage9-A-performance-test.mjs",
+  "browser:stage9-A": "npm run test:stage9-A && node tests/generate-stage9-A-machine-evidence.mjs && node tests/browser/stage9-A-theater-expansion.mjs && node tests/generate-stage9-A-evidence.mjs && node tests/stage9-A-strong-evidence-test.mjs && node tests/stage9-A-evidence-tamper-test.mjs && node tests/generate-stage9-A-developer-selfcheck.mjs",
   "browser:stage8-2G-E-C": "npm run test:stage8-2G-E-C && node tests/generate-stage8-2G-EC-machine-evidence.mjs && node tests/browser/stage8-2G-E-C-offline-progression.mjs && node tests/generate-stage8-2G-EC-evidence.mjs && node tests/stage8-2G-E-C-evidence-tamper-test.mjs && node tests/stage8-2G-E-C-strong-evidence-test.mjs && node tests/generate-stage8-2G-EC-developer-selfcheck.mjs",
   "build:stage8-2G-E-C": "node tests/build-stage8-2G-E-C-delivery-package.mjs",
   "verify:stage8-2G-E-C": "node tests/verify-stage8-2G-E-C-delivery-package.mjs",
@@ -120,7 +122,7 @@
     "build:stage8-2E-A-2-3": "node tests/build-stage8-2E-A-2-3-delivery-package.mjs",
     "verify:stage8-2E-A-2-4": "node tests/verify-stage8-2E-A-2-4-delivery-package.mjs",
     "build:stage8-2E-A-2-4": "node tests/build-stage8-2E-A-2-4-delivery-package.mjs",
-    "gate:stage8-2G": "npm test && npm run browser:stage8-2G-E-A-1 && npm run browser:stage8-2G-E-B && npm run browser:stage8-2G-E-C",
+  "gate:stage8-2G": "npm test && npm run browser:stage8-2G-E-A-1 && npm run browser:stage8-2G-E-B && npm run browser:stage8-2G-E-C && npm run browser:stage9-A",
     "verify:clean-clone": "node tests/verify-clean-clone.mjs"
   }
 }

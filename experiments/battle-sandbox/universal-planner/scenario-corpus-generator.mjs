@@ -97,7 +97,9 @@ function selectCanonical(pool) {
   const evidenceRequirements = [
     ['convoy victory', (row) => row.missionId === 'convoy_escort' && row.result === 'victory'],
     ['convoy withdraw', (row) => row.missionId === 'convoy_escort' && row.result === 'withdraw'],
-    ['convoy wiped', (row) => row.missionId === 'convoy_escort' && row.result === 'wiped']
+    ['convoy wiped', (row) => row.missionId === 'convoy_escort' && row.result === 'wiped'],
+    // Preserve the existing corpus actor-count envelope while mission IDs expand.
+    ['maximum actor-count envelope', (row) => row.actorCount === 18]
   ];
   for (const [label, predicate] of evidenceRequirements) if (!take(predicate, true)) throw new Error(`canonical evidence selection failed: ${label}`);
   for (const result of Object.keys(quotas)) while (quotas[result] > 0) if (!take((row) => row.result === result)) throw new Error(`missing result candidate: ${result}`);

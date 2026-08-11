@@ -1,0 +1,51 @@
+{
+  "stage": "9-A",
+  "changedFiles": [
+    ".github/workflows/core-regression.yml",
+    "experiments/battle-sandbox/tests/universal-presentation-delivery-test.mjs",
+    "experiments/battle-sandbox/universal-planner/coverage-report.mjs",
+    "experiments/battle-sandbox/universal-planner/scenario-corpus-generator.mjs",
+    "experiments/battle-sandbox/universal-planner/scenarios/canonical.json",
+    "experiments/battle-sandbox/universal-planner/scenarios/coverage.json",
+    "experiments/battle-sandbox/universal-planner/scenarios/fuzz-specs.json",
+    "experiments/battle-sandbox/universal-planner/scenarios/manifest.json",
+    "js/battle-presentation/universal/universal-coverage-matrix.js",
+    "js/config.js",
+    "package.json",
+    "progress.md",
+    "tests/stage5-test.mjs",
+    "tests/stage8-2F-B-3-test.mjs",
+    "tests/stage8-test.mjs"
+  ],
+  "forbiddenChangedFiles": [],
+  "forbiddenAuthorityPaths": [
+    "js/battle.js",
+    "js/battle-presentation/universal/universal-plan-builder.js",
+    "js/battle-presentation/universal/universal-choreographer.js",
+    "tests/lib/"
+  ],
+  "package": {
+    "testStage9": true,
+    "browserStage9": true,
+    "posttestIncludesStage9": true,
+    "gateIncludesStage9": true
+  },
+  "workflow": {
+    "testStage9": true,
+    "browserStage9": true
+  },
+  "browser": {
+    "productionEntry": true,
+    "fixtureLoaderUsed": false,
+    "dispatchApiUsed": false,
+    "replayApiUsed": false,
+    "offlineApiUsed": false,
+    "frameCount": 18
+  },
+  "tamper": {
+    "caseCount": 80,
+    "rejectionCount": 80,
+    "passedFlagOnlyCases": 0
+  },
+  "passed": true
+}

@@ -657,6 +657,33 @@ export const THEATERS = {
     captureIncome: {},
     supplyMultiplier: 12,
     desc: '构筑了工事的前进基地，火力密集。'
+  },
+  river_crossing: {
+    id: 'river_crossing', name: '河谷渡场', terrain: 'road', terrainName: '河谷道路',
+    difficulty: 4, requires: ['enemy_outpost'], concealment: 16,
+    enemy: { enemy_infantry: 3 },
+    firstReward: { supply: 600, intel: 30 },
+    captureIncome: { supplyPerSec: 1 },
+    supplyMultiplier: 16,
+    desc: '穿越河谷的旧渡场，是向纵深推进的关键补给节点。'
+  },
+  relay_station: {
+    id: 'relay_station', name: '通信中继站', terrain: 'open', terrainName: '开阔高地',
+    difficulty: 5, requires: ['river_crossing'], concealment: 18,
+    enemy: { enemy_infantry: 4, enemy_at: 1, enemy_light_armor: 1 },
+    firstReward: { alloy: 700, intel: 35 },
+    captureIncome: { alloyPerSec: 1 },
+    supplyMultiplier: 20,
+    desc: '控制敌方纵深通信链路的高地中继站。'
+  },
+  mountain_pass: {
+    id: 'mountain_pass', name: '北岭山口', terrain: 'fortified', terrainName: '山口阵地',
+    difficulty: 6, requires: ['relay_station'], concealment: 20,
+    enemy: { enemy_infantry: 3, enemy_at: 1, enemy_light_armor: 1 },
+    firstReward: { alloy: 900, supply: 700, intel: 45 },
+    captureIncome: { supplyPerSec: 1, alloyPerSec: 1 },
+    supplyMultiplier: 24,
+    desc: '通往北岭纵深的最后山口，必须稳步夺取并守住。'
   }
 };
 
@@ -681,6 +708,27 @@ export const OPERATIONS = {
     supplyMultiplier: 10, intelCost: 3,
     rewards: { alloy: { min: 220, max: 360 }, intel: { min: 6, max: 12 } },
     experienceMultiplier: 1.25, desc: '清剿前哨站周边残余武装，获取情报和工业材料。'
+  },
+  river_ferry: {
+    id: 'river_ferry', name: '渡场补给', theaterId: 'river_crossing', missionKind: 'operation',
+    requiresCaptured: true, cooldown: 1200, enemy: { enemy_infantry: 4, enemy_at: 2 },
+    supplyMultiplier: 14, intelCost: 4,
+    rewards: { supply: { min: 260, max: 420 }, alloy: { min: 180, max: 300 } },
+    experienceMultiplier: 1.4, desc: '清理渡场周边袭扰部队，恢复纵深补给线。'
+  },
+  relay_intercept: {
+    id: 'relay_intercept', name: '信号截获', theaterId: 'relay_station', missionKind: 'operation',
+    requiresCaptured: true, cooldown: 1500, enemy: { enemy_infantry: 5, enemy_at: 2, enemy_light_armor: 1 },
+    supplyMultiplier: 18, intelCost: 6,
+    rewards: { intel: { min: 10, max: 18 }, alloy: { min: 260, max: 420 } },
+    experienceMultiplier: 1.6, desc: '截获中继站残余信号，压制敌方反攻准备。'
+  },
+  pass_patrol: {
+    id: 'pass_patrol', name: '山口巡防', theaterId: 'mountain_pass', missionKind: 'operation',
+    requiresCaptured: true, cooldown: 1800, enemy: { enemy_infantry: 5, enemy_at: 3, enemy_light_armor: 1 },
+    supplyMultiplier: 22, intelCost: 8,
+    rewards: { supply: { min: 360, max: 560 }, alloy: { min: 320, max: 520 } },
+    experienceMultiplier: 1.8, desc: '巡防北岭山口，确保纵深阵地不被重新渗透。'
   }
 };
 

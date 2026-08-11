@@ -1,0 +1,8 @@
+{
+  "stage": "9-A",
+  "passed": true,
+  "theaterId": "mountain_pass",
+  "activeBattleFrozen": true,
+  "replayFrozen": true,
+  "battlePaused": true
+}

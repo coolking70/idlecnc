@@ -1,0 +1,19 @@
+{
+  "stage": "9-A",
+  "passed": true,
+  "before": {
+    "missionCount": 6,
+    "totalCells": 30,
+    "coveredCells": 26,
+    "unobservedCells": 4
+  },
+  "after": {
+    "missionCount": 12,
+    "totalCells": 60,
+    "coveredCells": 44,
+    "unobservedCells": 16
+  },
+  "derivation": "totalCells = missionResultMatrix.missionIds.length × results.length = 12 × 5 = 60; values read after scenario-corpus-generator --write",
+  "deterministicPlanFailures": 0,
+  "deterministicCoverage": true
+}
