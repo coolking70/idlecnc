@@ -19,32 +19,32 @@
       "afterGreaterThanBefore": true,
       "loaderChanged": true,
       "declaredTimeOriginConsistent": true,
-      "beforeLoaderId": "8F78AB1A65AD3E2593FCCF0D3FB6959C",
-      "afterLoaderId": "FAEE88D876DF0C62B27E230AFF778248"
+      "beforeLoaderId": "2925309605E04038B43933D9D8A0C6BC",
+      "afterLoaderId": "53C8C0ADB766F159C66B45D17EE6E10F"
     },
     {
       "reason": "completed_unmounted",
       "afterGreaterThanBefore": true,
       "loaderChanged": true,
       "declaredTimeOriginConsistent": true,
-      "beforeLoaderId": "FAEE88D876DF0C62B27E230AFF778248",
-      "afterLoaderId": "FE17F31AE55A9CBEB5F4E36A80BC2BEB"
+      "beforeLoaderId": "53C8C0ADB766F159C66B45D17EE6E10F",
+      "afterLoaderId": "9FF6BF3E8166FBA9D3B2AD541350AD68"
     },
     {
       "reason": "running_battle",
       "afterGreaterThanBefore": true,
       "loaderChanged": true,
       "declaredTimeOriginConsistent": true,
-      "beforeLoaderId": "FE17F31AE55A9CBEB5F4E36A80BC2BEB",
-      "afterLoaderId": "79EE373C34D5DFC8A0AF8A2AE2B71E9D"
+      "beforeLoaderId": "9FF6BF3E8166FBA9D3B2AD541350AD68",
+      "afterLoaderId": "02D6A9294158668017CC812EBB5E5D8A"
     },
     {
       "reason": "replay",
       "afterGreaterThanBefore": true,
       "loaderChanged": true,
       "declaredTimeOriginConsistent": true,
-      "beforeLoaderId": "79EE373C34D5DFC8A0AF8A2AE2B71E9D",
-      "afterLoaderId": "2679E6653795AEC7E6097E3F2C9F7EDF"
+      "beforeLoaderId": "02D6A9294158668017CC812EBB5E5D8A",
+      "afterLoaderId": "9D3D44270E9D54269BBB6365D3B6430C"
     }
   ],
   "afterLoaderIdsUnique": true,

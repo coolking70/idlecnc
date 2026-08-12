@@ -28,17 +28,17 @@
     "river_crossing": {
       "seed": 3,
       "result": "victory",
-      "battleSessionId": "battle-session-0-river_crossing-7953deec5c918caffa5d-1"
+      "battleSessionId": "battle-session-0-river_crossing-7c27ca490dd357f83573-1"
     },
     "relay_station": {
       "seed": 1,
       "result": "victory",
-      "battleSessionId": "battle-session-0-relay_station-88551704c913981cfb48-1"
+      "battleSessionId": "battle-session-0-relay_station-2f8209d84af06d6f34e6-1"
     },
     "mountain_pass": {
       "seed": 1,
       "result": "victory",
-      "battleSessionId": "battle-session-0-mountain_pass-f55d2bbaee612ecb9cf7-1"
+      "battleSessionId": "battle-session-0-mountain_pass-8b53cc0f287d94887ef1-1"
     }
   }
 }

@@ -3,9 +3,9 @@
   "sampleCount": 500,
   "operationCountPerSample": 12,
   "timingMs": {
-    "p50": 0.003416000000001418,
-    "p95": 0.011541999999998609,
-    "max": 0.2765410000000017
+    "p50": 0.006666000000002725,
+    "p95": 0.019040999999994312,
+    "max": 0.5418329999999969
   },
   "environment": {
     "platform": "darwin",
@@ -35,11 +35,6 @@
       "script": "tests/stage8-2G-E-C-offline-progression-test.mjs",
       "exitCode": 0,
       "outputTail": "\n── Stage 8.2G-E-C offline / idle progression ──\n  PASS  invalid or future savedAt fails closed with zero seconds\n  PASS  valid window preserves raw seconds and cap truthfully\n  PASS  clock rollback never creates negative or positive progression\n  PASS  offline window consumes savedAt through the real window helper\n  PASS  same token is exactly once and does not duplicate gains\n  PASS  pending report survives migration and remains dismissible state\n  PASS  MAX_STEPS truncation exposes consumed and remaining time\n  PASS  MAX_STEPS next savedAt retains the unconsumed window\n  PASS  active battle boundary preserves session, hashes, report and elapsed\n  PASS  settlement result boundary does not settle a second time\n  PASS  replay boundary preserves canonical session, formation, units and ledger\n  PASS  offline report builder is pure and exposes honest truncation metadata\n\nStage 8.2G-E-C result: 12 passed / 0 failed / 12 total\n"
-    },
-    {
-      "script": "tests/stage8-2G-D-C-1-performance-test.mjs",
-      "exitCode": 0,
-      "outputTail": "{\"ok\":true,\"stage\":\"8.2G-D-C.1\",\"sampleCount\":120,\"rows\":[{\"sceneId\":\"stage8g-dc-victory\",\"p95Ms\":3.283,\"maxMs\":3.708,\"peakEffectCount\":38,\"peakSmokeCount\":26},{\"sceneId\":\"stage8g-dc-withdraw\",\"p95Ms\":2.905,\"maxMs\":6.621,\"peakEffectCount\":39,\"peakSmokeCount\":24},{\"sceneId\":\"stage8g-dc-art\",\"p95Ms\":4.014,\"maxMs\":4.186,\"peakEffectCount\":46,\"peakSmokeCount\":28}]}\n"
     }
   ],
   "passed": true

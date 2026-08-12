@@ -22,12 +22,12 @@
     "samples": [
       {
         "attempt": 1,
-        "normalizedLoad1": 0.297,
-        "spareCores": 7.028
+        "normalizedLoad1": 0.692,
+        "spareCores": 3.076
       }
     ],
-    "loadBefore": 0.297,
-    "loadAfter": 0.297
+    "loadBefore": 0.692,
+    "loadAfter": 0.692
   },
   "scenarios": {
     "effectiveStats": {
@@ -35,24 +35,24 @@
       "warmup": 20,
       "samples": 120,
       "metric": "p95",
-      "p95Ms": 0.0077,
-      "maxMs": 0.2118
+      "p95Ms": 0.0078,
+      "maxMs": 0.2076
     },
     "snapshot": {
       "name": "snapshot",
       "warmup": 20,
       "samples": 120,
       "metric": "p95",
-      "p95Ms": 0.0361,
-      "maxMs": 0.1496
+      "p95Ms": 0.0343,
+      "maxMs": 0.1378
     },
     "inventory": {
       "name": "inventoryCounts",
       "warmup": 20,
       "samples": 120,
       "metric": "p95",
-      "p95Ms": 0.0003,
-      "maxMs": 0.0032
+      "p95Ms": 0.0004,
+      "maxMs": 0.008
     }
   },
   "hotPathGuards": {

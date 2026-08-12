@@ -386,72 +386,72 @@
         "reason": "equipment_panel_mounted",
         "method": "Page.reload",
         "before": {
-          "timeOrigin": 1786467070461.2,
+          "timeOrigin": 1786565579700.4,
           "readyState": "complete",
           "navigationType": "navigate"
         },
         "after": {
-          "timeOrigin": 1786467071230.1,
+          "timeOrigin": 1786565580572.6,
           "readyState": "complete",
           "navigationType": "reload"
         },
-        "beforeLoaderId": "82FFE1BD80ECC7FD0B4C11F8180DBB36",
-        "afterLoaderId": "1B6806D84214DD466A954A5BDFE3D789",
-        "loaderId": "1B6806D84214DD466A954A5BDFE3D789",
+        "beforeLoaderId": "4DE6B12F10F299BCB95A2976A49A277A",
+        "afterLoaderId": "9D00DF9A93648957EA1AB96759A3CD8A",
+        "loaderId": "9D00DF9A93648957EA1AB96759A3CD8A",
         "timeOriginChanged": true
       },
       {
         "reason": "running_battle",
         "method": "Page.reload",
         "before": {
-          "timeOrigin": 1786467071230.1,
+          "timeOrigin": 1786565580572.6,
           "readyState": "complete",
           "navigationType": "reload"
         },
         "after": {
-          "timeOrigin": 1786467073541.9,
+          "timeOrigin": 1786565583062.1,
           "readyState": "complete",
           "navigationType": "reload"
         },
-        "beforeLoaderId": "1B6806D84214DD466A954A5BDFE3D789",
-        "afterLoaderId": "102FFD26A1D477DFC101EDD5CF76ED9E",
-        "loaderId": "102FFD26A1D477DFC101EDD5CF76ED9E",
+        "beforeLoaderId": "9D00DF9A93648957EA1AB96759A3CD8A",
+        "afterLoaderId": "13951995DEDD892A9884815222D50A76",
+        "loaderId": "13951995DEDD892A9884815222D50A76",
         "timeOriginChanged": true
       },
       {
         "reason": "result",
         "method": "Page.reload",
         "before": {
-          "timeOrigin": 1786467073541.9,
+          "timeOrigin": 1786565583062.1,
           "readyState": "complete",
           "navigationType": "reload"
         },
         "after": {
-          "timeOrigin": 1786467074743.8,
+          "timeOrigin": 1786565584390.9,
           "readyState": "complete",
           "navigationType": "reload"
         },
-        "beforeLoaderId": "102FFD26A1D477DFC101EDD5CF76ED9E",
-        "afterLoaderId": "ABF45C04D52543D6D8E220448B71F6E3",
-        "loaderId": "ABF45C04D52543D6D8E220448B71F6E3",
+        "beforeLoaderId": "13951995DEDD892A9884815222D50A76",
+        "afterLoaderId": "495D112B55011655F7420DFE0D4C07A7",
+        "loaderId": "495D112B55011655F7420DFE0D4C07A7",
         "timeOriginChanged": true
       },
       {
         "reason": "replay",
         "method": "Page.reload",
         "before": {
-          "timeOrigin": 1786467074743.8,
+          "timeOrigin": 1786565584390.9,
           "readyState": "complete",
           "navigationType": "reload"
         },
         "after": {
-          "timeOrigin": 1786467076575.3,
+          "timeOrigin": 1786565586318,
           "readyState": "complete",
           "navigationType": "reload"
         },
-        "beforeLoaderId": "ABF45C04D52543D6D8E220448B71F6E3",
-        "afterLoaderId": "3E50D82EBA43AB00745C2014804C6E93",
-        "loaderId": "3E50D82EBA43AB00745C2014804C6E93",
+        "beforeLoaderId": "495D112B55011655F7420DFE0D4C07A7",
+        "afterLoaderId": "848EB2BC202C9C8A9FD8FD154141A005",
+        "loaderId": "848EB2BC202C9C8A9FD8FD154141A005",
         "timeOriginChanged": true
       }
     ],
@@ -487,11 +487,11 @@
               "reportCount": 0,
               "ledgerCount": 0
             },
-            "domText": "◣\n钢铁指令\nIRON COMMAND · 指挥终端\n▤\n补给\n999,999/ 5,000\n+2/s\n◈\n合金\n999,999/ 5,000\n+1/s\n◎\n情报\n999,999/ 500\n+0.1/s\n⚡\n电力\n0/ 30\n空载\n✦\n指挥容量\n0/ 999\n空闲\n基地时间\n08:00:00\n第1天\n❚❚\n1×\n2×\n4×\n保存\n读取\n新游戏\n视图：基地全景 / BASE VIEW\n指挥区\n工业区\n军营区\n后勤区\n基地出口\nFPS 63 · 暂停\n概览\n建设\n生产\n部队\n编队\n战区\n维修\n科研\n战报\n单位档案\n阶段8 · 已开放\n1\n单位总数\n1\n空闲单位\n0\n已编队单位\n0\n维修中单位\n0\n轻度受损\n0\n重度受损\n1\n新兵\n0\n训练有素\n0\n老兵\n0\n精锐\n类型\n全部类型\n步兵\n车辆\n装甲\n支援\n状态\n全部状态\n空闲\n已编队\n维修中\n受损\n等级\n全部等级\n新兵\n训练有素\n老兵\n精锐\n排序\n创建时间\n经验\n战斗次数\n生命比例\n单位类型\n单位列表\n1 个\n主战坦克\n新兵 · 主战坦克\n经验 0 · 战斗 0 · HP 160/160 · intact\n单位详情\n主战坦克\n新兵\n保存呼号\n单位类型\n主战坦克\n创建时间\n08:00:00\n来源建筑\n装甲工厂\n经验\n0\n战斗次数\n0\n生命\n160 / 160\n损伤\nintact\n等级进度\n距训练有素还需 10\n战斗中实际属性\nattack\n35（基础 35）\nantiArmor\n20（基础 20）\ndefense\n32.4（基础 30）\nscouting\n3（基础 3）\nmobility\n10.4（基础 10）\nrepair\n0（基础 0）\n装备槽位（1/2）\n强化底盘 · 槽位1\n卸载\n战术光学组 · scouting×1.15 mobility×1.03\n挂载\n野战工具包 · repair×1.2 defense×1.02\n挂载\n通讯记录 / COMMS\n1 / 30\n[08:00]\n基地数据已保存。\n装备已挂载",
-            "imageSha256": "b7f4011414089f671eae0c9a08b273e1c912b11769bfe1cdcc45796ed2d9e0c5",
+            "domText": "◣\n钢铁指令\nIRON COMMAND · 指挥终端\n▤\n补给\n999,999/ 5,000\n+2/s\n◈\n合金\n999,999/ 5,000\n+1/s\n◎\n情报\n999,999/ 500\n+0.1/s\n⚡\n电力\n0/ 30\n空载\n✦\n指挥容量\n0/ 999\n空闲\n基地时间\n08:00:00\n第1天\n❚❚\n1×\n2×\n4×\n保存\n读取\n新游戏\n视图：基地全景 / BASE VIEW\n指挥区\n工业区\n军营区\n后勤区\n基地出口\nFPS 64 · 暂停\n概览\n建设\n生产\n部队\n编队\n战区\n维修\n科研\n战报\n单位档案\n阶段8 · 已开放\n1\n单位总数\n1\n空闲单位\n0\n已编队单位\n0\n维修中单位\n0\n轻度受损\n0\n重度受损\n1\n新兵\n0\n训练有素\n0\n老兵\n0\n精锐\n类型\n全部类型\n步兵\n车辆\n装甲\n支援\n状态\n全部状态\n空闲\n已编队\n维修中\n受损\n等级\n全部等级\n新兵\n训练有素\n老兵\n精锐\n排序\n创建时间\n经验\n战斗次数\n生命比例\n单位类型\n单位列表\n1 个\n主战坦克\n新兵 · 主战坦克\n经验 0 · 战斗 0 · HP 160/160 · intact\n单位详情\n主战坦克\n新兵\n保存呼号\n单位类型\n主战坦克\n创建时间\n08:00:00\n来源建筑\n装甲工厂\n经验\n0\n战斗次数\n0\n生命\n160 / 160\n损伤\nintact\n等级进度\n距训练有素还需 10\n战斗中实际属性\nattack\n35（基础 35）\nantiArmor\n20（基础 20）\ndefense\n32.4（基础 30）\nscouting\n3（基础 3）\nmobility\n10.4（基础 10）\nrepair\n0（基础 0）\n装备槽位（1/2）\n强化底盘 · 槽位1\n卸载\n战术光学组 · scouting×1.15 mobility×1.03\n挂载\n野战工具包 · repair×1.2 defense×1.02\n挂载\n通讯记录 / COMMS\n1 / 30\n[08:00]\n基地数据已保存。\n装备已挂载",
+            "imageSha256": "7bc623ce259b6fbc5b89af6be3fd0b291718019d39928753f6bab3cc29f0de84",
             "screenshot": {
               "path": "screenshots/stage9-B/s9-b-01-equipment-panel.png",
-              "sha256": "b7f4011414089f671eae0c9a08b273e1c912b11769bfe1cdcc45796ed2d9e0c5"
+              "sha256": "7bc623ce259b6fbc5b89af6be3fd0b291718019d39928753f6bab3cc29f0de84"
             }
           },
           {
@@ -503,18 +503,18 @@
               "reason": "equipment_panel_mounted",
               "method": "Page.reload",
               "before": {
-                "timeOrigin": 1786467070461.2,
+                "timeOrigin": 1786565579700.4,
                 "readyState": "complete",
                 "navigationType": "navigate"
               },
               "after": {
-                "timeOrigin": 1786467071230.1,
+                "timeOrigin": 1786565580572.6,
                 "readyState": "complete",
                 "navigationType": "reload"
               },
-              "beforeLoaderId": "82FFE1BD80ECC7FD0B4C11F8180DBB36",
-              "afterLoaderId": "1B6806D84214DD466A954A5BDFE3D789",
-              "loaderId": "1B6806D84214DD466A954A5BDFE3D789",
+              "beforeLoaderId": "4DE6B12F10F299BCB95A2976A49A277A",
+              "afterLoaderId": "9D00DF9A93648957EA1AB96759A3CD8A",
+              "loaderId": "9D00DF9A93648957EA1AB96759A3CD8A",
               "timeOriginChanged": true
             },
             "state": {
@@ -532,10 +532,10 @@
               "ledgerCount": 0
             },
             "domText": "◣\n钢铁指令\nIRON COMMAND · 指挥终端\n▤\n补给\n5,000/ 5,000\n+2/s\n◈\n合金\n5,000/ 5,000\n+1/s\n◎\n情报\n500/ 500\n+0.1/s\n⚡\n电力\n0/ 30\n空载\n✦\n指挥容量\n0/ 6\n空闲\n基地时间\n08:00:00\n第1天\n❚❚\n1×\n2×\n4×\n保存\n读取\n新游戏\n视图：基地全景 / BASE VIEW\n指挥区\n工业区\n军营区\n后勤区\n基地出口\nFPS 0 · 暂停\n概览\n建设\n生产\n部队\n编队\n战区\n维修\n科研\n战报\n单位档案\n阶段8 · 已开放\n1\n单位总数\n1\n空闲单位\n0\n已编队单位\n0\n维修中单位\n0\n轻度受损\n0\n重度受损\n1\n新兵\n0\n训练有素\n0\n老兵\n0\n精锐\n类型\n全部类型\n步兵\n车辆\n装甲\n支援\n状态\n全部状态\n空闲\n已编队\n维修中\n受损\n等级\n全部等级\n新兵\n训练有素\n老兵\n精锐\n排序\n创建时间\n经验\n战斗次数\n生命比例\n单位类型\n单位列表\n1 个\n主战坦克\n新兵 · 主战坦克\n经验 0 · 战斗 0 · HP 160/160 · intact\n单位详情\n主战坦克\n新兵\n保存呼号\n单位类型\n主战坦克\n创建时间\n08:00:00\n来源建筑\n装甲工厂\n经验\n0\n战斗次数\n0\n生命\n160 / 160\n损伤\nintact\n等级进度\n距训练有素还需 10\n战斗中实际属性\nattack\n35（基础 35）\nantiArmor\n20（基础 20）\ndefense\n32.4（基础 30）\nscouting\n3（基础 3）\nmobility\n10.4（基础 10）\nrepair\n0（基础 0）\n装备槽位（1/2）\n强化底盘 · 槽位1\n卸载\n战术光学组 · scouting×1.15 mobility×1.03\n挂载\n野战工具包 · repair×1.2 defense×1.02\n挂载\n通讯记录 / COMMS\n2 / 30\n[08:00]\n基地数据已保存。\n[08:00]\n存档已载入，基地状态恢复。",
-            "imageSha256": "88f0a5825cdd5679c33da69bba3c30a723d9d8a39ab16d419e91caa928e70235",
+            "imageSha256": "6fbbc2e411f172adcd9f84ad7f1228d0686220742433d7810ec086c967947170",
             "screenshot": {
               "path": "screenshots/stage9-B/s9-b-02-equipment-panel-reload.png",
-              "sha256": "88f0a5825cdd5679c33da69bba3c30a723d9d8a39ab16d419e91caa928e70235"
+              "sha256": "6fbbc2e411f172adcd9f84ad7f1228d0686220742433d7810ec086c967947170"
             }
           },
           {
@@ -543,19 +543,19 @@
             "file": "s9-b-03-running-attempt.png",
             "semantic": "running_equipment_change_attempt",
             "phase": "running_equipment_change_attempt",
-            "sessionId": "battle-session-8-scrap_mine-581135cefab553b32e30-1",
+            "sessionId": "battle-session-8-scrap_mine-5708090f460a7ac7efb1-1",
             "state": {
-              "activeBattleSessionId": "battle-session-8-scrap_mine-581135cefab553b32e30-1",
+              "activeBattleSessionId": "battle-session-8-scrap_mine-5708090f460a7ac7efb1-1",
               "activeBattle": {
-                "battleSessionId": "battle-session-8-scrap_mine-581135cefab553b32e30-1",
+                "battleSessionId": "battle-session-8-scrap_mine-5708090f460a7ac7efb1-1",
                 "replayReadOnly": false,
                 "settled": false,
-                "deploymentHash": "581135cefab553b32e30a2fee8113afc92e645fa8624e548233036714e46f74f",
-                "formalReportHash": "b326ea7f580ba50b8a8ec52182ddc54549c7d7e8b24cbb4f6b0e53d72097df4f",
-                "settlementId": "settlement-8b25736d347fd051061cd57256e72ef057c4d7468c7d1f4577979a12f5439cbe",
-                "reportId": "battle_2393486611_fm_msowdaw5_6_scrap_mine_cautious"
+                "deploymentHash": "5708090f460a7ac7efb1be95b493e07a47cb57c72a40e9e27ea32318e12f05c2",
+                "formalReportHash": "5a7d586814c5b6c4753ffc1ff9008e2c05aa756510861ae1ca1f797b56c39bd7",
+                "settlementId": "settlement-7d72ea57e8ce967d65747945d51d316c2aaa6f1ad481f359922fd5a4836c2118",
+                "reportId": "battle_3171138968_fm_msqj0p8i_6_scrap_mine_cautious"
               },
-              "sessionId": "battle-session-8-scrap_mine-581135cefab553b32e30-1",
+              "sessionId": "battle-session-8-scrap_mine-5708090f460a7ac7efb1-1",
               "sessionLifecycle": "running",
               "equipment": {
                 "stage9-b-browser-unit": [
@@ -567,10 +567,10 @@
               "ledgerCount": 0
             },
             "domText": "◣\n钢铁指令\nIRON COMMAND · 指挥终端\n▤\n补给\n4,975/ 5,000\n+2/s\n◈\n合金\n5,000/ 5,000\n+1/s\n◎\n情报\n500/ 500\n+0.1/s\n⚡\n电力\n0/ 30\n空载\n✦\n指挥容量\n2/ 6\n空闲\n基地时间\n08:00:00\n第1天\n❚❚\n1×\n2×\n4×\n保存\n读取\n新游戏\n演出：自动\n通用规划 · 正式旁路\n概览\n建设\n生产\n部队\n编队\n战区\n维修\n科研\n战报\n单位档案\n阶段8 · 已开放\n1\n单位总数\n0\n空闲单位\n0\n已编队单位\n0\n维修中单位\n0\n轻度受损\n0\n重度受损\n1\n新兵\n0\n训练有素\n0\n老兵\n0\n精锐\n类型\n全部类型\n步兵\n车辆\n装甲\n支援\n状态\n全部状态\n空闲\n已编队\n维修中\n受损\n等级\n全部等级\n新兵\n训练有素\n老兵\n精锐\n排序\n创建时间\n经验\n战斗次数\n生命比例\n单位类型\n单位列表\n1 个\n主战坦克\n新兵 · 主战坦克\n经验 0 · 战斗 0 · HP 160/160 · intact\n单位详情\n主战坦克\n新兵\n保存呼号\n单位类型\n主战坦克\n创建时间\n08:00:00\n来源建筑\n装甲工厂\n经验\n0\n战斗次数\n0\n生命\n160 / 160\n损伤\nintact\n等级进度\n距训练有素还需 10\n战斗中实际属性\nattack\n35（基础 35）\nantiArmor\n20（基础 20）\ndefense\n32.4（基础 30）\nscouting\n3（基础 3）\nmobility\n10.4（基础 10）\nrepair\n0（基础 0）\n装备槽位（1/2）\n强化底盘 · 槽位1\n卸载\n战术光学组 · scouting×1.15 mobility×1.03\n挂载\n野战工具包 · repair×1.2 defense×1.02\n挂载\n通讯记录 / COMMS\n5 / 30\n[08:00]\n基地数据已保存。\n[08:00]\n存档已载入，基地状态恢复。\n[08:00]\n编队「第一战斗群」已建立。\n[08:00]\n主战坦克已加入「第一战斗群」，指挥容量剩余4。\n[08:00]\n第一战斗群向废弃矿区发起进攻（谨慎推进）。\n正式战斗或结果面板期间不能变更装备",
-            "imageSha256": "37b9069598149e7037107902ef3e207994bbc90957a2d0d8e6b07653597bf8b6",
+            "imageSha256": "88a75bcdaef8e9746f9781f6221c5a644a9a6364efe3335a587f1e3703baf4d3",
             "screenshot": {
               "path": "screenshots/stage9-B/s9-b-03-running-attempt.png",
-              "sha256": "37b9069598149e7037107902ef3e207994bbc90957a2d0d8e6b07653597bf8b6"
+              "sha256": "88a75bcdaef8e9746f9781f6221c5a644a9a6364efe3335a587f1e3703baf4d3"
             }
           },
           {
@@ -582,33 +582,33 @@
               "reason": "running_battle",
               "method": "Page.reload",
               "before": {
-                "timeOrigin": 1786467071230.1,
+                "timeOrigin": 1786565580572.6,
                 "readyState": "complete",
                 "navigationType": "reload"
               },
               "after": {
-                "timeOrigin": 1786467073541.9,
+                "timeOrigin": 1786565583062.1,
                 "readyState": "complete",
                 "navigationType": "reload"
               },
-              "beforeLoaderId": "1B6806D84214DD466A954A5BDFE3D789",
-              "afterLoaderId": "102FFD26A1D477DFC101EDD5CF76ED9E",
-              "loaderId": "102FFD26A1D477DFC101EDD5CF76ED9E",
+              "beforeLoaderId": "9D00DF9A93648957EA1AB96759A3CD8A",
+              "afterLoaderId": "13951995DEDD892A9884815222D50A76",
+              "loaderId": "13951995DEDD892A9884815222D50A76",
               "timeOriginChanged": true
             },
-            "sessionId": "battle-session-8-scrap_mine-581135cefab553b32e30-1",
+            "sessionId": "battle-session-8-scrap_mine-5708090f460a7ac7efb1-1",
             "state": {
-              "activeBattleSessionId": "battle-session-8-scrap_mine-581135cefab553b32e30-1",
+              "activeBattleSessionId": "battle-session-8-scrap_mine-5708090f460a7ac7efb1-1",
               "activeBattle": {
-                "battleSessionId": "battle-session-8-scrap_mine-581135cefab553b32e30-1",
+                "battleSessionId": "battle-session-8-scrap_mine-5708090f460a7ac7efb1-1",
                 "replayReadOnly": false,
                 "settled": false,
-                "deploymentHash": "581135cefab553b32e30a2fee8113afc92e645fa8624e548233036714e46f74f",
-                "formalReportHash": "b326ea7f580ba50b8a8ec52182ddc54549c7d7e8b24cbb4f6b0e53d72097df4f",
-                "settlementId": "settlement-8b25736d347fd051061cd57256e72ef057c4d7468c7d1f4577979a12f5439cbe",
-                "reportId": "battle_2393486611_fm_msowdaw5_6_scrap_mine_cautious"
+                "deploymentHash": "5708090f460a7ac7efb1be95b493e07a47cb57c72a40e9e27ea32318e12f05c2",
+                "formalReportHash": "5a7d586814c5b6c4753ffc1ff9008e2c05aa756510861ae1ca1f797b56c39bd7",
+                "settlementId": "settlement-7d72ea57e8ce967d65747945d51d316c2aaa6f1ad481f359922fd5a4836c2118",
+                "reportId": "battle_3171138968_fm_msqj0p8i_6_scrap_mine_cautious"
               },
-              "sessionId": "battle-session-8-scrap_mine-581135cefab553b32e30-1",
+              "sessionId": "battle-session-8-scrap_mine-5708090f460a7ac7efb1-1",
               "sessionLifecycle": "running",
               "equipment": {
                 "stage9-b-browser-unit": [
@@ -620,10 +620,10 @@
               "ledgerCount": 0
             },
             "domText": "◣\n钢铁指令\nIRON COMMAND · 指挥终端\n▤\n补给\n4,975/ 5,000\n+2/s\n◈\n合金\n5,000/ 5,000\n+1/s\n◎\n情报\n500/ 500\n+0.1/s\n⚡\n电力\n0/ 30\n空载\n✦\n指挥容量\n2/ 6\n空闲\n基地时间\n08:00:00\n第1天\n❚❚\n1×\n2×\n4×\n保存\n读取\n新游戏\n演出：自动\n通用规划 · 正式旁路\n概览\n建设\n生产\n部队\n编队\n战区\n维修\n科研\n战报\n单位档案\n阶段8 · 已开放\n1\n单位总数\n0\n空闲单位\n0\n已编队单位\n0\n维修中单位\n0\n轻度受损\n0\n重度受损\n1\n新兵\n0\n训练有素\n0\n老兵\n0\n精锐\n类型\n全部类型\n步兵\n车辆\n装甲\n支援\n状态\n全部状态\n空闲\n已编队\n维修中\n受损\n等级\n全部等级\n新兵\n训练有素\n老兵\n精锐\n排序\n创建时间\n经验\n战斗次数\n生命比例\n单位类型\n单位列表\n1 个\n主战坦克\n新兵 · 主战坦克\n经验 0 · 战斗 0 · HP 160/160 · intact\n单位详情\n主战坦克\n新兵\n保存呼号\n单位类型\n主战坦克\n创建时间\n08:00:00\n来源建筑\n装甲工厂\n经验\n0\n战斗次数\n0\n生命\n160 / 160\n损伤\nintact\n等级进度\n距训练有素还需 10\n战斗中实际属性\nattack\n35（基础 35）\nantiArmor\n20（基础 20）\ndefense\n32.4（基础 30）\nscouting\n3（基础 3）\nmobility\n10.4（基础 10）\nrepair\n0（基础 0）\n装备槽位（1/2）\n强化底盘 · 槽位1\n卸载\n战术光学组 · scouting×1.15 mobility×1.03\n挂载\n野战工具包 · repair×1.2 defense×1.02\n挂载\n通讯记录 / COMMS\n8 / 30\n[08:00]\n基地数据已保存。\n[08:00]\n存档已载入，基地状态恢复。\n[08:00]\n编队「第一战斗群」已建立。\n[08:00]\n主战坦克已加入「第一战斗群」，指挥容量剩余4。\n[08:00]\n第一战斗群向废弃矿区发起进攻（谨慎推进）。\n[08:00]\n存档已载入，基地状态恢复。\n[08:00]\n1支编队已恢复，指挥容量占用 2/6。\n[08:00]\n第一战斗群正在废弃矿区作战，回放进度 0%，结果已锁定。\n正式战斗或结果面板期间不能变更装备",
-            "imageSha256": "ed07bd319a33e989855787d1f763f97d5abc55106bd6fa7c9c4cff307b0639d5",
+            "imageSha256": "ad28f340306754e66cad21d6eecdd328e17ca8fdebfaf1e7bea6eab235309dd0",
             "screenshot": {
               "path": "screenshots/stage9-B/s9-b-04-running-reload.png",
-              "sha256": "ed07bd319a33e989855787d1f763f97d5abc55106bd6fa7c9c4cff307b0639d5"
+              "sha256": "ad28f340306754e66cad21d6eecdd328e17ca8fdebfaf1e7bea6eab235309dd0"
             }
           },
           {
@@ -632,17 +632,17 @@
             "semantic": "result_equipment_change_attempt",
             "phase": "result_equipment_change_attempt",
             "state": {
-              "activeBattleSessionId": "battle-session-8-scrap_mine-581135cefab553b32e30-1",
+              "activeBattleSessionId": "battle-session-8-scrap_mine-5708090f460a7ac7efb1-1",
               "activeBattle": {
-                "battleSessionId": "battle-session-8-scrap_mine-581135cefab553b32e30-1",
+                "battleSessionId": "battle-session-8-scrap_mine-5708090f460a7ac7efb1-1",
                 "replayReadOnly": false,
                 "settled": true,
-                "deploymentHash": "581135cefab553b32e30a2fee8113afc92e645fa8624e548233036714e46f74f",
-                "formalReportHash": "b326ea7f580ba50b8a8ec52182ddc54549c7d7e8b24cbb4f6b0e53d72097df4f",
-                "settlementId": "settlement-8b25736d347fd051061cd57256e72ef057c4d7468c7d1f4577979a12f5439cbe",
-                "reportId": "battle_2393486611_fm_msowdaw5_6_scrap_mine_cautious"
+                "deploymentHash": "5708090f460a7ac7efb1be95b493e07a47cb57c72a40e9e27ea32318e12f05c2",
+                "formalReportHash": "5a7d586814c5b6c4753ffc1ff9008e2c05aa756510861ae1ca1f797b56c39bd7",
+                "settlementId": "settlement-7d72ea57e8ce967d65747945d51d316c2aaa6f1ad481f359922fd5a4836c2118",
+                "reportId": "battle_3171138968_fm_msqj0p8i_6_scrap_mine_cautious"
               },
-              "sessionId": "battle-session-8-scrap_mine-581135cefab553b32e30-1",
+              "sessionId": "battle-session-8-scrap_mine-5708090f460a7ac7efb1-1",
               "sessionLifecycle": "settled",
               "equipment": {
                 "stage9-b-browser-unit": [
@@ -654,10 +654,10 @@
               "ledgerCount": 1
             },
             "domText": "◣\n钢铁指令\nIRON COMMAND · 指挥终端\n▤\n补给\n4,975/ 5,000\n+2/s\n◈\n合金\n5,000/ 5,000\n+2/s\n◎\n情报\n500/ 500\n+0.1/s\n⚡\n电力\n0/ 30\n空载\n✦\n指挥容量\n2/ 6\n空闲\n基地时间\n08:00:00\n第1天\n❚❚\n1×\n2×\n4×\n保存\n读取\n新游戏\n演出：自动\n通用规划 · 正式旁路\n作战结束，部队正在重新集结并返航 · 5 秒\n查看完整战报\n跳过返航动画\n概览\n建设\n生产\n部队\n编队\n战区\n维修\n科研\n战报\n单位档案\n阶段8 · 已开放\n1\n单位总数\n0\n空闲单位\n0\n已编队单位\n0\n维修中单位\n0\n轻度受损\n0\n重度受损\n0\n新兵\n1\n训练有素\n0\n老兵\n0\n精锐\n类型\n全部类型\n步兵\n车辆\n装甲\n支援\n状态\n全部状态\n空闲\n已编队\n维修中\n受损\n等级\n全部等级\n新兵\n训练有素\n老兵\n精锐\n排序\n创建时间\n经验\n战斗次数\n生命比例\n单位类型\n单位列表\n1 个\n主战坦克\n训练有素 · 主战坦克\n经验 10 · 战斗 1 · HP 151/160 · intact\n单位详情\n主战坦克\n训练有素\n保存呼号\n单位类型\n主战坦克\n创建时间\n08:00:00\n来源建筑\n装甲工厂\n经验\n10\n战斗次数\n1\n生命\n151 / 160\n损伤\nintact\n等级进度\n距老兵还需 20\n战斗中实际属性\nattack\n36.05（基础 35）\nantiArmor\n20.6（基础 20）\ndefense\n33.372（基础 30）\nscouting\n3（基础 3）\nmobility\n10.4（基础 10）\nrepair\n0（基础 0）\n装备槽位（1/2）\n强化底盘 · 槽位1\n卸载\n战术光学组 · scouting×1.15 mobility×1.03\n挂载\n野战工具包 · repair×1.2 defense×1.02\n挂载\n通讯记录 / COMMS\n10 / 30\n[08:00]\n基地数据已保存。\n[08:00]\n存档已载入，基地状态恢复。\n[08:00]\n编队「第一战斗群」已建立。\n[08:00]\n主战坦克已加入「第一战斗群」，指挥容量剩余4。\n[08:00]\n第一战斗群向废弃矿区发起进攻（谨慎推进）。\n[08:00]\n存档已载入，基地状态恢复。\n[08:00]\n1支编队已恢复，指挥容量占用 2/6。\n[08:00]\n第一战斗群正在废弃矿区作战，回放进度 0%，结果已锁定。\n[08:00]\n第一战斗群在废弃矿区的作战结束：胜利，无永久损失。\n[08:00]\n占领废弃矿区，获得首次占领奖励：合金 300。\n正式战斗或结果面板期间不能变更装备",
-            "imageSha256": "aa2ba4387740c46fd04117e289c97fe2903ba8ed7c4d9e996b58ac05910af21b",
+            "imageSha256": "e5118a06c0ea2b9fda8feffe45f32e8f9be86fd88b66416c4c460e2a04831e75",
             "screenshot": {
               "path": "screenshots/stage9-B/s9-b-05-result-attempt.png",
-              "sha256": "aa2ba4387740c46fd04117e289c97fe2903ba8ed7c4d9e996b58ac05910af21b"
+              "sha256": "e5118a06c0ea2b9fda8feffe45f32e8f9be86fd88b66416c4c460e2a04831e75"
             }
           },
           {
@@ -669,32 +669,32 @@
               "reason": "result",
               "method": "Page.reload",
               "before": {
-                "timeOrigin": 1786467073541.9,
+                "timeOrigin": 1786565583062.1,
                 "readyState": "complete",
                 "navigationType": "reload"
               },
               "after": {
-                "timeOrigin": 1786467074743.8,
+                "timeOrigin": 1786565584390.9,
                 "readyState": "complete",
                 "navigationType": "reload"
               },
-              "beforeLoaderId": "102FFD26A1D477DFC101EDD5CF76ED9E",
-              "afterLoaderId": "ABF45C04D52543D6D8E220448B71F6E3",
-              "loaderId": "ABF45C04D52543D6D8E220448B71F6E3",
+              "beforeLoaderId": "13951995DEDD892A9884815222D50A76",
+              "afterLoaderId": "495D112B55011655F7420DFE0D4C07A7",
+              "loaderId": "495D112B55011655F7420DFE0D4C07A7",
               "timeOriginChanged": true
             },
             "state": {
-              "activeBattleSessionId": "battle-session-8-scrap_mine-581135cefab553b32e30-1",
+              "activeBattleSessionId": "battle-session-8-scrap_mine-5708090f460a7ac7efb1-1",
               "activeBattle": {
-                "battleSessionId": "battle-session-8-scrap_mine-581135cefab553b32e30-1",
+                "battleSessionId": "battle-session-8-scrap_mine-5708090f460a7ac7efb1-1",
                 "replayReadOnly": false,
                 "settled": true,
-                "deploymentHash": "581135cefab553b32e30a2fee8113afc92e645fa8624e548233036714e46f74f",
-                "formalReportHash": "b326ea7f580ba50b8a8ec52182ddc54549c7d7e8b24cbb4f6b0e53d72097df4f",
-                "settlementId": "settlement-8b25736d347fd051061cd57256e72ef057c4d7468c7d1f4577979a12f5439cbe",
-                "reportId": "battle_2393486611_fm_msowdaw5_6_scrap_mine_cautious"
+                "deploymentHash": "5708090f460a7ac7efb1be95b493e07a47cb57c72a40e9e27ea32318e12f05c2",
+                "formalReportHash": "5a7d586814c5b6c4753ffc1ff9008e2c05aa756510861ae1ca1f797b56c39bd7",
+                "settlementId": "settlement-7d72ea57e8ce967d65747945d51d316c2aaa6f1ad481f359922fd5a4836c2118",
+                "reportId": "battle_3171138968_fm_msqj0p8i_6_scrap_mine_cautious"
               },
-              "sessionId": "battle-session-8-scrap_mine-581135cefab553b32e30-1",
+              "sessionId": "battle-session-8-scrap_mine-5708090f460a7ac7efb1-1",
               "sessionLifecycle": "settled",
               "equipment": {
                 "stage9-b-browser-unit": [
@@ -706,10 +706,10 @@
               "ledgerCount": 1
             },
             "domText": "◣\n钢铁指令\nIRON COMMAND · 指挥终端\n▤\n补给\n4,975/ 5,000\n+2/s\n◈\n合金\n5,000/ 5,000\n+2/s\n◎\n情报\n500/ 500\n+0.1/s\n⚡\n电力\n0/ 30\n空载\n✦\n指挥容量\n2/ 6\n空闲\n基地时间\n08:00:00\n第1天\n❚❚\n1×\n2×\n4×\n保存\n读取\n新游戏\n演出：自动\n通用规划 · 正式旁路\n作战结束，部队正在重新集结并返航 · 5 秒\n查看完整战报\n跳过返航动画\n概览\n建设\n生产\n部队\n编队\n战区\n维修\n科研\n战报\n单位档案\n阶段8 · 已开放\n1\n单位总数\n0\n空闲单位\n0\n已编队单位\n0\n维修中单位\n0\n轻度受损\n0\n重度受损\n0\n新兵\n1\n训练有素\n0\n老兵\n0\n精锐\n类型\n全部类型\n步兵\n车辆\n装甲\n支援\n状态\n全部状态\n空闲\n已编队\n维修中\n受损\n等级\n全部等级\n新兵\n训练有素\n老兵\n精锐\n排序\n创建时间\n经验\n战斗次数\n生命比例\n单位类型\n单位列表\n1 个\n主战坦克\n训练有素 · 主战坦克\n经验 10 · 战斗 1 · HP 151/160 · intact\n单位详情\n主战坦克\n训练有素\n保存呼号\n单位类型\n主战坦克\n创建时间\n08:00:00\n来源建筑\n装甲工厂\n经验\n10\n战斗次数\n1\n生命\n151 / 160\n损伤\nintact\n等级进度\n距老兵还需 20\n战斗中实际属性\nattack\n36.05（基础 35）\nantiArmor\n20.6（基础 20）\ndefense\n33.372（基础 30）\nscouting\n3（基础 3）\nmobility\n10.4（基础 10）\nrepair\n0（基础 0）\n装备槽位（1/2）\n强化底盘 · 槽位1\n卸载\n战术光学组 · scouting×1.15 mobility×1.03\n挂载\n野战工具包 · repair×1.2 defense×1.02\n挂载\n通讯记录 / COMMS\n16 / 30\n[08:00]\n基地数据已保存。\n[08:00]\n存档已载入，基地状态恢复。\n[08:00]\n编队「第一战斗群」已建立。\n[08:00]\n主战坦克已加入「第一战斗群」，指挥容量剩余4。\n[08:00]\n第一战斗群向废弃矿区发起进攻（谨慎推进）。\n[08:00]\n存档已载入，基地状态恢复。\n[08:00]\n1支编队已恢复，指挥容量占用 2/6。\n[08:00]\n第一战斗群正在废弃矿区作战，回放进度 0%，结果已锁定。\n[08:00]\n第一战斗群在废弃矿区的作战结束：胜利，无永久损失。\n[08:00]\n占领废弃矿区，获得首次占领奖励：合金 300。\n[08:00]\n存档已载入，基地状态恢复。\n[08:00]\n检测到异常编队数据，已自动修复。\n[08:00]\n修复说明：活动编队状态已恢复为战斗。\n[08:00]\n1支编队已恢复，指挥容量占用 2/6。\n[08:00]\n已占领战区：废弃矿区，占领收益持续生效。\n[08:00]\n第一战斗群在废弃矿区的战斗已结束（胜利），等待返回基地。\n正式战斗或结果面板期间不能变更装备",
-            "imageSha256": "517eb6471d1b33dd195d7fb42dbbd55f86b75a65bb0b7304ba02768cd1b2b5bc",
+            "imageSha256": "c4b568151483c435d1b0b40505bd35e25a11fd4fb5866761755b02bd0a726793",
             "screenshot": {
               "path": "screenshots/stage9-B/s9-b-06-result-reload.png",
-              "sha256": "517eb6471d1b33dd195d7fb42dbbd55f86b75a65bb0b7304ba02768cd1b2b5bc"
+              "sha256": "c4b568151483c435d1b0b40505bd35e25a11fd4fb5866761755b02bd0a726793"
             }
           },
           {
@@ -720,15 +720,15 @@
             "state": {
               "activeBattleSessionId": null,
               "activeBattle": {
-                "battleSessionId": "battle-session-8-scrap_mine-581135cefab553b32e30-1",
+                "battleSessionId": "battle-session-8-scrap_mine-5708090f460a7ac7efb1-1",
                 "replayReadOnly": true,
                 "settled": false,
-                "deploymentHash": "581135cefab553b32e30a2fee8113afc92e645fa8624e548233036714e46f74f",
-                "formalReportHash": "b326ea7f580ba50b8a8ec52182ddc54549c7d7e8b24cbb4f6b0e53d72097df4f",
-                "settlementId": "settlement-8b25736d347fd051061cd57256e72ef057c4d7468c7d1f4577979a12f5439cbe",
-                "reportId": "battle_2393486611_fm_msowdaw5_6_scrap_mine_cautious"
+                "deploymentHash": "5708090f460a7ac7efb1be95b493e07a47cb57c72a40e9e27ea32318e12f05c2",
+                "formalReportHash": "5a7d586814c5b6c4753ffc1ff9008e2c05aa756510861ae1ca1f797b56c39bd7",
+                "settlementId": "settlement-7d72ea57e8ce967d65747945d51d316c2aaa6f1ad481f359922fd5a4836c2118",
+                "reportId": "battle_3171138968_fm_msqj0p8i_6_scrap_mine_cautious"
               },
-              "sessionId": "battle-session-8-scrap_mine-581135cefab553b32e30-1",
+              "sessionId": "battle-session-8-scrap_mine-5708090f460a7ac7efb1-1",
               "sessionLifecycle": "returned",
               "equipment": {
                 "stage9-b-browser-unit": [
@@ -740,10 +740,10 @@
               "ledgerCount": 1
             },
             "domText": "◣\n钢铁指令\nIRON COMMAND · 指挥终端\n▤\n补给\n4,975/ 5,000\n+2/s\n◈\n合金\n5,000/ 5,000\n+2/s\n◎\n情报\n500/ 500\n+0.1/s\n⚡\n电力\n0/ 30\n空载\n✦\n指挥容量\n2/ 6\n空闲\n基地时间\n08:00:00\n第1天\n❚❚\n1×\n2×\n4×\n保存\n读取\n新游戏\n演出：自动\n通用规划 · 正式旁路\n概览\n建设\n生产\n部队\n编队\n战区\n维修\n科研\n战报\n单位档案\n阶段8 · 已开放\n1\n单位总数\n0\n空闲单位\n1\n已编队单位\n0\n维修中单位\n0\n轻度受损\n0\n重度受损\n0\n新兵\n1\n训练有素\n0\n老兵\n0\n精锐\n类型\n全部类型\n步兵\n车辆\n装甲\n支援\n状态\n全部状态\n空闲\n已编队\n维修中\n受损\n等级\n全部等级\n新兵\n训练有素\n老兵\n精锐\n排序\n创建时间\n经验\n战斗次数\n生命比例\n单位类型\n单位列表\n1 个\n主战坦克\n训练有素 · 主战坦克\n经验 10 · 战斗 1 · HP 151/160 · intact\n单位详情\n主战坦克\n训练有素\n保存呼号\n单位类型\n主战坦克\n创建时间\n08:00:00\n来源建筑\n装甲工厂\n经验\n10\n战斗次数\n1\n生命\n151 / 160\n损伤\nintact\n等级进度\n距老兵还需 20\n战斗中实际属性\nattack\n36.05（基础 35）\nantiArmor\n20.6（基础 20）\ndefense\n33.372（基础 30）\nscouting\n3（基础 3）\nmobility\n10.4（基础 10）\nrepair\n0（基础 0）\n装备槽位（1/2）\n强化底盘 · 槽位1\n卸载\n战术光学组 · scouting×1.15 mobility×1.03\n挂载\n野战工具包 · repair×1.2 defense×1.02\n挂载\n通讯记录 / COMMS\n17 / 30\n[08:00]\n基地数据已保存。\n[08:00]\n存档已载入，基地状态恢复。\n[08:00]\n编队「第一战斗群」已建立。\n[08:00]\n主战坦克已加入「第一战斗群」，指挥容量剩余4。\n[08:00]\n第一战斗群向废弃矿区发起进攻（谨慎推进）。\n[08:00]\n存档已载入，基地状态恢复。\n[08:00]\n1支编队已恢复，指挥容量占用 2/6。\n[08:00]\n第一战斗群正在废弃矿区作战，回放进度 0%，结果已锁定。\n[08:00]\n第一战斗群在废弃矿区的作战结束：胜利，无永久损失。\n[08:00]\n占领废弃矿区，获得首次占领奖励：合金 300。\n[08:00]\n存档已载入，基地状态恢复。\n[08:00]\n检测到异常编队数据，已自动修复。\n[08:00]\n修复说明：活动编队状态已恢复为战斗。\n[08:00]\n1支编队已恢复，指挥容量占用 2/6。\n[08:00]\n已占领战区：废弃矿区，占领收益持续生效。\n[08:00]\n第一战斗群在废弃矿区的战斗已结束（胜利），等待返回基地。\n[08:00]\n第一战斗群已返回基地。\n只读回放期间不能变更装备",
-            "imageSha256": "716268198ae923fa5fd5dca206ab4ad7e5fcafb42306668e8ccd9b5269e14bb3",
+            "imageSha256": "3dfde8e676d1904823a5898635e508c44f348ee60a9de9e69471ede88ee581b2",
             "screenshot": {
               "path": "screenshots/stage9-B/s9-b-07-replay-attempt.png",
-              "sha256": "716268198ae923fa5fd5dca206ab4ad7e5fcafb42306668e8ccd9b5269e14bb3"
+              "sha256": "3dfde8e676d1904823a5898635e508c44f348ee60a9de9e69471ede88ee581b2"
             }
           },
           {
@@ -755,32 +755,32 @@
               "reason": "replay",
               "method": "Page.reload",
               "before": {
-                "timeOrigin": 1786467074743.8,
+                "timeOrigin": 1786565584390.9,
                 "readyState": "complete",
                 "navigationType": "reload"
               },
               "after": {
-                "timeOrigin": 1786467076575.3,
+                "timeOrigin": 1786565586318,
                 "readyState": "complete",
                 "navigationType": "reload"
               },
-              "beforeLoaderId": "ABF45C04D52543D6D8E220448B71F6E3",
-              "afterLoaderId": "3E50D82EBA43AB00745C2014804C6E93",
-              "loaderId": "3E50D82EBA43AB00745C2014804C6E93",
+              "beforeLoaderId": "495D112B55011655F7420DFE0D4C07A7",
+              "afterLoaderId": "848EB2BC202C9C8A9FD8FD154141A005",
+              "loaderId": "848EB2BC202C9C8A9FD8FD154141A005",
               "timeOriginChanged": true
             },
             "state": {
               "activeBattleSessionId": null,
               "activeBattle": {
-                "battleSessionId": "battle-session-8-scrap_mine-581135cefab553b32e30-1",
+                "battleSessionId": "battle-session-8-scrap_mine-5708090f460a7ac7efb1-1",
                 "replayReadOnly": true,
                 "settled": false,
-                "deploymentHash": "581135cefab553b32e30a2fee8113afc92e645fa8624e548233036714e46f74f",
-                "formalReportHash": "b326ea7f580ba50b8a8ec52182ddc54549c7d7e8b24cbb4f6b0e53d72097df4f",
-                "settlementId": "settlement-8b25736d347fd051061cd57256e72ef057c4d7468c7d1f4577979a12f5439cbe",
-                "reportId": "battle_2393486611_fm_msowdaw5_6_scrap_mine_cautious"
+                "deploymentHash": "5708090f460a7ac7efb1be95b493e07a47cb57c72a40e9e27ea32318e12f05c2",
+                "formalReportHash": "5a7d586814c5b6c4753ffc1ff9008e2c05aa756510861ae1ca1f797b56c39bd7",
+                "settlementId": "settlement-7d72ea57e8ce967d65747945d51d316c2aaa6f1ad481f359922fd5a4836c2118",
+                "reportId": "battle_3171138968_fm_msqj0p8i_6_scrap_mine_cautious"
               },
-              "sessionId": "battle-session-8-scrap_mine-581135cefab553b32e30-1",
+              "sessionId": "battle-session-8-scrap_mine-5708090f460a7ac7efb1-1",
               "sessionLifecycle": "returned",
               "equipment": {
                 "stage9-b-browser-unit": [
@@ -792,10 +792,10 @@
               "ledgerCount": 1
             },
             "domText": "◣\n钢铁指令\nIRON COMMAND · 指挥终端\n▤\n补给\n4,975/ 5,000\n+2/s\n◈\n合金\n5,000/ 5,000\n+2/s\n◎\n情报\n500/ 500\n+0.1/s\n⚡\n电力\n0/ 30\n空载\n✦\n指挥容量\n2/ 6\n空闲\n基地时间\n08:00:00\n第1天\n❚❚\n1×\n2×\n4×\n保存\n读取\n新游戏\n演出：自动\n通用规划 · 正式旁路\n概览\n建设\n生产\n部队\n编队\n战区\n维修\n科研\n战报\n单位档案\n阶段8 · 已开放\n1\n单位总数\n0\n空闲单位\n1\n已编队单位\n0\n维修中单位\n0\n轻度受损\n0\n重度受损\n0\n新兵\n1\n训练有素\n0\n老兵\n0\n精锐\n类型\n全部类型\n步兵\n车辆\n装甲\n支援\n状态\n全部状态\n空闲\n已编队\n维修中\n受损\n等级\n全部等级\n新兵\n训练有素\n老兵\n精锐\n排序\n创建时间\n经验\n战斗次数\n生命比例\n单位类型\n单位列表\n1 个\n主战坦克\n训练有素 · 主战坦克\n经验 10 · 战斗 1 · HP 151/160 · intact\n单位详情\n主战坦克\n训练有素\n保存呼号\n单位类型\n主战坦克\n创建时间\n08:00:00\n来源建筑\n装甲工厂\n经验\n10\n战斗次数\n1\n生命\n151 / 160\n损伤\nintact\n等级进度\n距老兵还需 20\n战斗中实际属性\nattack\n36.05（基础 35）\nantiArmor\n20.6（基础 20）\ndefense\n33.372（基础 30）\nscouting\n3（基础 3）\nmobility\n10.4（基础 10）\nrepair\n0（基础 0）\n装备槽位（1/2）\n强化底盘 · 槽位1\n卸载\n战术光学组 · scouting×1.15 mobility×1.03\n挂载\n野战工具包 · repair×1.2 defense×1.02\n挂载\n通讯记录 / COMMS\n21 / 30\n[08:00]\n基地数据已保存。\n[08:00]\n存档已载入，基地状态恢复。\n[08:00]\n编队「第一战斗群」已建立。\n[08:00]\n主战坦克已加入「第一战斗群」，指挥容量剩余4。\n[08:00]\n第一战斗群向废弃矿区发起进攻（谨慎推进）。\n[08:00]\n存档已载入，基地状态恢复。\n[08:00]\n1支编队已恢复，指挥容量占用 2/6。\n[08:00]\n第一战斗群正在废弃矿区作战，回放进度 0%，结果已锁定。\n[08:00]\n第一战斗群在废弃矿区的作战结束：胜利，无永久损失。\n[08:00]\n占领废弃矿区，获得首次占领奖励：合金 300。\n[08:00]\n存档已载入，基地状态恢复。\n[08:00]\n检测到异常编队数据，已自动修复。\n[08:00]\n修复说明：活动编队状态已恢复为战斗。\n[08:00]\n1支编队已恢复，指挥容量占用 2/6。\n[08:00]\n已占领战区：废弃矿区，占领收益持续生效。\n[08:00]\n第一战斗群在废弃矿区的战斗已结束（胜利），等待返回基地。\n[08:00]\n第一战斗群已返回基地。\n[08:00]\n存档已载入，基地状态恢复。\n[08:00]\n1支编队已恢复，指挥容量占用 2/6。\n[08:00]\n已占领战区：废弃矿区，占领收益持续生效。\n[08:00]\n第一战斗群正在废弃矿区作战，回放进度 0%，结果已锁定。\n只读回放期间不能变更装备",
-            "imageSha256": "e34211fe32106da2ea301d8dcc560884c23c8d137198c43952af9799b62f9853",
+            "imageSha256": "3db017876d365aae3bb5d8ea94d48b14271be682c4fbfca320026639e930bb70",
             "screenshot": {
               "path": "screenshots/stage9-B/s9-b-08-replay-reload.png",
-              "sha256": "e34211fe32106da2ea301d8dcc560884c23c8d137198c43952af9799b62f9853"
+              "sha256": "3db017876d365aae3bb5d8ea94d48b14271be682c4fbfca320026639e930bb70"
             }
           }
         ]
@@ -940,7 +940,7 @@
       "migrationEvidence": {
         "stage": "9-B",
         "passed": true,
-        "saveVersion": 8,
+        "saveVersion": 9,
         "oldSaveEquipment": {
           "inventory": [],
           "bindings": {}
@@ -977,7 +977,7 @@
           "equipment": null
         },
         "running": {
-          "battleSessionId": "battle-session-0-scrap_mine-a534dbb4d1870f69993d-1",
+          "battleSessionId": "battle-session-0-scrap_mine-30345824a5fe684353f8-1",
           "deploymentHashUnchanged": true,
           "formalReportHashUnchanged": true,
           "equipmentUnchanged": true
@@ -991,7 +991,7 @@
       "replayEvidence": {
         "stage": "9-B",
         "passed": true,
-        "sessionId": "battle-session-0-scrap_mine-17f0ddefb121720cb7d1-1",
+        "sessionId": "battle-session-0-scrap_mine-5d3de590bfffe219af6d-1",
         "historicalEquipment": [
           {
             "instanceId": "equipment-starter-2",
@@ -1050,15 +1050,15 @@
         "warmup": 20,
         "samples": 120,
         "metric": "p95",
-        "p95Ms": 0.008167000000000257,
-        "maxMs": 0.1987090000000009
+        "p95Ms": 0.021833999999998355,
+        "maxMs": 0.45241699999999696
       },
       "snapshot": {
         "warmup": 20,
         "samples": 120,
         "metric": "p95",
-        "p95Ms": 0.01662499999999767,
-        "maxMs": 0.029958000000000595
+        "p95Ms": 0.04187500000000455,
+        "maxMs": 0.07916600000000074
       }
     },
     "hotPathGuards": {
@@ -1167,7 +1167,7 @@
     "performance": true
   },
   "hashes": {
-    "browserManifestSha256": "a35d664fd7e1701f92ae28f6c54bf9e39fc0e7149fa1a273df513cc987beb99e"
+    "browserManifestSha256": "d86dcb9c8e8e247530943e27e4738d8c7879d0c33c1546985fa37550e27992f3"
   },
   "environment": {
     "platform": "darwin",

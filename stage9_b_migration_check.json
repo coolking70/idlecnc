@@ -1,7 +1,7 @@
 {
   "stage": "9-B",
   "passed": true,
-  "saveVersion": 8,
+  "saveVersion": 9,
   "oldSaveEquipment": {
     "inventory": [],
     "bindings": {}

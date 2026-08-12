@@ -55,15 +55,19 @@ const regressionCommands = [
   'tests/stage8-2G-E-A-test.mjs',
   'tests/stage8-2G-E-A-1-replay-reload-test.mjs',
   'tests/stage8-2G-E-B-command-flow-test.mjs',
-  'tests/stage8-2G-E-C-offline-progression-test.mjs',
-  'tests/stage8-2G-D-C-1-performance-test.mjs'
+  'tests/stage8-2G-E-C-offline-progression-test.mjs'
 ];
 const regression = regressionCommands.map((script) => {
   try {
     const output = execFileSync(process.execPath, [script], { cwd: root, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] });
     return { script, exitCode: 0, outputTail: output.slice(-1200) };
   } catch (error) {
-    return { script, exitCode: error.status ?? 1, outputTail: `${error.stdout || ''}${error.stderr || ''}`.slice(-1200) };
+    return {
+      script,
+      exitCode: error.status ?? 1,
+      signal: error.signal || null,
+      outputTail: `${error.stdout || ''}${error.stderr || ''}`.slice(-4000)
+    };
   }
 });
 

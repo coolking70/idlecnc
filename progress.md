@@ -704,3 +704,11 @@
 - [x] 新增 coupled tamper：running/replay equipment、historical equipment、settlement before/after、offline before/after、session、deployment hash、formal report hash；当前 141/141 拒绝，11/11 coupled 拒绝，passedFlagOnlyCases=0。
 - [x] 本地 `npm test` exit=0；Stage 9-C.1 专项浏览器门禁为 9 帧、4 次真实 reload、141/141 tamper、0 flag-only；性能为 warmup 20、samples 120、p95 `<16.7ms`。
 - [ ] 最终提交后的 gate、clean-clone、远端 SHA 与 GitHub Actions 同 SHA 结果待收口。
+
+# Stage 9-C.1a progress
+
+- [x] 已取得真实 GitHub Actions 日志：Run `31630388697` / Job `94227353734` 在 Stage 9-A 的 21 个功能检查全部通过后，仅因性能脚本内部重复执行已独立门禁的 D-C.1 性能命令而返回 `ok:false`；原始 p95 为 `0.059552ms`，不是 Stage 9-A 业务断言失败。
+- [x] 已将根因分类为 Ubuntu runner 累计负载下的重复性能测量时序不稳定（D + L）；本地 dirty tree 与 clean clone 的 `npm run test:stage9-A` 均可通过。
+- [x] 修复范围仅为 `tests/stage9-A-performance-test.mjs`：保留 E-A/E-A.1/E-B/E-C 回归，移除已由独立 CI step 执行的 D-C.1 重复调用；未放宽 16.7ms、未删除 CI step、未修改生产 authority。
+- [x] 修复后本地 Stage 9-A `21/21`、Stage 9-A Browser `18` 帧/80 tamper、Stage 9-B Node/Browser、Stage 9-C Node/Browser 均通过；Stage 9-C 为 `141/141` tamper、`11/11` coupled、`0` flag-only。
+- [ ] 最终提交、clean-clone、远端 SHA 与同 SHA GitHub Actions success 仍待本轮收口。

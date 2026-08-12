@@ -3,10 +3,10 @@
   "passed": true,
   "theaterId": "mountain_pass",
   "missionKind": "campaign",
-  "sessionId": "battle-session-0-mountain_pass-927d6736822e50486bdb-1",
+  "sessionId": "battle-session-0-mountain_pass-6682a1ddf669488fcb1e-1",
   "deployment": {
     "formation": {
-      "id": "fm_msoli3qe_3g",
+      "id": "fm_msqiwm5k_3g",
       "name": "Stage 9 深入编队",
       "experience": 0,
       "unitIds": [
@@ -33,27 +33,9 @@
           "scouting": 3,
           "mobility": 10,
           "repair": 0,
-          "hp": 160,
-          "rankId": "recruit",
-          "rankName": "新兵",
-          "rankModifiers": {
-            "attack": 1,
-            "antiArmor": 1,
-            "defense": 1,
-            "scouting": 1,
-            "mobility": 1,
-            "repair": 1
-          },
-          "base": {
-            "attack": 35,
-            "antiArmor": 20,
-            "defense": 30,
-            "scouting": 3,
-            "mobility": 10,
-            "repair": 0,
-            "hp": 160
-          }
+          "hp": 160
         },
+        "equipment": [],
         "rankId": "recruit",
         "rankName": "新兵",
         "rankModifiers": {
@@ -80,27 +62,9 @@
           "scouting": 3,
           "mobility": 10,
           "repair": 0,
-          "hp": 160,
-          "rankId": "recruit",
-          "rankName": "新兵",
-          "rankModifiers": {
-            "attack": 1,
-            "antiArmor": 1,
-            "defense": 1,
-            "scouting": 1,
-            "mobility": 1,
-            "repair": 1
-          },
-          "base": {
-            "attack": 35,
-            "antiArmor": 20,
-            "defense": 30,
-            "scouting": 3,
-            "mobility": 10,
-            "repair": 0,
-            "hp": 160
-          }
+          "hp": 160
         },
+        "equipment": [],
         "rankId": "recruit",
         "rankName": "新兵",
         "rankModifiers": {
@@ -127,27 +91,9 @@
           "scouting": 3,
           "mobility": 10,
           "repair": 0,
-          "hp": 160,
-          "rankId": "recruit",
-          "rankName": "新兵",
-          "rankModifiers": {
-            "attack": 1,
-            "antiArmor": 1,
-            "defense": 1,
-            "scouting": 1,
-            "mobility": 1,
-            "repair": 1
-          },
-          "base": {
-            "attack": 35,
-            "antiArmor": 20,
-            "defense": 30,
-            "scouting": 3,
-            "mobility": 10,
-            "repair": 0,
-            "hp": 160
-          }
+          "hp": 160
         },
+        "equipment": [],
         "rankId": "recruit",
         "rankName": "新兵",
         "rankModifiers": {
@@ -174,27 +120,9 @@
           "scouting": 3,
           "mobility": 10,
           "repair": 0,
-          "hp": 160,
-          "rankId": "recruit",
-          "rankName": "新兵",
-          "rankModifiers": {
-            "attack": 1,
-            "antiArmor": 1,
-            "defense": 1,
-            "scouting": 1,
-            "mobility": 1,
-            "repair": 1
-          },
-          "base": {
-            "attack": 35,
-            "antiArmor": 20,
-            "defense": 30,
-            "scouting": 3,
-            "mobility": 10,
-            "repair": 0,
-            "hp": 160
-          }
+          "hp": 160
         },
+        "equipment": [],
         "rankId": "recruit",
         "rankName": "新兵",
         "rankModifiers": {
@@ -221,27 +149,9 @@
           "scouting": 3,
           "mobility": 10,
           "repair": 0,
-          "hp": 160,
-          "rankId": "recruit",
-          "rankName": "新兵",
-          "rankModifiers": {
-            "attack": 1,
-            "antiArmor": 1,
-            "defense": 1,
-            "scouting": 1,
-            "mobility": 1,
-            "repair": 1
-          },
-          "base": {
-            "attack": 35,
-            "antiArmor": 20,
-            "defense": 30,
-            "scouting": 3,
-            "mobility": 10,
-            "repair": 0,
-            "hp": 160
-          }
+          "hp": 160
         },
+        "equipment": [],
         "rankId": "recruit",
         "rankName": "新兵",
         "rankModifiers": {
@@ -254,6 +164,13 @@
         }
       }
     ],
+    "equipmentComposition": {
+      "stage9-unit-0": [],
+      "stage9-unit-1": [],
+      "stage9-unit-2": [],
+      "stage9-unit-3": [],
+      "stage9-unit-4": []
+    },
     "buildings": {
       "radarOperational": false
     },
@@ -268,7 +185,7 @@
     "operation": null
   },
   "report": {
-    "id": "battle_1_fm_msoli3qe_3g_mountain_pass_cautious",
+    "id": "battle_1_fm_msqiwm5k_3g_mountain_pass_cautious",
     "seed": 1,
     "theaterId": "mountain_pass",
     "theaterName": "北岭山口",
@@ -277,7 +194,7 @@
     "missionKind": "campaign",
     "missionId": "mountain_pass",
     "strategyName": "谨慎推进",
-    "formationId": "fm_msoli3qe_3g",
+    "formationId": "fm_msqiwm5k_3g",
     "formationName": "Stage 9 深入编队",
     "startedAt": 1,
     "initial": {
@@ -1760,11 +1677,11 @@
     "experienceMultiplier": 1
   },
   "session": {
-    "battleSessionId": "battle-session-0-mountain_pass-927d6736822e50486bdb-1",
+    "battleSessionId": "battle-session-0-mountain_pass-6682a1ddf669488fcb1e-1",
     "missionId": "mountain_pass",
     "deploymentSnapshot": {
       "formation": {
-        "id": "fm_msoli3qe_3g",
+        "id": "fm_msqiwm5k_3g",
         "name": "Stage 9 深入编队",
         "experience": 0,
         "unitIds": [
@@ -1791,27 +1708,9 @@
             "scouting": 3,
             "mobility": 10,
             "repair": 0,
-            "hp": 160,
-            "rankId": "recruit",
-            "rankName": "新兵",
-            "rankModifiers": {
-              "attack": 1,
-              "antiArmor": 1,
-              "defense": 1,
-              "scouting": 1,
-              "mobility": 1,
-              "repair": 1
-            },
-            "base": {
-              "attack": 35,
-              "antiArmor": 20,
-              "defense": 30,
-              "scouting": 3,
-              "mobility": 10,
-              "repair": 0,
-              "hp": 160
-            }
+            "hp": 160
           },
+          "equipment": [],
           "rankId": "recruit",
           "rankName": "新兵",
           "rankModifiers": {
@@ -1838,27 +1737,9 @@
             "scouting": 3,
             "mobility": 10,
             "repair": 0,
-            "hp": 160,
-            "rankId": "recruit",
-            "rankName": "新兵",
-            "rankModifiers": {
-              "attack": 1,
-              "antiArmor": 1,
-              "defense": 1,
-              "scouting": 1,
-              "mobility": 1,
-              "repair": 1
-            },
-            "base": {
-              "attack": 35,
-              "antiArmor": 20,
-              "defense": 30,
-              "scouting": 3,
-              "mobility": 10,
-              "repair": 0,
-              "hp": 160
-            }
+            "hp": 160
           },
+          "equipment": [],
           "rankId": "recruit",
           "rankName": "新兵",
           "rankModifiers": {
@@ -1885,27 +1766,9 @@
             "scouting": 3,
             "mobility": 10,
             "repair": 0,
-            "hp": 160,
-            "rankId": "recruit",
-            "rankName": "新兵",
-            "rankModifiers": {
-              "attack": 1,
-              "antiArmor": 1,
-              "defense": 1,
-              "scouting": 1,
-              "mobility": 1,
-              "repair": 1
-            },
-            "base": {
-              "attack": 35,
-              "antiArmor": 20,
-              "defense": 30,
-              "scouting": 3,
-              "mobility": 10,
-              "repair": 0,
-              "hp": 160
-            }
+            "hp": 160
           },
+          "equipment": [],
           "rankId": "recruit",
           "rankName": "新兵",
           "rankModifiers": {
@@ -1932,27 +1795,9 @@
             "scouting": 3,
             "mobility": 10,
             "repair": 0,
-            "hp": 160,
-            "rankId": "recruit",
-            "rankName": "新兵",
-            "rankModifiers": {
-              "attack": 1,
-              "antiArmor": 1,
-              "defense": 1,
-              "scouting": 1,
-              "mobility": 1,
-              "repair": 1
-            },
-            "base": {
-              "attack": 35,
-              "antiArmor": 20,
-              "defense": 30,
-              "scouting": 3,
-              "mobility": 10,
-              "repair": 0,
-              "hp": 160
-            }
+            "hp": 160
           },
+          "equipment": [],
           "rankId": "recruit",
           "rankName": "新兵",
           "rankModifiers": {
@@ -1979,27 +1824,9 @@
             "scouting": 3,
             "mobility": 10,
             "repair": 0,
-            "hp": 160,
-            "rankId": "recruit",
-            "rankName": "新兵",
-            "rankModifiers": {
-              "attack": 1,
-              "antiArmor": 1,
-              "defense": 1,
-              "scouting": 1,
-              "mobility": 1,
-              "repair": 1
-            },
-            "base": {
-              "attack": 35,
-              "antiArmor": 20,
-              "defense": 30,
-              "scouting": 3,
-              "mobility": 10,
-              "repair": 0,
-              "hp": 160
-            }
+            "hp": 160
           },
+          "equipment": [],
           "rankId": "recruit",
           "rankName": "新兵",
           "rankModifiers": {
@@ -2012,6 +1839,13 @@
           }
         }
       ],
+      "equipmentComposition": {
+        "stage9-unit-0": [],
+        "stage9-unit-1": [],
+        "stage9-unit-2": [],
+        "stage9-unit-3": [],
+        "stage9-unit-4": []
+      },
       "buildings": {
         "radarOperational": false
       },
@@ -2025,18 +1859,18 @@
       "missionId": "mountain_pass",
       "operation": null
     },
-    "deploymentSnapshotId": "deployment-927d6736822e50486bdba15c5d10bc79c18236c76fcbcc00ac05d52b1c695b8a",
-    "deploymentHash": "927d6736822e50486bdba15c5d10bc79c18236c76fcbcc00ac05d52b1c695b8a",
+    "deploymentSnapshotId": "deployment-6682a1ddf669488fcb1ee5e54d8239fa3b364da4460cd744c5cc3bbdaeca0b3d",
+    "deploymentHash": "6682a1ddf669488fcb1ee5e54d8239fa3b364da4460cd744c5cc3bbdaeca0b3d",
     "sourceSaveRevision": 0,
-    "formalReportId": "battle_1_fm_msoli3qe_3g_mountain_pass_cautious",
-    "formalReportHash": "6f6a0f7aec3cbc9c67a8588010b2da600b641260fd192665c3730bf65f134dfa",
+    "formalReportId": "battle_1_fm_msqiwm5k_3g_mountain_pass_cautious",
+    "formalReportHash": "2764566ad13ebc09bdc3497418f6a898f97a36151a4f47d16675e2249d31732c",
     "shotHash": "ef5d8464998e5eab93db0185c529d6aeee80b5919d2105866e383ce59acc28da",
     "repairHash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
     "resultHash": "b5bb5cf793418d0c57feca3e3dd055746ee1aaabc732694c49c790735d820e4e",
-    "sourceReportHash": "6f6a0f7aec3cbc9c67a8588010b2da600b641260fd192665c3730bf65f134dfa",
+    "sourceReportHash": "2764566ad13ebc09bdc3497418f6a898f97a36151a4f47d16675e2249d31732c",
     "sessionOrigin": "production",
     "lifecycle": "settled",
-    "settlementId": "settlement-71079dd2bcc02b3d30b1398cf3b22bcce554727345b1b7a8e51dddeb831c3f88",
+    "settlementId": "settlement-84236cc3c16ec3524c1541ff133754b94c73a1b96e957852c2eb7d9a30a62e71",
     "settlementStatus": "applied",
     "presentationState": {
       "phase": "returning",
@@ -2044,7 +1878,7 @@
     },
     "settlementState": {
       "status": "applied",
-      "settlementId": "settlement-71079dd2bcc02b3d30b1398cf3b22bcce554727345b1b7a8e51dddeb831c3f88",
+      "settlementId": "settlement-84236cc3c16ec3524c1541ff133754b94c73a1b96e957852c2eb7d9a30a62e71",
       "locked": true
     },
     "returnState": {
@@ -2060,12 +1894,12 @@
     "settlementLocked": true,
     "version": 1,
     "settlementReceipt": {
-      "battleId": "battle_1_fm_msoli3qe_3g_mountain_pass_cautious",
-      "battleSessionId": "battle-session-0-mountain_pass-927d6736822e50486bdb-1",
-      "settlementId": "settlement-71079dd2bcc02b3d30b1398cf3b22bcce554727345b1b7a8e51dddeb831c3f88",
-      "formalReportHash": "6f6a0f7aec3cbc9c67a8588010b2da600b641260fd192665c3730bf65f134dfa",
-      "reportId": "battle_1_fm_msoli3qe_3g_mountain_pass_cautious",
-      "formationId": "fm_msoli3qe_3g",
+      "battleId": "battle_1_fm_msqiwm5k_3g_mountain_pass_cautious",
+      "battleSessionId": "battle-session-0-mountain_pass-6682a1ddf669488fcb1e-1",
+      "settlementId": "settlement-84236cc3c16ec3524c1541ff133754b94c73a1b96e957852c2eb7d9a30a62e71",
+      "formalReportHash": "2764566ad13ebc09bdc3497418f6a898f97a36151a4f47d16675e2249d31732c",
+      "reportId": "battle_1_fm_msqiwm5k_3g_mountain_pass_cautious",
+      "formationId": "fm_msqiwm5k_3g",
       "theaterId": "mountain_pass",
       "result": "victory",
       "captured": true,
