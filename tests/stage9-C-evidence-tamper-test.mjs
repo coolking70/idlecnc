@@ -80,12 +80,35 @@ add('performance-warmup', (b) => { b.performance.warmup = 19; });
 add('performance-sample-count', (b) => { b.performance.samples = 119; });
 add('performance-effective-p95', (b) => { b.performance.scenarios.effectiveStats.p95Ms = 16.8; });
 add('performance-snapshot-p95', (b) => { b.performance.scenarios.snapshot.p95Ms = 16.8; });
+add('performance-inventory-p95', (b) => { b.performance.scenarios.inventory.p95Ms = 16.8; });
+add('performance-effective-samples', (b) => { b.performance.scenarios.effectiveStats.samples = 119; });
+add('performance-snapshot-samples', (b) => { b.performance.scenarios.snapshot.samples = 119; });
+add('performance-inventory-samples', (b) => { b.performance.scenarios.inventory.samples = 119; });
 add('performance-load-before', (b) => { delete b.performance.environmentGuard.loadBefore; });
 add('performance-environment', (b) => { delete b.performance.environment.cpuModel; });
-add('isolation-offline-progress', (b) => { b.core.isolation.productionOfflineProgressed = false; });
-add('isolation-exactly-once', (b) => { b.core.isolation.productionOfflineCompletedExactlyOnce = false; });
-add('isolation-settlement-equipment', (b) => { b.core.isolation.settlementEquipmentUnchanged = false; });
+add('offline-before-equipment', (b) => { b.core.isolation.offlineProduction.equipmentBefore = {}; });
+add('offline-after-first-equipment', (b) => { b.core.isolation.offlineProduction.equipmentAfterFirst = {}; });
+add('offline-after-second-equipment', (b) => { b.core.isolation.offlineProduction.equipmentAfterSecond = {}; });
+add('offline-instance-id', (b) => { b.core.isolation.offlineProduction.producedInstanceId = 'forged-instance'; });
+add('formal-settlement-before-equipment', (b) => { b.core.formalSettlement.beforeSettlement.equipment = {}; });
+add('formal-settlement-after-equipment', (b) => { b.core.formalSettlement.afterSettlement.equipment = {}; });
+add('formal-settlement-before-hash', (b) => { b.core.formalSettlement.beforeSettlement.equipmentHash = 'forged'; });
+add('formal-settlement-after-hash', (b) => { b.core.formalSettlement.afterSettlement.equipmentHash = 'forged'; });
 add('replay-historical-evidence', (b) => { delete b.browser.scenes[0].frames[7].state.activeBattle.historicalEquipment['stage9-c-browser-unit']; });
+
+let coupledTamperCount = 0;
+const coupled = (label, mutate) => { coupledTamperCount += 1; add(label, mutate); };
+coupled('running-both-equipment-cleared', (b) => { [5, 6].forEach((i) => { b.browser.scenes[0].frames[i].state.equipment = {}; }); });
+coupled('running-both-equipment-swapped', (b) => { [5, 6].forEach((i) => { b.browser.scenes[0].frames[i].state.equipment = { 'stage9-c-browser-unit': ['equipment-starter-2'] }; }); });
+coupled('replay-both-equipment-cleared', (b) => { [7, 8].forEach((i) => { b.browser.scenes[0].frames[i].state.equipment = {}; }); });
+coupled('replay-both-historical-cleared', (b) => { [7, 8].forEach((i) => { b.browser.scenes[0].frames[i].state.activeBattle.historicalEquipment = {}; }); });
+coupled('replay-both-historical-instance-swapped', (b) => { [7, 8].forEach((i) => { b.browser.scenes[0].frames[i].state.activeBattle.historicalEquipment['stage9-c-browser-unit'][0].instanceId = 'equipment-starter-2'; }); });
+coupled('settlement-before-after-both-falsified', (b) => { const fake = { inventory: [], bindings: { fake: ['fake-instance'] } }; b.core.formalSettlement.beforeSettlement.equipment = clone(fake); b.core.formalSettlement.afterSettlement.equipment = clone(fake); b.core.formalSettlement.beforeSettlement.equipmentHash = 'forged'; b.core.formalSettlement.afterSettlement.equipmentHash = 'forged'; });
+coupled('offline-before-after-consistent-fake', (b) => { const before = clone(b.core.isolation.offlineProduction.equipmentBefore); const fake = clone(before); fake.inventory.push({ id: 'forged-instance', equipmentId: 'anti_armor_sights', quantity: 1 }); b.core.isolation.offlineProduction.equipmentBefore = before; b.core.isolation.offlineProduction.equipmentAfterFirst = fake; b.core.isolation.offlineProduction.equipmentAfterSecond = fake; b.core.isolation.offlineProduction.producedInstanceId = 'forged-instance'; });
+coupled('running-session-coupled-swap', (b) => { [5, 6].forEach((i) => { b.browser.scenes[0].frames[i].state.activeBattle.battleSessionId = 'forged-session'; b.browser.scenes[0].frames[i].state.authoritativeSession.battleSessionId = 'forged-session'; }); });
+coupled('replay-session-coupled-swap', (b) => { [7, 8].forEach((i) => { b.browser.scenes[0].frames[i].state.activeBattle.battleSessionId = 'forged-session'; b.browser.scenes[0].frames[i].state.authoritativeSession.battleSessionId = 'forged-session'; }); });
+coupled('deployment-hash-coupled-swap', (b) => { [5, 6, 7, 8].forEach((i) => { b.browser.scenes[0].frames[i].state.activeBattle.deploymentHash = 'forged-deployment'; b.browser.scenes[0].frames[i].state.authoritativeSession.deploymentHash = 'forged-deployment'; }); });
+coupled('formal-report-hash-coupled-swap', (b) => { [5, 6, 7, 8].forEach((i) => { b.browser.scenes[0].frames[i].state.activeBattle.formalReportHash = 'forged-report'; b.browser.scenes[0].frames[i].state.authoritativeSession.formalReportHash = 'forged-report'; }); });
 
 const results = mutations.map(({ label, mutate }) => {
   const candidate = clone(base); mutate(candidate); candidate.passed = true;
@@ -93,13 +116,15 @@ const results = mutations.map(({ label, mutate }) => {
   return { label, rejected: verdict.ok === false, failureCodes: verdict.errors.map((row) => row.code) };
 });
 const output = {
-  stage: '9-C', rule: 'true-value mutation while passed=true', caseCount: results.length,
+  stage: '9-C.1', rule: 'true-value mutation while passed=true', caseCount: results.length,
   rejectionCount: results.filter((row) => row.rejected).length,
   passedFlagOnlyCases: results.filter((row) => row.failureCodes.length === 0).length,
-  cases: results, passed: results.length >= 84 && results.every((row) => row.rejected && row.failureCodes.length > 0)
+  coupledTamperCaseCount: coupledTamperCount,
+  coupledTamperRejected: results.slice(-coupledTamperCount).filter((row) => row.rejected).length,
+  cases: results, passed: results.length > 121 && results.every((row) => row.rejected && row.failureCodes.length > 0) && results.slice(-coupledTamperCount).every((row) => row.rejected)
 };
 fs.writeFileSync('stage9_c_tamper_results.json', `${JSON.stringify(output, null, 2)}\n`);
 assert.equal(output.passed, true, JSON.stringify(output));
 const strong = JSON.parse(fs.readFileSync('stage9_c_strong_evidence_verdict.json', 'utf8'));
-fs.writeFileSync('stage9_c_strong_evidence_verdict.json', `${JSON.stringify({ ...strong, tamperAudit: { caseCount: output.caseCount, rejectionCount: output.rejectionCount, passedFlagOnlyCases: output.passedFlagOnlyCases, independentlyRejected: output.passed }, tamperAuditPending: false, passed: strong.passed && output.passed }, null, 2)}\n`);
+fs.writeFileSync('stage9_c_strong_evidence_verdict.json', `${JSON.stringify({ ...strong, tamperAudit: { caseCount: output.caseCount, rejectionCount: output.rejectionCount, passedFlagOnlyCases: output.passedFlagOnlyCases, coupledTamperCaseCount: output.coupledTamperCaseCount, coupledTamperRejected: output.coupledTamperRejected, independentlyRejected: output.passed }, tamperAuditPending: false, passed: strong.passed && output.passed }, null, 2)}\n`);
 console.log(JSON.stringify({ ok: output.passed, stage: output.stage, cases: output.caseCount, rejected: output.rejectionCount, passedFlagOnlyCases: output.passedFlagOnlyCases }));

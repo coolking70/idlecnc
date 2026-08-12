@@ -1,5 +1,5 @@
 {
-  "stage": "9-C",
+  "stage": "9-C.1",
   "independentRecompute": true,
   "machineFrameCount": 9,
   "actualFrameCount": 9,
@@ -7,9 +7,9 @@
   "hashes": [
     {
       "file": "s9-c-01-production-queue.png",
-      "declared": "1d3b2e3228ba9ba85eb6d16a61905f5446f757de24fbe916368203d03e4809ac",
-      "manifest": "1d3b2e3228ba9ba85eb6d16a61905f5446f757de24fbe916368203d03e4809ac",
-      "actual": "1d3b2e3228ba9ba85eb6d16a61905f5446f757de24fbe916368203d03e4809ac"
+      "declared": "c02f3cccb0b42c428d7c209451c086cee1fe6290294ac187ea625fabd5c05460",
+      "manifest": "c02f3cccb0b42c428d7c209451c086cee1fe6290294ac187ea625fabd5c05460",
+      "actual": "c02f3cccb0b42c428d7c209451c086cee1fe6290294ac187ea625fabd5c05460"
     },
     {
       "file": "s9-c-02-production-queue-reload.png",
@@ -19,9 +19,9 @@
     },
     {
       "file": "s9-c-03-completed-unmounted.png",
-      "declared": "fc435ab235519d4108be906996f0602a011c5c7150f402307b702738f86af48f",
-      "manifest": "fc435ab235519d4108be906996f0602a011c5c7150f402307b702738f86af48f",
-      "actual": "fc435ab235519d4108be906996f0602a011c5c7150f402307b702738f86af48f"
+      "declared": "9be45e62215cc6956e5972d57027af68b49cc3a513911be3001d118d97012e37",
+      "manifest": "9be45e62215cc6956e5972d57027af68b49cc3a513911be3001d118d97012e37",
+      "actual": "9be45e62215cc6956e5972d57027af68b49cc3a513911be3001d118d97012e37"
     },
     {
       "file": "s9-c-04-completed-reload.png",
@@ -31,33 +31,33 @@
     },
     {
       "file": "s9-c-05-mounted.png",
-      "declared": "bfb4520d753240a50f5d2655cae2152a28d78a7d01776526eaf9cc5df7278951",
-      "manifest": "bfb4520d753240a50f5d2655cae2152a28d78a7d01776526eaf9cc5df7278951",
-      "actual": "bfb4520d753240a50f5d2655cae2152a28d78a7d01776526eaf9cc5df7278951"
+      "declared": "12e60ac03ce14f10176576a4baadf2f5da42e9c7bd3c7f9ab1af0d50ee6f832a",
+      "manifest": "12e60ac03ce14f10176576a4baadf2f5da42e9c7bd3c7f9ab1af0d50ee6f832a",
+      "actual": "12e60ac03ce14f10176576a4baadf2f5da42e9c7bd3c7f9ab1af0d50ee6f832a"
     },
     {
       "file": "s9-c-06-running.png",
-      "declared": "a9f4dfd422fbd96f2527ae9f9349200864b803015c9265b609b8a5a739d7febc",
-      "manifest": "a9f4dfd422fbd96f2527ae9f9349200864b803015c9265b609b8a5a739d7febc",
-      "actual": "a9f4dfd422fbd96f2527ae9f9349200864b803015c9265b609b8a5a739d7febc"
+      "declared": "b8e2c04218d20d6f5cb306fd047c2e2319f997f9aa0470a96553a6c2bd334899",
+      "manifest": "b8e2c04218d20d6f5cb306fd047c2e2319f997f9aa0470a96553a6c2bd334899",
+      "actual": "b8e2c04218d20d6f5cb306fd047c2e2319f997f9aa0470a96553a6c2bd334899"
     },
     {
       "file": "s9-c-07-running-reload.png",
-      "declared": "9dbace98f06f7b9670ad2b511742dfcac9aaa5d06ca87768e0d955c2c6d683f6",
-      "manifest": "9dbace98f06f7b9670ad2b511742dfcac9aaa5d06ca87768e0d955c2c6d683f6",
-      "actual": "9dbace98f06f7b9670ad2b511742dfcac9aaa5d06ca87768e0d955c2c6d683f6"
+      "declared": "48ab0b1bb706c67ac19d7a0bc663ce6448d136bea6be8e0546e319065e1d5293",
+      "manifest": "48ab0b1bb706c67ac19d7a0bc663ce6448d136bea6be8e0546e319065e1d5293",
+      "actual": "48ab0b1bb706c67ac19d7a0bc663ce6448d136bea6be8e0546e319065e1d5293"
     },
     {
       "file": "s9-c-08-replay.png",
-      "declared": "e6b103b6bc34e4fdb5777ab483eb19ce0c44c05f9df9eabb0b5eaa352cde3229",
-      "manifest": "e6b103b6bc34e4fdb5777ab483eb19ce0c44c05f9df9eabb0b5eaa352cde3229",
-      "actual": "e6b103b6bc34e4fdb5777ab483eb19ce0c44c05f9df9eabb0b5eaa352cde3229"
+      "declared": "ba9e57cee90e964e1eb96a79ffc6966134cd34bd0368369f2f01bbe2404e5dbc",
+      "manifest": "ba9e57cee90e964e1eb96a79ffc6966134cd34bd0368369f2f01bbe2404e5dbc",
+      "actual": "ba9e57cee90e964e1eb96a79ffc6966134cd34bd0368369f2f01bbe2404e5dbc"
     },
     {
       "file": "s9-c-09-replay-reload.png",
-      "declared": "d4459fbaafb33d8b7b9514ac21b8d9fb33eaa0cdc4a3695621c623a4172e9777",
-      "manifest": "d4459fbaafb33d8b7b9514ac21b8d9fb33eaa0cdc4a3695621c623a4172e9777",
-      "actual": "d4459fbaafb33d8b7b9514ac21b8d9fb33eaa0cdc4a3695621c623a4172e9777"
+      "declared": "fd0c117614ea5059578f384010c2a681ae0b926227d3c3646d9d0a0c9e9fd9e8",
+      "manifest": "fd0c117614ea5059578f384010c2a681ae0b926227d3c3646d9d0a0c9e9fd9e8",
+      "actual": "fd0c117614ea5059578f384010c2a681ae0b926227d3c3646d9d0a0c9e9fd9e8"
     }
   ],
   "uniqueHashes": 9,

@@ -26,7 +26,7 @@ const performance = read('stage9_c_performance_check.json');
 const core = {
   acquisition: read('stage9_c_acquisition_model_check.json'), production: read('stage9_c_production_queue_check.json'), techGate: read('stage9_c_tech_gate_check.json'),
   catalog: read('stage9_c_catalog_check.json'), inventory: read('stage9_c_inventory_integrity_check.json'), migration: read('stage9_c_migration_check.json'),
-  isolation: read('stage9_c_battle_isolation_check.json'), saveDiff: read('stage9_c_save_diff_check.json'), ui: read('stage9_c_ui_path_check.json'),
+  isolation: read('stage9_c_battle_isolation_check.json'), formalSettlement: read('stage9_c_formal_settlement_isolation_check.json'), saveDiff: read('stage9_c_save_diff_check.json'), ui: read('stage9_c_ui_path_check.json'),
   authority: read('stage9_c_authority_check.json'), regression: read('stage9_c_regression_check.json')
 };
 const frames = browser.scenes?.flatMap((scene) => scene.frames || []) || [];
@@ -56,8 +56,8 @@ function recomputeSnapshot() {
 
 const effective = recomputeEffective();
 const snapshotUnit = recomputeSnapshot();
-const effectiveStats = { stage: '9-C', independentRecompute: true, source: 'current js/units.js + js/equipment.js', actual: Object.fromEntries(EQUIPMENT_STAT_KEYS.concat(['hp']).map((key) => [key, effective.stats[key]])), equipment: effective.equipment, order: effective.stats.calculation.order, rounding: effective.stats.calculation.rounding, hpInvariant: effective.stats.hp === 100 };
-const snapshotEvidence = { stage: '9-C', independentRecompute: true, unitId: snapshotUnit.id, parsedStats: snapshotUnit.stats, equipmentComposition: snapshotUnit.equipment, historicalInput: { stats: snapshotUnit.stats, equipment: snapshotUnit.equipment }, hpInvariant: snapshotUnit.stats.hp === 100 };
+const effectiveStats = { stage: '9-C.1', independentRecompute: true, source: 'current js/units.js + js/equipment.js', actual: Object.fromEntries(EQUIPMENT_STAT_KEYS.concat(['hp']).map((key) => [key, effective.stats[key]])), equipment: effective.equipment, order: effective.stats.calculation.order, rounding: effective.stats.calculation.rounding, hpInvariant: effective.stats.hp === 100 };
+const snapshotEvidence = { stage: '9-C.1', independentRecompute: true, unitId: snapshotUnit.id, parsedStats: snapshotUnit.stats, equipmentComposition: snapshotUnit.equipment, historicalInput: { stats: snapshotUnit.stats, equipment: snapshotUnit.equipment }, hpInvariant: snapshotUnit.stats.hp === 100 };
 write('stage9_c_effective_stats_check.json', effectiveStats);
 write('stage9_c_snapshot_binding_check.json', snapshotEvidence);
 
@@ -69,21 +69,21 @@ const reloadChecks = (browser.realReloads || []).map((row) => ({
   declaredTimeOriginConsistent: row.timeOriginChanged === (Number(row.after?.timeOrigin) > Number(row.before?.timeOrigin)),
   beforeLoaderId: row.beforeLoaderId, afterLoaderId: row.afterLoaderId
 }));
-const reloadEvidence = { stage: '9-C', independentRecompute: true, expectedReasons: reloadExpected, actualReasons: reloadChecks.map((row) => row.reason), checks: reloadChecks, afterLoaderIdsUnique: new Set(reloadChecks.map((row) => row.afterLoaderId)).size === reloadChecks.length, passed: reloadChecks.length === reloadExpected.length && reloadChecks.map((row) => row.reason).join('|') === reloadExpected.join('|') && reloadChecks.every((row) => row.afterGreaterThanBefore && row.loaderChanged && row.declaredTimeOriginConsistent) };
+const reloadEvidence = { stage: '9-C.1', independentRecompute: true, expectedReasons: reloadExpected, actualReasons: reloadChecks.map((row) => row.reason), checks: reloadChecks, afterLoaderIdsUnique: new Set(reloadChecks.map((row) => row.afterLoaderId)).size === reloadChecks.length, passed: reloadChecks.length === reloadExpected.length && reloadChecks.map((row) => row.reason).join('|') === reloadExpected.join('|') && reloadChecks.every((row) => row.afterGreaterThanBefore && row.loaderChanged && row.declaredTimeOriginConsistent) };
 write('stage9_c_reload_check.json', reloadEvidence);
 const replayFrames = [frames[7], frames[8]];
-const replayHistorical = { stage: '9-C', independentRecompute: true, usesHistoricalSnapshot: replayFrames.every((frame) => Object.keys(frame.state?.activeBattle?.historicalEquipment || {}).length > 0 && frame.state.activeBattle.historicalEquipment['stage9-c-browser-unit']?.some((item) => item.equipmentId === 'anti_armor_sights')), currentBindingStillPresent: replayFrames.every((frame) => frame.state?.equipment?.['stage9-c-browser-unit']?.includes('equipment-production-anti_armor_sights-1')), replayHashesUnchanged: replayFrames.length === 2 && replayFrames[0].state.activeBattle.deploymentHash === replayFrames[1].state.activeBattle.deploymentHash && replayFrames[0].state.activeBattle.formalReportHash === replayFrames[1].state.activeBattle.formalReportHash };
+const replayHistorical = { stage: '9-C.1', independentRecompute: true, usesHistoricalSnapshot: replayFrames.every((frame) => Object.keys(frame.state?.activeBattle?.historicalEquipment || {}).length > 0 && frame.state.activeBattle.historicalEquipment['stage9-c-browser-unit']?.some((item) => item.equipmentId === 'anti_armor_sights')), currentBindingStillPresent: replayFrames.every((frame) => frame.state?.equipment?.['stage9-c-browser-unit']?.includes('equipment-production-anti_armor_sights-1')), replayHashesUnchanged: replayFrames.length === 2 && replayFrames[0].state.activeBattle.deploymentHash === replayFrames[1].state.activeBattle.deploymentHash && replayFrames[0].state.activeBattle.formalReportHash === replayFrames[1].state.activeBattle.formalReportHash };
 write('stage9_c_replay_historical_check.json', replayHistorical);
 
 const sourceFiles = ['js/config.js', 'js/equipment.js', 'js/production.js', 'js/offline.js', 'js/save.js', 'js/units.js', 'js/ui.js', 'js/main.js'];
 const source = sourceFiles.map((file) => fs.readFileSync(path.join(root, file), 'utf8')).join('\n');
 const forbidden = ['js/save-diff.js', 'tests/lib/', 'js/battle.js', 'js/theater.js', 'js/battle-presentation/universal/'];
 const changed = execFileSync('git', ['diff', 'e72eedac27423902b94ebab69b2fa053ca99b112', '--name-only'], { cwd: root, encoding: 'utf8' }).split(/\r?\n/).filter(Boolean);
-const authority = { stage: '9-C', independentRecompute: true, changedFiles: changed, forbiddenPaths: forbidden, authorityFieldChanges: 0, forbiddenChangedFiles: changed.filter((file) => forbidden.some((prefix) => file === prefix || file.startsWith(prefix))), solverPlannerChoreographerChanged: false, saveDiffChanged: false, stage9A: { theaterCount: Object.keys(THEATERS).length, operationCount: Object.keys(OPERATIONS).length }, passed: changed.every((file) => !forbidden.some((prefix) => file === prefix || file.startsWith(prefix))) && Object.keys(THEATERS).length === 6 && Object.keys(OPERATIONS).length === 6 };
+const authority = { stage: '9-C.1', independentRecompute: true, changedFiles: changed, forbiddenPaths: forbidden, authorityFieldChanges: 0, forbiddenChangedFiles: changed.filter((file) => forbidden.some((prefix) => file === prefix || file.startsWith(prefix))), solverPlannerChoreographerChanged: false, saveDiffChanged: false, stage9A: { theaterCount: Object.keys(THEATERS).length, operationCount: Object.keys(OPERATIONS).length }, passed: changed.every((file) => !forbidden.some((prefix) => file === prefix || file.startsWith(prefix))) && Object.keys(THEATERS).length === 6 && Object.keys(OPERATIONS).length === 6 };
 write('stage9_c_authority_check.json', authority);
 
 const browserIntegrity = {
-  stage: '9-C', independentRecompute: true,
+  stage: '9-C.1', independentRecompute: true,
   machineFrameCount: machine.frameCount, actualFrameCount: frames.length,
   semanticOrderMatches: frames.map((row) => row.semantic).join('|') === machine.frames.map((row) => row.semantic).join('|'),
   hashes: frames.map((frame) => ({ file: frame.file, declared: frame.imageSha256, manifest: frame.screenshot?.sha256, actual: frame.screenshot?.path ? hashFile(frame.screenshot.path) : null })),
@@ -94,7 +94,7 @@ const browserIntegrity = {
 write('stage9_c_browser_integrity_check.json', browserIntegrity);
 
 const bundle = {
-  stage: '9-C', version: 1, generatedBy: 'tests/generate-stage9-C-evidence.mjs', saveVersion: SAVE_VERSION,
+  stage: '9-C.1', version: 2, generatedBy: 'tests/generate-stage9-C-evidence.mjs', saveVersion: SAVE_VERSION,
   machine, browser, core, effectiveStats, snapshotEvidence, reloadEvidence, replayHistorical, browserIntegrity, performance,
   source: { files: sourceFiles, currentCodeCaptured: source.includes('queueEquipment') && source.includes('getUnitEffectiveStats') },
   environment: { platform: os.platform(), arch: os.arch(), cpuModel: os.cpus()[0]?.model || 'unknown', cpuCount: os.cpus().length, nodeVersion: process.version },
@@ -105,4 +105,4 @@ write('stage9_c_evidence_bundle.json', bundle);
 assert.equal(browserIntegrity.passed, true, JSON.stringify(browserIntegrity));
 assert.equal(reloadEvidence.passed, true, JSON.stringify(reloadEvidence));
 assert.equal(replayHistorical.usesHistoricalSnapshot, true, JSON.stringify(replayHistorical));
-console.log(JSON.stringify({ ok: true, stage: '9-C', frames: frames.length, reloads: reloadEvidence.actualReasons, screenshotHashes: browserIntegrity.uniqueHashes, bundle: 'stage9_c_evidence_bundle.json' }));
+console.log(JSON.stringify({ ok: true, stage: '9-C.1', frames: frames.length, reloads: reloadEvidence.actualReasons, screenshotHashes: browserIntegrity.uniqueHashes, bundle: 'stage9_c_evidence_bundle.json' }));

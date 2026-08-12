@@ -1,18 +1,30 @@
 {
-  "stage": "9-C",
+  "stage": "9-C.1",
   "independentRecompute": true,
   "checks": {
     "catalog": true,
     "production": true,
     "researchGate": true,
     "migration": true,
+    "offlineProductionExactlyOnce": true,
+    "formalSettlementEquipmentUnchanged": true,
     "browser": true,
+    "runningContinuity": true,
+    "replayContinuity": true,
     "reloads": true,
     "historicalReplay": true,
     "saveDiff": true,
     "authority": true,
     "performance": true
   },
-  "tamperAuditPending": true,
-  "passed": true
+  "tamperAuditPending": false,
+  "passed": true,
+  "tamperAudit": {
+    "caseCount": 141,
+    "rejectionCount": 141,
+    "passedFlagOnlyCases": 0,
+    "coupledTamperCaseCount": 11,
+    "coupledTamperRejected": 11,
+    "independentlyRejected": true
+  }
 }

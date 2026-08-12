@@ -1,5 +1,5 @@
 {
-  "stage": "9-C",
+  "stage": "9-C.1",
   "independentRecompute": true,
   "source": "current js/units.js + js/equipment.js",
   "actual": {

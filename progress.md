@@ -695,3 +695,12 @@
 - [x] 真实浏览器 Stage 9-C：9 帧、9 个唯一截图 hash、production_queue / completed_unmounted / running_battle / replay 四次 Page.reload，真实 DOM 入队/取消/完成观察/挂载/战斗锁/回放动作。
 - [x] 独立 source 重算 verifier 与 121 例 true-value tamper：121/121 拒绝，`passedFlagOnlyCases=0`；性能守卫为 20 warmup、120 samples、p95 `<16.7ms`。
 - [x] 最终门禁与 clean-clone 已通过：`overallPassed: true`，所有步骤均为 `passed: true`，`currentHead` 与 `clonedHead` 一致；文档回填后将以最终推送 SHA 为准。
+
+# Stage 9-C.1 progress
+
+- [x] 已将离线生产 exactly-once 与 Formal Battle settlement isolation 拆为两个独立证据域；Formal settlement 使用真实 dispatch/settle 前后装备状态并由 verifier 重算。
+- [x] 浏览器证据 frame 增加 authoritative production session、dispatch snapshot、formal report machine-readable 来源；running/reload/replay 各帧逐项匹配 expected equipment binding 与 identity。
+- [x] Strong verifier 不再以 `settlementEquipmentUnchanged` 等 declared boolean 作为权威；性能三个场景均严格要求 120 samples 且 p95 < 16.7ms。
+- [x] 新增 coupled tamper：running/replay equipment、historical equipment、settlement before/after、offline before/after、session、deployment hash、formal report hash；当前 141/141 拒绝，11/11 coupled 拒绝，passedFlagOnlyCases=0。
+- [x] 本地 `npm test` exit=0；Stage 9-C.1 专项浏览器门禁为 9 帧、4 次真实 reload、141/141 tamper、0 flag-only；性能为 warmup 20、samples 120、p95 `<16.7ms`。
+- [ ] 最终提交后的 gate、clean-clone、远端 SHA 与 GitHub Actions 同 SHA 结果待收口。

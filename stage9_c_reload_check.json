@@ -1,5 +1,5 @@
 {
-  "stage": "9-C",
+  "stage": "9-C.1",
   "independentRecompute": true,
   "expectedReasons": [
     "production_queue",
@@ -19,32 +19,32 @@
       "afterGreaterThanBefore": true,
       "loaderChanged": true,
       "declaredTimeOriginConsistent": true,
-      "beforeLoaderId": "2E970DBEB27BF7818EA739D000B98604",
-      "afterLoaderId": "2DCA99CE462914C72F9946A16C022462"
+      "beforeLoaderId": "8F78AB1A65AD3E2593FCCF0D3FB6959C",
+      "afterLoaderId": "FAEE88D876DF0C62B27E230AFF778248"
     },
     {
       "reason": "completed_unmounted",
       "afterGreaterThanBefore": true,
       "loaderChanged": true,
       "declaredTimeOriginConsistent": true,
-      "beforeLoaderId": "2DCA99CE462914C72F9946A16C022462",
-      "afterLoaderId": "66634F01B6DE0A1A8FFC4CBAFBC7F166"
+      "beforeLoaderId": "FAEE88D876DF0C62B27E230AFF778248",
+      "afterLoaderId": "FE17F31AE55A9CBEB5F4E36A80BC2BEB"
     },
     {
       "reason": "running_battle",
       "afterGreaterThanBefore": true,
       "loaderChanged": true,
       "declaredTimeOriginConsistent": true,
-      "beforeLoaderId": "66634F01B6DE0A1A8FFC4CBAFBC7F166",
-      "afterLoaderId": "F25E0D47CEACC21A26C95660C61454C7"
+      "beforeLoaderId": "FE17F31AE55A9CBEB5F4E36A80BC2BEB",
+      "afterLoaderId": "79EE373C34D5DFC8A0AF8A2AE2B71E9D"
     },
     {
       "reason": "replay",
       "afterGreaterThanBefore": true,
       "loaderChanged": true,
       "declaredTimeOriginConsistent": true,
-      "beforeLoaderId": "F25E0D47CEACC21A26C95660C61454C7",
-      "afterLoaderId": "9A93205DCD675C4D4039DBD09B0C07D7"
+      "beforeLoaderId": "79EE373C34D5DFC8A0AF8A2AE2B71E9D",
+      "afterLoaderId": "2679E6653795AEC7E6097E3F2C9F7EDF"
     }
   ],
   "afterLoaderIdsUnique": true,

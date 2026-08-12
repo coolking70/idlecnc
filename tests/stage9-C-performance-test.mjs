@@ -86,7 +86,7 @@ const environment = {
 const scenarios = { effectiveStats, snapshot, inventory };
 assert.ok(Object.values(scenarios).every((row) => row.samples === samples && row.p95Ms < budgetMs), JSON.stringify(scenarios));
 const output = {
-  stage: '9-C', version: 1, measurement: 'equipment effective-stats, snapshot and inventory read paths',
+  stage: '9-C.1', version: 2, measurement: 'equipment effective-stats, snapshot and inventory read paths',
   budgetMs, warmup, samples, metric: 'p95', measurementValid: true, passed: true,
   environment,
   environmentGuard: { fit: true, threshold: guard.threshold, attempts: guard.attempts, samples: guard.samples, loadBefore: guard.snapshot.normalizedLoad1, loadAfter: loadAfter.normalizedLoad1 },

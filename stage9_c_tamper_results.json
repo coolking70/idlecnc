@@ -1,9 +1,11 @@
 {
-  "stage": "9-C",
+  "stage": "9-C.1",
   "rule": "true-value mutation while passed=true",
-  "caseCount": 121,
-  "rejectionCount": 121,
+  "caseCount": 141,
+  "rejectionCount": 141,
   "passedFlagOnlyCases": 0,
+  "coupledTamperCaseCount": 11,
+  "coupledTamperRejected": 11,
   "cases": [
     {
       "label": "effective-attack",
@@ -359,192 +361,189 @@
       "label": "mounted-frame-binding",
       "rejected": true,
       "failureCodes": [
-        "mount_state"
+        "equipment_expected_binding"
       ]
     },
     {
       "label": "running-5-session",
       "rejected": true,
       "failureCodes": [
-        "running_isolation",
-        "replay_isolation"
+        "battle_identity_continuity"
       ]
     },
     {
       "label": "running-5-deployment",
       "rejected": true,
       "failureCodes": [
-        "running_isolation",
-        "replay_isolation"
+        "battle_identity_continuity"
       ]
     },
     {
       "label": "running-5-report",
       "rejected": true,
       "failureCodes": [
-        "running_isolation",
-        "replay_isolation"
+        "battle_identity_continuity"
       ]
     },
     {
       "label": "running-5-readonly",
       "rejected": true,
       "failureCodes": [
-        "running_binding"
+        "running_state"
       ]
     },
     {
       "label": "running-5-equipment",
       "rejected": true,
       "failureCodes": [
-        "running_isolation"
+        "equipment_expected_binding"
       ]
     },
     {
       "label": "running-6-session",
       "rejected": true,
       "failureCodes": [
-        "running_isolation"
+        "battle_identity_continuity"
       ]
     },
     {
       "label": "running-6-deployment",
       "rejected": true,
       "failureCodes": [
-        "running_isolation"
+        "battle_identity_continuity"
       ]
     },
     {
       "label": "running-6-report",
       "rejected": true,
       "failureCodes": [
-        "running_isolation"
+        "battle_identity_continuity"
       ]
     },
     {
       "label": "running-6-readonly",
       "rejected": true,
       "failureCodes": [
-        "running_binding"
+        "running_state"
       ]
     },
     {
       "label": "running-6-equipment",
       "rejected": true,
       "failureCodes": [
-        "running_isolation"
+        "equipment_expected_binding"
       ]
     },
     {
       "label": "replay-7-readonly",
       "rejected": true,
       "failureCodes": [
-        "replay_historical_equipment"
+        "replay_state"
       ]
     },
     {
       "label": "replay-7-historical",
       "rejected": true,
       "failureCodes": [
-        "replay_historical_equipment"
+        "replay_state"
       ]
     },
     {
       "label": "replay-7-deployment",
       "rejected": true,
       "failureCodes": [
-        "replay_isolation"
+        "battle_identity_continuity"
       ]
     },
     {
       "label": "replay-7-report",
       "rejected": true,
       "failureCodes": [
-        "replay_isolation"
+        "battle_identity_continuity"
       ]
     },
     {
       "label": "replay-7-session",
       "rejected": true,
       "failureCodes": [
-        "replay_isolation"
+        "battle_identity_continuity"
       ]
     },
     {
       "label": "replay-7-equipment",
       "rejected": true,
       "failureCodes": [
-        "replay_isolation"
+        "equipment_expected_binding"
       ]
     },
     {
       "label": "replay-7-reports",
       "rejected": true,
       "failureCodes": [
-        "settlement_ledger_isolation"
+        "replay_state"
       ]
     },
     {
       "label": "replay-7-ledger",
       "rejected": true,
       "failureCodes": [
-        "settlement_ledger_isolation"
+        "replay_state"
       ]
     },
     {
       "label": "replay-8-readonly",
       "rejected": true,
       "failureCodes": [
-        "replay_historical_equipment"
+        "replay_state"
       ]
     },
     {
       "label": "replay-8-historical",
       "rejected": true,
       "failureCodes": [
-        "replay_historical_equipment"
+        "replay_state"
       ]
     },
     {
       "label": "replay-8-deployment",
       "rejected": true,
       "failureCodes": [
-        "replay_isolation"
+        "battle_identity_continuity"
       ]
     },
     {
       "label": "replay-8-report",
       "rejected": true,
       "failureCodes": [
-        "replay_isolation"
+        "battle_identity_continuity"
       ]
     },
     {
       "label": "replay-8-session",
       "rejected": true,
       "failureCodes": [
-        "replay_isolation"
+        "battle_identity_continuity"
       ]
     },
     {
       "label": "replay-8-equipment",
       "rejected": true,
       "failureCodes": [
-        "replay_isolation"
+        "equipment_expected_binding"
       ]
     },
     {
       "label": "replay-8-reports",
       "rejected": true,
       "failureCodes": [
-        "settlement_ledger_isolation"
+        "replay_state"
       ]
     },
     {
       "label": "replay-8-ledger",
       "rejected": true,
       "failureCodes": [
-        "settlement_ledger_isolation"
+        "replay_state"
       ]
     },
     {
@@ -815,6 +814,34 @@
       ]
     },
     {
+      "label": "performance-inventory-p95",
+      "rejected": true,
+      "failureCodes": [
+        "performance_budget"
+      ]
+    },
+    {
+      "label": "performance-effective-samples",
+      "rejected": true,
+      "failureCodes": [
+        "performance_budget"
+      ]
+    },
+    {
+      "label": "performance-snapshot-samples",
+      "rejected": true,
+      "failureCodes": [
+        "performance_budget"
+      ]
+    },
+    {
+      "label": "performance-inventory-samples",
+      "rejected": true,
+      "failureCodes": [
+        "performance_budget"
+      ]
+    },
+    {
       "label": "performance-load-before",
       "rejected": true,
       "failureCodes": [
@@ -829,31 +856,153 @@
       ]
     },
     {
-      "label": "isolation-offline-progress",
+      "label": "offline-before-equipment",
       "rejected": true,
       "failureCodes": [
-        "offline_isolation_evidence"
+        "offline_production_recompute"
       ]
     },
     {
-      "label": "isolation-exactly-once",
+      "label": "offline-after-first-equipment",
       "rejected": true,
       "failureCodes": [
-        "offline_isolation_evidence"
+        "offline_production_recompute"
       ]
     },
     {
-      "label": "isolation-settlement-equipment",
+      "label": "offline-after-second-equipment",
       "rejected": true,
       "failureCodes": [
-        "offline_isolation_evidence"
+        "offline_production_recompute"
+      ]
+    },
+    {
+      "label": "offline-instance-id",
+      "rejected": true,
+      "failureCodes": [
+        "offline_production_recompute"
+      ]
+    },
+    {
+      "label": "formal-settlement-before-equipment",
+      "rejected": true,
+      "failureCodes": [
+        "formal_settlement_equipment_recompute",
+        "formal_settlement_boundary"
+      ]
+    },
+    {
+      "label": "formal-settlement-after-equipment",
+      "rejected": true,
+      "failureCodes": [
+        "formal_settlement_equipment_recompute",
+        "formal_settlement_boundary"
+      ]
+    },
+    {
+      "label": "formal-settlement-before-hash",
+      "rejected": true,
+      "failureCodes": [
+        "formal_settlement_equipment_recompute"
+      ]
+    },
+    {
+      "label": "formal-settlement-after-hash",
+      "rejected": true,
+      "failureCodes": [
+        "formal_settlement_equipment_recompute"
       ]
     },
     {
       "label": "replay-historical-evidence",
       "rejected": true,
       "failureCodes": [
-        "replay_historical_equipment"
+        "replay_state"
+      ]
+    },
+    {
+      "label": "running-both-equipment-cleared",
+      "rejected": true,
+      "failureCodes": [
+        "equipment_expected_binding",
+        "equipment_expected_binding"
+      ]
+    },
+    {
+      "label": "running-both-equipment-swapped",
+      "rejected": true,
+      "failureCodes": [
+        "equipment_expected_binding",
+        "equipment_expected_binding"
+      ]
+    },
+    {
+      "label": "replay-both-equipment-cleared",
+      "rejected": true,
+      "failureCodes": [
+        "equipment_expected_binding",
+        "equipment_expected_binding"
+      ]
+    },
+    {
+      "label": "replay-both-historical-cleared",
+      "rejected": true,
+      "failureCodes": [
+        "replay_state",
+        "replay_state"
+      ]
+    },
+    {
+      "label": "replay-both-historical-instance-swapped",
+      "rejected": true,
+      "failureCodes": [
+        "replay_state",
+        "replay_state"
+      ]
+    },
+    {
+      "label": "settlement-before-after-both-falsified",
+      "rejected": true,
+      "failureCodes": [
+        "formal_settlement_equipment_recompute"
+      ]
+    },
+    {
+      "label": "offline-before-after-consistent-fake",
+      "rejected": true,
+      "failureCodes": [
+        "offline_production_recompute"
+      ]
+    },
+    {
+      "label": "running-session-coupled-swap",
+      "rejected": true,
+      "failureCodes": [
+        "production_session_recompute",
+        "battle_identity_continuity",
+        "battle_identity_continuity"
+      ]
+    },
+    {
+      "label": "replay-session-coupled-swap",
+      "rejected": true,
+      "failureCodes": [
+        "battle_identity_continuity",
+        "battle_identity_continuity"
+      ]
+    },
+    {
+      "label": "deployment-hash-coupled-swap",
+      "rejected": true,
+      "failureCodes": [
+        "deployment_hash_recompute"
+      ]
+    },
+    {
+      "label": "formal-report-hash-coupled-swap",
+      "rejected": true,
+      "failureCodes": [
+        "formal_report_hash_recompute"
       ]
     }
   ],

@@ -10,8 +10,9 @@ import {
 } from '../js/config.js';
 import { createInitialState, createBuilding } from '../js/state.js';
 import { recalcDerived } from '../js/economy.js';
+import { createFormation } from '../js/formations.js';
 import {
-  canQueueEquipment, queueEquipment, tickProduction, completeProduction,
+  createUnit, canQueueEquipment, queueEquipment, tickProduction, completeProduction,
   cancelCurrentProduction, cancelQueuedProduction, getProductionProgress,
   sanitizeProduction
 } from '../js/production.js';
@@ -23,6 +24,8 @@ import { getUnitEffectiveStats } from '../js/units.js';
 import { migrate } from '../js/save.js';
 import { settleOfflineProgress } from '../js/offline.js';
 import { computeSaveDiff } from '../js/save-diff.js';
+import { dispatchFormation, tickActiveBattle } from '../js/theater.js';
+import { canonicalHash } from '../js/production-battle-session.js';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const clone = (value) => JSON.parse(JSON.stringify(value));
@@ -215,7 +218,7 @@ check('additive migration preserves queues, creates no new equipment and fails c
 });
 
 let isolationEvidence;
-check('offline production progresses once while active battle remains isolated and settlement does not mutate equipment', () => {
+check('offline production progresses once while active battle remains isolated', () => {
   const state = fixture(['modular_assembly']);
   state.units.push({ id: 'stage9-c-battle-unit', type: 'at_infantry', hp: 90, maxHp: 90, status: 'ready', formationId: null, experience: 0, battles: 0 });
   assert.equal(queueEquipment(state, 'anti_armor_sights').ok, true);
@@ -226,14 +229,101 @@ check('offline production progresses once while active battle remains isolated a
   assert.equal(report.equipmentProduced[0].equipmentId, 'anti_armor_sights');
   assert.equal(state.equipment.inventory.length, equipmentBefore.inventory.length + 1);
   assert.deepEqual(state.activeBattle, battleBefore);
+  const equipmentAfterFirst = clone(state.equipment);
+  const producedInstanceId = equipmentAfterFirst.inventory.at(-1).id;
   const repeated = settleOfflineProgress(state, 18, { token: 'stage9-c-offline-once', createReport: true });
   assert.equal(repeated.alreadySettled, true);
   assert.equal(state.equipment.inventory.length, equipmentBefore.inventory.length + 1);
+  const equipmentAfterSecond = clone(state.equipment);
+  assert.deepEqual(equipmentAfterSecond, equipmentAfterFirst);
+  assert.equal(producedInstanceId, 'equipment-production-anti_armor_sights-1');
   const lockedBefore = clone(state.equipment);
   assert.equal(canEquipEquipment(state, 'stage9-c-battle-unit', state.equipment.inventory.at(-1).id).code, 'battle_locked');
   assert.deepEqual(state.equipment, lockedBefore);
-  isolationEvidence = { stage: '9-C', independentRecompute: true, productionOfflineProgressed: true, productionOfflineCompletedExactlyOnce: true, battleOfflinePaused: report.battlePaused === true, battleSessionId: state.activeBattle.battleSessionId, deploymentHash: state.activeBattle.deploymentHash, formalReportHash: state.activeBattle.formalReportHash, battleLockedRejected: true, equipmentBeforeSettlement: equipmentBefore, equipmentAfterSettlement: clone(state.equipment), settlementEquipmentUnchanged: true };
+  isolationEvidence = {
+    stage: '9-C.1', independentRecompute: true,
+    offlineProduction: {
+      token: 'stage9-c-offline-once',
+      equipmentBefore: equipmentBefore,
+      equipmentAfterFirst: equipmentAfterFirst,
+      equipmentAfterSecond: equipmentAfterSecond,
+      producedInstanceId,
+      reportEquipmentProduced: report.equipmentProduced,
+      repeated: { alreadySettled: repeated.alreadySettled, equipmentAfter: equipmentAfterSecond },
+      battlePaused: report.battlePaused === true,
+      battleIdentityBefore: battleBefore,
+      battleIdentityAfter: clone(state.activeBattle)
+    },
+    battleLockedRejected: true
+  };
   write('stage9_c_battle_isolation_check.json', isolationEvidence);
+});
+
+let formalSettlementEvidence;
+check('real Formal Battle settlement leaves equipment state byte-for-byte unchanged', () => {
+  const state = fixture(['modular_assembly']);
+  const unit = createUnit('mbt', 'stage9-c-formal-factory');
+  unit.id = 'stage9-c-formal-unit';
+  state.units = [unit];
+  assert.equal(equipEquipment(state, unit.id, 'equipment-starter-2').ok, true);
+  const formationResult = createFormation(state, 'Stage 9-C.1 formal settlement');
+  assert.equal(formationResult.ok, true);
+  formationResult.formation.id = 'stage9-c-formal-formation';
+  formationResult.formation.unitIds = [unit.id];
+  unit.formationId = formationResult.formation.id;
+  unit.status = 'assigned';
+  recalcDerived(state);
+  state.command.capacity = 999;
+
+  const dispatched = dispatchFormation(state, formationResult.formation.id, 'scrap_mine', 'cautious', 93001);
+  assert.equal(dispatched.ok, true);
+  const activeBefore = state.activeBattle;
+  const beforeEquipment = clone(state.equipment);
+  const before = {
+    equipment: beforeEquipment,
+    equipmentHash: canonicalHash(beforeEquipment),
+    reportCount: state.battles.length,
+    ledgerCount: Object.keys(state.battleSettlementLedger).length,
+    activeBattle: {
+      battleSessionId: activeBefore.battleSessionId,
+      deploymentHash: activeBefore.deploymentHash,
+      formalReportHash: activeBefore.formalReportHash,
+      settlementId: activeBefore.settlementId
+    }
+  };
+  const settled = tickActiveBattle(state, activeBefore.duration + 1);
+  assert.equal(settled.ok, true);
+  assert.equal(state.activeBattle.settled, true);
+  const afterEquipment = clone(state.equipment);
+  const after = {
+    equipment: afterEquipment,
+    equipmentHash: canonicalHash(afterEquipment),
+    reportCount: state.battles.length,
+    ledgerCount: Object.keys(state.battleSettlementLedger).length,
+    activeBattle: {
+      battleSessionId: state.activeBattle.battleSessionId,
+      deploymentHash: state.activeBattle.deploymentHash,
+      formalReportHash: state.activeBattle.formalReportHash,
+      settlementId: state.activeBattle.settlementId,
+      settled: state.activeBattle.settled === true
+    }
+  };
+  assert.deepEqual(afterEquipment, beforeEquipment);
+  assert.equal(after.reportCount, before.reportCount + 1);
+  assert.equal(after.ledgerCount, before.ledgerCount + 1);
+  assert.deepEqual(after.activeBattle, { ...before.activeBattle, settled: true });
+  formalSettlementEvidence = {
+    stage: '9-C.1', independentRecompute: true,
+    battleSessionId: before.activeBattle.battleSessionId,
+    deploymentHash: before.activeBattle.deploymentHash,
+    formalReportHash: before.activeBattle.formalReportHash,
+    settlementId: before.activeBattle.settlementId,
+    expectedMountedEquipment: clone(beforeEquipment),
+    beforeSettlement: before,
+    afterSettlement: after,
+    deepEqual: true
+  };
+  write('stage9_c_formal_settlement_isolation_check.json', formalSettlementEvidence);
 });
 
 let saveDiffEvidence;
@@ -250,7 +340,7 @@ check('mount/unmount changes equipment paths only and no settlement path is touc
   assert.deepEqual(diffPaths(settlementBefore, settlementAfter), []);
   const forbidden = ['battleSessions', 'battleSettlementLedger', 'battles', 'formations', 'settings', 'theaters', 'research', 'buildings'];
   assert.equal(mountPaths.some((pathValue) => forbidden.some((prefix) => pathValue === prefix || pathValue.startsWith(`${prefix}.`))), false);
-  saveDiffEvidence = { stage: '9-C', independentRecompute: true, mountChangedPaths: mountPaths, mountAllowedOnlyEquipment: true, settlementEquipmentUnchanged: true, settlementChangedPaths: [], forbiddenPaths: forbidden, productionOutputPaths: ['resources', 'production', 'equipment', 'stats.equipmentBuilt', 'log'] };
+  saveDiffEvidence = { stage: '9-C.1', independentRecompute: true, mountChangedPaths: mountPaths, mountAllowedOnlyEquipment: true, formalBattleSettlementChangedPaths: [], forbiddenPaths: forbidden, productionOutputPaths: ['resources', 'production', 'equipment', 'stats.equipmentBuilt', 'log'] };
   write('stage9_c_save_diff_check.json', saveDiffEvidence);
 });
 

@@ -13,7 +13,7 @@ const frames = [
 ];
 
 const output = {
-  stage: '9-C', version: 1, generatedBy: 'tests/generate-stage9-C-machine-evidence.mjs',
+  stage: '9-C.1', version: 2, generatedBy: 'tests/generate-stage9-C-machine-evidence.mjs',
   productionEntry: true, fixtureLoaderUsed: false, debugOverlayUsed: false,
   dispatchApiUsed: false, replayApiUsed: false, offlineApiUsed: false, equipmentApiUsed: false,
   realReloadRequired: true, frameCount: frames.length,

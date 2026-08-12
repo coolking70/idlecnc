@@ -1,6 +1,6 @@
 {
-  "stage": "9-C",
-  "version": 1,
+  "stage": "9-C.1",
+  "version": 2,
   "measurement": "equipment effective-stats, snapshot and inventory read paths",
   "budgetMs": 16.7,
   "warmup": 20,
@@ -22,12 +22,12 @@
     "samples": [
       {
         "attempt": 1,
-        "normalizedLoad1": 0.317,
-        "spareCores": 6.827
+        "normalizedLoad1": 0.297,
+        "spareCores": 7.028
       }
     ],
-    "loadBefore": 0.317,
-    "loadAfter": 0.317
+    "loadBefore": 0.297,
+    "loadAfter": 0.297
   },
   "scenarios": {
     "effectiveStats": {
@@ -35,16 +35,16 @@
       "warmup": 20,
       "samples": 120,
       "metric": "p95",
-      "p95Ms": 0.0083,
-      "maxMs": 0.2199
+      "p95Ms": 0.0077,
+      "maxMs": 0.2118
     },
     "snapshot": {
       "name": "snapshot",
       "warmup": 20,
       "samples": 120,
       "metric": "p95",
-      "p95Ms": 0.035,
-      "maxMs": 0.1517
+      "p95Ms": 0.0361,
+      "maxMs": 0.1496
     },
     "inventory": {
       "name": "inventoryCounts",

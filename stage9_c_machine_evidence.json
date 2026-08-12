@@ -1,6 +1,6 @@
 {
-  "stage": "9-C",
-  "version": 1,
+  "stage": "9-C.1",
+  "version": 2,
   "generatedBy": "tests/generate-stage9-C-machine-evidence.mjs",
   "productionEntry": true,
   "fixtureLoaderUsed": false,

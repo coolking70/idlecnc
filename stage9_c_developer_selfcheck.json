@@ -1,12 +1,14 @@
 {
-  "stage": "9-C",
+  "stage": "9-C.1",
   "independentRecompute": true,
   "checks": {
     "verifierRecomputedCurrentSource": true,
     "verifierErrors": [],
-    "tamperCases": 121,
-    "tamperRejected": 121,
+    "tamperCases": 141,
+    "tamperRejected": 141,
     "passedFlagOnlyCases": 0,
+    "coupledTamperCaseCount": 11,
+    "coupledTamperRejected": 11,
     "browserRealReloads": [
       "production_queue",
       "completed_unmounted",
@@ -55,6 +57,10 @@
     },
     {
       "file": "stage9_c_battle_isolation_check.json",
+      "exists": true
+    },
+    {
+      "file": "stage9_c_formal_settlement_isolation_check.json",
       "exists": true
     },
     {

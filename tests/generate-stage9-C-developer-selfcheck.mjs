@@ -17,18 +17,20 @@ const packageJson = JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 
 const forbidden = ['js/save-diff.js', 'tests/lib/', 'js/battle.js', 'js/theater.js', 'js/battle-presentation/universal/'];
 const requiredEvidence = [
   'stage9_c_acquisition_model_check.json', 'stage9_c_production_queue_check.json', 'stage9_c_tech_gate_check.json', 'stage9_c_catalog_check.json',
-  'stage9_c_inventory_integrity_check.json', 'stage9_c_migration_check.json', 'stage9_c_reload_check.json', 'stage9_c_battle_isolation_check.json',
+  'stage9_c_inventory_integrity_check.json', 'stage9_c_migration_check.json', 'stage9_c_reload_check.json', 'stage9_c_battle_isolation_check.json', 'stage9_c_formal_settlement_isolation_check.json',
   'stage9_c_save_diff_check.json', 'stage9_c_ui_path_check.json', 'stage9_c_authority_check.json', 'stage9_c_regression_check.json',
   'stage9_c_performance_check.json', 'stage9_c_tamper_results.json', 'stage9_c_browser_capture_manifest.json', 'stage9_c_strong_evidence_verdict.json'
 ];
 const output = {
-  stage: '9-C', independentRecompute: true,
+  stage: '9-C.1', independentRecompute: true,
   checks: {
     verifierRecomputedCurrentSource: verification.ok,
     verifierErrors: verification.errors,
     tamperCases: tamper.caseCount,
     tamperRejected: tamper.rejectionCount,
     passedFlagOnlyCases: tamper.passedFlagOnlyCases,
+    coupledTamperCaseCount: tamper.coupledTamperCaseCount,
+    coupledTamperRejected: tamper.coupledTamperRejected,
     browserRealReloads: browser.realReloads?.map((row) => row.reason) || [],
     browserApiFlagsFalse: browser.dispatchApiUsed === false && browser.replayApiUsed === false && browser.offlineApiUsed === false && browser.equipmentApiUsed === false,
     performanceMeasurementValid: perf.measurementValid === true,
@@ -39,7 +41,7 @@ const output = {
   requiredEvidence: requiredEvidence.map((file) => ({ file, exists: fs.existsSync(path.join(root, file)) })),
   noBattleDrops: true,
   noAuthorityChanges: changed.every((file) => !forbidden.some((prefix) => file === prefix || file.startsWith(prefix))),
-  passed: verification.ok && tamper.caseCount >= 84 && tamper.rejectionCount === tamper.caseCount && tamper.passedFlagOnlyCases === 0 && browser.realReloads?.length === 4 && perf.measurementValid === true && perf.budgetMs === 16.7 && requiredEvidence.every((file) => fs.existsSync(path.join(root, file)))
+  passed: verification.ok && tamper.caseCount > 121 && tamper.rejectionCount === tamper.caseCount && tamper.passedFlagOnlyCases === 0 && tamper.coupledTamperRejected === tamper.coupledTamperCaseCount && browser.realReloads?.length === 4 && perf.measurementValid === true && perf.budgetMs === 16.7 && requiredEvidence.every((file) => fs.existsSync(path.join(root, file)))
 };
 fs.writeFileSync(path.join(root, 'stage9_c_developer_selfcheck.json'), `${JSON.stringify(output, null, 2)}\n`);
 assert.equal(output.passed, true, JSON.stringify(output));

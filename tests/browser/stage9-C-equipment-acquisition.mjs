@@ -28,6 +28,24 @@ function summary(state) {
   const active = state?.activeBattle || null;
   const sourceId = active?.replayContext?.sourceBattleSessionId || active?.battleSessionId || null;
   const session = sourceId ? state?.battleSessions?.[sourceId] : null;
+  const formalReport = session?.formalReportId
+    ? (state?.battles || []).find((row) => row && row.id === session.formalReportId)
+      || (active?.report?.id === session.formalReportId ? active.report : null)
+    : (active?.report || null);
+  const authoritativeSession = session && {
+    battleSessionId: session.battleSessionId || null,
+    missionId: session.missionId || null,
+    deploymentSnapshot: session.deploymentSnapshot || null,
+    deploymentSnapshotId: session.deploymentSnapshotId || null,
+    deploymentHash: session.deploymentHash || null,
+    formalReportId: session.formalReportId || null,
+    formalReportHash: session.formalReportHash || null,
+    sourceReportHash: session.sourceReportHash || null,
+    sourceSaveRevision: session.sourceSaveRevision ?? null,
+    settlementId: session.settlementId || null,
+    sessionOrigin: session.sessionOrigin || null,
+    formalReport
+  };
   return {
     activeBattleSessionId: state?.activeBattleSessionId ?? null,
     activeBattle: active && {
@@ -41,6 +59,7 @@ function summary(state) {
       reportId: active.report?.id || null,
       historicalEquipment: historicalSnapshot(state)
     },
+    authoritativeSession,
     sessionId: sourceId,
     sessionLifecycle: session?.lifecycle || null,
     equipment: state?.equipment?.bindings || {},
@@ -53,7 +72,7 @@ function summary(state) {
 
 async function main() {
   const machine = JSON.parse(await fs.readFile(machinePath, 'utf8'));
-  if (machine.stage !== '9-C' || machine.frameCount !== 9 || machine.fixtureLoaderUsed === true || machine.equipmentApiUsed === true) throw new Error('Stage9-C machine evidence target list invalid');
+  if (machine.stage !== '9-C.1' || machine.frameCount !== 9 || machine.fixtureLoaderUsed === true || machine.equipmentApiUsed === true) throw new Error('Stage9-C.1 machine evidence target list invalid');
   await fs.rm(manifestPath, { force: true });
   await fs.rm(screenshotDir, { recursive: true, force: true });
   await fs.mkdir(screenshotDir, { recursive: true });
@@ -169,7 +188,7 @@ async function main() {
 
     if (pageErrors.length || consoleErrors.length) throw new Error(`Stage9-C browser errors: ${JSON.stringify({ pageErrors, consoleErrors })}`);
     const output = {
-      stage: '9-C', version: 1, generatedBy: 'tests/browser/stage9-C-equipment-acquisition.mjs', machineEvidenceFile: path.basename(machinePath),
+      stage: '9-C.1', version: 2, generatedBy: 'tests/browser/stage9-C-equipment-acquisition.mjs', machineEvidenceFile: path.basename(machinePath),
       productionEntry: true, fixtureLoaderUsed: false, debugOverlayUsed: false, dispatchApiUsed: false, replayApiUsed: false, offlineApiUsed: false, equipmentApiUsed: false,
       fixtureSeeded: true, fixtureSeedMethod: 'one valid unit, operational armor factory, research and resources seeded through the test-only state handle; acquisition, cancel, completion wait, mount, dispatch, battle-lock and replay actions are production DOM interactions',
       actionProvenance: actions, realReloads: reloads,
