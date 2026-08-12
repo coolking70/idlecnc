@@ -1,0 +1,98 @@
+{
+  "stage": "9-C",
+  "independentRecompute": true,
+  "productionOfflineProgressed": true,
+  "productionOfflineCompletedExactlyOnce": true,
+  "battleOfflinePaused": true,
+  "battleSessionId": "stage9-c-session",
+  "deploymentHash": "deployment-fixed",
+  "formalReportHash": "report-fixed",
+  "battleLockedRejected": true,
+  "equipmentBeforeSettlement": {
+    "inventory": [
+      {
+        "id": "equipment-starter-1",
+        "equipmentId": "scout_optics",
+        "quantity": 1,
+        "acquiredAt": 0,
+        "acquisition": {
+          "kind": "starter",
+          "label": "初始装备补给"
+        }
+      },
+      {
+        "id": "equipment-starter-2",
+        "equipmentId": "reinforced_chassis",
+        "quantity": 1,
+        "acquiredAt": 0,
+        "acquisition": {
+          "kind": "starter",
+          "label": "初始装备补给"
+        }
+      },
+      {
+        "id": "equipment-starter-3",
+        "equipmentId": "field_toolkit",
+        "quantity": 1,
+        "acquiredAt": 0,
+        "acquisition": {
+          "kind": "starter",
+          "label": "初始装备补给"
+        }
+      }
+    ],
+    "bindings": {}
+  },
+  "equipmentAfterSettlement": {
+    "inventory": [
+      {
+        "id": "equipment-starter-1",
+        "equipmentId": "scout_optics",
+        "quantity": 1,
+        "acquiredAt": 0,
+        "acquisition": {
+          "kind": "starter",
+          "label": "初始装备补给"
+        }
+      },
+      {
+        "id": "equipment-starter-2",
+        "equipmentId": "reinforced_chassis",
+        "quantity": 1,
+        "acquiredAt": 0,
+        "acquisition": {
+          "kind": "starter",
+          "label": "初始装备补给"
+        }
+      },
+      {
+        "id": "equipment-starter-3",
+        "equipmentId": "field_toolkit",
+        "quantity": 1,
+        "acquiredAt": 0,
+        "acquisition": {
+          "kind": "starter",
+          "label": "初始装备补给"
+        }
+      },
+      {
+        "id": "equipment-production-anti_armor_sights-1",
+        "equipmentId": "anti_armor_sights",
+        "quantity": 1,
+        "acquiredAt": 28818,
+        "acquisition": {
+          "kind": "production",
+          "label": "装甲工厂制造",
+          "building": "armor_factory",
+          "cost": {
+            "supply": 180,
+            "alloy": 140
+          },
+          "buildTime": 18
+        }
+      }
+    ],
+    "bindings": {}
+  },
+  "settlementEquipmentUnchanged": true
+}

@@ -1,0 +1,861 @@
+{
+  "stage": "9-C",
+  "rule": "true-value mutation while passed=true",
+  "caseCount": 121,
+  "rejectionCount": 121,
+  "passedFlagOnlyCases": 0,
+  "cases": [
+    {
+      "label": "effective-attack",
+      "rejected": true,
+      "failureCodes": [
+        "effective_stats_true_value"
+      ]
+    },
+    {
+      "label": "effective-anti-armor",
+      "rejected": true,
+      "failureCodes": [
+        "effective_stats_true_value"
+      ]
+    },
+    {
+      "label": "effective-defense",
+      "rejected": true,
+      "failureCodes": [
+        "effective_stats_true_value"
+      ]
+    },
+    {
+      "label": "effective-scouting",
+      "rejected": true,
+      "failureCodes": [
+        "effective_stats_true_value"
+      ]
+    },
+    {
+      "label": "effective-mobility",
+      "rejected": true,
+      "failureCodes": [
+        "effective_stats_true_value"
+      ]
+    },
+    {
+      "label": "effective-repair",
+      "rejected": true,
+      "failureCodes": [
+        "effective_stats_true_value"
+      ]
+    },
+    {
+      "label": "effective-hp",
+      "rejected": true,
+      "failureCodes": [
+        "effective_stats_true_value"
+      ]
+    },
+    {
+      "label": "snapshot-stat",
+      "rejected": true,
+      "failureCodes": [
+        "snapshot_true_value"
+      ]
+    },
+    {
+      "label": "snapshot-equipment-id",
+      "rejected": true,
+      "failureCodes": [
+        "snapshot_true_value"
+      ]
+    },
+    {
+      "label": "snapshot-equipment-modifier",
+      "rejected": true,
+      "failureCodes": [
+        "snapshot_true_value"
+      ]
+    },
+    {
+      "label": "production-cost",
+      "rejected": true,
+      "failureCodes": [
+        "production_true_value"
+      ]
+    },
+    {
+      "label": "production-duration",
+      "rejected": true,
+      "failureCodes": [
+        "production_true_value"
+      ]
+    },
+    {
+      "label": "production-kind",
+      "rejected": true,
+      "failureCodes": [
+        "production_true_value"
+      ]
+    },
+    {
+      "label": "tech-gate-code",
+      "rejected": true,
+      "failureCodes": [
+        "tech_gate_true_value"
+      ]
+    },
+    {
+      "label": "tech-gate-missing-tech",
+      "rejected": true,
+      "failureCodes": [
+        "tech_gate_true_value"
+      ]
+    },
+    {
+      "label": "tech-gate-reason",
+      "rejected": true,
+      "failureCodes": [
+        "tech_gate_true_value"
+      ]
+    },
+    {
+      "label": "semantic-frame-1",
+      "rejected": true,
+      "failureCodes": [
+        "semantic_frame_order"
+      ]
+    },
+    {
+      "label": "image-hash-1",
+      "rejected": true,
+      "failureCodes": [
+        "screenshot_hash_declared"
+      ]
+    },
+    {
+      "label": "screenshot-hash-1",
+      "rejected": true,
+      "failureCodes": [
+        "screenshot_hash_declared"
+      ]
+    },
+    {
+      "label": "semantic-frame-2",
+      "rejected": true,
+      "failureCodes": [
+        "semantic_frame_order"
+      ]
+    },
+    {
+      "label": "image-hash-2",
+      "rejected": true,
+      "failureCodes": [
+        "screenshot_hash_declared"
+      ]
+    },
+    {
+      "label": "screenshot-hash-2",
+      "rejected": true,
+      "failureCodes": [
+        "screenshot_hash_declared"
+      ]
+    },
+    {
+      "label": "semantic-frame-3",
+      "rejected": true,
+      "failureCodes": [
+        "semantic_frame_order"
+      ]
+    },
+    {
+      "label": "image-hash-3",
+      "rejected": true,
+      "failureCodes": [
+        "screenshot_hash_declared"
+      ]
+    },
+    {
+      "label": "screenshot-hash-3",
+      "rejected": true,
+      "failureCodes": [
+        "screenshot_hash_declared"
+      ]
+    },
+    {
+      "label": "semantic-frame-4",
+      "rejected": true,
+      "failureCodes": [
+        "semantic_frame_order"
+      ]
+    },
+    {
+      "label": "image-hash-4",
+      "rejected": true,
+      "failureCodes": [
+        "screenshot_hash_declared"
+      ]
+    },
+    {
+      "label": "screenshot-hash-4",
+      "rejected": true,
+      "failureCodes": [
+        "screenshot_hash_declared"
+      ]
+    },
+    {
+      "label": "semantic-frame-5",
+      "rejected": true,
+      "failureCodes": [
+        "semantic_frame_order"
+      ]
+    },
+    {
+      "label": "image-hash-5",
+      "rejected": true,
+      "failureCodes": [
+        "screenshot_hash_declared"
+      ]
+    },
+    {
+      "label": "screenshot-hash-5",
+      "rejected": true,
+      "failureCodes": [
+        "screenshot_hash_declared"
+      ]
+    },
+    {
+      "label": "semantic-frame-6",
+      "rejected": true,
+      "failureCodes": [
+        "semantic_frame_order"
+      ]
+    },
+    {
+      "label": "image-hash-6",
+      "rejected": true,
+      "failureCodes": [
+        "screenshot_hash_declared"
+      ]
+    },
+    {
+      "label": "screenshot-hash-6",
+      "rejected": true,
+      "failureCodes": [
+        "screenshot_hash_declared"
+      ]
+    },
+    {
+      "label": "semantic-frame-7",
+      "rejected": true,
+      "failureCodes": [
+        "semantic_frame_order"
+      ]
+    },
+    {
+      "label": "image-hash-7",
+      "rejected": true,
+      "failureCodes": [
+        "screenshot_hash_declared"
+      ]
+    },
+    {
+      "label": "screenshot-hash-7",
+      "rejected": true,
+      "failureCodes": [
+        "screenshot_hash_declared"
+      ]
+    },
+    {
+      "label": "semantic-frame-8",
+      "rejected": true,
+      "failureCodes": [
+        "semantic_frame_order"
+      ]
+    },
+    {
+      "label": "image-hash-8",
+      "rejected": true,
+      "failureCodes": [
+        "screenshot_hash_declared"
+      ]
+    },
+    {
+      "label": "screenshot-hash-8",
+      "rejected": true,
+      "failureCodes": [
+        "screenshot_hash_declared"
+      ]
+    },
+    {
+      "label": "semantic-frame-9",
+      "rejected": true,
+      "failureCodes": [
+        "semantic_frame_order"
+      ]
+    },
+    {
+      "label": "image-hash-9",
+      "rejected": true,
+      "failureCodes": [
+        "screenshot_hash_declared"
+      ]
+    },
+    {
+      "label": "screenshot-hash-9",
+      "rejected": true,
+      "failureCodes": [
+        "screenshot_hash_declared"
+      ]
+    },
+    {
+      "label": "queue-frame-current",
+      "rejected": true,
+      "failureCodes": [
+        "queue_state"
+      ]
+    },
+    {
+      "label": "queue-frame-inventory",
+      "rejected": true,
+      "failureCodes": [
+        "queue_inventory_early"
+      ]
+    },
+    {
+      "label": "queue-reload-current",
+      "rejected": true,
+      "failureCodes": [
+        "queue_state"
+      ]
+    },
+    {
+      "label": "queue-reload-inventory",
+      "rejected": true,
+      "failureCodes": [
+        "queue_inventory_early"
+      ]
+    },
+    {
+      "label": "completed-frame-inventory",
+      "rejected": true,
+      "failureCodes": [
+        "completed_unmounted_state"
+      ]
+    },
+    {
+      "label": "completed-frame-binding",
+      "rejected": true,
+      "failureCodes": [
+        "completed_unmounted_state"
+      ]
+    },
+    {
+      "label": "completed-reload-inventory",
+      "rejected": true,
+      "failureCodes": [
+        "completed_unmounted_state"
+      ]
+    },
+    {
+      "label": "mounted-frame-binding",
+      "rejected": true,
+      "failureCodes": [
+        "mount_state"
+      ]
+    },
+    {
+      "label": "running-5-session",
+      "rejected": true,
+      "failureCodes": [
+        "running_isolation",
+        "replay_isolation"
+      ]
+    },
+    {
+      "label": "running-5-deployment",
+      "rejected": true,
+      "failureCodes": [
+        "running_isolation",
+        "replay_isolation"
+      ]
+    },
+    {
+      "label": "running-5-report",
+      "rejected": true,
+      "failureCodes": [
+        "running_isolation",
+        "replay_isolation"
+      ]
+    },
+    {
+      "label": "running-5-readonly",
+      "rejected": true,
+      "failureCodes": [
+        "running_binding"
+      ]
+    },
+    {
+      "label": "running-5-equipment",
+      "rejected": true,
+      "failureCodes": [
+        "running_isolation"
+      ]
+    },
+    {
+      "label": "running-6-session",
+      "rejected": true,
+      "failureCodes": [
+        "running_isolation"
+      ]
+    },
+    {
+      "label": "running-6-deployment",
+      "rejected": true,
+      "failureCodes": [
+        "running_isolation"
+      ]
+    },
+    {
+      "label": "running-6-report",
+      "rejected": true,
+      "failureCodes": [
+        "running_isolation"
+      ]
+    },
+    {
+      "label": "running-6-readonly",
+      "rejected": true,
+      "failureCodes": [
+        "running_binding"
+      ]
+    },
+    {
+      "label": "running-6-equipment",
+      "rejected": true,
+      "failureCodes": [
+        "running_isolation"
+      ]
+    },
+    {
+      "label": "replay-7-readonly",
+      "rejected": true,
+      "failureCodes": [
+        "replay_historical_equipment"
+      ]
+    },
+    {
+      "label": "replay-7-historical",
+      "rejected": true,
+      "failureCodes": [
+        "replay_historical_equipment"
+      ]
+    },
+    {
+      "label": "replay-7-deployment",
+      "rejected": true,
+      "failureCodes": [
+        "replay_isolation"
+      ]
+    },
+    {
+      "label": "replay-7-report",
+      "rejected": true,
+      "failureCodes": [
+        "replay_isolation"
+      ]
+    },
+    {
+      "label": "replay-7-session",
+      "rejected": true,
+      "failureCodes": [
+        "replay_isolation"
+      ]
+    },
+    {
+      "label": "replay-7-equipment",
+      "rejected": true,
+      "failureCodes": [
+        "replay_isolation"
+      ]
+    },
+    {
+      "label": "replay-7-reports",
+      "rejected": true,
+      "failureCodes": [
+        "settlement_ledger_isolation"
+      ]
+    },
+    {
+      "label": "replay-7-ledger",
+      "rejected": true,
+      "failureCodes": [
+        "settlement_ledger_isolation"
+      ]
+    },
+    {
+      "label": "replay-8-readonly",
+      "rejected": true,
+      "failureCodes": [
+        "replay_historical_equipment"
+      ]
+    },
+    {
+      "label": "replay-8-historical",
+      "rejected": true,
+      "failureCodes": [
+        "replay_historical_equipment"
+      ]
+    },
+    {
+      "label": "replay-8-deployment",
+      "rejected": true,
+      "failureCodes": [
+        "replay_isolation"
+      ]
+    },
+    {
+      "label": "replay-8-report",
+      "rejected": true,
+      "failureCodes": [
+        "replay_isolation"
+      ]
+    },
+    {
+      "label": "replay-8-session",
+      "rejected": true,
+      "failureCodes": [
+        "replay_isolation"
+      ]
+    },
+    {
+      "label": "replay-8-equipment",
+      "rejected": true,
+      "failureCodes": [
+        "replay_isolation"
+      ]
+    },
+    {
+      "label": "replay-8-reports",
+      "rejected": true,
+      "failureCodes": [
+        "settlement_ledger_isolation"
+      ]
+    },
+    {
+      "label": "replay-8-ledger",
+      "rejected": true,
+      "failureCodes": [
+        "settlement_ledger_isolation"
+      ]
+    },
+    {
+      "label": "capture-count",
+      "rejected": true,
+      "failureCodes": [
+        "capture_count"
+      ]
+    },
+    {
+      "label": "unique-image-count",
+      "rejected": true,
+      "failureCodes": [
+        "capture_count"
+      ]
+    },
+    {
+      "label": "browser-page-error",
+      "rejected": true,
+      "failureCodes": [
+        "browser_errors"
+      ]
+    },
+    {
+      "label": "browser-console-error",
+      "rejected": true,
+      "failureCodes": [
+        "browser_errors"
+      ]
+    },
+    {
+      "label": "api-dispatchApiUsed",
+      "rejected": true,
+      "failureCodes": [
+        "api_provenance"
+      ]
+    },
+    {
+      "label": "api-replayApiUsed",
+      "rejected": true,
+      "failureCodes": [
+        "api_provenance"
+      ]
+    },
+    {
+      "label": "api-offlineApiUsed",
+      "rejected": true,
+      "failureCodes": [
+        "api_provenance"
+      ]
+    },
+    {
+      "label": "api-equipmentApiUsed",
+      "rejected": true,
+      "failureCodes": [
+        "api_provenance"
+      ]
+    },
+    {
+      "label": "coverage-productionEntry",
+      "rejected": true,
+      "failureCodes": [
+        "ui_coverage"
+      ]
+    },
+    {
+      "label": "coverage-enqueueAction",
+      "rejected": true,
+      "failureCodes": [
+        "ui_coverage"
+      ]
+    },
+    {
+      "label": "coverage-cancelAction",
+      "rejected": true,
+      "failureCodes": [
+        "ui_coverage"
+      ]
+    },
+    {
+      "label": "coverage-completionObserved",
+      "rejected": true,
+      "failureCodes": [
+        "ui_coverage"
+      ]
+    },
+    {
+      "label": "coverage-completedUnmounted",
+      "rejected": true,
+      "failureCodes": [
+        "ui_coverage"
+      ]
+    },
+    {
+      "label": "coverage-mountAction",
+      "rejected": true,
+      "failureCodes": [
+        "ui_coverage"
+      ]
+    },
+    {
+      "label": "coverage-runningAttempt",
+      "rejected": true,
+      "failureCodes": [
+        "ui_coverage"
+      ]
+    },
+    {
+      "label": "coverage-replayAttempt",
+      "rejected": true,
+      "failureCodes": [
+        "ui_coverage"
+      ]
+    },
+    {
+      "label": "ui-source-provenance",
+      "rejected": true,
+      "failureCodes": [
+        "ui_provenance"
+      ]
+    },
+    {
+      "label": "ui-synthetic-provenance",
+      "rejected": true,
+      "failureCodes": [
+        "ui_provenance"
+      ]
+    },
+    {
+      "label": "missing-action-produce-equipment",
+      "rejected": true,
+      "failureCodes": [
+        "required_ui_action"
+      ]
+    },
+    {
+      "label": "missing-action-cancel-production-current",
+      "rejected": true,
+      "failureCodes": [
+        "required_ui_action"
+      ]
+    },
+    {
+      "label": "missing-action-cancel-production-queue",
+      "rejected": true,
+      "failureCodes": [
+        "required_ui_action"
+      ]
+    },
+    {
+      "label": "missing-action-equip-equipment",
+      "rejected": true,
+      "failureCodes": [
+        "required_ui_action"
+      ]
+    },
+    {
+      "label": "missing-action-unequip-equipment",
+      "rejected": true,
+      "failureCodes": [
+        "required_ui_action"
+      ]
+    },
+    {
+      "label": "missing-action-confirm-dispatch",
+      "rejected": true,
+      "failureCodes": [
+        "required_ui_action"
+      ]
+    },
+    {
+      "label": "missing-action-replay-report",
+      "rejected": true,
+      "failureCodes": [
+        "required_ui_action"
+      ]
+    },
+    {
+      "label": "reload-reason-missing",
+      "rejected": true,
+      "failureCodes": [
+        "reload_reasons"
+      ]
+    },
+    {
+      "label": "reload-reason-extra",
+      "rejected": true,
+      "failureCodes": [
+        "reload_reasons"
+      ]
+    },
+    {
+      "label": "reload-time-origin-equal",
+      "rejected": true,
+      "failureCodes": [
+        "reload_true_value"
+      ]
+    },
+    {
+      "label": "reload-time-origin-backwards",
+      "rejected": true,
+      "failureCodes": [
+        "reload_true_value"
+      ]
+    },
+    {
+      "label": "reload-loader-same",
+      "rejected": true,
+      "failureCodes": [
+        "reload_true_value",
+        "reload_loader_duplicate"
+      ]
+    },
+    {
+      "label": "reload-declared-value",
+      "rejected": true,
+      "failureCodes": [
+        "reload_true_value"
+      ]
+    },
+    {
+      "label": "reload-loader-duplicate",
+      "rejected": true,
+      "failureCodes": [
+        "reload_loader_duplicate"
+      ]
+    },
+    {
+      "label": "performance-measurement-invalid",
+      "rejected": true,
+      "failureCodes": [
+        "performance_guard"
+      ]
+    },
+    {
+      "label": "performance-budget",
+      "rejected": true,
+      "failureCodes": [
+        "performance_guard"
+      ]
+    },
+    {
+      "label": "performance-warmup",
+      "rejected": true,
+      "failureCodes": [
+        "performance_guard"
+      ]
+    },
+    {
+      "label": "performance-sample-count",
+      "rejected": true,
+      "failureCodes": [
+        "performance_guard"
+      ]
+    },
+    {
+      "label": "performance-effective-p95",
+      "rejected": true,
+      "failureCodes": [
+        "performance_budget"
+      ]
+    },
+    {
+      "label": "performance-snapshot-p95",
+      "rejected": true,
+      "failureCodes": [
+        "performance_budget"
+      ]
+    },
+    {
+      "label": "performance-load-before",
+      "rejected": true,
+      "failureCodes": [
+        "performance_guard"
+      ]
+    },
+    {
+      "label": "performance-environment",
+      "rejected": true,
+      "failureCodes": [
+        "performance_guard"
+      ]
+    },
+    {
+      "label": "isolation-offline-progress",
+      "rejected": true,
+      "failureCodes": [
+        "offline_isolation_evidence"
+      ]
+    },
+    {
+      "label": "isolation-exactly-once",
+      "rejected": true,
+      "failureCodes": [
+        "offline_isolation_evidence"
+      ]
+    },
+    {
+      "label": "isolation-settlement-equipment",
+      "rejected": true,
+      "failureCodes": [
+        "offline_isolation_evidence"
+      ]
+    },
+    {
+      "label": "replay-historical-evidence",
+      "rejected": true,
+      "failureCodes": [
+        "replay_historical_equipment"
+      ]
+    }
+  ],
+  "passed": true
+}

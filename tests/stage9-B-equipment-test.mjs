@@ -75,9 +75,9 @@ function sourceChangedFiles() {
 console.log('\n── Stage 9-B equipment core / persistence / snapshot ──');
 
 check('equipment model has deterministic definitions, acquisition conditions and no hp modifier', () => {
-  assert.equal(SAVE_VERSION, 8);
+  assert.equal(SAVE_VERSION, 9);
   assert.equal(EQUIPMENT_RULES.maxSlotsPerUnit, 2);
-  assert.equal(Object.keys(EQUIPMENT).length, EQUIPMENT_RULES.starterInventory);
+  assert.ok(Object.keys(EQUIPMENT).length >= EQUIPMENT_RULES.starterInventory);
   Object.values(EQUIPMENT).forEach((def) => {
     assert.ok(def.id && def.name && Array.isArray(def.applicableTypes));
     assert.ok(def.acquisition && def.acquisition.kind);

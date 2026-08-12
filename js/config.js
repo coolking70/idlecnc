@@ -11,7 +11,7 @@
  * 存档 / 时间
  * ========================================================== */
 
-export const SAVE_VERSION = 8;
+export const SAVE_VERSION = 9;
 export const SAVE_KEY = 'iron-command.save.v1';
 /** 手动保存槽位：不被静默自动保存覆盖，供玩家点击“读取”时恢复。 */
 export const MANUAL_SAVE_KEY = 'iron-command.save.manual.v1';
@@ -376,6 +376,61 @@ export const EQUIPMENT = {
     modifiers: { repair: 1.2, defense: 1.02 },
     acquisition: { kind: 'starter', label: '初始装备补给' },
     desc: '提高维修效率与野战保障能力，不改变生命上限。'
+  },
+  anti_armor_sights: {
+    id: 'anti_armor_sights', name: '反装甲瞄具', slot: 'weapon',
+    applicableTypes: ['at_infantry', 'mbt'],
+    modifiers: { antiArmor: 1.10, scouting: 1.03 },
+    requiresTech: 'modular_assembly',
+    acquisition: {
+      kind: 'production', label: '装甲工厂制造', building: 'armor_factory',
+      cost: { supply: 180, alloy: 140 }, buildTime: 18
+    },
+    desc: '提高反装甲火力与目标识别能力，不改变生命上限。'
+  },
+  command_uplink: {
+    id: 'command_uplink', name: '战术指挥链', slot: 'utility',
+    applicableTypes: ['infantry', 'at_infantry', 'scout_car'],
+    modifiers: { attack: 1.05, scouting: 1.10, mobility: 1.03 },
+    requiresTech: 'modular_assembly',
+    acquisition: {
+      kind: 'production', label: '装甲工厂制造', building: 'armor_factory',
+      cost: { supply: 220, alloy: 170 }, buildTime: 22
+    },
+    desc: '提升战术通信与目标感知，不改变生命上限。'
+  },
+  mobile_repair_rig: {
+    id: 'mobile_repair_rig', name: '机动维修架', slot: 'utility',
+    applicableTypes: ['infantry', 'repair_vehicle'],
+    modifiers: { repair: 1.15, defense: 1.05 },
+    requiresTech: 'field_maintenance',
+    acquisition: {
+      kind: 'production', label: '装甲工厂制造', building: 'armor_factory',
+      cost: { supply: 260, alloy: 220 }, buildTime: 26
+    },
+    desc: '增强野战抢修效率与保障防护，不改变生命上限。'
+  },
+  reactive_armor_module: {
+    id: 'reactive_armor_module', name: '反应装甲模块', slot: 'armor',
+    applicableTypes: ['scout_car', 'mbt', 'repair_vehicle'],
+    modifiers: { defense: 1.12, mobility: 1.01 },
+    requiresTech: 'composite_armor',
+    acquisition: {
+      kind: 'production', label: '装甲工厂制造', building: 'armor_factory',
+      cost: { supply: 320, alloy: 280 }, buildTime: 32
+    },
+    desc: '提高装甲防护并保持车辆机动，不改变生命上限。'
+  },
+  precision_fire_control: {
+    id: 'precision_fire_control', name: '精确火控组件', slot: 'weapon',
+    applicableTypes: ['at_infantry', 'mbt'],
+    modifiers: { attack: 1.12, antiArmor: 1.10 },
+    requiresTech: 'expanded_storage',
+    acquisition: {
+      kind: 'production', label: '装甲工厂制造', building: 'armor_factory',
+      cost: { supply: 380, alloy: 340 }, buildTime: 38
+    },
+    desc: '提高直接火力与反装甲精度，不改变生命上限。'
   }
 };
 

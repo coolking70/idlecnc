@@ -70,7 +70,7 @@ const uiSourceChecks = {
 uiSourceChecks.allRequiredDomProvenance = uiSourceChecks.mountHook && uiSourceChecks.unmountHook && uiSourceChecks.authorityStats && uiSourceChecks.renderSignature;
 
 const independent = {
-  saveVersion: SAVE_VERSION === 8,
+  saveVersion: SAVE_VERSION === 9,
   allEquipmentDefinitionsValid: Object.values(EQUIPMENT).every((def) => def.id && def.acquisition?.kind && !('hp' in def.modifiers) && !('maxHp' in def.modifiers)),
   effectiveStats: equal(core.evidence?.effectiveEvidence?.actual, independentlyComputedStats),
   snapshotStats: equal(core.evidence?.snapshotEvidence?.parsedStats, snapshotUnit.stats),

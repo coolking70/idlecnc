@@ -684,3 +684,14 @@
 - [x] 完整 `npm run gate:stage8-2G` 实跑 `exit=0`；Stage 8.2G、Stage 9-A 与 Stage 9-B 均通过，Stage 9-B 为 8 帧 / 4 次真实 reload / 84/84 tamper rejection。
 - [x] 分支 `auto/stage9-b-equipment-system` 已推送到 cnb；最终远端 SHA、工作树状态与 clean-clone JSON 以收口命令输出为准。
 - [x] 已完成最终 HEAD 的 `verify:clean-clone`：`git-clone`、`clone-head-matches`、`npm-install`、`gate:stage8-2G` 全部通过，`overallPassed: true`，完整 JSON 已原样交付。
+
+# Stage 9-C progress
+
+- [x] `SAVE_VERSION=9` additive migration；旧存档补齐为空装备库存，生产中装备任务按来源建筑/科技/成本/时长 fail-closed 清洗。
+- [x] 装备目录扩至 8 件；5 种单位类型各至少 2 件适用装备；starter 三件、既有 9 项科技、hp/maxHp 通道保持冻结。
+- [x] 生产装备接入共享生产队列：入队扣费、队列上限、当前/等待取消返还、完成入库、确定性实例 ID 与多实例隔离。
+- [x] 科研前置、装甲工厂 operational 门禁、未入库不可挂载、离线正常推进且同令牌不重复完成。
+- [x] UI 增加装备制造卡、科研原因、库存实例、队列取消与既有槽位挂载/卸载 DOM hooks；使用现有增量 render signature。
+- [x] 真实浏览器 Stage 9-C：9 帧、9 个唯一截图 hash、production_queue / completed_unmounted / running_battle / replay 四次 Page.reload，真实 DOM 入队/取消/完成观察/挂载/战斗锁/回放动作。
+- [x] 独立 source 重算 verifier 与 121 例 true-value tamper：121/121 拒绝，`passedFlagOnlyCases=0`；性能守卫为 20 warmup、120 samples、p95 `<16.7ms`。
+- [ ] 最终门禁、clean-clone、远端 SHA：待最终提交与推送后执行并回填。

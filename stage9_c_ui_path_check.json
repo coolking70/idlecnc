@@ -1,0 +1,19 @@
+{
+  "stage": "9-C",
+  "independentRecompute": true,
+  "requiredActions": [
+    "produce-equipment",
+    "cancel-production-current",
+    "cancel-production-queue",
+    "equip-equipment",
+    "unequip-equipment"
+  ],
+  "authorityChecks": [
+    "canQueueEquipment",
+    "equipmentInventoryCounts",
+    "getUnitEffectiveStats"
+  ],
+  "renderSignature": "equipmentSig",
+  "productionApiUsed": false,
+  "passed": true
+}

@@ -1,0 +1,23 @@
+{
+  "stage": "9-C",
+  "independentRecompute": true,
+  "production": {
+    "kind": "production",
+    "building": "armor_factory",
+    "maxQueueSize": 5,
+    "currentKind": "equipment",
+    "costPaid": {
+      "supply": 180,
+      "alloy": 140
+    },
+    "duration": 18
+  },
+  "research": {
+    "requiresTech": "modular_assembly",
+    "blockedCode": "equipment_tech_prerequisite",
+    "blockedReason": "需要先完成“模块化装配”",
+    "noSpendWhileBlocked": true
+  },
+  "starterOnlyBeforeCompletion": true,
+  "dropsImplemented": false
+}

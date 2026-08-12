@@ -1,0 +1,76 @@
+{
+  "stage": "9-C",
+  "independentRecompute": true,
+  "count": 8,
+  "coverage": {
+    "infantry": [
+      "command_uplink",
+      "mobile_repair_rig"
+    ],
+    "at_infantry": [
+      "anti_armor_sights",
+      "command_uplink",
+      "precision_fire_control"
+    ],
+    "scout_car": [
+      "command_uplink",
+      "reactive_armor_module"
+    ],
+    "mbt": [
+      "anti_armor_sights",
+      "reactive_armor_module",
+      "precision_fire_control"
+    ],
+    "repair_vehicle": [
+      "mobile_repair_rig",
+      "reactive_armor_module"
+    ]
+  },
+  "starterDefinitionsUnchanged": true,
+  "productionCurve": [
+    {
+      "id": "anti_armor_sights",
+      "tier": 2,
+      "supply": 180,
+      "alloy": 140,
+      "buildTime": 18
+    },
+    {
+      "id": "command_uplink",
+      "tier": 2,
+      "supply": 220,
+      "alloy": 170,
+      "buildTime": 22
+    },
+    {
+      "id": "mobile_repair_rig",
+      "tier": 2,
+      "supply": 260,
+      "alloy": 220,
+      "buildTime": 26
+    },
+    {
+      "id": "reactive_armor_module",
+      "tier": 3,
+      "supply": 320,
+      "alloy": 280,
+      "buildTime": 32
+    },
+    {
+      "id": "precision_fire_control",
+      "tier": 3,
+      "supply": 380,
+      "alloy": 340,
+      "buildTime": 38
+    }
+  ],
+  "legalStatKeys": [
+    "attack",
+    "antiArmor",
+    "defense",
+    "scouting",
+    "mobility",
+    "repair"
+  ],
+  "hpModifierCount": 0
+}

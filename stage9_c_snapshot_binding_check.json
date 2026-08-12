@@ -1,0 +1,54 @@
+{
+  "stage": "9-C",
+  "independentRecompute": true,
+  "unitId": "stage9-c-snapshot-unit",
+  "parsedStats": {
+    "attack": 12,
+    "antiArmor": 4,
+    "defense": 10,
+    "scouting": 2.3,
+    "mobility": 5.15,
+    "repair": 0,
+    "hp": 100
+  },
+  "equipmentComposition": [
+    {
+      "instanceId": "equipment-starter-1",
+      "equipmentId": "scout_optics",
+      "name": "战术光学组",
+      "slot": "utility",
+      "slotIndex": 0,
+      "modifiers": {
+        "scouting": 1.15,
+        "mobility": 1.03
+      },
+      "desc": "提高侦察与机动效率，不改变生命上限。"
+    }
+  ],
+  "historicalInput": {
+    "stats": {
+      "attack": 12,
+      "antiArmor": 4,
+      "defense": 10,
+      "scouting": 2.3,
+      "mobility": 5.15,
+      "repair": 0,
+      "hp": 100
+    },
+    "equipment": [
+      {
+        "instanceId": "equipment-starter-1",
+        "equipmentId": "scout_optics",
+        "name": "战术光学组",
+        "slot": "utility",
+        "slotIndex": 0,
+        "modifiers": {
+          "scouting": 1.15,
+          "mobility": 1.03
+        },
+        "desc": "提高侦察与机动效率，不改变生命上限。"
+      }
+    ]
+  },
+  "hpInvariant": true
+}

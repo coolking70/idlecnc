@@ -106,7 +106,7 @@ export function createInitialState() {
     settings: { autoSave: true, showFps: true },
 
     /** 统计 */
-    stats: { battlesFought: 0, victories: 0, unitsBuilt: 0, buildingsBuilt: 0 }
+    stats: { battlesFought: 0, victories: 0, unitsBuilt: 0, equipmentBuilt: 0, buildingsBuilt: 0 }
   };
 
   // 初始建筑：指挥中心 + 小型发电站

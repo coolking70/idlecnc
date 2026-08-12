@@ -36,3 +36,5 @@ jobs:
       - run: npm run browser:stage9-A
       - run: npm run test:stage9-B
       - run: npm run browser:stage9-B
+      - run: npm run test:stage9-C
+      - run: npm run browser:stage9-C

@@ -1,0 +1,43 @@
+{
+  "stage": "9-C",
+  "independentRecompute": true,
+  "source": "current js/units.js + js/equipment.js",
+  "actual": {
+    "attack": 12.72,
+    "antiArmor": 4.24,
+    "defense": 10.812,
+    "scouting": 2.415,
+    "mobility": 5.15,
+    "repair": 0,
+    "hp": 100
+  },
+  "equipment": [
+    {
+      "instanceId": "equipment-starter-1",
+      "equipmentId": "scout_optics",
+      "name": "战术光学组",
+      "slot": "utility",
+      "slotIndex": 0,
+      "modifiers": {
+        "scouting": 1.15,
+        "mobility": 1.03
+      },
+      "desc": "提高侦察与机动效率，不改变生命上限。"
+    },
+    {
+      "instanceId": "equipment-starter-3",
+      "equipmentId": "field_toolkit",
+      "name": "野战工具包",
+      "slot": "utility",
+      "slotIndex": 1,
+      "modifiers": {
+        "repair": 1.2,
+        "defense": 1.02
+      },
+      "desc": "提高维修效率与野战保障能力，不改变生命上限。"
+    }
+  ],
+  "order": "base_then_rank_then_equipment",
+  "rounding": "round-half-up-4-decimal-after-each-multiplication",
+  "hpInvariant": true
+}

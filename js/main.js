@@ -19,7 +19,7 @@ import {
 } from './construction.js';
 import {
   tickProduction, queueUnit, cancelCurrentProduction, cancelQueuedProduction,
-  canQueueUnit, getProductionProgress, inventoryCount
+  canQueueUnit, queueEquipment, canQueueEquipment, getProductionProgress, inventoryCount
 } from './production.js';
 import {
   tickRepairs, canQueueRepair, queueRepair, cancelRepair as cancelRepairJob,
@@ -217,6 +217,18 @@ function handleProduce(unitType) {
   } finally {
     produceBusy = false;
   }
+  return res;
+}
+
+/** 提交装备制造：真实 UI 只转发到 production.js 的权威资格判断。 */
+function handleProduceEquipment(equipmentId) {
+  const state = getState();
+  const res = queueEquipment(state, equipmentId);
+  if (res.ok) {
+    if (ui) ui.toast(`${res.definition.name}已加入制造队列`, 'info');
+    saveGame(state, { silent: true });
+  } else if (ui) ui.toast(res.reason || '当前无法制造该装备', 'warn');
+  if (ui) ui.refreshProduction(state);
   return res;
 }
 
@@ -608,6 +620,7 @@ function handleSettleOffline(seconds, options = {}) {
   if (ui) {
     if (typeof ui.refreshRepairs === 'function') ui.refreshRepairs(state);
     ui.refreshConstruction(state);
+    ui.refreshProduction(state);
     ui.refreshFormations(state);
     ui.refreshTheater(state);
   }
@@ -650,6 +663,7 @@ function handleLoad() {
   if (ui) {
     ui.setSpeed(state.time.speed);
     ui.refreshConstruction(state);
+    ui.refreshProduction(state);
     ui.refreshFormations(state);      // 读档后编队列表与指挥容量同步重画
     ui.refreshTheater(state);         // 阶段5：战区进度、活动战斗与战报同步重画
     if (typeof ui.refreshRepairs === 'function') ui.refreshRepairs(state);   // 阶段6：维修队列
@@ -886,6 +900,7 @@ function boot() {
     onBuild: handleBuild,
     onCancelConstruction: () => handleCancelConstruction(),
     onProduce: handleProduce,
+    onProduceEquipment: handleProduceEquipment,
     onCancelCurrentProduction: () => handleCancelCurrentProduction(),
     onCancelQueuedProduction: (jobId) => handleCancelQueuedProduction(jobId),
     /* 阶段4：编队 */
@@ -953,8 +968,10 @@ function boot() {
   });
 
   // 生产完成时立即落盘，避免刚生产完就关页面导致回退
-  on('production:completed', () => {
-    saveGame(getState(), { silent: true });
+    on('production:completed', () => {
+    const s = getState();
+    saveGame(s, { silent: true });
+    if (ui) ui.refreshProduction(s);
   });
 
   // 战斗结算（阶段5）：损失、占领与奖励已写入状态，立即落盘并刷新界面
@@ -987,7 +1004,9 @@ function boot() {
 
   // 离线结算完成（阶段6）：报告已写入 state.offline，立即落盘，由界面展示
   on('offline:settled', () => {
-    saveGame(getState(), { silent: true });
+    const s = getState();
+    saveGame(s, { silent: true });
+    if (ui) ui.refreshProduction(s);
   });
 
   tickAutoSave = createAutoSaver(TIME.autoSaveInterval);
@@ -1076,6 +1095,18 @@ function boot() {
       } catch (err) {
         return { ok: false, reason: String(err) };
       }
+    },
+    canProduceEquipment: (equipmentId) => {
+      try { return canQueueEquipment(getState(), equipmentId); }
+      catch (err) { return { ok: false, code: 'error', reason: String(err), reasons: [String(err)] }; }
+    },
+    produceEquipment: (equipmentId) => {
+      try { return handleProduceEquipment(equipmentId); }
+      catch (err) { return { ok: false, code: 'error', reason: String(err) }; }
+    },
+    equipmentInventory: () => {
+      try { return getState().equipment || { inventory: [], bindings: {} }; }
+      catch (err) { return { inventory: [], bindings: {} }; }
     },
     /** 当前生产进度详情，空闲时返回 null */
     getProductionProgress: () => {

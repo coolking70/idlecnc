@@ -451,6 +451,7 @@ export function loadGame({ preferManual = false } = {}) {
         gains: {},
         buildingsCompleted: [],
         unitsProduced: [],
+        equipmentProduced: [],
         repairsCompleted: [],
         steps: 0,
         lines: ['离线结算发生异常，本次未发放离线进度。'],

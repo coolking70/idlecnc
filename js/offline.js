@@ -156,6 +156,7 @@ export function settleOfflineProgress(state, seconds, options = {}) {
 
   const buildingsCompleted = [];
   const unitsProduced = {};
+  const equipmentProduced = {};
   const repairsCompleted = [];
   const completedResearch = [];
 
@@ -193,8 +194,12 @@ export function settleOfflineProgress(state, seconds, options = {}) {
       // 3. 生产推进（可能出厂 → 改变库存）
       const doneUnits = advanceProduction(state, step);
       if (isObject(doneUnits)) {
-        Object.keys(doneUnits).forEach((type) => {
+        Object.keys(doneUnits).filter((type) => UNITS[type]).forEach((type) => {
           unitsProduced[type] = (unitsProduced[type] || 0) + safeNumber(doneUnits[type], 0);
+        });
+        Object.keys(doneUnits.equipmentProduced || {}).forEach((equipmentId) => {
+          equipmentProduced[equipmentId] = (equipmentProduced[equipmentId] || 0)
+            + safeNumber(doneUnits.equipmentProduced[equipmentId], 0);
         });
       }
 
@@ -229,7 +234,7 @@ export function settleOfflineProgress(state, seconds, options = {}) {
   const report = buildOfflineReport({
     seconds: consumedSeconds, consumedSeconds, consumedPreciseSeconds, requestedSeconds: total,
     remainingSeconds, truncated, maxSteps: MAX_STEPS, before, after, buildingsCompleted,
-    unitsProduced, repairsCompleted, completedResearch, operationsReady, steps,
+    unitsProduced, equipmentProduced, repairsCompleted, completedResearch, operationsReady, steps,
     battlePaused: Boolean(state.activeBattle)
   });
 
@@ -280,6 +285,14 @@ export function buildOfflineReport(input) {
     unitsProduced.push({ type, name: def ? def.name : type, count });
   });
 
+  const equipmentProduced = [];
+  const rawEquipment = isObject(src.equipmentProduced) ? src.equipmentProduced : {};
+  Object.keys(rawEquipment).forEach((equipmentId) => {
+    const count = Math.max(0, Math.floor(safeNumber(rawEquipment[equipmentId], 0)));
+    if (count <= 0) return;
+    equipmentProduced.push({ equipmentId, count });
+  });
+
   const buildings = Array.isArray(src.buildingsCompleted) ? src.buildingsCompleted.slice() : [];
   const repairs = Array.isArray(src.repairsCompleted) ? src.repairsCompleted.slice() : [];
   const completedResearch = Array.isArray(src.completedResearch) ? src.completedResearch.slice() : [];
@@ -293,6 +306,9 @@ export function buildOfflineReport(input) {
   if (buildings.length) lines.push(`完成工程：${buildings.join('、')}`);
   if (unitsProduced.length) {
     lines.push(`出厂单位：${unitsProduced.map((u) => `${u.name}×${u.count}`).join('、')}`);
+  }
+  if (equipmentProduced.length) {
+    lines.push(`制造装备：${equipmentProduced.map((item) => `${item.equipmentId}×${item.count}`).join('、')}`);
   }
   if (repairs.length) lines.push(`维修完成：${repairs.join('、')}`);
   if (completedResearch.length) lines.push(`完成研究：${completedResearch.join('、')}`);
@@ -312,6 +328,7 @@ export function buildOfflineReport(input) {
     gains,
     buildingsCompleted: buildings,
     unitsProduced,
+    equipmentProduced,
     repairsCompleted: repairs,
     completedResearch,
     operationsReady,

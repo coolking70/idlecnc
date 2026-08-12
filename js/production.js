@@ -11,13 +11,15 @@
  */
 
 import {
-  UNITS, BUILDINGS, PRODUCTION, PRODUCTION_UI, RESOURCE_DEFS, DAMAGE_STATES, BUILDING_STATUS
+  UNITS, BUILDINGS, PRODUCTION, PRODUCTION_UI, RESOURCE_DEFS, DAMAGE_STATES, BUILDING_STATUS,
+  TECHNOLOGIES
 } from './config.js';
 import { canAfford, spend, grant, recalcDerived } from './economy.js';
 import { logEvent, emit, LOG_LEVEL } from './events.js';
 import { uid, safeNumber, clamp, formatCost, formatDuration, formatInt } from './utils.js';
 import { getDamageState } from './unit-status.js';
 import { getResearchModifiers, getResearchCompletedAtRevision, ensureResearchRevision } from './research.js';
+import { addEquipmentInstance, getEquipmentDefinition } from './equipment.js';
 
 const R = PRODUCTION_UI ? PRODUCTION_UI.reason : {};
 
@@ -47,6 +49,34 @@ function durationForSnapshot(baseTime, category, snapshot) {
 function buildingName(typeId) {
   const b = BUILDINGS[typeId];
   return b ? b.name : (typeId || '生产建筑');
+}
+
+function isEquipmentJob(job) {
+  return Boolean(job && job.kind === 'equipment');
+}
+
+function equipmentProductionDefinition(equipmentId) {
+  const def = getEquipmentDefinition(equipmentId);
+  return def && def.acquisition && def.acquisition.kind === 'production' ? def : null;
+}
+
+function productionEntryForJob(job) {
+  if (isEquipmentJob(job)) {
+    const def = equipmentProductionDefinition(job.equipmentId);
+    return def ? { kind: 'equipment', id: def.id, name: def.name, def, cost: def.acquisition.cost, duration: def.acquisition.buildTime } : null;
+  }
+  const def = job && UNITS[job.type];
+  return def ? { kind: 'unit', id: def.id, name: def.name, def, cost: def.cost, duration: def.buildTime } : null;
+}
+
+function requiredEquipmentTechs(def) {
+  if (!def) return [];
+  return (Array.isArray(def.requiresTech) ? def.requiresTech : [def.requiresTech])
+    .filter((id) => typeof id === 'string' && id);
+}
+
+function equipmentTechReason(techId) {
+  return `需要先完成“${TECHNOLOGIES[techId] ? TECHNOLOGIES[techId].name : techId}”`;
 }
 
 /* ============================================================
@@ -107,6 +137,44 @@ export function canQueueUnit(state, unitType) {
 
   const ok = reasons.length === 0;
   return { ok, code: ok ? 'ready' : code, reasons, reason: ok ? '' : reasons[0] };
+}
+
+/** 判断某件装备当前能否进入共享生产队列。 */
+export function canQueueEquipment(state, equipmentId) {
+  const def = equipmentProductionDefinition(equipmentId);
+  const reasons = [];
+  if (!def) return { ok: false, code: 'unknown_equipment', reasons: ['未知或不可制造的装备'], reason: '未知或不可制造的装备' };
+  const pushReason = (text, code) => reasons.push({ text, code });
+  const buildingType = def.acquisition.building || 'armor_factory';
+  const producers = (state?.buildings || []).filter((b) => b && b.type === buildingType);
+  if (!producers.length) pushReason(`需要先建成${buildingName(buildingType)}`, 'producer_missing');
+  else if (!producers.some((b) => b.status === BUILDING_STATUS.OPERATIONAL)) pushReason(`${buildingName(buildingType)}当前无法生产`, 'producer_offline');
+  const completed = new Set(Array.isArray(state?.research?.completed) ? state.research.completed : []);
+  const missingTech = requiredEquipmentTechs(def).find((id) => !completed.has(id));
+  if (missingTech) pushReason(equipmentTechReason(missingTech), 'equipment_tech_prerequisite');
+  const prod = state?.production || {};
+  const inLine = (prod.current ? 1 : 0) + (Array.isArray(prod.queue) ? prod.queue.length : 0);
+  if (inLine >= safeNumber(PRODUCTION.maxQueueSize, 5)) pushReason(`生产队列已满：最多${PRODUCTION.maxQueueSize}项`, 'queue_full');
+  if (!canAfford(state, def.acquisition.cost)) {
+    Object.keys(def.acquisition.cost || {}).forEach((key) => {
+      const need = safeNumber(def.acquisition.cost[key], 0);
+      const have = safeNumber(state?.resources?.[key], 0);
+      if (have < need) {
+        const name = RESOURCE_DEFS[key] ? RESOURCE_DEFS[key].name : key;
+        pushReason(`${name}不足，缺少${formatInt(need - have)}`, 'resource');
+      }
+    });
+  }
+  return {
+    ok: reasons.length === 0,
+    code: reasons.length ? reasons[0].code : 'ready',
+    reasons: reasons.map((row) => row.text),
+    reason: reasons.length ? reasons[0].text : '',
+    missingTech: missingTech || null,
+    definition: def,
+    cost: { ...def.acquisition.cost },
+    duration: def.acquisition.buildTime
+  };
 }
 
 /** 兼容别名 */
@@ -178,6 +246,37 @@ export function queueUnit(state, unitType) {
   return { ok: true };
 }
 
+/** 装备制造入队：和单位生产共用 PRODUCTION.maxQueueSize、扣费和取消返还。 */
+export function queueEquipment(state, equipmentId) {
+  const check = canQueueEquipment(state, equipmentId);
+  if (!check.ok) return { ok: false, reason: check.reason, code: check.code, missingTech: check.missingTech || null };
+  const def = check.definition;
+  const buildingType = def.acquisition.building || 'armor_factory';
+  const producer = (state.buildings || []).find((b) => b && b.type === buildingType && b.status === BUILDING_STATUS.OPERATIONAL);
+  if (!producer) return { ok: false, reason: `${buildingName(buildingType)}当前无法生产`, code: 'producer_missing' };
+  const prod = state.production;
+  if (!spend(state, def.acquisition.cost)) return { ok: false, reason: '资源扣除失败', code: 'resource' };
+  const job = {
+    id: uid('equipment_job'), kind: 'equipment', type: null, equipmentId: def.id,
+    elapsed: 0, durationBase: Math.max(0.05, safeNumber(def.acquisition.buildTime, 1)),
+    duration: Math.max(0.05, safeNumber(def.acquisition.buildTime, 1)),
+    queuedAt: safeNumber(state.time && state.time.game, 0), startedAt: null,
+    sourceBuildingId: producer.id, sourceBuildingType: buildingType,
+    costPaid: { ...def.acquisition.cost }, requiresTech: requiredEquipmentTechs(def), done: false
+  };
+  if (!prod.current) {
+    prod.current = job;
+    job.startedAt = safeNumber(state.time && state.time.game, 0);
+    logEvent(state, `${def.name}开始制造。`, LOG_LEVEL.INFO);
+    emit('production:started', { kind: 'equipment', equipmentId: def.id, jobId: job.id });
+  } else {
+    prod.queue.push(job);
+    logEvent(state, `${def.name}已加入制造队列，当前排在第${prod.queue.length + 1}位。`, LOG_LEVEL.INFO);
+    emit('production:queued', { kind: 'equipment', equipmentId: def.id, jobId: job.id, position: prod.queue.length });
+  }
+  return { ok: true, code: 'ready', job, definition: def };
+}
+
 /* ============================================================
  * 推进与完成
  * ========================================================== */
@@ -227,9 +326,29 @@ export function completeProduction(state, job) {
   // 只允许结算当前任务，防止旧引用被二次调用
   if (state.production.current !== job) return false;
 
-  const def = UNITS[job.type];
+  const entry = productionEntryForJob(job);
+  if (!entry) return false;
+  const def = entry.kind === 'unit' ? entry.def : null;
   job.done = true;
   job.elapsed = safeNumber(job.duration, 0);
+
+  if (entry.kind === 'equipment') {
+    const instance = addEquipmentInstance(state, entry.id, safeNumber(state.time && state.time.game, 0));
+    if (!instance) { job.done = false; return false; }
+    state.stats.equipmentBuilt = safeNumber(state.stats.equipmentBuilt, 0) + 1;
+    state.production.current = null;
+    logEvent(state, `${entry.name}制造完成，已进入装备库存。`, LOG_LEVEL.GOOD);
+    emit('production:completed', {
+      kind: 'equipment', equipmentId: entry.id, instanceId: instance.id,
+      sourceBuildingId: job.sourceBuildingId, sourceBuildingType: job.sourceBuildingType || null
+    });
+    startNextProduction(state);
+    if (!state.production.current) {
+      logEvent(state, `${buildingName(job.sourceBuildingType || 'armor_factory')}已空闲。`, LOG_LEVEL.INFO);
+      emit('production:idle', { kind: 'equipment', sourceBuildingType: job.sourceBuildingType || null });
+    }
+    return true;
+  }
 
   const unit = createUnit(job.type, job.sourceBuildingId);
   state.units.push(unit);
@@ -269,10 +388,14 @@ export function startNextProduction(state) {
   next.elapsed = 0;
   next.startedAt = Date.now();
   state.production.current = next;
-  const def = UNITS[next.type];
-  const verb = categoryVerb(def);
-  logEvent(state, `${def ? def.name : '单位'}开始${verb}。`, LOG_LEVEL.INFO);
-  emit('production:started', { unitType: next.type, jobId: next.id });
+  const entry = productionEntryForJob(next);
+  const def = entry && entry.kind === 'unit' ? entry.def : null;
+  const verb = def ? categoryVerb(def) : '制造';
+  logEvent(state, `${entry ? entry.name : '项目'}开始${verb}。`, LOG_LEVEL.INFO);
+  emit('production:started', {
+    kind: entry ? entry.kind : 'unit', unitType: def ? next.type : null,
+    equipmentId: entry && entry.kind === 'equipment' ? entry.id : null, jobId: next.id
+  });
   return true;
 }
 
@@ -306,7 +429,8 @@ function displayPercent(duration, elapsed) {
 export function getProductionProgress(state) {
   const job = state && state.production && state.production.current;
   if (!job) return null;
-  const def = UNITS[job.type];
+  const entry = productionEntryForJob(job);
+  const def = entry && entry.kind === 'unit' ? entry.def : null;
   const duration = Math.max(0, safeNumber(job.duration, 0));
   const elapsed = Math.min(duration, Math.max(0, safeNumber(job.elapsed, 0)));
   const progress = duration > 0 ? Math.min(1, elapsed / duration) : 1;
@@ -318,8 +442,11 @@ export function getProductionProgress(state) {
     : '生产设施';
 
   return {
-    typeId: job.type,
-    name: def ? def.name : '未知单位',
+    kind: entry ? entry.kind : 'unknown',
+    typeId: entry ? entry.id : null,
+    equipmentId: entry && entry.kind === 'equipment' ? entry.id : null,
+    unitType: entry && entry.kind === 'unit' ? entry.id : null,
+    name: entry ? entry.name : '未知项目',
     sourceBuildingId: job.sourceBuildingId || null,
     sourceBuildingName: producerName,
     elapsed,
@@ -344,7 +471,9 @@ export function cancelCurrentProduction(state) {
   const job = state && state.production && state.production.current;
   if (!job) return { ok: false, reason: '当前没有进行中的生产' };
 
-  const def = UNITS[job.type];
+  const entry = productionEntryForJob(job);
+  if (!entry) return { ok: false, reason: '当前生产项目无效', code: 'invalid_job' };
+  const def = entry.kind === 'unit' ? entry.def : null;
   state.production.current = null;
   job.done = true;
 
@@ -358,11 +487,11 @@ export function cancelCurrentProduction(state) {
   grant(state, refund);
 
   const refundText = Object.keys(refund).length ? formatCost(refund, RESOURCE_DEFS) : '无资源返还';
-  logEvent(state, `${def ? def.name : '项目'}生产已取消，返还${refundText}。`, LOG_LEVEL.WARN);
-  emit('production:cancelled', { unitType: job.type, refund });
+  logEvent(state, `${entry.name}生产已取消，返还${refundText}。`, LOG_LEVEL.WARN);
+  emit('production:cancelled', { kind: entry.kind, unitType: def ? job.type : null, equipmentId: entry.kind === 'equipment' ? entry.id : null, refund });
 
   startNextProduction(state);
-  return { ok: true, name: def ? def.name : '项目', refund };
+  return { ok: true, name: entry.name, kind: entry.kind, equipmentId: entry.kind === 'equipment' ? entry.id : null, refund };
 }
 
 /**
@@ -376,7 +505,9 @@ export function cancelQueuedProduction(state, jobId) {
   if (idx < 0) return { ok: false, reason: '未找到该等待任务' };
 
   const job = queue[idx];
-  const def = UNITS[job.type];
+  const entry = productionEntryForJob(job);
+  if (!entry) return { ok: false, reason: '等待任务无效', code: 'invalid_job' };
+  const def = entry.kind === 'unit' ? entry.def : null;
   queue.splice(idx, 1);
 
   const refund = {};
@@ -389,9 +520,9 @@ export function cancelQueuedProduction(state, jobId) {
   grant(state, refund);
 
   const refundText = Object.keys(refund).length ? formatCost(refund, RESOURCE_DEFS) : '无资源返还';
-  logEvent(state, `${def ? def.name : '项目'}已从等待队列移除，返还${refundText}。`, LOG_LEVEL.WARN);
-  emit('production:queued_cancelled', { unitType: job.type, refund });
-  return { ok: true, name: def ? def.name : '项目', refund };
+  logEvent(state, `${entry.name}已从等待队列移除，返还${refundText}。`, LOG_LEVEL.WARN);
+  emit('production:queued_cancelled', { kind: entry.kind, unitType: def ? job.type : null, equipmentId: entry.kind === 'equipment' ? entry.id : null, refund });
+  return { ok: true, name: entry.name, kind: entry.kind, equipmentId: entry.kind === 'equipment' ? entry.id : null, refund };
 }
 
 /* ============================================================
@@ -460,15 +591,32 @@ export function sanitizeProduction(saveState) {
 
   const checkJob = (job, where) => {
     if (!job || typeof job !== 'object' || Array.isArray(job)) { notes.push(`${where}任务格式非法`); return null; }
-    if (!job.type || !validTypes.has(job.type)) { notes.push(`${where}任务单位类型无效`); return null; }
+    const equipmentJob = job.kind === 'equipment';
+    const equipmentDef = equipmentJob ? equipmentProductionDefinition(job.equipmentId) : null;
+    if (equipmentJob && !equipmentDef) { notes.push(`${where}装备任务类型无效`); return null; }
+    if (!equipmentJob && (!job.type || !validTypes.has(job.type))) { notes.push(`${where}任务单位类型无效`); return null; }
     if (!job.sourceBuildingId) { notes.push(`${where}任务缺少来源建筑`); return null; }
     const bld = (saveState.buildings || []).find((b) => b && b.id === job.sourceBuildingId);
     if (!bld) { notes.push(`${where}任务来源建筑不存在`); return null; }
     if (bld.status !== BUILDING_STATUS.OPERATIONAL) { notes.push(`${where}任务来源建筑未运行`); return null; }
-    const def = UNITS[job.type];
+    const def = equipmentJob ? null : UNITS[job.type];
+    const expectedBuilding = equipmentJob ? (equipmentDef.acquisition.building || 'armor_factory') : def.from;
     // 来源建筑类型必须与单位配置声明的生产建筑一致（坦克不能挂在兵营上）
-    if (bld.type !== def.from) { notes.push(`${where}任务来源建筑类型不匹配`); return null; }
-    if (!isUnlocked(job.type)) { notes.push(`${where}任务单位未解锁`); return null; }
+    if (bld.type !== expectedBuilding) { notes.push(`${where}任务来源建筑类型不匹配`); return null; }
+    if (!equipmentJob && !isUnlocked(job.type)) { notes.push(`${where}任务单位未解锁`); return null; }
+    if (equipmentJob) {
+      const required = requiredEquipmentTechs(equipmentDef);
+      const completed = new Set(Array.isArray(saveState.research?.completed) ? saveState.research.completed : []);
+      if (required.some((id) => !completed.has(id))) { notes.push(`${where}装备任务科研前置未完成`); return null; }
+      job.kind = 'equipment';
+      job.type = null;
+      job.equipmentId = equipmentDef.id;
+      job.sourceBuildingType = expectedBuilding;
+      job.requiresTech = required;
+      job.durationBase = Math.max(0.0001, safeNumber(equipmentDef.acquisition.buildTime, 1));
+      job.duration = job.durationBase;
+      job.costPaid = { ...equipmentDef.acquisition.cost };
+    }
     if (!job.costPaid || typeof job.costPaid !== 'object') { notes.push(`${where}任务缺少已支付成本`); return null; }
     let costOk = true;
     Object.keys(job.costPaid).forEach((k) => {
@@ -477,17 +625,21 @@ export function sanitizeProduction(saveState) {
     if (!costOk) { notes.push(`${where}任务已支付成本非法`); return null; }
 
     // 规范化：时长只由任务创建时绑定的科研revision重建，不能信任当前科技或 duration。
-    job.durationBase = Math.max(0.0001, safeNumber(def.buildTime, 1));
-    job.createdGameTime = Math.max(0, safeNumber(job.createdGameTime, safeNumber(job.queuedAt, saveState.time && saveState.time.game)));
-    job.researchRevision = Number.isInteger(Number(job.researchRevision)) ? Number(job.researchRevision) : -1;
-    const completedTechs = job.researchRevision >= 0
-      ? getResearchCompletedAtRevision(saveState, job.researchRevision, job.createdGameTime) : [];
-    const migratedSnapshot = Array.isArray(job.researchSnapshot) ? job.researchSnapshot : [];
-    const usedCompleted = job.researchRevision >= 0 ? completedTechs : productionResearchSnapshot(saveState, def.category, migratedSnapshot);
-    job.duration = durationForSnapshot(job.durationBase, def.category, usedCompleted);
-    job.researchSnapshot = productionResearchSnapshot(saveState, def.category, usedCompleted);
+    if (!equipmentJob) {
+      job.durationBase = Math.max(0.0001, safeNumber(def.buildTime, 1));
+      job.createdGameTime = Math.max(0, safeNumber(job.createdGameTime, safeNumber(job.queuedAt, saveState.time && saveState.time.game)));
+      job.researchRevision = Number.isInteger(Number(job.researchRevision)) ? Number(job.researchRevision) : -1;
+      const completedTechs = job.researchRevision >= 0
+        ? getResearchCompletedAtRevision(saveState, job.researchRevision, job.createdGameTime) : [];
+      const migratedSnapshot = Array.isArray(job.researchSnapshot) ? job.researchSnapshot : [];
+      const usedCompleted = job.researchRevision >= 0 ? completedTechs : productionResearchSnapshot(saveState, def.category, migratedSnapshot);
+      job.duration = durationForSnapshot(job.durationBase, def.category, usedCompleted);
+      job.researchSnapshot = productionResearchSnapshot(saveState, def.category, usedCompleted);
+    } else {
+      job.createdGameTime = Math.max(0, safeNumber(job.createdGameTime, safeNumber(job.queuedAt, saveState.time && saveState.time.game)));
+    }
     job.elapsed = clamp(safeNumber(job.elapsed, 0), 0, job.duration);
-    job.costPaid = { ...def.cost };
+    job.costPaid = { ...(equipmentJob ? equipmentDef.acquisition.cost : def.cost) };
 
     // 任务 ID 规范化：必须非空且为字符串
     if (!job.id || typeof job.id !== 'string') {
@@ -583,8 +735,8 @@ export function sanitizeProduction(saveState) {
 export function isFactoryBusy(state, buildingType) {
   const job = state && state.production && state.production.current;
   if (!job) return false;
-  const def = UNITS[job.type];
-  return Boolean(def && def.from === buildingType);
+  const entry = productionEntryForJob(job);
+  return Boolean(entry && (job.sourceBuildingType || entry.def.from || entry.def.acquisition?.building) === buildingType);
 }
 
 /** 建筑是否处于可生产状态（阶段3使用） */
@@ -609,7 +761,11 @@ export function advanceOffline(state, seconds) {
       remaining -= Math.max(0, need);
       const type = job.type;
       completeProduction(state, job);
-      if (type) done[type] = (done[type] || 0) + 1;
+      if (isEquipmentJob(job)) {
+        const equipmentId = job.equipmentId;
+        done.equipmentProduced = done.equipmentProduced || {};
+        if (equipmentId) done.equipmentProduced[equipmentId] = (done.equipmentProduced[equipmentId] || 0) + 1;
+      } else if (type) done[type] = (done[type] || 0) + 1;
     }
   }
   return done;

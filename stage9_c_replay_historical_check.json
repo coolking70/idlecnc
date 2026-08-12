@@ -1,0 +1,7 @@
+{
+  "stage": "9-C",
+  "independentRecompute": true,
+  "usesHistoricalSnapshot": true,
+  "currentBindingStillPresent": true,
+  "replayHashesUnchanged": true
+}

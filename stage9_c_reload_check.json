@@ -1,0 +1,52 @@
+{
+  "stage": "9-C",
+  "independentRecompute": true,
+  "expectedReasons": [
+    "production_queue",
+    "completed_unmounted",
+    "running_battle",
+    "replay"
+  ],
+  "actualReasons": [
+    "production_queue",
+    "completed_unmounted",
+    "running_battle",
+    "replay"
+  ],
+  "checks": [
+    {
+      "reason": "production_queue",
+      "afterGreaterThanBefore": true,
+      "loaderChanged": true,
+      "declaredTimeOriginConsistent": true,
+      "beforeLoaderId": "2E970DBEB27BF7818EA739D000B98604",
+      "afterLoaderId": "2DCA99CE462914C72F9946A16C022462"
+    },
+    {
+      "reason": "completed_unmounted",
+      "afterGreaterThanBefore": true,
+      "loaderChanged": true,
+      "declaredTimeOriginConsistent": true,
+      "beforeLoaderId": "2DCA99CE462914C72F9946A16C022462",
+      "afterLoaderId": "66634F01B6DE0A1A8FFC4CBAFBC7F166"
+    },
+    {
+      "reason": "running_battle",
+      "afterGreaterThanBefore": true,
+      "loaderChanged": true,
+      "declaredTimeOriginConsistent": true,
+      "beforeLoaderId": "66634F01B6DE0A1A8FFC4CBAFBC7F166",
+      "afterLoaderId": "F25E0D47CEACC21A26C95660C61454C7"
+    },
+    {
+      "reason": "replay",
+      "afterGreaterThanBefore": true,
+      "loaderChanged": true,
+      "declaredTimeOriginConsistent": true,
+      "beforeLoaderId": "F25E0D47CEACC21A26C95660C61454C7",
+      "afterLoaderId": "9A93205DCD675C4D4039DBD09B0C07D7"
+    }
+  ],
+  "afterLoaderIdsUnique": true,
+  "passed": true
+}

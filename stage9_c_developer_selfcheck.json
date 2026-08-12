@@ -1,0 +1,96 @@
+{
+  "stage": "9-C",
+  "independentRecompute": true,
+  "checks": {
+    "verifierRecomputedCurrentSource": true,
+    "verifierErrors": [],
+    "tamperCases": 121,
+    "tamperRejected": 121,
+    "passedFlagOnlyCases": 0,
+    "browserRealReloads": [
+      "production_queue",
+      "completed_unmounted",
+      "running_battle",
+      "replay"
+    ],
+    "browserApiFlagsFalse": true,
+    "performanceMeasurementValid": true,
+    "performanceBudgetUnchanged": true,
+    "forbiddenChangedFiles": [],
+    "scripts": {
+      "posttestIncludesStage9C": true,
+      "gateIncludesStage9C": true,
+      "workflowStepPresent": true,
+      "cnbUnchanged": true
+    }
+  },
+  "requiredEvidence": [
+    {
+      "file": "stage9_c_acquisition_model_check.json",
+      "exists": true
+    },
+    {
+      "file": "stage9_c_production_queue_check.json",
+      "exists": true
+    },
+    {
+      "file": "stage9_c_tech_gate_check.json",
+      "exists": true
+    },
+    {
+      "file": "stage9_c_catalog_check.json",
+      "exists": true
+    },
+    {
+      "file": "stage9_c_inventory_integrity_check.json",
+      "exists": true
+    },
+    {
+      "file": "stage9_c_migration_check.json",
+      "exists": true
+    },
+    {
+      "file": "stage9_c_reload_check.json",
+      "exists": true
+    },
+    {
+      "file": "stage9_c_battle_isolation_check.json",
+      "exists": true
+    },
+    {
+      "file": "stage9_c_save_diff_check.json",
+      "exists": true
+    },
+    {
+      "file": "stage9_c_ui_path_check.json",
+      "exists": true
+    },
+    {
+      "file": "stage9_c_authority_check.json",
+      "exists": true
+    },
+    {
+      "file": "stage9_c_regression_check.json",
+      "exists": true
+    },
+    {
+      "file": "stage9_c_performance_check.json",
+      "exists": true
+    },
+    {
+      "file": "stage9_c_tamper_results.json",
+      "exists": true
+    },
+    {
+      "file": "stage9_c_browser_capture_manifest.json",
+      "exists": true
+    },
+    {
+      "file": "stage9_c_strong_evidence_verdict.json",
+      "exists": true
+    }
+  ],
+  "noBattleDrops": true,
+  "noAuthorityChanges": true,
+  "passed": true
+}

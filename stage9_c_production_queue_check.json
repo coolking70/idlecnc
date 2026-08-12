@@ -1,0 +1,20 @@
+{
+  "stage": "9-C",
+  "independentRecompute": true,
+  "sharedQueue": {
+    "limit": 5,
+    "rejectedWithoutSpend": true
+  },
+  "cancellation": {
+    "activeRefundRatio": 0.5,
+    "queuedRefundRatio": 1,
+    "currentAndQueuedVerified": true
+  },
+  "completion": {
+    "inventoryBefore": 3,
+    "inventoryAfter": 4,
+    "instanceId": "equipment-production-anti_armor_sights-1",
+    "deterministic": true,
+    "duplicateCompletionRejected": true
+  }
+}

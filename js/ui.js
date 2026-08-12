@@ -8,7 +8,7 @@
 import {
   PANEL_TABS, STAGE_PLACEHOLDER, CURRENT_STAGE, CURRENT_STAGE_LABEL, BUILDINGS, BUILDING_STATUS,
   RESOURCE_DEFS, BASE_LAYOUT, TIME, UNITS, CONSTRUCTION, CONSTRUCTION_UI,
-  PRODUCTION, PRODUCTION_UI, FORMATION, FORMATION_PRESETS,
+  PRODUCTION, PRODUCTION_UI, FORMATION, FORMATION_PRESETS, EQUIPMENT,
   BATTLE, BATTLE_RESULT, THEATERS, OPERATIONS, DAMAGE_STATES, REPAIR, RESEARCH, TECHNOLOGIES, UNIT_RANKS
 } from './config.js';
 import { canBuild, getConstructionProgress, buildableList } from './construction.js';
@@ -35,7 +35,11 @@ import {
 } from './theater.js';
 import { getOperationCost } from './operations.js';
 import { EQUIPMENT_RULES } from './config.js';
-import { canEquipEquipment, getEquipmentDefinition, getUnitEquipment } from './equipment.js';
+import {
+  canEquipEquipment, getEquipmentDefinition, getUnitEquipment,
+  equipmentInventoryCounts
+} from './equipment.js';
+import { canQueueEquipment } from './production.js';
 import {
   missionKindLabel, dispatchEligibilityText, operationCooldownText, unitStatusLabel
 } from './mission-command-presentation.js';
@@ -70,6 +74,8 @@ export class UI {
     this._buildLocked = false;
     /** 生产按钮的临时锁，防止一次点击被处理两次 */
     this._produceLocked = false;
+    /** 装备制造按钮的临时锁，防止同一实例被重复入队 */
+    this._equipmentProduceLocked = false;
     /** 编队操作的临时锁 */
     this._formationLocked = false;
     /** 当前选中的编队 ID（阶段4） */
@@ -519,7 +525,7 @@ export class UI {
   /** 构建生产分页：当前生产线 + 等待队列 + 单位卡片 + 单位库存 */
   _buildProductionPage(page) {
     const r = this.refs;
-    r.prod = { cards: {}, queueSig: '' };
+    r.prod = { cards: {}, equipmentCards: {}, queueSig: '', equipmentSig: '' };
 
     // —— 当前生产线 ——
     const line = el('div', 'card prod-line');
@@ -571,6 +577,7 @@ export class UI {
 
     r.prod.cancelBtn = el('button', 'btn danger cs-cancel', '取消当前项目');
     r.prod.cancelBtn.type = 'button';
+    r.prod.cancelBtn.dataset.action = 'cancel-production-current';
     r.prod.cancelBtn.addEventListener('click', () => {
       const fn = this.handlers.onCancelCurrentProduction;
       if (typeof fn === 'function') fn();
@@ -601,6 +608,19 @@ export class UI {
       r.prod.cards[def.id] = card;
     });
     page.appendChild(grid);
+
+    // —— 装备制造卡片：仍然使用共享生产队列，UI 只读取权威资格结果 ——
+    const equipmentHead = el('div', 'section-head');
+    equipmentHead.appendChild(el('span', '', '装备制造'));
+    equipmentHead.appendChild(el('span', 'tag', '装甲工厂生产'));
+    page.appendChild(equipmentHead);
+    const equipmentGrid = el('div', 'unit-grid equipment-production-grid');
+    Object.values(EQUIPMENT).filter((def) => def.acquisition?.kind === 'production').forEach((def) => {
+      const card = this._renderEquipmentProductionCard(def);
+      equipmentGrid.appendChild(card.root);
+      r.prod.equipmentCards[def.id] = card;
+    });
+    page.appendChild(equipmentGrid);
 
     // —— 单位库存 ——
     const iHead = el('div', 'section-head');
@@ -707,6 +727,35 @@ export class UI {
     return { root, btn, reason, chips, invCount, def };
   }
 
+  _renderEquipmentProductionCard(def) {
+    const root = el('article', 'unit-card equipment-card');
+    root.dataset.equipmentId = def.id;
+    const head = el('div', 'bc-head');
+    head.appendChild(el('span', 'bc-name', def.name));
+    const tag = el('span', 'bc-status tag', def.slot || '装备');
+    head.appendChild(tag); root.appendChild(head);
+    root.appendChild(el('p', 'bc-desc', def.desc || ''));
+    const grid = el('div', 'bc-grid');
+    const applicable = Array.isArray(def.applicableTypes) ? def.applicableTypes.map((id) => UNITS[id]?.name || id).join('、') : '—';
+    [['适用单位', applicable], ['制造时间', `${formatInt(def.acquisition?.buildTime || 0)} 秒`], ['科研前置', def.requiresTech ? (TECHNOLOGIES[def.requiresTech]?.name || def.requiresTech) : '无']]
+      .forEach(([label, value]) => { const cell = el('div', 'bc-cell'); cell.appendChild(el('b', '', label)); cell.appendChild(el('span', '', value)); grid.appendChild(cell); });
+    root.appendChild(grid);
+    const costBox = el('div', 'bc-cost'); costBox.appendChild(el('b', '', '制造成本'));
+    const chips = {};
+    Object.keys(def.acquisition?.cost || {}).forEach((key) => {
+      const chip = el('span', 'cost-chip', `${RESOURCE_DEFS[key] ? RESOURCE_DEFS[key].name : key} ${formatInt(def.acquisition.cost[key])}`);
+      chip.dataset.res = key; chips[key] = chip; costBox.appendChild(chip);
+    });
+    root.appendChild(costBox);
+    const inv = el('div', 'uc-inv'); inv.appendChild(el('b', '', '库存实例')); const invCount = el('span', 'uc-inv-count', '0'); inv.appendChild(invCount); root.appendChild(inv);
+    const btn = el('button', 'btn primary equipment-btn', '加入制造队列');
+    btn.type = 'button'; btn.dataset.action = 'produce-equipment'; btn.dataset.equipmentId = def.id;
+    btn.addEventListener('click', () => this._onEquipmentProduceClick(def.id));
+    root.appendChild(btn);
+    const reason = el('div', 'bc-reason'); reason.hidden = true; root.appendChild(reason);
+    return { root, btn, reason, chips, invCount, def };
+  }
+
   /** 生产按钮点击：临时锁按钮，避免连点重复扣费 */
   _onProduceClick(typeId) {
     if (this._produceLocked) return;
@@ -719,22 +768,33 @@ export class UI {
     }
   }
 
+  _onEquipmentProduceClick(equipmentId) {
+    if (this._equipmentProduceLocked) return;
+    this._equipmentProduceLocked = true;
+    try {
+      if (this.handlers.onProduceEquipment) this.handlers.onProduceEquipment(equipmentId);
+    } finally {
+      this._equipmentProduceLocked = false;
+    }
+  }
+
   /** 渲染等待队列中的一项 */
   _renderQueueItem(job, index, state) {
-    const def = UNITS[job.type];
+    const def = job.kind === 'equipment' ? getEquipmentDefinition(job.equipmentId) : UNITS[job.type];
     const item = el('div', 'queue-item');
     item.dataset.jobId = job.id;
 
     const title = el('div', 'qi-title');
     title.appendChild(el('span', 'qi-idx', `${index}.`));
-    title.appendChild(el('span', 'qi-name', def ? def.name : '未知单位'));
+    title.appendChild(el('span', 'qi-name', def ? def.name : '未知项目'));
     item.appendChild(title);
 
     const meta = el('div', 'qi-meta');
     const producer = (state.buildings || []).find((b) => b.id === job.sourceBuildingId);
     const pname = producer ? (BUILDINGS[producer.type] ? BUILDINGS[producer.type].name : '生产设施') : '生产设施';
     meta.appendChild(el('span', '', `来源：${pname}`));
-    meta.appendChild(el('span', '', `时间：${formatInt(def ? def.buildTime : 0)}秒`));
+    const duration = job.kind === 'equipment' ? def?.acquisition?.buildTime : def?.buildTime;
+    meta.appendChild(el('span', '', `时间：${formatInt(duration || 0)}秒`));
     const paid = Object.keys(job.costPaid || {})
       .filter((k) => safeNumber(job.costPaid[k], 0) > 0)
       .map((k) => `${RESOURCE_DEFS[k] ? RESOURCE_DEFS[k].name : k}${formatInt(job.costPaid[k])}`)
@@ -745,6 +805,8 @@ export class UI {
     const cancel = el('button', 'btn tiny danger qi-cancel', '移除');
     cancel.type = 'button';
     cancel.dataset.jobId = job.id;
+    cancel.dataset.action = 'cancel-production-queue';
+    if (job.kind === 'equipment') cancel.dataset.equipmentId = job.equipmentId;
     cancel.addEventListener('click', () => {
       const fn = this.handlers.onCancelQueuedProduction;
       if (typeof fn === 'function') fn(job.id);
@@ -829,6 +891,23 @@ export class UI {
       });
     });
 
+    // —— 装备制造卡片：库存只按已完成实例统计，生产中任务不会提前进入库存 ——
+    const equipmentCounts = equipmentInventoryCounts(state.equipment);
+    Object.keys(p.equipmentCards || {}).forEach((equipmentId) => {
+      const card = p.equipmentCards[equipmentId];
+      const def = card.def;
+      const check = canQueueEquipment(state, equipmentId);
+      setText(card.invCount, String(safeNumber(equipmentCounts[equipmentId], 0)));
+      const current = state.production?.current;
+      setText(card.btn, current?.kind === 'equipment' && current.equipmentId === equipmentId ? '制造中' : '加入制造队列');
+      card.btn.disabled = !check.ok;
+      card.reason.hidden = check.ok;
+      setText(card.reason, check.ok ? '' : (check.reasons || [check.reason]).join('；'));
+      Object.keys(card.chips).forEach((key) => {
+        toggleClass(card.chips[key], 'lack', safeNumber(state.resources?.[key], 0) < safeNumber(def.acquisition.cost[key], 0));
+      });
+    });
+
     // —— 库存统计 ——
     const units = state.units || [];
     setText(p.invTotal, String(units.length));
@@ -839,7 +918,7 @@ export class UI {
     setText(p.invAssigned, String(assigned));
     setText(p.invRepairing, String(repairing));
 
-    const listSig = units.map((u) => `${u.type}:${counts[u.type]}`).join('|');
+    const listSig = `${units.map((u) => `${u.type}:${counts[u.type]}`).join('|')}|equipment:${JSON.stringify(state.equipment || {})}`;
     if (listSig !== p._invListSig) {
       p._invListSig = listSig;
       p.invList.innerHTML = '';

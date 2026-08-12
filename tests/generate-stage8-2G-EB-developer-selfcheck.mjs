@@ -24,6 +24,17 @@ const offlineSaveBoundaryChange = saveSource.includes('settleOfflineWindow(')
 const replayStart = theaterSource.indexOf('if (ab.replayReadOnly === true || isObject(ab.replayContext))');
 const replayEnd = theaterSource.indexOf("if (!THEATERS[ab.theaterId])", replayStart);
 const replayBranch = theaterSource.slice(replayStart, replayEnd);
+const battleSource = text('js/battle.js');
+const baselineBattle = run(['show', `${baseline}:js/battle.js`]).stdout;
+// Stage 9-B already merged the production-side fallback that applies the
+// frozen equipment resolver when a legacy caller has no deployment snapshot.
+// Allow exactly that one-line delta; any other battle.js delta remains
+// fail-closed as an authority violation.
+const stage9BEquipmentFallbackChange = baselineBattle.length > 0
+  && battleSource.replace(
+    'return { ...u, stats: getUnitEffectiveStats(u, state && state.equipment), rank };',
+    'return { ...u, stats: getUnitEffectiveStats(u), rank };'
+  ) === baselineBattle;
 
 const changedPaths = run(['diff', '--name-only', baseline, '--']).stdout.trim().split('\n').filter(Boolean);
 const forbiddenAuthorityPaths = [
@@ -40,7 +51,8 @@ const forbiddenAuthorityPaths = [
   'js/battle-presentation/universal/universal-route-planner.js'
 ];
 const authorityChangedPaths = changedPaths.filter((file) => forbiddenAuthorityPaths.includes(file)
-  && !(file === 'js/save.js' && offlineSaveBoundaryChange));
+  && !(file === 'js/save.js' && offlineSaveBoundaryChange)
+  && !(file === 'js/battle.js' && stage9BEquipmentFallbackChange));
 const baselineTheater = run(['show', `${baseline}:js/theater.js`]).stdout;
 // Stage 9-B deliberately extends the single snapshot boundary with equipment.
 // Preserve the E-B guard against battle/settlement edits while allowing this

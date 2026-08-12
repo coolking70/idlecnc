@@ -8,7 +8,7 @@
 
 import {
   EQUIPMENT, EQUIPMENT_RULES, EQUIPMENT_STAT_KEYS,
-  FORMATION_STATUS
+  FORMATION_STATUS, TECHNOLOGIES
 } from './config.js';
 import { safeNumber } from './utils.js';
 
@@ -43,6 +43,56 @@ export function createInitialEquipmentState() {
 
 export function emptyEquipmentState() {
   return { inventory: [], bindings: {} };
+}
+
+/** 只返回可由装甲工厂制造的装备定义，顺序由 config 的声明顺序决定。 */
+export function getEquipmentProductionDefinitions() {
+  return Object.values(EQUIPMENT).filter((def) => def && def.acquisition?.kind === 'production');
+}
+
+/** 各装备的库存实例数；挂载不会从库存删除，生产完成才增加实例。 */
+export function equipmentInventoryCounts(stateOrEquipment) {
+  const equipment = equipmentStateOf(stateOrEquipment);
+  const counts = {};
+  (Array.isArray(equipment?.inventory) ? equipment.inventory : []).forEach((instance) => {
+    if (!instance || !getEquipmentDefinition(instance.equipmentId) || instance.quantity !== 1) return;
+    counts[instance.equipmentId] = (counts[instance.equipmentId] || 0) + 1;
+  });
+  return counts;
+}
+
+/**
+ * 生产完成时生成装备实例。ID 不依赖墙上时钟或随机数：取该装备最小可用序号，
+ * 并使用独立的 production 前缀，保证绝不与三个 starter ID 冲突。
+ */
+export function createEquipmentInstance(stateOrEquipment, equipmentId, acquiredAt = 0) {
+  const equipment = equipmentStateOf(stateOrEquipment);
+  const def = getEquipmentDefinition(equipmentId);
+  if (!equipment || !def || def.acquisition?.kind !== 'production') return null;
+  if (!Array.isArray(equipment.inventory)) equipment.inventory = [];
+  let serial = 1;
+  let id = `equipment-production-${equipmentId}-${serial}`;
+  const used = new Set(equipment.inventory.map((item) => item && item.id).filter(Boolean));
+  while (used.has(id)) {
+    serial += 1;
+    id = `equipment-production-${equipmentId}-${serial}`;
+  }
+  return {
+    id,
+    equipmentId: def.id,
+    quantity: 1,
+    acquiredAt: Math.max(0, safeNumber(acquiredAt, 0)),
+    acquisition: cloneJson(def.acquisition)
+  };
+}
+
+export function addEquipmentInstance(state, equipmentId, acquiredAt = 0) {
+  if (!state || typeof state !== 'object') return null;
+  if (!state.equipment || typeof state.equipment !== 'object') state.equipment = emptyEquipmentState();
+  const instance = createEquipmentInstance(state.equipment, equipmentId, acquiredAt);
+  if (!instance) return null;
+  state.equipment.inventory.push(instance);
+  return instance;
 }
 
 export function getEquipmentDefinition(equipmentId) {
@@ -194,6 +244,18 @@ function validModifierMap(def) {
   });
 }
 
+function validProductionAcquisition(def) {
+  const acquisition = def && def.acquisition;
+  if (!acquisition || acquisition.kind !== 'production') return true;
+  if (typeof acquisition.building !== 'string' || !acquisition.building) return false;
+  if (!acquisition.cost || typeof acquisition.cost !== 'object' || Array.isArray(acquisition.cost)) return false;
+  if (Object.keys(acquisition.cost).some((key) => !['supply', 'alloy', 'intel'].includes(key)
+    || !Number.isFinite(Number(acquisition.cost[key])) || Number(acquisition.cost[key]) < 0)) return false;
+  if (!(Number(acquisition.buildTime) > 0) || !Number.isFinite(Number(acquisition.buildTime))) return false;
+  const requires = Array.isArray(def.requiresTech) ? def.requiresTech : (def.requiresTech ? [def.requiresTech] : []);
+  return requires.every((id) => typeof id === 'string' && Boolean(TECHNOLOGIES[id]));
+}
+
 /**
  * 存档清洗的 fail-closed 规则：
  * 1. 先清洗库存实例（合法 definition、唯一 ID、quantity 必须为 1）；
@@ -223,6 +285,7 @@ export function sanitizeEquipment(state) {
       && inventoryIdCounts[instance.id] === 1
       && !ids.has(instance.id)
       && Boolean(def) && validModifierMap(def)
+      && validProductionAcquisition(def)
       && Number(instance.quantity) === 1;
     if (!valid) { notes.push('非法、重复或数量异常的装备实例已移除。'); return false; }
     ids.add(instance.id);
@@ -261,6 +324,7 @@ export function sanitizeEquipment(state) {
 
 export const EQUIPMENT_API = {
   createInitialEquipmentState, emptyEquipmentState, getEquipmentDefinition,
+  getEquipmentProductionDefinitions, equipmentInventoryCounts, createEquipmentInstance, addEquipmentInstance,
   getEquipmentInstance, getUnitEquipment, getEquipmentComposition,
   equipmentModifiersFor, canEquipEquipment, equipEquipment,
   canUnequipEquipment, unequipEquipment, sanitizeEquipment,

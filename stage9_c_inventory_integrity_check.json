@@ -1,0 +1,19 @@
+{
+  "stage": "9-C",
+  "independentRecompute": true,
+  "sameDefinitionInstances": [
+    "equipment-production-anti_armor_sights-1",
+    "equipment-production-anti_armor_sights-2"
+  ],
+  "instanceIsolation": true,
+  "maxSlots": 2,
+  "inFlightNotInventory": true,
+  "inventoryCounts": {
+    "scout_optics": 1,
+    "reinforced_chassis": 1,
+    "field_toolkit": 1,
+    "anti_armor_sights": 2
+  },
+  "duplicateOwnerRemoved": true,
+  "negativeQuantityRejected": true
+}

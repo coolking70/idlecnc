@@ -1,0 +1,108 @@
+{
+  "stage": "9-C",
+  "version": 1,
+  "measurement": "equipment effective-stats, snapshot and inventory read paths",
+  "budgetMs": 16.7,
+  "warmup": 20,
+  "samples": 120,
+  "metric": "p95",
+  "measurementValid": true,
+  "passed": true,
+  "environment": {
+    "platform": "darwin",
+    "arch": "arm64",
+    "cpuModel": "Apple M5",
+    "cpuCount": 10,
+    "nodeVersion": "v25.2.1"
+  },
+  "environmentGuard": {
+    "fit": true,
+    "threshold": 0.75,
+    "attempts": 1,
+    "samples": [
+      {
+        "attempt": 1,
+        "normalizedLoad1": 0.317,
+        "spareCores": 6.827
+      }
+    ],
+    "loadBefore": 0.317,
+    "loadAfter": 0.317
+  },
+  "scenarios": {
+    "effectiveStats": {
+      "name": "effectiveStats",
+      "warmup": 20,
+      "samples": 120,
+      "metric": "p95",
+      "p95Ms": 0.0083,
+      "maxMs": 0.2199
+    },
+    "snapshot": {
+      "name": "snapshot",
+      "warmup": 20,
+      "samples": 120,
+      "metric": "p95",
+      "p95Ms": 0.035,
+      "maxMs": 0.1517
+    },
+    "inventory": {
+      "name": "inventoryCounts",
+      "warmup": 20,
+      "samples": 120,
+      "metric": "p95",
+      "p95Ms": 0.0003,
+      "maxMs": 0.0032
+    }
+  },
+  "hotPathGuards": {
+    "parserOutsideFrameLoop": true,
+    "renderSignature": true,
+    "noPerFrameSaveHash": true
+  },
+  "sourceState": {
+    "unitCount": 5,
+    "equipment": {
+      "inventory": [
+        {
+          "id": "equipment-starter-1",
+          "equipmentId": "scout_optics",
+          "quantity": 1,
+          "acquiredAt": 0,
+          "acquisition": {
+            "kind": "starter",
+            "label": "初始装备补给"
+          }
+        },
+        {
+          "id": "equipment-starter-2",
+          "equipmentId": "reinforced_chassis",
+          "quantity": 1,
+          "acquiredAt": 0,
+          "acquisition": {
+            "kind": "starter",
+            "label": "初始装备补给"
+          }
+        },
+        {
+          "id": "equipment-starter-3",
+          "equipmentId": "field_toolkit",
+          "quantity": 1,
+          "acquiredAt": 0,
+          "acquisition": {
+            "kind": "starter",
+            "label": "初始装备补给"
+          }
+        }
+      ],
+      "bindings": {
+        "stage9-c-performance-0": [
+          "equipment-starter-1",
+          "equipment-starter-3"
+        ]
+      }
+    },
+    "maxSlotsPerUnit": 2,
+    "catalogCount": 8
+  }
+}
