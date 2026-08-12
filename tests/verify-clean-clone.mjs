@@ -11,10 +11,11 @@ import path from 'node:path';
  * 行为：
  *   1. 把当前仓库 HEAD 通过 `git clone --depth 1 file://<repo>` 克隆到临时目录
  *      （必须从 git 克隆，而不是复制工作目录，否则未提交的脏文件会污染验证）
- *   2. 在临时目录执行 `npm install --ignore-scripts`
- *   3. 在临时目录跑完整门禁链 `npm run gate:stage8-2G`
- *   4. 输出 JSON 结果：克隆的 commit SHA、各步骤结论、总体 passed
- *   5. 结束后清理临时目录
+ *   2. 在临时目录 fetch 只读的 Stage 9-C authority 基线对象
+ *   3. 在临时目录执行 `npm install --ignore-scripts`
+ *   4. 在临时目录跑完整门禁链 `npm run gate:stage8-2G`
+ *   5. 输出 JSON 结果：克隆的 commit SHA、各步骤结论、总体 passed
+ *   6. 结束后清理临时目录
  *
  * 约束：
  *   - 必须真实执行 browser 门禁，不得跳过
@@ -32,6 +33,7 @@ const run = (cmd, args, cwd, opts = {}) => {
 };
 
 const root = process.cwd();
+const authorityBaseline = 'e72eedac27423902b94ebab69b2fa053ca99b112';
 const steps = [];
 const outputTail = (value, limit = 4000) => String(value || '').slice(-limit);
 
@@ -68,7 +70,22 @@ try {
   record('clone-head-matches', headMatches, null, { currentHead, clonedHead });
   if (!headMatches) throw new Error(`clone HEAD mismatch: current=${currentHead} cloned=${clonedHead}`);
 
-  // 2. npm install --ignore-scripts（干净克隆内）
+  // 2. 为浅克隆补齐唯一的 authority 基线对象。业务代码和 gate 仍只运行于
+  // 克隆目录；这一步只是让 source-diff verifier 能独立比较冻结路径。
+  try {
+    run('git', ['fetch', '--depth', '1', 'origin', authorityBaseline], cloneDir, { timeout: 120000 });
+    record('authority-baseline-fetch', true, 0, { baseline: authorityBaseline });
+  } catch (error) {
+    record('authority-baseline-fetch', false, null, {
+      baseline: authorityBaseline,
+      message: String(error.stderr || error.message),
+      stdout: outputTail(error.stdout),
+      stderr: outputTail(error.stderr),
+    });
+    throw error;
+  }
+
+  // 3. npm install --ignore-scripts（干净克隆内）
   try {
     run('npm', ['install', '--ignore-scripts', '--no-audit', '--no-fund'], cloneDir, { timeout: 300000 });
     record('npm-install', true, 0);
@@ -81,7 +98,7 @@ try {
     throw error;
   }
 
-  // 3. 在干净克隆内跑完整门禁链 gate:stage8-2G（含 npm test 与全部 browser 门禁）
+  // 4. 在干净克隆内跑完整门禁链 gate:stage8-2G（含 npm test 与全部 browser 门禁）
   try {
     const gateOutput = run('npm', ['run', 'gate:stage8-2G'], cloneDir, { timeout: 1800000 });
     record('gate:stage8-2G', true, 0, { tail: outputTail(gateOutput, 2000) });
