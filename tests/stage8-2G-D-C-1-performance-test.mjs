@@ -1,9 +1,28 @@
 import assert from 'node:assert/strict';
 import os from 'node:os';
 import { buildPresentations, definitions, writeJson } from './lib/stage8-2G-DC1-fixtures.mjs';
+import { awaitFitEnvironment, loadSnapshot, PerfEnvironmentUnfitError } from './lib/perf-environment.mjs';
 
 const warmupSamples = 20;
 const sampleCount = 120;
+
+// 16.7ms 是 60fps 单帧预算，衡量的是产品的战斗表现流畅度，任何情况下都不放宽。
+// 但在被占满的机器上测量帧耗时是无效的，此时必须报告「环境不合格」而不是
+// 「性能不达标」——后者是一个关于产品的错误结论。
+const guard = await awaitFitEnvironment();
+if (!guard.fit) {
+  writeJson('stage8_2g_dc1_performance_check.json', {
+    stage: '8.2G-D-C.1', version: 1,
+    measurement: 'complete presentation renderState.atTime including effects, camera, audio, transitions and environment state',
+    runtime: guard.snapshot,
+    environmentGuard: { fit: false, threshold: guard.threshold, attempts: guard.attempts, samples: guard.samples },
+    measurementValid: false, scenes: [],
+    limits: { p95TotalPresentationBuildMs: 16.7, sampleCountMinimum: 100, maxEffects: 96, maxSmokeParticles: 32 },
+    passed: false
+  });
+  throw new PerfEnvironmentUnfitError('8.2G-D-C.1', guard);
+}
+
 const rows = [];
 for (const { sceneId } of definitions) {
   const presentation = buildPresentations().get(sceneId);
@@ -25,5 +44,6 @@ for (const { sceneId } of definitions) {
 const limits = { p95TotalPresentationBuildMs: 16.7, sampleCountMinimum: 100, maxEffects: 96, maxSmokeParticles: 32 };
 const passed = rows.every((row) => row.samples >= limits.sampleCountMinimum && row.p95Ms < limits.p95TotalPresentationBuildMs && row.peakEffectCount <= limits.maxEffects && row.peakSmokeCount <= limits.maxSmokeParticles);
 assert.equal(passed, true, JSON.stringify(rows));
-writeJson('stage8_2g_dc1_performance_check.json', { stage: '8.2G-D-C.1', version: 1, measurement: 'complete presentation renderState.atTime including effects, camera, audio, transitions and environment state', runtime: { node: process.version, platform: process.platform, arch: process.arch, cpuCount: os.cpus().length, cpuModel: os.cpus()[0]?.model || null }, warmupSamples, sampleCount, scenes: rows, limits, passed });
+const loadAfter = loadSnapshot();
+writeJson('stage8_2g_dc1_performance_check.json', { stage: '8.2G-D-C.1', version: 1, measurement: 'complete presentation renderState.atTime including effects, camera, audio, transitions and environment state', runtime: { node: process.version, platform: process.platform, arch: process.arch, cpuCount: os.cpus().length, cpuModel: os.cpus()[0]?.model || null }, environmentGuard: { fit: true, threshold: guard.threshold, attempts: guard.attempts, samples: guard.samples, loadBefore: guard.snapshot.normalizedLoad1, loadAfter: loadAfter.normalizedLoad1 }, measurementValid: true, warmupSamples, sampleCount, scenes: rows, limits, passed });
 console.log(JSON.stringify({ ok: true, stage: '8.2G-D-C.1', sampleCount, rows: rows.map(({ sceneId, p95Ms, maxMs, peakEffectCount, peakSmokeCount }) => ({ sceneId, p95Ms, maxMs, peakEffectCount, peakSmokeCount })) }));
