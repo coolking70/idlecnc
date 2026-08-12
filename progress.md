@@ -694,4 +694,4 @@
 - [x] UI 增加装备制造卡、科研原因、库存实例、队列取消与既有槽位挂载/卸载 DOM hooks；使用现有增量 render signature。
 - [x] 真实浏览器 Stage 9-C：9 帧、9 个唯一截图 hash、production_queue / completed_unmounted / running_battle / replay 四次 Page.reload，真实 DOM 入队/取消/完成观察/挂载/战斗锁/回放动作。
 - [x] 独立 source 重算 verifier 与 121 例 true-value tamper：121/121 拒绝，`passedFlagOnlyCases=0`；性能守卫为 20 warmup、120 samples、p95 `<16.7ms`。
-- [ ] 最终门禁、clean-clone、远端 SHA：待最终提交与推送后执行并回填。
+- [x] 最终门禁与 clean-clone 已通过：`overallPassed: true`，所有步骤均为 `passed: true`，`currentHead` 与 `clonedHead` 一致；文档回填后将以最终推送 SHA 为准。
