@@ -31,3 +31,11 @@ The second candidate then exposed a deterministic ordering dependency created by
 `tests/stage9-A-performance-test.mjs` no longer repeats the already-independent D-C.1 performance command. The independent D-C.1 CI step remains immediately after install, before the CPU-heavy D-A/D-B regression sequence. A narrow prep step creates only the D-C source machine/evidence inputs required by the existing D-C.1 verifier; the full D-C regression remains later in its original position. No step was deleted, made optional, or allowed to continue after failure. The D-C.1 guard, warmup, 120 samples, and strict 16.7ms budget are unchanged.
 
 No production authority, battle, planner, choreographer, solver, settlement, save-diff, or `tests/lib/` file was changed.
+
+## Final closure evidence
+
+- Final commit: `d2be365cf2bf5d1f56c1bd52e7101bc8c8e54dd3`
+- Remote branch: `auto/stage9-c-equipment-acquisition`
+- Same-SHA workflow: run `31642115695`, job `94266919302`, conclusion `success`
+- Clean clone: exit `0`, `overallPassed=true`, `clonedHead == currentHead == d2be365cf2bf5d1f56c1bd52e7101bc8c8e54dd3`
+- Stage 9-C browser evidence: 9 frames, 4 real reloads, 141/141 true-value tamper rejections, 11/11 coupled tamper rejections, `passedFlagOnlyCases=0`

@@ -1,8 +1,8 @@
 {
   "stage": "Stage 9-C.1a",
   "baselineHead": "86067c36fe94ecadca1c968f05550220cdf62bed",
-  "finalHead": "86067c36fe94ecadca1c968f05550220cdf62bed",
-  "sourceCommit": "86067c36fe94ecadca1c968f05550220cdf62bed",
+  "finalHead": "d2be365cf2bf5d1f56c1bd52e7101bc8c8e54dd3",
+  "sourceCommit": "d2be365cf2bf5d1f56c1bd52e7101bc8c8e54dd3",
   "originalFailure": {
     "command": "npm run test:stage9-A",
     "ciHead": "86067c36fe94ecadca1c968f05550220cdf62bed",
@@ -35,9 +35,9 @@
     "performanceMeasurementValid": true,
     "performanceSamples": 120,
     "performanceP95Ms": {
-      "effectiveStats": 0.0078,
-      "snapshot": 0.0343,
-      "inventory": 0.0004
+      "effectiveStats": 0.0082,
+      "snapshot": 0.0359,
+      "inventory": 0.0003
     }
   },
   "authorityFreeze": {
@@ -50,6 +50,19 @@
     "cpuModel": "Apple M5",
     "cpuCount": 10,
     "nodeVersion": "v25.2.1"
+  },
+  "finalHeadCi": {
+    "runId": 31642115695,
+    "jobId": 94266919302,
+    "headSha": "d2be365cf2bf5d1f56c1bd52e7101bc8c8e54dd3",
+    "conclusion": "success",
+    "allRequiredStepsPassed": true,
+    "skippedRequiredSteps": []
+  },
+  "cleanClone": {
+    "overallPassed": true,
+    "clonedHead": "d2be365cf2bf5d1f56c1bd52e7101bc8c8e54dd3",
+    "currentHead": "d2be365cf2bf5d1f56c1bd52e7101bc8c8e54dd3"
   },
   "passed": true
 }

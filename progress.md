@@ -715,4 +715,9 @@
 - [x] 同 SHA CI Run `31637103269` 证明 Stage 9-A 已通过，但暴露第二个真实问题：独立 D-C.1 在 D-A/D-B 重负载之后的 Ubuntu/Node 22 测量中 `stage8g-dc-art p95=17.442ms`，于 `tests/stage8-2G-D-C-1-performance-test.mjs:46` fail-closed。
 - [x] 第二个修复已确定为 CI 执行顺序：保留独立 D-C.1 step、120 samples、环境守卫和 16.7ms 阈值，将其提前到重负载 D-A/D-B 回归之前；无生产 authority 改动。
 - [x] 第二候选 `8ae6dee6e85fe176c68ea18f4a0ec293dcdd0272` 暴露了提前后的输入顺序依赖：D-C.1 machine generator 读取尚未生成的 D-C 派生证据；已增加窄范围 D-C prep，完整 D-C 回归顺序不变。
-- [ ] 第三个修复提交、clean-clone、远端 SHA 与同 SHA GitHub Actions success 仍待本轮收口。
+- [x] 第三个修复提交 `25839f6b2d5dc1b9902cabfeb9b8294dd3893d94` 已修复 D-C.1 证据输入顺序依赖；随后发现浅克隆缺少 authority 基线对象。
+- [x] 最终修复提交 `d2be365cf2bf5d1f56c1bd52e7101bc8c8e54dd3` 为 GitHub Actions checkout 增加 `fetch-depth: 0`，仅解决证据生成器访问既定 authority 基线对象的问题；未改动游戏运行时代码、冻结 verifier 语义或性能预算。
+- [x] 同 SHA GitHub Actions Run `31642115695` / Job `94266919302` 已完成 success；Stage 9-A/B/C 的 Node 与 Browser 步骤全部 success、无 required step skipped。
+- [x] `npm run gate:stage8-2G` exit=0；Stage 9-C 真实浏览器为 9 帧、4 次 reload、141/141 tamper、11/11 coupled、0 flag-only。
+- [x] `npm run verify:clean-clone` exit=0，`overallPassed=true`，`clonedHead == currentHead == d2be365cf2bf5d1f56c1bd52e7101bc8c8e54dd3`，完整 JSON 见 `stage9_c1a_clean_clone_result.json`。
+- [x] `git ls-remote origin refs/heads/auto/stage9-c-equipment-acquisition` 返回 `d2be365cf2bf5d1f56c1bd52e7101bc8c8e54dd3`；Stage 9-C.1a 已闭环。
