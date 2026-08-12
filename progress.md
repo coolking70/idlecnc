@@ -714,4 +714,5 @@
 - [x] 提交 `741fcbc785f40b6150ccdcf1600543899cc2bfd9` 已推送；其 clean-clone 从该 SHA 实际执行并返回 `overallPassed: true`。
 - [x] 同 SHA CI Run `31637103269` 证明 Stage 9-A 已通过，但暴露第二个真实问题：独立 D-C.1 在 D-A/D-B 重负载之后的 Ubuntu/Node 22 测量中 `stage8g-dc-art p95=17.442ms`，于 `tests/stage8-2G-D-C-1-performance-test.mjs:46` fail-closed。
 - [x] 第二个修复已确定为 CI 执行顺序：保留独立 D-C.1 step、120 samples、环境守卫和 16.7ms 阈值，将其提前到重负载 D-A/D-B 回归之前；无生产 authority 改动。
-- [ ] 第二个修复提交、clean-clone、远端 SHA 与同 SHA GitHub Actions success 仍待本轮收口。
+- [x] 第二候选 `8ae6dee6e85fe176c68ea18f4a0ec293dcdd0272` 暴露了提前后的输入顺序依赖：D-C.1 machine generator 读取尚未生成的 D-C 派生证据；已增加窄范围 D-C prep，完整 D-C 回归顺序不变。
+- [ ] 第三个修复提交、clean-clone、远端 SHA 与同 SHA GitHub Actions success 仍待本轮收口。

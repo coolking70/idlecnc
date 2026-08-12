@@ -24,8 +24,10 @@ The Ubuntu runner's serialized process history made the duplicate D-C.1 measurem
 
 The first final-head attempt after that fix exposed a second, separate runner-order failure. Run `31637103269`, job `94250091443`, passed Stage 8.2G through D-C, then the independent D-C.1 step measured the `stage8g-dc-art` scene at p95 `17.442ms` on Ubuntu 24.04 / Node 22.23.2 after the preceding D-A/D-B workload; the assertion failed at `tests/stage8-2G-D-C-1-performance-test.mjs:46`. The same command passed before the heavy regression on the local machine (`3.468/2.885/4.161ms` in the three scenes). This is category **L** (timing/runner load), with the platform-specific manifestation in category **M**.
 
+The second candidate then exposed a deterministic ordering dependency created by moving D-C.1: Run `31638840429`, job `94255921991`, failed before measurement because `generate-stage8-2G-DC1-machine-evidence.mjs` consumed D-C-derived files that had not yet been created (`ENOENT stage8_2g_dc_muzzle_effect_check.json`). This is category **F** (ordering instability), not a production or performance change.
+
 ## Fix
 
-`tests/stage9-A-performance-test.mjs` no longer repeats the already-independent D-C.1 performance command. The independent D-C.1 CI step remains, and is now scheduled immediately after install, before the CPU-heavy D-A/D-B regression sequence. No step was deleted, made optional, or allowed to continue after failure. The D-C.1 guard, warmup, 120 samples, and strict 16.7ms budget are unchanged.
+`tests/stage9-A-performance-test.mjs` no longer repeats the already-independent D-C.1 performance command. The independent D-C.1 CI step remains immediately after install, before the CPU-heavy D-A/D-B regression sequence. A narrow prep step creates only the D-C source machine/evidence inputs required by the existing D-C.1 verifier; the full D-C regression remains later in its original position. No step was deleted, made optional, or allowed to continue after failure. The D-C.1 guard, warmup, 120 samples, and strict 16.7ms budget are unchanged.
 
 No production authority, battle, planner, choreographer, solver, settlement, save-diff, or `tests/lib/` file was changed.

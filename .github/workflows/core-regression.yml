@@ -14,6 +14,7 @@ jobs:
           node-version: 22
       - run: npm install --ignore-scripts
       - run: npm run test:stage8-2G-C-1
+      - run: npm run test:stage8-2G-D-C-1-prep
       - run: npm run test:stage8-2G-D-C-1
       - run: npm run test:stage8-2G-C-1-1
       - run: npm run test:stage8-2G-C-1-1a
