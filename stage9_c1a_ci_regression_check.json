@@ -1,8 +1,8 @@
 {
   "stage": "Stage 9-C.1a",
   "baselineHead": "86067c36fe94ecadca1c968f05550220cdf62bed",
-  "finalHead": "d2be365cf2bf5d1f56c1bd52e7101bc8c8e54dd3",
-  "sourceCommit": "d2be365cf2bf5d1f56c1bd52e7101bc8c8e54dd3",
+  "finalHead": "8ec82cf5d3b6deb5aa3db011b76db9198aad5213",
+  "sourceCommit": "8ec82cf5d3b6deb5aa3db011b76db9198aad5213",
   "originalFailure": {
     "command": "npm run test:stage9-A",
     "ciHead": "86067c36fe94ecadca1c968f05550220cdf62bed",
@@ -35,8 +35,8 @@
     "performanceMeasurementValid": true,
     "performanceSamples": 120,
     "performanceP95Ms": {
-      "effectiveStats": 0.0082,
-      "snapshot": 0.0359,
+      "effectiveStats": 0.0076,
+      "snapshot": 0.0348,
       "inventory": 0.0003
     }
   },
@@ -52,17 +52,18 @@
     "nodeVersion": "v25.2.1"
   },
   "finalHeadCi": {
-    "runId": 31642115695,
-    "jobId": 94266919302,
-    "headSha": "d2be365cf2bf5d1f56c1bd52e7101bc8c8e54dd3",
+    "runId": 31646337573,
+    "jobId": 94281397473,
+    "attempt": 2,
+    "headSha": "8ec82cf5d3b6deb5aa3db011b76db9198aad5213",
     "conclusion": "success",
     "allRequiredStepsPassed": true,
     "skippedRequiredSteps": []
   },
   "cleanClone": {
     "overallPassed": true,
-    "clonedHead": "d2be365cf2bf5d1f56c1bd52e7101bc8c8e54dd3",
-    "currentHead": "d2be365cf2bf5d1f56c1bd52e7101bc8c8e54dd3"
+    "clonedHead": "8ec82cf5d3b6deb5aa3db011b76db9198aad5213",
+    "currentHead": "8ec82cf5d3b6deb5aa3db011b76db9198aad5213"
   },
   "passed": true
 }

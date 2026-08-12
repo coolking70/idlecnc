@@ -5,7 +5,7 @@
 This is a reproducibility hotfix only. It does not add equipment gameplay, drops, crafting, economy, UI, or Stage 9-D work.
 
 - Baseline HEAD: `86067c36fe94ecadca1c968f05550220cdf62bed`
-- Final HEAD: `d2be365cf2bf5d1f56c1bd52e7101bc8c8e54dd3`
+- Final HEAD: `8ec82cf5d3b6deb5aa3db011b76db9198aad5213`
 - Root cause: Stage 9-A performance test duplicated the already-independent D-C.1 performance command inside a cumulative Ubuntu runner; the duplicate environment-sensitive measurement failed closed while 21/21 Stage 9-A functional checks passed. The first final-head retry then showed the independent D-C.1 step itself was scheduled after the CPU-heavy D-A/D-B sequence and reached `17.442ms` p95 for `stage8g-dc-art` on Ubuntu. The second candidate exposed a pre-existing D-C.1 input-order dependency after moving the step (`ENOENT stage8_2g_dc_muzzle_effect_check.json`).
 - Fix: remove only the duplicate nested command, run a narrow D-C evidence prep before the existing D-C.1 step, and keep that step before the heavy D-A/D-B sequence; retain all 16.7ms/performance guards.
 
@@ -15,7 +15,7 @@ The source/test change is `tests/stage9-A-performance-test.mjs`; the workflow ch
 
 ## Real CI evidence
 
-The original run `31630388697`, job `94227353734`, was read through the GitHub Actions job log. It records Stage 9-A `21 passed / 0 failed / 21 total`, followed by `ok:false` from the nested regression summary. The final same-head run is `31642115695`, job `94266919302`, with `head_sha=d2be365cf2bf5d1f56c1bd52e7101bc8c8e54dd3` and conclusion `success`; all required Stage 9-A/B/C Node and Browser steps completed successfully and none were skipped. The machine-readable record is `stage9_c1a_final_head_ci.json`.
+The original run `31630388697`, job `94227353734`, was read through the GitHub Actions job log. It records Stage 9-A `21 passed / 0 failed / 21 total`, followed by `ok:false` from the nested regression summary. The final same-head run is `31646337573`, attempt 2, job `94281397473`, with `head_sha=8ec82cf5d3b6deb5aa3db011b76db9198aad5213` and conclusion `success`; all required Stage 9-A/B/C Node and Browser steps completed successfully and none were skipped. The machine-readable record is `stage9_c1a_final_head_ci.json`.
 
 ## Commands and required results
 
@@ -50,4 +50,4 @@ The independent final-head CI must have `head_sha == FINAL_HEAD`, `conclusion=su
 
 Stage 9-C.1a: `PASSED`.
 
-The final remote branch resolves to `d2be365cf2bf5d1f56c1bd52e7101bc8c8e54dd3`. `verify:clean-clone` returned exit 0 with `overallPassed=true`, matching cloned/current HEADs, and the same SHA's GitHub Actions run returned success. The complete clean-clone JSON is preserved in `stage9_c1a_clean_clone_result.json`.
+The final remote branch resolves to `8ec82cf5d3b6deb5aa3db011b76db9198aad5213`. `verify:clean-clone` returned exit 0 with `overallPassed=true`, matching cloned/current HEADs, and the same SHA's GitHub Actions attempt 2 returned success. The complete clean-clone JSON is preserved in `stage9_c1a_clean_clone_result.json`.

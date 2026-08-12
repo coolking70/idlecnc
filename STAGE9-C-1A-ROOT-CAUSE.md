@@ -34,8 +34,8 @@ No production authority, battle, planner, choreographer, solver, settlement, sav
 
 ## Final closure evidence
 
-- Final commit: `d2be365cf2bf5d1f56c1bd52e7101bc8c8e54dd3`
+- Final commit: `8ec82cf5d3b6deb5aa3db011b76db9198aad5213`
 - Remote branch: `auto/stage9-c-equipment-acquisition`
-- Same-SHA workflow: run `31642115695`, job `94266919302`, conclusion `success`
-- Clean clone: exit `0`, `overallPassed=true`, `clonedHead == currentHead == d2be365cf2bf5d1f56c1bd52e7101bc8c8e54dd3`
+- Same-SHA workflow: run `31646337573`, attempt 2, job `94281397473`, conclusion `success`
+- Clean clone: exit `0`, `overallPassed=true`, `clonedHead == currentHead == 8ec82cf5d3b6deb5aa3db011b76db9198aad5213`
 - Stage 9-C browser evidence: 9 frames, 4 real reloads, 141/141 true-value tamper rejections, 11/11 coupled tamper rejections, `passedFlagOnlyCases=0`

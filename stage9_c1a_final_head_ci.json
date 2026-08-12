@@ -1,10 +1,11 @@
 {
   "stage": "Stage 9-C.1a",
   "workflow": "core-regression",
-  "runId": 31642115695,
-  "jobId": 94266919302,
-  "validatedSourceCommit": "d2be365cf2bf5d1f56c1bd52e7101bc8c8e54dd3",
-  "headSha": "d2be365cf2bf5d1f56c1bd52e7101bc8c8e54dd3",
+  "runId": 31646337573,
+  "jobId": 94281397473,
+  "attempt": 2,
+  "validatedSourceCommit": "8ec82cf5d3b6deb5aa3db011b76db9198aad5213",
+  "headSha": "8ec82cf5d3b6deb5aa3db011b76db9198aad5213",
   "status": "completed",
   "conclusion": "success",
   "requiredSteps": [
