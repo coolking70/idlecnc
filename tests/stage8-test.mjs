@@ -45,12 +45,12 @@ console.log('══════════════════════�
 
 console.log('\n── A. 阶段标记、配置与公开契约 ──');
 check('A01 CURRENT_STAGE 为8', () => assert.equal(cfg.CURRENT_STAGE, 8));
-check('A02 SAVE_VERSION 为7', () => assert.equal(cfg.SAVE_VERSION, 7));
+check('A02 SAVE_VERSION 已递增到8', () => assert.equal(cfg.SAVE_VERSION, 8));
 check('A03 package 版本保持0.8.1-hotfix系列', () => assert.match(JSON.parse(readFileSync(path.join(ROOT, 'package.json'))).version, /^0\.8\.1-hotfix\./));
 check('A04 四档老兵配置阈值递增', () => assert.deepEqual(Object.values(cfg.UNIT_RANKS).map((x) => x.minExperience), [0, 10, 30, 60]));
 check('A05 老兵配置含战斗与后勤修正', () => { const r = cfg.UNIT_RANKS.elite.modifiers; assert.ok(r.attack > 1 && r.repair > 1); });
-check('A06 三个重复任务配置存在', () => assert.deepEqual(Object.keys(cfg.OPERATIONS), ['salvage_run', 'convoy_escort', 'outpost_sweep']));
-check('A07 重复任务冷却按配置递增', () => assert.deepEqual(Object.values(cfg.OPERATIONS).map((x) => x.cooldown), [300, 600, 900]));
+check('A06 保留三个旧重复任务并支持阶段9扩展', () => { assert.ok(Object.keys(cfg.OPERATIONS).length >= 6); assert.deepEqual(Object.keys(cfg.OPERATIONS).slice(0, 3), ['salvage_run', 'convoy_escort', 'outpost_sweep']); });
+check('A07 旧重复任务冷却顺序保持且新任务继续递增', () => { const cooldowns = Object.values(cfg.OPERATIONS).map((x) => x.cooldown); assert.deepEqual(cooldowns.slice(0, 3), [300, 600, 900]); assert.ok(cooldowns.slice(3).every((value, index) => value > cooldowns[index + 2])); });
 check('A08 每个重复任务绑定已知战区', () => Object.values(cfg.OPERATIONS).forEach((x) => assert.ok(cfg.THEATERS[x.theaterId])));
 check('A09 部队分页阶段8开放', () => assert.ok(cfg.PANEL_TABS.some((x) => x.id === 'units' && x.stage <= cfg.CURRENT_STAGE)));
 check('A10 操作公开 API 含成本与冷却', () => { assert.equal(typeof operations.getOperationCost, 'function'); assert.equal(typeof operations.operationCooldown, 'function'); });
@@ -136,7 +136,7 @@ check('G07 重复离线令牌幂等', () => { const s = fresh(); const a = offli
 check('G08 活动战斗离线保持暂停', () => { const s = fresh(); s.activeBattle = { id: 'x', elapsed: 3 }; offline.settleOfflineProgress(s, 60); assert.equal(s.activeBattle.elapsed, 3); });
 
 console.log('\n── H. 存档容错、UI接线与文档 ──');
-check('H01 operations缺失可重建', () => { const s = fresh(); delete s.operations; const r = operations.sanitizeOperations(s); assert.equal(r.repaired, true); assert.equal(Object.keys(s.operations).length, 3); });
+check('H01 operations缺失可重建全部配置记录', () => { const s = fresh(); delete s.operations; const r = operations.sanitizeOperations(s); assert.equal(r.repaired, true); assert.equal(Object.keys(s.operations).length, Object.keys(cfg.OPERATIONS).length); });
 check('H02 未知操作记录被移除', () => { const s = fresh(); s.operations.nope = { attempts: 99 }; operations.sanitizeOperations(s); assert.equal(s.operations.nope, undefined); });
 check('H03 操作胜利数不超过尝试数', () => { const s = fresh(); s.operations.salvage_run = { attempts: 1, victories: 99 }; operations.sanitizeOperations(s); assert.equal(s.operations.salvage_run.victories, 1); });
 check('H04 单位重复ID被清理', () => { const s = fresh(); const u = addUnit(s); s.units.push({ ...u }); units.sanitizeUnits(s); assert.equal(s.units.length, 1); });

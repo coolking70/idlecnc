@@ -379,8 +379,9 @@ check('A06 阶段3回归：损坏编队数据被自动修复（sanitizeFormation
  * ========================================================== */
 section('B. 战区配置与解锁链');
 
-check('B01 THEATERS 含 3 个战区且顺序稳定', () => {
-  assert.deepEqual(THEATER_IDS, ['scrap_mine', 'border_road', 'enemy_outpost']);
+check('B01 THEATERS 保留旧战区顺序并支持阶段9扩展', () => {
+  assert.ok(THEATER_IDS.length >= 6);
+  assert.deepEqual(THEATER_IDS.slice(0, 3), ['scrap_mine', 'border_road', 'enemy_outpost']);
 });
 
 check('B02 三个战区难度递增（1→2→3）', () => {

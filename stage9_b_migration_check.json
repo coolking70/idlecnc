@@ -1,0 +1,24 @@
+{
+  "stage": "9-B",
+  "passed": true,
+  "saveVersion": 8,
+  "oldSaveEquipment": {
+    "inventory": [],
+    "bindings": {}
+  },
+  "oldSaveCreatesNothing": true,
+  "danglingUnitReferenceRemoved": true,
+  "danglingEquipmentReferenceRemoved": true,
+  "sanitizeOrder": [
+    "construction",
+    "production",
+    "units",
+    "equipment",
+    "operations",
+    "theaters",
+    "battles",
+    "activeBattle",
+    "repairs",
+    "formations"
+  ]
+}

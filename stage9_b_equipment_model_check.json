@@ -1,0 +1,76 @@
+{
+  "stage": "9-B",
+  "passed": true,
+  "saveVersion": 8,
+  "rules": {
+    "maxSlotsPerUnit": 2,
+    "roundingDigits": 4,
+    "starterInventory": 3
+  },
+  "definitions": {
+    "scout_optics": {
+      "id": "scout_optics",
+      "name": "战术光学组",
+      "slot": "utility",
+      "applicableTypes": [
+        "infantry",
+        "at_infantry",
+        "scout_car"
+      ],
+      "modifiers": {
+        "scouting": 1.15,
+        "mobility": 1.03
+      },
+      "acquisition": {
+        "kind": "starter",
+        "label": "初始装备补给"
+      },
+      "desc": "提高侦察与机动效率，不改变生命上限。"
+    },
+    "reinforced_chassis": {
+      "id": "reinforced_chassis",
+      "name": "强化底盘",
+      "slot": "utility",
+      "applicableTypes": [
+        "scout_car",
+        "mbt",
+        "repair_vehicle"
+      ],
+      "modifiers": {
+        "defense": 1.08,
+        "mobility": 1.04
+      },
+      "acquisition": {
+        "kind": "starter",
+        "label": "初始装备补给"
+      },
+      "desc": "提高车辆防护与机动效率，不改变生命上限。"
+    },
+    "field_toolkit": {
+      "id": "field_toolkit",
+      "name": "野战工具包",
+      "slot": "utility",
+      "applicableTypes": [
+        "infantry",
+        "repair_vehicle"
+      ],
+      "modifiers": {
+        "repair": 1.2,
+        "defense": 1.02
+      },
+      "acquisition": {
+        "kind": "starter",
+        "label": "初始装备补给"
+      },
+      "desc": "提高维修效率与野战保障能力，不改变生命上限。"
+    }
+  },
+  "inventoryShape": "{ inventory: [{ id, equipmentId, quantity: 1 }], bindings: { unitId: instanceId[] } }",
+  "bindingRules": [
+    "unit exists",
+    "equipment exists",
+    "applicable type",
+    "unique instance owner",
+    "max slots"
+  ]
+}

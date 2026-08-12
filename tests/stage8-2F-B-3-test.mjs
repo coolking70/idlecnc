@@ -14,7 +14,7 @@ let passed = 0;
 function check(name, fn) { fn(); passed += 1; console.log(`  PASS ${String(passed).padStart(2, '0')} ${name}`); }
 
 check('formal coverage matrix is explicit and versioned', () => {
-  const summary = getUniversalCoverageSummary(); assert.equal(UNIVERSAL_COVERAGE_MATRIX_VERSION, '8.2F-B.3'); assert.equal(summary.totalCells, 30); assert.equal(summary.coveredCells, 26); assert.equal(summary.unobservedCells.length, 4);
+  const summary = getUniversalCoverageSummary(); assert.equal(UNIVERSAL_COVERAGE_MATRIX_VERSION, '8.2F-B.3'); assert.equal(summary.totalCells, 60); assert.equal(summary.coveredCells, 44); assert.equal(summary.unobservedCells.length, 16);
   const disk = JSON.parse(fs.readFileSync(path.join(root, 'experiments/battle-sandbox/universal-planner/scenarios/coverage.json'), 'utf8')).missionResultMatrix; assert.deepEqual(summary.unobservedCells, disk.unobservedCells); assert.equal(summary.coveredCells, disk.coveredCells);
 });
 

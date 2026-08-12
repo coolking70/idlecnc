@@ -11,6 +11,7 @@ import {
   SAVE_VERSION, TIME, ECONOMY, BUILDINGS, BUILDING_STATUS, THEATERS, OPERATIONS
 } from './config.js';
 import { uid } from './utils.js';
+import { createInitialEquipmentState } from './equipment.js';
 
 /** 创建一份全新的初始状态（新游戏） */
 export function createInitialState() {
@@ -52,6 +53,9 @@ export function createInitialState() {
 
     /** 单位库存（阶段3） */
     units: [],
+
+    /** Stage 9-B：装备实例库存与单位挂载关系。 */
+    equipment: createInitialEquipmentState(),
 
     /** 编队（阶段4） */
     formations: [],

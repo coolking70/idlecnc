@@ -1,0 +1,18 @@
+{
+  "stage": "9-B",
+  "passed": true,
+  "mountChangedPaths": [
+    "equipment.bindings.stage9-b-unit-0"
+  ],
+  "forbiddenPaths": [
+    "battleSessions",
+    "battleSettlementLedger",
+    "battles",
+    "formations",
+    "settings",
+    "research",
+    "buildings",
+    "theaters"
+  ],
+  "settlementEquipmentUnchanged": true
+}

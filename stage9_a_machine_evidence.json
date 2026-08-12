@@ -1,0 +1,107 @@
+{
+  "stage": "9-A",
+  "version": 1,
+  "generatedBy": "tests/generate-stage9-A-machine-evidence.mjs",
+  "productionEntry": true,
+  "fixtureLoaderUsed": false,
+  "debugOverlayUsed": false,
+  "dispatchApiUsed": false,
+  "replayApiUsed": false,
+  "offlineApiUsed": false,
+  "prerequisiteStateSeeded": true,
+  "prerequisiteSeedMethod": "test-only prerequisite capture state; all Stage9 launch/review/confirm/report/replay actions remain DOM-driven",
+  "realReloadRequired": true,
+  "frameCount": 18,
+  "frames": [
+    {
+      "frame": 1,
+      "file": "s9-a-01-base.png",
+      "semantic": "base_before_stage9"
+    },
+    {
+      "frame": 2,
+      "file": "s9-a-02-buildings.png",
+      "semantic": "armor_factory_operational"
+    },
+    {
+      "frame": 3,
+      "file": "s9-a-03-units.png",
+      "semantic": "three_mbt_ready"
+    },
+    {
+      "frame": 4,
+      "file": "s9-a-04-formation.png",
+      "semantic": "formation_ready"
+    },
+    {
+      "frame": 5,
+      "file": "s9-a-05-eligibility.png",
+      "semantic": "river_crossing_eligibility"
+    },
+    {
+      "frame": 6,
+      "file": "s9-a-06-review.png",
+      "semantic": "deployment_review_new_theater"
+    },
+    {
+      "frame": 7,
+      "file": "s9-a-07-review_reload.png",
+      "semantic": "review_after_real_reload"
+    },
+    {
+      "frame": 8,
+      "file": "s9-a-08-running.png",
+      "semantic": "new_theater_running"
+    },
+    {
+      "frame": 9,
+      "file": "s9-a-09-running_reload.png",
+      "semantic": "running_after_real_reload"
+    },
+    {
+      "frame": 10,
+      "file": "s9-a-10-result.png",
+      "semantic": "new_theater_result"
+    },
+    {
+      "frame": 11,
+      "file": "s9-a-11-result_reload.png",
+      "semantic": "result_after_real_reload"
+    },
+    {
+      "frame": 12,
+      "file": "s9-a-12-report.png",
+      "semantic": "formal_report_view"
+    },
+    {
+      "frame": 13,
+      "file": "s9-a-13-operation.png",
+      "semantic": "repeat_operation_eligibility"
+    },
+    {
+      "frame": 14,
+      "file": "s9-a-14-operation_review.png",
+      "semantic": "repeat_operation_review"
+    },
+    {
+      "frame": 15,
+      "file": "s9-a-15-operation_cancel.png",
+      "semantic": "repeat_operation_cancelled"
+    },
+    {
+      "frame": 16,
+      "file": "s9-a-16-replay.png",
+      "semantic": "replay_started"
+    },
+    {
+      "frame": 17,
+      "file": "s9-a-17-replay_reload.png",
+      "semantic": "replay_after_real_reload"
+    },
+    {
+      "frame": 18,
+      "file": "s9-a-18-final.png",
+      "semantic": "replay_closed_final_reports"
+    }
+  ]
+}

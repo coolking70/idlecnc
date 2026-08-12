@@ -1,0 +1,56 @@
+{
+  "stage": "9-B",
+  "version": 1,
+  "generatedBy": "tests/generate-stage9-B-machine-evidence.mjs",
+  "productionEntry": true,
+  "fixtureLoaderUsed": false,
+  "debugOverlayUsed": false,
+  "dispatchApiUsed": false,
+  "replayApiUsed": false,
+  "offlineApiUsed": false,
+  "equipmentApiUsed": false,
+  "realReloadRequired": true,
+  "frameCount": 8,
+  "frames": [
+    {
+      "frame": 1,
+      "file": "s9-b-01-equipment-panel.png",
+      "semantic": "equipment_panel_mounted"
+    },
+    {
+      "frame": 2,
+      "file": "s9-b-02-equipment-panel-reload.png",
+      "semantic": "equipment_panel_after_real_reload"
+    },
+    {
+      "frame": 3,
+      "file": "s9-b-03-running-attempt.png",
+      "semantic": "running_equipment_change_attempt"
+    },
+    {
+      "frame": 4,
+      "file": "s9-b-04-running-reload.png",
+      "semantic": "running_after_real_reload"
+    },
+    {
+      "frame": 5,
+      "file": "s9-b-05-result-attempt.png",
+      "semantic": "result_equipment_change_attempt"
+    },
+    {
+      "frame": 6,
+      "file": "s9-b-06-result-reload.png",
+      "semantic": "result_after_real_reload"
+    },
+    {
+      "frame": 7,
+      "file": "s9-b-07-replay-attempt.png",
+      "semantic": "replay_equipment_change_attempt"
+    },
+    {
+      "frame": 8,
+      "file": "s9-b-08-replay-reload.png",
+      "semantic": "replay_after_real_reload"
+    }
+  ]
+}

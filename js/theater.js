@@ -17,7 +17,7 @@
 
 import {
   THEATERS, OPERATIONS, STRATEGIES, ENEMY_UNITS, TERRAIN, BATTLE, BATTLE_RESULT,
-  UNITS, BUILDING_STATUS, DAMAGE_STATES,
+  UNITS, BUILDING_STATUS, DAMAGE_STATES, EQUIPMENT_STAT_KEYS,
   FORMATION_STATUS, RESOURCE_DEFS
 } from './config.js';
 import { BATTLE_EVENT, simulateBattle, resultLabel, rebuildBattleFromDispatchSnapshot } from './battle.js';
@@ -26,6 +26,7 @@ import { logEvent, emit, LOG_LEVEL } from './events.js';
 import { safeNumber, clamp, randomSeed, formatInt } from './utils.js';
 import { getDamageState } from './unit-status.js';
 import { getUnitRank, getUnitEffectiveStats, formatUnitDisplayName } from './units.js';
+import { getEquipmentComposition } from './equipment.js';
 import { compareBattleReports, validateBattleOutcomeConsistency, stableStringify } from './integrity.js';
 import { OPERATION_CODE, getOperationCost, canDispatchOperation, operationCooldown } from './operations.js';
 import {
@@ -492,18 +493,30 @@ export function buildDispatchSnapshot(state, formation, theaterId, strategyId, m
     const unit = findUnit(state, unitId);
     if (!unit || !UNITS[unit.type]) return null;
     const rank = getUnitRank(unit);
-    const effective = getUnitEffectiveStats(unit);
+    const effective = getUnitEffectiveStats(unit, state && state.equipment);
+    const stats = {};
+    EQUIPMENT_STAT_KEYS.concat(['hp']).forEach((key) => {
+      stats[key] = safeNumber(effective && effective[key], UNITS[unit.type].stats[key]);
+    });
     return {
       id: unit.id, type: unit.type, hp: safeNumber(unit.hp, unit.maxHp), maxHp: safeNumber(unit.maxHp, 1),
       experience: safeNumber(unit.experience, 0), battles: Math.max(0, Math.floor(safeNumber(unit.battles, 0))),
       callsign: typeof unit.callsign === 'string' ? unit.callsign : null,
-      stats: effective, rankId: rank.id, rankName: rank.name, rankModifiers: { ...rank.modifiers }
+      // snapshot.stats 只允许七个正式战斗属性键；解析元数据单独留在 equipment 中。
+      stats,
+      equipment: effective && Array.isArray(effective.equipment)
+        ? effective.equipment.map((item) => ({
+          instanceId: item.instanceId, equipmentId: item.equipmentId, name: item.name,
+          slot: item.slot, slotIndex: item.slotIndex, modifiers: { ...item.modifiers }, desc: item.desc
+        })) : [],
+      rankId: rank.id, rankName: rank.name, rankModifiers: { ...rank.modifiers }
     };
   }).filter(Boolean);
   const research = state.research || {};
   return JSON.parse(JSON.stringify({
     formation: { id: formation.id, name: formation.name, experience: safeNumber(formation.experience, 0), unitIds: (formation.unitIds || []).slice() },
     units,
+    equipmentComposition: getEquipmentComposition(state && state.equipment, units.map((unit) => unit.id)),
     buildings: { radarOperational: hasRadar(state) },
     research: { revision: safeNumber(research.revision, 0), completed: Array.isArray(research.completed) ? research.completed.slice() : [] },
     theaterId, strategyId, missionKind, missionId,

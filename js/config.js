@@ -11,7 +11,7 @@
  * 存档 / 时间
  * ========================================================== */
 
-export const SAVE_VERSION = 7;
+export const SAVE_VERSION = 8;
 export const SAVE_KEY = 'iron-command.save.v1';
 /** 手动保存槽位：不被静默自动保存覆盖，供玩家点击“读取”时恢复。 */
 export const MANUAL_SAVE_KEY = 'iron-command.save.manual.v1';
@@ -340,6 +340,45 @@ export const UNITS = {
   }
 };
 
+/* ============================================================
+ * 装备定义（Stage 9-B）
+ *  - 装备是生产侧输入，只能通过部署快照进入正式战斗；
+ *  - hp 不属于可修正属性，避免与 sanitizeUnit 的基础生命上限契约冲突；
+ *  - modifiers 是乘法修正，结合顺序由 units.js 的有效属性解析器统一决定。
+ * ========================================================== */
+
+export const EQUIPMENT_STAT_KEYS = ['attack', 'antiArmor', 'defense', 'scouting', 'mobility', 'repair'];
+
+export const EQUIPMENT_RULES = {
+  maxSlotsPerUnit: 2,
+  roundingDigits: 4,
+  starterInventory: 3
+};
+
+export const EQUIPMENT = {
+  scout_optics: {
+    id: 'scout_optics', name: '战术光学组', slot: 'utility',
+    applicableTypes: ['infantry', 'at_infantry', 'scout_car'],
+    modifiers: { scouting: 1.15, mobility: 1.03 },
+    acquisition: { kind: 'starter', label: '初始装备补给' },
+    desc: '提高侦察与机动效率，不改变生命上限。'
+  },
+  reinforced_chassis: {
+    id: 'reinforced_chassis', name: '强化底盘', slot: 'utility',
+    applicableTypes: ['scout_car', 'mbt', 'repair_vehicle'],
+    modifiers: { defense: 1.08, mobility: 1.04 },
+    acquisition: { kind: 'starter', label: '初始装备补给' },
+    desc: '提高车辆防护与机动效率，不改变生命上限。'
+  },
+  field_toolkit: {
+    id: 'field_toolkit', name: '野战工具包', slot: 'utility',
+    applicableTypes: ['infantry', 'repair_vehicle'],
+    modifiers: { repair: 1.2, defense: 1.02 },
+    acquisition: { kind: 'starter', label: '初始装备补给' },
+    desc: '提高维修效率与野战保障能力，不改变生命上限。'
+  }
+};
+
 /** 单位老兵等级：等级由经验动态推导，不从存档读取。 */
 export const UNIT_RANKS = {
   recruit: {
@@ -657,6 +696,33 @@ export const THEATERS = {
     captureIncome: {},
     supplyMultiplier: 12,
     desc: '构筑了工事的前进基地，火力密集。'
+  },
+  river_crossing: {
+    id: 'river_crossing', name: '河谷渡场', terrain: 'road', terrainName: '河谷道路',
+    difficulty: 4, requires: ['enemy_outpost'], concealment: 16,
+    enemy: { enemy_infantry: 3 },
+    firstReward: { supply: 600, intel: 30 },
+    captureIncome: { supplyPerSec: 1 },
+    supplyMultiplier: 16,
+    desc: '穿越河谷的旧渡场，是向纵深推进的关键补给节点。'
+  },
+  relay_station: {
+    id: 'relay_station', name: '通信中继站', terrain: 'open', terrainName: '开阔高地',
+    difficulty: 5, requires: ['river_crossing'], concealment: 18,
+    enemy: { enemy_infantry: 4, enemy_at: 1, enemy_light_armor: 1 },
+    firstReward: { alloy: 700, intel: 35 },
+    captureIncome: { alloyPerSec: 1 },
+    supplyMultiplier: 20,
+    desc: '控制敌方纵深通信链路的高地中继站。'
+  },
+  mountain_pass: {
+    id: 'mountain_pass', name: '北岭山口', terrain: 'fortified', terrainName: '山口阵地',
+    difficulty: 6, requires: ['relay_station'], concealment: 20,
+    enemy: { enemy_infantry: 3, enemy_at: 1, enemy_light_armor: 1 },
+    firstReward: { alloy: 900, supply: 700, intel: 45 },
+    captureIncome: { supplyPerSec: 1, alloyPerSec: 1 },
+    supplyMultiplier: 24,
+    desc: '通往北岭纵深的最后山口，必须稳步夺取并守住。'
   }
 };
 
@@ -681,6 +747,27 @@ export const OPERATIONS = {
     supplyMultiplier: 10, intelCost: 3,
     rewards: { alloy: { min: 220, max: 360 }, intel: { min: 6, max: 12 } },
     experienceMultiplier: 1.25, desc: '清剿前哨站周边残余武装，获取情报和工业材料。'
+  },
+  river_ferry: {
+    id: 'river_ferry', name: '渡场补给', theaterId: 'river_crossing', missionKind: 'operation',
+    requiresCaptured: true, cooldown: 1200, enemy: { enemy_infantry: 4, enemy_at: 2 },
+    supplyMultiplier: 14, intelCost: 4,
+    rewards: { supply: { min: 260, max: 420 }, alloy: { min: 180, max: 300 } },
+    experienceMultiplier: 1.4, desc: '清理渡场周边袭扰部队，恢复纵深补给线。'
+  },
+  relay_intercept: {
+    id: 'relay_intercept', name: '信号截获', theaterId: 'relay_station', missionKind: 'operation',
+    requiresCaptured: true, cooldown: 1500, enemy: { enemy_infantry: 5, enemy_at: 2, enemy_light_armor: 1 },
+    supplyMultiplier: 18, intelCost: 6,
+    rewards: { intel: { min: 10, max: 18 }, alloy: { min: 260, max: 420 } },
+    experienceMultiplier: 1.6, desc: '截获中继站残余信号，压制敌方反攻准备。'
+  },
+  pass_patrol: {
+    id: 'pass_patrol', name: '山口巡防', theaterId: 'mountain_pass', missionKind: 'operation',
+    requiresCaptured: true, cooldown: 1800, enemy: { enemy_infantry: 5, enemy_at: 3, enemy_light_armor: 1 },
+    supplyMultiplier: 22, intelCost: 8,
+    rewards: { supply: { min: 360, max: 560 }, alloy: { min: 320, max: 520 } },
+    experienceMultiplier: 1.8, desc: '巡防北岭山口，确保纵深阵地不被重新渗透。'
   }
 };
 
@@ -847,6 +934,7 @@ export const CONFIG = {
   SAVE_VERSION, SAVE_KEY, MANUAL_SAVE_KEY, TIME, LOG, RESOURCE_DEFS, ECONOMY, RENDER, BASE_LAYOUT,
   BUILDINGS, BUILDING_STATUS, CONSTRUCTION, CONSTRUCTION_UI, UNITS, UNIT_RANKS, PRODUCTION, PRODUCTION_UI,
   DAMAGE_STATES, DAMAGE_THRESHOLDS, REPAIR, RESEARCH, TECHNOLOGIES,
+  EQUIPMENT, EQUIPMENT_RULES, EQUIPMENT_STAT_KEYS,
   FORMATION_STATUS, FORMATION_PRESETS, FORMATION, FORMATION_WARNINGS,
   THEATERS, OPERATIONS, ENEMY_UNITS, STRATEGIES, TERRAIN, BATTLE, BATTLE_RESULT,
   PANEL_TABS, STAGE_PLACEHOLDER, CURRENT_STAGE, CURRENT_STAGE_LABEL

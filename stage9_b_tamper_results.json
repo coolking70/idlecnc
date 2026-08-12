@@ -1,0 +1,608 @@
+{
+  "stage": "9-B",
+  "caseCount": 84,
+  "rejectionCount": 84,
+  "passedFlagOnlyCases": 0,
+  "cases": [
+    {
+      "label": "equipment-stat-attack",
+      "rejected": true,
+      "failureCodes": [
+        "effective_stats_true_value"
+      ]
+    },
+    {
+      "label": "equipment-stat-scouting",
+      "rejected": true,
+      "failureCodes": [
+        "effective_stats_true_value"
+      ]
+    },
+    {
+      "label": "equipment-order-result",
+      "rejected": true,
+      "failureCodes": [
+        "effective_stats_true_value"
+      ]
+    },
+    {
+      "label": "equipment-hp",
+      "rejected": true,
+      "failureCodes": [
+        "effective_stats_true_value"
+      ]
+    },
+    {
+      "label": "snapshot-stat",
+      "rejected": true,
+      "failureCodes": [
+        "snapshot_stats_true_value"
+      ]
+    },
+    {
+      "label": "snapshot-equipment-id",
+      "rejected": true,
+      "failureCodes": [
+        "snapshot_equipment_true_value"
+      ]
+    },
+    {
+      "label": "snapshot-equipment-modifier",
+      "rejected": true,
+      "failureCodes": [
+        "snapshot_equipment_true_value"
+      ]
+    },
+    {
+      "label": "snapshot-hash-input",
+      "rejected": true,
+      "failureCodes": [
+        "snapshot_hash_input"
+      ]
+    },
+    {
+      "label": "migration-fabricated-equipment",
+      "rejected": true,
+      "failureCodes": [
+        "migration_true_value"
+      ]
+    },
+    {
+      "label": "migration-fail-open-unit",
+      "rejected": true,
+      "failureCodes": [
+        "migration_true_value"
+      ]
+    },
+    {
+      "label": "migration-fail-open-equipment",
+      "rejected": true,
+      "failureCodes": [
+        "migration_true_value"
+      ]
+    },
+    {
+      "label": "save-diff-battle-pollution",
+      "rejected": true,
+      "failureCodes": [
+        "save_diff_true_value"
+      ]
+    },
+    {
+      "label": "save-diff-ledger-pollution",
+      "rejected": true,
+      "failureCodes": [
+        "save_diff_true_value"
+      ]
+    },
+    {
+      "label": "settlement-equipment-mutation",
+      "rejected": true,
+      "failureCodes": [
+        "save_diff_true_value"
+      ]
+    },
+    {
+      "label": "running-session-swap",
+      "rejected": true,
+      "failureCodes": [
+        "running_session_changed",
+        "active_session_binding_changed"
+      ]
+    },
+    {
+      "label": "running-deployment-hash",
+      "rejected": true,
+      "failureCodes": [
+        "running_deployment_hash_changed"
+      ]
+    },
+    {
+      "label": "running-report-hash",
+      "rejected": true,
+      "failureCodes": [
+        "running_report_hash_changed"
+      ]
+    },
+    {
+      "label": "result-ledger-count",
+      "rejected": true,
+      "failureCodes": [
+        "result_state_binding",
+        "settlement_ledger_changed"
+      ]
+    },
+    {
+      "label": "replay-deployment-hash",
+      "rejected": true,
+      "failureCodes": [
+        "replay_deployment_hash_changed"
+      ]
+    },
+    {
+      "label": "replay-report-hash",
+      "rejected": true,
+      "failureCodes": [
+        "replay_report_hash_changed"
+      ]
+    },
+    {
+      "label": "replay-equipment-current",
+      "rejected": true,
+      "failureCodes": [
+        "replay_equipment_changed"
+      ]
+    },
+    {
+      "label": "reload-time-origin-equal",
+      "rejected": true,
+      "failureCodes": [
+        "reload_time_origin",
+        "reload_declared_value"
+      ]
+    },
+    {
+      "label": "reload-time-origin-backwards",
+      "rejected": true,
+      "failureCodes": [
+        "reload_time_origin",
+        "reload_declared_value"
+      ]
+    },
+    {
+      "label": "reload-loader-swap",
+      "rejected": true,
+      "failureCodes": [
+        "reload_loader_id",
+        "reload_loader_duplicate"
+      ]
+    },
+    {
+      "label": "reload-reason-extra",
+      "rejected": true,
+      "failureCodes": [
+        "reload_reasons",
+        "reload_declared_value"
+      ]
+    },
+    {
+      "label": "reload-reason-missing",
+      "rejected": true,
+      "failureCodes": [
+        "reload_reasons"
+      ]
+    },
+    {
+      "label": "reload-declared-time-origin",
+      "rejected": true,
+      "failureCodes": [
+        "reload_declared_value"
+      ]
+    },
+    {
+      "label": "ui-action-mount-missing",
+      "rejected": true,
+      "failureCodes": [
+        "missing_ui_action",
+        "missing_ui_action"
+      ]
+    },
+    {
+      "label": "ui-action-unmount-missing",
+      "rejected": true,
+      "failureCodes": [
+        "missing_ui_action"
+      ]
+    },
+    {
+      "label": "ui-provenance-source",
+      "rejected": true,
+      "failureCodes": [
+        "action_provenance"
+      ]
+    },
+    {
+      "label": "ui-provenance-synthetic",
+      "rejected": true,
+      "failureCodes": [
+        "action_provenance"
+      ]
+    },
+    {
+      "label": "equipment-api-used",
+      "rejected": true,
+      "failureCodes": [
+        "browser_provenance"
+      ]
+    },
+    {
+      "label": "dispatch-api-used",
+      "rejected": true,
+      "failureCodes": [
+        "browser_provenance"
+      ]
+    },
+    {
+      "label": "fixture-loader-used",
+      "rejected": true,
+      "failureCodes": [
+        "browser_provenance"
+      ]
+    },
+    {
+      "label": "missing-result-coverage",
+      "rejected": true,
+      "failureCodes": [
+        "coverage"
+      ]
+    },
+    {
+      "label": "missing-replay-coverage",
+      "rejected": true,
+      "failureCodes": [
+        "coverage"
+      ]
+    },
+    {
+      "label": "missing-mount-coverage",
+      "rejected": true,
+      "failureCodes": [
+        "coverage"
+      ]
+    },
+    {
+      "label": "machine-frame-count",
+      "rejected": true,
+      "failureCodes": [
+        "frame_count"
+      ]
+    },
+    {
+      "label": "browser-capture-count",
+      "rejected": true,
+      "failureCodes": [
+        "capture_counts"
+      ]
+    },
+    {
+      "label": "browser-unique-hashes",
+      "rejected": true,
+      "failureCodes": [
+        "capture_counts"
+      ]
+    },
+    {
+      "label": "running-readonly-flag",
+      "rejected": true,
+      "failureCodes": [
+        "running_state_binding"
+      ]
+    },
+    {
+      "label": "result-settled-flag",
+      "rejected": true,
+      "failureCodes": [
+        "result_state_binding"
+      ]
+    },
+    {
+      "label": "replay-readonly-flag",
+      "rejected": true,
+      "failureCodes": [
+        "replay_state_binding"
+      ]
+    },
+    {
+      "label": "replay-session-swap",
+      "rejected": true,
+      "failureCodes": [
+        "active_session_binding_changed"
+      ]
+    },
+    {
+      "label": "replay-report-id-swap",
+      "rejected": true,
+      "failureCodes": [
+        "report_binding_changed"
+      ]
+    },
+    {
+      "label": "result-report-id-swap",
+      "rejected": true,
+      "failureCodes": [
+        "report_binding_changed"
+      ]
+    },
+    {
+      "label": "running-settlement-id-swap",
+      "rejected": true,
+      "failureCodes": [
+        "settlement_binding_changed"
+      ]
+    },
+    {
+      "label": "running-unit-equipment-copy",
+      "rejected": true,
+      "failureCodes": [
+        "running_equipment_changed"
+      ]
+    },
+    {
+      "label": "replay-unit-equipment-copy",
+      "rejected": true,
+      "failureCodes": [
+        "replay_equipment_changed"
+      ]
+    },
+    {
+      "label": "frame-state-report-count",
+      "rejected": true,
+      "failureCodes": [
+        "report_count_changed"
+      ]
+    },
+    {
+      "label": "frame-state-session-id",
+      "rejected": true,
+      "failureCodes": [
+        "session_binding_changed",
+        "session_binding_changed",
+        "session_binding_changed",
+        "session_binding_changed",
+        "session_binding_changed"
+      ]
+    },
+    {
+      "label": "browser-page-error",
+      "rejected": true,
+      "failureCodes": [
+        "browser_errors"
+      ]
+    },
+    {
+      "label": "browser-console-error",
+      "rejected": true,
+      "failureCodes": [
+        "browser_errors"
+      ]
+    },
+    {
+      "label": "performance-effective-p95",
+      "rejected": true,
+      "failureCodes": [
+        "performance_budget"
+      ]
+    },
+    {
+      "label": "performance-snapshot-p95",
+      "rejected": true,
+      "failureCodes": [
+        "performance_budget"
+      ]
+    },
+    {
+      "label": "performance-environment",
+      "rejected": true,
+      "failureCodes": [
+        "performance_environment"
+      ]
+    },
+    {
+      "label": "core-effective-base",
+      "rejected": true,
+      "failureCodes": [
+        "effective_stats_true_value"
+      ]
+    },
+    {
+      "label": "core-snapshot-unit",
+      "rejected": true,
+      "failureCodes": [
+        "snapshot_unit_binding"
+      ]
+    },
+    {
+      "label": "core-replay-history",
+      "rejected": true,
+      "failureCodes": [
+        "historical_replay_true_value"
+      ]
+    },
+    {
+      "label": "core-isolation-ledger",
+      "rejected": true,
+      "failureCodes": [
+        "isolation_ledger_true_value"
+      ]
+    },
+    {
+      "label": "semantic-frame-1",
+      "rejected": true,
+      "failureCodes": [
+        "semantic_frame_order"
+      ]
+    },
+    {
+      "label": "image-hash-1",
+      "rejected": true,
+      "failureCodes": [
+        "screenshot_hash_mismatch"
+      ]
+    },
+    {
+      "label": "screenshot-hash-1",
+      "rejected": true,
+      "failureCodes": [
+        "screenshot_hash_mismatch"
+      ]
+    },
+    {
+      "label": "semantic-frame-2",
+      "rejected": true,
+      "failureCodes": [
+        "semantic_frame_order"
+      ]
+    },
+    {
+      "label": "image-hash-2",
+      "rejected": true,
+      "failureCodes": [
+        "screenshot_hash_mismatch"
+      ]
+    },
+    {
+      "label": "screenshot-hash-2",
+      "rejected": true,
+      "failureCodes": [
+        "screenshot_hash_mismatch"
+      ]
+    },
+    {
+      "label": "semantic-frame-3",
+      "rejected": true,
+      "failureCodes": [
+        "semantic_frame_order"
+      ]
+    },
+    {
+      "label": "image-hash-3",
+      "rejected": true,
+      "failureCodes": [
+        "screenshot_hash_mismatch"
+      ]
+    },
+    {
+      "label": "screenshot-hash-3",
+      "rejected": true,
+      "failureCodes": [
+        "screenshot_hash_mismatch"
+      ]
+    },
+    {
+      "label": "semantic-frame-4",
+      "rejected": true,
+      "failureCodes": [
+        "semantic_frame_order"
+      ]
+    },
+    {
+      "label": "image-hash-4",
+      "rejected": true,
+      "failureCodes": [
+        "screenshot_hash_mismatch"
+      ]
+    },
+    {
+      "label": "screenshot-hash-4",
+      "rejected": true,
+      "failureCodes": [
+        "screenshot_hash_mismatch"
+      ]
+    },
+    {
+      "label": "semantic-frame-5",
+      "rejected": true,
+      "failureCodes": [
+        "semantic_frame_order"
+      ]
+    },
+    {
+      "label": "image-hash-5",
+      "rejected": true,
+      "failureCodes": [
+        "screenshot_hash_mismatch"
+      ]
+    },
+    {
+      "label": "screenshot-hash-5",
+      "rejected": true,
+      "failureCodes": [
+        "screenshot_hash_mismatch"
+      ]
+    },
+    {
+      "label": "semantic-frame-6",
+      "rejected": true,
+      "failureCodes": [
+        "semantic_frame_order"
+      ]
+    },
+    {
+      "label": "image-hash-6",
+      "rejected": true,
+      "failureCodes": [
+        "screenshot_hash_mismatch"
+      ]
+    },
+    {
+      "label": "screenshot-hash-6",
+      "rejected": true,
+      "failureCodes": [
+        "screenshot_hash_mismatch"
+      ]
+    },
+    {
+      "label": "semantic-frame-7",
+      "rejected": true,
+      "failureCodes": [
+        "semantic_frame_order"
+      ]
+    },
+    {
+      "label": "image-hash-7",
+      "rejected": true,
+      "failureCodes": [
+        "screenshot_hash_mismatch"
+      ]
+    },
+    {
+      "label": "screenshot-hash-7",
+      "rejected": true,
+      "failureCodes": [
+        "screenshot_hash_mismatch"
+      ]
+    },
+    {
+      "label": "semantic-frame-8",
+      "rejected": true,
+      "failureCodes": [
+        "semantic_frame_order"
+      ]
+    },
+    {
+      "label": "image-hash-8",
+      "rejected": true,
+      "failureCodes": [
+        "screenshot_hash_mismatch"
+      ]
+    },
+    {
+      "label": "screenshot-hash-8",
+      "rejected": true,
+      "failureCodes": [
+        "screenshot_hash_mismatch"
+      ]
+    }
+  ],
+  "passed": true
+}

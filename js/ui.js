@@ -34,6 +34,8 @@ import {
   getActiveBattle, getReports, hasRadar, buildDispatchSnapshot
 } from './theater.js';
 import { getOperationCost } from './operations.js';
+import { EQUIPMENT_RULES } from './config.js';
+import { canEquipEquipment, getEquipmentDefinition, getUnitEquipment } from './equipment.js';
 import {
   missionKindLabel, dispatchEligibilityText, operationCooldownText, unitStatusLabel
 } from './mission-command-presentation.js';
@@ -866,7 +868,7 @@ export class UI {
 
   _buildUnitsPage(page) {
     const r = this.refs;
-    r.units = { selectedId: null, filter: 'all', status: 'all', rank: 'all', sort: 'createdAt' };
+    r.units = { selectedId: null, filter: 'all', status: 'all', rank: 'all', sort: 'createdAt', equipmentSignature: '', detailUnitId: null };
     const summary = el('div', 'card units-summary');
     r.units.summary = el('div', 'units-summary-grid');
     summary.appendChild(r.units.summary);
@@ -933,7 +935,18 @@ export class UI {
     });
     const selected = list.find((unit) => unit.id === r.selectedId) || list[0] || null;
     r.selectedId = selected ? selected.id : null;
-    this._renderUnitDetail(state, selected);
+    const equipmentSignature = JSON.stringify({
+      equipment: state.equipment || null,
+      battle: state.activeBattle ? {
+        id: state.activeBattle.id || null,
+        replayReadOnly: state.activeBattle.replayReadOnly === true,
+        settled: state.activeBattle.settled === true
+      } : null
+    });
+    if (r.equipmentSignature !== equipmentSignature || r.detailUnitId !== (selected && selected.id)) {
+      r.equipmentSignature = equipmentSignature;
+      this._renderUnitDetail(state, selected);
+    }
   }
 
   _renderUnitDetail(state, unit) {
@@ -942,7 +955,7 @@ export class UI {
     box.innerHTML = '';
     box.appendChild(el('div', 'card-head', '单位详情'));
     if (!unit) { box.appendChild(el('div', 'hint', '选择一个单位查看详情。')); return; }
-    const def = UNITS[unit.type]; const rank = getUnitRank(unit); const progress = getRankProgress(unit); const stats = getUnitEffectiveStats(unit);
+    const def = UNITS[unit.type]; const rank = getUnitRank(unit); const progress = getRankProgress(unit); const stats = getUnitEffectiveStats(unit, state.equipment);
     const name = el('div', 'unit-detail-title'); name.appendChild(el('b', '', formatUnitDisplayName(unit))); name.appendChild(el('span', 'tag ok', rank.name)); box.appendChild(name);
     const callsign = el('input', 'unit-callsign'); callsign.type = 'text'; callsign.maxLength = 12; callsign.value = unit.callsign || ''; callsign.placeholder = '输入呼号（最多12字）';
     const rename = el('button', 'btn primary small', '保存呼号'); rename.type = 'button'; rename.addEventListener('click', () => this.handlers.onRenameUnit && this.handlers.onRenameUnit(unit.id, callsign.value));
@@ -951,6 +964,36 @@ export class UI {
     const bar = el('div', 'bar unit-rank'); const fill = el('i'); fill.style.width = `${progress.percent}%`; bar.appendChild(fill); box.appendChild(bar);
     const statHead = el('div', 'section-head sub'); statHead.appendChild(el('span', '', '战斗中实际属性')); box.appendChild(statHead);
     ['attack', 'antiArmor', 'defense', 'scouting', 'mobility', 'repair'].forEach((key) => { const row = el('div', 'kv'); row.appendChild(el('span', '', key)); row.appendChild(el('span', '', `${stats[key]}（基础 ${def.stats[key]}）`)); box.appendChild(row); });
+
+    const equipmentHead = el('div', 'section-head sub');
+    equipmentHead.appendChild(el('span', '', `装备槽位（${(stats.equipment || []).length}/${EQUIPMENT_RULES.maxSlotsPerUnit}）`));
+    box.appendChild(equipmentHead);
+    const equipped = getUnitEquipment(state.equipment, unit.id);
+    if (!equipped.length) box.appendChild(el('div', 'hint', '当前没有挂载装备。'));
+    equipped.forEach((item) => {
+      const row = el('div', 'kv equipment-row');
+      row.appendChild(el('span', '', `${item.name} · 槽位${item.slotIndex + 1}`));
+      const remove = el('button', 'btn small', '卸载');
+      remove.type = 'button'; remove.dataset.action = 'unequip-equipment'; remove.dataset.unitId = unit.id; remove.dataset.equipmentInstanceId = item.instanceId;
+      remove.addEventListener('click', () => this.handlers.onUnequipEquipment && this.handlers.onUnequipEquipment(unit.id, item.instanceId));
+      row.appendChild(remove); box.appendChild(row);
+    });
+
+    const available = Array.isArray(state.equipment?.inventory) ? state.equipment.inventory : [];
+    const mountedIds = new Set(equipped.map((item) => item.instanceId));
+    available.filter((instance) => !mountedIds.has(instance.id)).forEach((instance) => {
+      const equipmentDef = getEquipmentDefinition(instance.equipmentId);
+      if (!equipmentDef) return;
+      const check = canEquipEquipment(state, unit.id, instance.id);
+      const row = el('div', 'kv equipment-row');
+      row.appendChild(el('span', '', `${equipmentDef.name} · ${Object.entries(equipmentDef.modifiers).map(([key, value]) => `${key}×${value}`).join(' ')}`));
+      const mount = el('button', 'btn primary small', '挂载');
+      mount.type = 'button'; mount.dataset.action = 'equip-equipment'; mount.dataset.unitId = unit.id; mount.dataset.equipmentInstanceId = instance.id; mount.disabled = !check.ok;
+      mount.title = check.ok ? equipmentDef.desc : check.reason;
+      mount.addEventListener('click', () => this.handlers.onEquipEquipment && this.handlers.onEquipEquipment(unit.id, instance.id));
+      row.appendChild(mount); box.appendChild(row);
+    });
+    this.refs.units.detailUnitId = unit.id;
   }
 
   /* ==========================================================

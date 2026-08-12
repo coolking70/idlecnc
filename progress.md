@@ -662,3 +662,25 @@
 - [x] 未改动 `js/` 下任何运行时源码，未改动 `tests/lib/` 下任何 verifier 判定逻辑，未删除/放宽任何测试断言、tamper 用例或性能阈值（16.7ms 红线不变），未重新引入任何自指 `finalHead`。
 - [x] 本地完整 `npm run gate:stage8-2G` 与 `npm run verify:clean-clone` 实跑均为绿，真实输出见本 Issue 评论与 `STAGE8-2G-E-C-DELIVERY.md`。
 - [x] `.cnb.yml` 流水线在容器内 git checkout 后跑相同门禁链，现可复现通过（本环境已用 Chromium 实跑验证）。
+
+# Stage 9-A progress
+
+- [x] 新增 `river_crossing`、`relay_station`、`mountain_pass` 三个无环战区，以及 `river_ferry`、`relay_intercept`、`pass_patrol` 三个重复任务；旧战区与旧任务 ID 保持不变。
+- [x] 新增战区使用既有敌军类型，难度/补给倍率/首占奖励单调递增；正式模拟为三个新战区各找到可捕获 seed。
+- [x] 新增 21 项 Stage9 逻辑检查：资格、DAG、迁移、失败零副作用、双 dispatch、正式结算、save/reload、离线暂停、只读回放、篡改任务绑定和 Authority Freeze 全部通过。
+- [x] scenario corpus 重新生成：canonical 120 + fuzz 1000，12 mission IDs，12×5=60 cells，44 covered / 16 unobserved；coverage report 与生产 coverage matrix 已同步。
+- [x] 性能/回归和浏览器证据脚本接入 package、CI 与完整 gate；浏览器完成 18/18 唯一截图、4 次真实重载，新增战区和重复任务关键动作由生产 DOM 完成。
+- [x] Stage9 强证据与篡改审计通过：80/80 拒绝、`passedFlagOnlyCases=0`；完成 `STAGE9-A-DELIVERY.md` 和全部 `stage9_a_*` 证据文件。
+- [x] 最终完整 `npm test` 与 `npm run gate:stage8-2G` 已通过；新 HEAD 连续两次 clean-clone、提交及远端推送为交付收口步骤。
+
+# Stage 9-B progress
+
+- [x] 新增 `EQUIPMENT` 配置、实例库存、单位绑定、2 槽位规则与 acquisition condition；`sanitizeEquipment` 在 `sanitizeUnits` 之后 fail-closed 清洗两端悬空引用、重复实例、非法数量和不适用单位。
+- [x] `SAVE_VERSION` 从 7 递增到 8；旧存档无装备字段时显式迁移为空库存，不使用新游戏 starter inventory，避免凭空生成装备。
+- [x] 有效属性唯一接入 `getUnitEffectiveStats(unit, equipmentState)`：基础 → 老兵 → 装备，逐次 `toFixed(4)` 确定性舍入；装备不接触 hp/maxHp。
+- [x] `buildDispatchSnapshot()` 记录七个合法数值属性、逐单位装备历史编成和 `equipmentComposition`；Formal Solver、Settlement、Replay 状态机未改动。
+- [x] 运行战斗、结果面板和只读回放期间装备变更 fail-closed；历史回放读取部署快照；结算不修改装备；UI 装备入口使用真实 `data-action` DOM 控件与增量 `equipmentSignature`。
+- [x] Stage 9-B core/performance/independent evidence/tamper/browser 脚本已接入 package posttest、gate 和 GitHub workflow；四次真实 `Page.reload`、8 张唯一截图、84 个真值 tamper cases，`passedFlagOnlyCases=0`。
+- [x] 完整 `npm run gate:stage8-2G` 实跑 `exit=0`；Stage 8.2G、Stage 9-A 与 Stage 9-B 均通过，Stage 9-B 为 8 帧 / 4 次真实 reload / 84/84 tamper rejection。
+- [x] 分支 `auto/stage9-b-equipment-system` 已推送到 cnb；最终远端 SHA、工作树状态与 clean-clone JSON 以收口命令输出为准。
+- [x] 已完成最终 HEAD 的 `verify:clean-clone`：`git-clone`、`clone-head-matches`、`npm-install`、`gate:stage8-2G` 全部通过，`overallPassed: true`，完整 JSON 已原样交付。

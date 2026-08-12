@@ -333,8 +333,8 @@ check('A01 CURRENT_STAGE 已进入阶段8', () => {
   assert.equal(CURRENT_STAGE, 8);
 });
 
-check('A02 SAVE_VERSION === 7', () => {
-  assert.equal(SAVE_VERSION, 7);
+check('A02 SAVE_VERSION === 8', () => {
+  assert.equal(SAVE_VERSION, 8);
 });
 
 check('A03 package.json 版本号保持0.8.1-hotfix系列', () => {

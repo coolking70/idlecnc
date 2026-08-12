@@ -39,7 +39,7 @@ console.log('\n═════════════════════�
 console.log('  钢铁指令 阶段7 自动测试');
 console.log('════════════════════════════════════════════');
 
-check('A01 阶段与存档版本', () => { assert.equal(cfg.CURRENT_STAGE, 8); assert.equal(cfg.SAVE_VERSION, 7); });
+check('A01 阶段与存档版本', () => { assert.equal(cfg.CURRENT_STAGE, 8); assert.equal(cfg.SAVE_VERSION, 8); });
 check('A02 package 版本保持0.8.1-hotfix系列', () => { assert.match(JSON.parse(readFileSync(path.join(ROOT, 'package.json'))).version, /^0\.8\.1-hotfix\./); });
 check('A03 损伤阈值为 0.75 / 0.40', () => { assert.deepEqual(cfg.DAMAGE_THRESHOLDS, { intact: 0.75, light: 0.4 }); });
 check('A04 unit-status 80% 完好', () => { assert.equal(unitStatus.getDamageState(80, 100), 'intact'); });

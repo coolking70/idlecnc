@@ -1,0 +1,27 @@
+{
+  "stage": "9-A",
+  "passed": true,
+  "forbiddenPaths": [
+    "js/battle.js",
+    "js/battle-presentation/universal/universal-plan-builder.js",
+    "js/battle-presentation/universal/universal-choreographer.js",
+    "tests/lib/"
+  ],
+  "changedFiles": [
+    ".github/workflows/core-regression.yml",
+    "experiments/battle-sandbox/tests/universal-presentation-delivery-test.mjs",
+    "experiments/battle-sandbox/universal-planner/coverage-report.mjs",
+    "experiments/battle-sandbox/universal-planner/scenario-corpus-generator.mjs",
+    "experiments/battle-sandbox/universal-planner/scenarios/canonical.json",
+    "experiments/battle-sandbox/universal-planner/scenarios/coverage.json",
+    "experiments/battle-sandbox/universal-planner/scenarios/fuzz-specs.json",
+    "experiments/battle-sandbox/universal-planner/scenarios/manifest.json",
+    "js/battle-presentation/universal/universal-coverage-matrix.js",
+    "js/config.js",
+    "package.json",
+    "progress.md",
+    "tests/stage5-test.mjs",
+    "tests/stage8-2F-B-3-test.mjs",
+    "tests/stage8-test.mjs"
+  ]
+}
