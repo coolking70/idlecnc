@@ -22,8 +22,10 @@ Primary categories: **D — Windows/macOS vs Linux difference** and **L — timi
 
 The Ubuntu runner's serialized process history made the duplicate D-C.1 measurement non-reproducible. Local macOS dirty-tree and local clean-clone runs passed. The GitHub run's 21/21 Stage 9-A functional checks passed, while the independent D-C.1 run passed earlier and the duplicated invocation was the unstable part of the Stage 9-A aggregate. A fresh clean clone reproduced `npm run test:stage9-A` with exit 0.
 
+The first final-head attempt after that fix exposed a second, separate runner-order failure. Run `31637103269`, job `94250091443`, passed Stage 8.2G through D-C, then the independent D-C.1 step measured the `stage8g-dc-art` scene at p95 `17.442ms` on Ubuntu 24.04 / Node 22.23.2 after the preceding D-A/D-B workload; the assertion failed at `tests/stage8-2G-D-C-1-performance-test.mjs:46`. The same command passed before the heavy regression on the local machine (`3.468/2.885/4.161ms` in the three scenes). This is category **L** (timing/runner load), with the platform-specific manifestation in category **M**.
+
 ## Fix
 
-`tests/stage9-A-performance-test.mjs` no longer repeats the already-independent D-C.1 performance command. It still runs the four non-performance regression commands, records their exit status, signal, and expanded output tail, and keeps the Stage 9-A performance measurement and 16.7ms semantics unchanged. The independent CI step remains in `.github/workflows/core-regression.yml`; no step was deleted, made optional, or allowed to continue after failure.
+`tests/stage9-A-performance-test.mjs` no longer repeats the already-independent D-C.1 performance command. The independent D-C.1 CI step remains, and is now scheduled immediately after install, before the CPU-heavy D-A/D-B regression sequence. No step was deleted, made optional, or allowed to continue after failure. The D-C.1 guard, warmup, 120 samples, and strict 16.7ms budget are unchanged.
 
 No production authority, battle, planner, choreographer, solver, settlement, save-diff, or `tests/lib/` file was changed.

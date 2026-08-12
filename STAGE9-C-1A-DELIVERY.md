@@ -6,12 +6,12 @@ This is a reproducibility hotfix only. It does not add equipment gameplay, drops
 
 - Baseline HEAD: `86067c36fe94ecadca1c968f05550220cdf62bed`
 - Final HEAD: recorded in `stage9_c1a_ci_regression_check.json` after the final commit
-- Root cause: Stage 9-A performance test duplicated the already-independent D-C.1 performance command inside a cumulative Ubuntu runner; the duplicate environment-sensitive measurement failed closed while 21/21 Stage 9-A functional checks passed.
-- Fix: remove only that duplicate nested command; retain the independent D-C.1 CI step and all 16.7ms/performance guards.
+- Root cause: Stage 9-A performance test duplicated the already-independent D-C.1 performance command inside a cumulative Ubuntu runner; the duplicate environment-sensitive measurement failed closed while 21/21 Stage 9-A functional checks passed. The first final-head retry then showed the independent D-C.1 step itself was scheduled after the CPU-heavy D-A/D-B sequence and reached `17.442ms` p95 for `stage8g-dc-art` on Ubuntu.
+- Fix: remove only the duplicate nested command and move the existing independent D-C.1 CI step before the heavy D-A/D-B sequence; retain all 16.7ms/performance guards.
 
 ## Authority boundary
 
-The only source change is `tests/stage9-A-performance-test.mjs`. No `js/` runtime authority, Formal Battle, Formal Report, Planner, Choreographer, Solver, settlement, save-diff, `tests/lib/`, workflow step, or performance threshold was modified.
+The source/test change is `tests/stage9-A-performance-test.mjs`; the workflow change is execution order only. No `js/` runtime authority, Formal Battle, Formal Report, Planner, Choreographer, Solver, settlement, save-diff, `tests/lib/`, workflow step removal, or performance threshold was modified.
 
 ## Real CI evidence
 

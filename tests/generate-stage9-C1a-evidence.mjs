@@ -49,7 +49,8 @@ const output = {
   },
   authorityFreeze: {
     passed: changed.every((file) => !forbidden.some((prefix) => file === prefix || file.startsWith(prefix))),
-    modifiedFrozenFiles: changed.filter((file) => forbidden.some((prefix) => file === prefix || file.startsWith(prefix)))
+    modifiedFrozenFiles: changed.filter((file) => forbidden.some((prefix) => file === prefix || file.startsWith(prefix))),
+    workflowOnlyOrderChange: changed.includes('.github/workflows/core-regression.yml')
   },
   environment: { platform: os.platform(), arch: os.arch(), cpuModel: os.cpus()[0]?.model || null, cpuCount: os.cpus().length, nodeVersion: process.version },
   passed: stage9A.passed === true && tamper.caseCount === 141 && tamper.rejectionCount === 141 && tamper.coupledTamperCaseCount === 11 && tamper.coupledTamperRejected === 11 && tamper.passedFlagOnlyCases === 0 && stage9C.passed === true

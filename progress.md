@@ -711,4 +711,7 @@
 - [x] 已将根因分类为 Ubuntu runner 累计负载下的重复性能测量时序不稳定（D + L）；本地 dirty tree 与 clean clone 的 `npm run test:stage9-A` 均可通过。
 - [x] 修复范围仅为 `tests/stage9-A-performance-test.mjs`：保留 E-A/E-A.1/E-B/E-C 回归，移除已由独立 CI step 执行的 D-C.1 重复调用；未放宽 16.7ms、未删除 CI step、未修改生产 authority。
 - [x] 修复后本地 Stage 9-A `21/21`、Stage 9-A Browser `18` 帧/80 tamper、Stage 9-B Node/Browser、Stage 9-C Node/Browser 均通过；Stage 9-C 为 `141/141` tamper、`11/11` coupled、`0` flag-only。
-- [ ] 最终提交、clean-clone、远端 SHA 与同 SHA GitHub Actions success 仍待本轮收口。
+- [x] 提交 `741fcbc785f40b6150ccdcf1600543899cc2bfd9` 已推送；其 clean-clone 从该 SHA 实际执行并返回 `overallPassed: true`。
+- [x] 同 SHA CI Run `31637103269` 证明 Stage 9-A 已通过，但暴露第二个真实问题：独立 D-C.1 在 D-A/D-B 重负载之后的 Ubuntu/Node 22 测量中 `stage8g-dc-art p95=17.442ms`，于 `tests/stage8-2G-D-C-1-performance-test.mjs:46` fail-closed。
+- [x] 第二个修复已确定为 CI 执行顺序：保留独立 D-C.1 step、120 samples、环境守卫和 16.7ms 阈值，将其提前到重负载 D-A/D-B 回归之前；无生产 authority 改动。
+- [ ] 第二个修复提交、clean-clone、远端 SHA 与同 SHA GitHub Actions success 仍待本轮收口。
