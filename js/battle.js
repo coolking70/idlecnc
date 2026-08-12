@@ -149,7 +149,7 @@ export function simulateBattle(params) {
     const u = (state.units || []).find((x) => x && x.id === uid);
     if (!u || !UNITS[u.type]) return null;
     const rank = getUnitRank(u);
-    return { ...u, stats: getUnitEffectiveStats(u), rank };
+    return { ...u, stats: getUnitEffectiveStats(u, state && state.equipment), rank };
   }).filter(Boolean)).map((u) => {
     const def = UNITS[u.type];
     if (!def) return null;
