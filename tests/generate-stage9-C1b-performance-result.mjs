@@ -13,7 +13,7 @@ const qualificationTamper = read('stage8_2g_dc1_performance_environment_tamper_r
 const verdict = verifyDC1PerformanceEvidence(performance);
 assert.equal(verdict.ok, true, JSON.stringify(verdict));
 assert.equal(qualificationTamper.passed, true);
-assert.equal(qualificationTamper.rejectionCount, 8);
+assert.equal(qualificationTamper.rejectionCount, 9);
 assert.equal(qualificationTamper.passedFlagOnlyCases, 0);
 
 const result = {
