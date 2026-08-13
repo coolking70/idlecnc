@@ -721,3 +721,15 @@
 - [x] `npm run gate:stage8-2G` exit=0；Stage 9-C 真实浏览器为 9 帧、4 次 reload、141/141 tamper、11/11 coupled、0 flag-only。
 - [x] `npm run verify:clean-clone` exit=0，`overallPassed=true`，`clonedHead == currentHead == 8ec82cf5d3b6deb5aa3db011b76db9198aad5213`，完整 JSON 见 `stage9_c1a_clean_clone_result.json`。
 - [x] `git ls-remote origin refs/heads/auto/stage9-c-equipment-acquisition` 返回 `8ec82cf5d3b6deb5aa3db011b76db9198aad5213`；Stage 9-C.1a 已闭环。
+
+# Stage 9-C.1b progress
+
+- [x] 已从 GitHub Actions Run `31648264645` 的两个 attempt 取得原始日志并记录可审计字段；旧日志未保存 CPU/load/guard 全量数据的部分明确标为 unavailable，不使用其它时刻数值冒充。
+- [x] D-C.1 preflight 增加有效 CPU/cgroup quota、归一化 load、event-loop jitter、确定性 CPU calibration、方差/尾比、warm-up drift 与 cgroup throttling；不改 16.7ms 产品预算。
+- [x] 正式性能证据保存每场景 120 个原始 timing samples、p50/p90/p95/max 与完整 qualification probes；正式测量次数固定为 1，禁止 retry/best-of/outlier trimming。
+- [x] 新增独立 performance verifier 与 8 个 true-value 环境篡改用例；当前 8/8 拒绝、passedFlagOnlyCases=0。
+- [x] `test:stage8-2G-D-C-1` 拆为 performance + functional aggregate；普通 `npm test` 先运行 performance，后运行 functional，完整覆盖不减少且不在重负载后重复测量。
+- [x] GitHub workflow 拆为 required `dc1-performance`、`node-core`、`final-closure`；性能 artifact 供 functional 验证，legacy 8-sample smoke evidence 不再覆盖正式 120-sample 结果。
+- [x] 新增 same-SHA performance、Stage 9 与 final closure runtime generators；clean-clone 可把纯 JSON 写入 artifact 路径。
+- [x] 已新增静态根因与交付 contract 文档；runtime SHA、run ID、机器和最终数值不再提交回仓库。
+- [ ] 待完成本地完整门禁、唯一 FINAL_HEAD 提交/推送、Run A first execution、同 SHA Run B、artifact 与 remote/clean-clone identity 收口；验证后禁止新 commit。

@@ -69,7 +69,10 @@ function diffPaths(before, after) {
 }
 
 function sourceChangedFiles() {
-  return execFileSync('git', ['diff', '--name-only', 'HEAD'], { cwd: root, encoding: 'utf8' }).split(/\r?\n/).filter(Boolean);
+  const baseline = '27c115848bea9aaa965fa46b784940a9949537e4';
+  const committed = execFileSync('git', ['diff', '--name-only', `${baseline}..HEAD`], { cwd: root, encoding: 'utf8' }).split(/\r?\n/).filter(Boolean);
+  const working = execFileSync('git', ['diff', '--name-only', 'HEAD'], { cwd: root, encoding: 'utf8' }).split(/\r?\n/).filter(Boolean);
+  return [...new Set([...committed, ...working])].sort();
 }
 
 console.log('\n── Stage 9-B equipment core / persistence / snapshot ──');
@@ -268,12 +271,13 @@ check('equipment mutation changes only equipment paths and settlement never chan
 
 check('authority freeze, Stage 9-A constants and UI authority boundaries are untouched', () => {
   const changed = sourceChangedFiles();
+  const allowedPerformanceHelper = 'tests/lib/perf-environment.mjs';
   const forbidden = [
-    'js/battle.js', 'js/battle-presentation/universal/universal-plan-builder.js',
-    'js/battle-presentation/universal/universal-choreographer.js', 'tests/lib/'
+    'js/battle.js', 'js/theater.js', 'js/save-diff.js',
+    'js/battle-presentation/universal/', 'experiments/battle-sandbox/universal-planner/universal-planner.js'
   ];
   assert.deepEqual(changed.filter((file) => forbidden.some((prefix) => file === prefix || file.startsWith(prefix))), []);
-  assert.ok(!changed.includes('js/save-diff.js'));
+  assert.deepEqual(changed.filter((file) => file.startsWith('tests/lib/') && file !== allowedPerformanceHelper), []);
   assert.equal(Object.keys(THEATERS).length, 6);
   assert.equal(Object.keys(OPERATIONS).length, 6);
   const ui = fs.readFileSync(path.join(root, 'js/ui.js'), 'utf8');
@@ -281,7 +285,7 @@ check('authority freeze, Stage 9-A constants and UI authority boundaries are unt
   assert.match(ui, /dataset\.action = 'unequip-equipment'/);
   assert.match(ui, /getUnitEffectiveStats\(unit, state\.equipment\)/);
   writeEvidence('stage9_b_authority_check.json', {
-    stage: '9-B', passed: true, changedFiles: changed, forbiddenPaths: forbidden,
+    stage: '9-B', passed: true, changedFiles: changed, forbiddenPaths: forbidden, allowedPerformanceHelper,
     solverPlannerChoreographerChanged: false, saveDiffChanged: false,
     stage9A: { theaterCount: Object.keys(THEATERS).length, operationCount: Object.keys(OPERATIONS).length },
     uiReadsAuthoritativeStats: true

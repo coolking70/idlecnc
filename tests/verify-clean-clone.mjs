@@ -134,5 +134,11 @@ const result = {
   overallPassed,
   tempCleaned: !fs.existsSync(tmpRoot),
 };
-console.log(JSON.stringify(result, null, 2));
+const serializedResult = `${JSON.stringify(result, null, 2)}\n`;
+if (process.env.IRON_CLEAN_CLONE_RESULT_PATH) {
+  const resultPath = path.resolve(root, process.env.IRON_CLEAN_CLONE_RESULT_PATH);
+  fs.mkdirSync(path.dirname(resultPath), { recursive: true });
+  fs.writeFileSync(resultPath, serializedResult);
+}
+console.log(serializedResult.trimEnd());
 process.exitCode = process.exitCode || (overallPassed ? 0 : 1);

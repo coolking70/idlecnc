@@ -3,9 +3,10 @@ name: core-regression
 on:
   push:
   pull_request:
+  workflow_dispatch:
 
 jobs:
-  node-core:
+  dc1-performance:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -14,10 +15,44 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - run: npm install --ignore-scripts
+      - run: npm install --ignore-scripts --no-audit --no-fund
+      - name: Run one qualified D-C.1 formal performance measurement
+        run: npm run test:stage8-2G-D-C-1:performance
+      - name: Generate same-SHA performance runtime result
+        if: success()
+        run: node tests/generate-stage9-C1b-performance-result.mjs artifacts/stage9-c1b-performance
+      - name: Upload D-C.1 performance runtime evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: stage9-c1b-performance-${{ github.sha }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            stage8_2g_dc1_performance_check.json
+            stage8_2g_dc1_performance_environment_tamper_results.json
+            artifacts/stage9-c1b-performance/
+          if-no-files-found: error
+          retention-days: 30
+
+  node-core:
+    needs: dc1-performance
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm install --ignore-scripts --no-audit --no-fund
+      - name: Download qualified D-C.1 performance input
+        uses: actions/download-artifact@v4
+        with:
+          name: stage9-c1b-performance-${{ github.sha }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: .
       - run: npm run test:stage8-2G-C-1
       - run: npm run test:stage8-2G-D-C-1-prep
-      - run: npm run test:stage8-2G-D-C-1
+      - name: Run npm run test:stage8-2G-D-C-1:functional
+        run: npm run test:stage8-2G-D-C-1:functional
       - run: npm run test:stage8-2G-C-1-1
       - run: npm run test:stage8-2G-C-1-1a
       - run: npm run test:stage8-2G-B-1-1a
@@ -41,3 +76,49 @@ jobs:
       - run: npm run browser:stage9-B
       - run: npm run test:stage9-C
       - run: npm run browser:stage9-C
+      - name: Generate same-SHA Stage 9 runtime result
+        run: node tests/generate-stage9-C1b-node-core-runtime.mjs artifacts/stage9-c1b-node-core
+      - name: Upload Stage 9 node/browser runtime evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: stage9-c1b-node-core-${{ github.sha }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: artifacts/stage9-c1b-node-core/
+          if-no-files-found: error
+          retention-days: 30
+
+  final-closure:
+    needs:
+      - dc1-performance
+      - node-core
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm install --ignore-scripts --no-audit --no-fund
+      - name: Download same-run performance evidence
+        uses: actions/download-artifact@v4
+        with:
+          name: stage9-c1b-performance-${{ github.sha }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: artifacts/stage9-c1b-final-closure
+      - name: Download same-run Stage 9 evidence
+        uses: actions/download-artifact@v4
+        with:
+          name: stage9-c1b-node-core-${{ github.sha }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: artifacts/stage9-c1b-final-closure
+      - name: Verify clean clone of exact immutable HEAD
+        env:
+          IRON_CLEAN_CLONE_RESULT_PATH: artifacts/stage9-c1b-final-closure/stage9_c1b_clean_clone_result.json
+        run: npm run verify:clean-clone
+      - name: Generate immutable final-head runtime closure
+        run: node tests/generate-stage9-C1b-runtime-closure.mjs artifacts/stage9-c1b-final-closure
+      - name: Upload immutable final-head closure
+        uses: actions/upload-artifact@v4
+        with:
+          name: stage9-c1b-final-closure-${{ github.sha }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: artifacts/stage9-c1b-final-closure/
+          if-no-files-found: error
+          retention-days: 30

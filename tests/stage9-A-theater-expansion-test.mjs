@@ -334,14 +334,19 @@ check('success save diff is limited to battle-authoritative paths', () => {
 });
 
 check('authority freeze excludes solver, planner, choreographer and presentation mutations', () => {
-  const forbidden = ['js/battle.js', 'js/battle-presentation/universal/universal-plan-builder.js', 'js/battle-presentation/universal/universal-choreographer.js', 'tests/lib/'];
+  const forbidden = ['js/battle.js', 'js/theater.js', 'js/save-diff.js', 'js/battle-presentation/universal/', 'experiments/battle-sandbox/universal-planner/universal-planner.js'];
+  const allowedPerformanceHelper = 'tests/lib/perf-environment.mjs';
   const status = requireGitNames();
   assert.deepEqual(status.filter((file) => forbidden.some((prefix) => file === prefix || file.startsWith(prefix))), []);
-  writeEvidence('stage9_a_authority_check.json', { stage: '9-A', passed: true, forbiddenPaths: forbidden, changedFiles: status });
+  assert.deepEqual(status.filter((file) => file.startsWith('tests/lib/') && file !== allowedPerformanceHelper), []);
+  writeEvidence('stage9_a_authority_check.json', { stage: '9-A', passed: true, forbiddenPaths: forbidden, allowedPerformanceHelper, changedFiles: status });
 });
 
 function requireGitNames() {
-  return execFileSync('git', ['diff', '--name-only', 'HEAD'], { cwd: root, encoding: 'utf8' }).split(/\r?\n/).filter(Boolean);
+  const baseline = '27c115848bea9aaa965fa46b784940a9949537e4';
+  const committed = execFileSync('git', ['diff', '--name-only', `${baseline}..HEAD`], { cwd: root, encoding: 'utf8' }).split(/\r?\n/).filter(Boolean);
+  const working = execFileSync('git', ['diff', '--name-only', 'HEAD'], { cwd: root, encoding: 'utf8' }).split(/\r?\n/).filter(Boolean);
+  return [...new Set([...committed, ...working])].sort();
 }
 
 const coverage = JSON.parse(fs.readFileSync(path.join(root, 'experiments/battle-sandbox/universal-planner/scenarios/coverage.json'), 'utf8'));

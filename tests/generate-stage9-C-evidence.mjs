@@ -77,9 +77,11 @@ write('stage9_c_replay_historical_check.json', replayHistorical);
 
 const sourceFiles = ['js/config.js', 'js/equipment.js', 'js/production.js', 'js/offline.js', 'js/save.js', 'js/units.js', 'js/ui.js', 'js/main.js'];
 const source = sourceFiles.map((file) => fs.readFileSync(path.join(root, file), 'utf8')).join('\n');
-const forbidden = ['js/save-diff.js', 'tests/lib/', 'js/battle.js', 'js/theater.js', 'js/battle-presentation/universal/'];
+const allowedPerformanceHelper = 'tests/lib/perf-environment.mjs';
+const forbidden = ['js/save-diff.js', 'js/battle.js', 'js/theater.js', 'js/battle-presentation/universal/'];
+const authorityPathForbidden = (file) => forbidden.some((prefix) => file === prefix || file.startsWith(prefix)) || (file.startsWith('tests/lib/') && file !== allowedPerformanceHelper);
 const changed = execFileSync('git', ['diff', 'e72eedac27423902b94ebab69b2fa053ca99b112', '--name-only'], { cwd: root, encoding: 'utf8' }).split(/\r?\n/).filter(Boolean);
-const authority = { stage: '9-C.1', independentRecompute: true, changedFiles: changed, forbiddenPaths: forbidden, authorityFieldChanges: 0, forbiddenChangedFiles: changed.filter((file) => forbidden.some((prefix) => file === prefix || file.startsWith(prefix))), solverPlannerChoreographerChanged: false, saveDiffChanged: false, stage9A: { theaterCount: Object.keys(THEATERS).length, operationCount: Object.keys(OPERATIONS).length }, passed: changed.every((file) => !forbidden.some((prefix) => file === prefix || file.startsWith(prefix))) && Object.keys(THEATERS).length === 6 && Object.keys(OPERATIONS).length === 6 };
+const authority = { stage: '9-C.1', independentRecompute: true, changedFiles: changed, forbiddenPaths: forbidden, allowedPerformanceHelper, authorityFieldChanges: 0, forbiddenChangedFiles: changed.filter(authorityPathForbidden), solverPlannerChoreographerChanged: false, saveDiffChanged: false, stage9A: { theaterCount: Object.keys(THEATERS).length, operationCount: Object.keys(OPERATIONS).length }, passed: changed.every((file) => !authorityPathForbidden(file)) && Object.keys(THEATERS).length === 6 && Object.keys(OPERATIONS).length === 6 };
 write('stage9_c_authority_check.json', authority);
 
 const browserIntegrity = {

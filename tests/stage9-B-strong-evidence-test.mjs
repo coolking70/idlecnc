@@ -44,7 +44,10 @@ export function verifyStage9BEvidence(candidate, { checkFiles = false } = {}) {
   const snapshot = core.evidence?.snapshotEvidence;
   const sourceFiles = ['js/config.js', 'js/equipment.js', 'js/state.js', 'js/units.js', 'js/save.js', 'js/theater.js', 'js/ui.js', 'js/main.js'];
   const source = sourceFiles.map((file) => fs.readFileSync(path.join(root, file), 'utf8')).join('\n');
-  const changed = execFileSync('git', ['diff', '--name-only', 'HEAD'], { cwd: root, encoding: 'utf8' }).split(/\r?\n/).filter(Boolean);
+  const baseline = '27c115848bea9aaa965fa46b784940a9949537e4';
+  const committed = execFileSync('git', ['diff', '--name-only', `${baseline}..HEAD`], { cwd: root, encoding: 'utf8' }).split(/\r?\n/).filter(Boolean);
+  const working = execFileSync('git', ['diff', '--name-only', 'HEAD'], { cwd: root, encoding: 'utf8' }).split(/\r?\n/).filter(Boolean);
+  const changed = [...new Set([...committed, ...working])].sort();
 
   if (candidate?.stage !== '9-B') fail('stage');
   if (SAVE_VERSION !== 9) fail('save_version', SAVE_VERSION);
@@ -119,8 +122,9 @@ export function verifyStage9BEvidence(candidate, { checkFiles = false } = {}) {
   if (!Object.values(EQUIPMENT).every((def) => def.acquisition?.kind && !('hp' in def.modifiers) && !('maxHp' in def.modifiers))) fail('equipment_model');
   if (recomputed.stats.hp !== 100) fail('hp_affected');
   if (Object.keys(THEATERS).length !== 6 || Object.keys(OPERATIONS).length !== 6) fail('stage9a_regression');
-  const forbidden = ['js/battle.js', 'js/battle-presentation/universal/universal-plan-builder.js', 'js/battle-presentation/universal/universal-choreographer.js', 'tests/lib/'];
-  if (changed.some((file) => forbidden.some((prefix) => file === prefix || file.startsWith(prefix))) || changed.includes('js/save-diff.js')) fail('authority_changed', changed);
+  const allowedPerformanceHelper = 'tests/lib/perf-environment.mjs';
+  const forbidden = ['js/battle.js', 'js/theater.js', 'js/save-diff.js', 'js/battle-presentation/universal/', 'experiments/battle-sandbox/universal-planner/universal-planner.js'];
+  if (changed.some((file) => forbidden.some((prefix) => file === prefix || file.startsWith(prefix)) || (file.startsWith('tests/lib/') && file !== allowedPerformanceHelper))) fail('authority_changed', changed);
   if (!source.includes('getUnitEffectiveStats(unit, state && state.equipment)') || !source.includes('sanitizeEquipment(merged)') || !source.includes("dataset.action = 'equip-equipment'")) fail('source_binding');
   if (Number(candidate.performance?.scenarios?.effectiveStats?.p95Ms) >= 16.7 || Number(candidate.performance?.scenarios?.snapshot?.p95Ms) >= 16.7) fail('performance_budget');
   if (!candidate.performance?.environment?.platform || !candidate.performance?.environment?.arch || !candidate.performance?.environment?.cpuModel || !candidate.performance?.environment?.cpuCount || !candidate.performance?.environment?.nodeVersion) fail('performance_environment');

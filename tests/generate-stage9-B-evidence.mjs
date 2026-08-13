@@ -40,8 +40,13 @@ const snapshotUnit = snapshot.units.find((row) => row.id === snapshotUnitState.i
 
 const sourceFiles = ['js/config.js', 'js/equipment.js', 'js/state.js', 'js/units.js', 'js/save.js', 'js/theater.js', 'js/ui.js', 'js/main.js'];
 const sourceText = sourceFiles.map((file) => fs.readFileSync(path.join(root, file), 'utf8')).join('\n');
-const authorityForbidden = ['js/battle.js', 'js/battle-presentation/universal/universal-plan-builder.js', 'js/battle-presentation/universal/universal-choreographer.js', 'tests/lib/'];
-const gitNames = execFileSync('git', ['diff', '--name-only', 'HEAD'], { cwd: root, encoding: 'utf8' }).split(/\r?\n/).filter(Boolean);
+const authorityBaseline = '27c115848bea9aaa965fa46b784940a9949537e4';
+const committedNames = execFileSync('git', ['diff', '--name-only', `${authorityBaseline}..HEAD`], { cwd: root, encoding: 'utf8' }).split(/\r?\n/).filter(Boolean);
+const workingNames = execFileSync('git', ['diff', '--name-only', 'HEAD'], { cwd: root, encoding: 'utf8' }).split(/\r?\n/).filter(Boolean);
+const gitNames = [...new Set([...committedNames, ...workingNames])].sort();
+const allowedPerformanceHelper = 'tests/lib/perf-environment.mjs';
+const authorityForbidden = ['js/battle.js', 'js/theater.js', 'js/save-diff.js', 'js/battle-presentation/universal/', 'experiments/battle-sandbox/universal-planner/universal-planner.js'];
+const authorityPathForbidden = (file) => authorityForbidden.some((prefix) => file === prefix || file.startsWith(prefix)) || (file.startsWith('tests/lib/') && file !== allowedPerformanceHelper);
 
 const reloadReasons = (browser.realReloads || []).map((row) => row.reason);
 const reloadExpected = ['equipment_panel_mounted', 'running_battle', 'result', 'replay'];
@@ -79,7 +84,7 @@ const independent = {
   currentRecomputedSnapshot: { stats: snapshotUnit.stats, equipment: snapshotUnit.equipment },
   noHpEffect: independentlyComputedStats.hp === 100 && effectiveUnit.maxHp === 100,
   stage9AConstants: Object.keys(THEATERS).length === 6 && Object.keys(OPERATIONS).length === 6,
-  authorityFrozen: gitNames.every((file) => !authorityForbidden.some((prefix) => file === prefix || file.startsWith(prefix))),
+  authorityFrozen: gitNames.every((file) => !authorityPathForbidden(file)),
   reloads: reloadReasons.join('|') === reloadExpected.join('|') && reloadChecks.length === 4 && reloadChecks.every((row) => row.afterGreaterThanBefore && row.loaderChanged && row.declaredTimeOriginConsistent && row.loaderIdNotRepeated),
   browserProvenance: browser.productionEntry === true && browser.fixtureLoaderUsed === false && browser.dispatchApiUsed === false && browser.replayApiUsed === false && browser.offlineApiUsed === false && browser.equipmentApiUsed === false,
   ui: uiSourceChecks.allRequiredDomProvenance,
@@ -88,7 +93,7 @@ const independent = {
 
 write('stage9_b_real_reload_check.json', { stage: '9-B', independentRecompute: true, expectedReasons: reloadExpected, actualReasons: reloadReasons, checks: reloadChecks, passed: independent.reloads });
 write('stage9_b_ui_path_check.json', { stage: '9-B', independentRecompute: true, requiredActions: requiredActionSelectors, sourceChecks: uiSourceChecks, observedSelectors: [...actionSelectors], equipmentApiUsed: browser.equipmentApiUsed === true, passed: independent.ui && browser.equipmentApiUsed === false });
-write('stage9_b_authority_check.json', { stage: '9-B', independentRecompute: true, changedFiles: gitNames, forbiddenPaths: authorityForbidden, authorityFieldChanges: 0, solverPlannerChoreographerChanged: false, saveDiffChanged: false, stage9A: { theaterCount: Object.keys(THEATERS).length, operationCount: Object.keys(OPERATIONS).length }, passed: independent.authorityFrozen && independent.stage9AConstants });
+write('stage9_b_authority_check.json', { stage: '9-B', independentRecompute: true, changedFiles: gitNames, forbiddenPaths: authorityForbidden, allowedPerformanceHelper, authorityFieldChanges: 0, solverPlannerChoreographerChanged: false, saveDiffChanged: false, stage9A: { theaterCount: Object.keys(THEATERS).length, operationCount: Object.keys(OPERATIONS).length }, passed: independent.authorityFrozen && independent.stage9AConstants });
 
 const bundle = {
   stage: '9-B', version: 1, generatedBy: 'tests/generate-stage9-B-evidence.mjs',

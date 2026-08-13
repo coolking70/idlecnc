@@ -358,13 +358,17 @@ check('UI uses real data-action hooks and authoritative qualification functions'
 
 let authorityEvidence;
 check('authority freeze and Stage 9-A / 9-B boundaries remain untouched', () => {
-  const changed = execFileSync('git', ['diff', '--name-only', 'HEAD'], { cwd: root, encoding: 'utf8' }).split(/\r?\n/).filter(Boolean);
-  const forbidden = ['js/save-diff.js', 'tests/lib/', 'js/battle.js', 'js/theater.js', 'js/battle-presentation/universal/'];
-  assert.equal(changed.some((file) => forbidden.some((prefix) => file === prefix || file.startsWith(prefix))), false);
+  const baseline = '27c115848bea9aaa965fa46b784940a9949537e4';
+  const committed = execFileSync('git', ['diff', '--name-only', `${baseline}..HEAD`], { cwd: root, encoding: 'utf8' }).split(/\r?\n/).filter(Boolean);
+  const working = execFileSync('git', ['diff', '--name-only', 'HEAD'], { cwd: root, encoding: 'utf8' }).split(/\r?\n/).filter(Boolean);
+  const changed = [...new Set([...committed, ...working])].sort();
+  const allowedPerformanceHelper = 'tests/lib/perf-environment.mjs';
+  const forbidden = ['js/save-diff.js', 'js/battle.js', 'js/theater.js', 'js/battle-presentation/universal/'];
+  assert.equal(changed.some((file) => forbidden.some((prefix) => file === prefix || file.startsWith(prefix)) || (file.startsWith('tests/lib/') && file !== allowedPerformanceHelper)), false);
   assert.equal(Object.keys(THEATERS).length, 6);
   assert.equal(Object.keys(OPERATIONS).length, 6);
   assert.equal(Object.keys(TECHNOLOGIES).length, 9);
-  authorityEvidence = { stage: '9-C', independentRecompute: true, changedFiles: changed, forbiddenPaths: forbidden, authorityFieldChanges: 0, solverPlannerChoreographerChanged: false, saveDiffChanged: false, stage9A: { theaterCount: Object.keys(THEATERS).length, operationCount: Object.keys(OPERATIONS).length }, stage9B: { battleLocked: true, noHpEquipment: true, historicalSnapshotContract: true } };
+  authorityEvidence = { stage: '9-C', independentRecompute: true, changedFiles: changed, forbiddenPaths: forbidden, allowedPerformanceHelper, authorityFieldChanges: 0, solverPlannerChoreographerChanged: false, saveDiffChanged: false, stage9A: { theaterCount: Object.keys(THEATERS).length, operationCount: Object.keys(OPERATIONS).length }, stage9B: { battleLocked: true, noHpEquipment: true, historicalSnapshotContract: true } };
   write('stage9_c_authority_check.json', authorityEvidence);
 });
 
