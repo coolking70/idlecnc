@@ -65,6 +65,8 @@ The new preflight runs before any product sample and records:
 - Linux cgroup throttling deltas when available;
 - every probe, rule, recomputed metric and qualification reason.
 
+It also runs a fixed product-workload canary during each qualification probe: 20 warmups and 60 raw samples for each of the three D-C.1 scenes. The canary is not counted as the formal measurement; it is an early fail-closed signal for the exact workload whose p95 budget is being guarded. Its raw samples are retained and independently recomputed. A canary p95 at or above `16.7ms` rejects the environment before the formal 20-warmup/120-sample measurement begins.
+
 If preflight is unfit, the test emits `ENVIRONMENT_UNFIT`, writes `measurementValid=false`, sets formal measurement runs to zero, and fails. If it is fit, exactly one 120-sample product measurement begins. A product p95 failure is final for that execution: there is no retry, best-of-N, outlier trimming or slow-sample deletion.
 
 The GitHub workflow also isolates the formal D-C.1 measurement in a fresh required job. The long functional regression consumes that job’s same-run performance artifact instead of measuring again or overwriting it with the legacy 8-sample smoke check.

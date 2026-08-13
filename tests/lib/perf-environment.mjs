@@ -21,6 +21,11 @@ export const DEFAULT_QUALIFICATION_RULES = Object.freeze({
   calibrationWarmupSamples: 6,
   calibrationSamplesPerProbe: 12,
   calibrationIterations: 1_200_000,
+  requireProductCanary: false,
+  productCanaryWarmupSamples: 20,
+  productCanarySamplesPerScene: 60,
+  productCanarySceneCount: 3,
+  maxProductCanaryP95Ms: 16.7,
   minimumEffectiveCpuCount: 2,
   maxEventLoopP95JitterMs: 2.5,
   maxEventLoopMaxJitterMs: 10,
@@ -164,7 +169,7 @@ const cgroupThrottleDelta = (before, after, wallMs) => {
   };
 };
 
-export async function collectQualificationAttempt({ rules = DEFAULT_QUALIFICATION_RULES, loadProvider = loadSnapshot, eventLoopProvider = measureEventLoopJitter, calibrationProvider = measureCpuCalibration } = {}) {
+export async function collectQualificationAttempt({ rules = DEFAULT_QUALIFICATION_RULES, loadProvider = loadSnapshot, eventLoopProvider = measureEventLoopJitter, calibrationProvider = measureCpuCalibration, workloadProvider } = {}) {
   const probes = [];
   for (let probe = 1; probe <= rules.probesPerAttempt; probe += 1) {
     const snapshotBefore = loadProvider();
@@ -172,6 +177,7 @@ export async function collectQualificationAttempt({ rules = DEFAULT_QUALIFICATIO
     const started = performance.now();
     const eventLoopJitterMs = await eventLoopProvider({ samples: rules.eventLoopSamplesPerProbe, delayMs: rules.eventLoopDelayMs, probe });
     const calibration = await calibrationProvider({ warmupSamples: rules.calibrationWarmupSamples, samples: rules.calibrationSamplesPerProbe, iterations: rules.calibrationIterations, probe });
+    const productCanary = workloadProvider ? await workloadProvider({ rules, probe }) : null;
     const wallMs = performance.now() - started;
     const snapshotAfter = loadProvider();
     probes.push({
@@ -180,6 +186,7 @@ export async function collectQualificationAttempt({ rules = DEFAULT_QUALIFICATIO
       snapshotAfter,
       eventLoopJitterMs,
       calibration,
+      ...(productCanary ? { productCanary } : {}),
       cgroupThrottle: cgroupThrottleDelta(cgroupBefore, snapshotAfter.cgroup, wallMs)
     });
   }
@@ -223,6 +230,22 @@ export function evaluateEnvironmentQualification(attempt = {}, { threshold = loa
   const maxCgroupThrottledWallRatio = throttledRatios.length ? Math.max(...throttledRatios) : null;
   if (maxCgroupThrottledWallRatio !== null && maxCgroupThrottledWallRatio > rules.maxCgroupThrottledWallRatio) reasons.push('cgroup_throttling');
 
+  const rawCanaryRows = probes.flatMap((probe) => Array.isArray(probe.productCanary?.scenes) ? probe.productCanary.scenes : []);
+  const canaryByScene = new Map();
+  for (const row of rawCanaryRows) {
+    const current = canaryByScene.get(row.sceneId) || [];
+    canaryByScene.set(row.sceneId, current.concat(Array.isArray(row.timingSamplesMs) ? row.timingSamplesMs : []));
+  }
+  const expectedCanaryRows = rules.productCanarySceneCount;
+  const canary = [...canaryByScene.entries()].map(([sceneId, timingSamplesMs]) => ({ sceneId, sampleCount: timingSamplesMs.length, stats: summarizeSamples(timingSamplesMs) }));
+  if (rules.requireProductCanary) {
+    if (canary.length !== expectedCanaryRows) reasons.push('product_canary_scene_count');
+    for (const row of canary) {
+      if (row.sampleCount !== rules.probesPerAttempt * rules.productCanarySamplesPerScene) reasons.push(`product_canary_sample_count:${row.sceneId}`);
+      if (row.stats.p95Ms === null || row.stats.p95Ms >= rules.maxProductCanaryP95Ms) reasons.push(`product_canary_p95:${row.sceneId}`);
+    }
+  }
+
   return {
     qualified: reasons.length === 0,
     reason: reasons.length ? `ENVIRONMENT_UNFIT:${[...new Set(reasons)].join(',')}` : 'QUALIFIED',
@@ -232,7 +255,8 @@ export function evaluateEnvironmentQualification(attempt = {}, { threshold = loa
       minimumEffectiveCpuCount: effectiveCpuCounts.length ? round(Math.min(...effectiveCpuCounts), 3) : null,
       eventLoop,
       calibration: { ...calibration, p95MedianRatio, maxMedianRatio, warmupDriftRatio },
-      maxCgroupThrottledWallRatio
+      maxCgroupThrottledWallRatio,
+      productCanary: { sceneCount: canary.length, expectedSceneCount: expectedCanaryRows, rows: canary }
     }
   };
 }
@@ -250,7 +274,7 @@ export async function awaitFitEnvironment(options = {}) {
   for (let attemptNumber = 1; attemptNumber <= attemptsLimit; attemptNumber += 1) {
     const raw = options.attemptProvider
       ? await options.attemptProvider({ attempt: attemptNumber, rules, threshold })
-      : await collectQualificationAttempt({ rules, loadProvider: options.loadProvider, eventLoopProvider: options.eventLoopProvider, calibrationProvider: options.calibrationProvider });
+      : await collectQualificationAttempt({ rules, loadProvider: options.loadProvider, eventLoopProvider: options.eventLoopProvider, calibrationProvider: options.calibrationProvider, workloadProvider: options.workloadProvider });
     const evaluation = evaluateEnvironmentQualification(raw, { threshold, rules });
     const attempt = { attempt: attemptNumber, ...raw, evaluation };
     attempts.push(attempt);

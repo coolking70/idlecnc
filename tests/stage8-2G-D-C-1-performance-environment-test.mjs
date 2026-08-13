@@ -30,7 +30,8 @@ function validAttempt() {
       warmupMs: Array(DEFAULT_QUALIFICATION_RULES.calibrationWarmupSamples).fill(2.1),
       samplesMs: Array(DEFAULT_QUALIFICATION_RULES.calibrationSamplesPerProbe).fill(2)
     },
-    cgroupThrottle: { available: true, throttledUsecDelta: 0, throttledWallRatio: 0, nrThrottledDelta: 0 }
+    cgroupThrottle: { available: true, throttledUsecDelta: 0, throttledWallRatio: 0, nrThrottledDelta: 0 },
+    productCanary: { scenes: ['stage8g-dc-victory', 'stage8g-dc-withdraw', 'stage8g-dc-art'].map((sceneId, sceneIndex) => ({ sceneId, timingSamplesMs: Array.from({ length: 60 }, (_, index) => 4 + sceneIndex + (index % 5) * 0.01) })) }
   }));
   const raw = { probes };
   return { attempt: 1, ...raw, evaluation: evaluateEnvironmentQualification(raw, { threshold: DEFAULT_LOAD_THRESHOLD, rules: DEFAULT_QUALIFICATION_RULES }) };
@@ -56,7 +57,7 @@ function validEvidence() {
     environmentGuard: {
       fit: true, environmentQualified: true, environmentQualificationReason: 'QUALIFIED',
       qualificationVersion: 2, threshold: DEFAULT_LOAD_THRESHOLD,
-      rules: clone(DEFAULT_QUALIFICATION_RULES), attempts: 1, attemptsLimit: 2,
+      rules: clone({ ...DEFAULT_QUALIFICATION_RULES, requireProductCanary: true, productCanaryWarmupSamples: 20, productCanarySamplesPerScene: 60, productCanarySceneCount: 3, maxProductCanaryP95Ms: 16.7 }), attempts: 1, attemptsLimit: 2,
       samples: [selected], selectedAttempt: 1, snapshot: clone(runtime), loadAfter: clone(runtime)
     },
     measurementValid: true, formalMeasurementRuns: 1,
@@ -68,7 +69,7 @@ function validEvidence() {
   };
 }
 
-assert.equal(verifyDC1PerformanceEvidence(validEvidence()).ok, true, 'valid evidence must be independently accepted');
+assert.equal(verifyDC1PerformanceEvidence(validEvidence()).ok, true, JSON.stringify(verifyDC1PerformanceEvidence(validEvidence())));
 const injectedUnfit = validAttempt();
 injectedUnfit.probes[0].eventLoopJitterMs.fill(20);
 const unfitGuard = await awaitFitEnvironment({ attempts: 1, waitMs: 0, attemptProvider: async () => injectedUnfit, sleepFn: async () => {} });
@@ -106,12 +107,13 @@ tamper('best_of_n_retry_result_injected', (evidence) => {
   evidence.measurementAttempts = [{ p95Ms: 20, passed: false }, { p95Ms: 5, passed: true }]; evidence.bestOf = 2;
 });
 tamper('environment_metadata_tampered', (evidence) => { evidence.runtime.cpuModel = 'forged-cpu'; });
+tamper('product_canary_p95_tampered', (evidence) => { evidence.environmentGuard.samples[0].probes[0].productCanary.scenes[2].timingSamplesMs.fill(20); });
 
 const output = {
   stage: '8.2G-D-C.1-performance-environment', version: 1,
   cases, caseCount: cases.length, rejectionCount: cases.filter((row) => row.rejected).length,
   passedFlagOnlyCases: cases.filter((row) => row.passedPreserved && row.errors.length === 0).length,
-  passed: cases.length === 8 && cases.every((row) => row.rejected && row.passedPreserved)
+  passed: cases.length === 9 && cases.every((row) => row.rejected && row.passedPreserved)
 };
 assert.equal(output.passed, true);
 assert.equal(output.passedFlagOnlyCases, 0);

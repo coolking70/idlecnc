@@ -724,6 +724,11 @@
 
 # Stage 9-C.1b progress
 
+- [x] Added immutable final-head CI topology with separate D-C.1 performance, node/browser core and final-closure jobs; same-SHA runtime evidence remains artifact-only.
+- [x] Added pre-measurement load, event-loop, CPU calibration and cgroup qualification with a fixed three-scene product-workload canary (20 warmups + 60 raw samples per scene); formal D-C.1 remains exactly one 20/120 measurement with strict p95 `<16.7ms`.
+- [x] Added independent qualification/timing recomputation and true-value tamper coverage; current local performance gate is 9/9 rejected with zero flag-only cases.
+- [x] Fixed clean-clone to fetch both the historical authority baseline and the Stage 9-A/B/C source-diff baseline; final clean clone passed with matching final HEAD.
+
 - [x] 已从 GitHub Actions Run `31648264645` 的两个 attempt 取得原始日志并记录可审计字段；旧日志未保存 CPU/load/guard 全量数据的部分明确标为 unavailable，不使用其它时刻数值冒充。
 - [x] D-C.1 preflight 增加有效 CPU/cgroup quota、归一化 load、event-loop jitter、确定性 CPU calibration、方差/尾比、warm-up drift 与 cgroup throttling；不改 16.7ms 产品预算。
 - [x] 正式性能证据保存每场景 120 个原始 timing samples、p50/p90/p95/max 与完整 qualification probes；正式测量次数固定为 1，禁止 retry/best-of/outlier trimming。

@@ -32,6 +32,11 @@ const rulesNotWeakerThanDefault = (rules = {}) => (
   && Number(rules.maxCalibrationMaxMedianRatio) <= DEFAULT_QUALIFICATION_RULES.maxCalibrationMaxMedianRatio
   && Number(rules.maxCalibrationWarmupDriftRatio) <= DEFAULT_QUALIFICATION_RULES.maxCalibrationWarmupDriftRatio
   && Number(rules.maxCgroupThrottledWallRatio) <= DEFAULT_QUALIFICATION_RULES.maxCgroupThrottledWallRatio
+  && rules.requireProductCanary === true
+  && Number(rules.productCanaryWarmupSamples) >= 20
+  && Number(rules.productCanarySamplesPerScene) >= 60
+  && Number(rules.productCanarySceneCount) === 3
+  && Number(rules.maxProductCanaryP95Ms) <= 16.7
 );
 
 const metadataMatches = (runtime, snapshot) => {
@@ -54,6 +59,9 @@ export function verifyDC1PerformanceEvidence(evidence = {}) {
   if (selected && (!same(selected.evaluation?.reasons, qualification.reasons) || !same(selected.evaluation?.metrics, qualification.metrics) || selected.evaluation?.qualified !== qualification.qualified)) errors.push('qualification_declared_mismatch');
   if (guard.fit !== true || guard.environmentQualified !== true || evidence.environmentQualified !== true || evidence.environmentQualificationReason !== 'QUALIFIED') errors.push('qualification_claim');
   if (!metadataMatches(evidence.runtime, guard.snapshot)) errors.push('environment_metadata');
+  const canaryRows = qualification?.metrics?.productCanary?.rows || [];
+  if (canaryRows.length !== 3) errors.push('product_canary_scene_count');
+  if (canaryRows.some((row) => row.sampleCount < Number(rules.productCanarySamplesPerScene) || !(row.stats?.p95Ms < Number(rules.maxProductCanaryP95Ms)))) errors.push('product_canary_budget');
 
   if (evidence.measurementValid !== true) errors.push('measurement_valid');
   if (Number(evidence.formalMeasurementRuns) !== 1) errors.push('formal_measurement_count');

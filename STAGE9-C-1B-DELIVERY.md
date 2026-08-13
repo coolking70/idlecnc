@@ -17,12 +17,13 @@ No Stage 9-D work or gameplay expansion is included.
 - `maxEffects <= 96`
 - `maxSmokeParticles <= 32`
 - exactly one formal product measurement per performance-component execution
+- qualification includes one fixed three-scene product-workload canary per probe (20 warmups + 60 raw samples per scene); canary samples are qualification telemetry, not formal measurement samples
 - no retry after product measurement starts
 - no best-of-N, outlier trimming, ignored first failure, or threshold relaxation
 
-`tests/lib/perf-environment.mjs` is the only modified file under `tests/lib/`. Its scope is limited to pre-measurement qualification. Raw qualification probes and raw product timing samples are persisted so the new verifier can recompute the decision instead of trusting `fit`, `measurementValid`, `passed`, or p95 declarations.
+`tests/lib/perf-environment.mjs` is the only modified file under `tests/lib/`. Its scope is limited to pre-measurement qualification. Raw qualification probes, raw product-canary timing samples and raw formal timing samples are persisted so the new verifier can recompute the decision instead of trusting `fit`, `measurementValid`, `passed`, or p95 declarations. A canary p95 at or above `16.7ms` rejects the environment before the formal measurement starts; it is never retried or selected as a best result.
 
-Eight true-value qualification tamper cases cover high calibration variance, excessive event-loop jitter, qualification/measurement mismatch, over-budget p95, insufficient samples, forged percentile, retry/best-of injection, and forged environment metadata. All preserve `passed=true`; `passedFlagOnlyCases` must remain zero.
+Nine true-value qualification tamper cases cover high calibration variance, excessive event-loop jitter, qualification/measurement mismatch, over-budget p95, insufficient samples, forged percentile, retry/best-of injection, forged environment metadata and over-budget product canary. All preserve `passed=true`; `passedFlagOnlyCases` must remain zero.
 
 ## CI topology
 

@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { buildPresentations, definitions, writeJson } from './lib/stage8-2G-DC1-fixtures.mjs';
-import { awaitFitEnvironment, loadSnapshot, PerfEnvironmentUnfitError } from './lib/perf-environment.mjs';
+import { awaitFitEnvironment, DEFAULT_QUALIFICATION_RULES, loadSnapshot, PerfEnvironmentUnfitError } from './lib/perf-environment.mjs';
 import { verifyDC1PerformanceEvidence } from './stage8-2G-D-C-1-performance-verifier.mjs';
 
 const warmupSamples = 20;
@@ -8,7 +8,34 @@ const sampleCount = 120;
 const limits = { p95TotalPresentationBuildMs: 16.7, sampleCountMinimum: 120, maxEffects: 96, maxSmokeParticles: 32 };
 const measurement = 'complete presentation renderState.atTime including effects, camera, audio, transitions and environment state';
 
-const guard = await awaitFitEnvironment();
+const qualificationRules = {
+  ...DEFAULT_QUALIFICATION_RULES,
+  requireProductCanary: true,
+  productCanaryWarmupSamples: warmupSamples,
+  productCanarySamplesPerScene: 60,
+  productCanarySceneCount: definitions.length,
+  maxProductCanaryP95Ms: limits.p95TotalPresentationBuildMs
+};
+const productCanary = () => {
+  const scenes = [];
+  for (const { sceneId } of definitions) {
+    const presentation = buildPresentations().get(sceneId);
+    assert.equal(presentation?.ok, true, `canary presentation ${sceneId}`);
+    const duration = presentation.plan.timeline.duration;
+    for (let index = 0; index < qualificationRules.productCanaryWarmupSamples; index += 1) {
+      presentation.renderState.atTime((duration * ((index * 17) % 101)) / 100);
+    }
+    const timingSamplesMs = [];
+    for (let index = 0; index < qualificationRules.productCanarySamplesPerScene; index += 1) {
+      const started = process.hrtime.bigint();
+      presentation.renderState.atTime((duration * ((index * 37) % 101)) / 100);
+      timingSamplesMs.push(Number((Number(process.hrtime.bigint() - started) / 1e6).toFixed(6)));
+    }
+    scenes.push({ sceneId, timingSamplesMs });
+  }
+  return { scenes };
+};
+const guard = await awaitFitEnvironment({ rules: qualificationRules, workloadProvider: productCanary });
 if (!guard.fit) {
   const output = {
     stage: '8.2G-D-C.1', version: 2, measurement,
