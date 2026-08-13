@@ -69,4 +69,21 @@ It also runs a fixed product-workload canary during each qualification probe: 20
 
 If preflight is unfit, the test emits `ENVIRONMENT_UNFIT`, writes `measurementValid=false`, sets formal measurement runs to zero, and fails. If it is fit, exactly one 120-sample product measurement begins. A product p95 failure is final for that execution: there is no retry, best-of-N, outlier trimming or slow-sample deletion.
 
+## Final-closure timeout diagnosis
+
+The first independent same-SHA validation after the successful push-triggered
+run exposed a separate process-boundary failure. Run A's clean clone completed
+in about 29m53s. Run B completed the performance and node/browser jobs, but its
+`verify:clean-clone` gate was still running when the previous 30-minute
+`execFileSync` timeout fired. The runner then cleaned up the still-running
+`browser:stage9-A` process, so the visible malformed-JSON and fixture `FAIL`
+lines in the retained tail were expected test-fixture output, not the failure
+cause.
+
+The correction is limited to the clean-clone execution boundary: one bounded
+60-minute gate window, an explicit 70-minute workflow-step bound, and runtime
+diagnostics for `timeoutMs`, `elapsedMs`, and `timeoutTriggered`. There is no
+retry, no best-of-N behavior, and no change to the 16.7ms product budget or
+formal performance measurement.
+
 The GitHub workflow also isolates the formal D-C.1 measurement in a fresh required job. The long functional regression consumes that job’s same-run performance artifact instead of measuring again or overwriting it with the legacy 8-sample smoke check.

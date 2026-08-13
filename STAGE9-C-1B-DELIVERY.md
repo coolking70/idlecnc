@@ -60,6 +60,13 @@ The required artifact files are:
 
 The closure generator diffs the baseline against the checked-out SHA. It fails if any Formal Battle authority file, universal planner/choreographer file, or any `tests/lib/` helper other than `perf-environment.mjs` changed. Production JS, battle settlement semantics, equipment acquisition semantics, Stage 9-A values and the Stage 9-B equipment seam remain unchanged.
 
+The clean-clone gate is a single, fail-closed execution with a 60-minute command
+window (`IRON_CLEAN_CLONE_TIMEOUT_MS`, default `3600000`); it never retries or
+turns a timeout into success. The final-closure workflow step has a separate
+70-minute outer bound and records the effective window, elapsed time and
+timeout classification in the clean-clone JSON. This accommodates the observed
+full-gate runtime variance while preserving a bounded failure path.
+
 ## Closure criteria
 
 Stage 9-C closes only when Run A first execution and Run B same-SHA execution both succeed, their performance artifacts independently qualify and remain below budget, Stage 9-C remains 9 frames / 4 reloads / 141 of 141 tamper / 11 of 11 coupled tamper / 0 flag-only, clean clone verifies the same SHA, remote HEAD equals FINAL_HEAD, and no commit follows validation.

@@ -112,6 +112,8 @@ jobs:
       - name: Verify clean clone of exact immutable HEAD
         env:
           IRON_CLEAN_CLONE_RESULT_PATH: artifacts/stage9-c1b-final-closure/stage9_c1b_clean_clone_result.json
+          IRON_CLEAN_CLONE_TIMEOUT_MS: 3600000
+        timeout-minutes: 70
         run: npm run verify:clean-clone
       - name: Generate immutable final-head runtime closure
         run: node tests/generate-stage9-C1b-runtime-closure.mjs artifacts/stage9-c1b-final-closure

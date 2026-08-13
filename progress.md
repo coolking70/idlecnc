@@ -737,4 +737,7 @@
 - [x] GitHub workflow 拆为 required `dc1-performance`、`node-core`、`final-closure`；性能 artifact 供 functional 验证，legacy 8-sample smoke evidence 不再覆盖正式 120-sample 结果。
 - [x] 新增 same-SHA performance、Stage 9 与 final closure runtime generators；clean-clone 可把纯 JSON 写入 artifact 路径。
 - [x] 已新增静态根因与交付 contract 文档；runtime SHA、run ID、机器和最终数值不再提交回仓库。
-- [ ] 待完成本地完整门禁、唯一 FINAL_HEAD 提交/推送、Run A first execution、同 SHA Run B、artifact 与 remote/clean-clone identity 收口；验证后禁止新 commit。
+- [x] 定位同 SHA Run B 的 clean-clone 失败根因：完整 gate 实际运行超过旧 30 分钟 `execFileSync` 窗口，外层终止仍在运行的 Stage 9-A 浏览器进程；可见的损坏 JSON / fixture FAIL 行是预期测试输出，不是根因。
+- [x] 将 clean-clone 改为单次、fail-closed 的 60 分钟窗口（可由 `IRON_CLEAN_CLONE_TIMEOUT_MS` 覆盖），workflow final-closure 设置 70 分钟外层上限，并记录 timeoutMs / elapsedMs / timeoutTriggered；不增加重试、不改变 16.7ms 性能契约。
+- [x] 本地 D-C.1 性能资格 tamper 为 9/9、passedFlagOnlyCases=0；Stage 9-A 为 21/21，Stage 9-C 为 10/10。
+- [ ] 待将本修复作为新的 FINAL_HEAD 提交/推送并取得 Run A first execution、同 SHA Run B、artifact 与 remote/clean-clone identity 收口；验证后禁止新 commit。

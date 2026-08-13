@@ -35,8 +35,14 @@ const run = (cmd, args, cwd, opts = {}) => {
 const root = process.cwd();
 const authorityBaseline = 'e72eedac27423902b94ebab69b2fa053ca99b112';
 const stage9Baseline = '27c115848bea9aaa965fa46b784940a9949537e4';
+const DEFAULT_GATE_TIMEOUT_MS = 3_600_000;
 const steps = [];
 const outputTail = (value, limit = 4000) => String(value || '').slice(-limit);
+const positiveInteger = (value, fallback) => {
+  const parsed = Number(value);
+  return Number.isInteger(parsed) && parsed > 0 ? parsed : fallback;
+};
+const gateTimeoutMs = positiveInteger(process.env.IRON_CLEAN_CLONE_TIMEOUT_MS, DEFAULT_GATE_TIMEOUT_MS);
 
 const record = (step, passed, exitCode = null, extra = {}) => {
   const entry = { step, passed };
@@ -112,11 +118,22 @@ try {
   }
 
   // 4. 在干净克隆内跑完整门禁链 gate:stage8-2G（含 npm test 与全部 browser 门禁）
+  const gateStartedAt = Date.now();
   try {
-    const gateOutput = run('npm', ['run', 'gate:stage8-2G'], cloneDir, { timeout: 1800000 });
-    record('gate:stage8-2G', true, 0, { tail: outputTail(gateOutput, 2000) });
+    const gateOutput = run('npm', ['run', 'gate:stage8-2G'], cloneDir, { timeout: gateTimeoutMs });
+    record('gate:stage8-2G', true, 0, {
+      timeoutMs: gateTimeoutMs,
+      elapsedMs: Date.now() - gateStartedAt,
+      tail: outputTail(gateOutput, 2000)
+    });
   } catch (error) {
+    const elapsedMs = Date.now() - gateStartedAt;
+    const timeoutTriggered = error?.code === 'ETIMEDOUT'
+      || (error?.signal === 'SIGTERM' && elapsedMs >= gateTimeoutMs - 1000);
     record('gate:stage8-2G', false, null, {
+      timeoutMs: gateTimeoutMs,
+      elapsedMs,
+      timeoutTriggered,
       message: String(error.stderr || error.message),
       stdout: outputTail(error.stdout),
       stderr: outputTail(error.stderr),
@@ -143,6 +160,7 @@ try {
 const result = {
   commitSha: (() => { try { return run('git', ['rev-parse', 'HEAD'], root).trim(); } catch { return null; } })(),
   cloneMethod: 'git-clone-file-local',
+  gateTimeoutMs,
   steps,
   overallPassed,
   tempCleaned: !fs.existsSync(tmpRoot),
