@@ -1,0 +1,79 @@
+{
+  "stage": "9-D",
+  "version": 1,
+  "generatedBy": "tests/generate-stage9-D-machine-evidence.mjs",
+  "productionEntry": true,
+  "fixtureLoaderUsed": false,
+  "debugOverlayUsed": false,
+  "dispatchApiUsed": false,
+  "replayApiUsed": false,
+  "offlineApiUsed": false,
+  "equipmentApiUsed": false,
+  "realReloadRequired": true,
+  "frameCount": 9,
+  "requiredActions": [
+    "launch-battle",
+    "confirm-dispatch",
+    "claim-battle-salvage",
+    "view-report",
+    "replay-report"
+  ],
+  "realReloadReasons": [
+    "pending_result",
+    "claimed_result",
+    "replay",
+    "no_drop_result"
+  ],
+  "deterministicFixture": {
+    "salvageSeed": 5,
+    "noDropSeed": 6,
+    "method": "DOM dispatch with test-only Math.random seed source; no dispatch API call"
+  },
+  "frames": [
+    {
+      "frame": 1,
+      "file": "s9-d-01-result-salvage-available.png",
+      "semantic": "result_salvage_available"
+    },
+    {
+      "frame": 2,
+      "file": "s9-d-02-pending-after-real-reload.png",
+      "semantic": "pending_after_real_reload"
+    },
+    {
+      "frame": 3,
+      "file": "s9-d-03-salvage-claimed.png",
+      "semantic": "salvage_claimed"
+    },
+    {
+      "frame": 4,
+      "file": "s9-d-04-claimed-after-real-reload.png",
+      "semantic": "claimed_after_real_reload"
+    },
+    {
+      "frame": 5,
+      "file": "s9-d-05-history-claimed.png",
+      "semantic": "history_claimed"
+    },
+    {
+      "frame": 6,
+      "file": "s9-d-06-replay-read-only.png",
+      "semantic": "replay_read_only_salvage"
+    },
+    {
+      "frame": 7,
+      "file": "s9-d-07-replay-after-real-reload.png",
+      "semantic": "replay_after_real_reload"
+    },
+    {
+      "frame": 8,
+      "file": "s9-d-08-no-drop.png",
+      "semantic": "no_drop_result"
+    },
+    {
+      "frame": 9,
+      "file": "s9-d-09-no-drop-after-real-reload.png",
+      "semantic": "no_drop_after_real_reload"
+    }
+  ]
+}

@@ -40,6 +40,7 @@ import {
   equipmentInventoryCounts
 } from './equipment.js';
 import { canQueueEquipment } from './production.js';
+import { deriveSalvageOffer } from './battle-salvage.js';
 import {
   missionKindLabel, dispatchEligibilityText, operationCooldownText, unitStatusLabel
 } from './mission-command-presentation.js';
@@ -1064,8 +1065,11 @@ export class UI {
       const equipmentDef = getEquipmentDefinition(instance.equipmentId);
       if (!equipmentDef) return;
       const check = canEquipEquipment(state, unit.id, instance.id);
+      const provenance = instance.provenance?.kind === 'battle_salvage'
+        ? `战场回收${instance.provenance.theaterId ? ` · ${THEATERS[instance.provenance.theaterId]?.name || instance.provenance.theaterId}` : ''}`
+        : instance.provenance?.kind === 'production' ? '装甲工厂生产' : '初始配发';
       const row = el('div', 'kv equipment-row');
-      row.appendChild(el('span', '', `${equipmentDef.name} · ${Object.entries(equipmentDef.modifiers).map(([key, value]) => `${key}×${value}`).join(' ')}`));
+      row.appendChild(el('span', '', `${equipmentDef.name} · ${provenance} · ${instance.id}`));
       const mount = el('button', 'btn primary small', '挂载');
       mount.type = 'button'; mount.dataset.action = 'equip-equipment'; mount.dataset.unitId = unit.id; mount.dataset.equipmentInstanceId = instance.id; mount.disabled = !check.ok;
       mount.title = check.ok ? equipmentDef.desc : check.reason;
@@ -2147,7 +2151,11 @@ export class UI {
     t.battleActions.hidden = !active.settled;
     if (t.skipReturnBtn) t.skipReturnBtn.hidden = !active.settled;
 
-    const sig = `${active.id}:${active.settled ? 1 : 0}`;
+    const salvage = active.battleSessionId ? deriveSalvageOffer(state, active.battleSessionId) : null;
+    const salvageSig = salvage?.ok
+      ? `${salvage.salvageId}:${salvage.offerHash}:${salvage.state}:${salvage.claim?.instanceId || ''}`
+      : `${salvage?.code || 'none'}:${salvage?.reason || ''}`;
+    const sig = `${active.id}:${active.settled ? 1 : 0}:${active.replayReadOnly ? 1 : 0}:${salvageSig}`;
     if (sig === t.sig.battle) return;
     t.sig.battle = sig;
 
@@ -2175,6 +2183,8 @@ export class UI {
     const granted = active.granted || {};
     mk('本次获得', Object.keys(granted).length ? formatMissionCost(granted) : '无（奖励已领取或未占领）');
 
+    this._renderBattleSalvage(t.result, state, active, salvage);
+
     const reasons = report.reasons || { advantages: [], problems: [] };
     if (reasons.advantages.length || reasons.problems.length) {
       const ul = el('ul', 'th-reasons');
@@ -2182,6 +2192,42 @@ export class UI {
       reasons.problems.forEach((x) => ul.appendChild(el('li', 'risk', x)));
       t.result.appendChild(ul);
     }
+  }
+
+  /** 战后打捞只消费 salvage 模块的重算结果，不在 UI 层推导概率或装备池。 */
+  _renderBattleSalvage(box, state, active, offer = null) {
+    const section = el('div', 'battle-salvage');
+    const head = el('div', 'section-head sub');
+    head.appendChild(el('span', '', '战场打捞'));
+    head.appendChild(el('span', 'tag', '结算后获取'));
+    section.appendChild(head);
+
+    if (!offer || !offer.ok) {
+      section.appendChild(el('div', 'hint', offer?.reason || '本次作战不适用战场打捞。'));
+      box.appendChild(section);
+      return;
+    }
+    if (offer.outcome !== 'equipment') {
+      section.appendChild(el('div', 'hint', '未发现可回收装备。'));
+      box.appendChild(section);
+      return;
+    }
+    const def = getEquipmentDefinition(offer.equipmentId);
+    const title = offer.claimed ? `已回收：${def?.name || offer.equipmentId}` : `发现：${def?.name || offer.equipmentId}`;
+    section.appendChild(el('div', offer.claimed ? 'hint good' : 'hint', title));
+    if (offer.claimed) {
+      section.appendChild(el('div', 'hint', '装备实例已写入库存，可在单位档案中挂载。'));
+    } else if (active.replayReadOnly !== true && active.settlementAllowed !== false && active.settled === true) {
+      const claim = el('button', 'btn primary', '回收装备');
+      claim.type = 'button';
+      claim.dataset.action = 'claim-battle-salvage';
+      claim.dataset.battleSessionId = active.battleSessionId || '';
+      claim.addEventListener('click', () => this._onTheaterAction('onClaimBattleSalvage', active.battleSessionId));
+      section.appendChild(claim);
+    } else {
+      section.appendChild(el('div', 'hint', '只读回放中不能领取战利品。'));
+    }
+    box.appendChild(section);
   }
 
   /** 按播放进度推断当前阶段文本 */
@@ -2566,6 +2612,32 @@ export class UI {
       replay.addEventListener('click', () => this._onTheaterAction('onReplayReport', report.id));
       sessionBox.appendChild(replay);
       box.appendChild(sessionBox);
+
+      // 历史战报只读取同一正式会话的确定性打捞结果；不在 UI 层复制
+      // 掉落概率、装备池或资格判断。
+      const salvage = deriveSalvageOffer(state, session.battleSessionId);
+      const salvageBox = el('div', 'battle-salvage');
+      const salvageHead = el('div', 'section-head sub');
+      salvageHead.appendChild(el('span', '', '战场打捞历史'));
+      salvageHead.appendChild(el('span', 'tag', '正式结算后'));
+      salvageBox.appendChild(salvageHead);
+      if (!salvage.ok || salvage.outcome !== 'equipment') {
+        salvageBox.appendChild(el('div', 'hint', salvage.ok ? '本次未发现可回收装备。' : (salvage.reason || '本次作战不适用战场打捞。')));
+      } else {
+        const def = getEquipmentDefinition(salvage.equipmentId);
+        salvageBox.appendChild(el('div', salvage.claimed ? 'hint good' : 'hint', `${salvage.claimed ? '已回收' : '发现'}：${def?.name || salvage.equipmentId}`));
+        if (salvage.claimed) {
+          salvageBox.appendChild(el('div', 'hint', `历史实例 ${salvage.claim?.instanceId || salvage.instanceId}`));
+        } else if (!getActiveBattle(state)) {
+          const claim = el('button', 'btn primary', '回收装备');
+          claim.type = 'button'; claim.dataset.action = 'claim-battle-salvage'; claim.dataset.battleSessionId = session.battleSessionId;
+          claim.addEventListener('click', () => this._onTheaterAction('onClaimBattleSalvage', session.battleSessionId));
+          salvageBox.appendChild(claim);
+        } else {
+          salvageBox.appendChild(el('div', 'hint', '请在结算面板领取；只读回放中不能领取。'));
+        }
+      }
+      box.appendChild(salvageBox);
     }
 
     const mk = (label, value) => {

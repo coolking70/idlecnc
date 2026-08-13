@@ -78,7 +78,7 @@ console.log('══════════════════════�
 
 console.log('\n── A. 版本、契约与真实撤退求解 ──');
 check('A01 CURRENT_STAGE 保持8', () => assert.equal(cfg.CURRENT_STAGE, 8));
-check('A02 SAVE_VERSION 已递增到9', () => assert.equal(cfg.SAVE_VERSION, 9));
+check('A02 SAVE_VERSION 已递增到10', () => assert.equal(cfg.SAVE_VERSION, 10));
 check('A03 package 版本保持0.8.1-hotfix系列', () => assert.match(JSON.parse(readFileSync(path.join(ROOT, 'package.json'))).version, /^0\.8\.1-hotfix\./));
 check('A04 RETREAT 事件常量存在', () => assert.equal(battle.BATTLE_EVENT.RETREAT, 'retreat'));
 check('A05 结算阻断码公开', () => assert.equal(theater.THEATER_CODE.SETTLEMENT_BLOCKED, 'settlement_blocked'));

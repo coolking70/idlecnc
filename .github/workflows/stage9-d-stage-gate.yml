@@ -1,0 +1,22 @@
+name: stage9-d-stage-gate
+
+on:
+  workflow_dispatch:
+
+jobs:
+  stage-gate:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.23.1
+      - run: npm install --ignore-scripts --no-audit --no-fund
+      - name: Run targeted E-A and E-A.1 regression
+        run: npm run test:stage8-2G-E-A && npm run test:stage8-2G-E-A-1
+      - name: Run Stage 9-D Node Stage Gate
+        run: npm run test:stage9-D
+      - name: Run Stage 9-D browser evidence gate
+        run: npm run browser:stage9-D

@@ -199,7 +199,7 @@ check('additive migration preserves queues, creates no new equipment and fails c
   old.production = { current: null, queue: [] };
   const migratedOld = migrate(clone(old));
   assert.equal(migratedOld.version, SAVE_VERSION);
-  assert.deepEqual(migratedOld.equipment, { inventory: [], bindings: {} });
+  assert.deepEqual(migratedOld.equipment, { inventory: [], bindings: {}, salvageClaims: {} });
   assert.equal(migratedOld.production.current, null);
   const queued = fixture(['standardized_training', 'modular_assembly']);
   queueEquipment(queued, 'anti_armor_sights');

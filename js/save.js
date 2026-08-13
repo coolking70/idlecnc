@@ -19,6 +19,7 @@ import { sanitizeResearch } from './research.js';
 import { sanitizeOperations } from './operations.js';
 import { sanitizeUnits } from './units.js';
 import { emptyEquipmentState, sanitizeEquipment } from './equipment.js';
+import { sanitizeSalvageClaims } from './battle-salvage.js';
 import { calculateOfflineSeconds, settleOfflineWindow } from './offline.js';
 import { logEvent, emit, LOG_LEVEL } from './events.js';
 import { safeNumber, deepClone, formatDuration } from './utils.js';
@@ -315,6 +316,22 @@ export function migrate(data, report = {}) {
   }
   report.battleRepaired = Boolean(battleFix.repaired || battlesFix.repaired);
 
+  // v9 及以前没有战场打捞语义。sanitizeActiveBattle 可能为旧活动战斗
+  // 补建 ProductionBattleSession；此类补建 session 必须明确保持 legacy，
+  // 不能因为当前工厂函数支持 v10 就获得追溯性战利品资格。
+  if (safeNumber(data.version, 0) < SAVE_VERSION) {
+    Object.values(merged.battleSessions || {}).forEach((session) => {
+      if (session && typeof session === 'object') session.salvageRulesVersion = 0;
+    });
+  }
+
+  // Salvage claims 必须在 battleSessions / reports / settlement ledger 清洗后处理：
+  // 这样 claim→session→ledger→report 与 inventory→claim 两条引用方向都能
+  // fail-closed。v9 及更旧存档只得到空 claims，不根据历史战报自动补发。
+  const salvageFix = sanitizeSalvageClaims(merged);
+  if (salvageFix.repaired) report.notes = (report.notes || []).concat(salvageFix.notes);
+  report.salvageRepaired = salvageFix.repaired;
+
   // 维修队列必须在编队容错之前处理：它会把「维修中的单位」从编队里摘出来并
   // 释放归属，随后 sanitizeFormations 才能算出正确的指挥容量占用。
   // （merged.repairs 已在生产容错后从存档挂载）
@@ -335,6 +352,7 @@ export function migrate(data, report = {}) {
     || theaterFix.repaired || battlesFix.repaired || battleFix.repaired
     || repairFix.repaired || researchFix.repaired || operationFix.repaired || unitFix.repaired
     || equipmentFix.repaired
+    || salvageFix.repaired
   );
 
   if (safeNumber(data.version, 0) < SAVE_VERSION) {

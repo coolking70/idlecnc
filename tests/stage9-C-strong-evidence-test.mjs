@@ -152,7 +152,7 @@ function verifyBrowser(candidate, fail, checkFiles) {
 export function verifyStage9CEvidence(candidate, { checkFiles = false } = {}) {
   const errors = []; const fail = (code, detail = null) => errors.push({ code, detail });
   if (candidate?.stage !== '9-C.1') fail('stage');
-  if (SAVE_VERSION !== 9 || candidate?.saveVersion !== 9) fail('save_version');
+  if (SAVE_VERSION !== 10 || candidate?.saveVersion !== 10) fail('save_version');
   verifyCatalog(fail);
   const productionEvidence = candidate?.core?.acquisition?.production;
   if (!productionEvidence || productionEvidence.kind !== 'production' || !equal(productionEvidence.costPaid, EQUIPMENT.anti_armor_sights.acquisition.cost) || productionEvidence.duration !== EQUIPMENT.anti_armor_sights.acquisition.buildTime) fail('production_true_value');

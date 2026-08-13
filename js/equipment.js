@@ -35,14 +35,16 @@ export function createInitialEquipmentState() {
       equipmentId: def.id,
       quantity: 1,
       acquiredAt: 0,
-      acquisition: cloneJson(def.acquisition)
+      acquisition: cloneJson(def.acquisition),
+      provenance: { kind: 'starter' }
     })),
-    bindings: {}
+    bindings: {},
+    salvageClaims: {}
   };
 }
 
 export function emptyEquipmentState() {
-  return { inventory: [], bindings: {} };
+  return { inventory: [], bindings: {}, salvageClaims: {} };
 }
 
 /** 只返回可由装甲工厂制造的装备定义，顺序由 config 的声明顺序决定。 */
@@ -82,7 +84,8 @@ export function createEquipmentInstance(stateOrEquipment, equipmentId, acquiredA
     equipmentId: def.id,
     quantity: 1,
     acquiredAt: Math.max(0, safeNumber(acquiredAt, 0)),
-    acquisition: cloneJson(def.acquisition)
+    acquisition: cloneJson(def.acquisition),
+    provenance: { kind: 'production' }
   };
 }
 
@@ -93,6 +96,23 @@ export function addEquipmentInstance(state, equipmentId, acquiredAt = 0) {
   if (!instance) return null;
   state.equipment.inventory.push(instance);
   return instance;
+}
+
+/**
+ * Salvage 实例的 ID 与来源由 salvage 模块预先确定；这里仅负责构造实例，
+ * 不读取当前库存最大编号，也不产生时间/随机性。
+ */
+export function createSalvageEquipmentInstance(equipmentId, instanceId, acquiredAt = 0, provenance = {}) {
+  const def = getEquipmentDefinition(equipmentId);
+  if (!def || def.acquisition?.kind !== 'production' || typeof instanceId !== 'string' || !instanceId) return null;
+  return {
+    id: instanceId,
+    equipmentId: def.id,
+    quantity: 1,
+    acquiredAt: Math.max(0, safeNumber(acquiredAt, 0)),
+    acquisition: cloneJson(def.acquisition),
+    provenance: cloneJson({ kind: 'battle_salvage', ...provenance })
+  };
 }
 
 export function getEquipmentDefinition(equipmentId) {
@@ -292,6 +312,16 @@ export function sanitizeEquipment(state) {
     instance.quantity = 1;
     instance.acquiredAt = Math.max(0, safeNumber(instance.acquiredAt, 0));
     instance.acquisition = cloneJson(def.acquisition) || null;
+    if (!instance.provenance || typeof instance.provenance !== 'object') {
+      instance.provenance = String(instance.id).startsWith('equipment-starter-')
+        ? { kind: 'starter' }
+        : String(instance.id).startsWith('equipment-salvage-')
+          ? { kind: 'battle_salvage', salvageId: null }
+          : { kind: 'production' };
+    }
+    if (instance.provenance && !['starter', 'production', 'battle_salvage'].includes(instance.provenance.kind)) {
+      instance.provenance = null;
+    }
     return true;
   });
 
@@ -319,12 +349,18 @@ export function sanitizeEquipment(state) {
   });
   if (JSON.stringify(source.bindings || {}) !== JSON.stringify(normalized)) notes.push('装备绑定已规范化。');
   state.equipment.bindings = normalized;
+  if (!source.salvageClaims || typeof source.salvageClaims !== 'object' || Array.isArray(source.salvageClaims)) {
+    state.equipment.salvageClaims = {};
+  } else {
+    state.equipment.salvageClaims = source.salvageClaims;
+  }
   return { repaired: notes.length > 0, notes };
 }
 
 export const EQUIPMENT_API = {
   createInitialEquipmentState, emptyEquipmentState, getEquipmentDefinition,
   getEquipmentProductionDefinitions, equipmentInventoryCounts, createEquipmentInstance, addEquipmentInstance,
+  createSalvageEquipmentInstance,
   getEquipmentInstance, getUnitEquipment, getEquipmentComposition,
   equipmentModifiersFor, canEquipEquipment, equipEquipment,
   canUnequipEquipment, unequipEquipment, sanitizeEquipment,

@@ -50,7 +50,7 @@ export function verifyStage9BEvidence(candidate, { checkFiles = false } = {}) {
   const changed = [...new Set([...committed, ...working])].sort();
 
   if (candidate?.stage !== '9-B') fail('stage');
-  if (SAVE_VERSION !== 9) fail('save_version', SAVE_VERSION);
+  if (SAVE_VERSION !== 10) fail('save_version', SAVE_VERSION);
   if (machine.frameCount !== 8 || frames.length !== 8) fail('frame_count', { machine: machine.frameCount, frames: frames.length });
   if (machine.productionEntry !== true || machine.fixtureLoaderUsed !== false || machine.dispatchApiUsed !== false || machine.replayApiUsed !== false || machine.offlineApiUsed !== false || machine.equipmentApiUsed !== false) fail('machine_provenance');
   if (browser.productionEntry !== true || browser.fixtureLoaderUsed !== false || browser.dispatchApiUsed !== false || browser.replayApiUsed !== false || browser.offlineApiUsed !== false || browser.equipmentApiUsed !== false) fail('browser_provenance');

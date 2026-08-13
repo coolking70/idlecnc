@@ -85,7 +85,7 @@ await check('A.2.3 verifier is wired', () => assert.ok(fs.existsSync(path.join(r
 await check('fixture check is present', () => assert.ok(fs.existsSync(worker)));
 await check('all new JS passes syntax', () => ['tests/verification-runner.mjs', 'tests/fixtures/global-timeout-worker.mjs', 'tests/fixtures/global-timeout-fixture.mjs', 'tests/stage8-2E-A-2-3-test.mjs', 'tests/verify-stage8-2E-A-2-3-delivery-package.mjs', 'tests/build-stage8-2E-A-2-3-delivery-package.mjs'].forEach((file) => execFileSync(process.execPath, ['--check', file])));
 await check('formal game source is not imported by verifier', () => assert.doesNotMatch(verifierSource, /from ['"].*js\/battle\.js/));
-await check('SAVE_VERSION is incremented to nine', () => assert.match(fs.readFileSync(path.join(root, 'js/config.js'), 'utf8'), /SAVE_VERSION\s*=\s*9/));
+await check('SAVE_VERSION is incremented to ten', () => assert.match(fs.readFileSync(path.join(root, 'js/config.js'), 'utf8'), /SAVE_VERSION\s*=\s*10/));
 await check('runner does not call bare process.exit', () => assert.doesNotMatch(runnerSource, /process\.exit\s*\(/));
 await check('npm test remains wired', () => assert.match(fs.readFileSync(path.join(root, 'package.json'), 'utf8'), /stage8-2E-A-2-2-test\.mjs/));
 

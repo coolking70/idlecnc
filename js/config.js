@@ -11,7 +11,7 @@
  * 存档 / 时间
  * ========================================================== */
 
-export const SAVE_VERSION = 9;
+export const SAVE_VERSION = 10;
 export const SAVE_KEY = 'iron-command.save.v1';
 /** 手动保存槽位：不被静默自动保存覆盖，供玩家点击“读取”时恢复。 */
 export const MANUAL_SAVE_KEY = 'iron-command.save.manual.v1';
@@ -353,6 +353,19 @@ export const EQUIPMENT_RULES = {
   maxSlotsPerUnit: 2,
   roundingDigits: 4,
   starterInventory: 3
+};
+
+/**
+ * Stage 9-D：战后打捞只读取已结算的正式战斗身份，不参与 Formal Settlement。
+ * difficulty 采用从 1 开始的增量，避免把同一档难度重复加一次基础概率。
+ */
+export const SALVAGE_RULES = {
+  version: 1,
+  victory: { baseChance: 0.30, perDifficulty: 0.04, cap: 0.50 },
+  pyrrhic: { baseChance: 0.15, perDifficulty: 0.03, cap: 0.30 },
+  allowedResults: ['victory', 'pyrrhic'],
+  poolKind: 'production',
+  instanceNamespace: 'equipment-salvage'
 };
 
 export const EQUIPMENT = {
@@ -990,6 +1003,7 @@ export const CONFIG = {
   BUILDINGS, BUILDING_STATUS, CONSTRUCTION, CONSTRUCTION_UI, UNITS, UNIT_RANKS, PRODUCTION, PRODUCTION_UI,
   DAMAGE_STATES, DAMAGE_THRESHOLDS, REPAIR, RESEARCH, TECHNOLOGIES,
   EQUIPMENT, EQUIPMENT_RULES, EQUIPMENT_STAT_KEYS,
+  SALVAGE_RULES,
   FORMATION_STATUS, FORMATION_PRESETS, FORMATION, FORMATION_WARNINGS,
   THEATERS, OPERATIONS, ENEMY_UNITS, STRATEGIES, TERRAIN, BATTLE, BATTLE_RESULT,
   PANEL_TABS, STAGE_PLACEHOLDER, CURRENT_STAGE, CURRENT_STAGE_LABEL

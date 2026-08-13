@@ -65,7 +65,7 @@ try {
   await check('verification requires current browser evidence', () => assert.match(fs.readFileSync(path.join(root, 'tests/verify-stage8-2E-A-2-delivery-package.mjs'), 'utf8'), /browser evidence/));
   await check('verification does not accept old PNG only', () => assert.match(fs.readFileSync(path.join(root, 'tests/verify-stage8-2E-A-2-delivery-package.mjs'), 'utf8'), /formal-battle-evidence\.mjs/));
   await check('ZIP cleanup excludes git and node_modules', () => { const source = fs.readFileSync(path.join(root, 'tests/build-stage8-2E-A-2-delivery-package.mjs'), 'utf8'); assert.match(source, /node_modules/); assert.match(source, /\*\/\./); });
-  await check('SAVE_VERSION is incremented to nine', () => assert.match(fs.readFileSync(path.join(root, 'js/config.js'), 'utf8'), /SAVE_VERSION\s*=\s*9/));
+  await check('SAVE_VERSION is incremented to ten', () => assert.match(fs.readFileSync(path.join(root, 'js/config.js'), 'utf8'), /SAVE_VERSION\s*=\s*10/));
   await check('A.2 legacy test remains in npm test', () => assert.match(fs.readFileSync(path.join(root, 'package.json'), 'utf8'), /stage8-2E-A-2-test\.mjs/));
   await check('A.2.1 test is wired into npm test', () => assert.match(fs.readFileSync(path.join(root, 'package.json'), 'utf8'), /stage8-2E-A-2-1-test\.mjs/));
   await check('new modules pass syntax checks', () => ['tests/browser/isolated-temp-root.mjs', 'tests/browser/browser-policy-diagnostics.mjs', 'tests/stage8-2E-A-2-1-test.mjs'].forEach((file) => assert.equal(execFileSync(process.execPath, ['--check', file]).toString(), '')));

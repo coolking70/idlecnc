@@ -60,6 +60,7 @@ import {
 } from './research.js';
 import { getUnitRank, renameUnit, getUnitEffectiveStats, filterUnits, sortUnits } from './units.js';
 import { equipEquipment, unequipEquipment } from './equipment.js';
+import { deriveSalvageOffer, claimBattleSalvage } from './battle-salvage.js';
 import { validateResearchHistory, validateBattleOutcomeConsistency, compareBattleReports } from './integrity.js';
 import { buildEvidenceStatePayload, buildEvidenceStateSignature, buildStageC1EvidenceStatePayload, buildStageC1EvidenceStateSignature, stageC1SemanticPredicates } from './battle-presentation/universal/evidence-integrity.js';
 import { evaluateProductionSemanticPredicate } from './battle-presentation/universal/production-semantic-predicates.js';
@@ -502,6 +503,24 @@ function handleReplayReport(reportId) {
   return res;
 }
 
+/** 领取战后打捞：唯一 equipment acquisition mutation seam。 */
+function handleClaimBattleSalvage(battleSessionId) {
+  const state = getState();
+  const res = claimBattleSalvage(state, battleSessionId);
+  if (res.ok) {
+    saveGame(state, { silent: true });
+    if (ui) {
+      ui.toast(`已回收${res.instance?.equipmentId || '装备'}`, 'good');
+      ui.refreshTheater(state);
+      ui.refreshUnits(state);
+      ui.refreshProduction(state);
+    }
+  } else if (ui) {
+    ui.toast(res.reason || '当前无法领取战场打捞', 'warn');
+  }
+  return res;
+}
+
 /* ---- 维修操作（阶段6） ---- */
 
 /** 正在处理维修请求的标记，杜绝同一帧内的重复提交 */
@@ -930,6 +949,7 @@ function boot() {
     ,onRenameUnit: (unitId, callsign) => handleRenameUnit(unitId, callsign)
     ,onEquipEquipment: (unitId, equipmentInstanceId) => handleEquipEquipment(unitId, equipmentInstanceId)
     ,onUnequipEquipment: (unitId, equipmentInstanceId) => handleUnequipEquipment(unitId, equipmentInstanceId)
+    ,onClaimBattleSalvage: (battleSessionId) => handleClaimBattleSalvage(battleSessionId)
   });
 
   try {
@@ -1171,6 +1191,14 @@ function boot() {
         const state = getState();
         return getUnitEffectiveStats((state.units || []).find((unit) => unit && unit.id === unitId), state.equipment);
       } catch (err) { return null; }
+    },
+    salvageOffer: (battleSessionId) => {
+      try { return deriveSalvageOffer(getState(), battleSessionId); }
+      catch (err) { return { ok: false, code: 'error', reason: String(err) }; }
+    },
+    claimBattleSalvage: (battleSessionId) => {
+      try { return handleClaimBattleSalvage(battleSessionId); }
+      catch (err) { return { ok: false, code: 'error', reason: String(err) }; }
     },
 
     /* ---- 阶段4：编队调试接口 ---- */

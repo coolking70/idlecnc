@@ -78,7 +78,7 @@ function sourceChangedFiles() {
 console.log('\n── Stage 9-B equipment core / persistence / snapshot ──');
 
 check('equipment model has deterministic definitions, acquisition conditions and no hp modifier', () => {
-  assert.equal(SAVE_VERSION, 9);
+  assert.equal(SAVE_VERSION, 10);
   assert.equal(EQUIPMENT_RULES.maxSlotsPerUnit, 2);
   assert.ok(Object.keys(EQUIPMENT).length >= EQUIPMENT_RULES.starterInventory);
   Object.values(EQUIPMENT).forEach((def) => {
@@ -90,7 +90,7 @@ check('equipment model has deterministic definitions, acquisition conditions and
   });
   writeEvidence('stage9_b_equipment_model_check.json', {
     stage: '9-B', passed: true, saveVersion: SAVE_VERSION, rules: EQUIPMENT_RULES,
-    definitions: clone(EQUIPMENT), inventoryShape: '{ inventory: [{ id, equipmentId, quantity: 1 }], bindings: { unitId: instanceId[] } }',
+    definitions: clone(EQUIPMENT), inventoryShape: '{ inventory: [{ id, equipmentId, quantity: 1, provenance }], bindings: { unitId: instanceId[] }, salvageClaims: {} }',
     bindingRules: ['unit exists', 'equipment exists', 'applicable type', 'unique instance owner', 'max slots']
   });
 });

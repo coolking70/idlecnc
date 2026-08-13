@@ -1,0 +1,12 @@
+{
+  "stage": "9-D",
+  "independentRecompute": true,
+  "verifier": "source-derived session/ledger/report/offer/claim/hash recomputation",
+  "checks": {
+    "browser": true,
+    "core": true,
+    "authority": true
+  },
+  "errors": [],
+  "passed": true
+}

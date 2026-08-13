@@ -744,3 +744,16 @@
 - [x] 同 SHA Run B 按设计在正式测量前 fail-closed：两个 art canary p95 分别为 17.780833ms / 17.155942ms，`formalMeasurementRuns=0`，未执行 retry-to-green。
 - [x] 为消除 hosted runner 的滚动环境漂移，三份 CI job 均固定为 `ubuntu-24.04` + Node `22.23.1`；16.7ms 守卫、20/120 采样和失败语义未改变。
 - [ ] 待新固定环境 FINAL_HEAD 取得 Run A first execution、同 SHA Run B、artifact 与 remote/clean-clone identity 收口；验证后禁止新 commit。
+
+# Stage 9-D progress
+
+- [x] 新增独立 `js/battle-salvage.js`：仅在合法 production session、Formal Report 与 applied settlement ledger 绑定后推导战场打捞；Formal Battle / Solver / Settlement 不生成装备。
+- [x] Victory/Pyrrhic 使用集中式 `SALVAGE_RULES` 与 domain-separated canonical hash，确定性生成 roll、装备池、salvageId、offerHash 与 `equipment-salvage-*` 实例 ID；Defeat/Withdraw/Wiped 无打捞。
+- [x] `SAVE_VERSION=10` additive migration：v9 装备、生产队列、战斗会话、结算账本保留，claims 为空且旧会话带 legacy cutoff，不凭空补发装备或领取凭证；claims 与 salvage inventory 双向 fail-closed 清洗。
+- [x] 真实 DOM 领取与历史战报展示已接入；结果页/历史页可领取，Replay 只读；成功领取只改 `equipment.inventory` 与 `equipment.salvageClaims`，结算本身保持装备 byte-for-byte 不变。
+- [x] Stage 9-D core 12/12；Stage 9-B/C targeted regression 10/10 + 10/10；Strong Evidence 独立重算通过；tamper 126/126 拒绝，`passedFlagOnlyCases=0`。
+- [x] Browser evidence 已采集 9 帧、4 次真实 `Page.reload()`、9 个唯一截图 hash，覆盖 pending/claimed/history/replay/no-drop；四个 API provenance 标志均为 false。
+- [x] Stage 9-D focused performance 使用既有 environment guard，20 warmup/120 samples/p95 `<16.7ms`，证据含 environment、loadBefore、loadAfter；未修改 `tests/lib/perf-environment.mjs` 或 D-C.1 资格逻辑。
+- [x] 新增 Fast/Stage CI 分层；Release `gate:stage8-2G` 保持历史内容，不对 Stage 9-D 开发提交自动触发完整 Release Gate；core-regression 自动触发范围收窄为 main push / main PR，保留 workflow_dispatch。
+- [x] Stage 9-D Fast Gate、完整 `browser:stage9-D`、E-A / E-A.1 targeted regression 均已在当前工作树通过；性能 environment guard 有效，Release Gate 按阶段要求未默认运行。
+- [x] Stage 9-D 本地提交与 GitHub 分支已收口；最终远端身份由交付时的 `git ls-remote` 输出核对。
