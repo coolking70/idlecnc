@@ -34,7 +34,9 @@ const run = (cmd, args, cwd, opts = {}) => {
 
 const root = process.cwd();
 const authorityBaseline = 'e72eedac27423902b94ebab69b2fa053ca99b112';
-const stage9Baseline = '27c115848bea9aaa965fa46b784940a9949537e4';
+// All Stage 9 source-diff verifiers on the current release branch use the
+// accepted Stage 9-D.1 baseline; shallow clones must fetch that exact object.
+const stage9Baseline = '5f7bbdd00fe5a2b3a029bcbbc8e550019f0034b6';
 const DEFAULT_GATE_TIMEOUT_MS = 3_600_000;
 const steps = [];
 const outputTail = (value, limit = 4000) => String(value || '').slice(-limit);
