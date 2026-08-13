@@ -11,7 +11,7 @@ import path from 'node:path';
  * 行为：
  *   1. 把当前仓库 HEAD 通过 `git clone --depth 1 file://<repo>` 克隆到临时目录
  *      （必须从 git 克隆，而不是复制工作目录，否则未提交的脏文件会污染验证）
- *   2. 在临时目录 fetch 只读的 Stage 9-C authority 基线对象
+ *   2. 在临时目录 fetch 只读的 authority 基线对象（Stage 9-A/B/C 与历史基线）
  *   3. 在临时目录执行 `npm install --ignore-scripts`
  *   4. 在临时目录跑完整门禁链 `npm run gate:stage8-2G`
  *   5. 输出 JSON 结果：克隆的 commit SHA、各步骤结论、总体 passed
@@ -34,6 +34,7 @@ const run = (cmd, args, cwd, opts = {}) => {
 
 const root = process.cwd();
 const authorityBaseline = 'e72eedac27423902b94ebab69b2fa053ca99b112';
+const stage9Baseline = '27c115848bea9aaa965fa46b784940a9949537e4';
 const steps = [];
 const outputTail = (value, limit = 4000) => String(value || '').slice(-limit);
 
@@ -70,14 +71,26 @@ try {
   record('clone-head-matches', headMatches, null, { currentHead, clonedHead });
   if (!headMatches) throw new Error(`clone HEAD mismatch: current=${currentHead} cloned=${clonedHead}`);
 
-  // 2. 为浅克隆补齐唯一的 authority 基线对象。业务代码和 gate 仍只运行于
-  // 克隆目录；这一步只是让 source-diff verifier 能独立比较冻结路径。
+  // 2. 为浅克隆补齐 authority 基线对象。业务代码和 gate 仍只运行于克隆目录；
+  // 这些对象只是让各阶段 source-diff verifier 能独立比较冻结路径。
   try {
     run('git', ['fetch', '--depth', '1', 'origin', authorityBaseline], cloneDir, { timeout: 120000 });
     record('authority-baseline-fetch', true, 0, { baseline: authorityBaseline });
   } catch (error) {
     record('authority-baseline-fetch', false, null, {
       baseline: authorityBaseline,
+      message: String(error.stderr || error.message),
+      stdout: outputTail(error.stdout),
+      stderr: outputTail(error.stderr),
+    });
+    throw error;
+  }
+  try {
+    run('git', ['fetch', '--depth', '1', 'origin', stage9Baseline], cloneDir, { timeout: 120000 });
+    record('stage9-baseline-fetch', true, 0, { baseline: stage9Baseline });
+  } catch (error) {
+    record('stage9-baseline-fetch', false, null, {
+      baseline: stage9Baseline,
       message: String(error.stderr || error.message),
       stdout: outputTail(error.stdout),
       stderr: outputTail(error.stderr),
