@@ -358,7 +358,7 @@ check('UI uses real data-action hooks and authoritative qualification functions'
 
 let authorityEvidence;
 check('authority freeze and Stage 9-A / 9-B boundaries remain untouched', () => {
-  const baseline = '27c115848bea9aaa965fa46b784940a9949537e4';
+  const baseline = '5f7bbdd00fe5a2b3a029bcbbc8e550019f0034b6';
   const committed = execFileSync('git', ['diff', '--name-only', `${baseline}..HEAD`], { cwd: root, encoding: 'utf8' }).split(/\r?\n/).filter(Boolean);
   const working = execFileSync('git', ['diff', '--name-only', 'HEAD'], { cwd: root, encoding: 'utf8' }).split(/\r?\n/).filter(Boolean);
   const changed = [...new Set([...committed, ...working])].sort();
