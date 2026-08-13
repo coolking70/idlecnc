@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { loadSnapshot } from './lib/perf-environment.mjs';
 
-const BASELINE = '27c115848bea9aaa965fa46b784940a9949537e4';
+const BASELINE = '5f7bbdd00fe5a2b3a029bcbbc8e550019f0034b6';
 const outputDir = path.resolve(process.argv[2] || 'artifacts/stage9-c1b-final-closure');
 const locate = (file) => {
   const direct = path.join(outputDir, file);
