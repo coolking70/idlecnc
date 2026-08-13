@@ -779,4 +779,5 @@
 - [x] 新增 Stage 9-E Fast、Stage、Release workflow；Release 复用 `gate:stage8-2G` 与 clean-clone，未改动 `tests/lib/`、Solver、Planner、Choreographer 或 `save-diff` 语义。
 - [x] 本地 `npm run gate:stage8-2G` exit=0；机器起始 uptime/load 为 `5:51 up 30 days, 22:59` / `3.44 2.90 2.91`，Stage 9-C.1、9-A、9-B、9-C 与历史 E-A/E-B/E-C 回归均通过。
 - [x] 完整 `npm run browser:stage9-E` exit=0：14 帧、14 个唯一 hash、5 次真实 reload、92/92 tamper、strong verifier 与 developer selfcheck 均通过。
-- [ ] 最终提交、推送、Stage Gate、Release Gate 与 clean-clone 的同 SHA 外部运行结果待在提交后收口；不得用本地声明替代远端 identity。
+- [x] 最终提交与推送已收口；`git ls-remote` 已核对远端分支身份，clean-clone 已以同一远端头实跑并返回 `overallPassed=true`、所有步骤通过。
+- [ ] Stage Gate / Release Gate 仍为手动 workflow；本环境未伪造 dispatch 或 run ID，待 GitHub Actions 手动运行后补录其真实结果。
