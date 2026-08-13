@@ -1,6 +1,6 @@
 {
   "name": "iron-command",
-  "version": "0.8.1-hotfix.6",
+  "version": "0.9.0",
   "private": true,
   "type": "module",
   "description": "钢铁指令 / IRON COMMAND —— 纯前端军事基地经营放置游戏原型（零第三方依赖；使用 ES Module，需要通过本地 HTTP 服务器运行，直接执行 npm start 即可）",
@@ -40,7 +40,7 @@
     "test:stage8-2G-D-B": "node tests/stage8-2G-D-B-test.mjs && node tests/stage8-2G-D-B-asset-coverage-test.mjs && node tests/stage8-2G-D-B-ui-authority-test.mjs && node tests/stage8-2G-D-B-evidence-tamper-test.mjs",
     "test:stage8-2G-D-B-1": "node tests/stage8-2G-D-B-1-unarmed-visual-state-test.mjs && node tests/stage8-2G-D-B-1-semantic-resolution-test.mjs && node tests/generate-stage8-2G-DB1-machine-evidence.mjs && node tests/stage8-2G-D-B-1-responsive-test.mjs && node tests/stage8-2G-D-B-1-production-leak-test.mjs && node tests/browser/stage8-2G-D-B-1-evidence.mjs && node tests/stage8-2G-D-B-1-evidence-tamper-test.mjs && node tests/generate-stage8-2G-DB1-developer-selfcheck.mjs",
     "test:stage8-2G-D-B-1a": "npm run test:stage8-2G-D-B-1 && node tests/stage8-2G-D-B-1a-action-attribution-test.mjs && node tests/stage8-2G-D-B-1a-repair-attribution-test.mjs && node tests/stage8-2G-D-B-1a-repair-semantic-binding-test.mjs && node tests/stage8-2G-D-B-1a-retreat-binding-test.mjs && node tests/stage8-2G-D-B-1a-authority-test.mjs && node tests/generate-stage8-2G-DB1a-machine-evidence.mjs && node tests/browser/stage8-2G-D-B-1a-evidence.mjs && node tests/stage8-2G-D-B-1a-evidence-tamper-test.mjs && node tests/generate-stage8-2G-DB1a-developer-selfcheck.mjs",
-  "posttest": "npm run test:stage8-2G-D-C && npm run test:stage8-2G-D-C-1:functional && npm run test:stage8-2G-E-A && npm run test:stage8-2G-E-A-1 && npm run test:stage8-2G-E-B && npm run test:stage8-2G-E-C && npm run test:stage9-A && npm run test:stage9-B && npm run test:stage9-C && npm run test:stage9-D:fast",
+  "posttest": "npm run test:stage8-2G-D-C && npm run test:stage8-2G-D-C-1:functional && npm run test:stage8-2G-E-A && npm run test:stage8-2G-E-A-1 && npm run test:stage8-2G-E-B && npm run test:stage8-2G-E-C && npm run test:stage9-A && npm run test:stage9-B && npm run test:stage9-C && npm run test:stage9-D:fast && npm run test:stage9-E:fast",
     "test:stage8-2G-D-C": "npm run test:stage8-2G-D-B-1a && node tests/generate-stage8-2G-DC-machine-evidence.mjs && node tests/stage8-2G-D-C-test.mjs && node tests/stage8-2G-D-C-effects-test.mjs && node tests/stage8-2G-D-C-camera-test.mjs && node tests/stage8-2G-D-C-audio-cue-test.mjs && node tests/browser/stage8-2G-D-C-evidence.mjs && node tests/stage8-2G-D-C-evidence-tamper-test.mjs && node tests/generate-stage8-2G-DC-developer-selfcheck.mjs",
     "test:stage8-2G-D-C-1-prep": "node tests/generate-stage8-2G-DC-machine-evidence.mjs && node tests/stage8-2G-D-C-test.mjs",
     "test:stage8-2G-D-C-1": "npm run test:stage8-2G-D-C-1:performance && npm run test:stage8-2G-D-C-1:functional",
@@ -66,6 +66,10 @@
   "test:stage9-D:fast": "npm run test:stage9-D:core",
   "test:stage9-D": "npm run test:stage9-D:core && npm run test:stage9-D:performance",
   "browser:stage9-D": "npm run test:stage9-D:core && npm run test:stage9-D:performance && node tests/generate-stage9-D-machine-evidence.mjs && node tests/browser/stage9-D-battle-salvage.mjs && node tests/generate-stage9-D-evidence.mjs && npm run test:stage9-D:evidence && node tests/generate-stage9-D-developer-selfcheck.mjs",
+    "test:stage9-E:core": "node tests/stage9-E-integration-test.mjs && node tests/stage9-E-performance-test.mjs && npm run test:stage9-A && npm run test:stage9-B && npm run test:stage9-C && npm run test:stage9-D",
+  "test:stage9-E:fast": "node tests/stage9-E-integration-test.mjs && npm run test:stage9-B && npm run test:stage9-C && npm run test:stage9-D:core",
+  "test:stage9-E": "npm run test:stage9-E:core",
+  "browser:stage9-E": "npm run test:stage9-E && node tests/generate-stage9-E-machine-evidence.mjs && node tests/browser/stage9-E-integrated-campaign.mjs && node tests/generate-stage9-E-evidence.mjs && node tests/stage9-E-strong-evidence-test.mjs && node tests/stage9-E-evidence-tamper-test.mjs && node tests/generate-stage9-E-developer-selfcheck.mjs",
     "test:stage9-C.1a-evidence": "node tests/generate-stage9-C1a-evidence.mjs",
   "browser:stage8-2G-E-C": "npm run test:stage8-2G-E-C && node tests/generate-stage8-2G-EC-machine-evidence.mjs && node tests/browser/stage8-2G-E-C-offline-progression.mjs && node tests/generate-stage8-2G-EC-evidence.mjs && node tests/stage8-2G-E-C-evidence-tamper-test.mjs && node tests/stage8-2G-E-C-strong-evidence-test.mjs && node tests/generate-stage8-2G-EC-developer-selfcheck.mjs",
   "build:stage8-2G-E-C": "node tests/build-stage8-2G-E-C-delivery-package.mjs",
@@ -136,7 +140,7 @@
     "build:stage8-2E-A-2-3": "node tests/build-stage8-2E-A-2-3-delivery-package.mjs",
     "verify:stage8-2E-A-2-4": "node tests/verify-stage8-2E-A-2-4-delivery-package.mjs",
     "build:stage8-2E-A-2-4": "node tests/build-stage8-2E-A-2-4-delivery-package.mjs",
-  "gate:stage8-2G": "npm test && npm run browser:stage8-2G-E-A-1 && npm run browser:stage8-2G-E-B && npm run browser:stage8-2G-E-C && npm run browser:stage9-A && npm run browser:stage9-B && npm run browser:stage9-C",
+  "gate:stage8-2G": "npm test && npm run browser:stage8-2G-E-A-1 && npm run browser:stage8-2G-E-B && npm run browser:stage8-2G-E-C && npm run browser:stage9-A && npm run browser:stage9-B && npm run browser:stage9-C && npm run test:stage9-E:fast",
     "verify:clean-clone": "node tests/verify-clean-clone.mjs"
   }
 }

@@ -39,8 +39,8 @@ console.log('\n═════════════════════�
 console.log('  钢铁指令 阶段7 自动测试');
 console.log('════════════════════════════════════════════');
 
-check('A01 阶段与存档版本', () => { assert.equal(cfg.CURRENT_STAGE, 8); assert.equal(cfg.SAVE_VERSION, 10); });
-check('A02 package 版本保持0.8.1-hotfix系列', () => { assert.match(JSON.parse(readFileSync(path.join(ROOT, 'package.json'))).version, /^0\.8\.1-hotfix\./); });
+check('A01 阶段与存档版本', () => { assert.ok(cfg.CURRENT_STAGE >= 8); assert.equal(cfg.SAVE_VERSION, 10); });
+check('A02 package 版本已晋升为Stage 9正式版本', () => { assert.equal(JSON.parse(readFileSync(path.join(ROOT, 'package.json'))).version, '0.9.0'); });
 check('A03 损伤阈值为 0.75 / 0.40', () => { assert.deepEqual(cfg.DAMAGE_THRESHOLDS, { intact: 0.75, light: 0.4 }); });
 check('A04 unit-status 80% 完好', () => { assert.equal(unitStatus.getDamageState(80, 100), 'intact'); });
 check('A05 unit-status 45% 轻伤', () => { assert.equal(unitStatus.getDamageState(45, 100), 'light'); });

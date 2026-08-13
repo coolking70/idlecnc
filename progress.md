@@ -767,3 +767,16 @@
 - [x] Stage Gate scripts are self-contained: core/performance do not read screenshots; browser generation precedes strong verifier/tamper; Stage Gate uploads fresh SHA/run/attempt-named evidence.
 - [x] Developer selfcheck separates `implementationPassed` from `deliveryClosed`; no delivery-pending answer is represented as completed external closure.
 - [ ] Final Stage 9-D.1 commit, clean GitHub Stage Gate attempt 1, remote SHA, and final artifact identity remain to be closed; no Release Gate or full clean clone is planned.
+
+# Stage 9-E progress
+
+- [x] 从接受的 Stage 9-D.1 baseline `5f7bbdd00fe5a2b3a029bcbbc8e550019f0034b6` 创建 `auto/stage9-e-stage9-milestone-closure`。
+- [x] 产品元数据晋升为 `CURRENT_STAGE=9`、`Stage 9 · Expanded Campaign & Equipment`、package `0.9.0`；`SAVE_VERSION=10` 保持不变。
+- [x] README 已有限更新，明确 6 战区、6 重复任务、装备生产 / 挂载 / 战场回收 / 回放与 `SAVE_VERSION=10`。
+- [x] Stage 9-E 整合核心测试 23/23：真实生产入库、DOM 等价挂载、`river_ferry` 重复任务、正式结算不改 equipment、确定性战场回收、真实挂载、迁移、历史回放与离线生产幂等均已覆盖。
+- [x] 真实 CDP/DOM browser evidence 14/14 帧、14 个唯一截图 hash、5 次 `Page.reload`，覆盖生产队列 / 完成未挂载 / 运行中锁定 / 结算待领取 / 回放；所有 API provenance 标志均为 false。
+- [x] 独立 source verifier、strong evidence、92/92 true-value tamper rejection（`coupledRejected=92`、`passedFlagOnlyCases=0`）已通过；未实现战斗掉落。
+- [x] 新增 Stage 9-E Fast、Stage、Release workflow；Release 复用 `gate:stage8-2G` 与 clean-clone，未改动 `tests/lib/`、Solver、Planner、Choreographer 或 `save-diff` 语义。
+- [x] 本地 `npm run gate:stage8-2G` exit=0；机器起始 uptime/load 为 `5:51 up 30 days, 22:59` / `3.44 2.90 2.91`，Stage 9-C.1、9-A、9-B、9-C 与历史 E-A/E-B/E-C 回归均通过。
+- [x] 完整 `npm run browser:stage9-E` exit=0：14 帧、14 个唯一 hash、5 次真实 reload、92/92 tamper、strong verifier 与 developer selfcheck 均通过。
+- [ ] 最终提交、推送、Stage Gate、Release Gate 与 clean-clone 的同 SHA 外部运行结果待在提交后收口；不得用本地声明替代远端 identity。

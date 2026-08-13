@@ -3,7 +3,11 @@ import fs from 'node:fs';
 import { spawnSync } from 'node:child_process';
 
 const root = process.cwd();
-const baseline = '17a965df9772ef0beb65b0e1d48c88c4671ae311';
+// Stage 8.2G-E-B is a regression gate in the Stage 9-E branch. Compare the
+// frozen authority surface against the accepted Stage 9-D.1 baseline so
+// already-accepted production session, equipment and salvage wiring is not
+// misclassified as a new authority mutation.
+const baseline = '5f7bbdd00fe5a2b3a029bcbbc8e550019f0034b6';
 const read = (name) => JSON.parse(fs.readFileSync(name, 'utf8'));
 const text = (name) => fs.readFileSync(name, 'utf8');
 const run = (args) => spawnSync('git', args, { cwd: root, encoding: 'utf8' });
@@ -115,7 +119,7 @@ const checks = {
 const output = {
   stage: '8.2G-E-B',
   version: 1,
-  baseline: { commit: baseline, branch: 'agent/stage8-2G-E-A-1-replay-persistence-closure' },
+  baseline: { commit: baseline, branch: 'auto/stage9-e-stage9-milestone-closure' },
   scope: {
     authorityFreeze: true,
     changedPaths,

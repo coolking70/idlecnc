@@ -1,0 +1,16 @@
+{
+  "stage": "9-E",
+  "kind": "real_reload",
+  "independentRecompute": true,
+  "source": "current-source-recomputed",
+  "reloadCount": 5,
+  "reasons": [
+    "production_queue",
+    "completed_unmounted",
+    "running_battle",
+    "settlement_salvage_pending",
+    "replay"
+  ],
+  "everyReloadAdvancesTimeOrigin": true,
+  "everyReloadChangesLoader": true
+}

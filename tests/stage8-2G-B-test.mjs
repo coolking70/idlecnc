@@ -37,7 +37,7 @@ function scheduleFor(report) {
 
 const victory = scheduleFor(victoryReport); const withdraw = scheduleFor(withdrawReport); const wiped = scheduleFor(wipedReport);
 
-assert.ok(['Stage 8.2G-B.1 · Engagement Choreographer Correctness & Evidence Hardening', 'Stage 8.2G-B.1.1 · Phase-Continuous Fire & Browser Evidence Closure', 'Stage 8.2G-B.1.1a · Evidence Integrity & Final Package Record Hotfix', 'Stage 8.2G-C · Battlefield Environment & Persistent Destruction', 'Stage 8.2G-C.1 · Production Visual Consumption & Evidence Hardening'].includes(cfg.CURRENT_STAGE_LABEL));
+assert.ok(['Stage 8.2G-B.1 · Engagement Choreographer Correctness & Evidence Hardening', 'Stage 8.2G-B.1.1 · Phase-Continuous Fire & Browser Evidence Closure', 'Stage 8.2G-B.1.1a · Evidence Integrity & Final Package Record Hotfix', 'Stage 8.2G-C · Battlefield Environment & Persistent Destruction', 'Stage 8.2G-C.1 · Production Visual Consumption & Evidence Hardening', 'Stage 9 · Expanded Campaign & Equipment'].includes(cfg.CURRENT_STAGE_LABEL));
 assert.doesNotMatch(fs.readFileSync(path.join(root, 'README.md'), 'utf8'), /当前版本：[^\n]*Stage 8\.2G-A/);
 assert.doesNotMatch(fs.readFileSync(path.join(root, 'index.html'), 'utf8'), /Stage 8\.2G-A/);
 

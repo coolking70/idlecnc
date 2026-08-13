@@ -1,0 +1,14 @@
+{
+  "stage": "9-E",
+  "kind": "catalog",
+  "independentRecompute": true,
+  "source": "current-source-recomputed",
+  "equipmentCount": 8,
+  "starterCount": 3,
+  "productionCount": 5,
+  "everyUnitHasAtLeastTwoApplicable": true,
+  "legalModifierKeys": true,
+  "hpModifierCount": 0,
+  "maxHpModifierCount": 0,
+  "starterDefinitionsUnchanged": true
+}

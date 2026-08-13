@@ -13,6 +13,9 @@
           "acquisition": {
             "kind": "starter",
             "label": "初始装备补给"
+          },
+          "provenance": {
+            "kind": "starter"
           }
         },
         {
@@ -23,6 +26,9 @@
           "acquisition": {
             "kind": "starter",
             "label": "初始装备补给"
+          },
+          "provenance": {
+            "kind": "starter"
           }
         },
         {
@@ -33,10 +39,14 @@
           "acquisition": {
             "kind": "starter",
             "label": "初始装备补给"
+          },
+          "provenance": {
+            "kind": "starter"
           }
         }
       ],
-      "bindings": {}
+      "bindings": {},
+      "salvageClaims": {}
     },
     "equipmentAfterFirst": {
       "inventory": [
@@ -48,6 +58,9 @@
           "acquisition": {
             "kind": "starter",
             "label": "初始装备补给"
+          },
+          "provenance": {
+            "kind": "starter"
           }
         },
         {
@@ -58,6 +71,9 @@
           "acquisition": {
             "kind": "starter",
             "label": "初始装备补给"
+          },
+          "provenance": {
+            "kind": "starter"
           }
         },
         {
@@ -68,6 +84,9 @@
           "acquisition": {
             "kind": "starter",
             "label": "初始装备补给"
+          },
+          "provenance": {
+            "kind": "starter"
           }
         },
         {
@@ -84,10 +103,14 @@
               "alloy": 140
             },
             "buildTime": 18
+          },
+          "provenance": {
+            "kind": "production"
           }
         }
       ],
-      "bindings": {}
+      "bindings": {},
+      "salvageClaims": {}
     },
     "equipmentAfterSecond": {
       "inventory": [
@@ -99,6 +122,9 @@
           "acquisition": {
             "kind": "starter",
             "label": "初始装备补给"
+          },
+          "provenance": {
+            "kind": "starter"
           }
         },
         {
@@ -109,6 +135,9 @@
           "acquisition": {
             "kind": "starter",
             "label": "初始装备补给"
+          },
+          "provenance": {
+            "kind": "starter"
           }
         },
         {
@@ -119,6 +148,9 @@
           "acquisition": {
             "kind": "starter",
             "label": "初始装备补给"
+          },
+          "provenance": {
+            "kind": "starter"
           }
         },
         {
@@ -135,10 +167,14 @@
               "alloy": 140
             },
             "buildTime": 18
+          },
+          "provenance": {
+            "kind": "production"
           }
         }
       ],
-      "bindings": {}
+      "bindings": {},
+      "salvageClaims": {}
     },
     "producedInstanceId": "equipment-production-anti_armor_sights-1",
     "reportEquipmentProduced": [
@@ -159,6 +195,9 @@
             "acquisition": {
               "kind": "starter",
               "label": "初始装备补给"
+            },
+            "provenance": {
+              "kind": "starter"
             }
           },
           {
@@ -169,6 +208,9 @@
             "acquisition": {
               "kind": "starter",
               "label": "初始装备补给"
+            },
+            "provenance": {
+              "kind": "starter"
             }
           },
           {
@@ -179,6 +221,9 @@
             "acquisition": {
               "kind": "starter",
               "label": "初始装备补给"
+            },
+            "provenance": {
+              "kind": "starter"
             }
           },
           {
@@ -195,10 +240,14 @@
                 "alloy": 140
               },
               "buildTime": 18
+            },
+            "provenance": {
+              "kind": "production"
             }
           }
         ],
-        "bindings": {}
+        "bindings": {},
+        "salvageClaims": {}
       }
     },
     "battlePaused": true,

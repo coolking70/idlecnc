@@ -343,7 +343,10 @@ check('authority freeze excludes solver, planner, choreographer and presentation
 });
 
 function requireGitNames() {
-  const baseline = '27c115848bea9aaa965fa46b784940a9949537e4';
+  // Stage 9-A regression runs from the accepted Stage 9-D.1 baseline. The
+  // earlier Stage 9-A baseline predates the already-accepted production
+  // session / salvage metadata wiring in js/theater.js.
+  const baseline = '5f7bbdd00fe5a2b3a029bcbbc8e550019f0034b6';
   const committed = execFileSync('git', ['diff', '--name-only', `${baseline}..HEAD`], { cwd: root, encoding: 'utf8' }).split(/\r?\n/).filter(Boolean);
   const working = execFileSync('git', ['diff', '--name-only', 'HEAD'], { cwd: root, encoding: 'utf8' }).split(/\r?\n/).filter(Boolean);
   return [...new Set([...committed, ...working])].sort();

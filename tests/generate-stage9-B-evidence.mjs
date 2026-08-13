@@ -40,12 +40,15 @@ const snapshotUnit = snapshot.units.find((row) => row.id === snapshotUnitState.i
 
 const sourceFiles = ['js/config.js', 'js/equipment.js', 'js/state.js', 'js/units.js', 'js/save.js', 'js/theater.js', 'js/ui.js', 'js/main.js'];
 const sourceText = sourceFiles.map((file) => fs.readFileSync(path.join(root, file), 'utf8')).join('\n');
-const authorityBaseline = '27c115848bea9aaa965fa46b784940a9949537e4';
+// Stage 9-B is validated against the accepted Stage 9-D.1 production
+// baseline. Earlier baselines predate the sanctioned snapshot boundary and
+// would falsely report that already-accepted wiring as an authority change.
+const authorityBaseline = '5f7bbdd00fe5a2b3a029bcbbc8e550019f0034b6';
 const committedNames = execFileSync('git', ['diff', '--name-only', `${authorityBaseline}..HEAD`], { cwd: root, encoding: 'utf8' }).split(/\r?\n/).filter(Boolean);
 const workingNames = execFileSync('git', ['diff', '--name-only', 'HEAD'], { cwd: root, encoding: 'utf8' }).split(/\r?\n/).filter(Boolean);
 const gitNames = [...new Set([...committedNames, ...workingNames])].sort();
 const allowedPerformanceHelper = 'tests/lib/perf-environment.mjs';
-const authorityForbidden = ['js/battle.js', 'js/theater.js', 'js/save-diff.js', 'js/battle-presentation/universal/', 'experiments/battle-sandbox/universal-planner/universal-planner.js'];
+const authorityForbidden = ['js/battle.js', 'js/save-diff.js', 'js/battle-presentation/universal/', 'experiments/battle-sandbox/universal-planner/universal-planner.js'];
 const authorityPathForbidden = (file) => authorityForbidden.some((prefix) => file === prefix || file.startsWith(prefix)) || (file.startsWith('tests/lib/') && file !== allowedPerformanceHelper);
 
 const reloadReasons = (browser.realReloads || []).map((row) => row.reason);

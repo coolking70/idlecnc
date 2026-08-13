@@ -44,9 +44,9 @@ console.log('  钢铁指令 阶段8 自动测试');
 console.log('════════════════════════════════════════════');
 
 console.log('\n── A. 阶段标记、配置与公开契约 ──');
-check('A01 CURRENT_STAGE 为8', () => assert.equal(cfg.CURRENT_STAGE, 8));
+check('A01 CURRENT_STAGE 已晋升为9', () => assert.equal(cfg.CURRENT_STAGE, 9));
 check('A02 SAVE_VERSION 已递增到10', () => assert.equal(cfg.SAVE_VERSION, 10));
-check('A03 package 版本保持0.8.1-hotfix系列', () => assert.match(JSON.parse(readFileSync(path.join(ROOT, 'package.json'))).version, /^0\.8\.1-hotfix\./));
+check('A03 package 版本已晋升为0.9.0', () => assert.equal(JSON.parse(readFileSync(path.join(ROOT, 'package.json'))).version, '0.9.0'));
 check('A04 四档老兵配置阈值递增', () => assert.deepEqual(Object.values(cfg.UNIT_RANKS).map((x) => x.minExperience), [0, 10, 30, 60]));
 check('A05 老兵配置含战斗与后勤修正', () => { const r = cfg.UNIT_RANKS.elite.modifiers; assert.ok(r.attack > 1 && r.repair > 1); });
 check('A06 保留三个旧重复任务并支持阶段9扩展', () => { assert.ok(Object.keys(cfg.OPERATIONS).length >= 6); assert.deepEqual(Object.keys(cfg.OPERATIONS).slice(0, 3), ['salvage_run', 'convoy_escort', 'outpost_sweep']); });

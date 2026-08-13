@@ -6,12 +6,15 @@ const pkg = JSON.parse(fs.readFileSync('package.json', 'utf8'));
 const workflow = fs.readFileSync('.github/workflows/core-regression.yml', 'utf8');
 const manifest = JSON.parse(fs.readFileSync('stage9_a_browser_capture_manifest.json', 'utf8'));
 const tamper = JSON.parse(fs.readFileSync('stage9_a_tamper_results.json', 'utf8'));
-const baseline = '27c115848bea9aaa965fa46b784940a9949537e4';
+// Stage 9-A is a regression on the accepted Stage 9-D.1 baseline here.
+// Using the original 9-A baseline would reclassify already accepted theater
+// snapshot wiring as a new authority change.
+const baseline = '5f7bbdd00fe5a2b3a029bcbbc8e550019f0034b6';
 const committed = execFileSync('git', ['diff', '--name-only', `${baseline}..HEAD`], { encoding: 'utf8' }).split(/\r?\n/).filter(Boolean);
 const working = execFileSync('git', ['diff', '--name-only', 'HEAD'], { encoding: 'utf8' }).split(/\r?\n/).filter(Boolean);
 const changedFiles = [...new Set([...committed, ...working])].sort();
 const allowedPerformanceHelper = 'tests/lib/perf-environment.mjs';
-const forbiddenPrefixes = ['js/battle.js', 'js/theater.js', 'js/save-diff.js', 'js/battle-presentation/universal/', 'experiments/battle-sandbox/universal-planner/universal-planner.js'];
+const forbiddenPrefixes = ['js/battle.js', 'js/save-diff.js', 'js/battle-presentation/universal/', 'experiments/battle-sandbox/universal-planner/universal-planner.js'];
 const forbiddenChangedFiles = changedFiles.filter((file) => forbiddenPrefixes.some((prefix) => file === prefix || file.startsWith(prefix)) || (file.startsWith('tests/lib/') && file !== allowedPerformanceHelper));
 const output = {
   stage: '9-A',

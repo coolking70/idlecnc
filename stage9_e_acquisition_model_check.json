@@ -1,0 +1,24 @@
+{
+  "stage": "9-E",
+  "kind": "acquisition_model",
+  "independentRecompute": true,
+  "source": "current-source-recomputed",
+  "production": {
+    "kind": "production",
+    "building": "armor_factory",
+    "queueLimits": {
+      "maxConcurrent": 1,
+      "maxQueueSize": 5
+    },
+    "completion": "equipment.inventory"
+  },
+  "salvage": {
+    "kind": "battle_salvage",
+    "path": "post-settlement-claim-only",
+    "preexistingDropPath": false
+  },
+  "research": {
+    "productionDefinitions": 5,
+    "starterDefinitions": 3
+  }
+}

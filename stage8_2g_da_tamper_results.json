@@ -6,42 +6,42 @@
     {
       "label": "machine asset id",
       "rejected": true,
-      "output": " new Error(message); };\n                                  ^\n\nError: D-A manifest hash mismatch\n    at fail (file:///workspace/tests/verify-stage8-2G-D-A-evidence.mjs:14:35)\n    at file:///workspace/tests/verify-stage8-2G-D-A-evidence.mjs:26:86\n    at ModuleJob.run (node:internal/modules/esm/module_job:343:25)\n    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:681:26)\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5)\n\nNode.js v22.23.2\n"
+      "output": "oolking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-D-A-evidence.mjs:14:35)\n    at file:///Users/coolking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-D-A-evidence.mjs:26:86\n    at ModuleJob.run (node:internal/modules/esm/module_job:413:25)\n    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:654:26)\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)\n\nNode.js v25.2.1\n"
     },
     {
       "label": "machine animation frame",
       "rejected": true,
-      "output": " new Error(message); };\n                                  ^\n\nError: D-A manifest hash mismatch\n    at fail (file:///workspace/tests/verify-stage8-2G-D-A-evidence.mjs:14:35)\n    at file:///workspace/tests/verify-stage8-2G-D-A-evidence.mjs:26:86\n    at ModuleJob.run (node:internal/modules/esm/module_job:343:25)\n    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:681:26)\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5)\n\nNode.js v22.23.2\n"
+      "output": "oolking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-D-A-evidence.mjs:14:35)\n    at file:///Users/coolking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-D-A-evidence.mjs:26:86\n    at ModuleJob.run (node:internal/modules/esm/module_job:413:25)\n    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:654:26)\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)\n\nNode.js v25.2.1\n"
     },
     {
       "label": "browser source rect",
       "rejected": true,
-      "output": " new Error(message); };\n                                  ^\n\nError: D-A manifest hash mismatch\n    at fail (file:///workspace/tests/verify-stage8-2G-D-A-evidence.mjs:14:35)\n    at file:///workspace/tests/verify-stage8-2G-D-A-evidence.mjs:26:86\n    at ModuleJob.run (node:internal/modules/esm/module_job:343:25)\n    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:681:26)\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5)\n\nNode.js v22.23.2\n"
+      "output": "oolking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-D-A-evidence.mjs:14:35)\n    at file:///Users/coolking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-D-A-evidence.mjs:26:86\n    at ModuleJob.run (node:internal/modules/esm/module_job:413:25)\n    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:654:26)\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)\n\nNode.js v25.2.1\n"
     },
     {
       "label": "browser faction palette",
       "rejected": true,
-      "output": " new Error(message); };\n                                  ^\n\nError: D-A manifest hash mismatch\n    at fail (file:///workspace/tests/verify-stage8-2G-D-A-evidence.mjs:14:35)\n    at file:///workspace/tests/verify-stage8-2G-D-A-evidence.mjs:26:86\n    at ModuleJob.run (node:internal/modules/esm/module_job:343:25)\n    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:681:26)\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5)\n\nNode.js v22.23.2\n"
+      "output": "oolking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-D-A-evidence.mjs:14:35)\n    at file:///Users/coolking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-D-A-evidence.mjs:26:86\n    at ModuleJob.run (node:internal/modules/esm/module_job:413:25)\n    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:654:26)\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)\n\nNode.js v25.2.1\n"
     },
     {
       "label": "browser screenshot hash",
       "rejected": true,
-      "output": " new Error(message); };\n                                  ^\n\nError: D-A manifest hash mismatch\n    at fail (file:///workspace/tests/verify-stage8-2G-D-A-evidence.mjs:14:35)\n    at file:///workspace/tests/verify-stage8-2G-D-A-evidence.mjs:26:86\n    at ModuleJob.run (node:internal/modules/esm/module_job:343:25)\n    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:681:26)\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5)\n\nNode.js v22.23.2\n"
+      "output": "oolking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-D-A-evidence.mjs:14:35)\n    at file:///Users/coolking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-D-A-evidence.mjs:26:86\n    at ModuleJob.run (node:internal/modules/esm/module_job:413:25)\n    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:654:26)\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)\n\nNode.js v25.2.1\n"
     },
     {
       "label": "duplicate screenshot hash",
       "rejected": true,
-      "output": " new Error(message); };\n                                  ^\n\nError: D-A manifest hash mismatch\n    at fail (file:///workspace/tests/verify-stage8-2G-D-A-evidence.mjs:14:35)\n    at file:///workspace/tests/verify-stage8-2G-D-A-evidence.mjs:26:86\n    at ModuleJob.run (node:internal/modules/esm/module_job:343:25)\n    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:681:26)\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5)\n\nNode.js v22.23.2\n"
+      "output": "oolking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-D-A-evidence.mjs:14:35)\n    at file:///Users/coolking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-D-A-evidence.mjs:26:86\n    at ModuleJob.run (node:internal/modules/esm/module_job:413:25)\n    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:654:26)\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)\n\nNode.js v25.2.1\n"
     },
     {
       "label": "fallback binding",
       "rejected": true,
-      "output": " new Error(message); };\n                                  ^\n\nError: D-A manifest hash mismatch\n    at fail (file:///workspace/tests/verify-stage8-2G-D-A-evidence.mjs:14:35)\n    at file:///workspace/tests/verify-stage8-2G-D-A-evidence.mjs:26:86\n    at ModuleJob.run (node:internal/modules/esm/module_job:343:25)\n    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:681:26)\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5)\n\nNode.js v22.23.2\n"
+      "output": "oolking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-D-A-evidence.mjs:14:35)\n    at file:///Users/coolking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-D-A-evidence.mjs:26:86\n    at ModuleJob.run (node:internal/modules/esm/module_job:413:25)\n    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:654:26)\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)\n\nNode.js v25.2.1\n"
     },
     {
       "label": "source report",
       "rejected": true,
-      "output": " new Error(message); };\n                                  ^\n\nError: D-A manifest hash mismatch\n    at fail (file:///workspace/tests/verify-stage8-2G-D-A-evidence.mjs:14:35)\n    at file:///workspace/tests/verify-stage8-2G-D-A-evidence.mjs:26:86\n    at ModuleJob.run (node:internal/modules/esm/module_job:343:25)\n    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:681:26)\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5)\n\nNode.js v22.23.2\n"
+      "output": "oolking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-D-A-evidence.mjs:14:35)\n    at file:///Users/coolking70/Documents/%E5%90%8C%E6%AD%A5%E7%A9%BA%E9%97%B4/idlecnc/tests/verify-stage8-2G-D-A-evidence.mjs:26:86\n    at ModuleJob.run (node:internal/modules/esm/module_job:413:25)\n    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:654:26)\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)\n\nNode.js v25.2.1\n"
     }
   ],
   "assetBindingProtected": true,

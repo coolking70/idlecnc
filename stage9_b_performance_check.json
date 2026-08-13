@@ -7,15 +7,15 @@
       "warmup": 20,
       "samples": 120,
       "metric": "p95",
-      "p95Ms": 0.021833999999998355,
-      "maxMs": 0.45241699999999696
+      "p95Ms": 0.00837500000000091,
+      "maxMs": 0.2234589999999983
     },
     "snapshot": {
       "warmup": 20,
       "samples": 120,
       "metric": "p95",
-      "p95Ms": 0.04187500000000455,
-      "maxMs": 0.07916600000000074
+      "p95Ms": 0.015332999999998265,
+      "maxMs": 0.022584000000001936
     }
   },
   "hotPathGuards": {
@@ -43,6 +43,9 @@
           "acquisition": {
             "kind": "starter",
             "label": "初始装备补给"
+          },
+          "provenance": {
+            "kind": "starter"
           }
         },
         {
@@ -53,6 +56,9 @@
           "acquisition": {
             "kind": "starter",
             "label": "初始装备补给"
+          },
+          "provenance": {
+            "kind": "starter"
           }
         },
         {
@@ -63,6 +69,9 @@
           "acquisition": {
             "kind": "starter",
             "label": "初始装备补给"
+          },
+          "provenance": {
+            "kind": "starter"
           }
         }
       ],
@@ -71,7 +80,8 @@
           "equipment-starter-1",
           "equipment-starter-3"
         ]
-      }
+      },
+      "salvageClaims": {}
     }
   }
 }

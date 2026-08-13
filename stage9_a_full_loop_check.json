@@ -3,10 +3,10 @@
   "passed": true,
   "theaterId": "mountain_pass",
   "missionKind": "campaign",
-  "sessionId": "battle-session-0-mountain_pass-6682a1ddf669488fcb1e-1",
+  "sessionId": "battle-session-0-mountain_pass-69ecaa9f73064c2746c0-1",
   "deployment": {
     "formation": {
-      "id": "fm_msqiwm5k_3g",
+      "id": "fm_mss2jyle_3g",
       "name": "Stage 9 深入编队",
       "experience": 0,
       "unitIds": [
@@ -185,7 +185,7 @@
     "operation": null
   },
   "report": {
-    "id": "battle_1_fm_msqiwm5k_3g_mountain_pass_cautious",
+    "id": "battle_1_fm_mss2jyle_3g_mountain_pass_cautious",
     "seed": 1,
     "theaterId": "mountain_pass",
     "theaterName": "北岭山口",
@@ -194,7 +194,7 @@
     "missionKind": "campaign",
     "missionId": "mountain_pass",
     "strategyName": "谨慎推进",
-    "formationId": "fm_msqiwm5k_3g",
+    "formationId": "fm_mss2jyle_3g",
     "formationName": "Stage 9 深入编队",
     "startedAt": 1,
     "initial": {
@@ -1677,11 +1677,11 @@
     "experienceMultiplier": 1
   },
   "session": {
-    "battleSessionId": "battle-session-0-mountain_pass-6682a1ddf669488fcb1e-1",
+    "battleSessionId": "battle-session-0-mountain_pass-69ecaa9f73064c2746c0-1",
     "missionId": "mountain_pass",
     "deploymentSnapshot": {
       "formation": {
-        "id": "fm_msqiwm5k_3g",
+        "id": "fm_mss2jyle_3g",
         "name": "Stage 9 深入编队",
         "experience": 0,
         "unitIds": [
@@ -1859,18 +1859,18 @@
       "missionId": "mountain_pass",
       "operation": null
     },
-    "deploymentSnapshotId": "deployment-6682a1ddf669488fcb1ee5e54d8239fa3b364da4460cd744c5cc3bbdaeca0b3d",
-    "deploymentHash": "6682a1ddf669488fcb1ee5e54d8239fa3b364da4460cd744c5cc3bbdaeca0b3d",
+    "deploymentSnapshotId": "deployment-69ecaa9f73064c2746c02dc62c2bb8766d3c91b5d2b3004d70c02db43a70923f",
+    "deploymentHash": "69ecaa9f73064c2746c02dc62c2bb8766d3c91b5d2b3004d70c02db43a70923f",
     "sourceSaveRevision": 0,
-    "formalReportId": "battle_1_fm_msqiwm5k_3g_mountain_pass_cautious",
-    "formalReportHash": "2764566ad13ebc09bdc3497418f6a898f97a36151a4f47d16675e2249d31732c",
+    "formalReportId": "battle_1_fm_mss2jyle_3g_mountain_pass_cautious",
+    "formalReportHash": "17ce1f6e2bbb8af41fdfff43b4dc38f4da7e52843c69538502e8e915fa3e5aa6",
     "shotHash": "ef5d8464998e5eab93db0185c529d6aeee80b5919d2105866e383ce59acc28da",
     "repairHash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
     "resultHash": "b5bb5cf793418d0c57feca3e3dd055746ee1aaabc732694c49c790735d820e4e",
-    "sourceReportHash": "2764566ad13ebc09bdc3497418f6a898f97a36151a4f47d16675e2249d31732c",
+    "sourceReportHash": "17ce1f6e2bbb8af41fdfff43b4dc38f4da7e52843c69538502e8e915fa3e5aa6",
     "sessionOrigin": "production",
     "lifecycle": "settled",
-    "settlementId": "settlement-84236cc3c16ec3524c1541ff133754b94c73a1b96e957852c2eb7d9a30a62e71",
+    "settlementId": "settlement-94f20e755d1364b45bbc5d0c983de7bc566d226227db04f7233662fb5340ebf7",
     "settlementStatus": "applied",
     "presentationState": {
       "phase": "returning",
@@ -1878,7 +1878,7 @@
     },
     "settlementState": {
       "status": "applied",
-      "settlementId": "settlement-84236cc3c16ec3524c1541ff133754b94c73a1b96e957852c2eb7d9a30a62e71",
+      "settlementId": "settlement-94f20e755d1364b45bbc5d0c983de7bc566d226227db04f7233662fb5340ebf7",
       "locked": true
     },
     "returnState": {
@@ -1892,14 +1892,15 @@
     "returnedAtGameTime": null,
     "replayReadOnly": false,
     "settlementLocked": true,
+    "salvageRulesVersion": 1,
     "version": 1,
     "settlementReceipt": {
-      "battleId": "battle_1_fm_msqiwm5k_3g_mountain_pass_cautious",
-      "battleSessionId": "battle-session-0-mountain_pass-6682a1ddf669488fcb1e-1",
-      "settlementId": "settlement-84236cc3c16ec3524c1541ff133754b94c73a1b96e957852c2eb7d9a30a62e71",
-      "formalReportHash": "2764566ad13ebc09bdc3497418f6a898f97a36151a4f47d16675e2249d31732c",
-      "reportId": "battle_1_fm_msqiwm5k_3g_mountain_pass_cautious",
-      "formationId": "fm_msqiwm5k_3g",
+      "battleId": "battle_1_fm_mss2jyle_3g_mountain_pass_cautious",
+      "battleSessionId": "battle-session-0-mountain_pass-69ecaa9f73064c2746c0-1",
+      "settlementId": "settlement-94f20e755d1364b45bbc5d0c983de7bc566d226227db04f7233662fb5340ebf7",
+      "formalReportHash": "17ce1f6e2bbb8af41fdfff43b4dc38f4da7e52843c69538502e8e915fa3e5aa6",
+      "reportId": "battle_1_fm_mss2jyle_3g_mountain_pass_cautious",
+      "formationId": "fm_mss2jyle_3g",
       "theaterId": "mountain_pass",
       "result": "victory",
       "captured": true,

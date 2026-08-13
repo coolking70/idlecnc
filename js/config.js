@@ -971,8 +971,8 @@ export const BATTLE = {
  *  stage：该分页对应的开放阶段，阶段1只开放“概览”
  * ========================================================== */
 
-export const CURRENT_STAGE = 8;
-export const CURRENT_STAGE_LABEL = 'Stage 8.2G-C.1 · Production Visual Consumption & Evidence Hardening';
+export const CURRENT_STAGE = 9;
+export const CURRENT_STAGE_LABEL = 'Stage 9 · Expanded Campaign & Equipment';
 
 export const PANEL_TABS = [
   { id: 'overview',     label: '概览', stage: 1, title: '基地概览' },

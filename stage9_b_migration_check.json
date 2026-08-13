@@ -1,10 +1,11 @@
 {
   "stage": "9-B",
   "passed": true,
-  "saveVersion": 9,
+  "saveVersion": 10,
   "oldSaveEquipment": {
     "inventory": [],
-    "bindings": {}
+    "bindings": {},
+    "salvageClaims": {}
   },
   "oldSaveCreatesNothing": true,
   "danglingUnitReferenceRemoved": true,

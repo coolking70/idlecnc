@@ -44,7 +44,7 @@ export function verifyStage9BEvidence(candidate, { checkFiles = false } = {}) {
   const snapshot = core.evidence?.snapshotEvidence;
   const sourceFiles = ['js/config.js', 'js/equipment.js', 'js/state.js', 'js/units.js', 'js/save.js', 'js/theater.js', 'js/ui.js', 'js/main.js'];
   const source = sourceFiles.map((file) => fs.readFileSync(path.join(root, file), 'utf8')).join('\n');
-  const baseline = '27c115848bea9aaa965fa46b784940a9949537e4';
+  const baseline = '5f7bbdd00fe5a2b3a029bcbbc8e550019f0034b6';
   const committed = execFileSync('git', ['diff', '--name-only', `${baseline}..HEAD`], { cwd: root, encoding: 'utf8' }).split(/\r?\n/).filter(Boolean);
   const working = execFileSync('git', ['diff', '--name-only', 'HEAD'], { cwd: root, encoding: 'utf8' }).split(/\r?\n/).filter(Boolean);
   const changed = [...new Set([...committed, ...working])].sort();

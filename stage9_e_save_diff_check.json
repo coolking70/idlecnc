@@ -1,0 +1,11 @@
+{
+  "stage": "9-E",
+  "kind": "save_diff",
+  "independentRecompute": true,
+  "source": "current-source-recomputed",
+  "claimAllowedPrefix": "equipment",
+  "settlementTouchesEquipment": false,
+  "productionDoesNotTouchBattleSessions": true,
+  "productionDoesNotTouchLedger": true,
+  "productionDoesNotTouchBattles": true
+}

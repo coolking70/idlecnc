@@ -1,7 +1,7 @@
 {
   "stage": "9-B",
   "passed": true,
-  "saveVersion": 9,
+  "saveVersion": 10,
   "rules": {
     "maxSlotsPerUnit": 2,
     "roundingDigits": 4,
@@ -193,7 +193,7 @@
       "desc": "提高直接火力与反装甲精度，不改变生命上限。"
     }
   },
-  "inventoryShape": "{ inventory: [{ id, equipmentId, quantity: 1 }], bindings: { unitId: instanceId[] } }",
+  "inventoryShape": "{ inventory: [{ id, equipmentId, quantity: 1, provenance }], bindings: { unitId: instanceId[] }, salvageClaims: {} }",
   "bindingRules": [
     "unit exists",
     "equipment exists",

@@ -1,10 +1,10 @@
 {
   "stage": "8.2G-C.1",
   "sampleCount": 160,
-  "averageRenderMs": 5.643,
-  "medianRenderMs": 5.403,
-  "p95RenderMs": 7.1986,
-  "maxRenderMs": 10.1522,
+  "averageRenderMs": 1.7278,
+  "medianRenderMs": 1.6879,
+  "p95RenderMs": 2.0963,
+  "maxRenderMs": 2.2412,
   "samplesAreMeasured": true,
   "percentileMethod": "nearest-rank(sorted samples)",
   "maxActiveParticles": 96,
@@ -13,11 +13,11 @@
   "maxPersistentDecals": 128,
   "bounded": true,
   "environment": {
-    "platform": "linux",
-    "arch": "x64",
-    "cpuModel": "AMD EPYC 9754 128-Core Processor",
-    "cpuCount": 8,
-    "nodeVersion": "v22.23.2"
+    "platform": "darwin",
+    "arch": "arm64",
+    "cpuModel": "Apple M5",
+    "cpuCount": 10,
+    "nodeVersion": "v25.2.1"
   },
   "passed": true
 }

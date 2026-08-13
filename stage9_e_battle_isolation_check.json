@@ -1,0 +1,11 @@
+{
+  "stage": "9-E",
+  "kind": "battle_isolation",
+  "independentRecompute": true,
+  "source": "current-source-recomputed",
+  "operationId": "river_ferry",
+  "battleLocked": true,
+  "settlementLeavesEquipmentUnchanged": true,
+  "replayReadOnly": true,
+  "historicalSnapshot": true
+}

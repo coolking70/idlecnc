@@ -1,0 +1,127 @@
+{
+  "stage": "9-E",
+  "version": 1,
+  "generatedBy": "tests/generate-stage9-E-machine-evidence.mjs",
+  "frameCount": 14,
+  "frames": [
+    {
+      "index": 0,
+      "phase": "campaign_operation_boundary",
+      "file": "stage9-e-00-campaign_operation_boundary.png"
+    },
+    {
+      "index": 1,
+      "phase": "production_queue",
+      "file": "stage9-e-01-production_queue.png"
+    },
+    {
+      "index": 2,
+      "phase": "production_queue_after_real_reload",
+      "file": "stage9-e-02-production_queue_after_real_reload.png"
+    },
+    {
+      "index": 3,
+      "phase": "equipment_completed_unmounted",
+      "file": "stage9-e-03-equipment_completed_unmounted.png"
+    },
+    {
+      "index": 4,
+      "phase": "equipment_completed_after_real_reload",
+      "file": "stage9-e-04-equipment_completed_after_real_reload.png"
+    },
+    {
+      "index": 5,
+      "phase": "equipment_mounted_dom",
+      "file": "stage9-e-05-equipment_mounted_dom.png"
+    },
+    {
+      "index": 6,
+      "phase": "operation_review",
+      "file": "stage9-e-06-operation_review.png"
+    },
+    {
+      "index": 7,
+      "phase": "running_battle",
+      "file": "stage9-e-07-running_battle.png"
+    },
+    {
+      "index": 8,
+      "phase": "running_after_real_reload",
+      "file": "stage9-e-08-running_after_real_reload.png"
+    },
+    {
+      "index": 9,
+      "phase": "settlement_salvage_pending",
+      "file": "stage9-e-09-settlement_salvage_pending.png"
+    },
+    {
+      "index": 10,
+      "phase": "settlement_after_real_reload",
+      "file": "stage9-e-10-settlement_after_real_reload.png"
+    },
+    {
+      "index": 11,
+      "phase": "salvage_claimed",
+      "file": "stage9-e-11-salvage_claimed.png"
+    },
+    {
+      "index": 12,
+      "phase": "salvage_mounted_dom",
+      "file": "stage9-e-12-salvage_mounted_dom.png"
+    },
+    {
+      "index": 13,
+      "phase": "replay_after_real_reload",
+      "file": "stage9-e-13-replay_after_real_reload.png"
+    }
+  ],
+  "requiredActions": [
+    "produce-equipment",
+    "cancel-production-current",
+    "equip-equipment",
+    "select-theater",
+    "select-operation",
+    "select-strategy",
+    "launch-battle",
+    "confirm-dispatch",
+    "running-equipment-change-attempt",
+    "claim-battle-salvage",
+    "view-report",
+    "replay-report",
+    "salvage-equip-equipment",
+    "return-from-battle"
+  ],
+  "realReloadReasons": [
+    "production_queue",
+    "completed_unmounted",
+    "running_battle",
+    "settlement_salvage_pending",
+    "replay"
+  ],
+  "fixtureLoaderUsed": false,
+  "debugOverlayUsed": false,
+  "dispatchApiUsed": false,
+  "replayApiUsed": false,
+  "offlineApiUsed": false,
+  "equipmentApiUsed": false,
+  "salvageClaimApiUsed": false,
+  "apiProvenanceFlags": {
+    "dispatchApiUsed": false,
+    "replayApiUsed": false,
+    "offlineApiUsed": false,
+    "equipmentApiUsed": false,
+    "salvageClaimApiUsed": false
+  },
+  "deterministicInput": {
+    "operationId": "river_ferry",
+    "theaterId": "river_crossing",
+    "strategyId": "cautious",
+    "seed": 3,
+    "salvageEquipmentId": "mobile_repair_rig"
+  },
+  "requiredProvenance": {
+    "source": "production_ui",
+    "syntheticApiCall": false,
+    "realReloadMethod": "Page.reload"
+  }
+}

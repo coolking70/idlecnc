@@ -21,11 +21,15 @@
     "poolKind": "production",
     "instanceNamespace": "equipment-salvage"
   },
-  "testCount": 12,
+  "testCount": 17,
   "passed": true,
   "checks": [
     {
       "name": "v10 schema and centralized salvage rules are present",
+      "passed": true
+    },
+    {
+      "name": "new production session explicitly carries salvage rules version 1",
       "passed": true
     },
     {
@@ -45,6 +49,10 @@
       "passed": true
     },
     {
+      "name": "legacy cutoff remains closed across v10 re-migration and deleted metadata",
+      "passed": true
+    },
+    {
       "name": "first claim adds one deterministic instance and persisted provenance",
       "passed": true
     },
@@ -61,6 +69,10 @@
       "passed": true
     },
     {
+      "name": "real Formal Settlement executes while equipment remains byte-for-byte unchanged",
+      "passed": true
+    },
+    {
       "name": "salvage instance can be mounted normally after claim",
       "passed": true
     },
@@ -71,10 +83,20 @@
     {
       "name": "claim sanitizer removes forged receipt and orphan salvage instance",
       "passed": true
+    },
+    {
+      "name": "salvage provenance namespace and claim binding fail closed in both directions",
+      "passed": true
+    },
+    {
+      "name": "salvage sanitizer is idempotent after forged cleanup",
+      "passed": true
     }
   ],
   "forbiddenAuthorityFilesChanged": [],
+  "productionSessionMetadataOnly": true,
+  "theaterMetadataOnly": true,
   "formalSettlementEquipmentUnchanged": true,
-  "legacyCutoff": "salvageRulesVersion=1 only on new production sessions",
+  "legacyCutoff": "only explicit salvageRulesVersion=1 is eligible; missing/0/unknown fail closed",
   "noBattleDropInSolver": true
 }

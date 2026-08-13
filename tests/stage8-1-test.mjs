@@ -29,9 +29,9 @@ console.log('  钢铁指令 阶段8.1 自动测试');
 console.log('════════════════════════════════════════════');
 
 console.log('\n── A. 阶段标记与视觉模块 ──');
-check('A01 CURRENT_STAGE 保持8', () => assert.equal(cfg.CURRENT_STAGE, 8));
+check('A01 CURRENT_STAGE 已晋升为9', () => assert.equal(cfg.CURRENT_STAGE, 9));
 check('A02 SAVE_VERSION 已递增到10', () => assert.equal(cfg.SAVE_VERSION, 10));
-check('A03 package 版本保持0.8.1-hotfix系列', () => assert.match(JSON.parse(readFileSync(path.join(ROOT, 'package.json'))).version, /^0\.8\.1-hotfix\./));
+check('A03 package 版本已晋升为0.9.0', () => assert.equal(JSON.parse(readFileSync(path.join(ROOT, 'package.json'))).version, '0.9.0'));
 check('A04 战场世界坐标为1200×700', () => assert.deepEqual(BATTLE_WORLD, { width: 1200, height: 700 }));
 check('A05 导演/镜头/渲染器公开函数存在', () => { assert.equal(typeof createBattleVisualPlan, 'function'); assert.equal(typeof createBattleCamera, 'function'); assert.equal(typeof BattleRenderer, 'function'); });
 check('A06 计划确定性：同一战报得到完全相同JSON', () => assert.deepEqual(createBattleVisualPlan(reportFixture()), createBattleVisualPlan(reportFixture())));

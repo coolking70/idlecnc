@@ -1,0 +1,12 @@
+{
+  "stage": "9-E",
+  "kind": "migration",
+  "independentRecompute": true,
+  "source": "current-source-recomputed",
+  "saveVersion": 10,
+  "oldSaveAddsNoEquipment": true,
+  "oldSaveAddsNoProductionRecord": true,
+  "queueReloadRestores": true,
+  "sanitizerFailClosedBothDirections": true,
+  "equipmentSanitizedAfterUnits": true
+}

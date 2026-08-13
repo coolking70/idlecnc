@@ -1,0 +1,488 @@
+{
+  "stage": "9-E",
+  "version": 1,
+  "measurement": "integrated equipment acquisition read paths",
+  "budgetMs": 16.7,
+  "warmup": 20,
+  "samples": 120,
+  "metric": "p95",
+  "measurementValid": true,
+  "passed": true,
+  "environment": {
+    "platform": "darwin",
+    "arch": "arm64",
+    "cpuModel": "Apple M5",
+    "cpuCount": 10,
+    "nodeVersion": "v25.2.1"
+  },
+  "loadBefore": {
+    "platform": "darwin",
+    "arch": "arm64",
+    "nodeVersion": "v25.2.1",
+    "cpuCount": 10,
+    "availableCpuCount": 10,
+    "effectiveCpuCount": 10,
+    "cpuModel": "Apple M5",
+    "loadAverage": [
+      5.511,
+      5.165,
+      4.304
+    ],
+    "normalizedLoad1": 0.551,
+    "spareEffectiveCores": 4.489,
+    "cgroup": {
+      "available": false,
+      "version": null,
+      "quotaCores": null
+    }
+  },
+  "loadAfter": {
+    "platform": "darwin",
+    "arch": "arm64",
+    "nodeVersion": "v25.2.1",
+    "cpuCount": 10,
+    "availableCpuCount": 10,
+    "effectiveCpuCount": 10,
+    "cpuModel": "Apple M5",
+    "loadAverage": [
+      5.511,
+      5.165,
+      4.304
+    ],
+    "normalizedLoad1": 0.551,
+    "spareEffectiveCores": 4.489,
+    "cgroup": {
+      "available": false,
+      "version": null,
+      "quotaCores": null
+    }
+  },
+  "environmentGuard": {
+    "fit": true,
+    "qualificationVersion": 2,
+    "threshold": 0.75,
+    "attempts": 1,
+    "attemptsLimit": 2,
+    "samples": [
+      {
+        "attempt": 1,
+        "probes": [
+          {
+            "probe": 1,
+            "snapshotBefore": {
+              "platform": "darwin",
+              "arch": "arm64",
+              "nodeVersion": "v25.2.1",
+              "cpuCount": 10,
+              "availableCpuCount": 10,
+              "effectiveCpuCount": 10,
+              "cpuModel": "Apple M5",
+              "loadAverage": [
+                5.511,
+                5.165,
+                4.304
+              ],
+              "normalizedLoad1": 0.551,
+              "spareEffectiveCores": 4.489,
+              "cgroup": {
+                "available": false,
+                "version": null,
+                "quotaCores": null
+              }
+            },
+            "snapshotAfter": {
+              "platform": "darwin",
+              "arch": "arm64",
+              "nodeVersion": "v25.2.1",
+              "cpuCount": 10,
+              "availableCpuCount": 10,
+              "effectiveCpuCount": 10,
+              "cpuModel": "Apple M5",
+              "loadAverage": [
+                5.511,
+                5.165,
+                4.304
+              ],
+              "normalizedLoad1": 0.551,
+              "spareEffectiveCores": 4.489,
+              "cgroup": {
+                "available": false,
+                "version": null,
+                "quotaCores": null
+              }
+            },
+            "eventLoopJitterMs": [
+              1.342292,
+              1.058041,
+              1.057708,
+              1.033583,
+              1.068667,
+              1.08,
+              1.058334,
+              1.052167,
+              1.087666,
+              0.107417,
+              0.824709,
+              1.058542
+            ],
+            "calibration": {
+              "iterations": 1200000,
+              "checksum": 1725827320,
+              "warmupMs": [
+                2.907209,
+                1.831792,
+                1.823666,
+                1.834125,
+                1.768458,
+                1.708958
+              ],
+              "samplesMs": [
+                1.709958,
+                1.731458,
+                1.655667,
+                1.623667,
+                1.640958,
+                1.618584,
+                1.582708,
+                1.552625,
+                1.550583,
+                1.550667,
+                1.554458,
+                1.548375
+              ]
+            },
+            "cgroupThrottle": {
+              "available": false,
+              "throttledUsecDelta": null,
+              "throttledWallRatio": null,
+              "nrThrottledDelta": null
+            }
+          },
+          {
+            "probe": 2,
+            "snapshotBefore": {
+              "platform": "darwin",
+              "arch": "arm64",
+              "nodeVersion": "v25.2.1",
+              "cpuCount": 10,
+              "availableCpuCount": 10,
+              "effectiveCpuCount": 10,
+              "cpuModel": "Apple M5",
+              "loadAverage": [
+                5.511,
+                5.165,
+                4.304
+              ],
+              "normalizedLoad1": 0.551,
+              "spareEffectiveCores": 4.489,
+              "cgroup": {
+                "available": false,
+                "version": null,
+                "quotaCores": null
+              }
+            },
+            "snapshotAfter": {
+              "platform": "darwin",
+              "arch": "arm64",
+              "nodeVersion": "v25.2.1",
+              "cpuCount": 10,
+              "availableCpuCount": 10,
+              "effectiveCpuCount": 10,
+              "cpuModel": "Apple M5",
+              "loadAverage": [
+                5.511,
+                5.165,
+                4.304
+              ],
+              "normalizedLoad1": 0.551,
+              "spareEffectiveCores": 4.489,
+              "cgroup": {
+                "available": false,
+                "version": null,
+                "quotaCores": null
+              }
+            },
+            "eventLoopJitterMs": [
+              1.279125,
+              1.057417,
+              1.044708,
+              1.047375,
+              1.040833,
+              0,
+              1.047292,
+              1.043417,
+              1.043916,
+              1.041208,
+              1.046916,
+              1.030125
+            ],
+            "calibration": {
+              "iterations": 1200000,
+              "checksum": 1725827320,
+              "warmupMs": [
+                2.134208,
+                2.133333,
+                2.113334,
+                1.980084,
+                1.961042,
+                1.982833
+              ],
+              "samplesMs": [
+                1.849708,
+                1.847375,
+                1.877959,
+                1.799875,
+                1.709042,
+                1.709458,
+                1.709208,
+                1.721541,
+                1.69175,
+                1.633125,
+                1.623708,
+                1.624209
+              ]
+            },
+            "cgroupThrottle": {
+              "available": false,
+              "throttledUsecDelta": null,
+              "throttledWallRatio": null,
+              "nrThrottledDelta": null
+            }
+          },
+          {
+            "probe": 3,
+            "snapshotBefore": {
+              "platform": "darwin",
+              "arch": "arm64",
+              "nodeVersion": "v25.2.1",
+              "cpuCount": 10,
+              "availableCpuCount": 10,
+              "effectiveCpuCount": 10,
+              "cpuModel": "Apple M5",
+              "loadAverage": [
+                5.511,
+                5.165,
+                4.304
+              ],
+              "normalizedLoad1": 0.551,
+              "spareEffectiveCores": 4.489,
+              "cgroup": {
+                "available": false,
+                "version": null,
+                "quotaCores": null
+              }
+            },
+            "snapshotAfter": {
+              "platform": "darwin",
+              "arch": "arm64",
+              "nodeVersion": "v25.2.1",
+              "cpuCount": 10,
+              "availableCpuCount": 10,
+              "effectiveCpuCount": 10,
+              "cpuModel": "Apple M5",
+              "loadAverage": [
+                5.511,
+                5.165,
+                4.304
+              ],
+              "normalizedLoad1": 0.551,
+              "spareEffectiveCores": 4.489,
+              "cgroup": {
+                "available": false,
+                "version": null,
+                "quotaCores": null
+              }
+            },
+            "eventLoopJitterMs": [
+              1.097083,
+              1.074709,
+              1.034417,
+              1.041042,
+              1.040375,
+              1.040333,
+              1.041833,
+              1.038416,
+              1.045166,
+              1.040791,
+              1.038417,
+              1.039875
+            ],
+            "calibration": {
+              "iterations": 1200000,
+              "checksum": 1725827320,
+              "warmupMs": [
+                2.154792,
+                2.13125,
+                2.145166,
+                2.090333,
+                1.96425,
+                1.968292
+              ],
+              "samplesMs": [
+                1.980417,
+                1.831334,
+                1.833,
+                1.82375,
+                1.784875,
+                1.724583,
+                1.711792,
+                1.711792,
+                1.719958,
+                1.688292,
+                1.620542,
+                1.615041
+              ]
+            },
+            "cgroupThrottle": {
+              "available": false,
+              "throttledUsecDelta": null,
+              "throttledWallRatio": null,
+              "nrThrottledDelta": null
+            }
+          }
+        ],
+        "evaluation": {
+          "qualified": true,
+          "reason": "QUALIFIED",
+          "reasons": [],
+          "metrics": {
+            "maximumNormalizedLoad1": 0.551,
+            "minimumEffectiveCpuCount": 10,
+            "eventLoop": {
+              "count": 36,
+              "medianMs": 1.043916,
+              "p90Ms": 1.087666,
+              "p95Ms": 1.279125,
+              "maxMs": 1.342292,
+              "meanMs": 1.003442,
+              "coefficientOfVariation": 0.241235
+            },
+            "calibration": {
+              "count": 36,
+              "medianMs": 1.709042,
+              "p90Ms": 1.847375,
+              "p95Ms": 1.877959,
+              "maxMs": 1.980417,
+              "meanMs": 1.698946,
+              "coefficientOfVariation": 0.061801,
+              "p95MedianRatio": 1.098837,
+              "maxMedianRatio": 1.158788,
+              "warmupDriftRatio": 0.158593
+            },
+            "maxCgroupThrottledWallRatio": null,
+            "productCanary": {
+              "sceneCount": 0,
+              "expectedSceneCount": 3,
+              "rows": []
+            }
+          }
+        }
+      }
+    ],
+    "loadBefore": 0.551,
+    "loadAfter": 0.551
+  },
+  "scenarios": {
+    "stats": {
+      "name": "effectiveStats",
+      "warmup": 20,
+      "samples": 120,
+      "metric": "p95",
+      "p95Ms": 0.0055,
+      "maxMs": 0.0143
+    },
+    "snapshot": {
+      "name": "dispatchSnapshot",
+      "warmup": 20,
+      "samples": 120,
+      "metric": "p95",
+      "p95Ms": 0.0355,
+      "maxMs": 0.1668
+    },
+    "inventory": {
+      "name": "inventoryCounts",
+      "warmup": 20,
+      "samples": 120,
+      "metric": "p95",
+      "p95Ms": 0.0005,
+      "maxMs": 0.0099
+    },
+    "queueRead": {
+      "name": "equipmentQueueEligibility",
+      "warmup": 20,
+      "samples": 120,
+      "metric": "p95",
+      "p95Ms": 0.0001,
+      "maxMs": 0.0013
+    }
+  },
+  "hotPathGuards": {
+    "parserOutsideFrameLoop": true,
+    "renderSignature": true,
+    "noPerFrameSaveHash": true
+  },
+  "sourceState": {
+    "unitCount": 5,
+    "inventory": [
+      {
+        "id": "equipment-starter-1",
+        "equipmentId": "scout_optics",
+        "quantity": 1,
+        "acquiredAt": 0,
+        "acquisition": {
+          "kind": "starter",
+          "label": "初始装备补给"
+        },
+        "provenance": {
+          "kind": "starter"
+        }
+      },
+      {
+        "id": "equipment-starter-2",
+        "equipmentId": "reinforced_chassis",
+        "quantity": 1,
+        "acquiredAt": 0,
+        "acquisition": {
+          "kind": "starter",
+          "label": "初始装备补给"
+        },
+        "provenance": {
+          "kind": "starter"
+        }
+      },
+      {
+        "id": "equipment-starter-3",
+        "equipmentId": "field_toolkit",
+        "quantity": 1,
+        "acquiredAt": 0,
+        "acquisition": {
+          "kind": "starter",
+          "label": "初始装备补给"
+        },
+        "provenance": {
+          "kind": "starter"
+        }
+      },
+      {
+        "id": "equipment-production-anti_armor_sights-1",
+        "equipmentId": "anti_armor_sights",
+        "quantity": 1,
+        "acquiredAt": 28800,
+        "acquisition": {
+          "kind": "production",
+          "label": "装甲工厂制造",
+          "building": "armor_factory",
+          "cost": {
+            "supply": 180,
+            "alloy": 140
+          },
+          "buildTime": 18
+        },
+        "provenance": {
+          "kind": "production"
+        }
+      }
+    ],
+    "maxSlotsPerUnit": 2
+  }
+}

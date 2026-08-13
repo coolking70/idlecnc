@@ -81,7 +81,7 @@
       "syntheticApiCall": false,
       "label": "加入",
       "action": "add-unit",
-      "formationId": "fm_mslsyeul_s"
+      "formationId": "fm_mss2da86_s"
     },
     {
       "kind": "click",
@@ -90,7 +90,7 @@
       "syntheticApiCall": false,
       "label": "加入",
       "action": "add-unit",
-      "formationId": "fm_mslsyeul_s"
+      "formationId": "fm_mss2da86_s"
     },
     {
       "kind": "click",
@@ -127,12 +127,20 @@
       "strategyId": "cautious"
     },
     {
-      "kind": "double_click",
+      "kind": "click",
       "selector": "[data-action=\"launch-battle\"]",
       "source": "production_ui",
       "syntheticApiCall": false,
-      "label": "派遣出击",
-      "action": "launch-battle",
+      "label": "查看部署确认",
+      "action": "open-deployment-review"
+    },
+    {
+      "kind": "double_click",
+      "selector": "[data-action=\"confirm-dispatch\"]",
+      "source": "production_ui",
+      "syntheticApiCall": false,
+      "label": "确认派遣",
+      "action": "confirm-dispatch",
       "duplicateGuard": true
     },
     {
@@ -232,7 +240,7 @@
       "syntheticApiCall": false,
       "label": "只读回放",
       "action": "replay-report",
-      "reportId": "battle_977405078_fm_mslsyeul_s_scrap_mine_cautious"
+      "reportId": "battle_1782839534_fm_mss2da86_s_scrap_mine_cautious"
     },
     {
       "kind": "click",
@@ -314,44 +322,44 @@
       "reason": "running_battle",
       "method": "Page.reload",
       "before": {
-        "timeOrigin": 1786279927517.4,
+        "timeOrigin": 1786658534706.9,
         "readyState": "complete",
-        "stage": 8,
+        "stage": 9,
         "navigationType": "navigate",
         "navigationStart": 0
       },
       "after": {
-        "timeOrigin": 1786279941583.8,
+        "timeOrigin": 1786658549113.6,
         "readyState": "complete",
-        "stage": 8,
+        "stage": 9,
         "navigationType": "reload",
         "navigationStart": 0
       },
-      "beforeLoaderId": "297EB40F54C865D8DD69038098C07785",
-      "afterLoaderId": "42E1B210BF2AD5376C50FAD1E7101AA0",
-      "loaderId": "42E1B210BF2AD5376C50FAD1E7101AA0",
+      "beforeLoaderId": "BF465FE96D0F1D6D31D5D034C1DB2098",
+      "afterLoaderId": "7F85515C552B4A069149058F9BF24876",
+      "loaderId": "7F85515C552B4A069149058F9BF24876",
       "timeOriginChanged": true
     },
     {
       "reason": "replay",
       "method": "Page.reload",
       "before": {
-        "timeOrigin": 1786279941583.8,
+        "timeOrigin": 1786658549113.6,
         "readyState": "complete",
-        "stage": 8,
+        "stage": 9,
         "navigationType": "reload",
         "navigationStart": 0
       },
       "after": {
-        "timeOrigin": 1786279944401.7,
+        "timeOrigin": 1786658551954.1,
         "readyState": "complete",
-        "stage": 8,
+        "stage": 9,
         "navigationType": "reload",
         "navigationStart": 0
       },
-      "beforeLoaderId": "42E1B210BF2AD5376C50FAD1E7101AA0",
-      "afterLoaderId": "1433DD1C47A3136AAEA78FE24024990A",
-      "loaderId": "1433DD1C47A3136AAEA78FE24024990A",
+      "beforeLoaderId": "7F85515C552B4A069149058F9BF24876",
+      "afterLoaderId": "35A149138AC6591F7277E622CAE2CAA6",
+      "loaderId": "35A149138AC6591F7277E622CAE2CAA6",
       "timeOriginChanged": true
     }
   ],
@@ -394,15 +402,15 @@
             "ledgerHash": null,
             "ledgerCount": 0,
             "reportCount": 0,
-            "productionSignature": "05344d5f37e4b18fcc7db36877ef5ee6a0ce39846ad832a417fa6d4963ba4cae",
+            "productionSignature": "ba26687e0e3901b84a01619343023bc0891aa7aed2b0bdaf3c336dea3ef94b42",
             "formations": [],
             "units": []
           },
           "domTextLength": 1228,
-          "imageSha256": "50062eb5d92e53db0caced209843380cfd5c2465bde4088d66ce7f2d76410c34",
+          "imageSha256": "ee227366e6fa03c2d66c40b87b1ed9b1750a04879cad0f129e2c1935a31e47fb",
           "screenshot": {
             "path": "screenshots/stage8-2G-E-A-1/e-a1-01-base-before-battle.png",
-            "sha256": "50062eb5d92e53db0caced209843380cfd5c2465bde4088d66ce7f2d76410c34"
+            "sha256": "ee227366e6fa03c2d66c40b87b1ed9b1750a04879cad0f129e2c1935a31e47fb"
           }
         },
         {
@@ -485,7 +493,7 @@
               "syntheticApiCall": false,
               "label": "加入",
               "action": "add-unit",
-              "formationId": "fm_mslsyeul_s"
+              "formationId": "fm_mss2da86_s"
             },
             {
               "kind": "click",
@@ -494,7 +502,7 @@
               "syntheticApiCall": false,
               "label": "加入",
               "action": "add-unit",
-              "formationId": "fm_mslsyeul_s"
+              "formationId": "fm_mss2da86_s"
             },
             {
               "kind": "click",
@@ -543,35 +551,35 @@
             "ledgerHash": null,
             "ledgerCount": 0,
             "reportCount": 0,
-            "productionSignature": "be17d9219cb32a815e2528869063d09138368915464c2e04756dfb28d7cfdd65",
+            "productionSignature": "acbf162616ca7634112b5a8c3c5a4d33bbbdd25225f6a6fe0da2a655dccbbbe6",
             "formations": [
               {
-                "id": "fm_mslsyeul_s",
+                "id": "fm_mss2da86_s",
                 "status": "idle",
                 "unitIds": [
-                  "unit_mslsycru_m",
-                  "unit_mslsyepa_p"
+                  "unit_mss2d84z_m",
+                  "unit_mss2da20_p"
                 ]
               }
             ],
             "units": [
               {
-                "id": "unit_mslsycru_m",
+                "id": "unit_mss2d84z_m",
                 "status": "assigned",
                 "hp": 100
               },
               {
-                "id": "unit_mslsyepa_p",
+                "id": "unit_mss2da20_p",
                 "status": "assigned",
                 "hp": 100
               }
             ]
           },
-          "domTextLength": 1755,
-          "imageSha256": "6ff07cfdcca072292bd615f4fb5085fc65004493da663b86534470eedb48c315",
+          "domTextLength": 2413,
+          "imageSha256": "53f01c29e0d15764652da1fe6ab8d4b6ee1b70874112a55cd770b3ac28c59843",
           "screenshot": {
             "path": "screenshots/stage8-2G-E-A-1/e-a1-02-production-ui-launch-control.png",
-            "sha256": "6ff07cfdcca072292bd615f4fb5085fc65004493da663b86534470eedb48c315"
+            "sha256": "53f01c29e0d15764652da1fe6ab8d4b6ee1b70874112a55cd770b3ac28c59843"
           }
         },
         {
@@ -579,7 +587,7 @@
           "file": "e-a1-03-running-before-real-reload.png",
           "semantic": "running_before_real_reload",
           "phase": "running_before_real_reload",
-          "sessionId": "battle-session-10-scrap_mine-251b5c70138b1381ee80-1",
+          "sessionId": "battle-session-10-scrap_mine-5604cba514b241b8fdaf-1",
           "doubleClickSessionDelta": 1,
           "actionProvenance": [
             {
@@ -655,7 +663,7 @@
               "syntheticApiCall": false,
               "label": "加入",
               "action": "add-unit",
-              "formationId": "fm_mslsyeul_s"
+              "formationId": "fm_mss2da86_s"
             },
             {
               "kind": "click",
@@ -664,7 +672,7 @@
               "syntheticApiCall": false,
               "label": "加入",
               "action": "add-unit",
-              "formationId": "fm_mslsyeul_s"
+              "formationId": "fm_mss2da86_s"
             },
             {
               "kind": "click",
@@ -701,12 +709,20 @@
               "strategyId": "cautious"
             },
             {
-              "kind": "double_click",
+              "kind": "click",
               "selector": "[data-action=\"launch-battle\"]",
               "source": "production_ui",
               "syntheticApiCall": false,
-              "label": "派遣出击",
-              "action": "launch-battle",
+              "label": "查看部署确认",
+              "action": "open-deployment-review"
+            },
+            {
+              "kind": "double_click",
+              "selector": "[data-action=\"confirm-dispatch\"]",
+              "source": "production_ui",
+              "syntheticApiCall": false,
+              "label": "确认派遣",
+              "action": "confirm-dispatch",
               "duplicateGuard": true
             },
             {
@@ -728,9 +744,9 @@
           ],
           "state": {
             "saveRevision": 12,
-            "activeBattleSessionId": "battle-session-10-scrap_mine-251b5c70138b1381ee80-1",
+            "activeBattleSessionId": "battle-session-10-scrap_mine-5604cba514b241b8fdaf-1",
             "activeBattle": {
-              "battleSessionId": "battle-session-10-scrap_mine-251b5c70138b1381ee80-1",
+              "battleSessionId": "battle-session-10-scrap_mine-5604cba514b241b8fdaf-1",
               "replaySourceSessionId": null,
               "replayReadOnly": false,
               "settled": false,
@@ -738,43 +754,43 @@
               "returnElapsed": 0,
               "presentationTime": 0
             },
-            "sessionId": "battle-session-10-scrap_mine-251b5c70138b1381ee80-1",
+            "sessionId": "battle-session-10-scrap_mine-5604cba514b241b8fdaf-1",
             "sessionLifecycle": "running",
-            "sessionHash": "7baf8d0c7852084770a53ec8bc14d6944650f5a67425af1c03e6a7de6b2399bc",
-            "formalReportId": "battle_977405078_fm_mslsyeul_s_scrap_mine_cautious",
-            "formalReportHash": "058f6e3611748aba61bf77e23605fd0b03f80099ed85882ba1b68e83278590e3",
+            "sessionHash": "4ed5e20e9835aab1a56e4bd0851ced995bebe02a843ef88e9db70b2e76bec018",
+            "formalReportId": "battle_1782839534_fm_mss2da86_s_scrap_mine_cautious",
+            "formalReportHash": "ed5a8fc5b509d34028f8fd43b72d1594f2232c7bdcfb6137af62f7dae82b5128",
             "ledgerHash": null,
             "ledgerCount": 0,
             "reportCount": 0,
-            "productionSignature": "3987b33c8ba55751ab4255290640e0138c134b5a51e0c6e74fb24fe276b68ca6",
+            "productionSignature": "588c51a8b9e4552b29dc2002ccdbcac126f85437bc1badc1de18a6bc488fe2a9",
             "formations": [
               {
-                "id": "fm_mslsyeul_s",
+                "id": "fm_mss2da86_s",
                 "status": "fighting",
                 "unitIds": [
-                  "unit_mslsycru_m",
-                  "unit_mslsyepa_p"
+                  "unit_mss2d84z_m",
+                  "unit_mss2da20_p"
                 ]
               }
             ],
             "units": [
               {
-                "id": "unit_mslsycru_m",
+                "id": "unit_mss2d84z_m",
                 "status": "deployed",
                 "hp": 100
               },
               {
-                "id": "unit_mslsyepa_p",
+                "id": "unit_mss2da20_p",
                 "status": "deployed",
                 "hp": 100
               }
             ]
           },
-          "domTextLength": 1889,
-          "imageSha256": "f77ad9611ed21d0c6946f3214bed25338376f78cbdd79bc7e0f35396f9bae76d",
+          "domTextLength": 2546,
+          "imageSha256": "b6e21db0cda7165a36d336310988763f6e0dd2eb8035fa4c24ed48bc2516bc5c",
           "screenshot": {
             "path": "screenshots/stage8-2G-E-A-1/e-a1-03-running-before-real-reload.png",
-            "sha256": "f77ad9611ed21d0c6946f3214bed25338376f78cbdd79bc7e0f35396f9bae76d"
+            "sha256": "b6e21db0cda7165a36d336310988763f6e0dd2eb8035fa4c24ed48bc2516bc5c"
           }
         },
         {
@@ -786,22 +802,22 @@
             "reason": "running_battle",
             "method": "Page.reload",
             "before": {
-              "timeOrigin": 1786279927517.4,
+              "timeOrigin": 1786658534706.9,
               "readyState": "complete",
-              "stage": 8,
+              "stage": 9,
               "navigationType": "navigate",
               "navigationStart": 0
             },
             "after": {
-              "timeOrigin": 1786279941583.8,
+              "timeOrigin": 1786658549113.6,
               "readyState": "complete",
-              "stage": 8,
+              "stage": 9,
               "navigationType": "reload",
               "navigationStart": 0
             },
-            "beforeLoaderId": "297EB40F54C865D8DD69038098C07785",
-            "afterLoaderId": "42E1B210BF2AD5376C50FAD1E7101AA0",
-            "loaderId": "42E1B210BF2AD5376C50FAD1E7101AA0",
+            "beforeLoaderId": "BF465FE96D0F1D6D31D5D034C1DB2098",
+            "afterLoaderId": "7F85515C552B4A069149058F9BF24876",
+            "loaderId": "7F85515C552B4A069149058F9BF24876",
             "timeOriginChanged": true
           },
           "reloadPreservedSession": true,
@@ -879,7 +895,7 @@
               "syntheticApiCall": false,
               "label": "加入",
               "action": "add-unit",
-              "formationId": "fm_mslsyeul_s"
+              "formationId": "fm_mss2da86_s"
             },
             {
               "kind": "click",
@@ -888,7 +904,7 @@
               "syntheticApiCall": false,
               "label": "加入",
               "action": "add-unit",
-              "formationId": "fm_mslsyeul_s"
+              "formationId": "fm_mss2da86_s"
             },
             {
               "kind": "click",
@@ -925,12 +941,20 @@
               "strategyId": "cautious"
             },
             {
-              "kind": "double_click",
+              "kind": "click",
               "selector": "[data-action=\"launch-battle\"]",
               "source": "production_ui",
               "syntheticApiCall": false,
-              "label": "派遣出击",
-              "action": "launch-battle",
+              "label": "查看部署确认",
+              "action": "open-deployment-review"
+            },
+            {
+              "kind": "double_click",
+              "selector": "[data-action=\"confirm-dispatch\"]",
+              "source": "production_ui",
+              "syntheticApiCall": false,
+              "label": "确认派遣",
+              "action": "confirm-dispatch",
               "duplicateGuard": true
             },
             {
@@ -969,9 +993,9 @@
           ],
           "state": {
             "saveRevision": 14,
-            "activeBattleSessionId": "battle-session-10-scrap_mine-251b5c70138b1381ee80-1",
+            "activeBattleSessionId": "battle-session-10-scrap_mine-5604cba514b241b8fdaf-1",
             "activeBattle": {
-              "battleSessionId": "battle-session-10-scrap_mine-251b5c70138b1381ee80-1",
+              "battleSessionId": "battle-session-10-scrap_mine-5604cba514b241b8fdaf-1",
               "replaySourceSessionId": null,
               "replayReadOnly": false,
               "settled": false,
@@ -979,43 +1003,43 @@
               "returnElapsed": 0,
               "presentationTime": 0
             },
-            "sessionId": "battle-session-10-scrap_mine-251b5c70138b1381ee80-1",
+            "sessionId": "battle-session-10-scrap_mine-5604cba514b241b8fdaf-1",
             "sessionLifecycle": "running",
-            "sessionHash": "7baf8d0c7852084770a53ec8bc14d6944650f5a67425af1c03e6a7de6b2399bc",
-            "formalReportId": "battle_977405078_fm_mslsyeul_s_scrap_mine_cautious",
-            "formalReportHash": "058f6e3611748aba61bf77e23605fd0b03f80099ed85882ba1b68e83278590e3",
+            "sessionHash": "4ed5e20e9835aab1a56e4bd0851ced995bebe02a843ef88e9db70b2e76bec018",
+            "formalReportId": "battle_1782839534_fm_mss2da86_s_scrap_mine_cautious",
+            "formalReportHash": "ed5a8fc5b509d34028f8fd43b72d1594f2232c7bdcfb6137af62f7dae82b5128",
             "ledgerHash": null,
             "ledgerCount": 0,
             "reportCount": 0,
-            "productionSignature": "3868683674938ee41a50d41075a69b5fcb6e1d307a8f02e9c6bb4fdf1e60cef1",
+            "productionSignature": "7ac9b24ad113c647202c3d1dd644a1f55797cb9713ef8118698d30a987a627f4",
             "formations": [
               {
-                "id": "fm_mslsyeul_s",
+                "id": "fm_mss2da86_s",
                 "status": "fighting",
                 "unitIds": [
-                  "unit_mslsycru_m",
-                  "unit_mslsyepa_p"
+                  "unit_mss2d84z_m",
+                  "unit_mss2da20_p"
                 ]
               }
             ],
             "units": [
               {
-                "id": "unit_mslsycru_m",
+                "id": "unit_mss2d84z_m",
                 "status": "deployed",
                 "hp": 100
               },
               {
-                "id": "unit_mslsyepa_p",
+                "id": "unit_mss2da20_p",
                 "status": "deployed",
                 "hp": 100
               }
             ]
           },
-          "domTextLength": 1968,
-          "imageSha256": "688f2d90bae367b464d46939a211684486e240668d623162bd2fa48051c8695d",
+          "domTextLength": 2625,
+          "imageSha256": "94c7063063b269d2e9e083be8485dbf4a2646817ad7e926565d7589a3e1ce010",
           "screenshot": {
             "path": "screenshots/stage8-2G-E-A-1/e-a1-04-running-after-real-reload.png",
-            "sha256": "688f2d90bae367b464d46939a211684486e240668d623162bd2fa48051c8695d"
+            "sha256": "94c7063063b269d2e9e083be8485dbf4a2646817ad7e926565d7589a3e1ce010"
           }
         },
         {
@@ -1025,8 +1049,8 @@
           "phase": "formal_result",
           "settlementApplied": true,
           "saveDiffSummary": {
-            "beforeHash": "3868683674938ee41a50d41075a69b5fcb6e1d307a8f02e9c6bb4fdf1e60cef1",
-            "afterHash": "95bf8ab331fb4ed5523f761f1922da52c44723c294ad7efa65d49fa911880624",
+            "beforeHash": "7ac9b24ad113c647202c3d1dd644a1f55797cb9713ef8118698d30a987a627f4",
+            "afterHash": "8e869059db112ada563ceaa9361cb83bea298af0b34bbcd2c1e51b78be4f6ede",
             "changedPathCount": 47,
             "changedPaths": [
               "activeBattle.elapsed",
@@ -1045,36 +1069,36 @@
               "activeBattle.settled",
               "activeBattle.settlementAttempted",
               "activeBattle.settlementReceipt",
-              "battleSessions.battle-session-10-scrap_mine-251b5c70138b1381ee80-1.lifecycle",
-              "battleSessions.battle-session-10-scrap_mine-251b5c70138b1381ee80-1.presentationState.elapsed",
-              "battleSessions.battle-session-10-scrap_mine-251b5c70138b1381ee80-1.presentationState.phase",
-              "battleSessions.battle-session-10-scrap_mine-251b5c70138b1381ee80-1.presentationTime",
-              "battleSessions.battle-session-10-scrap_mine-251b5c70138b1381ee80-1.settledAtGameTime",
-              "battleSessions.battle-session-10-scrap_mine-251b5c70138b1381ee80-1.settlementLocked",
-              "battleSessions.battle-session-10-scrap_mine-251b5c70138b1381ee80-1.settlementReceipt",
-              "battleSessions.battle-session-10-scrap_mine-251b5c70138b1381ee80-1.settlementState.locked",
-              "battleSessions.battle-session-10-scrap_mine-251b5c70138b1381ee80-1.settlementState.status",
-              "battleSessions.battle-session-10-scrap_mine-251b5c70138b1381ee80-1.settlementStatus",
-              "battleSettlementLedger.settlement-0cf339361befd22c913618d99ca99ac329b18989c5c44401e70e5af94fa68c57",
-              "battles[id=battle_977405078_fm_mslsyeul_s_scrap_mine_cautious]",
+              "battleSessions.battle-session-10-scrap_mine-5604cba514b241b8fdaf-1.lifecycle",
+              "battleSessions.battle-session-10-scrap_mine-5604cba514b241b8fdaf-1.presentationState.elapsed",
+              "battleSessions.battle-session-10-scrap_mine-5604cba514b241b8fdaf-1.presentationState.phase",
+              "battleSessions.battle-session-10-scrap_mine-5604cba514b241b8fdaf-1.presentationTime",
+              "battleSessions.battle-session-10-scrap_mine-5604cba514b241b8fdaf-1.settledAtGameTime",
+              "battleSessions.battle-session-10-scrap_mine-5604cba514b241b8fdaf-1.settlementLocked",
+              "battleSessions.battle-session-10-scrap_mine-5604cba514b241b8fdaf-1.settlementReceipt",
+              "battleSessions.battle-session-10-scrap_mine-5604cba514b241b8fdaf-1.settlementState.locked",
+              "battleSessions.battle-session-10-scrap_mine-5604cba514b241b8fdaf-1.settlementState.status",
+              "battleSessions.battle-session-10-scrap_mine-5604cba514b241b8fdaf-1.settlementStatus",
+              "battleSettlementLedger.settlement-197c8e5d12aa70481c28e0e6b89161bf89e1a84dcae97c5f4be38c0819d5acd5",
+              "battles[id=battle_1782839534_fm_mss2da86_s_scrap_mine_cautious]",
               "battles[*order]",
               "command.used",
-              "formations[id=fm_mslsyeul_s].battles",
-              "formations[id=fm_mslsyeul_s].experience",
-              "formations[id=fm_mslsyeul_s].status",
-              "formations[id=fm_mslsyeul_s].unitIds[0]",
-              "formations[id=fm_mslsyeul_s].unitIds[1]",
-              "log[id=log_mslsyggk_8]",
+              "formations[id=fm_mss2da86_s].battles",
+              "formations[id=fm_mss2da86_s].experience",
+              "formations[id=fm_mss2da86_s].status",
+              "formations[id=fm_mss2da86_s].unitIds[0]",
+              "formations[id=fm_mss2da86_s].unitIds[1]",
+              "log[id=log_mss2dbw5_8]",
               "log[*order]",
               "saveRevision",
               "stats.battlesFought",
               "theaters.scrap_mine.lastBattleId",
               "theaters.scrap_mine.lastResult",
-              "units[id=unit_mslsycru_m]",
-              "units[id=unit_mslsyepa_p].battles",
-              "units[id=unit_mslsyepa_p].damage",
-              "units[id=unit_mslsyepa_p].experience",
-              "units[id=unit_mslsyepa_p].hp",
+              "units[id=unit_mss2d84z_m]",
+              "units[id=unit_mss2da20_p].battles",
+              "units[id=unit_mss2da20_p].damage",
+              "units[id=unit_mss2da20_p].experience",
+              "units[id=unit_mss2da20_p].hp",
               "units[*order]"
             ]
           },
@@ -1152,7 +1176,7 @@
               "syntheticApiCall": false,
               "label": "加入",
               "action": "add-unit",
-              "formationId": "fm_mslsyeul_s"
+              "formationId": "fm_mss2da86_s"
             },
             {
               "kind": "click",
@@ -1161,7 +1185,7 @@
               "syntheticApiCall": false,
               "label": "加入",
               "action": "add-unit",
-              "formationId": "fm_mslsyeul_s"
+              "formationId": "fm_mss2da86_s"
             },
             {
               "kind": "click",
@@ -1198,12 +1222,20 @@
               "strategyId": "cautious"
             },
             {
-              "kind": "double_click",
+              "kind": "click",
               "selector": "[data-action=\"launch-battle\"]",
               "source": "production_ui",
               "syntheticApiCall": false,
-              "label": "派遣出击",
-              "action": "launch-battle",
+              "label": "查看部署确认",
+              "action": "open-deployment-review"
+            },
+            {
+              "kind": "double_click",
+              "selector": "[data-action=\"confirm-dispatch\"]",
+              "source": "production_ui",
+              "syntheticApiCall": false,
+              "label": "确认派遣",
+              "action": "confirm-dispatch",
               "duplicateGuard": true
             },
             {
@@ -1258,9 +1290,9 @@
           ],
           "state": {
             "saveRevision": 16,
-            "activeBattleSessionId": "battle-session-10-scrap_mine-251b5c70138b1381ee80-1",
+            "activeBattleSessionId": "battle-session-10-scrap_mine-5604cba514b241b8fdaf-1",
             "activeBattle": {
-              "battleSessionId": "battle-session-10-scrap_mine-251b5c70138b1381ee80-1",
+              "battleSessionId": "battle-session-10-scrap_mine-5604cba514b241b8fdaf-1",
               "replaySourceSessionId": null,
               "replayReadOnly": false,
               "settled": true,
@@ -1268,37 +1300,37 @@
               "returnElapsed": 0,
               "presentationTime": 60
             },
-            "sessionId": "battle-session-10-scrap_mine-251b5c70138b1381ee80-1",
+            "sessionId": "battle-session-10-scrap_mine-5604cba514b241b8fdaf-1",
             "sessionLifecycle": "settled",
-            "sessionHash": "f61c5c320169f7ac1cdcde50632c60359556a83426ecef110af7d07bd301dad2",
-            "formalReportId": "battle_977405078_fm_mslsyeul_s_scrap_mine_cautious",
-            "formalReportHash": "058f6e3611748aba61bf77e23605fd0b03f80099ed85882ba1b68e83278590e3",
-            "ledgerHash": "359f414bd7706c263a197082cd02901714a24bff1c7e82a2026dfcb3f031e59d",
+            "sessionHash": "7c968f72225df0436651dc94b21671b95f57fcbcdc03928f377748ed93994378",
+            "formalReportId": "battle_1782839534_fm_mss2da86_s_scrap_mine_cautious",
+            "formalReportHash": "ed5a8fc5b509d34028f8fd43b72d1594f2232c7bdcfb6137af62f7dae82b5128",
+            "ledgerHash": "ee2b5e59c4196f183a9c70b38f20078c6bc70e108dc0c2f149c8d5a427f92971",
             "ledgerCount": 1,
             "reportCount": 1,
-            "productionSignature": "95bf8ab331fb4ed5523f761f1922da52c44723c294ad7efa65d49fa911880624",
+            "productionSignature": "8e869059db112ada563ceaa9361cb83bea298af0b34bbcd2c1e51b78be4f6ede",
             "formations": [
               {
-                "id": "fm_mslsyeul_s",
+                "id": "fm_mss2da86_s",
                 "status": "returning",
                 "unitIds": [
-                  "unit_mslsyepa_p"
+                  "unit_mss2da20_p"
                 ]
               }
             ],
             "units": [
               {
-                "id": "unit_mslsyepa_p",
+                "id": "unit_mss2da20_p",
                 "status": "deployed",
-                "hp": 51
+                "hp": 50
               }
             ]
           },
-          "domTextLength": 2175,
-          "imageSha256": "a3abdcc57af83e1f3cbefc57fd869ffd0eeedef4f4d8d9772ded1c82cc9d1505",
+          "domTextLength": 2856,
+          "imageSha256": "3a53c73b02b6d1bca59515ddbeb9af10180a3b57272d3dc04a64e078fc602e5c",
           "screenshot": {
             "path": "screenshots/stage8-2G-E-A-1/e-a1-05-formal-result.png",
-            "sha256": "a3abdcc57af83e1f3cbefc57fd869ffd0eeedef4f4d8d9772ded1c82cc9d1505"
+            "sha256": "3a53c73b02b6d1bca59515ddbeb9af10180a3b57272d3dc04a64e078fc602e5c"
           }
         },
         {
@@ -1381,7 +1413,7 @@
               "syntheticApiCall": false,
               "label": "加入",
               "action": "add-unit",
-              "formationId": "fm_mslsyeul_s"
+              "formationId": "fm_mss2da86_s"
             },
             {
               "kind": "click",
@@ -1390,7 +1422,7 @@
               "syntheticApiCall": false,
               "label": "加入",
               "action": "add-unit",
-              "formationId": "fm_mslsyeul_s"
+              "formationId": "fm_mss2da86_s"
             },
             {
               "kind": "click",
@@ -1427,12 +1459,20 @@
               "strategyId": "cautious"
             },
             {
-              "kind": "double_click",
+              "kind": "click",
               "selector": "[data-action=\"launch-battle\"]",
               "source": "production_ui",
               "syntheticApiCall": false,
-              "label": "派遣出击",
-              "action": "launch-battle",
+              "label": "查看部署确认",
+              "action": "open-deployment-review"
+            },
+            {
+              "kind": "double_click",
+              "selector": "[data-action=\"confirm-dispatch\"]",
+              "source": "production_ui",
+              "syntheticApiCall": false,
+              "label": "确认派遣",
+              "action": "confirm-dispatch",
               "duplicateGuard": true
             },
             {
@@ -1522,37 +1562,37 @@
             "saveRevision": 17,
             "activeBattleSessionId": null,
             "activeBattle": null,
-            "sessionId": "battle-session-10-scrap_mine-251b5c70138b1381ee80-1",
+            "sessionId": "battle-session-10-scrap_mine-5604cba514b241b8fdaf-1",
             "sessionLifecycle": "returned",
-            "sessionHash": "601879a7d6bd2403f996a2a4bfdede196a038f8ad7f2ea401f67dca1919c1f8c",
-            "formalReportId": "battle_977405078_fm_mslsyeul_s_scrap_mine_cautious",
-            "formalReportHash": "058f6e3611748aba61bf77e23605fd0b03f80099ed85882ba1b68e83278590e3",
-            "ledgerHash": "359f414bd7706c263a197082cd02901714a24bff1c7e82a2026dfcb3f031e59d",
+            "sessionHash": "53e3e577bbb89b834f0918ebe7faf407424a590aa27313ab622ffb47a16b66b5",
+            "formalReportId": "battle_1782839534_fm_mss2da86_s_scrap_mine_cautious",
+            "formalReportHash": "ed5a8fc5b509d34028f8fd43b72d1594f2232c7bdcfb6137af62f7dae82b5128",
+            "ledgerHash": "ee2b5e59c4196f183a9c70b38f20078c6bc70e108dc0c2f149c8d5a427f92971",
             "ledgerCount": 1,
             "reportCount": 1,
-            "productionSignature": "3e6bf1c8f4833a366a61ab76d821138d59b8ffce08a738768fa69a17d8558f00",
+            "productionSignature": "b6e70dca26cf7f413290d75d00ad503d2ffb05fef26651945d2ca136345a07bb",
             "formations": [
               {
-                "id": "fm_mslsyeul_s",
+                "id": "fm_mss2da86_s",
                 "status": "idle",
                 "unitIds": [
-                  "unit_mslsyepa_p"
+                  "unit_mss2da20_p"
                 ]
               }
             ],
             "units": [
               {
-                "id": "unit_mslsyepa_p",
+                "id": "unit_mss2da20_p",
                 "status": "assigned",
-                "hp": 51
+                "hp": 50
               }
             ]
           },
-          "domTextLength": 1768,
-          "imageSha256": "09047402000aad39912566e205577bde4825d1f9910a72da1010ddaca8851107",
+          "domTextLength": 1764,
+          "imageSha256": "c10a34d917f6a2ca4041a548f06d2b8827495a2f98c2a42adc3579fbfc905b10",
           "screenshot": {
             "path": "screenshots/stage8-2G-E-A-1/e-a1-06-base-after-settlement.png",
-            "sha256": "09047402000aad39912566e205577bde4825d1f9910a72da1010ddaca8851107"
+            "sha256": "c10a34d917f6a2ca4041a548f06d2b8827495a2f98c2a42adc3579fbfc905b10"
           }
         },
         {
@@ -1640,7 +1680,7 @@
               "syntheticApiCall": false,
               "label": "加入",
               "action": "add-unit",
-              "formationId": "fm_mslsyeul_s"
+              "formationId": "fm_mss2da86_s"
             },
             {
               "kind": "click",
@@ -1649,7 +1689,7 @@
               "syntheticApiCall": false,
               "label": "加入",
               "action": "add-unit",
-              "formationId": "fm_mslsyeul_s"
+              "formationId": "fm_mss2da86_s"
             },
             {
               "kind": "click",
@@ -1686,12 +1726,20 @@
               "strategyId": "cautious"
             },
             {
-              "kind": "double_click",
+              "kind": "click",
               "selector": "[data-action=\"launch-battle\"]",
               "source": "production_ui",
               "syntheticApiCall": false,
-              "label": "派遣出击",
-              "action": "launch-battle",
+              "label": "查看部署确认",
+              "action": "open-deployment-review"
+            },
+            {
+              "kind": "double_click",
+              "selector": "[data-action=\"confirm-dispatch\"]",
+              "source": "production_ui",
+              "syntheticApiCall": false,
+              "label": "确认派遣",
+              "action": "confirm-dispatch",
               "duplicateGuard": true
             },
             {
@@ -1791,7 +1839,7 @@
               "syntheticApiCall": false,
               "label": "只读回放",
               "action": "replay-report",
-              "reportId": "battle_977405078_fm_mslsyeul_s_scrap_mine_cautious"
+              "reportId": "battle_1782839534_fm_mss2da86_s_scrap_mine_cautious"
             },
             {
               "kind": "click",
@@ -1806,45 +1854,45 @@
             "saveRevision": 18,
             "activeBattleSessionId": null,
             "activeBattle": {
-              "battleSessionId": "battle-session-10-scrap_mine-251b5c70138b1381ee80-1",
-              "replaySourceSessionId": "battle-session-10-scrap_mine-251b5c70138b1381ee80-1",
+              "battleSessionId": "battle-session-10-scrap_mine-5604cba514b241b8fdaf-1",
+              "replaySourceSessionId": "battle-session-10-scrap_mine-5604cba514b241b8fdaf-1",
               "replayReadOnly": true,
               "settled": false,
               "elapsed": 0,
               "returnElapsed": 0,
               "presentationTime": 0
             },
-            "sessionId": "battle-session-10-scrap_mine-251b5c70138b1381ee80-1",
+            "sessionId": "battle-session-10-scrap_mine-5604cba514b241b8fdaf-1",
             "sessionLifecycle": "returned",
-            "sessionHash": "601879a7d6bd2403f996a2a4bfdede196a038f8ad7f2ea401f67dca1919c1f8c",
-            "formalReportId": "battle_977405078_fm_mslsyeul_s_scrap_mine_cautious",
-            "formalReportHash": "058f6e3611748aba61bf77e23605fd0b03f80099ed85882ba1b68e83278590e3",
-            "ledgerHash": "359f414bd7706c263a197082cd02901714a24bff1c7e82a2026dfcb3f031e59d",
+            "sessionHash": "53e3e577bbb89b834f0918ebe7faf407424a590aa27313ab622ffb47a16b66b5",
+            "formalReportId": "battle_1782839534_fm_mss2da86_s_scrap_mine_cautious",
+            "formalReportHash": "ed5a8fc5b509d34028f8fd43b72d1594f2232c7bdcfb6137af62f7dae82b5128",
+            "ledgerHash": "ee2b5e59c4196f183a9c70b38f20078c6bc70e108dc0c2f149c8d5a427f92971",
             "ledgerCount": 1,
             "reportCount": 1,
-            "productionSignature": "3e6bf1c8f4833a366a61ab76d821138d59b8ffce08a738768fa69a17d8558f00",
+            "productionSignature": "b6e70dca26cf7f413290d75d00ad503d2ffb05fef26651945d2ca136345a07bb",
             "formations": [
               {
-                "id": "fm_mslsyeul_s",
+                "id": "fm_mss2da86_s",
                 "status": "idle",
                 "unitIds": [
-                  "unit_mslsyepa_p"
+                  "unit_mss2da20_p"
                 ]
               }
             ],
             "units": [
               {
-                "id": "unit_mslsyepa_p",
+                "id": "unit_mss2da20_p",
                 "status": "assigned",
-                "hp": 51
+                "hp": 50
               }
             ]
           },
-          "domTextLength": 2053,
-          "imageSha256": "2e766573c872f8867e07b60818c63b2d939ddb94041f973f0537405464e7f122",
+          "domTextLength": 2710,
+          "imageSha256": "be043314f27de03e658cc3104b746d75c1f7254971e588b83337276af827647d",
           "screenshot": {
             "path": "screenshots/stage8-2G-E-A-1/e-a1-07-replay-start.png",
-            "sha256": "2e766573c872f8867e07b60818c63b2d939ddb94041f973f0537405464e7f122"
+            "sha256": "be043314f27de03e658cc3104b746d75c1f7254971e588b83337276af827647d"
           }
         },
         {
@@ -1852,7 +1900,7 @@
           "file": "e-a1-08-replay-before-real-reload.png",
           "semantic": "replay_before_real_reload",
           "phase": "replay_before_real_reload",
-          "canonicalSessionHash": "601879a7d6bd2403f996a2a4bfdede196a038f8ad7f2ea401f67dca1919c1f8c",
+          "canonicalSessionHash": "53e3e577bbb89b834f0918ebe7faf407424a590aa27313ab622ffb47a16b66b5",
           "actionProvenance": [
             {
               "kind": "click",
@@ -1927,7 +1975,7 @@
               "syntheticApiCall": false,
               "label": "加入",
               "action": "add-unit",
-              "formationId": "fm_mslsyeul_s"
+              "formationId": "fm_mss2da86_s"
             },
             {
               "kind": "click",
@@ -1936,7 +1984,7 @@
               "syntheticApiCall": false,
               "label": "加入",
               "action": "add-unit",
-              "formationId": "fm_mslsyeul_s"
+              "formationId": "fm_mss2da86_s"
             },
             {
               "kind": "click",
@@ -1973,12 +2021,20 @@
               "strategyId": "cautious"
             },
             {
-              "kind": "double_click",
+              "kind": "click",
               "selector": "[data-action=\"launch-battle\"]",
               "source": "production_ui",
               "syntheticApiCall": false,
-              "label": "派遣出击",
-              "action": "launch-battle",
+              "label": "查看部署确认",
+              "action": "open-deployment-review"
+            },
+            {
+              "kind": "double_click",
+              "selector": "[data-action=\"confirm-dispatch\"]",
+              "source": "production_ui",
+              "syntheticApiCall": false,
+              "label": "确认派遣",
+              "action": "confirm-dispatch",
               "duplicateGuard": true
             },
             {
@@ -2078,7 +2134,7 @@
               "syntheticApiCall": false,
               "label": "只读回放",
               "action": "replay-report",
-              "reportId": "battle_977405078_fm_mslsyeul_s_scrap_mine_cautious"
+              "reportId": "battle_1782839534_fm_mss2da86_s_scrap_mine_cautious"
             },
             {
               "kind": "click",
@@ -2109,45 +2165,45 @@
             "saveRevision": 19,
             "activeBattleSessionId": null,
             "activeBattle": {
-              "battleSessionId": "battle-session-10-scrap_mine-251b5c70138b1381ee80-1",
-              "replaySourceSessionId": "battle-session-10-scrap_mine-251b5c70138b1381ee80-1",
+              "battleSessionId": "battle-session-10-scrap_mine-5604cba514b241b8fdaf-1",
+              "replaySourceSessionId": "battle-session-10-scrap_mine-5604cba514b241b8fdaf-1",
               "replayReadOnly": true,
               "settled": false,
               "elapsed": 30,
               "returnElapsed": 0,
               "presentationTime": 30
             },
-            "sessionId": "battle-session-10-scrap_mine-251b5c70138b1381ee80-1",
+            "sessionId": "battle-session-10-scrap_mine-5604cba514b241b8fdaf-1",
             "sessionLifecycle": "returned",
-            "sessionHash": "601879a7d6bd2403f996a2a4bfdede196a038f8ad7f2ea401f67dca1919c1f8c",
-            "formalReportId": "battle_977405078_fm_mslsyeul_s_scrap_mine_cautious",
-            "formalReportHash": "058f6e3611748aba61bf77e23605fd0b03f80099ed85882ba1b68e83278590e3",
-            "ledgerHash": "359f414bd7706c263a197082cd02901714a24bff1c7e82a2026dfcb3f031e59d",
+            "sessionHash": "53e3e577bbb89b834f0918ebe7faf407424a590aa27313ab622ffb47a16b66b5",
+            "formalReportId": "battle_1782839534_fm_mss2da86_s_scrap_mine_cautious",
+            "formalReportHash": "ed5a8fc5b509d34028f8fd43b72d1594f2232c7bdcfb6137af62f7dae82b5128",
+            "ledgerHash": "ee2b5e59c4196f183a9c70b38f20078c6bc70e108dc0c2f149c8d5a427f92971",
             "ledgerCount": 1,
             "reportCount": 1,
-            "productionSignature": "3e6bf1c8f4833a366a61ab76d821138d59b8ffce08a738768fa69a17d8558f00",
+            "productionSignature": "b6e70dca26cf7f413290d75d00ad503d2ffb05fef26651945d2ca136345a07bb",
             "formations": [
               {
-                "id": "fm_mslsyeul_s",
+                "id": "fm_mss2da86_s",
                 "status": "idle",
                 "unitIds": [
-                  "unit_mslsyepa_p"
+                  "unit_mss2da20_p"
                 ]
               }
             ],
             "units": [
               {
-                "id": "unit_mslsyepa_p",
+                "id": "unit_mss2da20_p",
                 "status": "assigned",
-                "hp": 51
+                "hp": 50
               }
             ]
           },
-          "domTextLength": 2075,
-          "imageSha256": "c85c137e61e6236b4c10282441cb13838989e2522add11c2e6d0f54e5d36e474",
+          "domTextLength": 2732,
+          "imageSha256": "81e283a4b7bc1e87ac606f563164dcf49a513a45c178365175259b57cffa83f9",
           "screenshot": {
             "path": "screenshots/stage8-2G-E-A-1/e-a1-08-replay-before-real-reload.png",
-            "sha256": "c85c137e61e6236b4c10282441cb13838989e2522add11c2e6d0f54e5d36e474"
+            "sha256": "81e283a4b7bc1e87ac606f563164dcf49a513a45c178365175259b57cffa83f9"
           }
         },
         {
@@ -2159,22 +2215,22 @@
             "reason": "replay",
             "method": "Page.reload",
             "before": {
-              "timeOrigin": 1786279941583.8,
+              "timeOrigin": 1786658549113.6,
               "readyState": "complete",
-              "stage": 8,
+              "stage": 9,
               "navigationType": "reload",
               "navigationStart": 0
             },
             "after": {
-              "timeOrigin": 1786279944401.7,
+              "timeOrigin": 1786658551954.1,
               "readyState": "complete",
-              "stage": 8,
+              "stage": 9,
               "navigationType": "reload",
               "navigationStart": 0
             },
-            "beforeLoaderId": "42E1B210BF2AD5376C50FAD1E7101AA0",
-            "afterLoaderId": "1433DD1C47A3136AAEA78FE24024990A",
-            "loaderId": "1433DD1C47A3136AAEA78FE24024990A",
+            "beforeLoaderId": "7F85515C552B4A069149058F9BF24876",
+            "afterLoaderId": "35A149138AC6591F7277E622CAE2CAA6",
+            "loaderId": "35A149138AC6591F7277E622CAE2CAA6",
             "timeOriginChanged": true
           },
           "reloadPreservedReplay": true,
@@ -2252,7 +2308,7 @@
               "syntheticApiCall": false,
               "label": "加入",
               "action": "add-unit",
-              "formationId": "fm_mslsyeul_s"
+              "formationId": "fm_mss2da86_s"
             },
             {
               "kind": "click",
@@ -2261,7 +2317,7 @@
               "syntheticApiCall": false,
               "label": "加入",
               "action": "add-unit",
-              "formationId": "fm_mslsyeul_s"
+              "formationId": "fm_mss2da86_s"
             },
             {
               "kind": "click",
@@ -2298,12 +2354,20 @@
               "strategyId": "cautious"
             },
             {
-              "kind": "double_click",
+              "kind": "click",
               "selector": "[data-action=\"launch-battle\"]",
               "source": "production_ui",
               "syntheticApiCall": false,
-              "label": "派遣出击",
-              "action": "launch-battle",
+              "label": "查看部署确认",
+              "action": "open-deployment-review"
+            },
+            {
+              "kind": "double_click",
+              "selector": "[data-action=\"confirm-dispatch\"]",
+              "source": "production_ui",
+              "syntheticApiCall": false,
+              "label": "确认派遣",
+              "action": "confirm-dispatch",
               "duplicateGuard": true
             },
             {
@@ -2403,7 +2467,7 @@
               "syntheticApiCall": false,
               "label": "只读回放",
               "action": "replay-report",
-              "reportId": "battle_977405078_fm_mslsyeul_s_scrap_mine_cautious"
+              "reportId": "battle_1782839534_fm_mss2da86_s_scrap_mine_cautious"
             },
             {
               "kind": "click",
@@ -2451,45 +2515,45 @@
             "saveRevision": 21,
             "activeBattleSessionId": null,
             "activeBattle": {
-              "battleSessionId": "battle-session-10-scrap_mine-251b5c70138b1381ee80-1",
-              "replaySourceSessionId": "battle-session-10-scrap_mine-251b5c70138b1381ee80-1",
+              "battleSessionId": "battle-session-10-scrap_mine-5604cba514b241b8fdaf-1",
+              "replaySourceSessionId": "battle-session-10-scrap_mine-5604cba514b241b8fdaf-1",
               "replayReadOnly": true,
               "settled": false,
               "elapsed": 30,
               "returnElapsed": 0,
               "presentationTime": 30
             },
-            "sessionId": "battle-session-10-scrap_mine-251b5c70138b1381ee80-1",
+            "sessionId": "battle-session-10-scrap_mine-5604cba514b241b8fdaf-1",
             "sessionLifecycle": "returned",
-            "sessionHash": "601879a7d6bd2403f996a2a4bfdede196a038f8ad7f2ea401f67dca1919c1f8c",
-            "formalReportId": "battle_977405078_fm_mslsyeul_s_scrap_mine_cautious",
-            "formalReportHash": "058f6e3611748aba61bf77e23605fd0b03f80099ed85882ba1b68e83278590e3",
-            "ledgerHash": "359f414bd7706c263a197082cd02901714a24bff1c7e82a2026dfcb3f031e59d",
+            "sessionHash": "53e3e577bbb89b834f0918ebe7faf407424a590aa27313ab622ffb47a16b66b5",
+            "formalReportId": "battle_1782839534_fm_mss2da86_s_scrap_mine_cautious",
+            "formalReportHash": "ed5a8fc5b509d34028f8fd43b72d1594f2232c7bdcfb6137af62f7dae82b5128",
+            "ledgerHash": "ee2b5e59c4196f183a9c70b38f20078c6bc70e108dc0c2f149c8d5a427f92971",
             "ledgerCount": 1,
             "reportCount": 1,
-            "productionSignature": "3e6bf1c8f4833a366a61ab76d821138d59b8ffce08a738768fa69a17d8558f00",
+            "productionSignature": "b6e70dca26cf7f413290d75d00ad503d2ffb05fef26651945d2ca136345a07bb",
             "formations": [
               {
-                "id": "fm_mslsyeul_s",
+                "id": "fm_mss2da86_s",
                 "status": "idle",
                 "unitIds": [
-                  "unit_mslsyepa_p"
+                  "unit_mss2da20_p"
                 ]
               }
             ],
             "units": [
               {
-                "id": "unit_mslsyepa_p",
+                "id": "unit_mss2da20_p",
                 "status": "assigned",
-                "hp": 51
+                "hp": 50
               }
             ]
           },
-          "domTextLength": 2155,
-          "imageSha256": "4a4359ff3967299732858e66c5d3186d321856066858b201c04f7981e5f10bee",
+          "domTextLength": 2812,
+          "imageSha256": "aa166717c2d8d17f27049389ec26b6e30e3faf187cdb3a7c9dddc765f2432bb2",
           "screenshot": {
             "path": "screenshots/stage8-2G-E-A-1/e-a1-09-replay-after-real-reload.png",
-            "sha256": "4a4359ff3967299732858e66c5d3186d321856066858b201c04f7981e5f10bee"
+            "sha256": "aa166717c2d8d17f27049389ec26b6e30e3faf187cdb3a7c9dddc765f2432bb2"
           }
         },
         {
@@ -2572,7 +2636,7 @@
               "syntheticApiCall": false,
               "label": "加入",
               "action": "add-unit",
-              "formationId": "fm_mslsyeul_s"
+              "formationId": "fm_mss2da86_s"
             },
             {
               "kind": "click",
@@ -2581,7 +2645,7 @@
               "syntheticApiCall": false,
               "label": "加入",
               "action": "add-unit",
-              "formationId": "fm_mslsyeul_s"
+              "formationId": "fm_mss2da86_s"
             },
             {
               "kind": "click",
@@ -2618,12 +2682,20 @@
               "strategyId": "cautious"
             },
             {
-              "kind": "double_click",
+              "kind": "click",
               "selector": "[data-action=\"launch-battle\"]",
               "source": "production_ui",
               "syntheticApiCall": false,
-              "label": "派遣出击",
-              "action": "launch-battle",
+              "label": "查看部署确认",
+              "action": "open-deployment-review"
+            },
+            {
+              "kind": "double_click",
+              "selector": "[data-action=\"confirm-dispatch\"]",
+              "source": "production_ui",
+              "syntheticApiCall": false,
+              "label": "确认派遣",
+              "action": "confirm-dispatch",
               "duplicateGuard": true
             },
             {
@@ -2723,7 +2795,7 @@
               "syntheticApiCall": false,
               "label": "只读回放",
               "action": "replay-report",
-              "reportId": "battle_977405078_fm_mslsyeul_s_scrap_mine_cautious"
+              "reportId": "battle_1782839534_fm_mss2da86_s_scrap_mine_cautious"
             },
             {
               "kind": "click",
@@ -2796,37 +2868,37 @@
             "saveRevision": 21,
             "activeBattleSessionId": null,
             "activeBattle": null,
-            "sessionId": "battle-session-10-scrap_mine-251b5c70138b1381ee80-1",
+            "sessionId": "battle-session-10-scrap_mine-5604cba514b241b8fdaf-1",
             "sessionLifecycle": "returned",
-            "sessionHash": "601879a7d6bd2403f996a2a4bfdede196a038f8ad7f2ea401f67dca1919c1f8c",
-            "formalReportId": "battle_977405078_fm_mslsyeul_s_scrap_mine_cautious",
-            "formalReportHash": "058f6e3611748aba61bf77e23605fd0b03f80099ed85882ba1b68e83278590e3",
-            "ledgerHash": "359f414bd7706c263a197082cd02901714a24bff1c7e82a2026dfcb3f031e59d",
+            "sessionHash": "53e3e577bbb89b834f0918ebe7faf407424a590aa27313ab622ffb47a16b66b5",
+            "formalReportId": "battle_1782839534_fm_mss2da86_s_scrap_mine_cautious",
+            "formalReportHash": "ed5a8fc5b509d34028f8fd43b72d1594f2232c7bdcfb6137af62f7dae82b5128",
+            "ledgerHash": "ee2b5e59c4196f183a9c70b38f20078c6bc70e108dc0c2f149c8d5a427f92971",
             "ledgerCount": 1,
             "reportCount": 1,
-            "productionSignature": "3e6bf1c8f4833a366a61ab76d821138d59b8ffce08a738768fa69a17d8558f00",
+            "productionSignature": "b6e70dca26cf7f413290d75d00ad503d2ffb05fef26651945d2ca136345a07bb",
             "formations": [
               {
-                "id": "fm_mslsyeul_s",
+                "id": "fm_mss2da86_s",
                 "status": "idle",
                 "unitIds": [
-                  "unit_mslsyepa_p"
+                  "unit_mss2da20_p"
                 ]
               }
             ],
             "units": [
               {
-                "id": "unit_mslsyepa_p",
+                "id": "unit_mss2da20_p",
                 "status": "assigned",
-                "hp": 51
+                "hp": 50
               }
             ]
           },
           "domTextLength": 1877,
-          "imageSha256": "289664170e820c91c13df34a4c1e58dd73fb38141c37299432f5631e25a8d377",
+          "imageSha256": "5c0ba81c521e10c7e80144d9a04c3d3633ab81b4251cfd57ee12b1e4f61e9ac4",
           "screenshot": {
             "path": "screenshots/stage8-2G-E-A-1/e-a1-10-replay-finished-base.png",
-            "sha256": "289664170e820c91c13df34a4c1e58dd73fb38141c37299432f5631e25a8d377"
+            "sha256": "5c0ba81c521e10c7e80144d9a04c3d3633ab81b4251cfd57ee12b1e4f61e9ac4"
           }
         },
         {
@@ -2835,8 +2907,8 @@
           "semantic": "save_diff_summary",
           "phase": "save_diff_summary",
           "saveDiffSummary": {
-            "beforeHash": "3868683674938ee41a50d41075a69b5fcb6e1d307a8f02e9c6bb4fdf1e60cef1",
-            "afterHash": "95bf8ab331fb4ed5523f761f1922da52c44723c294ad7efa65d49fa911880624",
+            "beforeHash": "7ac9b24ad113c647202c3d1dd644a1f55797cb9713ef8118698d30a987a627f4",
+            "afterHash": "8e869059db112ada563ceaa9361cb83bea298af0b34bbcd2c1e51b78be4f6ede",
             "changedPathCount": 47,
             "ledgerCount": 1,
             "reportCount": 1,
@@ -2916,7 +2988,7 @@
               "syntheticApiCall": false,
               "label": "加入",
               "action": "add-unit",
-              "formationId": "fm_mslsyeul_s"
+              "formationId": "fm_mss2da86_s"
             },
             {
               "kind": "click",
@@ -2925,7 +2997,7 @@
               "syntheticApiCall": false,
               "label": "加入",
               "action": "add-unit",
-              "formationId": "fm_mslsyeul_s"
+              "formationId": "fm_mss2da86_s"
             },
             {
               "kind": "click",
@@ -2962,12 +3034,20 @@
               "strategyId": "cautious"
             },
             {
-              "kind": "double_click",
+              "kind": "click",
               "selector": "[data-action=\"launch-battle\"]",
               "source": "production_ui",
               "syntheticApiCall": false,
-              "label": "派遣出击",
-              "action": "launch-battle",
+              "label": "查看部署确认",
+              "action": "open-deployment-review"
+            },
+            {
+              "kind": "double_click",
+              "selector": "[data-action=\"confirm-dispatch\"]",
+              "source": "production_ui",
+              "syntheticApiCall": false,
+              "label": "确认派遣",
+              "action": "confirm-dispatch",
               "duplicateGuard": true
             },
             {
@@ -3067,7 +3147,7 @@
               "syntheticApiCall": false,
               "label": "只读回放",
               "action": "replay-report",
-              "reportId": "battle_977405078_fm_mslsyeul_s_scrap_mine_cautious"
+              "reportId": "battle_1782839534_fm_mss2da86_s_scrap_mine_cautious"
             },
             {
               "kind": "click",
@@ -3148,45 +3228,45 @@
             "saveRevision": 21,
             "activeBattleSessionId": null,
             "activeBattle": null,
-            "sessionId": "battle-session-10-scrap_mine-251b5c70138b1381ee80-1",
+            "sessionId": "battle-session-10-scrap_mine-5604cba514b241b8fdaf-1",
             "sessionLifecycle": "returned",
-            "sessionHash": "601879a7d6bd2403f996a2a4bfdede196a038f8ad7f2ea401f67dca1919c1f8c",
-            "formalReportId": "battle_977405078_fm_mslsyeul_s_scrap_mine_cautious",
-            "formalReportHash": "058f6e3611748aba61bf77e23605fd0b03f80099ed85882ba1b68e83278590e3",
-            "ledgerHash": "359f414bd7706c263a197082cd02901714a24bff1c7e82a2026dfcb3f031e59d",
+            "sessionHash": "53e3e577bbb89b834f0918ebe7faf407424a590aa27313ab622ffb47a16b66b5",
+            "formalReportId": "battle_1782839534_fm_mss2da86_s_scrap_mine_cautious",
+            "formalReportHash": "ed5a8fc5b509d34028f8fd43b72d1594f2232c7bdcfb6137af62f7dae82b5128",
+            "ledgerHash": "ee2b5e59c4196f183a9c70b38f20078c6bc70e108dc0c2f149c8d5a427f92971",
             "ledgerCount": 1,
             "reportCount": 1,
-            "productionSignature": "3e6bf1c8f4833a366a61ab76d821138d59b8ffce08a738768fa69a17d8558f00",
+            "productionSignature": "b6e70dca26cf7f413290d75d00ad503d2ffb05fef26651945d2ca136345a07bb",
             "formations": [
               {
-                "id": "fm_mslsyeul_s",
+                "id": "fm_mss2da86_s",
                 "status": "idle",
                 "unitIds": [
-                  "unit_mslsyepa_p"
+                  "unit_mss2da20_p"
                 ]
               }
             ],
             "units": [
               {
-                "id": "unit_mslsyepa_p",
+                "id": "unit_mss2da20_p",
                 "status": "assigned",
-                "hp": 51
+                "hp": 50
               }
             ]
           },
-          "domTextLength": 2906,
-          "imageSha256": "b1d807dd2f7f29365173f73249d988b77b272afcee1250ac6f613c4f93963b85",
+          "domTextLength": 2932,
+          "imageSha256": "35bc738a63f44315ce8a045a411d56af08456f64207d52e5aa91e2ffedaad59e",
           "screenshot": {
             "path": "screenshots/stage8-2G-E-A-1/e-a1-11-save-diff-summary.png",
-            "sha256": "b1d807dd2f7f29365173f73249d988b77b272afcee1250ac6f613c4f93963b85"
+            "sha256": "35bc738a63f44315ce8a045a411d56af08456f64207d52e5aa91e2ffedaad59e"
           }
         }
       ]
     }
   ],
   "saveDiffSummary": {
-    "beforeHash": "3868683674938ee41a50d41075a69b5fcb6e1d307a8f02e9c6bb4fdf1e60cef1",
-    "afterHash": "95bf8ab331fb4ed5523f761f1922da52c44723c294ad7efa65d49fa911880624",
+    "beforeHash": "7ac9b24ad113c647202c3d1dd644a1f55797cb9713ef8118698d30a987a627f4",
+    "afterHash": "8e869059db112ada563ceaa9361cb83bea298af0b34bbcd2c1e51b78be4f6ede",
     "changedPathCount": 47,
     "changedPaths": [
       "activeBattle.elapsed",
@@ -3205,36 +3285,36 @@
       "activeBattle.settled",
       "activeBattle.settlementAttempted",
       "activeBattle.settlementReceipt",
-      "battleSessions.battle-session-10-scrap_mine-251b5c70138b1381ee80-1.lifecycle",
-      "battleSessions.battle-session-10-scrap_mine-251b5c70138b1381ee80-1.presentationState.elapsed",
-      "battleSessions.battle-session-10-scrap_mine-251b5c70138b1381ee80-1.presentationState.phase",
-      "battleSessions.battle-session-10-scrap_mine-251b5c70138b1381ee80-1.presentationTime",
-      "battleSessions.battle-session-10-scrap_mine-251b5c70138b1381ee80-1.settledAtGameTime",
-      "battleSessions.battle-session-10-scrap_mine-251b5c70138b1381ee80-1.settlementLocked",
-      "battleSessions.battle-session-10-scrap_mine-251b5c70138b1381ee80-1.settlementReceipt",
-      "battleSessions.battle-session-10-scrap_mine-251b5c70138b1381ee80-1.settlementState.locked",
-      "battleSessions.battle-session-10-scrap_mine-251b5c70138b1381ee80-1.settlementState.status",
-      "battleSessions.battle-session-10-scrap_mine-251b5c70138b1381ee80-1.settlementStatus",
-      "battleSettlementLedger.settlement-0cf339361befd22c913618d99ca99ac329b18989c5c44401e70e5af94fa68c57",
-      "battles[id=battle_977405078_fm_mslsyeul_s_scrap_mine_cautious]",
+      "battleSessions.battle-session-10-scrap_mine-5604cba514b241b8fdaf-1.lifecycle",
+      "battleSessions.battle-session-10-scrap_mine-5604cba514b241b8fdaf-1.presentationState.elapsed",
+      "battleSessions.battle-session-10-scrap_mine-5604cba514b241b8fdaf-1.presentationState.phase",
+      "battleSessions.battle-session-10-scrap_mine-5604cba514b241b8fdaf-1.presentationTime",
+      "battleSessions.battle-session-10-scrap_mine-5604cba514b241b8fdaf-1.settledAtGameTime",
+      "battleSessions.battle-session-10-scrap_mine-5604cba514b241b8fdaf-1.settlementLocked",
+      "battleSessions.battle-session-10-scrap_mine-5604cba514b241b8fdaf-1.settlementReceipt",
+      "battleSessions.battle-session-10-scrap_mine-5604cba514b241b8fdaf-1.settlementState.locked",
+      "battleSessions.battle-session-10-scrap_mine-5604cba514b241b8fdaf-1.settlementState.status",
+      "battleSessions.battle-session-10-scrap_mine-5604cba514b241b8fdaf-1.settlementStatus",
+      "battleSettlementLedger.settlement-197c8e5d12aa70481c28e0e6b89161bf89e1a84dcae97c5f4be38c0819d5acd5",
+      "battles[id=battle_1782839534_fm_mss2da86_s_scrap_mine_cautious]",
       "battles[*order]",
       "command.used",
-      "formations[id=fm_mslsyeul_s].battles",
-      "formations[id=fm_mslsyeul_s].experience",
-      "formations[id=fm_mslsyeul_s].status",
-      "formations[id=fm_mslsyeul_s].unitIds[0]",
-      "formations[id=fm_mslsyeul_s].unitIds[1]",
-      "log[id=log_mslsyggk_8]",
+      "formations[id=fm_mss2da86_s].battles",
+      "formations[id=fm_mss2da86_s].experience",
+      "formations[id=fm_mss2da86_s].status",
+      "formations[id=fm_mss2da86_s].unitIds[0]",
+      "formations[id=fm_mss2da86_s].unitIds[1]",
+      "log[id=log_mss2dbw5_8]",
       "log[*order]",
       "saveRevision",
       "stats.battlesFought",
       "theaters.scrap_mine.lastBattleId",
       "theaters.scrap_mine.lastResult",
-      "units[id=unit_mslsycru_m]",
-      "units[id=unit_mslsyepa_p].battles",
-      "units[id=unit_mslsyepa_p].damage",
-      "units[id=unit_mslsyepa_p].experience",
-      "units[id=unit_mslsyepa_p].hp",
+      "units[id=unit_mss2d84z_m]",
+      "units[id=unit_mss2da20_p].battles",
+      "units[id=unit_mss2da20_p].damage",
+      "units[id=unit_mss2da20_p].experience",
+      "units[id=unit_mss2da20_p].hp",
       "units[*order]"
     ]
   },

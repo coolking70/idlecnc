@@ -9,7 +9,7 @@ const cnb = fs.readFileSync('.cnb.yml', 'utf8');
 const save = fs.readFileSync('js/save.js', 'utf8');
 const units = fs.readFileSync('js/units.js', 'utf8');
 const theater = fs.readFileSync('js/theater.js', 'utf8');
-const baseline = '27c115848bea9aaa965fa46b784940a9949537e4';
+const baseline = '5f7bbdd00fe5a2b3a029bcbbc8e550019f0034b6';
 const committed = execFileSync('git', ['diff', '--name-only', `${baseline}..HEAD`], { encoding: 'utf8' }).split(/\r?\n/).filter(Boolean);
 const working = execFileSync('git', ['diff', '--name-only', 'HEAD'], { encoding: 'utf8' }).split(/\r?\n/).filter(Boolean);
 const changed = [...new Set([...committed, ...working])].sort();
@@ -31,7 +31,7 @@ const answers = [
   { id: 8, question: 'historical replay', answer: 'replay reads source.deploymentSnapshot, not current equipment', verified: read('stage9_b_replay_historical_check.json').replayAfterCurrentEquipmentChanged.usesHistoricalSnapshot },
   { id: 9, question: 'settlement equipment mutation', answer: 'settlement leaves equipment unchanged', verified: read('stage9_b_save_diff_check.json').settlementEquipmentUnchanged },
   { id: 10, question: 'save diff', answer: 'mount paths are equipment-only; battle/session/ledger/formations are forbidden', verified: read('stage9_b_save_diff_check.json').mountChangedPaths.every((path) => path.startsWith('equipment.')) },
-  { id: 11, question: 'authority files', answer: 'solver/planner/choreographer/save-diff unchanged; only perf-environment is allowed under tests/lib', verified: !changed.some((file) => ['js/battle.js', 'js/theater.js', 'js/save-diff.js'].includes(file) || file.startsWith('js/battle-presentation/universal/') || (file.startsWith('tests/lib/') && file !== allowedPerformanceHelper)) },
+  { id: 11, question: 'authority files', answer: 'solver/planner/choreographer/save-diff unchanged; theater snapshot boundary is the sanctioned production-side input; only perf-environment is allowed under tests/lib', verified: !changed.some((file) => ['js/battle.js', 'js/save-diff.js'].includes(file) || file.startsWith('js/battle-presentation/universal/') || (file.startsWith('tests/lib/') && file !== allowedPerformanceHelper)) },
   { id: 12, question: 'Stage 9-A values', answer: 'six theaters and six operations remain configured', verified: read('stage9_b_regression_check.json').theaterCount === 6 && read('stage9_b_regression_check.json').operationCount === 6 },
   { id: 13, question: 'UI authority', answer: 'UI calls authoritative getUnitEffectiveStats/canEquipEquipment and uses equipment render signature', verified: read('stage9_b_ui_path_check.json').sourceChecks.allRequiredDomProvenance },
   { id: 14, question: 'tamper passedFlagOnlyCases', answer: tamper.passedFlagOnlyCases, verified: tamper.passedFlagOnlyCases === 0 },

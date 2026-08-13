@@ -1,0 +1,563 @@
+{
+  "stage": "9-E",
+  "independentRecompute": true,
+  "total": 92,
+  "rejected": 92,
+  "coupledTotal": 92,
+  "coupledRejected": 92,
+  "passedFlagOnlyCases": 0,
+  "results": [
+    {
+      "name": "core check count",
+      "coupled": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "core recompute flag",
+      "coupled": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "core production instance",
+      "coupled": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "core salvage equipment",
+      "coupled": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "core mission kind",
+      "coupled": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "core mission id",
+      "coupled": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "core seed",
+      "coupled": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "core salvage version",
+      "coupled": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "core settlement mutation",
+      "coupled": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "core diff boundary",
+      "coupled": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "core replay boundary",
+      "coupled": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "core drop scope",
+      "coupled": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "frame 0 semantic name",
+      "coupled": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "frame 1 semantic name",
+      "coupled": true,
+      "rejected": true,
+      "failureCount": 2
+    },
+    {
+      "name": "frame 2 semantic name",
+      "coupled": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "frame 3 semantic name",
+      "coupled": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "frame 4 semantic name",
+      "coupled": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "frame 5 semantic name",
+      "coupled": true,
+      "rejected": true,
+      "failureCount": 2
+    },
+    {
+      "name": "frame 6 semantic name",
+      "coupled": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "frame 7 semantic name",
+      "coupled": true,
+      "rejected": true,
+      "failureCount": 2
+    },
+    {
+      "name": "frame 8 semantic name",
+      "coupled": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "frame 9 semantic name",
+      "coupled": true,
+      "rejected": true,
+      "failureCount": 2
+    },
+    {
+      "name": "frame 10 semantic name",
+      "coupled": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "frame 11 semantic name",
+      "coupled": true,
+      "rejected": true,
+      "failureCount": 2
+    },
+    {
+      "name": "frame 12 semantic name",
+      "coupled": true,
+      "rejected": true,
+      "failureCount": 2
+    },
+    {
+      "name": "frame 13 semantic name",
+      "coupled": true,
+      "rejected": true,
+      "failureCount": 2
+    },
+    {
+      "name": "frame 0 screenshot hash",
+      "coupled": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "frame 1 screenshot hash",
+      "coupled": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "frame 2 screenshot hash",
+      "coupled": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "frame 3 screenshot hash",
+      "coupled": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "frame 4 screenshot hash",
+      "coupled": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "frame 5 screenshot hash",
+      "coupled": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "frame 6 screenshot hash",
+      "coupled": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "frame 7 screenshot hash",
+      "coupled": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "frame 8 screenshot hash",
+      "coupled": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "frame 9 screenshot hash",
+      "coupled": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "frame 10 screenshot hash",
+      "coupled": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "frame 11 screenshot hash",
+      "coupled": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "frame 12 screenshot hash",
+      "coupled": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "frame 13 screenshot hash",
+      "coupled": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "reload 0 timeOrigin",
+      "coupled": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "reload 0 loader",
+      "coupled": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "reload 1 timeOrigin",
+      "coupled": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "reload 1 loader",
+      "coupled": true,
+      "rejected": true,
+      "failureCount": 2
+    },
+    {
+      "name": "reload 2 timeOrigin",
+      "coupled": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "reload 2 loader",
+      "coupled": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "reload 3 timeOrigin",
+      "coupled": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "reload 3 loader",
+      "coupled": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "reload 4 timeOrigin",
+      "coupled": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "reload 4 loader",
+      "coupled": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "action 0 provenance",
+      "coupled": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "action 1 provenance",
+      "coupled": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "action 2 provenance",
+      "coupled": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "action 3 provenance",
+      "coupled": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "action 4 provenance",
+      "coupled": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "action 5 provenance",
+      "coupled": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "action 6 provenance",
+      "coupled": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "action 7 provenance",
+      "coupled": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "action 8 provenance",
+      "coupled": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "action 9 provenance",
+      "coupled": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "action 10 provenance",
+      "coupled": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "action 11 provenance",
+      "coupled": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "action 12 provenance",
+      "coupled": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "action 13 provenance",
+      "coupled": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "browser frame count",
+      "coupled": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "browser unique hash count",
+      "coupled": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "browser page error",
+      "coupled": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "browser console error",
+      "coupled": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "dispatch api flag",
+      "coupled": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "replay api flag",
+      "coupled": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "offline api flag",
+      "coupled": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "equipment api flag",
+      "coupled": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "salvage api flag",
+      "coupled": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "reload count",
+      "coupled": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "operation review kind",
+      "coupled": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "operation review id",
+      "coupled": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "queue state",
+      "coupled": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "production mount binding",
+      "coupled": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "running mission kind",
+      "coupled": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "running mission id",
+      "coupled": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "running salvage version",
+      "coupled": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "pending result flag",
+      "coupled": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "pending salvage outcome",
+      "coupled": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "pending salvage definition",
+      "coupled": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "claim count",
+      "coupled": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "claim inventory",
+      "coupled": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "salvage mount id",
+      "coupled": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "salvage mount binding",
+      "coupled": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "replay mode",
+      "coupled": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "replay production snapshot",
+      "coupled": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "replay salvage leakage",
+      "coupled": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "replay current inventory",
+      "coupled": true,
+      "rejected": true,
+      "failureCount": 1
+    }
+  ]
+}

@@ -23,7 +23,7 @@
   "unrelatedStatePreserved": true,
   "settlementReload": true,
   "tamper": {
-    "rejectionCount": 35,
+    "rejectionCount": 37,
     "passed": true
   },
   "authority": true,

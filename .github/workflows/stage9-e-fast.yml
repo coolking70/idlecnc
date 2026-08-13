@@ -1,0 +1,29 @@
+name: stage9-e-fast
+
+on:
+  push:
+    branches: [auto/stage9-e-stage9-milestone-closure]
+
+jobs:
+  fast-gate:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.23.1
+      - run: npm install --ignore-scripts --no-audit --no-fund
+      - name: Stage 9-E Fast Gate
+        run: npm run test:stage9-E:fast
+      - name: Upload Stage 9-E core evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: stage9-e-fast-${{ github.sha }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            stage9_e_core_evidence.json
+            stage9_e_machine_evidence.json
+          if-no-files-found: warn
+          retention-days: 30

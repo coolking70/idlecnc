@@ -1,7 +1,7 @@
 {
   "stage": "9-C",
   "independentRecompute": true,
-  "saveVersion": 9,
+  "saveVersion": 10,
   "oldSaveCreatesNothing": true,
   "productionQueueRestored": true,
   "danglingUnitReferenceRemoved": true,

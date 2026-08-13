@@ -2,7 +2,10 @@ import fs from 'node:fs';
 import { spawnSync } from 'node:child_process';
 
 const root = process.cwd();
-const baseline = 'b41ad940d8fab78038f1b1dedf5a404841b81401';
+// This is a regression on the accepted Stage 9-D.1 production baseline.
+// The older E-C baseline predates the frozen session/salvage wiring and would
+// incorrectly classify that already-accepted authority surface as new work.
+const baseline = '5f7bbdd00fe5a2b3a029bcbbc8e550019f0034b6';
 const read = (name) => JSON.parse(fs.readFileSync(name, 'utf8'));
 const text = (name) => fs.readFileSync(name, 'utf8');
 const git = (args) => spawnSync('git', args, { cwd: root, encoding: 'utf8' });
@@ -91,7 +94,7 @@ const checks = {
 const output = {
   stage: '8.2G-E-C',
   version: 1,
-  baseline: { commit: baseline, branch: 'agent/stage8-2G-E-B-mission-deployment-command-flow' },
+  baseline: { commit: baseline, branch: 'auto/stage9-e-stage9-milestone-closure' },
   scope: {
     authorityFreeze: true,
     changedPaths,
