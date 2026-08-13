@@ -87,3 +87,18 @@ retry, no best-of-N behavior, and no change to the 16.7ms product budget or
 formal performance measurement.
 
 The GitHub workflow also isolates the formal D-C.1 measurement in a fresh required job. The long functional regression consumes that job’s same-run performance artifact instead of measuring again or overwriting it with the legacy 8-sample smoke check.
+
+## Same-SHA Run B qualification failure and reproducibility correction
+
+The first fixed-timeout validation was intentionally not treated as a retry-to-green:
+Run A (`31682023599`) passed, while the independent Run B (`31692112592`) failed
+before formal measurement with `ENVIRONMENT_UNFIT`. Both canary attempts rejected
+the `stage8g-dc-art` scene (`17.780833ms` and `17.155942ms`), so the fail-closed
+qualification contract behaved correctly and `formalMeasurementRuns` remained zero.
+
+The retained logs also exposed an avoidable runtime drift: Run A resolved the
+workflow's `node-version: 22` to Node `v22.23.1`, while Run B resolved it to
+`v22.23.2`. The workflow now pins the runner image to `ubuntu-24.04` and Node to
+`22.23.1` in all three jobs. This removes rolling image and Node-patch drift; it
+does not relax the canary or formal budget, reduce sample counts, retry a failed
+formal measurement, or reinterpret `ENVIRONMENT_UNFIT` as success.

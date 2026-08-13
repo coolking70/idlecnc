@@ -740,4 +740,7 @@
 - [x] 定位同 SHA Run B 的 clean-clone 失败根因：完整 gate 实际运行超过旧 30 分钟 `execFileSync` 窗口，外层终止仍在运行的 Stage 9-A 浏览器进程；可见的损坏 JSON / fixture FAIL 行是预期测试输出，不是根因。
 - [x] 将 clean-clone 改为单次、fail-closed 的 60 分钟窗口（可由 `IRON_CLEAN_CLONE_TIMEOUT_MS` 覆盖），workflow final-closure 设置 70 分钟外层上限，并记录 timeoutMs / elapsedMs / timeoutTriggered；不增加重试、不改变 16.7ms 性能契约。
 - [x] 本地 D-C.1 性能资格 tamper 为 9/9、passedFlagOnlyCases=0；Stage 9-A 为 21/21，Stage 9-C 为 10/10。
-- [ ] 待将本修复作为新的 FINAL_HEAD 提交/推送并取得 Run A first execution、同 SHA Run B、artifact 与 remote/clean-clone identity 收口；验证后禁止新 commit。
+- [x] 同 SHA Run A 的 clean-clone 已在 60 分钟内完成并通过；旧 30 分钟执行边界已被真实日志证明不足。
+- [x] 同 SHA Run B 按设计在正式测量前 fail-closed：两个 art canary p95 分别为 17.780833ms / 17.155942ms，`formalMeasurementRuns=0`，未执行 retry-to-green。
+- [x] 为消除 hosted runner 的滚动环境漂移，三份 CI job 均固定为 `ubuntu-24.04` + Node `22.23.1`；16.7ms 守卫、20/120 采样和失败语义未改变。
+- [ ] 待新固定环境 FINAL_HEAD 取得 Run A first execution、同 SHA Run B、artifact 与 remote/clean-clone identity 收口；验证后禁止新 commit。
