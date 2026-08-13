@@ -19,7 +19,7 @@ const units = fs.readFileSync(path.join(root, 'js/units.js'), 'utf8');
 const changed = execFileSync('git', ['status', '--short'], { cwd: root, encoding: 'utf8' });
 const forbidden = ['js/save-diff.js', 'js/battle.js', 'js/battle-presentation/universal/', 'tests/lib/'];
 const diffNames = [...new Set([
-  ...execFileSync('git', ['diff', '--name-only', '38d13c24816407c68a04a859a165e39f3b73bdb5', 'HEAD'], { cwd: root, encoding: 'utf8' }).split(/\r?\n/),
+  ...execFileSync('git', ['diff', '--name-only', '5f7bbdd00fe5a2b3a029bcbbc8e550019f0034b6', 'HEAD'], { cwd: root, encoding: 'utf8' }).split(/\r?\n/),
   ...execFileSync('git', ['diff', '--name-only'], { cwd: root, encoding: 'utf8' }).split(/\r?\n/),
   ...execFileSync('git', ['ls-files', '--others', '--exclude-standard'], { cwd: root, encoding: 'utf8' }).split(/\r?\n/)
 ].filter(Boolean))];
