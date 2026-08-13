@@ -16,7 +16,7 @@
  */
 
 import {
-  THEATERS, OPERATIONS, STRATEGIES, ENEMY_UNITS, TERRAIN, BATTLE, BATTLE_RESULT,
+  THEATERS, OPERATIONS, STRATEGIES, ENEMY_UNITS, TERRAIN, BATTLE, BATTLE_RESULT, SALVAGE_RULES,
   UNITS, BUILDING_STATUS, DAMAGE_STATES, EQUIPMENT_STAT_KEYS,
   FORMATION_STATUS, RESOURCE_DEFS
 } from './config.js';
@@ -702,7 +702,8 @@ export function dispatchFormation(state, formationId, theaterId, strategyId, see
     report,
     sequence: state.battleSessionSequence,
     sessionOrigin: SESSION_ORIGIN.PRODUCTION,
-    createdAtGameTime: state.time && state.time.game
+    createdAtGameTime: state.time && state.time.game,
+    salvageRulesVersion: SALVAGE_RULES.version
   });
   productionSession.lifecycle = SESSION_LIFECYCLE.RUNNING;
   state.battleSessions[productionSession.battleSessionId] = productionSession;

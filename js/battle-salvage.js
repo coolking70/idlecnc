@@ -10,7 +10,7 @@ import { BATTLE_RESULT, EQUIPMENT, SALVAGE_RULES, THEATERS } from './config.js';
 import {
   canonicalHash, cloneJson, validateSessionBinding, validateSettlementLedger
 } from './production-battle-session.js';
-import { createSalvageEquipmentInstance, getEquipmentDefinition } from './equipment.js';
+import { createSalvageEquipmentInstance, getEquipmentDefinition, isSalvageInstanceId } from './equipment.js';
 import { safeNumber } from './utils.js';
 
 const ALLOWED_RESULTS = new Set(SALVAGE_RULES.allowedResults || [BATTLE_RESULT.VICTORY, BATTLE_RESULT.PYRRHIC]);
@@ -90,11 +90,11 @@ export function deriveSalvageOffer(state, battleSessionId) {
   const session = sessionFor(state, battleSessionId);
   if (!session) return invalid('session_missing', '正式战斗会话不存在');
   if (session.sessionOrigin !== 'production') return invalid('session_origin', '非正式生产会话不能产生战利品');
-  // New v10 production sessions predate no salvage field because the formal
-  // session/binding contract is frozen. v9 migration stamps old sessions with
-  // an explicit zero, so old history can never become eligible retroactively.
-  if (session.salvageRulesVersion === 0 || (session.salvageRulesVersion !== undefined && session.salvageRulesVersion !== SALVAGE_RULES.version)) {
-    return invalid('legacy_session', '该战斗创建于战场打捞规则启用前');
+  if (session.salvageRulesVersion !== SALVAGE_RULES.version) {
+    return invalid(
+      session.salvageRulesVersion === undefined ? 'version_missing' : session.salvageRulesVersion === 0 ? 'legacy_session' : 'version_incompatible',
+      '该战斗没有明确启用当前战场打捞规则'
+    );
   }
   if (sameSettlementUsedByAnotherSession(state, session)) {
     return invalid('settlement_reused', '结算凭证被多个战斗会话复用');
@@ -159,7 +159,7 @@ export function deriveSalvageOffer(state, battleSessionId) {
     equipmentId: equipment ? equipment.id : null
   };
   offer.offerHash = canonicalHash(offerHashSource(offer));
-  offer.instanceId = equipment ? `equipment-salvage-${canonicalHash({ salvageId, equipmentId: equipment.id }).slice(0, 32)}` : null;
+  offer.instanceId = equipment ? `${SALVAGE_RULES.instanceNamespace}-${canonicalHash({ salvageId, equipmentId: equipment.id }).slice(0, 32)}` : null;
   const existing = state?.equipment?.salvageClaims?.[salvageId];
   if (existing?.claimed === true) {
     offer.claimed = true;
@@ -247,33 +247,75 @@ export function sanitizeSalvageClaims(state) {
   const source = state.equipment.salvageClaims;
   const claims = source && typeof source === 'object' && !Array.isArray(source) ? source : {};
   const normalized = {};
-  const instanceIds = new Set();
+  const candidateClaims = [];
+  const claimedInstanceIds = new Set();
+  const claimedSalvageIds = new Set();
+  const rawInstanceCounts = new Map();
+  const rawSalvageCounts = new Map();
+  Object.entries(claims).forEach(([salvageId, raw]) => {
+    if (raw?.instanceId) rawInstanceCounts.set(raw.instanceId, (rawInstanceCounts.get(raw.instanceId) || 0) + 1);
+    if (salvageId) rawSalvageCounts.set(salvageId, (rawSalvageCounts.get(salvageId) || 0) + 1);
+  });
   Object.entries(claims).forEach(([salvageId, raw]) => {
     const offer = deriveSalvageOffer({ ...state, equipment: { ...state.equipment, salvageClaims: {} } }, raw?.battleSessionId);
-    const instance = Array.isArray(state.equipment.inventory)
-      ? state.equipment.inventory.find((row) => row && row.id === raw?.instanceId) : null;
     const valid = raw && raw.claimed === true && salvageId === raw.salvageId && offer.ok
       && offer.outcome === 'equipment' && offer.salvageId === salvageId
       && raw.offerHash === offer.offerHash && raw.equipmentId === offer.equipmentId
-      && !instanceIds.has(raw.instanceId) && instance
-      && instance.provenance?.kind === 'battle_salvage'
-      && instance.provenance.salvageId === salvageId
-      && instance.provenance.battleSessionId === raw.battleSessionId
-      && instance.equipmentId === raw.equipmentId;
+      && raw.battleSessionId === offer.battleSessionId
+      && raw.settlementId === offer.settlementId
+      && raw.formalReportId === offer.formalReportId
+      && raw.formalReportHash === offer.formalReportHash
+      && raw.instanceId === offer.instanceId
+      && isSalvageInstanceId(raw.instanceId)
+      && rawInstanceCounts.get(raw.instanceId) === 1
+      && rawSalvageCounts.get(salvageId) === 1
+      && !claimedInstanceIds.has(raw.instanceId)
+      && !claimedSalvageIds.has(salvageId);
     if (!valid) {
       notes.push('非法、悬空或与确定性战利品不一致的领取凭证已移除。');
       return;
     }
-    instanceIds.add(raw.instanceId);
-    normalized[salvageId] = cloneJson(raw);
+    claimedInstanceIds.add(raw.instanceId);
+    claimedSalvageIds.add(salvageId);
+    candidateClaims.push({ salvageId, raw: cloneJson(raw), offer });
+  });
+  const inventory = Array.isArray(state.equipment.inventory) ? state.equipment.inventory : [];
+  const rowsById = new Map();
+  const rowsBySalvageId = new Map();
+  inventory.forEach((instance) => {
+    if (!instance || (!isSalvageInstanceId(instance.id) && instance.provenance?.kind !== 'battle_salvage')) return;
+    const idRows = rowsById.get(instance.id) || [];
+    idRows.push(instance); rowsById.set(instance.id, idRows);
+    const salvageId = instance.provenance?.salvageId;
+    if (salvageId) {
+      const salvageRows = rowsBySalvageId.get(salvageId) || [];
+      salvageRows.push(instance); rowsBySalvageId.set(salvageId, salvageRows);
+    }
+  });
+  const validInventory = new Set();
+  candidateClaims.forEach(({ salvageId, raw, offer }) => {
+    const rows = rowsById.get(raw.instanceId) || [];
+    const matching = rows.filter((instance) => instance.provenance?.kind === 'battle_salvage'
+      && instance.provenance.salvageId === salvageId
+      && instance.provenance.battleSessionId === raw.battleSessionId
+      && instance.provenance.settlementId === raw.settlementId
+      && instance.provenance.formalReportHash === raw.formalReportHash
+      && instance.equipmentId === raw.equipmentId
+      && raw.instanceId === offer.instanceId);
+    const sameSalvageRows = rowsBySalvageId.get(salvageId) || [];
+    if (matching.length !== 1 || sameSalvageRows.length !== 1) {
+      notes.push('战场打捞凭证与库存实例不是唯一一对，已双向移除。');
+      return;
+    }
+    normalized[salvageId] = raw;
+    validInventory.add(matching[0]);
   });
   if (JSON.stringify(source || {}) !== JSON.stringify(normalized)) notes.push('战场打捞领取凭证已规范化。');
   state.equipment.salvageClaims = normalized;
-  const validSalvageInstances = new Set(Object.values(normalized).map((claim) => claim.instanceId));
   const beforeInventory = Array.isArray(state.equipment.inventory) ? state.equipment.inventory : [];
   state.equipment.inventory = beforeInventory.filter((instance) => {
-    if (instance?.provenance?.kind !== 'battle_salvage') return true;
-    const valid = validSalvageInstances.has(instance.id);
+    if (!instance || (!isSalvageInstanceId(instance.id) && instance.provenance?.kind !== 'battle_salvage')) return true;
+    const valid = validInventory.has(instance);
     if (!valid) notes.push('没有有效领取凭证的战场打捞实例已移除。');
     return valid;
   });

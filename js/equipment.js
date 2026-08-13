@@ -8,7 +8,7 @@
 
 import {
   EQUIPMENT, EQUIPMENT_RULES, EQUIPMENT_STAT_KEYS,
-  FORMATION_STATUS, TECHNOLOGIES
+  FORMATION_STATUS, TECHNOLOGIES, SALVAGE_RULES
 } from './config.js';
 import { safeNumber } from './utils.js';
 
@@ -45,6 +45,10 @@ export function createInitialEquipmentState() {
 
 export function emptyEquipmentState() {
   return { inventory: [], bindings: {}, salvageClaims: {} };
+}
+
+export function isSalvageInstanceId(id) {
+  return typeof id === 'string' && id.startsWith(`${SALVAGE_RULES.instanceNamespace}-`);
 }
 
 /** 只返回可由装甲工厂制造的装备定义，顺序由 config 的声明顺序决定。 */
@@ -104,14 +108,14 @@ export function addEquipmentInstance(state, equipmentId, acquiredAt = 0) {
  */
 export function createSalvageEquipmentInstance(equipmentId, instanceId, acquiredAt = 0, provenance = {}) {
   const def = getEquipmentDefinition(equipmentId);
-  if (!def || def.acquisition?.kind !== 'production' || typeof instanceId !== 'string' || !instanceId) return null;
+  if (!def || def.acquisition?.kind !== 'production' || !isSalvageInstanceId(instanceId)) return null;
   return {
     id: instanceId,
     equipmentId: def.id,
     quantity: 1,
     acquiredAt: Math.max(0, safeNumber(acquiredAt, 0)),
     acquisition: cloneJson(def.acquisition),
-    provenance: cloneJson({ kind: 'battle_salvage', ...provenance })
+    provenance: cloneJson({ ...provenance, kind: 'battle_salvage' })
   };
 }
 
@@ -315,7 +319,7 @@ export function sanitizeEquipment(state) {
     if (!instance.provenance || typeof instance.provenance !== 'object') {
       instance.provenance = String(instance.id).startsWith('equipment-starter-')
         ? { kind: 'starter' }
-        : String(instance.id).startsWith('equipment-salvage-')
+        : isSalvageInstanceId(instance.id)
           ? { kind: 'battle_salvage', salvageId: null }
           : { kind: 'production' };
     }
@@ -361,6 +365,7 @@ export const EQUIPMENT_API = {
   createInitialEquipmentState, emptyEquipmentState, getEquipmentDefinition,
   getEquipmentProductionDefinitions, equipmentInventoryCounts, createEquipmentInstance, addEquipmentInstance,
   createSalvageEquipmentInstance,
+  isSalvageInstanceId,
   getEquipmentInstance, getUnitEquipment, getEquipmentComposition,
   equipmentModifiersFor, canEquipEquipment, equipEquipment,
   canUnequipEquipment, unequipEquipment, sanitizeEquipment,

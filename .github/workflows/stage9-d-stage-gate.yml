@@ -1,6 +1,8 @@
 name: stage9-d-stage-gate
 
 on:
+  push:
+    branches: [auto/stage9-d-battle-salvage]
   workflow_dispatch:
 
 jobs:
@@ -20,3 +22,18 @@ jobs:
         run: npm run test:stage9-D
       - name: Run Stage 9-D browser evidence gate
         run: npm run browser:stage9-D
+      - name: Upload Stage 9-D Stage Gate evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: stage9-d-stage-${{ github.sha }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            stage9_d_core_machine_evidence.json
+            stage9_d_machine_evidence.json
+            stage9_d_browser_capture_manifest.json
+            stage9_d_evidence_bundle.json
+            stage9_d_strong_evidence_verdict.json
+            stage9_d_tamper_results.json
+            stage9_d_performance_check.json
+          if-no-files-found: error
+          retention-days: 30

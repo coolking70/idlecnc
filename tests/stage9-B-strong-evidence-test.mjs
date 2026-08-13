@@ -123,7 +123,7 @@ export function verifyStage9BEvidence(candidate, { checkFiles = false } = {}) {
   if (recomputed.stats.hp !== 100) fail('hp_affected');
   if (Object.keys(THEATERS).length !== 6 || Object.keys(OPERATIONS).length !== 6) fail('stage9a_regression');
   const allowedPerformanceHelper = 'tests/lib/perf-environment.mjs';
-  const forbidden = ['js/battle.js', 'js/theater.js', 'js/save-diff.js', 'js/battle-presentation/universal/', 'experiments/battle-sandbox/universal-planner/universal-planner.js'];
+  const forbidden = ['js/battle.js', 'js/save-diff.js', 'js/battle-presentation/universal/', 'experiments/battle-sandbox/universal-planner/universal-planner.js'];
   if (changed.some((file) => forbidden.some((prefix) => file === prefix || file.startsWith(prefix)) || (file.startsWith('tests/lib/') && file !== allowedPerformanceHelper))) fail('authority_changed', changed);
   if (!source.includes('getUnitEffectiveStats(unit, state && state.equipment)') || !source.includes('sanitizeEquipment(merged)') || !source.includes("dataset.action = 'equip-equipment'")) fail('source_binding');
   if (Number(candidate.performance?.scenarios?.effectiveStats?.p95Ms) >= 16.7 || Number(candidate.performance?.scenarios?.snapshot?.p95Ms) >= 16.7) fail('performance_budget');

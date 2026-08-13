@@ -757,3 +757,13 @@
 - [x] 新增 Fast/Stage CI 分层；Release `gate:stage8-2G` 保持历史内容，不对 Stage 9-D 开发提交自动触发完整 Release Gate；core-regression 自动触发范围收窄为 main push / main PR，保留 workflow_dispatch。
 - [x] Stage 9-D Fast Gate、完整 `browser:stage9-D`、E-A / E-A.1 targeted regression 均已在当前工作树通过；性能 environment guard 有效，Release Gate 按阶段要求未默认运行。
 - [x] Stage 9-D 本地提交与 GitHub 分支已收口；最终远端身份由交付时的 `git ls-remote` 输出核对。
+
+# Stage 9-D.1 progress
+
+- [x] Legacy cutoff changed to explicit opt-in: only `salvageRulesVersion === SALVAGE_RULES.version` is eligible; missing, zero, and unknown versions fail closed.
+- [x] New real dispatch sessions carry version `1`; legacy reconstruction and v9 migration carry version `0`; v10 re-migration and deleted metadata cannot unlock salvage.
+- [x] Salvage namespace/provenance/claim sanitizer now converges both directions to a unique 1:1 claim↔inventory pair; forged production provenance, missing claims, duplicate IDs, and mismatched deterministic identity are removed; sanitizer is idempotent.
+- [x] Node Stage 9-D core expanded to 17/17, including real Formal Settlement, fixed known-drop fixtures, explicit-version regressions, double migration, provenance mutations, and claim-only save diff.
+- [x] Stage Gate scripts are self-contained: core/performance do not read screenshots; browser generation precedes strong verifier/tamper; Stage Gate uploads fresh SHA/run/attempt-named evidence.
+- [x] Developer selfcheck separates `implementationPassed` from `deliveryClosed`; no delivery-pending answer is represented as completed external closure.
+- [ ] Final Stage 9-D.1 commit, clean GitHub Stage Gate attempt 1, remote SHA, and final artifact identity remain to be closed; no Release Gate or full clean clone is planned.

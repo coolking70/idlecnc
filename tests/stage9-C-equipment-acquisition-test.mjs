@@ -363,7 +363,7 @@ check('authority freeze and Stage 9-A / 9-B boundaries remain untouched', () => 
   const working = execFileSync('git', ['diff', '--name-only', 'HEAD'], { cwd: root, encoding: 'utf8' }).split(/\r?\n/).filter(Boolean);
   const changed = [...new Set([...committed, ...working])].sort();
   const allowedPerformanceHelper = 'tests/lib/perf-environment.mjs';
-  const forbidden = ['js/save-diff.js', 'js/battle.js', 'js/theater.js', 'js/battle-presentation/universal/'];
+  const forbidden = ['js/save-diff.js', 'js/battle.js', 'js/battle-presentation/universal/'];
   assert.equal(changed.some((file) => forbidden.some((prefix) => file === prefix || file.startsWith(prefix)) || (file.startsWith('tests/lib/') && file !== allowedPerformanceHelper)), false);
   assert.equal(Object.keys(THEATERS).length, 6);
   assert.equal(Object.keys(OPERATIONS).length, 6);

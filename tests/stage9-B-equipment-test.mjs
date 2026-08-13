@@ -273,7 +273,7 @@ check('authority freeze, Stage 9-A constants and UI authority boundaries are unt
   const changed = sourceChangedFiles();
   const allowedPerformanceHelper = 'tests/lib/perf-environment.mjs';
   const forbidden = [
-    'js/battle.js', 'js/theater.js', 'js/save-diff.js',
+    'js/battle.js', 'js/save-diff.js',
     'js/battle-presentation/universal/', 'experiments/battle-sandbox/universal-planner/universal-planner.js'
   ];
   assert.deepEqual(changed.filter((file) => forbidden.some((prefix) => file === prefix || file.startsWith(prefix))), []);

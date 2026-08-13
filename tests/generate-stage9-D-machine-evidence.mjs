@@ -19,7 +19,7 @@ const output = {
   realReloadRequired: true, frameCount: frames.length,
   requiredActions: ['launch-battle', 'confirm-dispatch', 'claim-battle-salvage', 'view-report', 'replay-report'],
   realReloadReasons: ['pending_result', 'claimed_result', 'replay', 'no_drop_result'],
-  deterministicFixture: { salvageSeed: 5, noDropSeed: 6, method: 'DOM dispatch with test-only Math.random seed source; no dispatch API call' },
+  deterministicFixture: { salvageSeed: 5, noDropSeed: 6, method: 'DOM dispatch with test-only Math.random seed source; no dispatch API call', requiresExplicitSalvageRulesVersion: 1 },
   frames: frames.map(([file, semantic], index) => ({ frame: index + 1, file, semantic }))
 };
 

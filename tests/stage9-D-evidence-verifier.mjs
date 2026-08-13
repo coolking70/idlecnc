@@ -5,6 +5,7 @@ import { fileURLToPath } from 'node:url';
 
 import { EQUIPMENT, EQUIPMENT_RULES, SAVE_VERSION, SALVAGE_RULES } from '../js/config.js';
 import { deriveSalvageOffer } from '../js/battle-salvage.js';
+import { isSalvageInstanceId } from '../js/equipment.js';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const clone = (value) => JSON.parse(JSON.stringify(value));
@@ -42,6 +43,7 @@ function verifyFrame(frame, index, errors, { checkFiles = false } = {}) {
   fields.forEach((field) => { if (captured[field] !== (expected[field] ?? null)) fail(errors, 'salvage_true_value', { index, field, captured: captured[field], expected: expected[field] ?? null }); });
   if (!expected.ok) fail(errors, 'salvage_offer_invalid', { index, code: expected.code });
   const authoritative = frame.state.authoritativeSession;
+  if (session.salvageRulesVersion !== SALVAGE_RULES.version || frame.state.salvageRulesVersion !== SALVAGE_RULES.version) fail(errors, 'salvage_rules_version_binding', index);
   if (!authoritative.deploymentHash || authoritative.deploymentHash !== session.deploymentHash) fail(errors, 'deployment_hash_binding', index);
   if (frame.state.sessionId !== session.battleSessionId || frame.state.settlementId !== session.settlementId || frame.state.formalReportHash !== session.formalReportHash) fail(errors, 'session_identity', index);
   if (expected.outcome === 'equipment') {
@@ -49,7 +51,7 @@ function verifyFrame(frame, index, errors, { checkFiles = false } = {}) {
     if (claimed) {
       const claim = frame.state.salvageClaims?.[expected.salvageId];
       const instance = state.equipment.inventory.find((row) => row?.id === expected.instanceId);
-      if (!claim || claim.offerHash !== expected.offerHash || claim.equipmentId !== expected.equipmentId || claim.instanceId !== expected.instanceId || instance?.equipmentId !== expected.equipmentId || instance?.provenance?.kind !== 'battle_salvage' || instance.provenance.salvageId !== expected.salvageId) fail(errors, 'claim_receipt_binding', index);
+      if (!claim || claim.salvageId !== expected.salvageId || claim.battleSessionId !== expected.battleSessionId || claim.settlementId !== expected.settlementId || claim.formalReportId !== expected.formalReportId || claim.formalReportHash !== expected.formalReportHash || claim.offerHash !== expected.offerHash || claim.equipmentId !== expected.equipmentId || claim.instanceId !== expected.instanceId || !isSalvageInstanceId(instance?.id) || instance?.equipmentId !== expected.equipmentId || instance?.provenance?.kind !== 'battle_salvage' || instance.provenance.salvageId !== expected.salvageId || instance.provenance.battleSessionId !== expected.battleSessionId || instance.provenance.settlementId !== expected.settlementId || instance.provenance.formalReportHash !== expected.formalReportHash) fail(errors, 'claim_receipt_binding', index);
     }
   }
   if (frame.semantic.includes('replay') && frame.claimControlPresent !== false) fail(errors, 'replay_claim_control', index);
@@ -63,10 +65,12 @@ export function verifyStage9DEvidence(candidate, { checkFiles = false } = {}) {
   const expectedCatalog = Object.values(EQUIPMENT).map((def) => ({ id: def.id, applicableTypes: def.applicableTypes, modifiers: def.modifiers, acquisition: def.acquisition, requiresTech: def.requiresTech || null }));
   if (!equal(candidate?.equipmentCatalog, expectedCatalog)) fail(errors, 'catalog_true_value');
   if (candidate?.equipmentRules?.maxSlotsPerUnit !== EQUIPMENT_RULES.maxSlotsPerUnit) fail(errors, 'equipment_rule_binding');
+  if ((candidate?.authority?.forbiddenAuthorityFilesChanged || []).length !== 0) fail(errors, 'authority_freeze');
   const machine = candidate?.machine || {};
   const browser = candidate?.browser || {};
   const frames = browser.scenes?.flatMap((scene) => scene.frames || []) || [];
   if (machine.stage !== '9-D' || machine.frameCount !== 9 || frames.length !== 9) fail(errors, 'frame_count');
+  if (machine.deterministicFixture?.requiresExplicitSalvageRulesVersion !== SALVAGE_RULES.version) fail(errors, 'fixture_salvage_version_contract');
   if (machine.frames?.map((row) => row.semantic).join('|') !== frames.map((row) => row.semantic).join('|')) fail(errors, 'semantic_order');
   ['dispatchApiUsed', 'replayApiUsed', 'offlineApiUsed', 'equipmentApiUsed'].forEach((key) => { if (browser[key] !== false || machine[key] !== false) fail(errors, 'api_provenance', key); });
   if (browser.browser?.captureCount !== frames.length || browser.browser?.uniqueImageHashes !== frames.length) fail(errors, 'capture_counts');
