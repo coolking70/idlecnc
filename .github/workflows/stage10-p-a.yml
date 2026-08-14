@@ -1,0 +1,45 @@
+name: stage10-p-a-command-ui
+
+on:
+  push:
+    branches: [auto/stage10-p-a-command-ui-foundation]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  command-ui-gate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 70
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.23.1
+      - name: Install project runtime
+        run: npm install --ignore-scripts --no-audit --no-fund
+      - name: Historical core regression
+        run: npm run --ignore-scripts test
+      - name: Stage 9 relevant regression
+        run: npm run test:stage9-E:fast
+      - name: Restore accepted historical evidence bytes
+        run: node tests/stage9-E1-restore-historical-evidence.mjs
+      - name: Stage 10-P-A unit and canonical equivalence
+        run: npm run test:stage10-P-A
+      - name: Stage 10-P-A real browser evidence
+        run: npm run browser:stage10-P-A
+      - name: Stage 10-P-A strong verifier and tamper corpus
+        run: npm run verify:stage10-P-A
+      - name: Upload Stage 10-P-A audit evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: stage10-p-a-${{ github.sha }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            evidence/stage10-P-A/
+            screenshots/stage10-P-A/
+            STAGE10-P-A-SELFCHECK.json
+          if-no-files-found: error
+          retention-days: 30

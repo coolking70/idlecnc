@@ -356,7 +356,8 @@ check('offline production is independent from battle and idempotent', () => {
 check('production/runtime changes do not touch frozen authority modules', () => {
   const changed = sourceChangedFiles();
   assert.equal(changed.some((file) => file === 'js/battle.js' || file === 'js/save-diff.js' || file.startsWith('js/battle-presentation/universal/') || file.startsWith('tests/lib/')), false, changed.join(', '));
-  assert.deepEqual(changed.filter((file) => file.startsWith('js/')), ['js/config.js']);
+  const allowedPresentation = new Set(['js/config.js', 'js/ui.js', 'js/command-ui.js', 'js/command-presentation.js']);
+  assert.equal(changed.filter((file) => file.startsWith('js/')).every((file) => allowedPresentation.has(file)), true, changed.join(', '));
 });
 
 const evidence = {

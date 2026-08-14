@@ -49,6 +49,12 @@ import {
   qs, el, setText, toggleClass, formatInt, formatRate, formatClock,
   formatDuration, formatWallClock, clamp, safeNumber
 } from './utils.js';
+import { CategoryBar, CommandSurface } from './command-ui.js';
+import {
+  buildConstructionTileModels, buildCurrentConstructionModel,
+  buildUnitProductionTileModels, buildEquipmentProductionTileModels,
+  buildProductionQueueModels
+} from './command-presentation.js';
 
 /** 战斗结果 → 样式修饰类 */
 const RESULT_TONE = {
@@ -91,6 +97,8 @@ export class UI {
     /** 仅 UI 内存中的部署确认；刷新后安全回退，不写入 production save。 */
     this.dispatchReview = null;
     this._lastState = null;
+    this.commandSurface = new CommandSurface((actionId, payload) => this._onInspectorCommand(actionId, payload));
+    this.commandCategory = 'units';
     /** 战报页选中的战报 ID（阶段5） */
     this.selectedReportId = null;
     this.presentationState = { preference: 'auto', mode: 'legacy' };
@@ -193,7 +201,12 @@ export class UI {
 
       const title = el('h3', 'page-title');
       title.appendChild(el('span', '', tab.title));
-      title.appendChild(el('small', '', tab.stage > CURRENT_STAGE ? `阶段${tab.stage}` : `阶段${tab.stage} · 已开放`));
+      if (tab.id === 'construction' || tab.id === 'production') {
+        title.classList.add('command-page-title');
+        title.appendChild(el('small', '', tab.id === 'construction' ? 'BUILD' : 'COMMAND PRODUCTION'));
+      } else {
+        title.appendChild(el('small', '', tab.stage > CURRENT_STAGE ? `阶段${tab.stage}` : `阶段${tab.stage} · 已开放`));
+      }
       page.appendChild(title);
 
       if (tab.id === 'overview') {
@@ -243,10 +256,56 @@ export class UI {
    * 建设页（阶段2）
    * ======================================================== */
 
+  _onInspectorCommand(actionId, payload = {}) {
+    if (actionId === 'cancel-construction') this.handlers.onCancelConstruction?.();
+    else if (actionId === 'cancel-current-production') this.handlers.onCancelCurrentProduction?.();
+    else if (actionId === 'cancel-queued-production') this.handlers.onCancelQueuedProduction?.(payload.jobId);
+    else if (actionId === 'build') this._onBuildClick(payload.typeId);
+    else if (actionId === 'produce-unit') this._onProduceClick(payload.unitType);
+    else if (actionId === 'produce-equipment') this._onEquipmentProduceClick(payload.equipmentId);
+  }
+
+  _onCommandPrimary(model) {
+    const payload = model?.inspector?.actionPayload || {};
+    if (model?.actionId === 'build') this._onBuildClick(payload.typeId);
+    else if (model?.actionId === 'produce-unit') this._onProduceClick(payload.unitType);
+    else if (model?.actionId === 'produce-equipment') this._onEquipmentProduceClick(payload.equipmentId);
+  }
+
+  _setCommandCategory(categoryId) {
+    const p = this.refs.prod;
+    if (!p || !['units', 'equipment'].includes(categoryId)) return;
+    this.commandCategory = categoryId;
+    p.categoryBar?.select(categoryId);
+    if (p.unitsSection) p.unitsSection.hidden = categoryId !== 'units';
+    if (p.equipmentSection) p.equipmentSection.hidden = categoryId !== 'equipment';
+  }
+
   /** 构建建设分页：工程状态区 + 建筑项目列表 */
   _buildConstructionPage(page) {
     const r = this.refs;
-    r.build = { cards: {} };
+    r.build = {};
+
+    const currentHead = el('div', 'command-section-head');
+    currentHead.appendChild(el('span', '', 'CURRENT'));
+    currentHead.appendChild(el('small', '', '施工队列'));
+    page.appendChild(currentHead);
+    r.build.currentEmpty = el('div', 'command-empty', '施工队列空闲');
+    page.appendChild(r.build.currentEmpty);
+    r.build.currentRoot = el('div', 'command-current command-queue');
+    page.appendChild(r.build.currentRoot);
+    r.build.currentGrid = this.commandSurface.createQueue(r.build.currentRoot, (model) => this._onCommandPrimary(model));
+
+    const buildHead = el('div', 'command-section-head');
+    buildHead.appendChild(el('span', '', 'BUILD'));
+    buildHead.appendChild(el('small', '', '点击建造'));
+    page.appendChild(buildHead);
+    r.build.gridRoot = el('div', 'command-grid command-build-grid');
+    r.build.gridRoot.dataset.commandScope = 'construction';
+    page.appendChild(r.build.gridRoot);
+    r.build.commandGrid = this.commandSurface.createGrid(r.build.gridRoot, (model) => this._onCommandPrimary(model));
+    page.appendChild(el('div', 'command-gesture-hint', '点击执行 · 悬浮快览 · 长按详情'));
+    return;
 
     // —— 工程状态区 ——
     const status = el('div', 'card build-status');
@@ -440,7 +499,15 @@ export class UI {
   /** 刷新建设页：工程进度 + 每张卡片的按钮状态与禁用原因 */
   _updateConstruction(state) {
     const b = this.refs.build;
-    if (!b || !b.cards) return;
+    if (!b || !b.commandGrid) return;
+
+    this._lastState = state;
+    const current = buildCurrentConstructionModel(state);
+    b.currentGrid.update(current ? [current] : []);
+    b.currentEmpty.hidden = Boolean(current);
+    b.currentRoot.hidden = !current;
+    b.commandGrid.update(buildConstructionTileModels(state));
+    return;
 
     const job = getConstructionProgress(state);
     const paused = safeNumber(state.time.speed, 1) === 0;
@@ -526,7 +593,53 @@ export class UI {
   /** 构建生产分页：当前生产线 + 等待队列 + 单位卡片 + 单位库存 */
   _buildProductionPage(page) {
     const r = this.refs;
-    r.prod = { cards: {}, equipmentCards: {}, queueSig: '', equipmentSig: '' };
+    r.prod = {};
+
+    const queueHead = el('div', 'command-section-head');
+    queueHead.appendChild(el('span', '', 'QUEUE'));
+    queueHead.appendChild(el('small', '', `0 / ${PRODUCTION.maxQueueSize}`));
+    r.prod.queueCount = queueHead.lastChild;
+    page.appendChild(queueHead);
+    r.prod.queueEmpty = el('div', 'command-empty', '生产队列空闲');
+    page.appendChild(r.prod.queueEmpty);
+    r.prod.queueRoot = el('div', 'command-grid command-queue');
+    r.prod.queueRoot.dataset.commandScope = 'production-queue';
+    page.appendChild(r.prod.queueRoot);
+    r.prod.queueGrid = this.commandSurface.createQueue(r.prod.queueRoot, (model) => this._onCommandPrimary(model));
+
+    r.prod.categoryRoot = el('div', 'command-category');
+    page.appendChild(r.prod.categoryRoot);
+    r.prod.categoryBar = new CategoryBar(r.prod.categoryRoot, [
+      { id: 'units', label: 'UNITS' },
+      { id: 'equipment', label: 'EQUIPMENT' }
+    ], (id) => this._setCommandCategory(id));
+
+    r.prod.unitsSection = el('section', 'command-category-panel');
+    r.prod.unitsSection.dataset.commandCategoryPanel = 'units';
+    const unitHead = el('div', 'command-section-head');
+    unitHead.appendChild(el('span', '', 'UNITS'));
+    unitHead.appendChild(el('small', '', '点击入队'));
+    r.prod.unitsSection.appendChild(unitHead);
+    r.prod.unitsRoot = el('div', 'command-grid');
+    r.prod.unitsRoot.dataset.commandScope = 'unit-production';
+    r.prod.unitsSection.appendChild(r.prod.unitsRoot);
+    r.prod.unitGrid = this.commandSurface.createGrid(r.prod.unitsRoot, (model) => this._onCommandPrimary(model));
+    page.appendChild(r.prod.unitsSection);
+
+    r.prod.equipmentSection = el('section', 'command-category-panel');
+    r.prod.equipmentSection.dataset.commandCategoryPanel = 'equipment';
+    const commandEquipmentHead = el('div', 'command-section-head');
+    commandEquipmentHead.appendChild(el('span', '', 'EQUIPMENT'));
+    commandEquipmentHead.appendChild(el('small', '', '点击入队'));
+    r.prod.equipmentSection.appendChild(commandEquipmentHead);
+    r.prod.equipmentRoot = el('div', 'command-grid');
+    r.prod.equipmentRoot.dataset.commandScope = 'equipment-production';
+    r.prod.equipmentSection.appendChild(r.prod.equipmentRoot);
+    r.prod.equipmentGrid = this.commandSurface.createGrid(r.prod.equipmentRoot, (model) => this._onCommandPrimary(model));
+    page.appendChild(r.prod.equipmentSection);
+    page.appendChild(el('div', 'command-gesture-hint', '点击生产 · 悬浮快览 · 长按详情'));
+    this._setCommandCategory(this.commandCategory);
+    return;
 
     // —— 当前生产线 ——
     const line = el('div', 'card prod-line');
@@ -819,7 +932,18 @@ export class UI {
   /** 刷新生产页：当前生产线 + 等待队列 + 单位卡片 + 库存统计 */
   _updateProduction(state) {
     const p = this.refs.prod;
-    if (!p || !p.cards) return;
+    if (!p || !p.unitGrid) return;
+
+    this._lastState = state;
+    const queueModels = buildProductionQueueModels(state);
+    p.queueGrid.update(queueModels);
+    p.queueEmpty.hidden = queueModels.length > 0;
+    p.queueRoot.hidden = queueModels.length === 0;
+    setText(p.queueCount, `${queueModels.length} / ${PRODUCTION.maxQueueSize}`);
+    p.unitGrid.update(buildUnitProductionTileModels(state));
+    p.equipmentGrid.update(buildEquipmentProductionTileModels(state));
+    this._setCommandCategory(this.commandCategory);
+    return;
 
     const progress = getProductionProgress(state);
     const paused = safeNumber(state.time.speed, 1) === 0;
