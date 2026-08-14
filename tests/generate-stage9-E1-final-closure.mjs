@@ -5,13 +5,24 @@ import path from 'node:path';
 
 const outputDir = path.resolve(process.argv[2] || 'artifacts/stage9-e1-final-closure');
 const read = (relativePath) => JSON.parse(fs.readFileSync(path.join(outputDir, relativePath), 'utf8'));
+const readFirstExisting = (relativePaths) => {
+  const relativePath = relativePaths.find((candidate) => fs.existsSync(path.join(outputDir, candidate)));
+  if (!relativePath) throw new Error(`missing evidence; tried: ${relativePaths.join(', ')}`);
+  return read(relativePath);
+};
 const gitHead = execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).trim();
 const workflowHead = process.env.GITHUB_SHA || gitHead;
 const stageHead = process.env.STAGE_GATE_HEAD || workflowHead;
 const performanceHead = process.env.RELEASE_PERFORMANCE_HEAD || workflowHead;
 const functionalHead = process.env.RELEASE_FUNCTIONAL_HEAD || workflowHead;
 const cleanClone = read('clean-clone/clean_clone_result.json');
-const performance = read('performance/stage9_c1b_performance_result.json');
+// upload-artifact preserves the source directory when the performance bundle
+// also contains root-level qualified inputs. Accept that deterministic nested
+// layout as well as the direct layout used by local/hand-built bundles.
+const performance = readFirstExisting([
+  'performance/stage9_c1b_performance_result.json',
+  'performance/artifacts/stage9-e1-performance/stage9_c1b_performance_result.json'
+]);
 const stageTamper = read('stage/stage9_e_tamper_results.json');
 const stageStrong = read('stage/stage9_e_strong_evidence_verdict.json');
 const stageBrowser = read('stage/stage9_e_browser_capture_manifest.json');
