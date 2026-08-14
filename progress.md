@@ -14,7 +14,8 @@ Starting from exact accepted Stage 9 baseline `ca408bb7031afda79a65af7aad27b6b64
 - [x] Construction, Unit Production, Equipment Production, and Production Queue migrations.
 - [x] Focused tests, canonical-state equivalence, 13-frame desktop/mobile browser evidence, integrity/tamper verifier, CI gate, handoff, and compact ZIP.
 - [x] Full `npm test` historical regression and Stage 9 relevant regression pass; accepted historical evidence restored byte-for-byte afterward.
-- [ ] Final evidence checkpoint commit, push, and remote CI inspection.
+- [x] Immutable implementation checkpoint and final evidence/package regeneration.
+- [ ] Push the final evidence commit and inspect its remote CI run (post-commit result is reported in the final response).
 
 # Stage 7 progress
 

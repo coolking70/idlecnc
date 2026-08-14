@@ -1,0 +1,15 @@
+{
+  "stage": "10-P-A",
+  "gameplayAuthorityChanged": false,
+  "saveVersionChanged": false,
+  "constructionMigrated": true,
+  "unitProductionMigrated": true,
+  "equipmentProductionMigrated": true,
+  "queueMigrated": true,
+  "desktopPassed": true,
+  "mobilePassed": true,
+  "hoverPassed": true,
+  "longPressPassed": true,
+  "historicalRegressionPassed": true,
+  "passed": true
+}

@@ -1,0 +1,16 @@
+{
+  "stage": "10-P-A",
+  "verifier": "tests/lib/stage10-P-A-verifier.mjs",
+  "independentRecompute": true,
+  "passed": true,
+  "failureCount": 0,
+  "failures": [],
+  "recomputed": {
+    "frameCount": 13,
+    "uniqueScreenshotCount": 13,
+    "desktopCoverage": true,
+    "mobileCoverage": true,
+    "hoverCoverage": true,
+    "longPressCoverage": true
+  }
+}

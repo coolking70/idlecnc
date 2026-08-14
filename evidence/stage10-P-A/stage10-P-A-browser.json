@@ -1,0 +1,1944 @@
+{
+  "stage": "10-P-A",
+  "generatedBy": "tests/browser/stage10-P-A-command-ui.mjs",
+  "frameCount": 13,
+  "requiredFrames": [
+    "01-construction-command-grid.png",
+    "02-construction-hover-tooltip.png",
+    "03-construction-active-progress.png",
+    "04-unit-production-command-grid.png",
+    "05-unit-hover-tooltip.png",
+    "06-unit-locked-state.png",
+    "07-unit-resource-insufficient.png",
+    "08-production-queue.png",
+    "09-equipment-command-grid.png",
+    "10-equipment-tooltip.png",
+    "11-mobile-480-production.png",
+    "12-mobile-390-production.png",
+    "13-mobile-inspector.png"
+  ],
+  "screenshots": [
+    {
+      "file": "01-construction-command-grid.png",
+      "phase": "construction_command_grid",
+      "path": "screenshots/stage10-P-A/01-construction-command-grid.png",
+      "sha256": "78b6923ec2518c950a5094c844bd5a23f9c9086a8f7de2f45fa3f5183625a251",
+      "bytes": 271070,
+      "dimensions": {
+        "width": 1366,
+        "height": 900,
+        "dpr": 1
+      },
+      "state": {
+        "resources": {
+          "supply": 1200,
+          "alloy": 1000,
+          "intel": 20
+        },
+        "construction": null,
+        "production": {
+          "current": null,
+          "queue": []
+        },
+        "unitCount": 0,
+        "equipmentInventoryCount": 3
+      },
+      "dom": {
+        "tooltipHosts": 1,
+        "inspectorHosts": 1,
+        "tooltipVisible": false,
+        "inspectorVisible": false,
+        "commandTiles": 16,
+        "visibleNames": [
+          "补给仓库",
+          "合金加工厂",
+          "兵营",
+          "装甲工厂",
+          "雷达站",
+          "技术实验室"
+        ],
+        "permanentDescriptions": 0,
+        "bodyText": "建设项目\nBUILD\nCURRENT\n施工队列\n施工队列空闲\nBUILD\n点击建造\nⓘ\n补给仓库\nⓘ\n合金加工厂\nⓘ\n兵营\nLOCK\nⓘ\n装甲工厂\nⓘ\n雷达站\nLOCK\nⓘ\n技术实验室\n点击执行 · 悬浮快览 · 长按详情"
+      },
+      "transientToastSuppressedForCapture": true
+    },
+    {
+      "file": "02-construction-hover-tooltip.png",
+      "phase": "construction_hover_tooltip",
+      "path": "screenshots/stage10-P-A/02-construction-hover-tooltip.png",
+      "sha256": "9797a11c5cb89dee61b95c657f17642c3f64427d6fbb71d27e8d8f1e6a708d6c",
+      "bytes": 277518,
+      "dimensions": {
+        "width": 1366,
+        "height": 900,
+        "dpr": 1
+      },
+      "state": {
+        "resources": {
+          "supply": 1200,
+          "alloy": 1000,
+          "intel": 20
+        },
+        "construction": null,
+        "production": {
+          "current": null,
+          "queue": []
+        },
+        "unitCount": 0,
+        "equipmentInventoryCount": 3
+      },
+      "dom": {
+        "tooltipHosts": 1,
+        "inspectorHosts": 1,
+        "tooltipVisible": true,
+        "inspectorVisible": false,
+        "commandTiles": 16,
+        "visibleNames": [
+          "补给仓库",
+          "合金加工厂",
+          "兵营",
+          "装甲工厂",
+          "雷达站",
+          "技术实验室"
+        ],
+        "permanentDescriptions": 0,
+        "bodyText": "建设项目\nBUILD\nCURRENT\n施工队列\n施工队列空闲\nBUILD\n点击建造\nⓘ\n补给仓库\nⓘ\n合金加工厂\nⓘ\n兵营\nLOCK\nⓘ\n装甲工厂\nⓘ\n雷达站\nLOCK\nⓘ\n技术实验室\n点击执行 · 悬浮快览 · 长按详情"
+      },
+      "transientToastSuppressedForCapture": true,
+      "tooltip": true
+    },
+    {
+      "file": "03-construction-active-progress.png",
+      "phase": "construction_active_progress",
+      "path": "screenshots/stage10-P-A/03-construction-active-progress.png",
+      "sha256": "1d95cf219b7657d7e045cb287a77bef5604cc8baeba6e40bd0fdf02733b40427",
+      "bytes": 290222,
+      "dimensions": {
+        "width": 1366,
+        "height": 900,
+        "dpr": 1
+      },
+      "state": {
+        "resources": {
+          "supply": 1117.9999999999836,
+          "alloy": 808.9999999999918,
+          "intel": 20.89999999999982
+        },
+        "construction": {
+          "type": "supply_depot",
+          "elapsed": 9,
+          "duration": 20
+        },
+        "production": {
+          "current": null,
+          "queue": []
+        },
+        "unitCount": 0,
+        "equipmentInventoryCount": 3
+      },
+      "dom": {
+        "tooltipHosts": 1,
+        "inspectorHosts": 1,
+        "tooltipVisible": false,
+        "inspectorVisible": false,
+        "commandTiles": 17,
+        "visibleNames": [
+          "补给仓库",
+          "补给仓库",
+          "合金加工厂",
+          "兵营",
+          "装甲工厂",
+          "雷达站",
+          "技术实验室"
+        ],
+        "permanentDescriptions": 0,
+        "bodyText": "建设项目\nBUILD\nCURRENT\n施工队列\n45%\n45%\nⓘ\n补给仓库\nBUILD\n点击建造\n45%\n45%\nⓘ\n补给仓库\nⓘ\n合金加工厂\nⓘ\n兵营\nⓘ\n装甲工厂\nⓘ\n雷达站\nⓘ\n技术实验室\n点击执行 · 悬浮快览 · 长按详情"
+      },
+      "transientToastSuppressedForCapture": true,
+      "actionViaTile": true
+    },
+    {
+      "file": "04-unit-production-command-grid.png",
+      "phase": "unit_production_command_grid",
+      "path": "screenshots/stage10-P-A/04-unit-production-command-grid.png",
+      "sha256": "384cf87e38b213ee9706af68bd3f64569fad016fdc8ff091405563903eab08da",
+      "bytes": 254296,
+      "dimensions": {
+        "width": 1366,
+        "height": 900,
+        "dpr": 1
+      },
+      "state": {
+        "resources": {
+          "supply": 4000,
+          "alloy": 4000,
+          "intel": 400
+        },
+        "construction": null,
+        "production": {
+          "current": null,
+          "queue": []
+        },
+        "unitCount": 0,
+        "equipmentInventoryCount": 3
+      },
+      "dom": {
+        "tooltipHosts": 1,
+        "inspectorHosts": 1,
+        "tooltipVisible": false,
+        "inspectorVisible": false,
+        "commandTiles": 16,
+        "visibleNames": [
+          "步兵班",
+          "反装甲班",
+          "侦察车",
+          "主战坦克",
+          "维修车",
+          "反装甲瞄具",
+          "战术指挥链",
+          "机动维修架",
+          "反应装甲模块",
+          "精确火控组件"
+        ],
+        "permanentDescriptions": 0,
+        "bodyText": "单位生产\nCOMMAND PRODUCTION\nQUEUE\n0 / 5\n生产队列空闲\nUNITS\nEQUIPMENT\nUNITS\n点击入队\nⓘ\n步兵班\nⓘ\n反装甲班\nⓘ\n侦察车\nⓘ\n主战坦克\nⓘ\n维修车\n点击生产 · 悬浮快览 · 长按详情"
+      },
+      "transientToastSuppressedForCapture": true
+    },
+    {
+      "file": "05-unit-hover-tooltip.png",
+      "phase": "unit_hover_tooltip",
+      "path": "screenshots/stage10-P-A/05-unit-hover-tooltip.png",
+      "sha256": "4e13ff0c9b5e06b046b210a2ad8f9fe8e7f57902830b3c3122a51ecada1c3d1a",
+      "bytes": 258760,
+      "dimensions": {
+        "width": 1366,
+        "height": 900,
+        "dpr": 1
+      },
+      "state": {
+        "resources": {
+          "supply": 4000,
+          "alloy": 4000,
+          "intel": 400
+        },
+        "construction": null,
+        "production": {
+          "current": null,
+          "queue": []
+        },
+        "unitCount": 0,
+        "equipmentInventoryCount": 3
+      },
+      "dom": {
+        "tooltipHosts": 1,
+        "inspectorHosts": 1,
+        "tooltipVisible": true,
+        "inspectorVisible": false,
+        "commandTiles": 16,
+        "visibleNames": [
+          "步兵班",
+          "反装甲班",
+          "侦察车",
+          "主战坦克",
+          "维修车",
+          "反装甲瞄具",
+          "战术指挥链",
+          "机动维修架",
+          "反应装甲模块",
+          "精确火控组件"
+        ],
+        "permanentDescriptions": 0,
+        "bodyText": "单位生产\nCOMMAND PRODUCTION\nQUEUE\n0 / 5\n生产队列空闲\nUNITS\nEQUIPMENT\nUNITS\n点击入队\nⓘ\n步兵班\nⓘ\n反装甲班\nⓘ\n侦察车\nⓘ\n主战坦克\nⓘ\n维修车\n点击生产 · 悬浮快览 · 长按详情"
+      },
+      "transientToastSuppressedForCapture": true,
+      "tooltip": true
+    },
+    {
+      "file": "06-unit-locked-state.png",
+      "phase": "unit_locked_state",
+      "path": "screenshots/stage10-P-A/06-unit-locked-state.png",
+      "sha256": "d032819d7589922842404e0631b42bb3280596708a05d4052662587fefc3c603",
+      "bytes": 274914,
+      "dimensions": {
+        "width": 1366,
+        "height": 900,
+        "dpr": 1
+      },
+      "state": {
+        "resources": {
+          "supply": 4000,
+          "alloy": 4000,
+          "intel": 400
+        },
+        "construction": null,
+        "production": {
+          "current": null,
+          "queue": []
+        },
+        "unitCount": 0,
+        "equipmentInventoryCount": 3
+      },
+      "dom": {
+        "tooltipHosts": 1,
+        "inspectorHosts": 1,
+        "tooltipVisible": false,
+        "inspectorVisible": false,
+        "commandTiles": 16,
+        "visibleNames": [
+          "步兵班",
+          "反装甲班",
+          "侦察车",
+          "主战坦克",
+          "维修车",
+          "反装甲瞄具",
+          "战术指挥链",
+          "机动维修架",
+          "反应装甲模块",
+          "精确火控组件"
+        ],
+        "permanentDescriptions": 0,
+        "bodyText": "单位生产\nCOMMAND PRODUCTION\nQUEUE\n0 / 5\n生产队列空闲\nUNITS\nEQUIPMENT\nUNITS\n点击入队\nLOCK\nⓘ\n步兵班\nLOCK\nⓘ\n反装甲班\nLOCK\nⓘ\n侦察车\nLOCK\nⓘ\n主战坦克\nLOCK\nⓘ\n维修车\n点击生产 · 悬浮快览 · 长按详情"
+      },
+      "transientToastSuppressedForCapture": true
+    },
+    {
+      "file": "07-unit-resource-insufficient.png",
+      "phase": "unit_resource_insufficient",
+      "path": "screenshots/stage10-P-A/07-unit-resource-insufficient.png",
+      "sha256": "218347b135a9051933fb0649b562893bfd1d0b36a2fbc0a5e2093c890ad1a29a",
+      "bytes": 258572,
+      "dimensions": {
+        "width": 1366,
+        "height": 900,
+        "dpr": 1
+      },
+      "state": {
+        "resources": {
+          "supply": 0,
+          "alloy": 0,
+          "intel": 0
+        },
+        "construction": null,
+        "production": {
+          "current": null,
+          "queue": []
+        },
+        "unitCount": 0,
+        "equipmentInventoryCount": 3
+      },
+      "dom": {
+        "tooltipHosts": 1,
+        "inspectorHosts": 1,
+        "tooltipVisible": false,
+        "inspectorVisible": false,
+        "commandTiles": 16,
+        "visibleNames": [
+          "步兵班",
+          "反装甲班",
+          "侦察车",
+          "主战坦克",
+          "维修车",
+          "反装甲瞄具",
+          "战术指挥链",
+          "机动维修架",
+          "反应装甲模块",
+          "精确火控组件"
+        ],
+        "permanentDescriptions": 0,
+        "bodyText": "单位生产\nCOMMAND PRODUCTION\nQUEUE\n0 / 5\n生产队列空闲\nUNITS\nEQUIPMENT\nUNITS\n点击入队\n!\nⓘ\n步兵班\n!\nⓘ\n反装甲班\n!\nⓘ\n侦察车\n!\nⓘ\n主战坦克\n!\nⓘ\n维修车\n点击生产 · 悬浮快览 · 长按详情"
+      },
+      "transientToastSuppressedForCapture": true
+    },
+    {
+      "file": "08-production-queue.png",
+      "phase": "production_queue",
+      "path": "screenshots/stage10-P-A/08-production-queue.png",
+      "sha256": "f10c5cc3940a18ef04bf5cd4f8576f5ac76e3e29ab10cf24e8e02e7c6c3e1f6e",
+      "bytes": 284634,
+      "dimensions": {
+        "width": 1366,
+        "height": 900,
+        "dpr": 1
+      },
+      "state": {
+        "resources": {
+          "supply": 3587.9999999999927,
+          "alloy": 3704.0000000000146,
+          "intel": 400.39999999999964
+        },
+        "construction": null,
+        "production": {
+          "current": {
+            "kind": "unit",
+            "type": "infantry",
+            "equipmentId": null
+          },
+          "queue": [
+            {
+              "kind": "unit",
+              "type": "infantry",
+              "equipmentId": null
+            },
+            {
+              "kind": "unit",
+              "type": "mbt",
+              "equipmentId": null
+            }
+          ]
+        },
+        "unitCount": 0,
+        "equipmentInventoryCount": 3
+      },
+      "dom": {
+        "tooltipHosts": 1,
+        "inspectorHosts": 1,
+        "tooltipVisible": false,
+        "inspectorVisible": false,
+        "commandTiles": 19,
+        "visibleNames": [
+          "步兵班",
+          "步兵班",
+          "主战坦克",
+          "步兵班",
+          "反装甲班",
+          "侦察车",
+          "主战坦克",
+          "维修车",
+          "反装甲瞄具",
+          "战术指挥链",
+          "机动维修架",
+          "反应装甲模块",
+          "精确火控组件"
+        ],
+        "permanentDescriptions": 0,
+        "bodyText": "单位生产\nCOMMAND PRODUCTION\nQUEUE\n3 / 5\n40%\n40%\nⓘ\n步兵班\n队列\nⓘ\n步兵班\n队列\nⓘ\n主战坦克\nUNITS\nEQUIPMENT\nUNITS\n点击入队\n队列\nⓘ\n步兵班\nⓘ\n反装甲班\nⓘ\n侦察车\n队列\nⓘ\n主战坦克\nⓘ\n维修车\n点击生产 · 悬浮快览 · 长按详情"
+      },
+      "transientToastSuppressedForCapture": true,
+      "rapidClicks": 3
+    },
+    {
+      "file": "09-equipment-command-grid.png",
+      "phase": "equipment_command_grid",
+      "path": "screenshots/stage10-P-A/09-equipment-command-grid.png",
+      "sha256": "813499feb2c817e0256590d1c1f3da49b55255b95c70d704c797d26fdf367197",
+      "bytes": 260565,
+      "dimensions": {
+        "width": 1366,
+        "height": 900,
+        "dpr": 1
+      },
+      "state": {
+        "resources": {
+          "supply": 4000,
+          "alloy": 4000,
+          "intel": 400
+        },
+        "construction": null,
+        "production": {
+          "current": null,
+          "queue": []
+        },
+        "unitCount": 0,
+        "equipmentInventoryCount": 3
+      },
+      "dom": {
+        "tooltipHosts": 1,
+        "inspectorHosts": 1,
+        "tooltipVisible": false,
+        "inspectorVisible": false,
+        "commandTiles": 16,
+        "visibleNames": [
+          "步兵班",
+          "反装甲班",
+          "侦察车",
+          "主战坦克",
+          "维修车",
+          "反装甲瞄具",
+          "战术指挥链",
+          "机动维修架",
+          "反应装甲模块",
+          "精确火控组件"
+        ],
+        "permanentDescriptions": 0,
+        "bodyText": "单位生产\nCOMMAND PRODUCTION\nQUEUE\n0 / 5\n生产队列空闲\nUNITS\nEQUIPMENT\nEQUIPMENT\n点击入队\nⓘ\n反装甲瞄具\nⓘ\n战术指挥链\nⓘ\n机动维修架\nⓘ\n反应装甲模块\nⓘ\n精确火控组件\n点击生产 · 悬浮快览 · 长按详情"
+      },
+      "transientToastSuppressedForCapture": true
+    },
+    {
+      "file": "10-equipment-tooltip.png",
+      "phase": "equipment_hover_tooltip",
+      "path": "screenshots/stage10-P-A/10-equipment-tooltip.png",
+      "sha256": "ed52a27e733910459f7f1091ea87eb91e0f783ec968f3ff576a54adf5380ae70",
+      "bytes": 273261,
+      "dimensions": {
+        "width": 1366,
+        "height": 900,
+        "dpr": 1
+      },
+      "state": {
+        "resources": {
+          "supply": 4000,
+          "alloy": 4000,
+          "intel": 400
+        },
+        "construction": null,
+        "production": {
+          "current": null,
+          "queue": []
+        },
+        "unitCount": 0,
+        "equipmentInventoryCount": 3
+      },
+      "dom": {
+        "tooltipHosts": 1,
+        "inspectorHosts": 1,
+        "tooltipVisible": true,
+        "inspectorVisible": false,
+        "commandTiles": 16,
+        "visibleNames": [
+          "步兵班",
+          "反装甲班",
+          "侦察车",
+          "主战坦克",
+          "维修车",
+          "反装甲瞄具",
+          "战术指挥链",
+          "机动维修架",
+          "反应装甲模块",
+          "精确火控组件"
+        ],
+        "permanentDescriptions": 0,
+        "bodyText": "单位生产\nCOMMAND PRODUCTION\nQUEUE\n0 / 5\n生产队列空闲\nUNITS\nEQUIPMENT\nEQUIPMENT\n点击入队\nⓘ\n反装甲瞄具\nⓘ\n战术指挥链\nⓘ\n机动维修架\nⓘ\n反应装甲模块\nⓘ\n精确火控组件\n点击生产 · 悬浮快览 · 长按详情"
+      },
+      "transientToastSuppressedForCapture": true,
+      "tooltip": true
+    },
+    {
+      "file": "11-mobile-480-production.png",
+      "phase": "mobile_480_production",
+      "path": "screenshots/stage10-P-A/11-mobile-480-production.png",
+      "sha256": "bf618c141459f64acacefeb430aa5d2b3183dcf67004bb18a722ba8d3a1926ab",
+      "bytes": 88012,
+      "dimensions": {
+        "width": 480,
+        "height": 860,
+        "dpr": 1
+      },
+      "state": {
+        "resources": {
+          "supply": 4000,
+          "alloy": 4000,
+          "intel": 400
+        },
+        "construction": null,
+        "production": {
+          "current": null,
+          "queue": []
+        },
+        "unitCount": 0,
+        "equipmentInventoryCount": 3
+      },
+      "dom": {
+        "tooltipHosts": 1,
+        "inspectorHosts": 1,
+        "tooltipVisible": false,
+        "inspectorVisible": false,
+        "commandTiles": 16,
+        "visibleNames": [
+          "步兵班",
+          "反装甲班",
+          "侦察车",
+          "主战坦克",
+          "维修车",
+          "反装甲瞄具",
+          "战术指挥链",
+          "机动维修架",
+          "反应装甲模块",
+          "精确火控组件"
+        ],
+        "permanentDescriptions": 0,
+        "bodyText": "单位生产\nCOMMAND PRODUCTION\nQUEUE\n0 / 5\n生产队列空闲\nUNITS\nEQUIPMENT\nUNITS\n点击入队\n步兵班\n反装甲班\n侦察车\n主战坦克\n维修车\n点击生产 · 悬浮快览 · 长按详情"
+      },
+      "transientToastSuppressedForCapture": true,
+      "mobile": true
+    },
+    {
+      "file": "12-mobile-390-production.png",
+      "phase": "mobile_390_production",
+      "path": "screenshots/stage10-P-A/12-mobile-390-production.png",
+      "sha256": "0fc9712a6a5dffe6c11bc09635d9b18eccd389995fecb7e717b2bb356f537eb4",
+      "bytes": 80742,
+      "dimensions": {
+        "width": 390,
+        "height": 844,
+        "dpr": 1
+      },
+      "state": {
+        "resources": {
+          "supply": 4000,
+          "alloy": 4000,
+          "intel": 400
+        },
+        "construction": null,
+        "production": {
+          "current": null,
+          "queue": []
+        },
+        "unitCount": 0,
+        "equipmentInventoryCount": 3
+      },
+      "dom": {
+        "tooltipHosts": 1,
+        "inspectorHosts": 1,
+        "tooltipVisible": false,
+        "inspectorVisible": false,
+        "commandTiles": 16,
+        "visibleNames": [
+          "步兵班",
+          "反装甲班",
+          "侦察车",
+          "主战坦克",
+          "维修车",
+          "反装甲瞄具",
+          "战术指挥链",
+          "机动维修架",
+          "反应装甲模块",
+          "精确火控组件"
+        ],
+        "permanentDescriptions": 0,
+        "bodyText": "单位生产\nCOMMAND PRODUCTION\nQUEUE\n0 / 5\n生产队列空闲\nUNITS\nEQUIPMENT\nUNITS\n点击入队\n步兵班\n反装甲班\n侦察车\n主战坦克\n维修车\n点击生产 · 悬浮快览 · 长按详情"
+      },
+      "transientToastSuppressedForCapture": true,
+      "mobile": true
+    },
+    {
+      "file": "13-mobile-inspector.png",
+      "phase": "mobile_inspector",
+      "path": "screenshots/stage10-P-A/13-mobile-inspector.png",
+      "sha256": "13bdff8141a4d2bd20c58ffeecbd2033c25c75b0a0cdf702c773f76fc58b79f5",
+      "bytes": 53319,
+      "dimensions": {
+        "width": 390,
+        "height": 844,
+        "dpr": 1
+      },
+      "state": {
+        "resources": {
+          "supply": 4000,
+          "alloy": 4000,
+          "intel": 400
+        },
+        "construction": null,
+        "production": {
+          "current": null,
+          "queue": []
+        },
+        "unitCount": 0,
+        "equipmentInventoryCount": 3
+      },
+      "dom": {
+        "tooltipHosts": 1,
+        "inspectorHosts": 1,
+        "tooltipVisible": false,
+        "inspectorVisible": true,
+        "commandTiles": 16,
+        "visibleNames": [
+          "步兵班",
+          "反装甲班",
+          "侦察车",
+          "主战坦克",
+          "维修车",
+          "反装甲瞄具",
+          "战术指挥链",
+          "机动维修架",
+          "反应装甲模块",
+          "精确火控组件"
+        ],
+        "permanentDescriptions": 0,
+        "bodyText": "单位生产\nCOMMAND PRODUCTION\nQUEUE\n0 / 5\n生产队列空闲\nUNITS\nEQUIPMENT\nUNITS\n点击入队\n步兵班\n反装甲班\n侦察车\n主战坦克\n维修车\n点击生产 · 悬浮快览 · 长按详情"
+      },
+      "transientToastSuppressedForCapture": true,
+      "mobile": true,
+      "longPress": true
+    }
+  ],
+  "uniqueScreenshotCount": 13,
+  "pageErrors": [],
+  "consoleErrors": [],
+  "actionProvenance": [
+    {
+      "kind": "mouse_click",
+      "selector": "button[data-tab=\"construction\"]",
+      "label": "open construction",
+      "source": "production_dom",
+      "coordinates": {
+        "x": 1102.7734375,
+        "y": 76
+      }
+    },
+    {
+      "kind": "mouse_hover",
+      "selector": "[data-command-id=\"construction:armor_factory\"]",
+      "label": "locked construction",
+      "source": "production_dom",
+      "coordinates": {
+        "x": 1278,
+        "y": 471
+      }
+    },
+    {
+      "kind": "mouse_click",
+      "selector": "[data-command-id=\"construction:supply_depot\"]",
+      "label": "build supply depot",
+      "source": "production_dom",
+      "coordinates": {
+        "x": 1115,
+        "y": 337
+      }
+    },
+    {
+      "kind": "mouse_click",
+      "selector": "button[data-tab=\"production\"]",
+      "label": "open production",
+      "source": "production_dom",
+      "coordinates": {
+        "x": 1149.6328125,
+        "y": 76
+      }
+    },
+    {
+      "kind": "mouse_click",
+      "selector": "[data-category=\"units\"]",
+      "label": "select unit category",
+      "source": "production_dom",
+      "coordinates": {
+        "x": 1117.75,
+        "y": 274
+      }
+    },
+    {
+      "kind": "mouse_hover",
+      "selector": "[data-command-id=\"unit:mbt\"]",
+      "label": "unit production",
+      "source": "production_dom",
+      "coordinates": {
+        "x": 1278,
+        "y": 520
+      }
+    },
+    {
+      "kind": "mouse_click",
+      "selector": "button[data-tab=\"production\"]",
+      "label": "open production",
+      "source": "production_dom",
+      "coordinates": {
+        "x": 1149.6328125,
+        "y": 76
+      }
+    },
+    {
+      "kind": "mouse_click",
+      "selector": "[data-category=\"units\"]",
+      "label": "select unit category",
+      "source": "production_dom",
+      "coordinates": {
+        "x": 1117.75,
+        "y": 274
+      }
+    },
+    {
+      "kind": "mouse_click",
+      "selector": "[data-command-id=\"unit:mbt\"]",
+      "label": "invalid locked unit attempt",
+      "source": "production_dom",
+      "coordinates": {
+        "x": 1278,
+        "y": 520
+      }
+    },
+    {
+      "kind": "mouse_click",
+      "selector": "button[data-tab=\"production\"]",
+      "label": "open production",
+      "source": "production_dom",
+      "coordinates": {
+        "x": 1149.6328125,
+        "y": 76
+      }
+    },
+    {
+      "kind": "mouse_click",
+      "selector": "[data-category=\"units\"]",
+      "label": "select unit category",
+      "source": "production_dom",
+      "coordinates": {
+        "x": 1117.75,
+        "y": 274
+      }
+    },
+    {
+      "kind": "mouse_click",
+      "selector": "button[data-tab=\"production\"]",
+      "label": "open production",
+      "source": "production_dom",
+      "coordinates": {
+        "x": 1149.6328125,
+        "y": 76
+      }
+    },
+    {
+      "kind": "mouse_click",
+      "selector": "[data-category=\"units\"]",
+      "label": "select unit category",
+      "source": "production_dom",
+      "coordinates": {
+        "x": 1117.75,
+        "y": 274
+      }
+    },
+    {
+      "kind": "mouse_click",
+      "selector": "[data-command-id=\"unit:infantry\"]",
+      "label": "queue infantry 1",
+      "source": "production_dom",
+      "coordinates": {
+        "x": 1115,
+        "y": 386
+      }
+    },
+    {
+      "kind": "mouse_click",
+      "selector": "[data-command-id=\"unit:infantry\"]",
+      "label": "queue infantry 2",
+      "source": "production_dom",
+      "coordinates": {
+        "x": 1113,
+        "y": 447
+      }
+    },
+    {
+      "kind": "mouse_click",
+      "selector": "[data-command-id=\"unit:mbt\"]",
+      "label": "queue mbt 3",
+      "source": "production_dom",
+      "coordinates": {
+        "x": 1272,
+        "y": 581
+      }
+    },
+    {
+      "kind": "mouse_click",
+      "selector": ".command-queue [data-command-id^=\"queue:\"]",
+      "label": "open active queue inspector",
+      "source": "production_dom",
+      "coordinates": {
+        "x": 1086.5,
+        "y": 248.5
+      }
+    },
+    {
+      "kind": "mouse_click",
+      "selector": "[data-inspector-action=\"cancel-current-production\"]",
+      "label": "cancel active through inspector",
+      "source": "production_dom",
+      "coordinates": {
+        "x": 1158,
+        "y": 411.1875
+      }
+    },
+    {
+      "kind": "mouse_click",
+      "selector": "button[data-tab=\"production\"]",
+      "label": "open production",
+      "source": "production_dom",
+      "coordinates": {
+        "x": 1149.6328125,
+        "y": 76
+      }
+    },
+    {
+      "kind": "mouse_click",
+      "selector": "[data-category=\"units\"]",
+      "label": "select unit category",
+      "source": "production_dom",
+      "coordinates": {
+        "x": 1117.75,
+        "y": 274
+      }
+    },
+    {
+      "kind": "mouse_click",
+      "selector": "[data-category=\"equipment\"]",
+      "label": "open equipment category",
+      "source": "production_dom",
+      "coordinates": {
+        "x": 1275.25,
+        "y": 274
+      }
+    },
+    {
+      "kind": "mouse_hover",
+      "selector": "[data-command-id=\"equipment:anti_armor_sights\"]",
+      "label": "equipment production",
+      "source": "production_dom",
+      "coordinates": {
+        "x": 1115,
+        "y": 386
+      }
+    },
+    {
+      "kind": "mouse_click",
+      "selector": "[data-command-id=\"equipment:anti_armor_sights\"]",
+      "label": "queue equipment",
+      "source": "production_dom",
+      "coordinates": {
+        "x": 1115,
+        "y": 386
+      }
+    },
+    {
+      "kind": "mouse_click",
+      "selector": "button[data-tab=\"production\"]",
+      "label": "open production",
+      "source": "production_dom",
+      "coordinates": {
+        "x": 1149.6328125,
+        "y": 76
+      }
+    },
+    {
+      "kind": "mouse_click",
+      "selector": "[data-category=\"units\"]",
+      "label": "select unit category",
+      "source": "production_dom",
+      "coordinates": {
+        "x": 1117.75,
+        "y": 274
+      }
+    },
+    {
+      "kind": "keyboard_enter",
+      "selector": "[data-command-id=\"unit:infantry\"]",
+      "label": "keyboard unit production",
+      "source": "production_dom"
+    },
+    {
+      "kind": "mouse_click",
+      "selector": "button[data-tab=\"production\"]",
+      "label": "open production",
+      "source": "production_dom",
+      "coordinates": {
+        "x": 134.8828125,
+        "y": 73
+      }
+    },
+    {
+      "kind": "mouse_click",
+      "selector": "[data-category=\"units\"]",
+      "label": "select unit category",
+      "source": "production_dom",
+      "coordinates": {
+        "x": 126,
+        "y": 240
+      }
+    },
+    {
+      "kind": "touch_tap",
+      "selector": "[data-command-id=\"unit:infantry\"]",
+      "label": "mobile tap production",
+      "source": "production_dom",
+      "durationMs": 80
+    },
+    {
+      "kind": "mouse_click",
+      "selector": "button[data-tab=\"production\"]",
+      "label": "open production",
+      "source": "production_dom",
+      "coordinates": {
+        "x": 131,
+        "y": 73
+      }
+    },
+    {
+      "kind": "mouse_click",
+      "selector": "[data-category=\"units\"]",
+      "label": "select unit category",
+      "source": "production_dom",
+      "coordinates": {
+        "x": 103.5,
+        "y": 240
+      }
+    },
+    {
+      "kind": "pointer_long_press",
+      "selector": "[data-command-id=\"unit:mbt\"]",
+      "label": "mobile MBT inspector",
+      "source": "production_dom",
+      "thresholdMs": 450,
+      "holdMs": 700,
+      "simulation": "browser PointerEvent sequence; no handler invocation"
+    },
+    {
+      "kind": "mouse_click",
+      "selector": ".command-inspector-close",
+      "label": "close mobile inspector",
+      "source": "production_dom",
+      "coordinates": {
+        "x": 356,
+        "y": 273.3125
+      }
+    },
+    {
+      "kind": "pointer_move_cancel",
+      "selector": "[data-command-id=\"unit:mbt\"]",
+      "label": "movement cancellation",
+      "source": "production_dom",
+      "thresholdMs": 450,
+      "holdMs": 700,
+      "simulation": "browser PointerEvent sequence; no handler invocation"
+    },
+    {
+      "kind": "touch_cancel",
+      "selector": "[data-command-id=\"unit:mbt\"]",
+      "label": "pointer cancellation",
+      "source": "production_dom",
+      "durationMs": 520
+    },
+    {
+      "kind": "mouse_click",
+      "selector": "button[data-tab=\"production\"]",
+      "label": "open production",
+      "source": "production_dom",
+      "coordinates": {
+        "x": 844.65625,
+        "y": 76
+      }
+    },
+    {
+      "kind": "mouse_click",
+      "selector": "[data-category=\"units\"]",
+      "label": "select unit category",
+      "source": "production_dom",
+      "coordinates": {
+        "x": 796.25,
+        "y": 274
+      }
+    }
+  ],
+  "assertions": [
+    {
+      "name": "production page booted",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "unique screenshot 01-construction-command-grid.png",
+      "passed": true,
+      "details": "78b6923ec2518c950a5094c844bd5a23f9c9086a8f7de2f45fa3f5183625a251"
+    },
+    {
+      "name": "01-construction-command-grid.png one tooltip host",
+      "passed": true,
+      "details": {
+        "tooltipHosts": 1,
+        "inspectorHosts": 1,
+        "tooltipVisible": false,
+        "inspectorVisible": false,
+        "commandTiles": 16,
+        "visibleNames": [
+          "补给仓库",
+          "合金加工厂",
+          "兵营",
+          "装甲工厂",
+          "雷达站",
+          "技术实验室"
+        ],
+        "permanentDescriptions": 0,
+        "bodyText": "建设项目\nBUILD\nCURRENT\n施工队列\n施工队列空闲\nBUILD\n点击建造\nⓘ\n补给仓库\nⓘ\n合金加工厂\nⓘ\n兵营\nLOCK\nⓘ\n装甲工厂\nⓘ\n雷达站\nLOCK\nⓘ\n技术实验室\n点击执行 · 悬浮快览 · 长按详情"
+      }
+    },
+    {
+      "name": "01-construction-command-grid.png one inspector host",
+      "passed": true,
+      "details": {
+        "tooltipHosts": 1,
+        "inspectorHosts": 1,
+        "tooltipVisible": false,
+        "inspectorVisible": false,
+        "commandTiles": 16,
+        "visibleNames": [
+          "补给仓库",
+          "合金加工厂",
+          "兵营",
+          "装甲工厂",
+          "雷达站",
+          "技术实验室"
+        ],
+        "permanentDescriptions": 0,
+        "bodyText": "建设项目\nBUILD\nCURRENT\n施工队列\n施工队列空闲\nBUILD\n点击建造\nⓘ\n补给仓库\nⓘ\n合金加工厂\nⓘ\n兵营\nLOCK\nⓘ\n装甲工厂\nⓘ\n雷达站\nLOCK\nⓘ\n技术实验室\n点击执行 · 悬浮快览 · 长按详情"
+      }
+    },
+    {
+      "name": "unique screenshot 02-construction-hover-tooltip.png",
+      "passed": true,
+      "details": "9797a11c5cb89dee61b95c657f17642c3f64427d6fbb71d27e8d8f1e6a708d6c"
+    },
+    {
+      "name": "02-construction-hover-tooltip.png one tooltip host",
+      "passed": true,
+      "details": {
+        "tooltipHosts": 1,
+        "inspectorHosts": 1,
+        "tooltipVisible": true,
+        "inspectorVisible": false,
+        "commandTiles": 16,
+        "visibleNames": [
+          "补给仓库",
+          "合金加工厂",
+          "兵营",
+          "装甲工厂",
+          "雷达站",
+          "技术实验室"
+        ],
+        "permanentDescriptions": 0,
+        "bodyText": "建设项目\nBUILD\nCURRENT\n施工队列\n施工队列空闲\nBUILD\n点击建造\nⓘ\n补给仓库\nⓘ\n合金加工厂\nⓘ\n兵营\nLOCK\nⓘ\n装甲工厂\nⓘ\n雷达站\nLOCK\nⓘ\n技术实验室\n点击执行 · 悬浮快览 · 长按详情"
+      }
+    },
+    {
+      "name": "02-construction-hover-tooltip.png one inspector host",
+      "passed": true,
+      "details": {
+        "tooltipHosts": 1,
+        "inspectorHosts": 1,
+        "tooltipVisible": true,
+        "inspectorVisible": false,
+        "commandTiles": 16,
+        "visibleNames": [
+          "补给仓库",
+          "合金加工厂",
+          "兵营",
+          "装甲工厂",
+          "雷达站",
+          "技术实验室"
+        ],
+        "permanentDescriptions": 0,
+        "bodyText": "建设项目\nBUILD\nCURRENT\n施工队列\n施工队列空闲\nBUILD\n点击建造\nⓘ\n补给仓库\nⓘ\n合金加工厂\nⓘ\n兵营\nLOCK\nⓘ\n装甲工厂\nⓘ\n雷达站\nLOCK\nⓘ\n技术实验室\n点击执行 · 悬浮快览 · 长按详情"
+      }
+    },
+    {
+      "name": "construction starts through tile",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "construction exact alloy deduction",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "unique screenshot 03-construction-active-progress.png",
+      "passed": true,
+      "details": "1d95cf219b7657d7e045cb287a77bef5604cc8baeba6e40bd0fdf02733b40427"
+    },
+    {
+      "name": "03-construction-active-progress.png one tooltip host",
+      "passed": true,
+      "details": {
+        "tooltipHosts": 1,
+        "inspectorHosts": 1,
+        "tooltipVisible": false,
+        "inspectorVisible": false,
+        "commandTiles": 17,
+        "visibleNames": [
+          "补给仓库",
+          "补给仓库",
+          "合金加工厂",
+          "兵营",
+          "装甲工厂",
+          "雷达站",
+          "技术实验室"
+        ],
+        "permanentDescriptions": 0,
+        "bodyText": "建设项目\nBUILD\nCURRENT\n施工队列\n45%\n45%\nⓘ\n补给仓库\nBUILD\n点击建造\n45%\n45%\nⓘ\n补给仓库\nⓘ\n合金加工厂\nⓘ\n兵营\nⓘ\n装甲工厂\nⓘ\n雷达站\nⓘ\n技术实验室\n点击执行 · 悬浮快览 · 长按详情"
+      }
+    },
+    {
+      "name": "03-construction-active-progress.png one inspector host",
+      "passed": true,
+      "details": {
+        "tooltipHosts": 1,
+        "inspectorHosts": 1,
+        "tooltipVisible": false,
+        "inspectorVisible": false,
+        "commandTiles": 17,
+        "visibleNames": [
+          "补给仓库",
+          "补给仓库",
+          "合金加工厂",
+          "兵营",
+          "装甲工厂",
+          "雷达站",
+          "技术实验室"
+        ],
+        "permanentDescriptions": 0,
+        "bodyText": "建设项目\nBUILD\nCURRENT\n施工队列\n45%\n45%\nⓘ\n补给仓库\nBUILD\n点击建造\n45%\n45%\nⓘ\n补给仓库\nⓘ\n合金加工厂\nⓘ\n兵营\nⓘ\n装甲工厂\nⓘ\n雷达站\nⓘ\n技术实验室\n点击执行 · 悬浮快览 · 长按详情"
+      }
+    },
+    {
+      "name": "unique screenshot 04-unit-production-command-grid.png",
+      "passed": true,
+      "details": "384cf87e38b213ee9706af68bd3f64569fad016fdc8ff091405563903eab08da"
+    },
+    {
+      "name": "04-unit-production-command-grid.png one tooltip host",
+      "passed": true,
+      "details": {
+        "tooltipHosts": 1,
+        "inspectorHosts": 1,
+        "tooltipVisible": false,
+        "inspectorVisible": false,
+        "commandTiles": 16,
+        "visibleNames": [
+          "步兵班",
+          "反装甲班",
+          "侦察车",
+          "主战坦克",
+          "维修车",
+          "反装甲瞄具",
+          "战术指挥链",
+          "机动维修架",
+          "反应装甲模块",
+          "精确火控组件"
+        ],
+        "permanentDescriptions": 0,
+        "bodyText": "单位生产\nCOMMAND PRODUCTION\nQUEUE\n0 / 5\n生产队列空闲\nUNITS\nEQUIPMENT\nUNITS\n点击入队\nⓘ\n步兵班\nⓘ\n反装甲班\nⓘ\n侦察车\nⓘ\n主战坦克\nⓘ\n维修车\n点击生产 · 悬浮快览 · 长按详情"
+      }
+    },
+    {
+      "name": "04-unit-production-command-grid.png one inspector host",
+      "passed": true,
+      "details": {
+        "tooltipHosts": 1,
+        "inspectorHosts": 1,
+        "tooltipVisible": false,
+        "inspectorVisible": false,
+        "commandTiles": 16,
+        "visibleNames": [
+          "步兵班",
+          "反装甲班",
+          "侦察车",
+          "主战坦克",
+          "维修车",
+          "反装甲瞄具",
+          "战术指挥链",
+          "机动维修架",
+          "反应装甲模块",
+          "精确火控组件"
+        ],
+        "permanentDescriptions": 0,
+        "bodyText": "单位生产\nCOMMAND PRODUCTION\nQUEUE\n0 / 5\n生产队列空闲\nUNITS\nEQUIPMENT\nUNITS\n点击入队\nⓘ\n步兵班\nⓘ\n反装甲班\nⓘ\n侦察车\nⓘ\n主战坦克\nⓘ\n维修车\n点击生产 · 悬浮快览 · 长按详情"
+      }
+    },
+    {
+      "name": "unique screenshot 05-unit-hover-tooltip.png",
+      "passed": true,
+      "details": "4e13ff0c9b5e06b046b210a2ad8f9fe8e7f57902830b3c3122a51ecada1c3d1a"
+    },
+    {
+      "name": "05-unit-hover-tooltip.png one tooltip host",
+      "passed": true,
+      "details": {
+        "tooltipHosts": 1,
+        "inspectorHosts": 1,
+        "tooltipVisible": true,
+        "inspectorVisible": false,
+        "commandTiles": 16,
+        "visibleNames": [
+          "步兵班",
+          "反装甲班",
+          "侦察车",
+          "主战坦克",
+          "维修车",
+          "反装甲瞄具",
+          "战术指挥链",
+          "机动维修架",
+          "反应装甲模块",
+          "精确火控组件"
+        ],
+        "permanentDescriptions": 0,
+        "bodyText": "单位生产\nCOMMAND PRODUCTION\nQUEUE\n0 / 5\n生产队列空闲\nUNITS\nEQUIPMENT\nUNITS\n点击入队\nⓘ\n步兵班\nⓘ\n反装甲班\nⓘ\n侦察车\nⓘ\n主战坦克\nⓘ\n维修车\n点击生产 · 悬浮快览 · 长按详情"
+      }
+    },
+    {
+      "name": "05-unit-hover-tooltip.png one inspector host",
+      "passed": true,
+      "details": {
+        "tooltipHosts": 1,
+        "inspectorHosts": 1,
+        "tooltipVisible": true,
+        "inspectorVisible": false,
+        "commandTiles": 16,
+        "visibleNames": [
+          "步兵班",
+          "反装甲班",
+          "侦察车",
+          "主战坦克",
+          "维修车",
+          "反装甲瞄具",
+          "战术指挥链",
+          "机动维修架",
+          "反应装甲模块",
+          "精确火控组件"
+        ],
+        "permanentDescriptions": 0,
+        "bodyText": "单位生产\nCOMMAND PRODUCTION\nQUEUE\n0 / 5\n生产队列空闲\nUNITS\nEQUIPMENT\nUNITS\n点击入队\nⓘ\n步兵班\nⓘ\n反装甲班\nⓘ\n侦察车\nⓘ\n主战坦克\nⓘ\n维修车\n点击生产 · 悬浮快览 · 长按详情"
+      }
+    },
+    {
+      "name": "unique screenshot 06-unit-locked-state.png",
+      "passed": true,
+      "details": "d032819d7589922842404e0631b42bb3280596708a05d4052662587fefc3c603"
+    },
+    {
+      "name": "06-unit-locked-state.png one tooltip host",
+      "passed": true,
+      "details": {
+        "tooltipHosts": 1,
+        "inspectorHosts": 1,
+        "tooltipVisible": false,
+        "inspectorVisible": false,
+        "commandTiles": 16,
+        "visibleNames": [
+          "步兵班",
+          "反装甲班",
+          "侦察车",
+          "主战坦克",
+          "维修车",
+          "反装甲瞄具",
+          "战术指挥链",
+          "机动维修架",
+          "反应装甲模块",
+          "精确火控组件"
+        ],
+        "permanentDescriptions": 0,
+        "bodyText": "单位生产\nCOMMAND PRODUCTION\nQUEUE\n0 / 5\n生产队列空闲\nUNITS\nEQUIPMENT\nUNITS\n点击入队\nLOCK\nⓘ\n步兵班\nLOCK\nⓘ\n反装甲班\nLOCK\nⓘ\n侦察车\nLOCK\nⓘ\n主战坦克\nLOCK\nⓘ\n维修车\n点击生产 · 悬浮快览 · 长按详情"
+      }
+    },
+    {
+      "name": "06-unit-locked-state.png one inspector host",
+      "passed": true,
+      "details": {
+        "tooltipHosts": 1,
+        "inspectorHosts": 1,
+        "tooltipVisible": false,
+        "inspectorVisible": false,
+        "commandTiles": 16,
+        "visibleNames": [
+          "步兵班",
+          "反装甲班",
+          "侦察车",
+          "主战坦克",
+          "维修车",
+          "反装甲瞄具",
+          "战术指挥链",
+          "机动维修架",
+          "反应装甲模块",
+          "精确火控组件"
+        ],
+        "permanentDescriptions": 0,
+        "bodyText": "单位生产\nCOMMAND PRODUCTION\nQUEUE\n0 / 5\n生产队列空闲\nUNITS\nEQUIPMENT\nUNITS\n点击入队\nLOCK\nⓘ\n步兵班\nLOCK\nⓘ\n反装甲班\nLOCK\nⓘ\n侦察车\nLOCK\nⓘ\n主战坦克\nLOCK\nⓘ\n维修车\n点击生产 · 悬浮快览 · 长按详情"
+      }
+    },
+    {
+      "name": "invalid locked click causes zero canonical mutation",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "unique screenshot 07-unit-resource-insufficient.png",
+      "passed": true,
+      "details": "218347b135a9051933fb0649b562893bfd1d0b36a2fbc0a5e2093c890ad1a29a"
+    },
+    {
+      "name": "07-unit-resource-insufficient.png one tooltip host",
+      "passed": true,
+      "details": {
+        "tooltipHosts": 1,
+        "inspectorHosts": 1,
+        "tooltipVisible": false,
+        "inspectorVisible": false,
+        "commandTiles": 16,
+        "visibleNames": [
+          "步兵班",
+          "反装甲班",
+          "侦察车",
+          "主战坦克",
+          "维修车",
+          "反装甲瞄具",
+          "战术指挥链",
+          "机动维修架",
+          "反应装甲模块",
+          "精确火控组件"
+        ],
+        "permanentDescriptions": 0,
+        "bodyText": "单位生产\nCOMMAND PRODUCTION\nQUEUE\n0 / 5\n生产队列空闲\nUNITS\nEQUIPMENT\nUNITS\n点击入队\n!\nⓘ\n步兵班\n!\nⓘ\n反装甲班\n!\nⓘ\n侦察车\n!\nⓘ\n主战坦克\n!\nⓘ\n维修车\n点击生产 · 悬浮快览 · 长按详情"
+      }
+    },
+    {
+      "name": "07-unit-resource-insufficient.png one inspector host",
+      "passed": true,
+      "details": {
+        "tooltipHosts": 1,
+        "inspectorHosts": 1,
+        "tooltipVisible": false,
+        "inspectorVisible": false,
+        "commandTiles": 16,
+        "visibleNames": [
+          "步兵班",
+          "反装甲班",
+          "侦察车",
+          "主战坦克",
+          "维修车",
+          "反装甲瞄具",
+          "战术指挥链",
+          "机动维修架",
+          "反应装甲模块",
+          "精确火控组件"
+        ],
+        "permanentDescriptions": 0,
+        "bodyText": "单位生产\nCOMMAND PRODUCTION\nQUEUE\n0 / 5\n生产队列空闲\nUNITS\nEQUIPMENT\nUNITS\n点击入队\n!\nⓘ\n步兵班\n!\nⓘ\n反装甲班\n!\nⓘ\n侦察车\n!\nⓘ\n主战坦克\n!\nⓘ\n维修车\n点击生产 · 悬浮快览 · 长按详情"
+      }
+    },
+    {
+      "name": "rapid clicks queue exactly once per click",
+      "passed": true,
+      "details": {
+        "resources": {
+          "supply": 3580,
+          "alloy": 3700,
+          "intel": 400
+        },
+        "construction": null,
+        "production": {
+          "current": {
+            "kind": "unit",
+            "type": "infantry",
+            "equipmentId": null
+          },
+          "queue": [
+            {
+              "kind": "unit",
+              "type": "infantry",
+              "equipmentId": null
+            },
+            {
+              "kind": "unit",
+              "type": "mbt",
+              "equipmentId": null
+            }
+          ]
+        },
+        "unitCount": 0,
+        "equipmentInventoryCount": 3
+      }
+    },
+    {
+      "name": "rapid click resource deduction exactly once",
+      "passed": true,
+      "details": {
+        "before": {
+          "supply": 4000,
+          "alloy": 4000,
+          "intel": 400
+        },
+        "after": {
+          "supply": 3580,
+          "alloy": 3700,
+          "intel": 400
+        }
+      }
+    },
+    {
+      "name": "unique screenshot 08-production-queue.png",
+      "passed": true,
+      "details": "f10c5cc3940a18ef04bf5cd4f8576f5ac76e3e29ab10cf24e8e02e7c6c3e1f6e"
+    },
+    {
+      "name": "08-production-queue.png one tooltip host",
+      "passed": true,
+      "details": {
+        "tooltipHosts": 1,
+        "inspectorHosts": 1,
+        "tooltipVisible": false,
+        "inspectorVisible": false,
+        "commandTiles": 19,
+        "visibleNames": [
+          "步兵班",
+          "步兵班",
+          "主战坦克",
+          "步兵班",
+          "反装甲班",
+          "侦察车",
+          "主战坦克",
+          "维修车",
+          "反装甲瞄具",
+          "战术指挥链",
+          "机动维修架",
+          "反应装甲模块",
+          "精确火控组件"
+        ],
+        "permanentDescriptions": 0,
+        "bodyText": "单位生产\nCOMMAND PRODUCTION\nQUEUE\n3 / 5\n40%\n40%\nⓘ\n步兵班\n队列\nⓘ\n步兵班\n队列\nⓘ\n主战坦克\nUNITS\nEQUIPMENT\nUNITS\n点击入队\n队列\nⓘ\n步兵班\nⓘ\n反装甲班\nⓘ\n侦察车\n队列\nⓘ\n主战坦克\nⓘ\n维修车\n点击生产 · 悬浮快览 · 长按详情"
+      }
+    },
+    {
+      "name": "08-production-queue.png one inspector host",
+      "passed": true,
+      "details": {
+        "tooltipHosts": 1,
+        "inspectorHosts": 1,
+        "tooltipVisible": false,
+        "inspectorVisible": false,
+        "commandTiles": 19,
+        "visibleNames": [
+          "步兵班",
+          "步兵班",
+          "主战坦克",
+          "步兵班",
+          "反装甲班",
+          "侦察车",
+          "主战坦克",
+          "维修车",
+          "反装甲瞄具",
+          "战术指挥链",
+          "机动维修架",
+          "反应装甲模块",
+          "精确火控组件"
+        ],
+        "permanentDescriptions": 0,
+        "bodyText": "单位生产\nCOMMAND PRODUCTION\nQUEUE\n3 / 5\n40%\n40%\nⓘ\n步兵班\n队列\nⓘ\n步兵班\n队列\nⓘ\n主战坦克\nUNITS\nEQUIPMENT\nUNITS\n点击入队\n队列\nⓘ\n步兵班\nⓘ\n反装甲班\nⓘ\n侦察车\n队列\nⓘ\n主战坦克\nⓘ\n维修车\n点击生产 · 悬浮快览 · 长按详情"
+      }
+    },
+    {
+      "name": "unique screenshot 09-equipment-command-grid.png",
+      "passed": true,
+      "details": "813499feb2c817e0256590d1c1f3da49b55255b95c70d704c797d26fdf367197"
+    },
+    {
+      "name": "09-equipment-command-grid.png one tooltip host",
+      "passed": true,
+      "details": {
+        "tooltipHosts": 1,
+        "inspectorHosts": 1,
+        "tooltipVisible": false,
+        "inspectorVisible": false,
+        "commandTiles": 16,
+        "visibleNames": [
+          "步兵班",
+          "反装甲班",
+          "侦察车",
+          "主战坦克",
+          "维修车",
+          "反装甲瞄具",
+          "战术指挥链",
+          "机动维修架",
+          "反应装甲模块",
+          "精确火控组件"
+        ],
+        "permanentDescriptions": 0,
+        "bodyText": "单位生产\nCOMMAND PRODUCTION\nQUEUE\n0 / 5\n生产队列空闲\nUNITS\nEQUIPMENT\nEQUIPMENT\n点击入队\nⓘ\n反装甲瞄具\nⓘ\n战术指挥链\nⓘ\n机动维修架\nⓘ\n反应装甲模块\nⓘ\n精确火控组件\n点击生产 · 悬浮快览 · 长按详情"
+      }
+    },
+    {
+      "name": "09-equipment-command-grid.png one inspector host",
+      "passed": true,
+      "details": {
+        "tooltipHosts": 1,
+        "inspectorHosts": 1,
+        "tooltipVisible": false,
+        "inspectorVisible": false,
+        "commandTiles": 16,
+        "visibleNames": [
+          "步兵班",
+          "反装甲班",
+          "侦察车",
+          "主战坦克",
+          "维修车",
+          "反装甲瞄具",
+          "战术指挥链",
+          "机动维修架",
+          "反应装甲模块",
+          "精确火控组件"
+        ],
+        "permanentDescriptions": 0,
+        "bodyText": "单位生产\nCOMMAND PRODUCTION\nQUEUE\n0 / 5\n生产队列空闲\nUNITS\nEQUIPMENT\nEQUIPMENT\n点击入队\nⓘ\n反装甲瞄具\nⓘ\n战术指挥链\nⓘ\n机动维修架\nⓘ\n反应装甲模块\nⓘ\n精确火控组件\n点击生产 · 悬浮快览 · 长按详情"
+      }
+    },
+    {
+      "name": "unique screenshot 10-equipment-tooltip.png",
+      "passed": true,
+      "details": "ed52a27e733910459f7f1091ea87eb91e0f783ec968f3ff576a54adf5380ae70"
+    },
+    {
+      "name": "10-equipment-tooltip.png one tooltip host",
+      "passed": true,
+      "details": {
+        "tooltipHosts": 1,
+        "inspectorHosts": 1,
+        "tooltipVisible": true,
+        "inspectorVisible": false,
+        "commandTiles": 16,
+        "visibleNames": [
+          "步兵班",
+          "反装甲班",
+          "侦察车",
+          "主战坦克",
+          "维修车",
+          "反装甲瞄具",
+          "战术指挥链",
+          "机动维修架",
+          "反应装甲模块",
+          "精确火控组件"
+        ],
+        "permanentDescriptions": 0,
+        "bodyText": "单位生产\nCOMMAND PRODUCTION\nQUEUE\n0 / 5\n生产队列空闲\nUNITS\nEQUIPMENT\nEQUIPMENT\n点击入队\nⓘ\n反装甲瞄具\nⓘ\n战术指挥链\nⓘ\n机动维修架\nⓘ\n反应装甲模块\nⓘ\n精确火控组件\n点击生产 · 悬浮快览 · 长按详情"
+      }
+    },
+    {
+      "name": "10-equipment-tooltip.png one inspector host",
+      "passed": true,
+      "details": {
+        "tooltipHosts": 1,
+        "inspectorHosts": 1,
+        "tooltipVisible": true,
+        "inspectorVisible": false,
+        "commandTiles": 16,
+        "visibleNames": [
+          "步兵班",
+          "反装甲班",
+          "侦察车",
+          "主战坦克",
+          "维修车",
+          "反装甲瞄具",
+          "战术指挥链",
+          "机动维修架",
+          "反应装甲模块",
+          "精确火控组件"
+        ],
+        "permanentDescriptions": 0,
+        "bodyText": "单位生产\nCOMMAND PRODUCTION\nQUEUE\n0 / 5\n生产队列空闲\nUNITS\nEQUIPMENT\nEQUIPMENT\n点击入队\nⓘ\n反装甲瞄具\nⓘ\n战术指挥链\nⓘ\n机动维修架\nⓘ\n反应装甲模块\nⓘ\n精确火控组件\n点击生产 · 悬浮快览 · 长按详情"
+      }
+    },
+    {
+      "name": "equipment tile queues equipment",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "equipment exact single deduction",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "keyboard Enter performs exactly one primary action",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "keyboard single deduction",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "unique screenshot 11-mobile-480-production.png",
+      "passed": true,
+      "details": "bf618c141459f64acacefeb430aa5d2b3183dcf67004bb18a722ba8d3a1926ab"
+    },
+    {
+      "name": "11-mobile-480-production.png one tooltip host",
+      "passed": true,
+      "details": {
+        "tooltipHosts": 1,
+        "inspectorHosts": 1,
+        "tooltipVisible": false,
+        "inspectorVisible": false,
+        "commandTiles": 16,
+        "visibleNames": [
+          "步兵班",
+          "反装甲班",
+          "侦察车",
+          "主战坦克",
+          "维修车",
+          "反装甲瞄具",
+          "战术指挥链",
+          "机动维修架",
+          "反应装甲模块",
+          "精确火控组件"
+        ],
+        "permanentDescriptions": 0,
+        "bodyText": "单位生产\nCOMMAND PRODUCTION\nQUEUE\n0 / 5\n生产队列空闲\nUNITS\nEQUIPMENT\nUNITS\n点击入队\n步兵班\n反装甲班\n侦察车\n主战坦克\n维修车\n点击生产 · 悬浮快览 · 长按详情"
+      }
+    },
+    {
+      "name": "11-mobile-480-production.png one inspector host",
+      "passed": true,
+      "details": {
+        "tooltipHosts": 1,
+        "inspectorHosts": 1,
+        "tooltipVisible": false,
+        "inspectorVisible": false,
+        "commandTiles": 16,
+        "visibleNames": [
+          "步兵班",
+          "反装甲班",
+          "侦察车",
+          "主战坦克",
+          "维修车",
+          "反装甲瞄具",
+          "战术指挥链",
+          "机动维修架",
+          "反应装甲模块",
+          "精确火控组件"
+        ],
+        "permanentDescriptions": 0,
+        "bodyText": "单位生产\nCOMMAND PRODUCTION\nQUEUE\n0 / 5\n生产队列空闲\nUNITS\nEQUIPMENT\nUNITS\n点击入队\n步兵班\n反装甲班\n侦察车\n主战坦克\n维修车\n点击生产 · 悬浮快览 · 长按详情"
+      }
+    },
+    {
+      "name": "unique screenshot 12-mobile-390-production.png",
+      "passed": true,
+      "details": "0fc9712a6a5dffe6c11bc09635d9b18eccd389995fecb7e717b2bb356f537eb4"
+    },
+    {
+      "name": "12-mobile-390-production.png one tooltip host",
+      "passed": true,
+      "details": {
+        "tooltipHosts": 1,
+        "inspectorHosts": 1,
+        "tooltipVisible": false,
+        "inspectorVisible": false,
+        "commandTiles": 16,
+        "visibleNames": [
+          "步兵班",
+          "反装甲班",
+          "侦察车",
+          "主战坦克",
+          "维修车",
+          "反装甲瞄具",
+          "战术指挥链",
+          "机动维修架",
+          "反应装甲模块",
+          "精确火控组件"
+        ],
+        "permanentDescriptions": 0,
+        "bodyText": "单位生产\nCOMMAND PRODUCTION\nQUEUE\n0 / 5\n生产队列空闲\nUNITS\nEQUIPMENT\nUNITS\n点击入队\n步兵班\n反装甲班\n侦察车\n主战坦克\n维修车\n点击生产 · 悬浮快览 · 长按详情"
+      }
+    },
+    {
+      "name": "12-mobile-390-production.png one inspector host",
+      "passed": true,
+      "details": {
+        "tooltipHosts": 1,
+        "inspectorHosts": 1,
+        "tooltipVisible": false,
+        "inspectorVisible": false,
+        "commandTiles": 16,
+        "visibleNames": [
+          "步兵班",
+          "反装甲班",
+          "侦察车",
+          "主战坦克",
+          "维修车",
+          "反装甲瞄具",
+          "战术指挥链",
+          "机动维修架",
+          "反应装甲模块",
+          "精确火控组件"
+        ],
+        "permanentDescriptions": 0,
+        "bodyText": "单位生产\nCOMMAND PRODUCTION\nQUEUE\n0 / 5\n生产队列空闲\nUNITS\nEQUIPMENT\nUNITS\n点击入队\n步兵班\n反装甲班\n侦察车\n主战坦克\n维修车\n点击生产 · 悬浮快览 · 长按详情"
+      }
+    },
+    {
+      "name": "mobile short tap performs exactly one primary action",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "mobile tap single deduction",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "mobile inspector visible after long press",
+      "passed": true,
+      "details": {
+        "state": "fired-released",
+        "inspectorVisible": true
+      }
+    },
+    {
+      "name": "long press never performs primary action",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "unique screenshot 13-mobile-inspector.png",
+      "passed": true,
+      "details": "13bdff8141a4d2bd20c58ffeecbd2033c25c75b0a0cdf702c773f76fc58b79f5"
+    },
+    {
+      "name": "13-mobile-inspector.png one tooltip host",
+      "passed": true,
+      "details": {
+        "tooltipHosts": 1,
+        "inspectorHosts": 1,
+        "tooltipVisible": false,
+        "inspectorVisible": true,
+        "commandTiles": 16,
+        "visibleNames": [
+          "步兵班",
+          "反装甲班",
+          "侦察车",
+          "主战坦克",
+          "维修车",
+          "反装甲瞄具",
+          "战术指挥链",
+          "机动维修架",
+          "反应装甲模块",
+          "精确火控组件"
+        ],
+        "permanentDescriptions": 0,
+        "bodyText": "单位生产\nCOMMAND PRODUCTION\nQUEUE\n0 / 5\n生产队列空闲\nUNITS\nEQUIPMENT\nUNITS\n点击入队\n步兵班\n反装甲班\n侦察车\n主战坦克\n维修车\n点击生产 · 悬浮快览 · 长按详情"
+      }
+    },
+    {
+      "name": "13-mobile-inspector.png one inspector host",
+      "passed": true,
+      "details": {
+        "tooltipHosts": 1,
+        "inspectorHosts": 1,
+        "tooltipVisible": false,
+        "inspectorVisible": true,
+        "commandTiles": 16,
+        "visibleNames": [
+          "步兵班",
+          "反装甲班",
+          "侦察车",
+          "主战坦克",
+          "维修车",
+          "反装甲瞄具",
+          "战术指挥链",
+          "机动维修架",
+          "反应装甲模块",
+          "精确火控组件"
+        ],
+        "permanentDescriptions": 0,
+        "bodyText": "单位生产\nCOMMAND PRODUCTION\nQUEUE\n0 / 5\n生产队列空闲\nUNITS\nEQUIPMENT\nUNITS\n点击入队\n步兵班\n反装甲班\n侦察车\n主战坦克\n维修车\n点击生产 · 悬浮快览 · 长按详情"
+      }
+    },
+    {
+      "name": "movement cancels long press",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "pointercancel cancels long press",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "1024 tablet command grid has usable tiles",
+      "passed": true,
+      "details": {
+        "tiles": [
+          {
+            "left": 725,
+            "top": 322.5,
+            "width": 137,
+            "height": 121
+          },
+          {
+            "left": 869,
+            "top": 322.5,
+            "width": 137,
+            "height": 121
+          },
+          {
+            "left": 725,
+            "top": 450.5,
+            "width": 137,
+            "height": 121
+          },
+          {
+            "left": 869,
+            "top": 450.5,
+            "width": 137,
+            "height": 121
+          }
+        ],
+        "viewport": {
+          "width": 1024,
+          "height": 820
+        }
+      }
+    },
+    {
+      "name": "page errors are zero",
+      "passed": true,
+      "details": []
+    },
+    {
+      "name": "console errors are zero",
+      "passed": true,
+      "details": []
+    },
+    {
+      "name": "all required frames captured",
+      "passed": true,
+      "details": [
+        "01-construction-command-grid.png",
+        "02-construction-hover-tooltip.png",
+        "03-construction-active-progress.png",
+        "04-unit-production-command-grid.png",
+        "05-unit-hover-tooltip.png",
+        "06-unit-locked-state.png",
+        "07-unit-resource-insufficient.png",
+        "08-production-queue.png",
+        "09-equipment-command-grid.png",
+        "10-equipment-tooltip.png",
+        "11-mobile-480-production.png",
+        "12-mobile-390-production.png",
+        "13-mobile-inspector.png"
+      ]
+    },
+    {
+      "name": "all frame hashes are unique",
+      "passed": true,
+      "details": 13
+    }
+  ],
+  "desktopCoverage": true,
+  "tabletCoverage": true,
+  "mobileCoverage": {
+    "width480": true,
+    "width390": true
+  },
+  "hoverCoverage": true,
+  "longPressCoverage": true,
+  "movementCancelCoverage": true,
+  "pointerCancelCoverage": true,
+  "keyboardCoverage": true,
+  "productionActionCoverage": {
+    "construction": true,
+    "unit": true,
+    "equipment": true,
+    "queueCancelViaInspector": true,
+    "rapidClicks": true,
+    "invalidZeroMutation": true
+  },
+  "syntheticGameplayActionUsed": false,
+  "fixtureSeedingOnly": true,
+  "passed": true
+}

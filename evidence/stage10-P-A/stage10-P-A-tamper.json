@@ -1,0 +1,59 @@
+{
+  "stage": "10-P-A",
+  "independentRecompute": true,
+  "total": 8,
+  "rejected": 8,
+  "candidateDeclaredPassedTrueCount": 8,
+  "passedFlagOnlyCases": 0,
+  "results": [
+    {
+      "name": "declared passed only",
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 36
+    },
+    {
+      "name": "missing screenshot",
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 3
+    },
+    {
+      "name": "duplicate screenshot bytes",
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 2
+    },
+    {
+      "name": "missing mobile evidence",
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 9
+    },
+    {
+      "name": "missing hover evidence",
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 3
+    },
+    {
+      "name": "missing longPress evidence",
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "hidden page error",
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "hidden console error",
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    }
+  ],
+  "passed": true
+}

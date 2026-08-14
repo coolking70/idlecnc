@@ -1,0 +1,134 @@
+{
+  "stage": "10-P-A",
+  "baseSha": "ca408bb7031afda79a65af7aad27b6b64b7c18c4",
+  "headSha": "136b8573eefb85911f35b23c3043f5f5f6c87832",
+  "saveVersion": 10,
+  "currentStage": "10-P-A",
+  "componentChecks": {
+    "commandTile": true,
+    "commandGrid": true,
+    "quickTooltip": true,
+    "commandInspector": true,
+    "statusBadge": true,
+    "progressOverlay": true,
+    "commandQueue": true,
+    "categoryBar": true,
+    "longPressController": true,
+    "presentationModels": true,
+    "sharedCssNamespace": true,
+    "oneTooltipAndInspectorHost": true
+  },
+  "functionalRegression": {
+    "constructionSemantics": true,
+    "unitProductionSemantics": true,
+    "equipmentProductionSemantics": true,
+    "cancellationSemantics": true,
+    "saveReloadAndOfflineSemantics": true,
+    "historicalCoreRegression": true,
+    "stage9RelevantRegression": true,
+    "stage10CommandUiTests": true,
+    "stage10BrowserEvidence": true
+  },
+  "canonicalStateEquivalence": {
+    "passed": true,
+    "caseCount": 4,
+    "canonicalFieldsAdded": []
+  },
+  "authority": {
+    "gameplayAuthorityChanged": false,
+    "frozenFileProof": [
+      {
+        "file": "js/config.js",
+        "baseSha256": "e951872bb862e1cd81da73e3097c28e6821771412b543c231452e2062137e7a5",
+        "currentSha256": "e951872bb862e1cd81da73e3097c28e6821771412b543c231452e2062137e7a5",
+        "unchanged": true
+      },
+      {
+        "file": "js/state.js",
+        "baseSha256": "7a8d4a0ecdb885c947510de8dcfec2f45bf5ec0cff1ed9100b9eee08b2dc824f",
+        "currentSha256": "7a8d4a0ecdb885c947510de8dcfec2f45bf5ec0cff1ed9100b9eee08b2dc824f",
+        "unchanged": true
+      },
+      {
+        "file": "js/construction.js",
+        "baseSha256": "9129ffa1fc7d23a1f0de711ad32723ab6fa7022244f74d730e1f042aa78c4e46",
+        "currentSha256": "9129ffa1fc7d23a1f0de711ad32723ab6fa7022244f74d730e1f042aa78c4e46",
+        "unchanged": true
+      },
+      {
+        "file": "js/production.js",
+        "baseSha256": "e5d3bfb9a46b6ac63872ea4f578d973de0af8100d4aaa825c0eebe5b233d12e5",
+        "currentSha256": "e5d3bfb9a46b6ac63872ea4f578d973de0af8100d4aaa825c0eebe5b233d12e5",
+        "unchanged": true
+      },
+      {
+        "file": "js/equipment.js",
+        "baseSha256": "a44aae240a8f3164db6e19abecf59f075e2d3be51da7474446024a1a64277e17",
+        "currentSha256": "a44aae240a8f3164db6e19abecf59f075e2d3be51da7474446024a1a64277e17",
+        "unchanged": true
+      },
+      {
+        "file": "js/save.js",
+        "baseSha256": "a8c651a040d51f365b83839fe254db64f0e06af527e112016f8ca7ad6b393559",
+        "currentSha256": "a8c651a040d51f365b83839fe254db64f0e06af527e112016f8ca7ad6b393559",
+        "unchanged": true
+      },
+      {
+        "file": "js/offline.js",
+        "baseSha256": "df06eee7640967587fe48ee9f9ec940b8a6a16406f08a1e8fb1a9dd5090b2f40",
+        "currentSha256": "df06eee7640967587fe48ee9f9ec940b8a6a16406f08a1e8fb1a9dd5090b2f40",
+        "unchanged": true
+      },
+      {
+        "file": "js/formations.js",
+        "baseSha256": "7ec225ffad868964d6f93143b3bba0a1d47d763e386230669d6498d1159e202e",
+        "currentSha256": "7ec225ffad868964d6f93143b3bba0a1d47d763e386230669d6498d1159e202e",
+        "unchanged": true
+      },
+      {
+        "file": "js/theater.js",
+        "baseSha256": "bdfc7b5c5da711018a7bdf49dba846a14cea229e0cc8d113f1b8a73aab1ba224",
+        "currentSha256": "bdfc7b5c5da711018a7bdf49dba846a14cea229e0cc8d113f1b8a73aab1ba224",
+        "unchanged": true
+      },
+      {
+        "file": "js/battle.js",
+        "baseSha256": "b8d2a3047e040078b5483a5da235efca7f6e28b022c8c35b2d4814e1f341c6b6",
+        "currentSha256": "b8d2a3047e040078b5483a5da235efca7f6e28b022c8c35b2d4814e1f341c6b6",
+        "unchanged": true
+      },
+      {
+        "file": "js/battle-salvage.js",
+        "baseSha256": "aa6d04aa305f2ed7df9876c9b89126542405c24b42f535595c5334be95f395a8",
+        "currentSha256": "aa6d04aa305f2ed7df9876c9b89126542405c24b42f535595c5334be95f395a8",
+        "unchanged": true
+      },
+      {
+        "file": "js/production-battle-session.js",
+        "baseSha256": "f5dabfcc8bf5455eddef97d378e931be1a5b0b9b88372a059ba6c099a1185500",
+        "currentSha256": "f5dabfcc8bf5455eddef97d378e931be1a5b0b9b88372a059ba6c099a1185500",
+        "unchanged": true
+      },
+      {
+        "file": "js/save-diff.js",
+        "baseSha256": "40198ec795a28821f8d685a416a7a9a2893c6c5dd0bab0575f3aeaa4f2d78bc9",
+        "currentSha256": "40198ec795a28821f8d685a416a7a9a2893c6c5dd0bab0575f3aeaa4f2d78bc9",
+        "unchanged": true
+      }
+    ],
+    "changedFiles": [
+      "HANDOFF-STAGE10-P-A.md",
+      "STAGE10-P-A-SELFCHECK.json",
+      "evidence/stage10-P-A/stage10-P-A-browser.json",
+      "evidence/stage10-P-A/stage10-P-A-machine.json",
+      "evidence/stage10-P-A/stage10-P-A-selfcheck.json",
+      "evidence/stage10-P-A/stage10-P-A-state-equivalence.json",
+      "evidence/stage10-P-A/stage10-P-A-tamper.json",
+      "evidence/stage10-P-A/stage10-P-A-verdict.json"
+    ],
+    "forbiddenChangedFiles": [],
+    "readOnlyPresentationBoundary": true,
+    "passed": true
+  },
+  "passed": true
+}
