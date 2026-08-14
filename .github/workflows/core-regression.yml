@@ -4,20 +4,20 @@ on:
   push:
     branches:
       - main
-      - auto/stage9-e1-final-release-closure
+      - auto/stage9-e1a-ci-browser-final-closure
   pull_request:
     branches: [main]
   workflow_dispatch:
 
 env:
-  FINAL_BRANCH: auto/stage9-e1-final-release-closure
+  FINAL_BRANCH: auto/stage9-e1a-ci-browser-final-closure
   FINAL_MARKER: '[stage9-e1-final]'
 
 jobs:
   # Existing main/PR regression remains intact. Final-branch pushes use the
   # explicitly registered Stage 9-E.1 topology below instead.
   dc1-performance:
-    if: github.ref_name != 'auto/stage9-e1-final-release-closure'
+    if: github.ref_name != 'auto/stage9-e1a-ci-browser-final-closure'
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
@@ -45,7 +45,7 @@ jobs:
           retention-days: 30
 
   node-core:
-    if: github.ref_name != 'auto/stage9-e1-final-release-closure'
+    if: github.ref_name != 'auto/stage9-e1a-ci-browser-final-closure'
     needs: dc1-performance
     runs-on: ubuntu-24.04
     steps:
@@ -99,7 +99,7 @@ jobs:
           retention-days: 30
 
   final-closure:
-    if: github.ref_name != 'auto/stage9-e1-final-release-closure'
+    if: github.ref_name != 'auto/stage9-e1a-ci-browser-final-closure'
     needs: [dc1-performance, node-core]
     runs-on: ubuntu-24.04
     steps:
@@ -137,7 +137,7 @@ jobs:
           retention-days: 30
 
   fast-gate:
-    if: github.event_name == 'push' && github.ref_name == 'auto/stage9-e1-final-release-closure'
+    if: github.event_name == 'push' && github.ref_name == 'auto/stage9-e1a-ci-browser-final-closure'
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
@@ -162,8 +162,10 @@ jobs:
           retention-days: 30
 
   stage9-e1-stage-gate:
-    if: github.event_name == 'push' && github.ref_name == 'auto/stage9-e1-final-release-closure' && contains(github.event.head_commit.message, '[stage9-e1-final]')
+    if: github.event_name == 'push' && github.ref_name == 'auto/stage9-e1a-ci-browser-final-closure' && contains(github.event.head_commit.message, '[stage9-e1-final]')
     runs-on: ubuntu-24.04
+    env:
+      IRON_BROWSER_DEVTOOLS_TIMEOUT_MS: 45000
     steps:
       - uses: actions/checkout@v4
         with:
@@ -173,8 +175,10 @@ jobs:
         with:
           node-version: 22.23.1
       - run: npm install --ignore-scripts --no-audit --no-fund
-      - name: Remove stale Stage 9-E screenshots
-        run: rm -rf screenshots/stage9-E
+      - name: Remove stale Stage 9-E browser evidence
+        run: node tests/clear-stage9-E-runtime-evidence.mjs
+      - name: Stage 9-E.1a browser startup contract
+        run: npm run test:stage9-E1a-browser-startup
       - name: Stage 9-E core
         run: npm run test:stage9-E
       - name: Fresh Stage 9-E browser evidence, strong verifier and tamper
@@ -205,7 +209,7 @@ jobs:
           retention-days: 30
 
   stage9-e1-release-performance:
-    if: github.event_name == 'push' && github.ref_name == 'auto/stage9-e1-final-release-closure' && contains(github.event.head_commit.message, '[stage9-e1-final]')
+    if: github.event_name == 'push' && github.ref_name == 'auto/stage9-e1a-ci-browser-final-closure' && contains(github.event.head_commit.message, '[stage9-e1-final]')
     needs: stage9-e1-stage-gate
     runs-on: ubuntu-24.04
     steps:
@@ -234,9 +238,11 @@ jobs:
           retention-days: 30
 
   stage9-e1-release-functional:
-    if: github.event_name == 'push' && github.ref_name == 'auto/stage9-e1-final-release-closure' && contains(github.event.head_commit.message, '[stage9-e1-final]')
+    if: github.event_name == 'push' && github.ref_name == 'auto/stage9-e1a-ci-browser-final-closure' && contains(github.event.head_commit.message, '[stage9-e1-final]')
     needs: [stage9-e1-stage-gate, stage9-e1-release-performance]
     runs-on: ubuntu-24.04
+    env:
+      IRON_BROWSER_DEVTOOLS_TIMEOUT_MS: 45000
     steps:
       - uses: actions/checkout@v4
         with:
@@ -258,9 +264,11 @@ jobs:
           retention-days: 30
 
   stage9-e1-clean-clone:
-    if: github.event_name == 'push' && github.ref_name == 'auto/stage9-e1-final-release-closure' && contains(github.event.head_commit.message, '[stage9-e1-final]')
+    if: github.event_name == 'push' && github.ref_name == 'auto/stage9-e1a-ci-browser-final-closure' && contains(github.event.head_commit.message, '[stage9-e1-final]')
     needs: stage9-e1-release-functional
     runs-on: ubuntu-24.04
+    env:
+      IRON_BROWSER_DEVTOOLS_TIMEOUT_MS: 45000
     steps:
       - uses: actions/checkout@v4
         with:
@@ -287,7 +295,7 @@ jobs:
           retention-days: 30
 
   stage9-e1-final-closure:
-    if: github.event_name == 'push' && github.ref_name == 'auto/stage9-e1-final-release-closure' && contains(github.event.head_commit.message, '[stage9-e1-final]')
+    if: github.event_name == 'push' && github.ref_name == 'auto/stage9-e1a-ci-browser-final-closure' && contains(github.event.head_commit.message, '[stage9-e1-final]')
     needs: [fast-gate, stage9-e1-stage-gate, stage9-e1-release-performance, stage9-e1-release-functional, stage9-e1-clean-clone]
     runs-on: ubuntu-24.04
     steps:
