@@ -47,6 +47,7 @@ const positiveInteger = (value, fallback) => {
 };
 const gateTimeoutMs = positiveInteger(process.env.IRON_CLEAN_CLONE_TIMEOUT_MS, DEFAULT_GATE_TIMEOUT_MS);
 const gateScript = process.env.IRON_CLEAN_CLONE_GATE_SCRIPT || DEFAULT_GATE_SCRIPT;
+const qualifiedPerformanceInput = process.env.IRON_CLEAN_CLONE_PERFORMANCE_INPUT || null;
 
 const record = (step, passed, exitCode = null, extra = {}) => {
   const entry = { step, passed };
@@ -122,6 +123,31 @@ try {
       stderr: outputTail(error.stderr),
     });
     throw error;
+  }
+
+  // Reuse the same-run qualified D-C.1 artifact when the selected functional
+  // gate needs its read-only input. This copies evidence into the temporary
+  // clone without running the formal performance measurement a second time.
+  if (qualifiedPerformanceInput) {
+    try {
+      const source = path.resolve(root, qualifiedPerformanceInput);
+      const rootPrefix = `${root}${path.sep}`;
+      if (source !== root && !source.startsWith(rootPrefix)) throw new Error('qualified performance input must stay inside repository root');
+      if (!fs.existsSync(source)) throw new Error(`qualified performance input missing: ${qualifiedPerformanceInput}`);
+      fs.copyFileSync(source, path.join(cloneDir, 'stage8_2g_dc1_performance_check.json'));
+      record('qualified-performance-input', true, 0, {
+        source: path.relative(root, source),
+        target: 'stage8_2g_dc1_performance_check.json',
+        reusedSameRunArtifact: true,
+        formalMeasurementRerun: false
+      });
+    } catch (error) {
+      record('qualified-performance-input', false, null, {
+        source: qualifiedPerformanceInput,
+        message: String(error.message || error)
+      });
+      throw error;
+    }
   }
 
   // 4. 在干净克隆内跑选定功能门禁。Stage 9-E.1 使用 release functional，

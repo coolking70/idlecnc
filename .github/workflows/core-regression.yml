@@ -252,6 +252,11 @@ jobs:
         with:
           node-version: 22.23.1
       - run: npm install --ignore-scripts --no-audit --no-fund
+      - name: Download same-run qualified D-C.1 performance input
+        uses: actions/download-artifact@v4
+        with:
+          name: stage9-e1-performance-${{ github.sha }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: .
       - name: Full historical functional release gate without formal D-C.1 rerun
         run: npm run gate:stage9-release:functional
       - name: Upload release functional marker
@@ -278,9 +283,15 @@ jobs:
         with:
           node-version: 22.23.1
       - run: npm install --ignore-scripts --no-audit --no-fund
+      - name: Download same-run qualified D-C.1 performance input
+        uses: actions/download-artifact@v4
+        with:
+          name: stage9-e1-performance-${{ github.sha }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: artifacts/stage9-e1-performance-input
       - name: Verify clean clone with release functional gate
         env:
           IRON_CLEAN_CLONE_GATE_SCRIPT: gate:stage9-release:functional
+          IRON_CLEAN_CLONE_PERFORMANCE_INPUT: artifacts/stage9-e1-performance-input/stage8_2g_dc1_performance_check.json
           IRON_CLEAN_CLONE_RESULT_PATH: artifacts/stage9-e1-clean-clone/clean_clone_result.json
           IRON_CLEAN_CLONE_TIMEOUT_MS: 3600000
         timeout-minutes: 70
