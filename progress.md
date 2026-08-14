@@ -781,3 +781,14 @@
 - [x] 完整 `npm run browser:stage9-E` exit=0：14 帧、14 个唯一 hash、5 次真实 reload、92/92 tamper、strong verifier 与 developer selfcheck 均通过。
 - [x] 最终提交与推送已收口；`git ls-remote` 已核对远端分支身份，clean-clone 已以同一远端头实跑并返回 `overallPassed=true`、所有步骤通过。
 - [ ] Stage Gate / Release Gate 仍为手动 workflow；本环境未伪造 dispatch 或 run ID，待 GitHub Actions 手动运行后补录其真实结果。
+
+# Stage 9-E.1 progress
+
+- [x] 从 Stage 9-E candidate `b21c8280a3c400146772120a2d984ad42b17227f` 建立独立分支 `auto/stage9-e1-final-release-closure`；本轮无新玩法。
+- [x] 将 Stage 9-E.1 Stage / Release / Clean Clone / Final Closure 注册到现有 `core-regression`，重门禁仅由 final branch push 且提交消息含 `[stage9-e1-final]` 触发；普通路径不再依赖 feature-only `workflow_dispatch`。
+- [x] Strong verifier 支持 evidence root，并在 `checkFiles=true` 下读取实际 PNG bytes、重新计算 SHA-256、拒绝路径穿越，并校验五类 Stage 9-E 文件。
+- [x] 新增实际 PNG 单字节篡改回归、历史 Stage 8 / Stage 9-A/B/C/D 证据字节完整性回归与静态 developer selfcheck 语义回归。
+- [x] Tamper corpus 将普通单字段与真实 multi-domain coupled attack 分开统计；所有 candidate 强制声明 `passed=true`，要求全量拒绝且 `passedFlagOnlyCases=0`。
+- [x] Clean clone 支持 `IRON_CLEAN_CLONE_GATE_SCRIPT`，并独立记录 `currentHead`、`clonedHead`、`headMatches`、脚本名、超时与步骤；Stage 9-E.1 使用不重复正式 D-C.1 性能的 functional release gate。
+- [x] 历史 runtime evidence 已恢复为 Stage 9-D.1 基线字节；`STAGE9-FINAL.md` 仅记录里程碑 contract，不写未来 run ID、SHA 或 runner 数值。
+- [ ] Final commit、远端 SHA、push-triggered Stage 9-E.1 workflow、clean-clone 与 runtime final closure 待本轮收口；最终 CI 结果不得回写本文件。

@@ -15,9 +15,6 @@
         "acquisition": {
           "kind": "starter",
           "label": "初始装备补给"
-        },
-        "provenance": {
-          "kind": "starter"
         }
       },
       {
@@ -28,9 +25,6 @@
         "acquisition": {
           "kind": "starter",
           "label": "初始装备补给"
-        },
-        "provenance": {
-          "kind": "starter"
         }
       },
       {
@@ -41,9 +35,6 @@
         "acquisition": {
           "kind": "starter",
           "label": "初始装备补给"
-        },
-        "provenance": {
-          "kind": "starter"
         }
       }
     ],
@@ -51,8 +42,7 @@
       "stage9-c-formal-unit": [
         "equipment-starter-2"
       ]
-    },
-    "salvageClaims": {}
+    }
   },
   "beforeSettlement": {
     "equipment": {
@@ -65,9 +55,6 @@
           "acquisition": {
             "kind": "starter",
             "label": "初始装备补给"
-          },
-          "provenance": {
-            "kind": "starter"
           }
         },
         {
@@ -78,9 +65,6 @@
           "acquisition": {
             "kind": "starter",
             "label": "初始装备补给"
-          },
-          "provenance": {
-            "kind": "starter"
           }
         },
         {
@@ -91,9 +75,6 @@
           "acquisition": {
             "kind": "starter",
             "label": "初始装备补给"
-          },
-          "provenance": {
-            "kind": "starter"
           }
         }
       ],
@@ -101,10 +82,9 @@
         "stage9-c-formal-unit": [
           "equipment-starter-2"
         ]
-      },
-      "salvageClaims": {}
+      }
     },
-    "equipmentHash": "cee17f2f179b901be67576ffe0dbd0f5008690e369ab7d29df79f00cc8f0b6e1",
+    "equipmentHash": "4ec48a0852320d5750de7a0b29ad505fa810b844b7b52435592753db4603483f",
     "reportCount": 0,
     "ledgerCount": 0,
     "activeBattle": {
@@ -125,9 +105,6 @@
           "acquisition": {
             "kind": "starter",
             "label": "初始装备补给"
-          },
-          "provenance": {
-            "kind": "starter"
           }
         },
         {
@@ -138,9 +115,6 @@
           "acquisition": {
             "kind": "starter",
             "label": "初始装备补给"
-          },
-          "provenance": {
-            "kind": "starter"
           }
         },
         {
@@ -151,9 +125,6 @@
           "acquisition": {
             "kind": "starter",
             "label": "初始装备补给"
-          },
-          "provenance": {
-            "kind": "starter"
           }
         }
       ],
@@ -161,10 +132,9 @@
         "stage9-c-formal-unit": [
           "equipment-starter-2"
         ]
-      },
-      "salvageClaims": {}
+      }
     },
-    "equipmentHash": "cee17f2f179b901be67576ffe0dbd0f5008690e369ab7d29df79f00cc8f0b6e1",
+    "equipmentHash": "4ec48a0852320d5750de7a0b29ad505fa810b844b7b52435592753db4603483f",
     "reportCount": 1,
     "ledgerCount": 1,
     "activeBattle": {

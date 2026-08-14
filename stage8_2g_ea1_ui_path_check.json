@@ -4,7 +4,7 @@
   "fixtureLoaderUsed": false,
   "dispatchApiUsed": false,
   "replayApiUsed": false,
-  "actionCount": 37,
+  "actionCount": 36,
   "allActionsFromProductionUi": true,
   "launchDoubleClickSessionGuard": true,
   "passed": true

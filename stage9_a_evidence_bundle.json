@@ -138,17 +138,17 @@
       "river_crossing": {
         "seed": 3,
         "result": "victory",
-        "battleSessionId": "battle-session-0-river_crossing-72a66e863136fc7b6517-1"
+        "battleSessionId": "battle-session-0-river_crossing-7c27ca490dd357f83573-1"
       },
       "relay_station": {
         "seed": 1,
         "result": "victory",
-        "battleSessionId": "battle-session-0-relay_station-b588af3b6dcfac8b1c85-1"
+        "battleSessionId": "battle-session-0-relay_station-2f8209d84af06d6f34e6-1"
       },
       "mountain_pass": {
         "seed": 1,
         "result": "victory",
-        "battleSessionId": "battle-session-0-mountain_pass-53893ee25ca7ee057a61-1"
+        "battleSessionId": "battle-session-0-mountain_pass-8b53cc0f287d94887ef1-1"
       }
     }
   },
@@ -256,10 +256,10 @@
     "loopEvidence": {
       "theaterId": "mountain_pass",
       "missionKind": "campaign",
-      "sessionId": "battle-session-0-mountain_pass-878a9e78a7118549a356-1",
+      "sessionId": "battle-session-0-mountain_pass-6682a1ddf669488fcb1e-1",
       "deployment": {
         "formation": {
-          "id": "fm_mss2ewt3_3g",
+          "id": "fm_msqiwm5k_3g",
           "name": "Stage 9 深入编队",
           "experience": 0,
           "unitIds": [
@@ -438,7 +438,7 @@
         "operation": null
       },
       "report": {
-        "id": "battle_1_fm_mss2ewt3_3g_mountain_pass_cautious",
+        "id": "battle_1_fm_msqiwm5k_3g_mountain_pass_cautious",
         "seed": 1,
         "theaterId": "mountain_pass",
         "theaterName": "北岭山口",
@@ -447,7 +447,7 @@
         "missionKind": "campaign",
         "missionId": "mountain_pass",
         "strategyName": "谨慎推进",
-        "formationId": "fm_mss2ewt3_3g",
+        "formationId": "fm_msqiwm5k_3g",
         "formationName": "Stage 9 深入编队",
         "startedAt": 1,
         "initial": {
@@ -1930,11 +1930,11 @@
         "experienceMultiplier": 1
       },
       "session": {
-        "battleSessionId": "battle-session-0-mountain_pass-878a9e78a7118549a356-1",
+        "battleSessionId": "battle-session-0-mountain_pass-6682a1ddf669488fcb1e-1",
         "missionId": "mountain_pass",
         "deploymentSnapshot": {
           "formation": {
-            "id": "fm_mss2ewt3_3g",
+            "id": "fm_msqiwm5k_3g",
             "name": "Stage 9 深入编队",
             "experience": 0,
             "unitIds": [
@@ -2112,18 +2112,18 @@
           "missionId": "mountain_pass",
           "operation": null
         },
-        "deploymentSnapshotId": "deployment-878a9e78a7118549a35638b71377d6b66053f68a3eaf63c40ecca1c22dc82385",
-        "deploymentHash": "878a9e78a7118549a35638b71377d6b66053f68a3eaf63c40ecca1c22dc82385",
+        "deploymentSnapshotId": "deployment-6682a1ddf669488fcb1ee5e54d8239fa3b364da4460cd744c5cc3bbdaeca0b3d",
+        "deploymentHash": "6682a1ddf669488fcb1ee5e54d8239fa3b364da4460cd744c5cc3bbdaeca0b3d",
         "sourceSaveRevision": 0,
-        "formalReportId": "battle_1_fm_mss2ewt3_3g_mountain_pass_cautious",
-        "formalReportHash": "1bedcc78a0e96addf06f9e8f2a46ca2a668d22b36c62b688386a71c053f6bb23",
+        "formalReportId": "battle_1_fm_msqiwm5k_3g_mountain_pass_cautious",
+        "formalReportHash": "2764566ad13ebc09bdc3497418f6a898f97a36151a4f47d16675e2249d31732c",
         "shotHash": "ef5d8464998e5eab93db0185c529d6aeee80b5919d2105866e383ce59acc28da",
         "repairHash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
         "resultHash": "b5bb5cf793418d0c57feca3e3dd055746ee1aaabc732694c49c790735d820e4e",
-        "sourceReportHash": "1bedcc78a0e96addf06f9e8f2a46ca2a668d22b36c62b688386a71c053f6bb23",
+        "sourceReportHash": "2764566ad13ebc09bdc3497418f6a898f97a36151a4f47d16675e2249d31732c",
         "sessionOrigin": "production",
         "lifecycle": "settled",
-        "settlementId": "settlement-b997c66e1e748ecf4c01806bb1765fa8ae97d8a22883dab5d5d7631ec9cb91a3",
+        "settlementId": "settlement-84236cc3c16ec3524c1541ff133754b94c73a1b96e957852c2eb7d9a30a62e71",
         "settlementStatus": "applied",
         "presentationState": {
           "phase": "returning",
@@ -2131,7 +2131,7 @@
         },
         "settlementState": {
           "status": "applied",
-          "settlementId": "settlement-b997c66e1e748ecf4c01806bb1765fa8ae97d8a22883dab5d5d7631ec9cb91a3",
+          "settlementId": "settlement-84236cc3c16ec3524c1541ff133754b94c73a1b96e957852c2eb7d9a30a62e71",
           "locked": true
         },
         "returnState": {
@@ -2145,15 +2145,14 @@
         "returnedAtGameTime": null,
         "replayReadOnly": false,
         "settlementLocked": true,
-        "salvageRulesVersion": 1,
         "version": 1,
         "settlementReceipt": {
-          "battleId": "battle_1_fm_mss2ewt3_3g_mountain_pass_cautious",
-          "battleSessionId": "battle-session-0-mountain_pass-878a9e78a7118549a356-1",
-          "settlementId": "settlement-b997c66e1e748ecf4c01806bb1765fa8ae97d8a22883dab5d5d7631ec9cb91a3",
-          "formalReportHash": "1bedcc78a0e96addf06f9e8f2a46ca2a668d22b36c62b688386a71c053f6bb23",
-          "reportId": "battle_1_fm_mss2ewt3_3g_mountain_pass_cautious",
-          "formationId": "fm_mss2ewt3_3g",
+          "battleId": "battle_1_fm_msqiwm5k_3g_mountain_pass_cautious",
+          "battleSessionId": "battle-session-0-mountain_pass-6682a1ddf669488fcb1e-1",
+          "settlementId": "settlement-84236cc3c16ec3524c1541ff133754b94c73a1b96e957852c2eb7d9a30a62e71",
+          "formalReportHash": "2764566ad13ebc09bdc3497418f6a898f97a36151a4f47d16675e2249d31732c",
+          "reportId": "battle_1_fm_msqiwm5k_3g_mountain_pass_cautious",
+          "formationId": "fm_msqiwm5k_3g",
           "theaterId": "mountain_pass",
           "result": "victory",
           "captured": true,
@@ -2288,10 +2287,10 @@
     "passed": true,
     "theaterId": "mountain_pass",
     "missionKind": "campaign",
-    "sessionId": "battle-session-0-mountain_pass-878a9e78a7118549a356-1",
+    "sessionId": "battle-session-0-mountain_pass-6682a1ddf669488fcb1e-1",
     "deployment": {
       "formation": {
-        "id": "fm_mss2ewt3_3g",
+        "id": "fm_msqiwm5k_3g",
         "name": "Stage 9 深入编队",
         "experience": 0,
         "unitIds": [
@@ -2470,7 +2469,7 @@
       "operation": null
     },
     "report": {
-      "id": "battle_1_fm_mss2ewt3_3g_mountain_pass_cautious",
+      "id": "battle_1_fm_msqiwm5k_3g_mountain_pass_cautious",
       "seed": 1,
       "theaterId": "mountain_pass",
       "theaterName": "北岭山口",
@@ -2479,7 +2478,7 @@
       "missionKind": "campaign",
       "missionId": "mountain_pass",
       "strategyName": "谨慎推进",
-      "formationId": "fm_mss2ewt3_3g",
+      "formationId": "fm_msqiwm5k_3g",
       "formationName": "Stage 9 深入编队",
       "startedAt": 1,
       "initial": {
@@ -3962,11 +3961,11 @@
       "experienceMultiplier": 1
     },
     "session": {
-      "battleSessionId": "battle-session-0-mountain_pass-878a9e78a7118549a356-1",
+      "battleSessionId": "battle-session-0-mountain_pass-6682a1ddf669488fcb1e-1",
       "missionId": "mountain_pass",
       "deploymentSnapshot": {
         "formation": {
-          "id": "fm_mss2ewt3_3g",
+          "id": "fm_msqiwm5k_3g",
           "name": "Stage 9 深入编队",
           "experience": 0,
           "unitIds": [
@@ -4144,18 +4143,18 @@
         "missionId": "mountain_pass",
         "operation": null
       },
-      "deploymentSnapshotId": "deployment-878a9e78a7118549a35638b71377d6b66053f68a3eaf63c40ecca1c22dc82385",
-      "deploymentHash": "878a9e78a7118549a35638b71377d6b66053f68a3eaf63c40ecca1c22dc82385",
+      "deploymentSnapshotId": "deployment-6682a1ddf669488fcb1ee5e54d8239fa3b364da4460cd744c5cc3bbdaeca0b3d",
+      "deploymentHash": "6682a1ddf669488fcb1ee5e54d8239fa3b364da4460cd744c5cc3bbdaeca0b3d",
       "sourceSaveRevision": 0,
-      "formalReportId": "battle_1_fm_mss2ewt3_3g_mountain_pass_cautious",
-      "formalReportHash": "1bedcc78a0e96addf06f9e8f2a46ca2a668d22b36c62b688386a71c053f6bb23",
+      "formalReportId": "battle_1_fm_msqiwm5k_3g_mountain_pass_cautious",
+      "formalReportHash": "2764566ad13ebc09bdc3497418f6a898f97a36151a4f47d16675e2249d31732c",
       "shotHash": "ef5d8464998e5eab93db0185c529d6aeee80b5919d2105866e383ce59acc28da",
       "repairHash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
       "resultHash": "b5bb5cf793418d0c57feca3e3dd055746ee1aaabc732694c49c790735d820e4e",
-      "sourceReportHash": "1bedcc78a0e96addf06f9e8f2a46ca2a668d22b36c62b688386a71c053f6bb23",
+      "sourceReportHash": "2764566ad13ebc09bdc3497418f6a898f97a36151a4f47d16675e2249d31732c",
       "sessionOrigin": "production",
       "lifecycle": "settled",
-      "settlementId": "settlement-b997c66e1e748ecf4c01806bb1765fa8ae97d8a22883dab5d5d7631ec9cb91a3",
+      "settlementId": "settlement-84236cc3c16ec3524c1541ff133754b94c73a1b96e957852c2eb7d9a30a62e71",
       "settlementStatus": "applied",
       "presentationState": {
         "phase": "returning",
@@ -4163,7 +4162,7 @@
       },
       "settlementState": {
         "status": "applied",
-        "settlementId": "settlement-b997c66e1e748ecf4c01806bb1765fa8ae97d8a22883dab5d5d7631ec9cb91a3",
+        "settlementId": "settlement-84236cc3c16ec3524c1541ff133754b94c73a1b96e957852c2eb7d9a30a62e71",
         "locked": true
       },
       "returnState": {
@@ -4177,15 +4176,14 @@
       "returnedAtGameTime": null,
       "replayReadOnly": false,
       "settlementLocked": true,
-      "salvageRulesVersion": 1,
       "version": 1,
       "settlementReceipt": {
-        "battleId": "battle_1_fm_mss2ewt3_3g_mountain_pass_cautious",
-        "battleSessionId": "battle-session-0-mountain_pass-878a9e78a7118549a356-1",
-        "settlementId": "settlement-b997c66e1e748ecf4c01806bb1765fa8ae97d8a22883dab5d5d7631ec9cb91a3",
-        "formalReportHash": "1bedcc78a0e96addf06f9e8f2a46ca2a668d22b36c62b688386a71c053f6bb23",
-        "reportId": "battle_1_fm_mss2ewt3_3g_mountain_pass_cautious",
-        "formationId": "fm_mss2ewt3_3g",
+        "battleId": "battle_1_fm_msqiwm5k_3g_mountain_pass_cautious",
+        "battleSessionId": "battle-session-0-mountain_pass-6682a1ddf669488fcb1e-1",
+        "settlementId": "settlement-84236cc3c16ec3524c1541ff133754b94c73a1b96e957852c2eb7d9a30a62e71",
+        "formalReportHash": "2764566ad13ebc09bdc3497418f6a898f97a36151a4f47d16675e2249d31732c",
+        "reportId": "battle_1_fm_msqiwm5k_3g_mountain_pass_cautious",
+        "formationId": "fm_msqiwm5k_3g",
         "theaterId": "mountain_pass",
         "result": "victory",
         "captured": true,
@@ -4225,19 +4223,19 @@
       "activeBattle",
       "activeBattleSessionId",
       "battleSessionSequence",
-      "battleSessions.battle-session-0-mountain_pass-aaf27a1ab3cffad2b910-1",
-      "battleSettlementLedger.settlement-1d5646b0353406ebd896554eaff087d3627634a120de2e7d54877caacf41b570",
-      "battles[id=battle_1_fm_mss2ewti_57_mountain_pass_cautious]",
+      "battleSessions.battle-session-0-mountain_pass-d2fac6367edb6e1895bc-1",
+      "battleSettlementLedger.settlement-8885e10ec0ff5fe1ca459b0d52c19e7a0681d072c222eee92d315a10ad9a3c2a",
+      "battles[id=battle_1_fm_msqiwm65_57_mountain_pass_cautious]",
       "battles[*order]",
       "command.capacity",
-      "formations[id=fm_mss2ewti_57].battles",
-      "formations[id=fm_mss2ewti_57].experience",
-      "formations[id=fm_mss2ewti_57].status",
-      "formations[id=fm_mss2ewti_57].strategy",
-      "formations[id=fm_mss2ewti_57].theaterId",
-      "log[id=log_mss2ewtj_59]",
-      "log[id=log_mss2ewtl_5a]",
-      "log[id=log_mss2ewtl_5b]",
+      "formations[id=fm_msqiwm65_57].battles",
+      "formations[id=fm_msqiwm65_57].experience",
+      "formations[id=fm_msqiwm65_57].status",
+      "formations[id=fm_msqiwm65_57].strategy",
+      "formations[id=fm_msqiwm65_57].theaterId",
+      "log[id=log_msqiwm67_59]",
+      "log[id=log_msqiwm6a_5a]",
+      "log[id=log_msqiwm6a_5b]",
       "log[*order]",
       "rates.alloy",
       "rates.supply",
@@ -4270,15 +4268,11 @@
     "passed": true,
     "forbiddenPaths": [
       "js/battle.js",
-      "js/theater.js",
-      "js/save-diff.js",
-      "js/battle-presentation/universal/",
-      "experiments/battle-sandbox/universal-planner/universal-planner.js"
+      "js/battle-presentation/universal/universal-plan-builder.js",
+      "js/battle-presentation/universal/universal-choreographer.js",
+      "tests/lib/"
     ],
-    "allowedPerformanceHelper": "tests/lib/perf-environment.mjs",
     "changedFiles": [
-      "README.md",
-      "js/config.js",
       "package.json",
       "progress.md",
       "screenshots/stage8-2G-E-A-1/e-a1-01-base-before-battle.png",
@@ -4316,6 +4310,7 @@
       "stage9_a_generalization_check.json",
       "stage9_a_mission_generalization_check.json",
       "stage9_a_performance_check.json",
+      "stage9_a_regression_check.json",
       "stage9_a_save_diff_check.json",
       "stage9_a_theater_chain_check.json",
       "stage9_b_authority_check.json",
@@ -4328,26 +4323,12 @@
       "stage9_b_performance_check.json",
       "stage9_b_replay_historical_check.json",
       "stage9_c_authority_check.json",
-      "stage9_c_battle_isolation_check.json",
-      "stage9_c_formal_settlement_isolation_check.json",
-      "stage9_c_migration_check.json",
+      "stage9_c_browser_capture_manifest.json",
+      "stage9_c_browser_integrity_check.json",
+      "stage9_c_evidence_bundle.json",
       "stage9_c_performance_check.json",
-      "stage9_c_regression_check.json",
-      "stage9_d_core_machine_evidence.json",
-      "stage9_d_performance_check.json",
-      "tests/generate-stage8-2G-EB-developer-selfcheck.mjs",
-      "tests/generate-stage8-2G-EC-developer-selfcheck.mjs",
-      "tests/generate-stage9-A-developer-selfcheck.mjs",
-      "tests/generate-stage9-B-developer-selfcheck.mjs",
-      "tests/generate-stage9-B-evidence.mjs",
-      "tests/stage6-test.mjs",
-      "tests/stage7-test.mjs",
-      "tests/stage8-1-1-test.mjs",
-      "tests/stage8-1-test.mjs",
-      "tests/stage8-2G-B-test.mjs",
-      "tests/stage8-test.mjs",
-      "tests/stage9-A-theater-expansion-test.mjs",
-      "tests/stage9-B-strong-evidence-test.mjs"
+      "stage9_c_reload_check.json",
+      "tests/stage9-A-performance-test.mjs"
     ]
   },
   "coverage": {
@@ -4374,9 +4355,9 @@
     "sampleCount": 500,
     "operationCountPerSample": 12,
     "timingMs": {
-      "p50": 0.0035420000000030427,
-      "p95": 0.011666999999995653,
-      "max": 0.30458300000000094
+      "p50": 0.006666000000002725,
+      "p95": 0.019040999999994312,
+      "max": 0.5418329999999969
     },
     "environment": {
       "platform": "darwin",
@@ -4842,72 +4823,72 @@
         "reason": "deployment_review",
         "method": "Page.reload",
         "before": {
-          "timeOrigin": 1786658625114,
+          "timeOrigin": 1786565393175.3,
           "readyState": "complete",
           "navigationType": "navigate"
         },
         "after": {
-          "timeOrigin": 1786658799173.5,
+          "timeOrigin": 1786565567438.9,
           "readyState": "complete",
           "navigationType": "reload"
         },
-        "beforeLoaderId": "62CB6D76A0CCC154CB0BC0C349B48C0E",
-        "afterLoaderId": "2F2393500CD60549E11C3341C468B2FC",
-        "loaderId": "2F2393500CD60549E11C3341C468B2FC",
+        "beforeLoaderId": "3D0FCDCB0C19D238C88E9C714F73832A",
+        "afterLoaderId": "15AA637CC9C1AB6CF8644BDE0FE27E9F",
+        "loaderId": "15AA637CC9C1AB6CF8644BDE0FE27E9F",
         "timeOriginChanged": true
       },
       {
         "reason": "running_battle",
         "method": "Page.reload",
         "before": {
-          "timeOrigin": 1786658799173.5,
+          "timeOrigin": 1786565567438.9,
           "readyState": "complete",
           "navigationType": "reload"
         },
         "after": {
-          "timeOrigin": 1786658800516.9,
+          "timeOrigin": 1786565568888.3,
           "readyState": "complete",
           "navigationType": "reload"
         },
-        "beforeLoaderId": "2F2393500CD60549E11C3341C468B2FC",
-        "afterLoaderId": "8DCBF93B16F55878EA11C78561251887",
-        "loaderId": "8DCBF93B16F55878EA11C78561251887",
+        "beforeLoaderId": "15AA637CC9C1AB6CF8644BDE0FE27E9F",
+        "afterLoaderId": "EFF7B091B4F3F7A164E65393BAB4A427",
+        "loaderId": "EFF7B091B4F3F7A164E65393BAB4A427",
         "timeOriginChanged": true
       },
       {
         "reason": "result",
         "method": "Page.reload",
         "before": {
-          "timeOrigin": 1786658800516.9,
+          "timeOrigin": 1786565568888.3,
           "readyState": "complete",
           "navigationType": "reload"
         },
         "after": {
-          "timeOrigin": 1786658801433.6,
+          "timeOrigin": 1786565569905.5,
           "readyState": "complete",
           "navigationType": "reload"
         },
-        "beforeLoaderId": "8DCBF93B16F55878EA11C78561251887",
-        "afterLoaderId": "3FA4BAB19811721302048EF9F31F9888",
-        "loaderId": "3FA4BAB19811721302048EF9F31F9888",
+        "beforeLoaderId": "EFF7B091B4F3F7A164E65393BAB4A427",
+        "afterLoaderId": "6DCEBCA7B32A7F547CAE01198461E160",
+        "loaderId": "6DCEBCA7B32A7F547CAE01198461E160",
         "timeOriginChanged": true
       },
       {
         "reason": "replay",
         "method": "Page.reload",
         "before": {
-          "timeOrigin": 1786658801433.6,
+          "timeOrigin": 1786565569905.5,
           "readyState": "complete",
           "navigationType": "reload"
         },
         "after": {
-          "timeOrigin": 1786658804700.7,
+          "timeOrigin": 1786565573360.3,
           "readyState": "complete",
           "navigationType": "reload"
         },
-        "beforeLoaderId": "3FA4BAB19811721302048EF9F31F9888",
-        "afterLoaderId": "99C679543D2D4DE1B9CF633DEF192807",
-        "loaderId": "99C679543D2D4DE1B9CF633DEF192807",
+        "beforeLoaderId": "6DCEBCA7B32A7F547CAE01198461E160",
+        "afterLoaderId": "1751FA7563B018151778761D9185BCBE",
+        "loaderId": "1751FA7563B018151778761D9185BCBE",
         "timeOriginChanged": true
       }
     ],
@@ -4940,10 +4921,10 @@
               "operationCooldownUntil": 0
             },
             "domText": "◣\n钢铁指令\nIRON COMMAND · 指挥终端\n▤\n补给\n1,200/ 5,000\n+2/s\n◈\n合金\n1,000/ 5,000\n+1/s\n◎\n情报\n20/ 500\n+0.1/s\n⚡\n电力\n0/ 30\n空载\n✦\n指挥容量\n0/ 6\n空闲\n基地时间\n08:00:00\n第1天\n❚❚\n1×\n2×\n4×\n保存\n读取\n新游戏\n视图：基地全景 / BASE VIEW\n指挥区\n工业区\n军营区\n后勤区\n基地出口\nFPS 0 · 暂停\n概览\n建设\n生产\n部队\n编队\n战区\n维修\n科研\n战报\n基地概览\n阶段1 · 已开放\n指挥官简报\n战备就绪\n已运行时长\n0秒\n运行中建筑\n2 座\n上次保存\n尚未保存\n推演速度\n已暂停\n基地负载\n正常\n电力\n0 / 30\n指挥容量\n0 / 6\n资源产出\n每秒\n补给\n+2/s\n合金\n+1/s\n情报\n+0.1/s\n基地设施\n2 座\n指挥中心\n指挥+6\n小型发电站\n电力+30\n战区作战\n战区作战\n顶部资源栏与自动增长\nCanvas 伪2.5D 基地画面\n雷达旋转、烟雾、施工火花\n暂停 / 1× / 2× / 4× 速度（暂停前档位可恢复）\n五种建筑的完整建设流程与进度\n取消工程并返还 50% 资源\n建成后效果立即生效（产量 / 上限 / 电力 / 解锁）\n每30秒自动保存，施工与生产要素可续\n兵营 / 装甲工厂训练与制造五种单位\n生产队列（最多 5 项）与 50%/100% 取消返还\n单位实例入库与实时库存统计\n生产 / 施工动画与出厂表现\n作战编队创建、重命名、解散（最多 6 支）\n单位编入 / 移出与指挥容量实时校验\n3 套预设模板一键组建（原子操作）\n编队汇总属性与编成评估提示\nCanvas 基地集结区编队单位表现\n6 个战区目标、解锁链与占领收益\n雷达站决定敌情精度（精确编成 / 模糊估算）\n三套作战策略（谨慎推进 / 正面突破 / 火力侦察）\n任务补给成本预览与派遣资格校验\n确定性战斗求解器（同种子必得同结果）\n四阶段自动战斗（侦察→接敌→交火≤8轮→结算）\nCanvas 战斗回放（只播放事件，不决定胜负）\n战地抢救、压制与维修车修复判定\n可解释战报：胜负原因、损失、事件时间轴\n历史战报存档（最多 20 份）与存档版本4迁移\n单位档案、呼号、动态老兵等级与战斗属性修正\n重复任务：固定成本、冷却、战报与离线就绪提示\n战斗派遣快照、确定性重建与结算完整性校验\n操作提示：鼠标悬停基地内的建筑或虚线预留位可查看详情；空格键暂停/继续，数字键 1 / 2 / 3 切换 1× / 2× / 4× 速度。切到「建设」分页可批准新工程，「生产」分页可训练/制造单位，「编队」分页可把库存单位编成作战编队，「战区」分页选择目标与策略后派遣出击，「部队」分页可管理呼号与老兵档案；占领战区后可选择重复任务，战斗结束后可在「战报」分页复盘全过程，冷却会随游戏时间推进。\n通讯记录 / COMMS\n0 / 30\n推演已暂停",
-            "imageSha256": "011a0cbf2783d02b8c9e9c18c5f67c61e98165c88a6898a94e00a2911ac44062",
+            "imageSha256": "252205ef3ac7abd51c06aa96ed0fb8de2154feda488114a2081425274c8cc870",
             "screenshot": {
               "path": "screenshots/stage9-A/s9-a-01-base.png",
-              "sha256": "011a0cbf2783d02b8c9e9c18c5f67c61e98165c88a6898a94e00a2911ac44062"
+              "sha256": "252205ef3ac7abd51c06aa96ed0fb8de2154feda488114a2081425274c8cc870"
             }
           },
           {
@@ -4962,11 +4943,11 @@
               "riverCaptured": false,
               "operationCooldownUntil": 0
             },
-            "domText": "◣\n钢铁指令\nIRON COMMAND · 指挥终端\n▤\n补给\n841/ 5,000\n+2/s\n◈\n合金\n320/ 5,000\n+1/s\n◎\n情报\n27/ 500\n+0.1/s\n⚡\n电力\n12/ 30\n正常\n✦\n指挥容量\n0/ 6\n空闲\n基地时间\n08:01:10\n第1天\n❚❚\n1×\n2×\n4×\n保存\n读取\n新游戏\n视图：基地全景 / BASE VIEW\n指挥区\n工业区\n军营区\n后勤区\n基地出口\nFPS 60 · 暂停\n概览\n建设\n生产\n部队\n编队\n战区\n维修\n科研\n战报\n建设项目\n阶段2 · 已开放\n工程队状态\n空闲\n工程队当前空闲\n可批准新项目。\n可建设项目\n同时施工上限 1\n补给仓库\n可建造\n\n补给产量 +2/s，补给上限 +1000。\n\n所在区域\n后勤区\n建造时间\n20 秒\n电力需求\n占用 2\n前置条件\n无\n建设成本\n合金 200\n补给 100\n建成效果\n补给产量 +2/s；补给上限 +1,000\n批准建设\n合金加工厂\n可建造\n\n合金产量 +2/s，烟囱持续排烟。\n\n所在区域\n工业区\n建造时间\n30 秒\n电力需求\n占用 5\n前置条件\n无\n建设成本\n合金 300\n补给 150\n建成效果\n合金产量 +2/s\n批准建设\n兵营\n已建成\n\n解锁步兵班与反装甲班训练。\n\n所在区域\n军营区\n建造时间\n25 秒\n电力需求\n占用 4\n前置条件\n无\n建设成本\n合金 250\n补给 200\n建成效果\n解锁 步兵班、反装甲班（可生产）\n已建成\n装甲工厂\n已建成\n\n解锁侦察车、主战坦克与维修车生产。\n\n所在区域\n工业区\n建造时间\n45 秒\n电力需求\n占用 8\n前置条件\n兵营\n建设成本\n合金 500\n补给 300\n建成效果\n解锁 侦察车、主战坦克、维修车（可生产）\n已建成\n雷达站\n条件不足\n\n提升战前情报准确度，降低伏击概率。\n\n所在区域\n指挥区\n建造时间\n35 秒\n电力需求\n占用 6\n前置条件\n无\n建设成本\n合金 350\n补给 150\n情报 10\n建成效果\n侦察 +10；伏击抵抗 +25%；情报准确度提升\n暂不可建\n合金不足，缺少30\n技术实验室\n条件不足\n\n解锁科技研究。能够同时执行一项研究任务。\n\n所在区域\n指挥区\n建造时间\n50 秒\n电力需求\n占用 5\n前置条件\n雷达站\n建设成本\n合金 600\n补给 300\n情报 25\n建成效果\n暂无直接数值加成\n暂不可建\n需要先建成雷达站；合金不足，缺少280\n说明：每种建筑最多建造一座，同时只能进行 1 项工程。取消施工只返还 50% 的建设资源，暂停状态下施工进度不会推进。\n通讯记录 / COMMS\n6 / 30\n[08:00]\n兵营开始施工（合金250 · 补给200，预计25秒）。\n[08:00]\n兵营施工完成，已投入运行。\n[08:00]\n兵营已解锁新的单位类型（生产功能将在阶段3开放）。\n[08:00]\n装甲工厂开始施工（合金500 · 补给300，预计45秒）。\n[08:01]\n装甲工厂施工完成，已投入运行。\n[08:01]\n装甲工厂已解锁新的单位类型（生产功能将在阶段3开放）。\n推演已暂停",
-            "imageSha256": "1453d5ff4eb2e5950144b65369afd6ecf2b85f9101d2b777690c03c207b3a75e",
+            "domText": "◣\n钢铁指令\nIRON COMMAND · 指挥终端\n▤\n补给\n840/ 5,000\n+2/s\n◈\n合金\n320/ 5,000\n+1/s\n◎\n情报\n27/ 500\n+0.1/s\n⚡\n电力\n12/ 30\n正常\n✦\n指挥容量\n0/ 6\n空闲\n基地时间\n08:01:10\n第1天\n❚❚\n1×\n2×\n4×\n保存\n读取\n新游戏\n视图：基地全景 / BASE VIEW\n指挥区\n工业区\n军营区\n后勤区\n基地出口\nFPS 60 · 暂停\n概览\n建设\n生产\n部队\n编队\n战区\n维修\n科研\n战报\n建设项目\n阶段2 · 已开放\n工程队状态\n空闲\n工程队当前空闲\n可批准新项目。\n可建设项目\n同时施工上限 1\n补给仓库\n可建造\n\n补给产量 +2/s，补给上限 +1000。\n\n所在区域\n后勤区\n建造时间\n20 秒\n电力需求\n占用 2\n前置条件\n无\n建设成本\n合金 200\n补给 100\n建成效果\n补给产量 +2/s；补给上限 +1,000\n批准建设\n合金加工厂\n可建造\n\n合金产量 +2/s，烟囱持续排烟。\n\n所在区域\n工业区\n建造时间\n30 秒\n电力需求\n占用 5\n前置条件\n无\n建设成本\n合金 300\n补给 150\n建成效果\n合金产量 +2/s\n批准建设\n兵营\n已建成\n\n解锁步兵班与反装甲班训练。\n\n所在区域\n军营区\n建造时间\n25 秒\n电力需求\n占用 4\n前置条件\n无\n建设成本\n合金 250\n补给 200\n建成效果\n解锁 步兵班、反装甲班（可生产）\n已建成\n装甲工厂\n已建成\n\n解锁侦察车、主战坦克与维修车生产。\n\n所在区域\n工业区\n建造时间\n45 秒\n电力需求\n占用 8\n前置条件\n兵营\n建设成本\n合金 500\n补给 300\n建成效果\n解锁 侦察车、主战坦克、维修车（可生产）\n已建成\n雷达站\n条件不足\n\n提升战前情报准确度，降低伏击概率。\n\n所在区域\n指挥区\n建造时间\n35 秒\n电力需求\n占用 6\n前置条件\n无\n建设成本\n合金 350\n补给 150\n情报 10\n建成效果\n侦察 +10；伏击抵抗 +25%；情报准确度提升\n暂不可建\n合金不足，缺少30\n技术实验室\n条件不足\n\n解锁科技研究。能够同时执行一项研究任务。\n\n所在区域\n指挥区\n建造时间\n50 秒\n电力需求\n占用 5\n前置条件\n雷达站\n建设成本\n合金 600\n补给 300\n情报 25\n建成效果\n暂无直接数值加成\n暂不可建\n需要先建成雷达站；合金不足，缺少280\n说明：每种建筑最多建造一座，同时只能进行 1 项工程。取消施工只返还 50% 的建设资源，暂停状态下施工进度不会推进。\n通讯记录 / COMMS\n6 / 30\n[08:00]\n兵营开始施工（合金250 · 补给200，预计25秒）。\n[08:00]\n兵营施工完成，已投入运行。\n[08:00]\n兵营已解锁新的单位类型（生产功能将在阶段3开放）。\n[08:00]\n装甲工厂开始施工（合金500 · 补给300，预计45秒）。\n[08:01]\n装甲工厂施工完成，已投入运行。\n[08:01]\n装甲工厂已解锁新的单位类型（生产功能将在阶段3开放）。\n推演已暂停",
+            "imageSha256": "09a97563ea5fe3014fe085d560ef91080440578cc801506e1bfdb7c19aa43800",
             "screenshot": {
               "path": "screenshots/stage9-A/s9-a-02-buildings.png",
-              "sha256": "1453d5ff4eb2e5950144b65369afd6ecf2b85f9101d2b777690c03c207b3a75e"
+              "sha256": "09a97563ea5fe3014fe085d560ef91080440578cc801506e1bfdb7c19aa43800"
             }
           },
           {
@@ -4985,11 +4966,11 @@
               "riverCaptured": false,
               "operationCooldownUntil": 0
             },
-            "domText": "◣\n钢铁指令\nIRON COMMAND · 指挥终端\n▤\n补给\n1,401/ 5,000\n+2/s\n◈\n合金\n30/ 5,000\n+1/s\n◎\n情报\n88/ 500\n+0.1/s\n⚡\n电力\n12/ 30\n正常\n✦\n指挥容量\n0/ 6\n空闲\n基地时间\n08:11:20\n第1天\n❚❚\n1×\n2×\n4×\n保存\n读取\n新游戏\n视图：基地全景 / BASE VIEW\n指挥区\n工业区\n军营区\n后勤区\n基地出口\nFPS 60 · 暂停\n概览\n建设\n生产\n部队\n编队\n战区\n维修\n科研\n战报\n单位生产\n阶段3 · 已开放\n当前生产线\n空闲\n生产线当前空闲\n可批准新的训练或制造任务。\n等待队列\n最多 5 项（含当前）\n队列为空，可同时排队多项生产。\n可生产单位\n步兵班\n步兵\n\n地形适应好，可为车辆提供掩护，单独面对装甲较弱。\n\n来源建筑\n兵营\n生产时间\n10 秒\n攻击\n12\n反装甲\n4\n防御\n10\n侦察\n2\n机动\n5\n维修\n0\n生命值\n100\n任务补给消耗\n1\n指挥占用\n1\n生产成本\n补给 100\n当前库存\n0\n加入训练队列\n反装甲班\n步兵\n\n对坦克伤害高，但容易被压制。\n\n来源建筑\n兵营\n生产时间\n14 秒\n攻击\n18\n反装甲\n25\n防御\n7\n侦察\n2\n机动\n4\n维修\n0\n生命值\n90\n任务补给消耗\n2\n指挥占用\n1\n生产成本\n补给 130\n合金 30\n当前库存\n0\n加入训练队列\n侦察车\n车辆\n\n提升情报准确度、降低伏击风险，正面战斗力弱。\n\n来源建筑\n装甲工厂\n生产时间\n18 秒\n攻击\n6\n反装甲\n2\n防御\n6\n侦察\n20\n机动\n15\n维修\n0\n生命值\n90\n任务补给消耗\n2\n指挥占用\n1\n生产成本\n补给 100\n合金 120\n当前库存\n0\n加入制造队列\n合金不足，缺少89\n主战坦克\n装甲\n\n正面突破能力强，被反装甲单位克制，维修成本高。\n\n来源建筑\n装甲工厂\n生产时间\n30 秒\n攻击\n35\n反装甲\n20\n防御\n30\n侦察\n3\n机动\n10\n维修\n0\n生命值\n160\n任务补给消耗\n5\n指挥占用\n2\n生产成本\n补给 220\n合金 300\n当前库存\n3\n加入制造队列\n合金不足，缺少269\n维修车\n支援\n\n降低战后永久损失，战斗中恢复少量装甲耐久，无攻击能力。\n\n来源建筑\n装甲工厂\n生产时间\n24 秒\n攻击\n0\n反装甲\n0\n防御\n8\n侦察\n2\n机动\n8\n维修\n20\n生命值\n110\n任务补给消耗\n3\n指挥占用\n1\n生产成本\n补给 150\n合金 180\n当前库存\n0\n加入制造队列\n合金不足，缺少149\n装备制造\n装甲工厂生产\n反装甲瞄具\nweapon\n\n提高反装甲火力与目标识别能力，不改变生命上限。\n\n适用单位\n反装甲班、主战坦克\n制造时间\n18 秒\n科研前置\n模块化装配\n制造成本\n补给 180\n合金 140\n库存实例\n0\n加入制造队列\n需要先完成“模块化装配”；合金不足，缺少109\n战术指挥链\nutility\n\n提升战术通信与目标感知，不改变生命上限。\n\n适用单位\n步兵班、反装甲班、侦察车\n制造时间\n22 秒\n科研前置\n模块化装配\n制造成本\n补给 220\n合金 170\n库存实例\n0\n加入制造队列\n需要先完成“模块化装配”；合金不足，缺少139\n机动维修架\nutility\n\n增强野战抢修效率与保障防护，不改变生命上限。\n\n适用单位\n步兵班、维修车\n制造时间\n26 秒\n科研前置\n野战维护规程\n制造成本\n补给 260\n合金 220\n库存实例\n0\n加入制造队列\n需要先完成“野战维护规程”；合金不足，缺少189\n反应装甲模块\narmor\n\n提高装甲防护并保持车辆机动，不改变生命上限。\n\n适用单位\n侦察车、主战坦克、维修车\n制造时间\n32 秒\n科研前置\n复合装甲\n制造成本\n补给 320\n合金 280\n库存实例\n0\n加入制造队列\n需要先完成“复合装甲”；合金不足，缺少249\n精确火控组件\nweapon\n\n提高直接火力与反装甲精度，不改变生命上限。\n\n适用单位\n反装甲班、主战坦克\n制造时间\n38 秒\n科研前置\n扩建储备设施\n制造成本\n补给 380\n合金 340\n库存实例\n0\n加入制造队列\n需要先完成“扩建储备设施”；合金不足，缺少309\n单位库存\n库存总单位\n3\n空闲单位\n3\n已编入编队\n0\n维修中\n0\n步兵班\n× 0\n反装甲班\n× 0\n侦察车\n× 0\n主战坦克\n× 3\n维修车\n× 0\n说明：同时只生产 1 个单位，当前生产 + 等待队列最多 5 项。取消正在生产的单位返还 50% 成本，取消等待任务返还 100% 成本。库存单位不占用指挥容量，只有编入作战编队后才会占用。\n通讯记录 / COMMS\n16 / 30\n[08:00]\n兵营开始施工（合金250 · 补给200，预计25秒）。\n[08:00]\n兵营施工完成，已投入运行。\n[08:00]\n兵营已解锁新的单位类型（生产功能将在阶段3开放）。\n[08:00]\n装甲工厂开始施工（合金500 · 补给300，预计45秒）。\n[08:01]\n装甲工厂施工完成，已投入运行。\n[08:01]\n装甲工厂已解锁新的单位类型（生产功能将在阶段3开放）。\n[08:01]\n主战坦克开始制造。\n[08:01]\n主战坦克生产完成，已进入单位库存。\n[08:01]\n装甲工厂已空闲。\n[08:05]\n主战坦克开始制造。\n[08:06]\n主战坦克生产完成，已进入单位库存。\n[08:06]\n装甲工厂已空闲。\n[08:09]\n各区域例行巡查完成，未发现异常。\n[08:10]\n主战坦克开始制造。\n[08:11]\n主战坦克生产完成，已进入单位库存。\n[08:11]\n装甲工厂已空闲。\n推演已暂停",
-            "imageSha256": "bea498f8a1947f339b43573bfdf9a9aa9aebdb2d6e4f2389fb25d5a18f55c286",
+            "domText": "◣\n钢铁指令\nIRON COMMAND · 指挥终端\n▤\n补给\n1,400/ 5,000\n+2/s\n◈\n合金\n30/ 5,000\n+1/s\n◎\n情报\n88/ 500\n+0.1/s\n⚡\n电力\n12/ 30\n正常\n✦\n指挥容量\n0/ 6\n空闲\n基地时间\n08:11:20\n第1天\n❚❚\n1×\n2×\n4×\n保存\n读取\n新游戏\n视图：基地全景 / BASE VIEW\n指挥区\n工业区\n军营区\n后勤区\n基地出口\nFPS 60 · 暂停\n概览\n建设\n生产\n部队\n编队\n战区\n维修\n科研\n战报\n单位生产\n阶段3 · 已开放\n当前生产线\n空闲\n生产线当前空闲\n可批准新的训练或制造任务。\n等待队列\n最多 5 项（含当前）\n队列为空，可同时排队多项生产。\n可生产单位\n步兵班\n步兵\n\n地形适应好，可为车辆提供掩护，单独面对装甲较弱。\n\n来源建筑\n兵营\n生产时间\n10 秒\n攻击\n12\n反装甲\n4\n防御\n10\n侦察\n2\n机动\n5\n维修\n0\n生命值\n100\n任务补给消耗\n1\n指挥占用\n1\n生产成本\n补给 100\n当前库存\n0\n加入训练队列\n反装甲班\n步兵\n\n对坦克伤害高，但容易被压制。\n\n来源建筑\n兵营\n生产时间\n14 秒\n攻击\n18\n反装甲\n25\n防御\n7\n侦察\n2\n机动\n4\n维修\n0\n生命值\n90\n任务补给消耗\n2\n指挥占用\n1\n生产成本\n补给 130\n合金 30\n当前库存\n0\n加入训练队列\n侦察车\n车辆\n\n提升情报准确度、降低伏击风险，正面战斗力弱。\n\n来源建筑\n装甲工厂\n生产时间\n18 秒\n攻击\n6\n反装甲\n2\n防御\n6\n侦察\n20\n机动\n15\n维修\n0\n生命值\n90\n任务补给消耗\n2\n指挥占用\n1\n生产成本\n补给 100\n合金 120\n当前库存\n0\n加入制造队列\n合金不足，缺少89\n主战坦克\n装甲\n\n正面突破能力强，被反装甲单位克制，维修成本高。\n\n来源建筑\n装甲工厂\n生产时间\n30 秒\n攻击\n35\n反装甲\n20\n防御\n30\n侦察\n3\n机动\n10\n维修\n0\n生命值\n160\n任务补给消耗\n5\n指挥占用\n2\n生产成本\n补给 220\n合金 300\n当前库存\n3\n加入制造队列\n合金不足，缺少269\n维修车\n支援\n\n降低战后永久损失，战斗中恢复少量装甲耐久，无攻击能力。\n\n来源建筑\n装甲工厂\n生产时间\n24 秒\n攻击\n0\n反装甲\n0\n防御\n8\n侦察\n2\n机动\n8\n维修\n20\n生命值\n110\n任务补给消耗\n3\n指挥占用\n1\n生产成本\n补给 150\n合金 180\n当前库存\n0\n加入制造队列\n合金不足，缺少149\n装备制造\n装甲工厂生产\n反装甲瞄具\nweapon\n\n提高反装甲火力与目标识别能力，不改变生命上限。\n\n适用单位\n反装甲班、主战坦克\n制造时间\n18 秒\n科研前置\n模块化装配\n制造成本\n补给 180\n合金 140\n库存实例\n0\n加入制造队列\n需要先完成“模块化装配”；合金不足，缺少109\n战术指挥链\nutility\n\n提升战术通信与目标感知，不改变生命上限。\n\n适用单位\n步兵班、反装甲班、侦察车\n制造时间\n22 秒\n科研前置\n模块化装配\n制造成本\n补给 220\n合金 170\n库存实例\n0\n加入制造队列\n需要先完成“模块化装配”；合金不足，缺少139\n机动维修架\nutility\n\n增强野战抢修效率与保障防护，不改变生命上限。\n\n适用单位\n步兵班、维修车\n制造时间\n26 秒\n科研前置\n野战维护规程\n制造成本\n补给 260\n合金 220\n库存实例\n0\n加入制造队列\n需要先完成“野战维护规程”；合金不足，缺少189\n反应装甲模块\narmor\n\n提高装甲防护并保持车辆机动，不改变生命上限。\n\n适用单位\n侦察车、主战坦克、维修车\n制造时间\n32 秒\n科研前置\n复合装甲\n制造成本\n补给 320\n合金 280\n库存实例\n0\n加入制造队列\n需要先完成“复合装甲”；合金不足，缺少249\n精确火控组件\nweapon\n\n提高直接火力与反装甲精度，不改变生命上限。\n\n适用单位\n反装甲班、主战坦克\n制造时间\n38 秒\n科研前置\n扩建储备设施\n制造成本\n补给 380\n合金 340\n库存实例\n0\n加入制造队列\n需要先完成“扩建储备设施”；合金不足，缺少309\n单位库存\n库存总单位\n3\n空闲单位\n3\n已编入编队\n0\n维修中\n0\n步兵班\n× 0\n反装甲班\n× 0\n侦察车\n× 0\n主战坦克\n× 3\n维修车\n× 0\n说明：同时只生产 1 个单位，当前生产 + 等待队列最多 5 项。取消正在生产的单位返还 50% 成本，取消等待任务返还 100% 成本。库存单位不占用指挥容量，只有编入作战编队后才会占用。\n通讯记录 / COMMS\n16 / 30\n[08:00]\n兵营开始施工（合金250 · 补给200，预计25秒）。\n[08:00]\n兵营施工完成，已投入运行。\n[08:00]\n兵营已解锁新的单位类型（生产功能将在阶段3开放）。\n[08:00]\n装甲工厂开始施工（合金500 · 补给300，预计45秒）。\n[08:01]\n装甲工厂施工完成，已投入运行。\n[08:01]\n装甲工厂已解锁新的单位类型（生产功能将在阶段3开放）。\n[08:01]\n主战坦克开始制造。\n[08:01]\n主战坦克生产完成，已进入单位库存。\n[08:01]\n装甲工厂已空闲。\n[08:05]\n主战坦克开始制造。\n[08:06]\n主战坦克生产完成，已进入单位库存。\n[08:06]\n装甲工厂已空闲。\n[08:09]\n各区域例行巡查完成，未发现异常。\n[08:10]\n主战坦克开始制造。\n[08:11]\n主战坦克生产完成，已进入单位库存。\n[08:11]\n装甲工厂已空闲。\n推演已暂停",
+            "imageSha256": "cafcbe9dc21535e2e1835d72d9a8fe8b467bf7904f459805c32eb955d4ffba1e",
             "screenshot": {
               "path": "screenshots/stage9-A/s9-a-03-units.png",
-              "sha256": "bea498f8a1947f339b43573bfdf9a9aa9aebdb2d6e4f2389fb25d5a18f55c286"
+              "sha256": "cafcbe9dc21535e2e1835d72d9a8fe8b467bf7904f459805c32eb955d4ffba1e"
             }
           },
           {
@@ -5008,11 +4989,11 @@
               "riverCaptured": false,
               "operationCooldownUntil": 0
             },
-            "domText": "◣\n钢铁指令\nIRON COMMAND · 指挥终端\n▤\n补给\n1,401/ 5,000\n+2/s\n◈\n合金\n30/ 5,000\n+1/s\n◎\n情报\n88/ 500\n+0.1/s\n⚡\n电力\n12/ 30\n正常\n✦\n指挥容量\n6/ 6\n已满\n基地时间\n08:11:20\n第1天\n❚❚\n1×\n2×\n4×\n保存\n读取\n新游戏\n视图：基地全景 / BASE VIEW\n指挥区\n工业区\n军营区\n后勤区\n基地出口\nFPS 60 · 暂停\n概览\n建设\n生产\n部队\n编队\n战区\n维修\n科研\n战报\n作战编队\n阶段4 · 已开放\n指挥容量\n已满\n已占用 / 总容量\n6 / 6\n剩余可编入\n0 点\n编队数量\n1 / 6 支\n库存单位不占用指挥容量；单位一旦编入编队即占用，移出或解散后立即释放。\n快速组建\n最多 6 支编队\n空编队\n自定义\n\n先建立一支空编队，再手动挑选库存单位编入。\n\n新建空编队\n综合战斗群\n指挥 4\n\n步兵班×2、反装甲班×1、侦察车×1\n\n一键组建\n库存不足：步兵班缺少2，反装甲班缺少1，侦察车缺少1\n装甲突击群\n指挥 6\n\n主战坦克×2、步兵班×1、维修车×1\n\n一键组建\n库存不足：主战坦克缺少2，步兵班缺少1，维修车缺少1\n侦察分队\n指挥 3\n\n侦察车×2、步兵班×1\n\n一键组建\n库存不足：侦察车缺少2，步兵班缺少1\n我的编队\n1 支\n第一战斗群\n待命\n成员 3\n指挥 6\n攻击 105\n防御 90\n侦察 9\n编队详情 · 第一战斗群\n待命\n重命名\n解散编队\n单位数量\n3\n指挥占用\n6\n总生命值\n480 / 480\n完好度\n100%\n总攻击\n105\n总反装甲\n60\n总防御\n90\n总侦察\n9\n总维修\n0\n平均机动\n10.0\n任务补给消耗\n15/次\n编成\n主战坦克×3\n装甲缺少步兵掩护，容易被反装甲单位偷袭。\n装甲部队缺少维修车，战损恢复较慢。\n当前成员\n3 个\n主战坦克\n生命 160/160 · 指挥 2 · 战斗 0 次\n移出\n主战坦克\n生命 160/160 · 指挥 2 · 战斗 0 次\n移出\n主战坦克\n生命 160/160 · 指挥 2 · 战斗 0 次\n移出\n可加入单位\n0 个空闲\n没有空闲单位，请先到「生产」分页训练或制造。\n说明：最多同时保有 6 支编队，编队名称不超过 20 个字符。只有「待命」状态的编队可以调整成员、重命名与解散；单位加入编队后占用指挥容量，移出或解散后立即返回库存。编队组建完成后，切到「战区」分页即可选择目标与作战策略并派遣出击。\n通讯记录 / COMMS\n21 / 30\n[08:00]\n兵营开始施工（合金250 · 补给200，预计25秒）。\n[08:00]\n兵营施工完成，已投入运行。\n[08:00]\n兵营已解锁新的单位类型（生产功能将在阶段3开放）。\n[08:00]\n装甲工厂开始施工（合金500 · 补给300，预计45秒）。\n[08:01]\n装甲工厂施工完成，已投入运行。\n[08:01]\n装甲工厂已解锁新的单位类型（生产功能将在阶段3开放）。\n[08:01]\n主战坦克开始制造。\n[08:01]\n主战坦克生产完成，已进入单位库存。\n[08:01]\n装甲工厂已空闲。\n[08:05]\n主战坦克开始制造。\n[08:06]\n主战坦克生产完成，已进入单位库存。\n[08:06]\n装甲工厂已空闲。\n[08:09]\n各区域例行巡查完成，未发现异常。\n[08:10]\n主战坦克开始制造。\n[08:11]\n主战坦克生产完成，已进入单位库存。\n[08:11]\n装甲工厂已空闲。\n[08:11]\n编队「第一战斗群」已建立。\n[08:11]\n主战坦克已加入「第一战斗群」，指挥容量剩余4。\n[08:11]\n主战坦克已加入「第一战斗群」，指挥容量剩余2。\n[08:11]\n主战坦克已加入「第一战斗群」，指挥容量剩余0。\n[08:11]\n基地数据已保存。\n基地数据已保存",
-            "imageSha256": "89b7adf09c1b1fcc438695df5c72d8180458bc45ca8db117cc1da19ff0c3a022",
+            "domText": "◣\n钢铁指令\nIRON COMMAND · 指挥终端\n▤\n补给\n1,400/ 5,000\n+2/s\n◈\n合金\n30/ 5,000\n+1/s\n◎\n情报\n88/ 500\n+0.1/s\n⚡\n电力\n12/ 30\n正常\n✦\n指挥容量\n6/ 6\n已满\n基地时间\n08:11:20\n第1天\n❚❚\n1×\n2×\n4×\n保存\n读取\n新游戏\n视图：基地全景 / BASE VIEW\n指挥区\n工业区\n军营区\n后勤区\n基地出口\nFPS 60 · 暂停\n概览\n建设\n生产\n部队\n编队\n战区\n维修\n科研\n战报\n作战编队\n阶段4 · 已开放\n指挥容量\n已满\n已占用 / 总容量\n6 / 6\n剩余可编入\n0 点\n编队数量\n1 / 6 支\n库存单位不占用指挥容量；单位一旦编入编队即占用，移出或解散后立即释放。\n快速组建\n最多 6 支编队\n空编队\n自定义\n\n先建立一支空编队，再手动挑选库存单位编入。\n\n新建空编队\n综合战斗群\n指挥 4\n\n步兵班×2、反装甲班×1、侦察车×1\n\n一键组建\n库存不足：步兵班缺少2，反装甲班缺少1，侦察车缺少1\n装甲突击群\n指挥 6\n\n主战坦克×2、步兵班×1、维修车×1\n\n一键组建\n库存不足：主战坦克缺少2，步兵班缺少1，维修车缺少1\n侦察分队\n指挥 3\n\n侦察车×2、步兵班×1\n\n一键组建\n库存不足：侦察车缺少2，步兵班缺少1\n我的编队\n1 支\n第一战斗群\n待命\n成员 3\n指挥 6\n攻击 105\n防御 90\n侦察 9\n编队详情 · 第一战斗群\n待命\n重命名\n解散编队\n单位数量\n3\n指挥占用\n6\n总生命值\n480 / 480\n完好度\n100%\n总攻击\n105\n总反装甲\n60\n总防御\n90\n总侦察\n9\n总维修\n0\n平均机动\n10.0\n任务补给消耗\n15/次\n编成\n主战坦克×3\n装甲缺少步兵掩护，容易被反装甲单位偷袭。\n装甲部队缺少维修车，战损恢复较慢。\n当前成员\n3 个\n主战坦克\n生命 160/160 · 指挥 2 · 战斗 0 次\n移出\n主战坦克\n生命 160/160 · 指挥 2 · 战斗 0 次\n移出\n主战坦克\n生命 160/160 · 指挥 2 · 战斗 0 次\n移出\n可加入单位\n0 个空闲\n没有空闲单位，请先到「生产」分页训练或制造。\n说明：最多同时保有 6 支编队，编队名称不超过 20 个字符。只有「待命」状态的编队可以调整成员、重命名与解散；单位加入编队后占用指挥容量，移出或解散后立即返回库存。编队组建完成后，切到「战区」分页即可选择目标与作战策略并派遣出击。\n通讯记录 / COMMS\n21 / 30\n[08:00]\n兵营开始施工（合金250 · 补给200，预计25秒）。\n[08:00]\n兵营施工完成，已投入运行。\n[08:00]\n兵营已解锁新的单位类型（生产功能将在阶段3开放）。\n[08:00]\n装甲工厂开始施工（合金500 · 补给300，预计45秒）。\n[08:01]\n装甲工厂施工完成，已投入运行。\n[08:01]\n装甲工厂已解锁新的单位类型（生产功能将在阶段3开放）。\n[08:01]\n主战坦克开始制造。\n[08:01]\n主战坦克生产完成，已进入单位库存。\n[08:01]\n装甲工厂已空闲。\n[08:05]\n主战坦克开始制造。\n[08:06]\n主战坦克生产完成，已进入单位库存。\n[08:06]\n装甲工厂已空闲。\n[08:09]\n各区域例行巡查完成，未发现异常。\n[08:10]\n主战坦克开始制造。\n[08:11]\n主战坦克生产完成，已进入单位库存。\n[08:11]\n装甲工厂已空闲。\n[08:11]\n编队「第一战斗群」已建立。\n[08:11]\n主战坦克已加入「第一战斗群」，指挥容量剩余4。\n[08:11]\n主战坦克已加入「第一战斗群」，指挥容量剩余2。\n[08:11]\n主战坦克已加入「第一战斗群」，指挥容量剩余0。\n[08:11]\n基地数据已保存。\n基地数据已保存",
+            "imageSha256": "fc527b9f06445e99898084668ea6a20cbeb89db95a24dd764c9ec799b941a941",
             "screenshot": {
               "path": "screenshots/stage9-A/s9-a-04-formation.png",
-              "sha256": "89b7adf09c1b1fcc438695df5c72d8180458bc45ca8db117cc1da19ff0c3a022"
+              "sha256": "fc527b9f06445e99898084668ea6a20cbeb89db95a24dd764c9ec799b941a941"
             }
           },
           {
@@ -5032,11 +5013,11 @@
               "riverCaptured": false,
               "operationCooldownUntil": 0
             },
-            "domText": "◣\n钢铁指令\nIRON COMMAND · 指挥终端\n▤\n补给\n1,401/ 5,000\n+2/s\n◈\n合金\n30/ 5,000\n+1/s\n◎\n情报\n88/ 500\n+0.1/s\n⚡\n电力\n12/ 30\n正常\n✦\n指挥容量\n6/ 6\n已满\n基地时间\n08:11:20\n第1天\n❚❚\n1×\n2×\n4×\n保存\n读取\n新游戏\n视图：基地全景 / BASE VIEW\n指挥区\n工业区\n军营区\n后勤区\n基地出口\nFPS 60 · 暂停\n概览\n建设\n生产\n部队\n编队\n战区\n维修\n科研\n战报\n战区目标\n阶段5 · 已开放\n作战目标\n3 / 6 已占领\n废弃矿区\n已占领\n难度 ★☆☆☆☆\n地形 开阔地\n隐蔽 4\n\n少量敌方步兵驻守的旧采掘场。\n\n敌情（侦察估算）\n兵力 约 1-5\n敌方步兵班 约 2-4\n装甲攻击 ×1.10 · 车辆机动 ×1.10　|　伏击风险 低\n首占奖励 合金 300　|　占领收益 合金+1/s\n废料回收 · 重复任务\n清理矿区残余威胁，并回收可用合金。 · 经验倍率 ×0.8\n成本系数 ×4 · 奖励范围 alloy 100-180\n任务已就绪\n选择任务\n尝试 0 次\n胜利 0 次\n尚未交战\n边境公路\n已占领\n难度 ★★☆☆☆\n地形 公路\n隐蔽 8\n\n敌方巡逻队与反装甲小组控制的运输干线。\n\n敌情（侦察估算）\n兵力 约 4-8\n敌方步兵班 约 3-5\n疑似敌方反装甲小组 约 1-3\n车辆机动 ×1.10 · 伏击风险略高　|　伏击风险 中\n首占奖励 补给 400 / 情报 10　|　占领收益 补给+1/s\n补给护送 · 重复任务\n护送运输队穿过仍不稳定的边境公路。 · 经验倍率 ×1\n成本系数 ×7 · 奖励范围 supply 180-300 / intel 2-5\n任务已就绪\n选择任务\n尝试 0 次\n胜利 0 次\n尚未交战\n敌方前哨站\n已占领\n难度 ★★★☆☆\n地形 防御阵地\n隐蔽 14\n\n构筑了工事的前进基地，火力密集。\n\n敌情（侦察估算）\n兵力 约 8-12\n敌方步兵班 约 4-6\n疑似敌方反装甲小组 约 2-4\n疑似敌方轻型装甲车 约 1-3\n敌方防御 ×1.20 · 我方攻击 ×0.90　|　伏击风险 高\n首占奖励 合金 500 / 情报 25\n残敌清剿 · 重复任务\n清剿前哨站周边残余武装，获取情报和工业材料。 · 经验倍率 ×1.25\n成本系数 ×10 · 奖励范围 alloy 220-360 / intel 6-12\n任务已就绪\n选择任务\n尝试 0 次\n胜利 0 次\n尚未交战\n河谷渡场\n可进攻\n难度 ★★★★☆\n地形 河谷道路\n隐蔽 16\n\n穿越河谷的旧渡场，是向纵深推进的关键补给节点。\n\n敌情（侦察估算）\n兵力 约 1-5\n敌方步兵班 约 2-4\n车辆机动 ×1.10 · 伏击风险略高　|　伏击风险 高\n首占奖励 补给 600 / 情报 30　|　占领收益 补给+1/s\n尝试 0 次\n胜利 0 次\n尚未交战\n通信中继站\n未解锁\n难度 ★★★★★\n地形 开阔高地\n隐蔽 18\n\n控制敌方纵深通信链路的高地中继站。\n\n敌情（侦察估算）\n兵力 约 4-8\n敌方步兵班 约 3-5\n疑似敌方反装甲小组 约 1-2\n疑似敌方轻型装甲车 约 1-2\n装甲攻击 ×1.10 · 车辆机动 ×1.10　|　伏击风险 高\n首占奖励 合金 700 / 情报 35　|　占领收益 合金+1/s\n尝试 0 次\n胜利 0 次\n尚未交战\n需要先占领：河谷渡场\n北岭山口\n未解锁\n难度 ★★★★★\n地形 山口阵地\n隐蔽 20\n\n通往北岭纵深的最后山口，必须稳步夺取并守住。\n\n敌情（侦察估算）\n兵力 约 3-7\n敌方步兵班 约 2-4\n疑似敌方反装甲小组 约 1-2\n疑似敌方轻型装甲车 约 1-2\n敌方防御 ×1.20 · 我方攻击 ×0.90　|　伏击风险 高\n首占奖励 合金 900 / 补给 700 / 情报 45　|　占领收益 补给+1/s 合金+1/s\n尝试 0 次\n胜利 0 次\n尚未交战\n需要先占领：通信中继站\n派遣控制台\n河谷渡场\n目标：河谷渡场 · 河谷道路 · 补给系数 ×16\n任务类型：战役任务 · 战区首次占领任务，无重复任务冷却\n出击编队\n第一战斗群（待命 · 3单位 · 指挥6）\n攻击 105 · 防御 90 · 侦察 9 · 耐久 480 · 维持 15\n作战策略\n谨慎推进\n谨慎推进\n无额外消耗\n\n侦察 +30%，防御 +15%，行军与战斗时间 +25%，伏击概率降低，输出略降约 8%。\n\n侦察充分，提前发现敌方反装甲阵地\n防御稳固，承受首轮打击更稳\n伏击概率显著降低\n整体输出下降约 8%\n行军与战斗时间更长\n正面突破\n无额外消耗\n\n首阶段攻击 +25%，装甲攻击额外提高，补给消耗 +25%，侦察不足时反装甲损失风险增加。\n\n首轮攻击 +25%\n装甲单位攻击额外 +15%\n任务补给成本 +25%\n侦察不足时受反装甲伤害风险升高\n火力侦察\n情报 5\n\n侦察与压制提高，有概率提前发现高威胁单位，步兵攻击略降，消耗 5 点情报。\n\n侦察 +20%\n压制能力 +25%\n更易提前发现高威胁单位\n步兵攻击 -8%\n额外消耗情报 5\n任务成本\n资源充足\n出击消耗\n补给 240\n计算方式\n维持 15 × 系数 16 × 策略 1\n参战单位\n3 个\n查看部署确认\n说明：同一时间只能进行一场作战。战斗结果在派遣时即由求解器一次性算出，画面只是按事件时间轴回放，暂停或加速不会改变胜负。每场战斗最多 8 轮交火；建成雷达站可获得精确敌情，否则只能得到估算区间。\n通讯记录 / COMMS\n22 / 30\n[08:00]\n兵营开始施工（合金250 · 补给200，预计25秒）。\n[08:00]\n兵营施工完成，已投入运行。\n[08:00]\n兵营已解锁新的单位类型（生产功能将在阶段3开放）。\n[08:00]\n装甲工厂开始施工（合金500 · 补给300，预计45秒）。\n[08:01]\n装甲工厂施工完成，已投入运行。\n[08:01]\n装甲工厂已解锁新的单位类型（生产功能将在阶段3开放）。\n[08:01]\n主战坦克开始制造。\n[08:01]\n主战坦克生产完成，已进入单位库存。\n[08:01]\n装甲工厂已空闲。\n[08:05]\n主战坦克开始制造。\n[08:06]\n主战坦克生产完成，已进入单位库存。\n[08:06]\n装甲工厂已空闲。\n[08:09]\n各区域例行巡查完成，未发现异常。\n[08:10]\n主战坦克开始制造。\n[08:11]\n主战坦克生产完成，已进入单位库存。\n[08:11]\n装甲工厂已空闲。\n[08:11]\n编队「第一战斗群」已建立。\n[08:11]\n主战坦克已加入「第一战斗群」，指挥容量剩余4。\n[08:11]\n主战坦克已加入「第一战斗群」，指挥容量剩余2。\n[08:11]\n主战坦克已加入「第一战斗群」，指挥容量剩余0。\n[08:11]\n基地数据已保存。\n[08:11]\n基地数据已保存。\n基地数据已保存",
-            "imageSha256": "84b28dfc2008738e2ae8376ec810d7ef2a7a6e3caad59c5c0a716bdc73dc3c27",
+            "domText": "◣\n钢铁指令\nIRON COMMAND · 指挥终端\n▤\n补给\n1,400/ 5,000\n+2/s\n◈\n合金\n30/ 5,000\n+1/s\n◎\n情报\n88/ 500\n+0.1/s\n⚡\n电力\n12/ 30\n正常\n✦\n指挥容量\n6/ 6\n已满\n基地时间\n08:11:20\n第1天\n❚❚\n1×\n2×\n4×\n保存\n读取\n新游戏\n视图：基地全景 / BASE VIEW\n指挥区\n工业区\n军营区\n后勤区\n基地出口\nFPS 60 · 暂停\n概览\n建设\n生产\n部队\n编队\n战区\n维修\n科研\n战报\n战区目标\n阶段5 · 已开放\n作战目标\n3 / 6 已占领\n废弃矿区\n已占领\n难度 ★☆☆☆☆\n地形 开阔地\n隐蔽 4\n\n少量敌方步兵驻守的旧采掘场。\n\n敌情（侦察估算）\n兵力 约 1-5\n敌方步兵班 约 2-4\n装甲攻击 ×1.10 · 车辆机动 ×1.10　|　伏击风险 低\n首占奖励 合金 300　|　占领收益 合金+1/s\n废料回收 · 重复任务\n清理矿区残余威胁，并回收可用合金。 · 经验倍率 ×0.8\n成本系数 ×4 · 奖励范围 alloy 100-180\n任务已就绪\n选择任务\n尝试 0 次\n胜利 0 次\n尚未交战\n边境公路\n已占领\n难度 ★★☆☆☆\n地形 公路\n隐蔽 8\n\n敌方巡逻队与反装甲小组控制的运输干线。\n\n敌情（侦察估算）\n兵力 约 4-8\n敌方步兵班 约 3-5\n疑似敌方反装甲小组 约 1-3\n车辆机动 ×1.10 · 伏击风险略高　|　伏击风险 中\n首占奖励 补给 400 / 情报 10　|　占领收益 补给+1/s\n补给护送 · 重复任务\n护送运输队穿过仍不稳定的边境公路。 · 经验倍率 ×1\n成本系数 ×7 · 奖励范围 supply 180-300 / intel 2-5\n任务已就绪\n选择任务\n尝试 0 次\n胜利 0 次\n尚未交战\n敌方前哨站\n已占领\n难度 ★★★☆☆\n地形 防御阵地\n隐蔽 14\n\n构筑了工事的前进基地，火力密集。\n\n敌情（侦察估算）\n兵力 约 8-12\n敌方步兵班 约 4-6\n疑似敌方反装甲小组 约 2-4\n疑似敌方轻型装甲车 约 1-3\n敌方防御 ×1.20 · 我方攻击 ×0.90　|　伏击风险 高\n首占奖励 合金 500 / 情报 25\n残敌清剿 · 重复任务\n清剿前哨站周边残余武装，获取情报和工业材料。 · 经验倍率 ×1.25\n成本系数 ×10 · 奖励范围 alloy 220-360 / intel 6-12\n任务已就绪\n选择任务\n尝试 0 次\n胜利 0 次\n尚未交战\n河谷渡场\n可进攻\n难度 ★★★★☆\n地形 河谷道路\n隐蔽 16\n\n穿越河谷的旧渡场，是向纵深推进的关键补给节点。\n\n敌情（侦察估算）\n兵力 约 1-5\n敌方步兵班 约 2-4\n车辆机动 ×1.10 · 伏击风险略高　|　伏击风险 高\n首占奖励 补给 600 / 情报 30　|　占领收益 补给+1/s\n尝试 0 次\n胜利 0 次\n尚未交战\n通信中继站\n未解锁\n难度 ★★★★★\n地形 开阔高地\n隐蔽 18\n\n控制敌方纵深通信链路的高地中继站。\n\n敌情（侦察估算）\n兵力 约 4-8\n敌方步兵班 约 3-5\n疑似敌方反装甲小组 约 1-2\n疑似敌方轻型装甲车 约 1-2\n装甲攻击 ×1.10 · 车辆机动 ×1.10　|　伏击风险 高\n首占奖励 合金 700 / 情报 35　|　占领收益 合金+1/s\n尝试 0 次\n胜利 0 次\n尚未交战\n需要先占领：河谷渡场\n北岭山口\n未解锁\n难度 ★★★★★\n地形 山口阵地\n隐蔽 20\n\n通往北岭纵深的最后山口，必须稳步夺取并守住。\n\n敌情（侦察估算）\n兵力 约 3-7\n敌方步兵班 约 2-4\n疑似敌方反装甲小组 约 1-2\n疑似敌方轻型装甲车 约 1-2\n敌方防御 ×1.20 · 我方攻击 ×0.90　|　伏击风险 高\n首占奖励 合金 900 / 补给 700 / 情报 45　|　占领收益 补给+1/s 合金+1/s\n尝试 0 次\n胜利 0 次\n尚未交战\n需要先占领：通信中继站\n派遣控制台\n河谷渡场\n目标：河谷渡场 · 河谷道路 · 补给系数 ×16\n任务类型：战役任务 · 战区首次占领任务，无重复任务冷却\n出击编队\n第一战斗群（待命 · 3单位 · 指挥6）\n攻击 105 · 防御 90 · 侦察 9 · 耐久 480 · 维持 15\n作战策略\n谨慎推进\n谨慎推进\n无额外消耗\n\n侦察 +30%，防御 +15%，行军与战斗时间 +25%，伏击概率降低，输出略降约 8%。\n\n侦察充分，提前发现敌方反装甲阵地\n防御稳固，承受首轮打击更稳\n伏击概率显著降低\n整体输出下降约 8%\n行军与战斗时间更长\n正面突破\n无额外消耗\n\n首阶段攻击 +25%，装甲攻击额外提高，补给消耗 +25%，侦察不足时反装甲损失风险增加。\n\n首轮攻击 +25%\n装甲单位攻击额外 +15%\n任务补给成本 +25%\n侦察不足时受反装甲伤害风险升高\n火力侦察\n情报 5\n\n侦察与压制提高，有概率提前发现高威胁单位，步兵攻击略降，消耗 5 点情报。\n\n侦察 +20%\n压制能力 +25%\n更易提前发现高威胁单位\n步兵攻击 -8%\n额外消耗情报 5\n任务成本\n资源充足\n出击消耗\n补给 240\n计算方式\n维持 15 × 系数 16 × 策略 1\n参战单位\n3 个\n查看部署确认\n说明：同一时间只能进行一场作战。战斗结果在派遣时即由求解器一次性算出，画面只是按事件时间轴回放，暂停或加速不会改变胜负。每场战斗最多 8 轮交火；建成雷达站可获得精确敌情，否则只能得到估算区间。\n通讯记录 / COMMS\n22 / 30\n[08:00]\n兵营开始施工（合金250 · 补给200，预计25秒）。\n[08:00]\n兵营施工完成，已投入运行。\n[08:00]\n兵营已解锁新的单位类型（生产功能将在阶段3开放）。\n[08:00]\n装甲工厂开始施工（合金500 · 补给300，预计45秒）。\n[08:01]\n装甲工厂施工完成，已投入运行。\n[08:01]\n装甲工厂已解锁新的单位类型（生产功能将在阶段3开放）。\n[08:01]\n主战坦克开始制造。\n[08:01]\n主战坦克生产完成，已进入单位库存。\n[08:01]\n装甲工厂已空闲。\n[08:05]\n主战坦克开始制造。\n[08:06]\n主战坦克生产完成，已进入单位库存。\n[08:06]\n装甲工厂已空闲。\n[08:09]\n各区域例行巡查完成，未发现异常。\n[08:10]\n主战坦克开始制造。\n[08:11]\n主战坦克生产完成，已进入单位库存。\n[08:11]\n装甲工厂已空闲。\n[08:11]\n编队「第一战斗群」已建立。\n[08:11]\n主战坦克已加入「第一战斗群」，指挥容量剩余4。\n[08:11]\n主战坦克已加入「第一战斗群」，指挥容量剩余2。\n[08:11]\n主战坦克已加入「第一战斗群」，指挥容量剩余0。\n[08:11]\n基地数据已保存。\n[08:11]\n基地数据已保存。\n基地数据已保存",
+            "imageSha256": "1a82480bde4097db95eff67d13c0a36356194474bee57013f1012e1acd0e3acd",
             "screenshot": {
               "path": "screenshots/stage9-A/s9-a-05-eligibility.png",
-              "sha256": "84b28dfc2008738e2ae8376ec810d7ef2a7a6e3caad59c5c0a716bdc73dc3c27"
+              "sha256": "1a82480bde4097db95eff67d13c0a36356194474bee57013f1012e1acd0e3acd"
             }
           },
           {
@@ -5057,11 +5038,11 @@
               "riverCaptured": false,
               "operationCooldownUntil": 0
             },
-            "domText": "◣\n钢铁指令\nIRON COMMAND · 指挥终端\n▤\n补给\n1,401/ 5,000\n+2/s\n◈\n合金\n30/ 5,000\n+1/s\n◎\n情报\n88/ 500\n+0.1/s\n⚡\n电力\n12/ 30\n正常\n✦\n指挥容量\n6/ 6\n已满\n基地时间\n08:11:20\n第1天\n❚❚\n1×\n2×\n4×\n保存\n读取\n新游戏\n视图：基地全景 / BASE VIEW\n指挥区\n工业区\n军营区\n后勤区\n基地出口\nFPS 60 · 暂停\n概览\n建设\n生产\n部队\n编队\n战区\n维修\n科研\n战报\n战区目标\n阶段5 · 已开放\n作战目标\n3 / 6 已占领\n废弃矿区\n已占领\n难度 ★☆☆☆☆\n地形 开阔地\n隐蔽 4\n\n少量敌方步兵驻守的旧采掘场。\n\n敌情（侦察估算）\n兵力 约 1-5\n敌方步兵班 约 2-4\n装甲攻击 ×1.10 · 车辆机动 ×1.10　|　伏击风险 低\n首占奖励 合金 300　|　占领收益 合金+1/s\n废料回收 · 重复任务\n清理矿区残余威胁，并回收可用合金。 · 经验倍率 ×0.8\n成本系数 ×4 · 奖励范围 alloy 100-180\n任务已就绪\n选择任务\n尝试 0 次\n胜利 0 次\n尚未交战\n边境公路\n已占领\n难度 ★★☆☆☆\n地形 公路\n隐蔽 8\n\n敌方巡逻队与反装甲小组控制的运输干线。\n\n敌情（侦察估算）\n兵力 约 4-8\n敌方步兵班 约 3-5\n疑似敌方反装甲小组 约 1-3\n车辆机动 ×1.10 · 伏击风险略高　|　伏击风险 中\n首占奖励 补给 400 / 情报 10　|　占领收益 补给+1/s\n补给护送 · 重复任务\n护送运输队穿过仍不稳定的边境公路。 · 经验倍率 ×1\n成本系数 ×7 · 奖励范围 supply 180-300 / intel 2-5\n任务已就绪\n选择任务\n尝试 0 次\n胜利 0 次\n尚未交战\n敌方前哨站\n已占领\n难度 ★★★☆☆\n地形 防御阵地\n隐蔽 14\n\n构筑了工事的前进基地，火力密集。\n\n敌情（侦察估算）\n兵力 约 8-12\n敌方步兵班 约 4-6\n疑似敌方反装甲小组 约 2-4\n疑似敌方轻型装甲车 约 1-3\n敌方防御 ×1.20 · 我方攻击 ×0.90　|　伏击风险 高\n首占奖励 合金 500 / 情报 25\n残敌清剿 · 重复任务\n清剿前哨站周边残余武装，获取情报和工业材料。 · 经验倍率 ×1.25\n成本系数 ×10 · 奖励范围 alloy 220-360 / intel 6-12\n任务已就绪\n选择任务\n尝试 0 次\n胜利 0 次\n尚未交战\n河谷渡场\n可进攻\n难度 ★★★★☆\n地形 河谷道路\n隐蔽 16\n\n穿越河谷的旧渡场，是向纵深推进的关键补给节点。\n\n敌情（侦察估算）\n兵力 约 1-5\n敌方步兵班 约 2-4\n车辆机动 ×1.10 · 伏击风险略高　|　伏击风险 高\n首占奖励 补给 600 / 情报 30　|　占领收益 补给+1/s\n尝试 0 次\n胜利 0 次\n尚未交战\n通信中继站\n未解锁\n难度 ★★★★★\n地形 开阔高地\n隐蔽 18\n\n控制敌方纵深通信链路的高地中继站。\n\n敌情（侦察估算）\n兵力 约 4-8\n敌方步兵班 约 3-5\n疑似敌方反装甲小组 约 1-2\n疑似敌方轻型装甲车 约 1-2\n装甲攻击 ×1.10 · 车辆机动 ×1.10　|　伏击风险 高\n首占奖励 合金 700 / 情报 35　|　占领收益 合金+1/s\n尝试 0 次\n胜利 0 次\n尚未交战\n需要先占领：河谷渡场\n北岭山口\n未解锁\n难度 ★★★★★\n地形 山口阵地\n隐蔽 20\n\n通往北岭纵深的最后山口，必须稳步夺取并守住。\n\n敌情（侦察估算）\n兵力 约 3-7\n敌方步兵班 约 2-4\n疑似敌方反装甲小组 约 1-2\n疑似敌方轻型装甲车 约 1-2\n敌方防御 ×1.20 · 我方攻击 ×0.90　|　伏击风险 高\n首占奖励 合金 900 / 补给 700 / 情报 45　|　占领收益 补给+1/s 合金+1/s\n尝试 0 次\n胜利 0 次\n尚未交战\n需要先占领：通信中继站\n派遣控制台\n河谷渡场\n目标：河谷渡场 · 河谷道路 · 补给系数 ×16\n任务类型：战役任务 · 战区首次占领任务，无重复任务冷却\n出击编队\n第一战斗群（待命 · 3单位 · 指挥6）\n攻击 105 · 防御 90 · 侦察 9 · 耐久 480 · 维持 15\n作战策略\n谨慎推进\n谨慎推进\n无额外消耗\n\n侦察 +30%，防御 +15%，行军与战斗时间 +25%，伏击概率降低，输出略降约 8%。\n\n侦察充分，提前发现敌方反装甲阵地\n防御稳固，承受首轮打击更稳\n伏击概率显著降低\n整体输出下降约 8%\n行军与战斗时间更长\n正面突破\n无额外消耗\n\n首阶段攻击 +25%，装甲攻击额外提高，补给消耗 +25%，侦察不足时反装甲损失风险增加。\n\n首轮攻击 +25%\n装甲单位攻击额外 +15%\n任务补给成本 +25%\n侦察不足时受反装甲伤害风险升高\n火力侦察\n情报 5\n\n侦察与压制提高，有概率提前发现高威胁单位，步兵攻击略降，消耗 5 点情报。\n\n侦察 +20%\n压制能力 +25%\n更易提前发现高威胁单位\n步兵攻击 -8%\n额外消耗情报 5\n任务成本\n资源充足\n出击消耗\n补给 240\n计算方式\n维持 15 × 系数 16 × 策略 1\n参战单位\n3 个\n等待确认\n部署确认 / DEPLOYMENT REVIEW\n待确认\n第一战斗群 → 河谷渡场\n战役任务 · 策略 谨慎推进\n目标战区\n河谷渡场\n预计消耗\n补给 240\n冷却安排\n首次战役任务：无重复任务冷却\n确认时游戏时间\n29480 秒\n实际派遣快照 · 参战单位\n3 个\n主战坦克\nHP 160/160 · 状态 待命 · 新兵 · intact\n主战坦克\nHP 160/160 · 状态 待命 · 新兵 · intact\n主战坦克\nHP 160/160 · 状态 待命 · 新兵 · intact\n以上清单来自本次派遣将写入的 dispatchSnapshot；确认时核心层会再次校验资格与资源。\n取消派遣\n确认派遣\n说明：同一时间只能进行一场作战。战斗结果在派遣时即由求解器一次性算出，画面只是按事件时间轴回放，暂停或加速不会改变胜负。每场战斗最多 8 轮交火；建成雷达站可获得精确敌情，否则只能得到估算区间。\n通讯记录 / COMMS\n22 / 30\n[08:00]\n兵营开始施工（合金250 · 补给200，预计25秒）。\n[08:00]\n兵营施工完成，已投入运行。\n[08:00]\n兵营已解锁新的单位类型（生产功能将在阶段3开放）。\n[08:00]\n装甲工厂开始施工（合金500 · 补给300，预计45秒）。\n[08:01]\n装甲工厂施工完成，已投入运行。\n[08:01]\n装甲工厂已解锁新的单位类型（生产功能将在阶段3开放）。\n[08:01]\n主战坦克开始制造。\n[08:01]\n主战坦克生产完成，已进入单位库存。\n[08:01]\n装甲工厂已空闲。\n[08:05]\n主战坦克开始制造。\n[08:06]\n主战坦克生产完成，已进入单位库存。\n[08:06]\n装甲工厂已空闲。\n[08:09]\n各区域例行巡查完成，未发现异常。\n[08:10]\n主战坦克开始制造。\n[08:11]\n主战坦克生产完成，已进入单位库存。\n[08:11]\n装甲工厂已空闲。\n[08:11]\n编队「第一战斗群」已建立。\n[08:11]\n主战坦克已加入「第一战斗群」，指挥容量剩余4。\n[08:11]\n主战坦克已加入「第一战斗群」，指挥容量剩余2。\n[08:11]\n主战坦克已加入「第一战斗群」，指挥容量剩余0。\n[08:11]\n基地数据已保存。\n[08:11]\n基地数据已保存。\n基地数据已保存",
-            "imageSha256": "5ac1f8a1c91f949e19e1fafda0e3f95eb3b625016affcd425aeac0b44f8efd1e",
+            "domText": "◣\n钢铁指令\nIRON COMMAND · 指挥终端\n▤\n补给\n1,400/ 5,000\n+2/s\n◈\n合金\n30/ 5,000\n+1/s\n◎\n情报\n88/ 500\n+0.1/s\n⚡\n电力\n12/ 30\n正常\n✦\n指挥容量\n6/ 6\n已满\n基地时间\n08:11:20\n第1天\n❚❚\n1×\n2×\n4×\n保存\n读取\n新游戏\n视图：基地全景 / BASE VIEW\n指挥区\n工业区\n军营区\n后勤区\n基地出口\nFPS 60 · 暂停\n概览\n建设\n生产\n部队\n编队\n战区\n维修\n科研\n战报\n战区目标\n阶段5 · 已开放\n作战目标\n3 / 6 已占领\n废弃矿区\n已占领\n难度 ★☆☆☆☆\n地形 开阔地\n隐蔽 4\n\n少量敌方步兵驻守的旧采掘场。\n\n敌情（侦察估算）\n兵力 约 1-5\n敌方步兵班 约 2-4\n装甲攻击 ×1.10 · 车辆机动 ×1.10　|　伏击风险 低\n首占奖励 合金 300　|　占领收益 合金+1/s\n废料回收 · 重复任务\n清理矿区残余威胁，并回收可用合金。 · 经验倍率 ×0.8\n成本系数 ×4 · 奖励范围 alloy 100-180\n任务已就绪\n选择任务\n尝试 0 次\n胜利 0 次\n尚未交战\n边境公路\n已占领\n难度 ★★☆☆☆\n地形 公路\n隐蔽 8\n\n敌方巡逻队与反装甲小组控制的运输干线。\n\n敌情（侦察估算）\n兵力 约 4-8\n敌方步兵班 约 3-5\n疑似敌方反装甲小组 约 1-3\n车辆机动 ×1.10 · 伏击风险略高　|　伏击风险 中\n首占奖励 补给 400 / 情报 10　|　占领收益 补给+1/s\n补给护送 · 重复任务\n护送运输队穿过仍不稳定的边境公路。 · 经验倍率 ×1\n成本系数 ×7 · 奖励范围 supply 180-300 / intel 2-5\n任务已就绪\n选择任务\n尝试 0 次\n胜利 0 次\n尚未交战\n敌方前哨站\n已占领\n难度 ★★★☆☆\n地形 防御阵地\n隐蔽 14\n\n构筑了工事的前进基地，火力密集。\n\n敌情（侦察估算）\n兵力 约 8-12\n敌方步兵班 约 4-6\n疑似敌方反装甲小组 约 2-4\n疑似敌方轻型装甲车 约 1-3\n敌方防御 ×1.20 · 我方攻击 ×0.90　|　伏击风险 高\n首占奖励 合金 500 / 情报 25\n残敌清剿 · 重复任务\n清剿前哨站周边残余武装，获取情报和工业材料。 · 经验倍率 ×1.25\n成本系数 ×10 · 奖励范围 alloy 220-360 / intel 6-12\n任务已就绪\n选择任务\n尝试 0 次\n胜利 0 次\n尚未交战\n河谷渡场\n可进攻\n难度 ★★★★☆\n地形 河谷道路\n隐蔽 16\n\n穿越河谷的旧渡场，是向纵深推进的关键补给节点。\n\n敌情（侦察估算）\n兵力 约 1-5\n敌方步兵班 约 2-4\n车辆机动 ×1.10 · 伏击风险略高　|　伏击风险 高\n首占奖励 补给 600 / 情报 30　|　占领收益 补给+1/s\n尝试 0 次\n胜利 0 次\n尚未交战\n通信中继站\n未解锁\n难度 ★★★★★\n地形 开阔高地\n隐蔽 18\n\n控制敌方纵深通信链路的高地中继站。\n\n敌情（侦察估算）\n兵力 约 4-8\n敌方步兵班 约 3-5\n疑似敌方反装甲小组 约 1-2\n疑似敌方轻型装甲车 约 1-2\n装甲攻击 ×1.10 · 车辆机动 ×1.10　|　伏击风险 高\n首占奖励 合金 700 / 情报 35　|　占领收益 合金+1/s\n尝试 0 次\n胜利 0 次\n尚未交战\n需要先占领：河谷渡场\n北岭山口\n未解锁\n难度 ★★★★★\n地形 山口阵地\n隐蔽 20\n\n通往北岭纵深的最后山口，必须稳步夺取并守住。\n\n敌情（侦察估算）\n兵力 约 3-7\n敌方步兵班 约 2-4\n疑似敌方反装甲小组 约 1-2\n疑似敌方轻型装甲车 约 1-2\n敌方防御 ×1.20 · 我方攻击 ×0.90　|　伏击风险 高\n首占奖励 合金 900 / 补给 700 / 情报 45　|　占领收益 补给+1/s 合金+1/s\n尝试 0 次\n胜利 0 次\n尚未交战\n需要先占领：通信中继站\n派遣控制台\n河谷渡场\n目标：河谷渡场 · 河谷道路 · 补给系数 ×16\n任务类型：战役任务 · 战区首次占领任务，无重复任务冷却\n出击编队\n第一战斗群（待命 · 3单位 · 指挥6）\n攻击 105 · 防御 90 · 侦察 9 · 耐久 480 · 维持 15\n作战策略\n谨慎推进\n谨慎推进\n无额外消耗\n\n侦察 +30%，防御 +15%，行军与战斗时间 +25%，伏击概率降低，输出略降约 8%。\n\n侦察充分，提前发现敌方反装甲阵地\n防御稳固，承受首轮打击更稳\n伏击概率显著降低\n整体输出下降约 8%\n行军与战斗时间更长\n正面突破\n无额外消耗\n\n首阶段攻击 +25%，装甲攻击额外提高，补给消耗 +25%，侦察不足时反装甲损失风险增加。\n\n首轮攻击 +25%\n装甲单位攻击额外 +15%\n任务补给成本 +25%\n侦察不足时受反装甲伤害风险升高\n火力侦察\n情报 5\n\n侦察与压制提高，有概率提前发现高威胁单位，步兵攻击略降，消耗 5 点情报。\n\n侦察 +20%\n压制能力 +25%\n更易提前发现高威胁单位\n步兵攻击 -8%\n额外消耗情报 5\n任务成本\n资源充足\n出击消耗\n补给 240\n计算方式\n维持 15 × 系数 16 × 策略 1\n参战单位\n3 个\n等待确认\n部署确认 / DEPLOYMENT REVIEW\n待确认\n第一战斗群 → 河谷渡场\n战役任务 · 策略 谨慎推进\n目标战区\n河谷渡场\n预计消耗\n补给 240\n冷却安排\n首次战役任务：无重复任务冷却\n确认时游戏时间\n29480 秒\n实际派遣快照 · 参战单位\n3 个\n主战坦克\nHP 160/160 · 状态 待命 · 新兵 · intact\n主战坦克\nHP 160/160 · 状态 待命 · 新兵 · intact\n主战坦克\nHP 160/160 · 状态 待命 · 新兵 · intact\n以上清单来自本次派遣将写入的 dispatchSnapshot；确认时核心层会再次校验资格与资源。\n取消派遣\n确认派遣\n说明：同一时间只能进行一场作战。战斗结果在派遣时即由求解器一次性算出，画面只是按事件时间轴回放，暂停或加速不会改变胜负。每场战斗最多 8 轮交火；建成雷达站可获得精确敌情，否则只能得到估算区间。\n通讯记录 / COMMS\n22 / 30\n[08:00]\n兵营开始施工（合金250 · 补给200，预计25秒）。\n[08:00]\n兵营施工完成，已投入运行。\n[08:00]\n兵营已解锁新的单位类型（生产功能将在阶段3开放）。\n[08:00]\n装甲工厂开始施工（合金500 · 补给300，预计45秒）。\n[08:01]\n装甲工厂施工完成，已投入运行。\n[08:01]\n装甲工厂已解锁新的单位类型（生产功能将在阶段3开放）。\n[08:01]\n主战坦克开始制造。\n[08:01]\n主战坦克生产完成，已进入单位库存。\n[08:01]\n装甲工厂已空闲。\n[08:05]\n主战坦克开始制造。\n[08:06]\n主战坦克生产完成，已进入单位库存。\n[08:06]\n装甲工厂已空闲。\n[08:09]\n各区域例行巡查完成，未发现异常。\n[08:10]\n主战坦克开始制造。\n[08:11]\n主战坦克生产完成，已进入单位库存。\n[08:11]\n装甲工厂已空闲。\n[08:11]\n编队「第一战斗群」已建立。\n[08:11]\n主战坦克已加入「第一战斗群」，指挥容量剩余4。\n[08:11]\n主战坦克已加入「第一战斗群」，指挥容量剩余2。\n[08:11]\n主战坦克已加入「第一战斗群」，指挥容量剩余0。\n[08:11]\n基地数据已保存。\n[08:11]\n基地数据已保存。\n基地数据已保存",
+            "imageSha256": "033d4d2c35f4cf2849d0c8882e4de7de52abad21d21773707c5d4937048fa627",
             "screenshot": {
               "path": "screenshots/stage9-A/s9-a-06-review.png",
-              "sha256": "5ac1f8a1c91f949e19e1fafda0e3f95eb3b625016affcd425aeac0b44f8efd1e"
+              "sha256": "033d4d2c35f4cf2849d0c8882e4de7de52abad21d21773707c5d4937048fa627"
             }
           },
           {
@@ -5073,18 +5054,18 @@
               "reason": "deployment_review",
               "method": "Page.reload",
               "before": {
-                "timeOrigin": 1786658625114,
+                "timeOrigin": 1786565393175.3,
                 "readyState": "complete",
                 "navigationType": "navigate"
               },
               "after": {
-                "timeOrigin": 1786658799173.5,
+                "timeOrigin": 1786565567438.9,
                 "readyState": "complete",
                 "navigationType": "reload"
               },
-              "beforeLoaderId": "62CB6D76A0CCC154CB0BC0C349B48C0E",
-              "afterLoaderId": "2F2393500CD60549E11C3341C468B2FC",
-              "loaderId": "2F2393500CD60549E11C3341C468B2FC",
+              "beforeLoaderId": "3D0FCDCB0C19D238C88E9C714F73832A",
+              "afterLoaderId": "15AA637CC9C1AB6CF8644BDE0FE27E9F",
+              "loaderId": "15AA637CC9C1AB6CF8644BDE0FE27E9F",
               "timeOriginChanged": true
             },
             "reviewVisibleAfterReload": false,
@@ -5099,11 +5080,11 @@
               "riverCaptured": false,
               "operationCooldownUntil": 0
             },
-            "domText": "◣\n钢铁指令\nIRON COMMAND · 指挥终端\n▤\n补给\n1,401/ 5,000\n+3/s\n◈\n合金\n30/ 5,000\n+2/s\n◎\n情报\n88/ 500\n+0.1/s\n⚡\n电力\n12/ 30\n正常\n✦\n指挥容量\n6/ 6\n已满\n基地时间\n08:11:20\n第1天\n❚❚\n1×\n2×\n4×\n保存\n读取\n新游戏\n视图：基地全景 / BASE VIEW\n指挥区\n工业区\n军营区\n后勤区\n基地出口\nFPS 0 · 暂停\n概览\n建设\n生产\n部队\n编队\n战区\n维修\n科研\n战报\n战区目标\n阶段5 · 已开放\n作战目标\n3 / 6 已占领\n废弃矿区\n已占领\n难度 ★☆☆☆☆\n地形 开阔地\n隐蔽 4\n\n少量敌方步兵驻守的旧采掘场。\n\n敌情（侦察估算）\n兵力 约 1-5\n敌方步兵班 约 2-4\n装甲攻击 ×1.10 · 车辆机动 ×1.10　|　伏击风险 低\n首占奖励 合金 300　|　占领收益 合金+1/s\n废料回收 · 重复任务\n清理矿区残余威胁，并回收可用合金。 · 经验倍率 ×0.8\n成本系数 ×4 · 奖励范围 alloy 100-180\n任务已就绪\n选择任务\n尝试 0 次\n胜利 0 次\n尚未交战\n边境公路\n已占领\n难度 ★★☆☆☆\n地形 公路\n隐蔽 8\n\n敌方巡逻队与反装甲小组控制的运输干线。\n\n敌情（侦察估算）\n兵力 约 4-8\n敌方步兵班 约 3-5\n疑似敌方反装甲小组 约 1-3\n车辆机动 ×1.10 · 伏击风险略高　|　伏击风险 中\n首占奖励 补给 400 / 情报 10　|　占领收益 补给+1/s\n补给护送 · 重复任务\n护送运输队穿过仍不稳定的边境公路。 · 经验倍率 ×1\n成本系数 ×7 · 奖励范围 supply 180-300 / intel 2-5\n任务已就绪\n选择任务\n尝试 0 次\n胜利 0 次\n尚未交战\n敌方前哨站\n已占领\n难度 ★★★☆☆\n地形 防御阵地\n隐蔽 14\n\n构筑了工事的前进基地，火力密集。\n\n敌情（侦察估算）\n兵力 约 8-12\n敌方步兵班 约 4-6\n疑似敌方反装甲小组 约 2-4\n疑似敌方轻型装甲车 约 1-3\n敌方防御 ×1.20 · 我方攻击 ×0.90　|　伏击风险 高\n首占奖励 合金 500 / 情报 25\n残敌清剿 · 重复任务\n清剿前哨站周边残余武装，获取情报和工业材料。 · 经验倍率 ×1.25\n成本系数 ×10 · 奖励范围 alloy 220-360 / intel 6-12\n任务已就绪\n选择任务\n尝试 0 次\n胜利 0 次\n尚未交战\n河谷渡场\n可进攻\n难度 ★★★★☆\n地形 河谷道路\n隐蔽 16\n\n穿越河谷的旧渡场，是向纵深推进的关键补给节点。\n\n敌情（侦察估算）\n兵力 约 1-5\n敌方步兵班 约 2-4\n车辆机动 ×1.10 · 伏击风险略高　|　伏击风险 高\n首占奖励 补给 600 / 情报 30　|　占领收益 补给+1/s\n尝试 0 次\n胜利 0 次\n尚未交战\n通信中继站\n未解锁\n难度 ★★★★★\n地形 开阔高地\n隐蔽 18\n\n控制敌方纵深通信链路的高地中继站。\n\n敌情（侦察估算）\n兵力 约 4-8\n敌方步兵班 约 3-5\n疑似敌方反装甲小组 约 1-2\n疑似敌方轻型装甲车 约 1-2\n装甲攻击 ×1.10 · 车辆机动 ×1.10　|　伏击风险 高\n首占奖励 合金 700 / 情报 35　|　占领收益 合金+1/s\n尝试 0 次\n胜利 0 次\n尚未交战\n需要先占领：河谷渡场\n北岭山口\n未解锁\n难度 ★★★★★\n地形 山口阵地\n隐蔽 20\n\n通往北岭纵深的最后山口，必须稳步夺取并守住。\n\n敌情（侦察估算）\n兵力 约 3-7\n敌方步兵班 约 2-4\n疑似敌方反装甲小组 约 1-2\n疑似敌方轻型装甲车 约 1-2\n敌方防御 ×1.20 · 我方攻击 ×0.90　|　伏击风险 高\n首占奖励 合金 900 / 补给 700 / 情报 45　|　占领收益 补给+1/s 合金+1/s\n尝试 0 次\n胜利 0 次\n尚未交战\n需要先占领：通信中继站\n派遣控制台\n河谷渡场\n目标：河谷渡场 · 河谷道路 · 补给系数 ×16\n任务类型：战役任务 · 战区首次占领任务，无重复任务冷却\n出击编队\n第一战斗群（待命 · 3单位 · 指挥6）\n攻击 105 · 防御 90 · 侦察 9 · 耐久 480 · 维持 15\n作战策略\n谨慎推进\n谨慎推进\n无额外消耗\n\n侦察 +30%，防御 +15%，行军与战斗时间 +25%，伏击概率降低，输出略降约 8%。\n\n侦察充分，提前发现敌方反装甲阵地\n防御稳固，承受首轮打击更稳\n伏击概率显著降低\n整体输出下降约 8%\n行军与战斗时间更长\n正面突破\n无额外消耗\n\n首阶段攻击 +25%，装甲攻击额外提高，补给消耗 +25%，侦察不足时反装甲损失风险增加。\n\n首轮攻击 +25%\n装甲单位攻击额外 +15%\n任务补给成本 +25%\n侦察不足时受反装甲伤害风险升高\n火力侦察\n情报 5\n\n侦察与压制提高，有概率提前发现高威胁单位，步兵攻击略降，消耗 5 点情报。\n\n侦察 +20%\n压制能力 +25%\n更易提前发现高威胁单位\n步兵攻击 -8%\n额外消耗情报 5\n任务成本\n资源充足\n出击消耗\n补给 240\n计算方式\n维持 15 × 系数 16 × 策略 1\n参战单位\n3 个\n查看部署确认\n说明：同一时间只能进行一场作战。战斗结果在派遣时即由求解器一次性算出，画面只是按事件时间轴回放，暂停或加速不会改变胜负。每场战斗最多 8 轮交火；建成雷达站可获得精确敌情，否则只能得到估算区间。\n通讯记录 / COMMS\n25 / 30\n[08:00]\n兵营开始施工（合金250 · 补给200，预计25秒）。\n[08:00]\n兵营施工完成，已投入运行。\n[08:00]\n兵营已解锁新的单位类型（生产功能将在阶段3开放）。\n[08:00]\n装甲工厂开始施工（合金500 · 补给300，预计45秒）。\n[08:01]\n装甲工厂施工完成，已投入运行。\n[08:01]\n装甲工厂已解锁新的单位类型（生产功能将在阶段3开放）。\n[08:01]\n主战坦克开始制造。\n[08:01]\n主战坦克生产完成，已进入单位库存。\n[08:01]\n装甲工厂已空闲。\n[08:05]\n主战坦克开始制造。\n[08:06]\n主战坦克生产完成，已进入单位库存。\n[08:06]\n装甲工厂已空闲。\n[08:09]\n各区域例行巡查完成，未发现异常。\n[08:10]\n主战坦克开始制造。\n[08:11]\n主战坦克生产完成，已进入单位库存。\n[08:11]\n装甲工厂已空闲。\n[08:11]\n编队「第一战斗群」已建立。\n[08:11]\n主战坦克已加入「第一战斗群」，指挥容量剩余4。\n[08:11]\n主战坦克已加入「第一战斗群」，指挥容量剩余2。\n[08:11]\n主战坦克已加入「第一战斗群」，指挥容量剩余0。\n[08:11]\n基地数据已保存。\n[08:11]\n基地数据已保存。\n[08:11]\n存档已载入，基地状态恢复。\n[08:11]\n1支编队已恢复，指挥容量占用 6/6。\n[08:11]\n已占领战区：废弃矿区、边境公路、敌方前哨站，占领收益持续生效。",
-            "imageSha256": "2b1fddfa04e957d57d84878a82e29a7576ce07d478e8dcd70c14fa39edef229a",
+            "domText": "◣\n钢铁指令\nIRON COMMAND · 指挥终端\n▤\n补给\n1,400/ 5,000\n+3/s\n◈\n合金\n30/ 5,000\n+2/s\n◎\n情报\n88/ 500\n+0.1/s\n⚡\n电力\n12/ 30\n正常\n✦\n指挥容量\n6/ 6\n已满\n基地时间\n08:11:20\n第1天\n❚❚\n1×\n2×\n4×\n保存\n读取\n新游戏\n视图：基地全景 / BASE VIEW\n指挥区\n工业区\n军营区\n后勤区\n基地出口\nFPS 0 · 暂停\n概览\n建设\n生产\n部队\n编队\n战区\n维修\n科研\n战报\n战区目标\n阶段5 · 已开放\n作战目标\n3 / 6 已占领\n废弃矿区\n已占领\n难度 ★☆☆☆☆\n地形 开阔地\n隐蔽 4\n\n少量敌方步兵驻守的旧采掘场。\n\n敌情（侦察估算）\n兵力 约 1-5\n敌方步兵班 约 2-4\n装甲攻击 ×1.10 · 车辆机动 ×1.10　|　伏击风险 低\n首占奖励 合金 300　|　占领收益 合金+1/s\n废料回收 · 重复任务\n清理矿区残余威胁，并回收可用合金。 · 经验倍率 ×0.8\n成本系数 ×4 · 奖励范围 alloy 100-180\n任务已就绪\n选择任务\n尝试 0 次\n胜利 0 次\n尚未交战\n边境公路\n已占领\n难度 ★★☆☆☆\n地形 公路\n隐蔽 8\n\n敌方巡逻队与反装甲小组控制的运输干线。\n\n敌情（侦察估算）\n兵力 约 4-8\n敌方步兵班 约 3-5\n疑似敌方反装甲小组 约 1-3\n车辆机动 ×1.10 · 伏击风险略高　|　伏击风险 中\n首占奖励 补给 400 / 情报 10　|　占领收益 补给+1/s\n补给护送 · 重复任务\n护送运输队穿过仍不稳定的边境公路。 · 经验倍率 ×1\n成本系数 ×7 · 奖励范围 supply 180-300 / intel 2-5\n任务已就绪\n选择任务\n尝试 0 次\n胜利 0 次\n尚未交战\n敌方前哨站\n已占领\n难度 ★★★☆☆\n地形 防御阵地\n隐蔽 14\n\n构筑了工事的前进基地，火力密集。\n\n敌情（侦察估算）\n兵力 约 8-12\n敌方步兵班 约 4-6\n疑似敌方反装甲小组 约 2-4\n疑似敌方轻型装甲车 约 1-3\n敌方防御 ×1.20 · 我方攻击 ×0.90　|　伏击风险 高\n首占奖励 合金 500 / 情报 25\n残敌清剿 · 重复任务\n清剿前哨站周边残余武装，获取情报和工业材料。 · 经验倍率 ×1.25\n成本系数 ×10 · 奖励范围 alloy 220-360 / intel 6-12\n任务已就绪\n选择任务\n尝试 0 次\n胜利 0 次\n尚未交战\n河谷渡场\n可进攻\n难度 ★★★★☆\n地形 河谷道路\n隐蔽 16\n\n穿越河谷的旧渡场，是向纵深推进的关键补给节点。\n\n敌情（侦察估算）\n兵力 约 1-5\n敌方步兵班 约 2-4\n车辆机动 ×1.10 · 伏击风险略高　|　伏击风险 高\n首占奖励 补给 600 / 情报 30　|　占领收益 补给+1/s\n尝试 0 次\n胜利 0 次\n尚未交战\n通信中继站\n未解锁\n难度 ★★★★★\n地形 开阔高地\n隐蔽 18\n\n控制敌方纵深通信链路的高地中继站。\n\n敌情（侦察估算）\n兵力 约 4-8\n敌方步兵班 约 3-5\n疑似敌方反装甲小组 约 1-2\n疑似敌方轻型装甲车 约 1-2\n装甲攻击 ×1.10 · 车辆机动 ×1.10　|　伏击风险 高\n首占奖励 合金 700 / 情报 35　|　占领收益 合金+1/s\n尝试 0 次\n胜利 0 次\n尚未交战\n需要先占领：河谷渡场\n北岭山口\n未解锁\n难度 ★★★★★\n地形 山口阵地\n隐蔽 20\n\n通往北岭纵深的最后山口，必须稳步夺取并守住。\n\n敌情（侦察估算）\n兵力 约 3-7\n敌方步兵班 约 2-4\n疑似敌方反装甲小组 约 1-2\n疑似敌方轻型装甲车 约 1-2\n敌方防御 ×1.20 · 我方攻击 ×0.90　|　伏击风险 高\n首占奖励 合金 900 / 补给 700 / 情报 45　|　占领收益 补给+1/s 合金+1/s\n尝试 0 次\n胜利 0 次\n尚未交战\n需要先占领：通信中继站\n派遣控制台\n河谷渡场\n目标：河谷渡场 · 河谷道路 · 补给系数 ×16\n任务类型：战役任务 · 战区首次占领任务，无重复任务冷却\n出击编队\n第一战斗群（待命 · 3单位 · 指挥6）\n攻击 105 · 防御 90 · 侦察 9 · 耐久 480 · 维持 15\n作战策略\n谨慎推进\n谨慎推进\n无额外消耗\n\n侦察 +30%，防御 +15%，行军与战斗时间 +25%，伏击概率降低，输出略降约 8%。\n\n侦察充分，提前发现敌方反装甲阵地\n防御稳固，承受首轮打击更稳\n伏击概率显著降低\n整体输出下降约 8%\n行军与战斗时间更长\n正面突破\n无额外消耗\n\n首阶段攻击 +25%，装甲攻击额外提高，补给消耗 +25%，侦察不足时反装甲损失风险增加。\n\n首轮攻击 +25%\n装甲单位攻击额外 +15%\n任务补给成本 +25%\n侦察不足时受反装甲伤害风险升高\n火力侦察\n情报 5\n\n侦察与压制提高，有概率提前发现高威胁单位，步兵攻击略降，消耗 5 点情报。\n\n侦察 +20%\n压制能力 +25%\n更易提前发现高威胁单位\n步兵攻击 -8%\n额外消耗情报 5\n任务成本\n资源充足\n出击消耗\n补给 240\n计算方式\n维持 15 × 系数 16 × 策略 1\n参战单位\n3 个\n查看部署确认\n说明：同一时间只能进行一场作战。战斗结果在派遣时即由求解器一次性算出，画面只是按事件时间轴回放，暂停或加速不会改变胜负。每场战斗最多 8 轮交火；建成雷达站可获得精确敌情，否则只能得到估算区间。\n通讯记录 / COMMS\n25 / 30\n[08:00]\n兵营开始施工（合金250 · 补给200，预计25秒）。\n[08:00]\n兵营施工完成，已投入运行。\n[08:00]\n兵营已解锁新的单位类型（生产功能将在阶段3开放）。\n[08:00]\n装甲工厂开始施工（合金500 · 补给300，预计45秒）。\n[08:01]\n装甲工厂施工完成，已投入运行。\n[08:01]\n装甲工厂已解锁新的单位类型（生产功能将在阶段3开放）。\n[08:01]\n主战坦克开始制造。\n[08:01]\n主战坦克生产完成，已进入单位库存。\n[08:01]\n装甲工厂已空闲。\n[08:05]\n主战坦克开始制造。\n[08:06]\n主战坦克生产完成，已进入单位库存。\n[08:06]\n装甲工厂已空闲。\n[08:09]\n各区域例行巡查完成，未发现异常。\n[08:10]\n主战坦克开始制造。\n[08:11]\n主战坦克生产完成，已进入单位库存。\n[08:11]\n装甲工厂已空闲。\n[08:11]\n编队「第一战斗群」已建立。\n[08:11]\n主战坦克已加入「第一战斗群」，指挥容量剩余4。\n[08:11]\n主战坦克已加入「第一战斗群」，指挥容量剩余2。\n[08:11]\n主战坦克已加入「第一战斗群」，指挥容量剩余0。\n[08:11]\n基地数据已保存。\n[08:11]\n基地数据已保存。\n[08:11]\n存档已载入，基地状态恢复。\n[08:11]\n1支编队已恢复，指挥容量占用 6/6。\n[08:11]\n已占领战区：废弃矿区、边境公路、敌方前哨站，占领收益持续生效。",
+            "imageSha256": "fbf773d1048c4e0193ef8ca081f2fc6746fbc37ba05c1b6c4290ed07ec45874a",
             "screenshot": {
               "path": "screenshots/stage9-A/s9-a-07-review_reload.png",
-              "sha256": "2b1fddfa04e957d57d84878a82e29a7576ce07d478e8dcd70c14fa39edef229a"
+              "sha256": "fbf773d1048c4e0193ef8ca081f2fc6746fbc37ba05c1b6c4290ed07ec45874a"
             }
           },
           {
@@ -5111,30 +5092,30 @@
             "file": "s9-a-08-running.png",
             "semantic": "new_theater_running",
             "phase": "new_theater_running",
-            "sessionId": "battle-session-23-river_crossing-9d4e1d3f9099f0d9a9ba-1",
+            "sessionId": "battle-session-23-river_crossing-898411d5937067e7602c-1",
             "doubleClickSessionDelta": 1,
             "state": {
               "saveRevision": 25,
-              "activeBattleSessionId": "battle-session-23-river_crossing-9d4e1d3f9099f0d9a9ba-1",
+              "activeBattleSessionId": "battle-session-23-river_crossing-898411d5937067e7602c-1",
               "activeBattle": {
-                "battleSessionId": "battle-session-23-river_crossing-9d4e1d3f9099f0d9a9ba-1",
+                "battleSessionId": "battle-session-23-river_crossing-898411d5937067e7602c-1",
                 "replayReadOnly": false,
                 "settled": false,
                 "elapsed": 0,
                 "returnElapsed": 0
               },
-              "sessionId": "battle-session-23-river_crossing-9d4e1d3f9099f0d9a9ba-1",
+              "sessionId": "battle-session-23-river_crossing-898411d5937067e7602c-1",
               "sessionLifecycle": "running",
               "sessionCount": 1,
               "reportCount": 0,
               "riverCaptured": false,
               "operationCooldownUntil": 0
             },
-            "domText": "◣\n钢铁指令\nIRON COMMAND · 指挥终端\n▤\n补给\n1,161/ 5,000\n+3/s\n◈\n合金\n30/ 5,000\n+2/s\n◎\n情报\n88/ 500\n+0.1/s\n⚡\n电力\n12/ 30\n正常\n✦\n指挥容量\n6/ 6\n已满\n基地时间\n08:11:20\n第1天\n❚❚\n1×\n2×\n4×\n保存\n读取\n新游戏\n演出：自动\n通用规划 · 正式旁路\n概览\n建设\n生产\n部队\n编队\n战区\n维修\n科研\n战报\n战区目标\n阶段5 · 已开放\n当前作战\n进行中\n第一战斗群 → 河谷渡场\n策略 谨慎推进 · 队形 装甲楔形 · 种子 2307575583 · 进度 0%（0 / 60 秒）\n侦察阶段开始\n侦察阶段开始\n跳过返航动画\n查看完整战报\n作战目标\n3 / 6 已占领\n废弃矿区\n已占领\n难度 ★☆☆☆☆\n地形 开阔地\n隐蔽 4\n\n少量敌方步兵驻守的旧采掘场。\n\n敌情（侦察估算）\n兵力 约 1-5\n敌方步兵班 约 2-4\n装甲攻击 ×1.10 · 车辆机动 ×1.10　|　伏击风险 低\n首占奖励 合金 300　|　占领收益 合金+1/s\n废料回收 · 重复任务\n清理矿区残余威胁，并回收可用合金。 · 经验倍率 ×0.8\n成本系数 ×4 · 奖励范围 alloy 100-180\n任务已就绪\n选择任务\n尝试 0 次\n胜利 0 次\n尚未交战\n边境公路\n已占领\n难度 ★★☆☆☆\n地形 公路\n隐蔽 8\n\n敌方巡逻队与反装甲小组控制的运输干线。\n\n敌情（侦察估算）\n兵力 约 4-8\n敌方步兵班 约 3-5\n疑似敌方反装甲小组 约 1-3\n车辆机动 ×1.10 · 伏击风险略高　|　伏击风险 中\n首占奖励 补给 400 / 情报 10　|　占领收益 补给+1/s\n补给护送 · 重复任务\n护送运输队穿过仍不稳定的边境公路。 · 经验倍率 ×1\n成本系数 ×7 · 奖励范围 supply 180-300 / intel 2-5\n任务已就绪\n选择任务\n尝试 0 次\n胜利 0 次\n尚未交战\n敌方前哨站\n已占领\n难度 ★★★☆☆\n地形 防御阵地\n隐蔽 14\n\n构筑了工事的前进基地，火力密集。\n\n敌情（侦察估算）\n兵力 约 8-12\n敌方步兵班 约 4-6\n疑似敌方反装甲小组 约 2-4\n疑似敌方轻型装甲车 约 1-3\n敌方防御 ×1.20 · 我方攻击 ×0.90　|　伏击风险 高\n首占奖励 合金 500 / 情报 25\n残敌清剿 · 重复任务\n清剿前哨站周边残余武装，获取情报和工业材料。 · 经验倍率 ×1.25\n成本系数 ×10 · 奖励范围 alloy 220-360 / intel 6-12\n任务已就绪\n选择任务\n尝试 0 次\n胜利 0 次\n尚未交战\n河谷渡场\n交战中\n难度 ★★★★☆\n地形 河谷道路\n隐蔽 16\n\n穿越河谷的旧渡场，是向纵深推进的关键补给节点。\n\n敌情（侦察估算）\n兵力 约 1-5\n敌方步兵班 约 2-4\n车辆机动 ×1.10 · 伏击风险略高　|　伏击风险 高\n首占奖励 补给 600 / 情报 30　|　占领收益 补给+1/s\n尝试 1 次\n胜利 0 次\n尚未交战\n通信中继站\n未解锁\n难度 ★★★★★\n地形 开阔高地\n隐蔽 18\n\n控制敌方纵深通信链路的高地中继站。\n\n敌情（侦察估算）\n兵力 约 4-8\n敌方步兵班 约 3-5\n疑似敌方反装甲小组 约 1-2\n疑似敌方轻型装甲车 约 1-2\n装甲攻击 ×1.10 · 车辆机动 ×1.10　|　伏击风险 高\n首占奖励 合金 700 / 情报 35　|　占领收益 合金+1/s\n尝试 0 次\n胜利 0 次\n尚未交战\n需要先占领：河谷渡场\n北岭山口\n未解锁\n难度 ★★★★★\n地形 山口阵地\n隐蔽 20\n\n通往北岭纵深的最后山口，必须稳步夺取并守住。\n\n敌情（侦察估算）\n兵力 约 3-7\n敌方步兵班 约 2-4\n疑似敌方反装甲小组 约 1-2\n疑似敌方轻型装甲车 约 1-2\n敌方防御 ×1.20 · 我方攻击 ×0.90　|　伏击风险 高\n首占奖励 合金 900 / 补给 700 / 情报 45　|　占领收益 补给+1/s 合金+1/s\n尝试 0 次\n胜利 0 次\n尚未交战\n需要先占领：通信中继站\n派遣控制台\n河谷渡场\n目标：河谷渡场 · 河谷道路 · 补给系数 ×16\n任务类型：战役任务 · 战区首次占领任务，无重复任务冷却\n出击编队\n第一战斗群（战斗 · 3单位 · 指挥6）\n攻击 105 · 防御 90 · 侦察 9 · 耐久 480 · 维持 15\n作战策略\n谨慎推进\n谨慎推进\n无额外消耗\n\n侦察 +30%，防御 +15%，行军与战斗时间 +25%，伏击概率降低，输出略降约 8%。\n\n侦察充分，提前发现敌方反装甲阵地\n防御稳固，承受首轮打击更稳\n伏击概率显著降低\n整体输出下降约 8%\n行军与战斗时间更长\n正面突破\n无额外消耗\n\n首阶段攻击 +25%，装甲攻击额外提高，补给消耗 +25%，侦察不足时反装甲损失风险增加。\n\n首轮攻击 +25%\n装甲单位攻击额外 +15%\n任务补给成本 +25%\n侦察不足时受反装甲伤害风险升高\n火力侦察\n情报 5\n\n侦察与压制提高，有概率提前发现高威胁单位，步兵攻击略降，消耗 5 点情报。\n\n侦察 +20%\n压制能力 +25%\n更易提前发现高威胁单位\n步兵攻击 -8%\n额外消耗情报 5\n任务成本\n资源充足\n出击消耗\n补给 240\n计算方式\n维持 15 × 系数 16 × 策略 1\n参战单位\n3 个\n作战进行中\n已有一场作战正在进行，请先返回基地。\n说明：同一时间只能进行一场作战。战斗结果在派遣时即由求解器一次性算出，画面只是按事件时间轴回放，暂停或加速不会改变胜负。每场战斗最多 8 轮交火；建成雷达站可获得精确敌情，否则只能得到估算区间。\n通讯记录 / COMMS\n27 / 30\n[08:00]\n兵营开始施工（合金250 · 补给200，预计25秒）。\n[08:00]\n兵营施工完成，已投入运行。\n[08:00]\n兵营已解锁新的单位类型（生产功能将在阶段3开放）。\n[08:00]\n装甲工厂开始施工（合金500 · 补给300，预计45秒）。\n[08:01]\n装甲工厂施工完成，已投入运行。\n[08:01]\n装甲工厂已解锁新的单位类型（生产功能将在阶段3开放）。\n[08:01]\n主战坦克开始制造。\n[08:01]\n主战坦克生产完成，已进入单位库存。\n[08:01]\n装甲工厂已空闲。\n[08:05]\n主战坦克开始制造。\n[08:06]\n主战坦克生产完成，已进入单位库存。\n[08:06]\n装甲工厂已空闲。\n[08:09]\n各区域例行巡查完成，未发现异常。\n[08:10]\n主战坦克开始制造。\n[08:11]\n主战坦克生产完成，已进入单位库存。\n[08:11]\n装甲工厂已空闲。\n[08:11]\n编队「第一战斗群」已建立。\n[08:11]\n主战坦克已加入「第一战斗群」，指挥容量剩余4。\n[08:11]\n主战坦克已加入「第一战斗群」，指挥容量剩余2。\n[08:11]\n主战坦克已加入「第一战斗群」，指挥容量剩余0。\n[08:11]\n基地数据已保存。\n[08:11]\n基地数据已保存。\n[08:11]\n存档已载入，基地状态恢复。\n[08:11]\n1支编队已恢复，指挥容量占用 6/6。\n[08:11]\n已占领战区：废弃矿区、边境公路、敌方前哨站，占领收益持续生效。\n[08:11]\n第一战斗群向河谷渡场发起进攻（谨慎推进）。\n[08:11]\n基地数据已保存。\n基地数据已保存",
-            "imageSha256": "91e1a647d16324d5f88eb0330d71d0d20db5b8306d484151d1e2f6a71ad5e2fa",
+            "domText": "◣\n钢铁指令\nIRON COMMAND · 指挥终端\n▤\n补给\n1,160/ 5,000\n+3/s\n◈\n合金\n30/ 5,000\n+2/s\n◎\n情报\n88/ 500\n+0.1/s\n⚡\n电力\n12/ 30\n正常\n✦\n指挥容量\n6/ 6\n已满\n基地时间\n08:11:20\n第1天\n❚❚\n1×\n2×\n4×\n保存\n读取\n新游戏\n演出：自动\n通用规划 · 正式旁路\n概览\n建设\n生产\n部队\n编队\n战区\n维修\n科研\n战报\n战区目标\n阶段5 · 已开放\n当前作战\n进行中\n第一战斗群 → 河谷渡场\n策略 谨慎推进 · 队形 装甲楔形 · 种子 1527140601 · 进度 0%（0 / 60 秒）\n侦察阶段开始\n侦察阶段开始\n跳过返航动画\n查看完整战报\n作战目标\n3 / 6 已占领\n废弃矿区\n已占领\n难度 ★☆☆☆☆\n地形 开阔地\n隐蔽 4\n\n少量敌方步兵驻守的旧采掘场。\n\n敌情（侦察估算）\n兵力 约 1-5\n敌方步兵班 约 2-4\n装甲攻击 ×1.10 · 车辆机动 ×1.10　|　伏击风险 低\n首占奖励 合金 300　|　占领收益 合金+1/s\n废料回收 · 重复任务\n清理矿区残余威胁，并回收可用合金。 · 经验倍率 ×0.8\n成本系数 ×4 · 奖励范围 alloy 100-180\n任务已就绪\n选择任务\n尝试 0 次\n胜利 0 次\n尚未交战\n边境公路\n已占领\n难度 ★★☆☆☆\n地形 公路\n隐蔽 8\n\n敌方巡逻队与反装甲小组控制的运输干线。\n\n敌情（侦察估算）\n兵力 约 4-8\n敌方步兵班 约 3-5\n疑似敌方反装甲小组 约 1-3\n车辆机动 ×1.10 · 伏击风险略高　|　伏击风险 中\n首占奖励 补给 400 / 情报 10　|　占领收益 补给+1/s\n补给护送 · 重复任务\n护送运输队穿过仍不稳定的边境公路。 · 经验倍率 ×1\n成本系数 ×7 · 奖励范围 supply 180-300 / intel 2-5\n任务已就绪\n选择任务\n尝试 0 次\n胜利 0 次\n尚未交战\n敌方前哨站\n已占领\n难度 ★★★☆☆\n地形 防御阵地\n隐蔽 14\n\n构筑了工事的前进基地，火力密集。\n\n敌情（侦察估算）\n兵力 约 8-12\n敌方步兵班 约 4-6\n疑似敌方反装甲小组 约 2-4\n疑似敌方轻型装甲车 约 1-3\n敌方防御 ×1.20 · 我方攻击 ×0.90　|　伏击风险 高\n首占奖励 合金 500 / 情报 25\n残敌清剿 · 重复任务\n清剿前哨站周边残余武装，获取情报和工业材料。 · 经验倍率 ×1.25\n成本系数 ×10 · 奖励范围 alloy 220-360 / intel 6-12\n任务已就绪\n选择任务\n尝试 0 次\n胜利 0 次\n尚未交战\n河谷渡场\n交战中\n难度 ★★★★☆\n地形 河谷道路\n隐蔽 16\n\n穿越河谷的旧渡场，是向纵深推进的关键补给节点。\n\n敌情（侦察估算）\n兵力 约 1-5\n敌方步兵班 约 2-4\n车辆机动 ×1.10 · 伏击风险略高　|　伏击风险 高\n首占奖励 补给 600 / 情报 30　|　占领收益 补给+1/s\n尝试 1 次\n胜利 0 次\n尚未交战\n通信中继站\n未解锁\n难度 ★★★★★\n地形 开阔高地\n隐蔽 18\n\n控制敌方纵深通信链路的高地中继站。\n\n敌情（侦察估算）\n兵力 约 4-8\n敌方步兵班 约 3-5\n疑似敌方反装甲小组 约 1-2\n疑似敌方轻型装甲车 约 1-2\n装甲攻击 ×1.10 · 车辆机动 ×1.10　|　伏击风险 高\n首占奖励 合金 700 / 情报 35　|　占领收益 合金+1/s\n尝试 0 次\n胜利 0 次\n尚未交战\n需要先占领：河谷渡场\n北岭山口\n未解锁\n难度 ★★★★★\n地形 山口阵地\n隐蔽 20\n\n通往北岭纵深的最后山口，必须稳步夺取并守住。\n\n敌情（侦察估算）\n兵力 约 3-7\n敌方步兵班 约 2-4\n疑似敌方反装甲小组 约 1-2\n疑似敌方轻型装甲车 约 1-2\n敌方防御 ×1.20 · 我方攻击 ×0.90　|　伏击风险 高\n首占奖励 合金 900 / 补给 700 / 情报 45　|　占领收益 补给+1/s 合金+1/s\n尝试 0 次\n胜利 0 次\n尚未交战\n需要先占领：通信中继站\n派遣控制台\n河谷渡场\n目标：河谷渡场 · 河谷道路 · 补给系数 ×16\n任务类型：战役任务 · 战区首次占领任务，无重复任务冷却\n出击编队\n第一战斗群（战斗 · 3单位 · 指挥6）\n攻击 105 · 防御 90 · 侦察 9 · 耐久 480 · 维持 15\n作战策略\n谨慎推进\n谨慎推进\n无额外消耗\n\n侦察 +30%，防御 +15%，行军与战斗时间 +25%，伏击概率降低，输出略降约 8%。\n\n侦察充分，提前发现敌方反装甲阵地\n防御稳固，承受首轮打击更稳\n伏击概率显著降低\n整体输出下降约 8%\n行军与战斗时间更长\n正面突破\n无额外消耗\n\n首阶段攻击 +25%，装甲攻击额外提高，补给消耗 +25%，侦察不足时反装甲损失风险增加。\n\n首轮攻击 +25%\n装甲单位攻击额外 +15%\n任务补给成本 +25%\n侦察不足时受反装甲伤害风险升高\n火力侦察\n情报 5\n\n侦察与压制提高，有概率提前发现高威胁单位，步兵攻击略降，消耗 5 点情报。\n\n侦察 +20%\n压制能力 +25%\n更易提前发现高威胁单位\n步兵攻击 -8%\n额外消耗情报 5\n任务成本\n资源充足\n出击消耗\n补给 240\n计算方式\n维持 15 × 系数 16 × 策略 1\n参战单位\n3 个\n作战进行中\n已有一场作战正在进行，请先返回基地。\n说明：同一时间只能进行一场作战。战斗结果在派遣时即由求解器一次性算出，画面只是按事件时间轴回放，暂停或加速不会改变胜负。每场战斗最多 8 轮交火；建成雷达站可获得精确敌情，否则只能得到估算区间。\n通讯记录 / COMMS\n27 / 30\n[08:00]\n兵营开始施工（合金250 · 补给200，预计25秒）。\n[08:00]\n兵营施工完成，已投入运行。\n[08:00]\n兵营已解锁新的单位类型（生产功能将在阶段3开放）。\n[08:00]\n装甲工厂开始施工（合金500 · 补给300，预计45秒）。\n[08:01]\n装甲工厂施工完成，已投入运行。\n[08:01]\n装甲工厂已解锁新的单位类型（生产功能将在阶段3开放）。\n[08:01]\n主战坦克开始制造。\n[08:01]\n主战坦克生产完成，已进入单位库存。\n[08:01]\n装甲工厂已空闲。\n[08:05]\n主战坦克开始制造。\n[08:06]\n主战坦克生产完成，已进入单位库存。\n[08:06]\n装甲工厂已空闲。\n[08:09]\n各区域例行巡查完成，未发现异常。\n[08:10]\n主战坦克开始制造。\n[08:11]\n主战坦克生产完成，已进入单位库存。\n[08:11]\n装甲工厂已空闲。\n[08:11]\n编队「第一战斗群」已建立。\n[08:11]\n主战坦克已加入「第一战斗群」，指挥容量剩余4。\n[08:11]\n主战坦克已加入「第一战斗群」，指挥容量剩余2。\n[08:11]\n主战坦克已加入「第一战斗群」，指挥容量剩余0。\n[08:11]\n基地数据已保存。\n[08:11]\n基地数据已保存。\n[08:11]\n存档已载入，基地状态恢复。\n[08:11]\n1支编队已恢复，指挥容量占用 6/6。\n[08:11]\n已占领战区：废弃矿区、边境公路、敌方前哨站，占领收益持续生效。\n[08:11]\n第一战斗群向河谷渡场发起进攻（谨慎推进）。\n[08:11]\n基地数据已保存。\n基地数据已保存",
+            "imageSha256": "5066aeca12013e70a4c819015daabd875d9dede8160c4721c948f37cabf4b0d1",
             "screenshot": {
               "path": "screenshots/stage9-A/s9-a-08-running.png",
-              "sha256": "91e1a647d16324d5f88eb0330d71d0d20db5b8306d484151d1e2f6a71ad5e2fa"
+              "sha256": "5066aeca12013e70a4c819015daabd875d9dede8160c4721c948f37cabf4b0d1"
             }
           },
           {
@@ -5146,42 +5127,42 @@
               "reason": "running_battle",
               "method": "Page.reload",
               "before": {
-                "timeOrigin": 1786658799173.5,
+                "timeOrigin": 1786565567438.9,
                 "readyState": "complete",
                 "navigationType": "reload"
               },
               "after": {
-                "timeOrigin": 1786658800516.9,
+                "timeOrigin": 1786565568888.3,
                 "readyState": "complete",
                 "navigationType": "reload"
               },
-              "beforeLoaderId": "2F2393500CD60549E11C3341C468B2FC",
-              "afterLoaderId": "8DCBF93B16F55878EA11C78561251887",
-              "loaderId": "8DCBF93B16F55878EA11C78561251887",
+              "beforeLoaderId": "15AA637CC9C1AB6CF8644BDE0FE27E9F",
+              "afterLoaderId": "EFF7B091B4F3F7A164E65393BAB4A427",
+              "loaderId": "EFF7B091B4F3F7A164E65393BAB4A427",
               "timeOriginChanged": true
             },
             "state": {
               "saveRevision": 27,
-              "activeBattleSessionId": "battle-session-23-river_crossing-9d4e1d3f9099f0d9a9ba-1",
+              "activeBattleSessionId": "battle-session-23-river_crossing-898411d5937067e7602c-1",
               "activeBattle": {
-                "battleSessionId": "battle-session-23-river_crossing-9d4e1d3f9099f0d9a9ba-1",
+                "battleSessionId": "battle-session-23-river_crossing-898411d5937067e7602c-1",
                 "replayReadOnly": false,
                 "settled": false,
                 "elapsed": 0,
                 "returnElapsed": 0
               },
-              "sessionId": "battle-session-23-river_crossing-9d4e1d3f9099f0d9a9ba-1",
+              "sessionId": "battle-session-23-river_crossing-898411d5937067e7602c-1",
               "sessionLifecycle": "running",
               "sessionCount": 1,
               "reportCount": 0,
               "riverCaptured": false,
               "operationCooldownUntil": 0
             },
-            "domText": "◣\n钢铁指令\nIRON COMMAND · 指挥终端\n▤\n补给\n1,161/ 5,000\n+3/s\n◈\n合金\n30/ 5,000\n+2/s\n◎\n情报\n88/ 500\n+0.1/s\n⚡\n电力\n12/ 30\n正常\n✦\n指挥容量\n6/ 6\n已满\n基地时间\n08:11:20\n第1天\n❚❚\n1×\n2×\n4×\n保存\n读取\n新游戏\n演出：自动\n通用规划 · 正式旁路\n概览\n建设\n生产\n部队\n编队\n战区\n维修\n科研\n战报\n战区目标\n阶段5 · 已开放\n当前作战\n进行中\n第一战斗群 → 河谷渡场\n策略 谨慎推进 · 队形 装甲楔形 · 种子 2307575583 · 进度 0%（0 / 60 秒）\n侦察阶段开始\n侦察阶段开始\n跳过返航动画\n查看完整战报\n作战目标\n3 / 6 已占领\n废弃矿区\n已占领\n难度 ★☆☆☆☆\n地形 开阔地\n隐蔽 4\n\n少量敌方步兵驻守的旧采掘场。\n\n敌情（侦察估算）\n兵力 约 1-5\n敌方步兵班 约 2-4\n装甲攻击 ×1.10 · 车辆机动 ×1.10　|　伏击风险 低\n首占奖励 合金 300　|　占领收益 合金+1/s\n废料回收 · 重复任务\n清理矿区残余威胁，并回收可用合金。 · 经验倍率 ×0.8\n成本系数 ×4 · 奖励范围 alloy 100-180\n任务已就绪\n选择任务\n尝试 0 次\n胜利 0 次\n尚未交战\n边境公路\n已占领\n难度 ★★☆☆☆\n地形 公路\n隐蔽 8\n\n敌方巡逻队与反装甲小组控制的运输干线。\n\n敌情（侦察估算）\n兵力 约 4-8\n敌方步兵班 约 3-5\n疑似敌方反装甲小组 约 1-3\n车辆机动 ×1.10 · 伏击风险略高　|　伏击风险 中\n首占奖励 补给 400 / 情报 10　|　占领收益 补给+1/s\n补给护送 · 重复任务\n护送运输队穿过仍不稳定的边境公路。 · 经验倍率 ×1\n成本系数 ×7 · 奖励范围 supply 180-300 / intel 2-5\n任务已就绪\n选择任务\n尝试 0 次\n胜利 0 次\n尚未交战\n敌方前哨站\n已占领\n难度 ★★★☆☆\n地形 防御阵地\n隐蔽 14\n\n构筑了工事的前进基地，火力密集。\n\n敌情（侦察估算）\n兵力 约 8-12\n敌方步兵班 约 4-6\n疑似敌方反装甲小组 约 2-4\n疑似敌方轻型装甲车 约 1-3\n敌方防御 ×1.20 · 我方攻击 ×0.90　|　伏击风险 高\n首占奖励 合金 500 / 情报 25\n残敌清剿 · 重复任务\n清剿前哨站周边残余武装，获取情报和工业材料。 · 经验倍率 ×1.25\n成本系数 ×10 · 奖励范围 alloy 220-360 / intel 6-12\n任务已就绪\n选择任务\n尝试 0 次\n胜利 0 次\n尚未交战\n河谷渡场\n交战中\n难度 ★★★★☆\n地形 河谷道路\n隐蔽 16\n\n穿越河谷的旧渡场，是向纵深推进的关键补给节点。\n\n敌情（侦察估算）\n兵力 约 1-5\n敌方步兵班 约 2-4\n车辆机动 ×1.10 · 伏击风险略高　|　伏击风险 高\n首占奖励 补给 600 / 情报 30　|　占领收益 补给+1/s\n尝试 1 次\n胜利 0 次\n尚未交战\n通信中继站\n未解锁\n难度 ★★★★★\n地形 开阔高地\n隐蔽 18\n\n控制敌方纵深通信链路的高地中继站。\n\n敌情（侦察估算）\n兵力 约 4-8\n敌方步兵班 约 3-5\n疑似敌方反装甲小组 约 1-2\n疑似敌方轻型装甲车 约 1-2\n装甲攻击 ×1.10 · 车辆机动 ×1.10　|　伏击风险 高\n首占奖励 合金 700 / 情报 35　|　占领收益 合金+1/s\n尝试 0 次\n胜利 0 次\n尚未交战\n需要先占领：河谷渡场\n北岭山口\n未解锁\n难度 ★★★★★\n地形 山口阵地\n隐蔽 20\n\n通往北岭纵深的最后山口，必须稳步夺取并守住。\n\n敌情（侦察估算）\n兵力 约 3-7\n敌方步兵班 约 2-4\n疑似敌方反装甲小组 约 1-2\n疑似敌方轻型装甲车 约 1-2\n敌方防御 ×1.20 · 我方攻击 ×0.90　|　伏击风险 高\n首占奖励 合金 900 / 补给 700 / 情报 45　|　占领收益 补给+1/s 合金+1/s\n尝试 0 次\n胜利 0 次\n尚未交战\n需要先占领：通信中继站\n派遣控制台\n河谷渡场\n目标：河谷渡场 · 河谷道路 · 补给系数 ×16\n任务类型：战役任务 · 战区首次占领任务，无重复任务冷却\n出击编队\n第一战斗群（战斗 · 3单位 · 指挥6）\n攻击 105 · 防御 90 · 侦察 9 · 耐久 480 · 维持 15\n作战策略\n谨慎推进\n谨慎推进\n无额外消耗\n\n侦察 +30%，防御 +15%，行军与战斗时间 +25%，伏击概率降低，输出略降约 8%。\n\n侦察充分，提前发现敌方反装甲阵地\n防御稳固，承受首轮打击更稳\n伏击概率显著降低\n整体输出下降约 8%\n行军与战斗时间更长\n正面突破\n无额外消耗\n\n首阶段攻击 +25%，装甲攻击额外提高，补给消耗 +25%，侦察不足时反装甲损失风险增加。\n\n首轮攻击 +25%\n装甲单位攻击额外 +15%\n任务补给成本 +25%\n侦察不足时受反装甲伤害风险升高\n火力侦察\n情报 5\n\n侦察与压制提高，有概率提前发现高威胁单位，步兵攻击略降，消耗 5 点情报。\n\n侦察 +20%\n压制能力 +25%\n更易提前发现高威胁单位\n步兵攻击 -8%\n额外消耗情报 5\n任务成本\n资源充足\n出击消耗\n补给 240\n计算方式\n维持 15 × 系数 16 × 策略 1\n参战单位\n3 个\n作战进行中\n已有一场作战正在进行，请先返回基地。\n说明：同一时间只能进行一场作战。战斗结果在派遣时即由求解器一次性算出，画面只是按事件时间轴回放，暂停或加速不会改变胜负。每场战斗最多 8 轮交火；建成雷达站可获得精确敌情，否则只能得到估算区间。\n通讯记录 / COMMS\n30 / 30\n[08:00]\n兵营施工完成，已投入运行。\n[08:00]\n兵营已解锁新的单位类型（生产功能将在阶段3开放）。\n[08:00]\n装甲工厂开始施工（合金500 · 补给300，预计45秒）。\n[08:01]\n装甲工厂施工完成，已投入运行。\n[08:01]\n装甲工厂已解锁新的单位类型（生产功能将在阶段3开放）。\n[08:01]\n主战坦克开始制造。\n[08:01]\n主战坦克生产完成，已进入单位库存。\n[08:01]\n装甲工厂已空闲。\n[08:05]\n主战坦克开始制造。\n[08:06]\n主战坦克生产完成，已进入单位库存。\n[08:06]\n装甲工厂已空闲。\n[08:09]\n各区域例行巡查完成，未发现异常。\n[08:10]\n主战坦克开始制造。\n[08:11]\n主战坦克生产完成，已进入单位库存。\n[08:11]\n装甲工厂已空闲。\n[08:11]\n编队「第一战斗群」已建立。\n[08:11]\n主战坦克已加入「第一战斗群」，指挥容量剩余4。\n[08:11]\n主战坦克已加入「第一战斗群」，指挥容量剩余2。\n[08:11]\n主战坦克已加入「第一战斗群」，指挥容量剩余0。\n[08:11]\n基地数据已保存。\n[08:11]\n基地数据已保存。\n[08:11]\n存档已载入，基地状态恢复。\n[08:11]\n1支编队已恢复，指挥容量占用 6/6。\n[08:11]\n已占领战区：废弃矿区、边境公路、敌方前哨站，占领收益持续生效。\n[08:11]\n第一战斗群向河谷渡场发起进攻（谨慎推进）。\n[08:11]\n基地数据已保存。\n[08:11]\n存档已载入，基地状态恢复。\n[08:11]\n1支编队已恢复，指挥容量占用 6/6。\n[08:11]\n已占领战区：废弃矿区、边境公路、敌方前哨站，占领收益持续生效。\n[08:11]\n第一战斗群正在河谷渡场作战，回放进度 0%，结果已锁定。",
-            "imageSha256": "3b646acf9823e527f01b6779b4997353b70b90df9b5bab47449972b89aabde50",
+            "domText": "◣\n钢铁指令\nIRON COMMAND · 指挥终端\n▤\n补给\n1,160/ 5,000\n+3/s\n◈\n合金\n30/ 5,000\n+2/s\n◎\n情报\n88/ 500\n+0.1/s\n⚡\n电力\n12/ 30\n正常\n✦\n指挥容量\n6/ 6\n已满\n基地时间\n08:11:20\n第1天\n❚❚\n1×\n2×\n4×\n保存\n读取\n新游戏\n演出：自动\n通用规划 · 正式旁路\n概览\n建设\n生产\n部队\n编队\n战区\n维修\n科研\n战报\n战区目标\n阶段5 · 已开放\n当前作战\n进行中\n第一战斗群 → 河谷渡场\n策略 谨慎推进 · 队形 装甲楔形 · 种子 1527140601 · 进度 0%（0 / 60 秒）\n侦察阶段开始\n侦察阶段开始\n跳过返航动画\n查看完整战报\n作战目标\n3 / 6 已占领\n废弃矿区\n已占领\n难度 ★☆☆☆☆\n地形 开阔地\n隐蔽 4\n\n少量敌方步兵驻守的旧采掘场。\n\n敌情（侦察估算）\n兵力 约 1-5\n敌方步兵班 约 2-4\n装甲攻击 ×1.10 · 车辆机动 ×1.10　|　伏击风险 低\n首占奖励 合金 300　|　占领收益 合金+1/s\n废料回收 · 重复任务\n清理矿区残余威胁，并回收可用合金。 · 经验倍率 ×0.8\n成本系数 ×4 · 奖励范围 alloy 100-180\n任务已就绪\n选择任务\n尝试 0 次\n胜利 0 次\n尚未交战\n边境公路\n已占领\n难度 ★★☆☆☆\n地形 公路\n隐蔽 8\n\n敌方巡逻队与反装甲小组控制的运输干线。\n\n敌情（侦察估算）\n兵力 约 4-8\n敌方步兵班 约 3-5\n疑似敌方反装甲小组 约 1-3\n车辆机动 ×1.10 · 伏击风险略高　|　伏击风险 中\n首占奖励 补给 400 / 情报 10　|　占领收益 补给+1/s\n补给护送 · 重复任务\n护送运输队穿过仍不稳定的边境公路。 · 经验倍率 ×1\n成本系数 ×7 · 奖励范围 supply 180-300 / intel 2-5\n任务已就绪\n选择任务\n尝试 0 次\n胜利 0 次\n尚未交战\n敌方前哨站\n已占领\n难度 ★★★☆☆\n地形 防御阵地\n隐蔽 14\n\n构筑了工事的前进基地，火力密集。\n\n敌情（侦察估算）\n兵力 约 8-12\n敌方步兵班 约 4-6\n疑似敌方反装甲小组 约 2-4\n疑似敌方轻型装甲车 约 1-3\n敌方防御 ×1.20 · 我方攻击 ×0.90　|　伏击风险 高\n首占奖励 合金 500 / 情报 25\n残敌清剿 · 重复任务\n清剿前哨站周边残余武装，获取情报和工业材料。 · 经验倍率 ×1.25\n成本系数 ×10 · 奖励范围 alloy 220-360 / intel 6-12\n任务已就绪\n选择任务\n尝试 0 次\n胜利 0 次\n尚未交战\n河谷渡场\n交战中\n难度 ★★★★☆\n地形 河谷道路\n隐蔽 16\n\n穿越河谷的旧渡场，是向纵深推进的关键补给节点。\n\n敌情（侦察估算）\n兵力 约 1-5\n敌方步兵班 约 2-4\n车辆机动 ×1.10 · 伏击风险略高　|　伏击风险 高\n首占奖励 补给 600 / 情报 30　|　占领收益 补给+1/s\n尝试 1 次\n胜利 0 次\n尚未交战\n通信中继站\n未解锁\n难度 ★★★★★\n地形 开阔高地\n隐蔽 18\n\n控制敌方纵深通信链路的高地中继站。\n\n敌情（侦察估算）\n兵力 约 4-8\n敌方步兵班 约 3-5\n疑似敌方反装甲小组 约 1-2\n疑似敌方轻型装甲车 约 1-2\n装甲攻击 ×1.10 · 车辆机动 ×1.10　|　伏击风险 高\n首占奖励 合金 700 / 情报 35　|　占领收益 合金+1/s\n尝试 0 次\n胜利 0 次\n尚未交战\n需要先占领：河谷渡场\n北岭山口\n未解锁\n难度 ★★★★★\n地形 山口阵地\n隐蔽 20\n\n通往北岭纵深的最后山口，必须稳步夺取并守住。\n\n敌情（侦察估算）\n兵力 约 3-7\n敌方步兵班 约 2-4\n疑似敌方反装甲小组 约 1-2\n疑似敌方轻型装甲车 约 1-2\n敌方防御 ×1.20 · 我方攻击 ×0.90　|　伏击风险 高\n首占奖励 合金 900 / 补给 700 / 情报 45　|　占领收益 补给+1/s 合金+1/s\n尝试 0 次\n胜利 0 次\n尚未交战\n需要先占领：通信中继站\n派遣控制台\n河谷渡场\n目标：河谷渡场 · 河谷道路 · 补给系数 ×16\n任务类型：战役任务 · 战区首次占领任务，无重复任务冷却\n出击编队\n第一战斗群（战斗 · 3单位 · 指挥6）\n攻击 105 · 防御 90 · 侦察 9 · 耐久 480 · 维持 15\n作战策略\n谨慎推进\n谨慎推进\n无额外消耗\n\n侦察 +30%，防御 +15%，行军与战斗时间 +25%，伏击概率降低，输出略降约 8%。\n\n侦察充分，提前发现敌方反装甲阵地\n防御稳固，承受首轮打击更稳\n伏击概率显著降低\n整体输出下降约 8%\n行军与战斗时间更长\n正面突破\n无额外消耗\n\n首阶段攻击 +25%，装甲攻击额外提高，补给消耗 +25%，侦察不足时反装甲损失风险增加。\n\n首轮攻击 +25%\n装甲单位攻击额外 +15%\n任务补给成本 +25%\n侦察不足时受反装甲伤害风险升高\n火力侦察\n情报 5\n\n侦察与压制提高，有概率提前发现高威胁单位，步兵攻击略降，消耗 5 点情报。\n\n侦察 +20%\n压制能力 +25%\n更易提前发现高威胁单位\n步兵攻击 -8%\n额外消耗情报 5\n任务成本\n资源充足\n出击消耗\n补给 240\n计算方式\n维持 15 × 系数 16 × 策略 1\n参战单位\n3 个\n作战进行中\n已有一场作战正在进行，请先返回基地。\n说明：同一时间只能进行一场作战。战斗结果在派遣时即由求解器一次性算出，画面只是按事件时间轴回放，暂停或加速不会改变胜负。每场战斗最多 8 轮交火；建成雷达站可获得精确敌情，否则只能得到估算区间。\n通讯记录 / COMMS\n30 / 30\n[08:00]\n兵营施工完成，已投入运行。\n[08:00]\n兵营已解锁新的单位类型（生产功能将在阶段3开放）。\n[08:00]\n装甲工厂开始施工（合金500 · 补给300，预计45秒）。\n[08:01]\n装甲工厂施工完成，已投入运行。\n[08:01]\n装甲工厂已解锁新的单位类型（生产功能将在阶段3开放）。\n[08:01]\n主战坦克开始制造。\n[08:01]\n主战坦克生产完成，已进入单位库存。\n[08:01]\n装甲工厂已空闲。\n[08:05]\n主战坦克开始制造。\n[08:06]\n主战坦克生产完成，已进入单位库存。\n[08:06]\n装甲工厂已空闲。\n[08:09]\n各区域例行巡查完成，未发现异常。\n[08:10]\n主战坦克开始制造。\n[08:11]\n主战坦克生产完成，已进入单位库存。\n[08:11]\n装甲工厂已空闲。\n[08:11]\n编队「第一战斗群」已建立。\n[08:11]\n主战坦克已加入「第一战斗群」，指挥容量剩余4。\n[08:11]\n主战坦克已加入「第一战斗群」，指挥容量剩余2。\n[08:11]\n主战坦克已加入「第一战斗群」，指挥容量剩余0。\n[08:11]\n基地数据已保存。\n[08:11]\n基地数据已保存。\n[08:11]\n存档已载入，基地状态恢复。\n[08:11]\n1支编队已恢复，指挥容量占用 6/6。\n[08:11]\n已占领战区：废弃矿区、边境公路、敌方前哨站，占领收益持续生效。\n[08:11]\n第一战斗群向河谷渡场发起进攻（谨慎推进）。\n[08:11]\n基地数据已保存。\n[08:11]\n存档已载入，基地状态恢复。\n[08:11]\n1支编队已恢复，指挥容量占用 6/6。\n[08:11]\n已占领战区：废弃矿区、边境公路、敌方前哨站，占领收益持续生效。\n[08:11]\n第一战斗群正在河谷渡场作战，回放进度 0%，结果已锁定。",
+            "imageSha256": "8b7b1db97ff4f93d8f0cffa8c63aca6d27d81b2bea6378f1418647146ac032a4",
             "screenshot": {
               "path": "screenshots/stage9-A/s9-a-09-running_reload.png",
-              "sha256": "3b646acf9823e527f01b6779b4997353b70b90df9b5bab47449972b89aabde50"
+              "sha256": "8b7b1db97ff4f93d8f0cffa8c63aca6d27d81b2bea6378f1418647146ac032a4"
             }
           },
           {
@@ -5192,26 +5173,26 @@
             "settlementApplied": true,
             "state": {
               "saveRevision": 28,
-              "activeBattleSessionId": "battle-session-23-river_crossing-9d4e1d3f9099f0d9a9ba-1",
+              "activeBattleSessionId": "battle-session-23-river_crossing-898411d5937067e7602c-1",
               "activeBattle": {
-                "battleSessionId": "battle-session-23-river_crossing-9d4e1d3f9099f0d9a9ba-1",
+                "battleSessionId": "battle-session-23-river_crossing-898411d5937067e7602c-1",
                 "replayReadOnly": false,
                 "settled": true,
                 "elapsed": 60,
                 "returnElapsed": 0
               },
-              "sessionId": "battle-session-23-river_crossing-9d4e1d3f9099f0d9a9ba-1",
+              "sessionId": "battle-session-23-river_crossing-898411d5937067e7602c-1",
               "sessionLifecycle": "settled",
               "sessionCount": 1,
               "reportCount": 1,
               "riverCaptured": true,
               "operationCooldownUntil": 0
             },
-            "domText": "◣\n钢铁指令\nIRON COMMAND · 指挥终端\n▤\n补给\n1,761/ 5,000\n+4/s\n◈\n合金\n30/ 5,000\n+2/s\n◎\n情报\n118/ 500\n+0.1/s\n⚡\n电力\n12/ 30\n正常\n✦\n指挥容量\n6/ 6\n已满\n基地时间\n08:11:20\n第1天\n❚❚\n1×\n2×\n4×\n保存\n读取\n新游戏\n演出：自动\n通用规划 · 正式旁路\n作战结束，部队正在重新集结并返航 · 5 秒\n查看完整战报\n跳过返航动画\n概览\n建设\n生产\n部队\n编队\n战区\n维修\n科研\n战报\n战区目标\n阶段5 · 已开放\n当前作战\n已结束\n第一战斗群 → 河谷渡场\n策略 谨慎推进 · 队形 装甲楔形 · 种子 2307575583 · 进度 100%（60 / 60 秒）\n结果：胜利\n第一战斗群在河谷渡场的作战以胜利告终。我方损失 0 个单位，敌方损失 3 个单位。\n胜利\n目标已占领\n我方永久损失\n无\n敌方损失\n3 个单位\n本次获得\n补给 600 / 情报 30\n战场打捞\n结算后获取\n未发现可回收装备。\n侦察充分，提前发现敌方部署\n跳过返航动画\n查看完整战报\n作战目标\n4 / 6 已占领\n废弃矿区\n已占领\n难度 ★☆☆☆☆\n地形 开阔地\n隐蔽 4\n\n少量敌方步兵驻守的旧采掘场。\n\n敌情（侦察估算）\n兵力 约 1-5\n敌方步兵班 约 2-4\n装甲攻击 ×1.10 · 车辆机动 ×1.10　|　伏击风险 低\n首占奖励 合金 300　|　占领收益 合金+1/s\n废料回收 · 重复任务\n清理矿区残余威胁，并回收可用合金。 · 经验倍率 ×0.8\n成本系数 ×4 · 奖励范围 alloy 100-180\n任务已就绪\n选择任务\n尝试 0 次\n胜利 0 次\n尚未交战\n边境公路\n已占领\n难度 ★★☆☆☆\n地形 公路\n隐蔽 8\n\n敌方巡逻队与反装甲小组控制的运输干线。\n\n敌情（侦察估算）\n兵力 约 4-8\n敌方步兵班 约 3-5\n疑似敌方反装甲小组 约 1-3\n车辆机动 ×1.10 · 伏击风险略高　|　伏击风险 中\n首占奖励 补给 400 / 情报 10　|　占领收益 补给+1/s\n补给护送 · 重复任务\n护送运输队穿过仍不稳定的边境公路。 · 经验倍率 ×1\n成本系数 ×7 · 奖励范围 supply 180-300 / intel 2-5\n任务已就绪\n选择任务\n尝试 0 次\n胜利 0 次\n尚未交战\n敌方前哨站\n已占领\n难度 ★★★☆☆\n地形 防御阵地\n隐蔽 14\n\n构筑了工事的前进基地，火力密集。\n\n敌情（侦察估算）\n兵力 约 8-12\n敌方步兵班 约 4-6\n疑似敌方反装甲小组 约 2-4\n疑似敌方轻型装甲车 约 1-3\n敌方防御 ×1.20 · 我方攻击 ×0.90　|　伏击风险 高\n首占奖励 合金 500 / 情报 25\n残敌清剿 · 重复任务\n清剿前哨站周边残余武装，获取情报和工业材料。 · 经验倍率 ×1.25\n成本系数 ×10 · 奖励范围 alloy 220-360 / intel 6-12\n任务已就绪\n选择任务\n尝试 0 次\n胜利 0 次\n尚未交战\n河谷渡场\n交战中\n难度 ★★★★☆\n地形 河谷道路\n隐蔽 16\n\n穿越河谷的旧渡场，是向纵深推进的关键补给节点。\n\n敌情（侦察估算）\n兵力 约 1-5\n敌方步兵班 约 2-4\n车辆机动 ×1.10 · 伏击风险略高　|　伏击风险 高\n首占奖励 补给 600 / 情报 30　|　占领收益 补给+1/s\n渡场补给 · 重复任务\n清理渡场周边袭扰部队，恢复纵深补给线。 · 经验倍率 ×1.4\n成本系数 ×14 · 奖励范围 supply 260-420 / alloy 180-300\n任务已就绪\n选择任务\n尝试 1 次\n胜利 1 次\n上次 胜利\n通信中继站\n可进攻\n难度 ★★★★★\n地形 开阔高地\n隐蔽 18\n\n控制敌方纵深通信链路的高地中继站。\n\n敌情（侦察估算）\n兵力 约 4-8\n敌方步兵班 约 3-5\n疑似敌方反装甲小组 约 1-2\n疑似敌方轻型装甲车 约 1-2\n装甲攻击 ×1.10 · 车辆机动 ×1.10　|　伏击风险 高\n首占奖励 合金 700 / 情报 35　|　占领收益 合金+1/s\n尝试 0 次\n胜利 0 次\n尚未交战\n北岭山口\n未解锁\n难度 ★★★★★\n地形 山口阵地\n隐蔽 20\n\n通往北岭纵深的最后山口，必须稳步夺取并守住。\n\n敌情（侦察估算）\n兵力 约 3-7\n敌方步兵班 约 2-4\n疑似敌方反装甲小组 约 1-2\n疑似敌方轻型装甲车 约 1-2\n敌方防御 ×1.20 · 我方攻击 ×0.90　|　伏击风险 高\n首占奖励 合金 900 / 补给 700 / 情报 45　|　占领收益 补给+1/s 合金+1/s\n尝试 0 次\n胜利 0 次\n尚未交战\n需要先占领：通信中继站\n派遣控制台\n河谷渡场\n目标：河谷渡场 · 河谷道路 · 补给系数 ×16\n任务类型：战役任务 · 战区首次占领任务，无重复任务冷却\n出击编队\n第一战斗群（返回 · 3单位 · 指挥6）\n攻击 105 · 防御 90 · 侦察 9 · 耐久 476 · 维持 15\n作战策略\n谨慎推进\n谨慎推进\n无额外消耗\n\n侦察 +30%，防御 +15%，行军与战斗时间 +25%，伏击概率降低，输出略降约 8%。\n\n侦察充分，提前发现敌方反装甲阵地\n防御稳固，承受首轮打击更稳\n伏击概率显著降低\n整体输出下降约 8%\n行军与战斗时间更长\n正面突破\n无额外消耗\n\n首阶段攻击 +25%，装甲攻击额外提高，补给消耗 +25%，侦察不足时反装甲损失风险增加。\n\n首轮攻击 +25%\n装甲单位攻击额外 +15%\n任务补给成本 +25%\n侦察不足时受反装甲伤害风险升高\n火力侦察\n情报 5\n\n侦察与压制提高，有概率提前发现高威胁单位，步兵攻击略降，消耗 5 点情报。\n\n侦察 +20%\n压制能力 +25%\n更易提前发现高威胁单位\n步兵攻击 -8%\n额外消耗情报 5\n任务成本\n资源充足\n出击消耗\n补给 240\n计算方式\n维持 15 × 系数 16 × 策略 1\n参战单位\n3 个\n作战进行中\n已有一场作战正在进行，请先返回基地。\n说明：同一时间只能进行一场作战。战斗结果在派遣时即由求解器一次性算出，画面只是按事件时间轴回放，暂停或加速不会改变胜负。每场战斗最多 8 轮交火；建成雷达站可获得精确敌情，否则只能得到估算区间。\n通讯记录 / COMMS\n30 / 30\n[08:00]\n装甲工厂开始施工（合金500 · 补给300，预计45秒）。\n[08:01]\n装甲工厂施工完成，已投入运行。\n[08:01]\n装甲工厂已解锁新的单位类型（生产功能将在阶段3开放）。\n[08:01]\n主战坦克开始制造。\n[08:01]\n主战坦克生产完成，已进入单位库存。\n[08:01]\n装甲工厂已空闲。\n[08:05]\n主战坦克开始制造。\n[08:06]\n主战坦克生产完成，已进入单位库存。\n[08:06]\n装甲工厂已空闲。\n[08:09]\n各区域例行巡查完成，未发现异常。\n[08:10]\n主战坦克开始制造。\n[08:11]\n主战坦克生产完成，已进入单位库存。\n[08:11]\n装甲工厂已空闲。\n[08:11]\n编队「第一战斗群」已建立。\n[08:11]\n主战坦克已加入「第一战斗群」，指挥容量剩余4。\n[08:11]\n主战坦克已加入「第一战斗群」，指挥容量剩余2。\n[08:11]\n主战坦克已加入「第一战斗群」，指挥容量剩余0。\n[08:11]\n基地数据已保存。\n[08:11]\n基地数据已保存。\n[08:11]\n存档已载入，基地状态恢复。\n[08:11]\n1支编队已恢复，指挥容量占用 6/6。\n[08:11]\n已占领战区：废弃矿区、边境公路、敌方前哨站，占领收益持续生效。\n[08:11]\n第一战斗群向河谷渡场发起进攻（谨慎推进）。\n[08:11]\n基地数据已保存。\n[08:11]\n存档已载入，基地状态恢复。\n[08:11]\n1支编队已恢复，指挥容量占用 6/6。\n[08:11]\n已占领战区：废弃矿区、边境公路、敌方前哨站，占领收益持续生效。\n[08:11]\n第一战斗群正在河谷渡场作战，回放进度 0%，结果已锁定。\n[08:11]\n第一战斗群在河谷渡场的作战结束：胜利，无永久损失。\n[08:11]\n占领河谷渡场，获得首次占领奖励：补给 600 / 情报 30。",
-            "imageSha256": "4c45bfd1926b7ff969c29a985fda045f78e4b1b4a5de6e02cccde7e49166188f",
+            "domText": "◣\n钢铁指令\nIRON COMMAND · 指挥终端\n▤\n补给\n1,760/ 5,000\n+4/s\n◈\n合金\n30/ 5,000\n+2/s\n◎\n情报\n118/ 500\n+0.1/s\n⚡\n电力\n12/ 30\n正常\n✦\n指挥容量\n6/ 6\n已满\n基地时间\n08:11:20\n第1天\n❚❚\n1×\n2×\n4×\n保存\n读取\n新游戏\n演出：自动\n通用规划 · 正式旁路\n作战结束，部队正在重新集结并返航 · 5 秒\n查看完整战报\n跳过返航动画\n概览\n建设\n生产\n部队\n编队\n战区\n维修\n科研\n战报\n战区目标\n阶段5 · 已开放\n当前作战\n已结束\n第一战斗群 → 河谷渡场\n策略 谨慎推进 · 队形 装甲楔形 · 种子 1527140601 · 进度 100%（60 / 60 秒）\n结果：胜利\n第一战斗群在河谷渡场的作战以胜利告终。我方损失 0 个单位，敌方损失 3 个单位。\n胜利\n目标已占领\n我方永久损失\n无\n敌方损失\n3 个单位\n本次获得\n补给 600 / 情报 30\n侦察充分，提前发现敌方部署\n跳过返航动画\n查看完整战报\n作战目标\n4 / 6 已占领\n废弃矿区\n已占领\n难度 ★☆☆☆☆\n地形 开阔地\n隐蔽 4\n\n少量敌方步兵驻守的旧采掘场。\n\n敌情（侦察估算）\n兵力 约 1-5\n敌方步兵班 约 2-4\n装甲攻击 ×1.10 · 车辆机动 ×1.10　|　伏击风险 低\n首占奖励 合金 300　|　占领收益 合金+1/s\n废料回收 · 重复任务\n清理矿区残余威胁，并回收可用合金。 · 经验倍率 ×0.8\n成本系数 ×4 · 奖励范围 alloy 100-180\n任务已就绪\n选择任务\n尝试 0 次\n胜利 0 次\n尚未交战\n边境公路\n已占领\n难度 ★★☆☆☆\n地形 公路\n隐蔽 8\n\n敌方巡逻队与反装甲小组控制的运输干线。\n\n敌情（侦察估算）\n兵力 约 4-8\n敌方步兵班 约 3-5\n疑似敌方反装甲小组 约 1-3\n车辆机动 ×1.10 · 伏击风险略高　|　伏击风险 中\n首占奖励 补给 400 / 情报 10　|　占领收益 补给+1/s\n补给护送 · 重复任务\n护送运输队穿过仍不稳定的边境公路。 · 经验倍率 ×1\n成本系数 ×7 · 奖励范围 supply 180-300 / intel 2-5\n任务已就绪\n选择任务\n尝试 0 次\n胜利 0 次\n尚未交战\n敌方前哨站\n已占领\n难度 ★★★☆☆\n地形 防御阵地\n隐蔽 14\n\n构筑了工事的前进基地，火力密集。\n\n敌情（侦察估算）\n兵力 约 8-12\n敌方步兵班 约 4-6\n疑似敌方反装甲小组 约 2-4\n疑似敌方轻型装甲车 约 1-3\n敌方防御 ×1.20 · 我方攻击 ×0.90　|　伏击风险 高\n首占奖励 合金 500 / 情报 25\n残敌清剿 · 重复任务\n清剿前哨站周边残余武装，获取情报和工业材料。 · 经验倍率 ×1.25\n成本系数 ×10 · 奖励范围 alloy 220-360 / intel 6-12\n任务已就绪\n选择任务\n尝试 0 次\n胜利 0 次\n尚未交战\n河谷渡场\n交战中\n难度 ★★★★☆\n地形 河谷道路\n隐蔽 16\n\n穿越河谷的旧渡场，是向纵深推进的关键补给节点。\n\n敌情（侦察估算）\n兵力 约 1-5\n敌方步兵班 约 2-4\n车辆机动 ×1.10 · 伏击风险略高　|　伏击风险 高\n首占奖励 补给 600 / 情报 30　|　占领收益 补给+1/s\n渡场补给 · 重复任务\n清理渡场周边袭扰部队，恢复纵深补给线。 · 经验倍率 ×1.4\n成本系数 ×14 · 奖励范围 supply 260-420 / alloy 180-300\n任务已就绪\n选择任务\n尝试 1 次\n胜利 1 次\n上次 胜利\n通信中继站\n可进攻\n难度 ★★★★★\n地形 开阔高地\n隐蔽 18\n\n控制敌方纵深通信链路的高地中继站。\n\n敌情（侦察估算）\n兵力 约 4-8\n敌方步兵班 约 3-5\n疑似敌方反装甲小组 约 1-2\n疑似敌方轻型装甲车 约 1-2\n装甲攻击 ×1.10 · 车辆机动 ×1.10　|　伏击风险 高\n首占奖励 合金 700 / 情报 35　|　占领收益 合金+1/s\n尝试 0 次\n胜利 0 次\n尚未交战\n北岭山口\n未解锁\n难度 ★★★★★\n地形 山口阵地\n隐蔽 20\n\n通往北岭纵深的最后山口，必须稳步夺取并守住。\n\n敌情（侦察估算）\n兵力 约 3-7\n敌方步兵班 约 2-4\n疑似敌方反装甲小组 约 1-2\n疑似敌方轻型装甲车 约 1-2\n敌方防御 ×1.20 · 我方攻击 ×0.90　|　伏击风险 高\n首占奖励 合金 900 / 补给 700 / 情报 45　|　占领收益 补给+1/s 合金+1/s\n尝试 0 次\n胜利 0 次\n尚未交战\n需要先占领：通信中继站\n派遣控制台\n河谷渡场\n目标：河谷渡场 · 河谷道路 · 补给系数 ×16\n任务类型：战役任务 · 战区首次占领任务，无重复任务冷却\n出击编队\n第一战斗群（返回 · 3单位 · 指挥6）\n攻击 105 · 防御 90 · 侦察 9 · 耐久 476 · 维持 15\n作战策略\n谨慎推进\n谨慎推进\n无额外消耗\n\n侦察 +30%，防御 +15%，行军与战斗时间 +25%，伏击概率降低，输出略降约 8%。\n\n侦察充分，提前发现敌方反装甲阵地\n防御稳固，承受首轮打击更稳\n伏击概率显著降低\n整体输出下降约 8%\n行军与战斗时间更长\n正面突破\n无额外消耗\n\n首阶段攻击 +25%，装甲攻击额外提高，补给消耗 +25%，侦察不足时反装甲损失风险增加。\n\n首轮攻击 +25%\n装甲单位攻击额外 +15%\n任务补给成本 +25%\n侦察不足时受反装甲伤害风险升高\n火力侦察\n情报 5\n\n侦察与压制提高，有概率提前发现高威胁单位，步兵攻击略降，消耗 5 点情报。\n\n侦察 +20%\n压制能力 +25%\n更易提前发现高威胁单位\n步兵攻击 -8%\n额外消耗情报 5\n任务成本\n资源充足\n出击消耗\n补给 240\n计算方式\n维持 15 × 系数 16 × 策略 1\n参战单位\n3 个\n作战进行中\n已有一场作战正在进行，请先返回基地。\n说明：同一时间只能进行一场作战。战斗结果在派遣时即由求解器一次性算出，画面只是按事件时间轴回放，暂停或加速不会改变胜负。每场战斗最多 8 轮交火；建成雷达站可获得精确敌情，否则只能得到估算区间。\n通讯记录 / COMMS\n30 / 30\n[08:00]\n装甲工厂开始施工（合金500 · 补给300，预计45秒）。\n[08:01]\n装甲工厂施工完成，已投入运行。\n[08:01]\n装甲工厂已解锁新的单位类型（生产功能将在阶段3开放）。\n[08:01]\n主战坦克开始制造。\n[08:01]\n主战坦克生产完成，已进入单位库存。\n[08:01]\n装甲工厂已空闲。\n[08:05]\n主战坦克开始制造。\n[08:06]\n主战坦克生产完成，已进入单位库存。\n[08:06]\n装甲工厂已空闲。\n[08:09]\n各区域例行巡查完成，未发现异常。\n[08:10]\n主战坦克开始制造。\n[08:11]\n主战坦克生产完成，已进入单位库存。\n[08:11]\n装甲工厂已空闲。\n[08:11]\n编队「第一战斗群」已建立。\n[08:11]\n主战坦克已加入「第一战斗群」，指挥容量剩余4。\n[08:11]\n主战坦克已加入「第一战斗群」，指挥容量剩余2。\n[08:11]\n主战坦克已加入「第一战斗群」，指挥容量剩余0。\n[08:11]\n基地数据已保存。\n[08:11]\n基地数据已保存。\n[08:11]\n存档已载入，基地状态恢复。\n[08:11]\n1支编队已恢复，指挥容量占用 6/6。\n[08:11]\n已占领战区：废弃矿区、边境公路、敌方前哨站，占领收益持续生效。\n[08:11]\n第一战斗群向河谷渡场发起进攻（谨慎推进）。\n[08:11]\n基地数据已保存。\n[08:11]\n存档已载入，基地状态恢复。\n[08:11]\n1支编队已恢复，指挥容量占用 6/6。\n[08:11]\n已占领战区：废弃矿区、边境公路、敌方前哨站，占领收益持续生效。\n[08:11]\n第一战斗群正在河谷渡场作战，回放进度 0%，结果已锁定。\n[08:11]\n第一战斗群在河谷渡场的作战结束：胜利，无永久损失。\n[08:11]\n占领河谷渡场，获得首次占领奖励：补给 600 / 情报 30。",
+            "imageSha256": "9a2f53e603ee5c6b10edb33c4c44458d252409b217c5f8cdf70ffa6e9361b7cc",
             "screenshot": {
               "path": "screenshots/stage9-A/s9-a-10-result.png",
-              "sha256": "4c45bfd1926b7ff969c29a985fda045f78e4b1b4a5de6e02cccde7e49166188f"
+              "sha256": "9a2f53e603ee5c6b10edb33c4c44458d252409b217c5f8cdf70ffa6e9361b7cc"
             }
           },
           {
@@ -5223,42 +5204,42 @@
               "reason": "result",
               "method": "Page.reload",
               "before": {
-                "timeOrigin": 1786658800516.9,
+                "timeOrigin": 1786565568888.3,
                 "readyState": "complete",
                 "navigationType": "reload"
               },
               "after": {
-                "timeOrigin": 1786658801433.6,
+                "timeOrigin": 1786565569905.5,
                 "readyState": "complete",
                 "navigationType": "reload"
               },
-              "beforeLoaderId": "8DCBF93B16F55878EA11C78561251887",
-              "afterLoaderId": "3FA4BAB19811721302048EF9F31F9888",
-              "loaderId": "3FA4BAB19811721302048EF9F31F9888",
+              "beforeLoaderId": "EFF7B091B4F3F7A164E65393BAB4A427",
+              "afterLoaderId": "6DCEBCA7B32A7F547CAE01198461E160",
+              "loaderId": "6DCEBCA7B32A7F547CAE01198461E160",
               "timeOriginChanged": true
             },
             "state": {
               "saveRevision": 30,
-              "activeBattleSessionId": "battle-session-23-river_crossing-9d4e1d3f9099f0d9a9ba-1",
+              "activeBattleSessionId": "battle-session-23-river_crossing-898411d5937067e7602c-1",
               "activeBattle": {
-                "battleSessionId": "battle-session-23-river_crossing-9d4e1d3f9099f0d9a9ba-1",
+                "battleSessionId": "battle-session-23-river_crossing-898411d5937067e7602c-1",
                 "replayReadOnly": false,
                 "settled": true,
                 "elapsed": 60,
                 "returnElapsed": 0
               },
-              "sessionId": "battle-session-23-river_crossing-9d4e1d3f9099f0d9a9ba-1",
+              "sessionId": "battle-session-23-river_crossing-898411d5937067e7602c-1",
               "sessionLifecycle": "settled",
               "sessionCount": 1,
               "reportCount": 1,
               "riverCaptured": true,
               "operationCooldownUntil": 0
             },
-            "domText": "◣\n钢铁指令\nIRON COMMAND · 指挥终端\n▤\n补给\n1,761/ 5,000\n+4/s\n◈\n合金\n30/ 5,000\n+2/s\n◎\n情报\n118/ 500\n+0.1/s\n⚡\n电力\n12/ 30\n正常\n✦\n指挥容量\n6/ 6\n已满\n基地时间\n08:11:20\n第1天\n❚❚\n1×\n2×\n4×\n保存\n读取\n新游戏\n演出：自动\n通用规划 · 正式旁路\n作战结束，部队正在重新集结并返航 · 5 秒\n查看完整战报\n跳过返航动画\n概览\n建设\n生产\n部队\n编队\n战区\n维修\n科研\n战报\n战区目标\n阶段5 · 已开放\n当前作战\n已结束\n第一战斗群 → 河谷渡场\n策略 谨慎推进 · 队形 装甲楔形 · 种子 2307575583 · 进度 100%（60 / 60 秒）\n结果：胜利\n第一战斗群在河谷渡场的作战以胜利告终。我方损失 0 个单位，敌方损失 3 个单位。\n胜利\n目标已占领\n我方永久损失\n无\n敌方损失\n3 个单位\n本次获得\n补给 600 / 情报 30\n战场打捞\n结算后获取\n未发现可回收装备。\n侦察充分，提前发现敌方部署\n跳过返航动画\n查看完整战报\n作战目标\n4 / 6 已占领\n废弃矿区\n已占领\n难度 ★☆☆☆☆\n地形 开阔地\n隐蔽 4\n\n少量敌方步兵驻守的旧采掘场。\n\n敌情（侦察估算）\n兵力 约 1-5\n敌方步兵班 约 2-4\n装甲攻击 ×1.10 · 车辆机动 ×1.10　|　伏击风险 低\n首占奖励 合金 300　|　占领收益 合金+1/s\n废料回收 · 重复任务\n清理矿区残余威胁，并回收可用合金。 · 经验倍率 ×0.8\n成本系数 ×4 · 奖励范围 alloy 100-180\n任务已就绪\n选择任务\n尝试 0 次\n胜利 0 次\n尚未交战\n边境公路\n已占领\n难度 ★★☆☆☆\n地形 公路\n隐蔽 8\n\n敌方巡逻队与反装甲小组控制的运输干线。\n\n敌情（侦察估算）\n兵力 约 4-8\n敌方步兵班 约 3-5\n疑似敌方反装甲小组 约 1-3\n车辆机动 ×1.10 · 伏击风险略高　|　伏击风险 中\n首占奖励 补给 400 / 情报 10　|　占领收益 补给+1/s\n补给护送 · 重复任务\n护送运输队穿过仍不稳定的边境公路。 · 经验倍率 ×1\n成本系数 ×7 · 奖励范围 supply 180-300 / intel 2-5\n任务已就绪\n选择任务\n尝试 0 次\n胜利 0 次\n尚未交战\n敌方前哨站\n已占领\n难度 ★★★☆☆\n地形 防御阵地\n隐蔽 14\n\n构筑了工事的前进基地，火力密集。\n\n敌情（侦察估算）\n兵力 约 8-12\n敌方步兵班 约 4-6\n疑似敌方反装甲小组 约 2-4\n疑似敌方轻型装甲车 约 1-3\n敌方防御 ×1.20 · 我方攻击 ×0.90　|　伏击风险 高\n首占奖励 合金 500 / 情报 25\n残敌清剿 · 重复任务\n清剿前哨站周边残余武装，获取情报和工业材料。 · 经验倍率 ×1.25\n成本系数 ×10 · 奖励范围 alloy 220-360 / intel 6-12\n任务已就绪\n选择任务\n尝试 0 次\n胜利 0 次\n尚未交战\n河谷渡场\n交战中\n难度 ★★★★☆\n地形 河谷道路\n隐蔽 16\n\n穿越河谷的旧渡场，是向纵深推进的关键补给节点。\n\n敌情（侦察估算）\n兵力 约 1-5\n敌方步兵班 约 2-4\n车辆机动 ×1.10 · 伏击风险略高　|　伏击风险 高\n首占奖励 补给 600 / 情报 30　|　占领收益 补给+1/s\n渡场补给 · 重复任务\n清理渡场周边袭扰部队，恢复纵深补给线。 · 经验倍率 ×1.4\n成本系数 ×14 · 奖励范围 supply 260-420 / alloy 180-300\n任务已就绪\n选择任务\n尝试 1 次\n胜利 1 次\n上次 胜利\n通信中继站\n可进攻\n难度 ★★★★★\n地形 开阔高地\n隐蔽 18\n\n控制敌方纵深通信链路的高地中继站。\n\n敌情（侦察估算）\n兵力 约 4-8\n敌方步兵班 约 3-5\n疑似敌方反装甲小组 约 1-2\n疑似敌方轻型装甲车 约 1-2\n装甲攻击 ×1.10 · 车辆机动 ×1.10　|　伏击风险 高\n首占奖励 合金 700 / 情报 35　|　占领收益 合金+1/s\n尝试 0 次\n胜利 0 次\n尚未交战\n北岭山口\n未解锁\n难度 ★★★★★\n地形 山口阵地\n隐蔽 20\n\n通往北岭纵深的最后山口，必须稳步夺取并守住。\n\n敌情（侦察估算）\n兵力 约 3-7\n敌方步兵班 约 2-4\n疑似敌方反装甲小组 约 1-2\n疑似敌方轻型装甲车 约 1-2\n敌方防御 ×1.20 · 我方攻击 ×0.90　|　伏击风险 高\n首占奖励 合金 900 / 补给 700 / 情报 45　|　占领收益 补给+1/s 合金+1/s\n尝试 0 次\n胜利 0 次\n尚未交战\n需要先占领：通信中继站\n派遣控制台\n通信中继站\n目标：通信中继站 · 开阔高地 · 补给系数 ×20\n任务类型：战役任务 · 战区首次占领任务，无重复任务冷却\n出击编队\n第一战斗群（战斗 · 3单位 · 指挥6）\n攻击 105 · 防御 90 · 侦察 9 · 耐久 476 · 维持 15\n作战策略\n谨慎推进\n谨慎推进\n无额外消耗\n\n侦察 +30%，防御 +15%，行军与战斗时间 +25%，伏击概率降低，输出略降约 8%。\n\n侦察充分，提前发现敌方反装甲阵地\n防御稳固，承受首轮打击更稳\n伏击概率显著降低\n整体输出下降约 8%\n行军与战斗时间更长\n正面突破\n无额外消耗\n\n首阶段攻击 +25%，装甲攻击额外提高，补给消耗 +25%，侦察不足时反装甲损失风险增加。\n\n首轮攻击 +25%\n装甲单位攻击额外 +15%\n任务补给成本 +25%\n侦察不足时受反装甲伤害风险升高\n火力侦察\n情报 5\n\n侦察与压制提高，有概率提前发现高威胁单位，步兵攻击略降，消耗 5 点情报。\n\n侦察 +20%\n压制能力 +25%\n更易提前发现高威胁单位\n步兵攻击 -8%\n额外消耗情报 5\n任务成本\n资源充足\n出击消耗\n补给 300\n计算方式\n维持 15 × 系数 20 × 策略 1\n参战单位\n3 个\n作战进行中\n已有一场作战正在进行，请先返回基地。\n说明：同一时间只能进行一场作战。战斗结果在派遣时即由求解器一次性算出，画面只是按事件时间轴回放，暂停或加速不会改变胜负。每场战斗最多 8 轮交火；建成雷达站可获得精确敌情，否则只能得到估算区间。\n通讯记录 / COMMS\n30 / 30\n[08:05]\n主战坦克开始制造。\n[08:06]\n主战坦克生产完成，已进入单位库存。\n[08:06]\n装甲工厂已空闲。\n[08:09]\n各区域例行巡查完成，未发现异常。\n[08:10]\n主战坦克开始制造。\n[08:11]\n主战坦克生产完成，已进入单位库存。\n[08:11]\n装甲工厂已空闲。\n[08:11]\n编队「第一战斗群」已建立。\n[08:11]\n主战坦克已加入「第一战斗群」，指挥容量剩余4。\n[08:11]\n主战坦克已加入「第一战斗群」，指挥容量剩余2。\n[08:11]\n主战坦克已加入「第一战斗群」，指挥容量剩余0。\n[08:11]\n基地数据已保存。\n[08:11]\n基地数据已保存。\n[08:11]\n存档已载入，基地状态恢复。\n[08:11]\n1支编队已恢复，指挥容量占用 6/6。\n[08:11]\n已占领战区：废弃矿区、边境公路、敌方前哨站，占领收益持续生效。\n[08:11]\n第一战斗群向河谷渡场发起进攻（谨慎推进）。\n[08:11]\n基地数据已保存。\n[08:11]\n存档已载入，基地状态恢复。\n[08:11]\n1支编队已恢复，指挥容量占用 6/6。\n[08:11]\n已占领战区：废弃矿区、边境公路、敌方前哨站，占领收益持续生效。\n[08:11]\n第一战斗群正在河谷渡场作战，回放进度 0%，结果已锁定。\n[08:11]\n第一战斗群在河谷渡场的作战结束：胜利，无永久损失。\n[08:11]\n占领河谷渡场，获得首次占领奖励：补给 600 / 情报 30。\n[08:11]\n存档已载入，基地状态恢复。\n[08:11]\n检测到异常编队数据，已自动修复。\n[08:11]\n修复说明：活动编队状态已恢复为战斗。\n[08:11]\n1支编队已恢复，指挥容量占用 6/6。\n[08:11]\n已占领战区：废弃矿区、边境公路、敌方前哨站、河谷渡场，占领收益持续生效。\n[08:11]\n第一战斗群在河谷渡场的战斗已结束（胜利），等待返回基地。",
-            "imageSha256": "b1a726150c38ea56cf7881de37b223f5efc60e12384d086f7e2724c8da185429",
+            "domText": "◣\n钢铁指令\nIRON COMMAND · 指挥终端\n▤\n补给\n1,760/ 5,000\n+4/s\n◈\n合金\n30/ 5,000\n+2/s\n◎\n情报\n118/ 500\n+0.1/s\n⚡\n电力\n12/ 30\n正常\n✦\n指挥容量\n6/ 6\n已满\n基地时间\n08:11:20\n第1天\n❚❚\n1×\n2×\n4×\n保存\n读取\n新游戏\n演出：自动\n通用规划 · 正式旁路\n作战结束，部队正在重新集结并返航 · 5 秒\n查看完整战报\n跳过返航动画\n概览\n建设\n生产\n部队\n编队\n战区\n维修\n科研\n战报\n战区目标\n阶段5 · 已开放\n当前作战\n已结束\n第一战斗群 → 河谷渡场\n策略 谨慎推进 · 队形 装甲楔形 · 种子 1527140601 · 进度 100%（60 / 60 秒）\n结果：胜利\n第一战斗群在河谷渡场的作战以胜利告终。我方损失 0 个单位，敌方损失 3 个单位。\n胜利\n目标已占领\n我方永久损失\n无\n敌方损失\n3 个单位\n本次获得\n补给 600 / 情报 30\n侦察充分，提前发现敌方部署\n跳过返航动画\n查看完整战报\n作战目标\n4 / 6 已占领\n废弃矿区\n已占领\n难度 ★☆☆☆☆\n地形 开阔地\n隐蔽 4\n\n少量敌方步兵驻守的旧采掘场。\n\n敌情（侦察估算）\n兵力 约 1-5\n敌方步兵班 约 2-4\n装甲攻击 ×1.10 · 车辆机动 ×1.10　|　伏击风险 低\n首占奖励 合金 300　|　占领收益 合金+1/s\n废料回收 · 重复任务\n清理矿区残余威胁，并回收可用合金。 · 经验倍率 ×0.8\n成本系数 ×4 · 奖励范围 alloy 100-180\n任务已就绪\n选择任务\n尝试 0 次\n胜利 0 次\n尚未交战\n边境公路\n已占领\n难度 ★★☆☆☆\n地形 公路\n隐蔽 8\n\n敌方巡逻队与反装甲小组控制的运输干线。\n\n敌情（侦察估算）\n兵力 约 4-8\n敌方步兵班 约 3-5\n疑似敌方反装甲小组 约 1-3\n车辆机动 ×1.10 · 伏击风险略高　|　伏击风险 中\n首占奖励 补给 400 / 情报 10　|　占领收益 补给+1/s\n补给护送 · 重复任务\n护送运输队穿过仍不稳定的边境公路。 · 经验倍率 ×1\n成本系数 ×7 · 奖励范围 supply 180-300 / intel 2-5\n任务已就绪\n选择任务\n尝试 0 次\n胜利 0 次\n尚未交战\n敌方前哨站\n已占领\n难度 ★★★☆☆\n地形 防御阵地\n隐蔽 14\n\n构筑了工事的前进基地，火力密集。\n\n敌情（侦察估算）\n兵力 约 8-12\n敌方步兵班 约 4-6\n疑似敌方反装甲小组 约 2-4\n疑似敌方轻型装甲车 约 1-3\n敌方防御 ×1.20 · 我方攻击 ×0.90　|　伏击风险 高\n首占奖励 合金 500 / 情报 25\n残敌清剿 · 重复任务\n清剿前哨站周边残余武装，获取情报和工业材料。 · 经验倍率 ×1.25\n成本系数 ×10 · 奖励范围 alloy 220-360 / intel 6-12\n任务已就绪\n选择任务\n尝试 0 次\n胜利 0 次\n尚未交战\n河谷渡场\n交战中\n难度 ★★★★☆\n地形 河谷道路\n隐蔽 16\n\n穿越河谷的旧渡场，是向纵深推进的关键补给节点。\n\n敌情（侦察估算）\n兵力 约 1-5\n敌方步兵班 约 2-4\n车辆机动 ×1.10 · 伏击风险略高　|　伏击风险 高\n首占奖励 补给 600 / 情报 30　|　占领收益 补给+1/s\n渡场补给 · 重复任务\n清理渡场周边袭扰部队，恢复纵深补给线。 · 经验倍率 ×1.4\n成本系数 ×14 · 奖励范围 supply 260-420 / alloy 180-300\n任务已就绪\n选择任务\n尝试 1 次\n胜利 1 次\n上次 胜利\n通信中继站\n可进攻\n难度 ★★★★★\n地形 开阔高地\n隐蔽 18\n\n控制敌方纵深通信链路的高地中继站。\n\n敌情（侦察估算）\n兵力 约 4-8\n敌方步兵班 约 3-5\n疑似敌方反装甲小组 约 1-2\n疑似敌方轻型装甲车 约 1-2\n装甲攻击 ×1.10 · 车辆机动 ×1.10　|　伏击风险 高\n首占奖励 合金 700 / 情报 35　|　占领收益 合金+1/s\n尝试 0 次\n胜利 0 次\n尚未交战\n北岭山口\n未解锁\n难度 ★★★★★\n地形 山口阵地\n隐蔽 20\n\n通往北岭纵深的最后山口，必须稳步夺取并守住。\n\n敌情（侦察估算）\n兵力 约 3-7\n敌方步兵班 约 2-4\n疑似敌方反装甲小组 约 1-2\n疑似敌方轻型装甲车 约 1-2\n敌方防御 ×1.20 · 我方攻击 ×0.90　|　伏击风险 高\n首占奖励 合金 900 / 补给 700 / 情报 45　|　占领收益 补给+1/s 合金+1/s\n尝试 0 次\n胜利 0 次\n尚未交战\n需要先占领：通信中继站\n派遣控制台\n通信中继站\n目标：通信中继站 · 开阔高地 · 补给系数 ×20\n任务类型：战役任务 · 战区首次占领任务，无重复任务冷却\n出击编队\n第一战斗群（战斗 · 3单位 · 指挥6）\n攻击 105 · 防御 90 · 侦察 9 · 耐久 476 · 维持 15\n作战策略\n谨慎推进\n谨慎推进\n无额外消耗\n\n侦察 +30%，防御 +15%，行军与战斗时间 +25%，伏击概率降低，输出略降约 8%。\n\n侦察充分，提前发现敌方反装甲阵地\n防御稳固，承受首轮打击更稳\n伏击概率显著降低\n整体输出下降约 8%\n行军与战斗时间更长\n正面突破\n无额外消耗\n\n首阶段攻击 +25%，装甲攻击额外提高，补给消耗 +25%，侦察不足时反装甲损失风险增加。\n\n首轮攻击 +25%\n装甲单位攻击额外 +15%\n任务补给成本 +25%\n侦察不足时受反装甲伤害风险升高\n火力侦察\n情报 5\n\n侦察与压制提高，有概率提前发现高威胁单位，步兵攻击略降，消耗 5 点情报。\n\n侦察 +20%\n压制能力 +25%\n更易提前发现高威胁单位\n步兵攻击 -8%\n额外消耗情报 5\n任务成本\n资源充足\n出击消耗\n补给 300\n计算方式\n维持 15 × 系数 20 × 策略 1\n参战单位\n3 个\n作战进行中\n已有一场作战正在进行，请先返回基地。\n说明：同一时间只能进行一场作战。战斗结果在派遣时即由求解器一次性算出，画面只是按事件时间轴回放，暂停或加速不会改变胜负。每场战斗最多 8 轮交火；建成雷达站可获得精确敌情，否则只能得到估算区间。\n通讯记录 / COMMS\n30 / 30\n[08:05]\n主战坦克开始制造。\n[08:06]\n主战坦克生产完成，已进入单位库存。\n[08:06]\n装甲工厂已空闲。\n[08:09]\n各区域例行巡查完成，未发现异常。\n[08:10]\n主战坦克开始制造。\n[08:11]\n主战坦克生产完成，已进入单位库存。\n[08:11]\n装甲工厂已空闲。\n[08:11]\n编队「第一战斗群」已建立。\n[08:11]\n主战坦克已加入「第一战斗群」，指挥容量剩余4。\n[08:11]\n主战坦克已加入「第一战斗群」，指挥容量剩余2。\n[08:11]\n主战坦克已加入「第一战斗群」，指挥容量剩余0。\n[08:11]\n基地数据已保存。\n[08:11]\n基地数据已保存。\n[08:11]\n存档已载入，基地状态恢复。\n[08:11]\n1支编队已恢复，指挥容量占用 6/6。\n[08:11]\n已占领战区：废弃矿区、边境公路、敌方前哨站，占领收益持续生效。\n[08:11]\n第一战斗群向河谷渡场发起进攻（谨慎推进）。\n[08:11]\n基地数据已保存。\n[08:11]\n存档已载入，基地状态恢复。\n[08:11]\n1支编队已恢复，指挥容量占用 6/6。\n[08:11]\n已占领战区：废弃矿区、边境公路、敌方前哨站，占领收益持续生效。\n[08:11]\n第一战斗群正在河谷渡场作战，回放进度 0%，结果已锁定。\n[08:11]\n第一战斗群在河谷渡场的作战结束：胜利，无永久损失。\n[08:11]\n占领河谷渡场，获得首次占领奖励：补给 600 / 情报 30。\n[08:11]\n存档已载入，基地状态恢复。\n[08:11]\n检测到异常编队数据，已自动修复。\n[08:11]\n修复说明：活动编队状态已恢复为战斗。\n[08:11]\n1支编队已恢复，指挥容量占用 6/6。\n[08:11]\n已占领战区：废弃矿区、边境公路、敌方前哨站、河谷渡场，占领收益持续生效。\n[08:11]\n第一战斗群在河谷渡场的战斗已结束（胜利），等待返回基地。",
+            "imageSha256": "ba932aabac13739ed3f47b563e1df6ccd28daaba444f9985854c0ab0c08e298e",
             "screenshot": {
               "path": "screenshots/stage9-A/s9-a-11-result_reload.png",
-              "sha256": "b1a726150c38ea56cf7881de37b223f5efc60e12384d086f7e2724c8da185429"
+              "sha256": "ba932aabac13739ed3f47b563e1df6ccd28daaba444f9985854c0ab0c08e298e"
             }
           },
           {
@@ -5268,26 +5249,26 @@
             "phase": "formal_report_view",
             "state": {
               "saveRevision": 30,
-              "activeBattleSessionId": "battle-session-23-river_crossing-9d4e1d3f9099f0d9a9ba-1",
+              "activeBattleSessionId": "battle-session-23-river_crossing-898411d5937067e7602c-1",
               "activeBattle": {
-                "battleSessionId": "battle-session-23-river_crossing-9d4e1d3f9099f0d9a9ba-1",
+                "battleSessionId": "battle-session-23-river_crossing-898411d5937067e7602c-1",
                 "replayReadOnly": false,
                 "settled": true,
                 "elapsed": 60,
                 "returnElapsed": 0
               },
-              "sessionId": "battle-session-23-river_crossing-9d4e1d3f9099f0d9a9ba-1",
+              "sessionId": "battle-session-23-river_crossing-898411d5937067e7602c-1",
               "sessionLifecycle": "settled",
               "sessionCount": 1,
               "reportCount": 1,
               "riverCaptured": true,
               "operationCooldownUntil": 0
             },
-            "domText": "◣\n钢铁指令\nIRON COMMAND · 指挥终端\n▤\n补给\n1,761/ 5,000\n+4/s\n◈\n合金\n30/ 5,000\n+2/s\n◎\n情报\n118/ 500\n+0.1/s\n⚡\n电力\n12/ 30\n正常\n✦\n指挥容量\n6/ 6\n已满\n基地时间\n08:11:20\n第1天\n❚❚\n1×\n2×\n4×\n保存\n读取\n新游戏\n演出：自动\n通用规划 · 正式旁路\n作战结束，部队正在重新集结并返航 · 5 秒\n查看完整战报\n跳过返航动画\n概览\n建设\n生产\n部队\n编队\n战区\n维修\n科研\n战报\n战斗报告\n阶段5 · 已开放\n战斗统计\n1 份\n累计交战\n1 场\n占领成功\n1 次\n已占领战区\n4 / 6\n历史战报\n最多保留 20 份\n河谷渡场 · 第一战斗群\n胜利\n谨慎推进\n3 轮\n损失 0\n种子 2307575583\n战报详情\n胜利\n河谷渡场 · 第一战斗群\n\n第一战斗群在河谷渡场的作战以胜利告终。我方损失 0 个单位，敌方损失 3 个单位。\n\n正式会话 battle-session-23-river_crossing-9d4e1d3f9099f0d9a9ba-1 · 结算已应用\n只读回放\n战场打捞历史\n正式结算后\n本次未发现可回收装备。\n随机种子\n2307575583\n作战策略\n谨慎推进\n战术编组\n装甲楔形\n协同强度\n8%\n战场地形\n河谷道路\n战斗时长\n60 秒\n我方参战\n3 个单位\n敌方兵力\n3 个单位\n侦察结果\n侦察值 11 · 伏击概率 19% · 先手 敌方\n作战经过\n4 个阶段\n侦察阶段\n侦察判定：情报可信度 高，未遭伏击，先手方：敌方。\n接敌阶段\n地形为公路：车辆机动×1.1，先手方：敌方。\n交火阶段\n共进行 3 轮交火\n第1轮交火，双方共6次攻击\n第2轮交火，双方共4次攻击\n第3轮交火，双方共2次攻击\n结算阶段\n结果：胜利\n战损与收获\n我方永久损失\n无\n战地抢救回收\n无\n敌方损失\n3 个单位\n是否占领\n是\n首占奖励\n补给 600 / 情报 30\n胜负原因\n侦察充分，提前发现敌方部署\n事件时间轴\n41 条\n0.0s\n侦察阶段开始\n1.4s\n发现敌方单位：敌方步兵班 ×3\n2.9s\n接敌阶段开始\n4.3s\n交火阶段开始\n5.7s\n敌方步兵班向主战坦克开火\n7.1s\n主战坦克受到1点伤害\n8.6s\n敌方步兵班向主战坦克开火\n10.0s\n主战坦克受到1点伤害\n11.4s\n敌方步兵班向主战坦克开火\n12.8s\n主战坦克受到1点伤害\n14.3s\n主战坦克向敌方步兵班开火\n15.7s\n敌方步兵班受到47点伤害\n17.1s\n敌方步兵班被压制，下次攻击下降\n18.5s\n主战坦克向敌方步兵班开火\n19.9s\n敌方步兵班受到41点伤害\n21.4s\n敌方步兵班被压制，下次攻击下降\n22.8s\n敌方步兵班被摧毁\n24.2s\n主战坦克向敌方步兵班开火\n25.6s\n敌方步兵班受到40点伤害\n27.1s\n敌方步兵班被压制，下次攻击下降\n28.5s\n主战坦克向敌方步兵班开火\n29.9s\n敌方步兵班受到39点伤害\n31.4s\n敌方步兵班被压制，下次攻击下降\n32.8s\n主战坦克向敌方步兵班开火\n34.2s\n敌方步兵班受到49点伤害\n35.6s\n敌方步兵班被压制，下次攻击下降\n37.0s\n敌方步兵班被摧毁\n38.5s\n主战坦克向敌方步兵班开火\n39.9s\n敌方步兵班受到38点伤害\n41.3s\n敌方步兵班被压制，下次攻击下降\n42.8s\n敌方步兵班向主战坦克开火\n44.2s\n主战坦克受到1点伤害\n45.6s\n主战坦克向敌方步兵班开火\n47.0s\n敌方步兵班受到44点伤害\n48.5s\n敌方步兵班被压制，下次攻击下降\n49.9s\n主战坦克向敌方步兵班开火\n51.3s\n敌方步兵班受到48点伤害\n52.7s\n敌方步兵班被压制，下次攻击下降\n54.1s\n敌方步兵班被摧毁\n55.6s\n结算阶段开始\n57.0s\n战斗结果：胜利\n说明：战报中的随机种子决定了整场战斗的全部判定；相同种子、相同编队与相同策略必然得到完全相同的结果，可用于复盘与验证。\n通讯记录 / COMMS\n30 / 30\n[08:05]\n主战坦克开始制造。\n[08:06]\n主战坦克生产完成，已进入单位库存。\n[08:06]\n装甲工厂已空闲。\n[08:09]\n各区域例行巡查完成，未发现异常。\n[08:10]\n主战坦克开始制造。\n[08:11]\n主战坦克生产完成，已进入单位库存。\n[08:11]\n装甲工厂已空闲。\n[08:11]\n编队「第一战斗群」已建立。\n[08:11]\n主战坦克已加入「第一战斗群」，指挥容量剩余4。\n[08:11]\n主战坦克已加入「第一战斗群」，指挥容量剩余2。\n[08:11]\n主战坦克已加入「第一战斗群」，指挥容量剩余0。\n[08:11]\n基地数据已保存。\n[08:11]\n基地数据已保存。\n[08:11]\n存档已载入，基地状态恢复。\n[08:11]\n1支编队已恢复，指挥容量占用 6/6。\n[08:11]\n已占领战区：废弃矿区、边境公路、敌方前哨站，占领收益持续生效。\n[08:11]\n第一战斗群向河谷渡场发起进攻（谨慎推进）。\n[08:11]\n基地数据已保存。\n[08:11]\n存档已载入，基地状态恢复。\n[08:11]\n1支编队已恢复，指挥容量占用 6/6。\n[08:11]\n已占领战区：废弃矿区、边境公路、敌方前哨站，占领收益持续生效。\n[08:11]\n第一战斗群正在河谷渡场作战，回放进度 0%，结果已锁定。\n[08:11]\n第一战斗群在河谷渡场的作战结束：胜利，无永久损失。\n[08:11]\n占领河谷渡场，获得首次占领奖励：补给 600 / 情报 30。\n[08:11]\n存档已载入，基地状态恢复。\n[08:11]\n检测到异常编队数据，已自动修复。\n[08:11]\n修复说明：活动编队状态已恢复为战斗。\n[08:11]\n1支编队已恢复，指挥容量占用 6/6。\n[08:11]\n已占领战区：废弃矿区、边境公路、敌方前哨站、河谷渡场，占领收益持续生效。\n[08:11]\n第一战斗群在河谷渡场的战斗已结束（胜利），等待返回基地。",
-            "imageSha256": "80eadeb5151a0e03c828d71498b27d5590e813c1e62363533a0cc6f7afe4c05b",
+            "domText": "◣\n钢铁指令\nIRON COMMAND · 指挥终端\n▤\n补给\n1,760/ 5,000\n+4/s\n◈\n合金\n30/ 5,000\n+2/s\n◎\n情报\n118/ 500\n+0.1/s\n⚡\n电力\n12/ 30\n正常\n✦\n指挥容量\n6/ 6\n已满\n基地时间\n08:11:20\n第1天\n❚❚\n1×\n2×\n4×\n保存\n读取\n新游戏\n演出：自动\n通用规划 · 正式旁路\n作战结束，部队正在重新集结并返航 · 5 秒\n查看完整战报\n跳过返航动画\n概览\n建设\n生产\n部队\n编队\n战区\n维修\n科研\n战报\n战斗报告\n阶段5 · 已开放\n战斗统计\n1 份\n累计交战\n1 场\n占领成功\n1 次\n已占领战区\n4 / 6\n历史战报\n最多保留 20 份\n河谷渡场 · 第一战斗群\n胜利\n谨慎推进\n3 轮\n损失 0\n种子 1527140601\n战报详情\n胜利\n河谷渡场 · 第一战斗群\n\n第一战斗群在河谷渡场的作战以胜利告终。我方损失 0 个单位，敌方损失 3 个单位。\n\n正式会话 battle-session-23-river_crossing-898411d5937067e7602c-1 · 结算已应用\n只读回放\n随机种子\n1527140601\n作战策略\n谨慎推进\n战术编组\n装甲楔形\n协同强度\n8%\n战场地形\n河谷道路\n战斗时长\n60 秒\n我方参战\n3 个单位\n敌方兵力\n3 个单位\n侦察结果\n侦察值 11 · 伏击概率 19% · 先手 敌方\n作战经过\n4 个阶段\n侦察阶段\n侦察判定：情报可信度 高，未遭伏击，先手方：敌方。\n接敌阶段\n地形为公路：车辆机动×1.1，先手方：敌方。\n交火阶段\n共进行 3 轮交火\n第1轮交火，双方共6次攻击\n第2轮交火，双方共4次攻击\n第3轮交火，双方共2次攻击\n结算阶段\n结果：胜利\n战损与收获\n我方永久损失\n无\n战地抢救回收\n无\n敌方损失\n3 个单位\n是否占领\n是\n首占奖励\n补给 600 / 情报 30\n胜负原因\n侦察充分，提前发现敌方部署\n事件时间轴\n41 条\n0.0s\n侦察阶段开始\n1.4s\n发现敌方单位：敌方步兵班 ×3\n2.9s\n接敌阶段开始\n4.3s\n交火阶段开始\n5.7s\n敌方步兵班向主战坦克开火\n7.1s\n主战坦克受到1点伤害\n8.6s\n敌方步兵班向主战坦克开火\n10.0s\n主战坦克受到1点伤害\n11.4s\n敌方步兵班向主战坦克开火\n12.8s\n主战坦克受到1点伤害\n14.3s\n主战坦克向敌方步兵班开火\n15.7s\n敌方步兵班受到43点伤害\n17.1s\n敌方步兵班被压制，下次攻击下降\n18.5s\n主战坦克向敌方步兵班开火\n19.9s\n敌方步兵班受到51点伤害\n21.4s\n敌方步兵班被压制，下次攻击下降\n22.8s\n敌方步兵班被摧毁\n24.2s\n主战坦克向敌方步兵班开火\n25.6s\n敌方步兵班受到42点伤害\n27.1s\n敌方步兵班被压制，下次攻击下降\n28.5s\n主战坦克向敌方步兵班开火\n29.9s\n敌方步兵班受到40点伤害\n31.4s\n敌方步兵班被压制，下次攻击下降\n32.8s\n主战坦克向敌方步兵班开火\n34.2s\n敌方步兵班受到41点伤害\n35.6s\n敌方步兵班被压制，下次攻击下降\n37.0s\n敌方步兵班被摧毁\n38.5s\n主战坦克向敌方步兵班开火\n39.9s\n敌方步兵班受到39点伤害\n41.3s\n敌方步兵班被压制，下次攻击下降\n42.8s\n敌方步兵班向主战坦克开火\n44.2s\n主战坦克受到1点伤害\n45.6s\n主战坦克向敌方步兵班开火\n47.0s\n敌方步兵班受到42点伤害\n48.5s\n敌方步兵班被压制，下次攻击下降\n49.9s\n主战坦克向敌方步兵班开火\n51.3s\n敌方步兵班受到41点伤害\n52.7s\n敌方步兵班被压制，下次攻击下降\n54.1s\n敌方步兵班被摧毁\n55.6s\n结算阶段开始\n57.0s\n战斗结果：胜利\n说明：战报中的随机种子决定了整场战斗的全部判定；相同种子、相同编队与相同策略必然得到完全相同的结果，可用于复盘与验证。\n通讯记录 / COMMS\n30 / 30\n[08:05]\n主战坦克开始制造。\n[08:06]\n主战坦克生产完成，已进入单位库存。\n[08:06]\n装甲工厂已空闲。\n[08:09]\n各区域例行巡查完成，未发现异常。\n[08:10]\n主战坦克开始制造。\n[08:11]\n主战坦克生产完成，已进入单位库存。\n[08:11]\n装甲工厂已空闲。\n[08:11]\n编队「第一战斗群」已建立。\n[08:11]\n主战坦克已加入「第一战斗群」，指挥容量剩余4。\n[08:11]\n主战坦克已加入「第一战斗群」，指挥容量剩余2。\n[08:11]\n主战坦克已加入「第一战斗群」，指挥容量剩余0。\n[08:11]\n基地数据已保存。\n[08:11]\n基地数据已保存。\n[08:11]\n存档已载入，基地状态恢复。\n[08:11]\n1支编队已恢复，指挥容量占用 6/6。\n[08:11]\n已占领战区：废弃矿区、边境公路、敌方前哨站，占领收益持续生效。\n[08:11]\n第一战斗群向河谷渡场发起进攻（谨慎推进）。\n[08:11]\n基地数据已保存。\n[08:11]\n存档已载入，基地状态恢复。\n[08:11]\n1支编队已恢复，指挥容量占用 6/6。\n[08:11]\n已占领战区：废弃矿区、边境公路、敌方前哨站，占领收益持续生效。\n[08:11]\n第一战斗群正在河谷渡场作战，回放进度 0%，结果已锁定。\n[08:11]\n第一战斗群在河谷渡场的作战结束：胜利，无永久损失。\n[08:11]\n占领河谷渡场，获得首次占领奖励：补给 600 / 情报 30。\n[08:11]\n存档已载入，基地状态恢复。\n[08:11]\n检测到异常编队数据，已自动修复。\n[08:11]\n修复说明：活动编队状态已恢复为战斗。\n[08:11]\n1支编队已恢复，指挥容量占用 6/6。\n[08:11]\n已占领战区：废弃矿区、边境公路、敌方前哨站、河谷渡场，占领收益持续生效。\n[08:11]\n第一战斗群在河谷渡场的战斗已结束（胜利），等待返回基地。",
+            "imageSha256": "938314f265217178fcb065c11186a1c162632c9efaf6498a6f3ab1de3b8625a5",
             "screenshot": {
               "path": "screenshots/stage9-A/s9-a-12-report.png",
-              "sha256": "80eadeb5151a0e03c828d71498b27d5590e813c1e62363533a0cc6f7afe4c05b"
+              "sha256": "938314f265217178fcb065c11186a1c162632c9efaf6498a6f3ab1de3b8625a5"
             }
           },
           {
@@ -5307,11 +5288,11 @@
               "riverCaptured": true,
               "operationCooldownUntil": 0
             },
-            "domText": "◣\n钢铁指令\nIRON COMMAND · 指挥终端\n▤\n补给\n1,761/ 5,000\n+4/s\n◈\n合金\n30/ 5,000\n+2/s\n◎\n情报\n118/ 500\n+0.1/s\n⚡\n电力\n12/ 30\n正常\n✦\n指挥容量\n6/ 6\n已满\n基地时间\n08:11:20\n第1天\n❚❚\n1×\n2×\n4×\n保存\n读取\n新游戏\n视图：基地全景 / BASE VIEW\n指挥区\n工业区\n军营区\n后勤区\n基地出口\nFPS 60 · 暂停\n概览\n建设\n生产\n部队\n编队\n战区\n维修\n科研\n战报\n战区目标\n阶段5 · 已开放\n作战目标\n4 / 6 已占领\n废弃矿区\n已占领\n难度 ★☆☆☆☆\n地形 开阔地\n隐蔽 4\n\n少量敌方步兵驻守的旧采掘场。\n\n敌情（侦察估算）\n兵力 约 1-5\n敌方步兵班 约 2-4\n装甲攻击 ×1.10 · 车辆机动 ×1.10　|　伏击风险 低\n首占奖励 合金 300　|　占领收益 合金+1/s\n废料回收 · 重复任务\n清理矿区残余威胁，并回收可用合金。 · 经验倍率 ×0.8\n成本系数 ×4 · 奖励范围 alloy 100-180\n任务已就绪\n选择任务\n尝试 0 次\n胜利 0 次\n尚未交战\n边境公路\n已占领\n难度 ★★☆☆☆\n地形 公路\n隐蔽 8\n\n敌方巡逻队与反装甲小组控制的运输干线。\n\n敌情（侦察估算）\n兵力 约 4-8\n敌方步兵班 约 3-5\n疑似敌方反装甲小组 约 1-3\n车辆机动 ×1.10 · 伏击风险略高　|　伏击风险 中\n首占奖励 补给 400 / 情报 10　|　占领收益 补给+1/s\n补给护送 · 重复任务\n护送运输队穿过仍不稳定的边境公路。 · 经验倍率 ×1\n成本系数 ×7 · 奖励范围 supply 180-300 / intel 2-5\n任务已就绪\n选择任务\n尝试 0 次\n胜利 0 次\n尚未交战\n敌方前哨站\n已占领\n难度 ★★★☆☆\n地形 防御阵地\n隐蔽 14\n\n构筑了工事的前进基地，火力密集。\n\n敌情（侦察估算）\n兵力 约 8-12\n敌方步兵班 约 4-6\n疑似敌方反装甲小组 约 2-4\n疑似敌方轻型装甲车 约 1-3\n敌方防御 ×1.20 · 我方攻击 ×0.90　|　伏击风险 高\n首占奖励 合金 500 / 情报 25\n残敌清剿 · 重复任务\n清剿前哨站周边残余武装，获取情报和工业材料。 · 经验倍率 ×1.25\n成本系数 ×10 · 奖励范围 alloy 220-360 / intel 6-12\n任务已就绪\n选择任务\n尝试 0 次\n胜利 0 次\n尚未交战\n河谷渡场\n已占领\n难度 ★★★★☆\n地形 河谷道路\n隐蔽 16\n\n穿越河谷的旧渡场，是向纵深推进的关键补给节点。\n\n敌情（侦察估算）\n兵力 约 1-5\n敌方步兵班 约 2-4\n车辆机动 ×1.10 · 伏击风险略高　|　伏击风险 高\n首占奖励 补给 600 / 情报 30　|　占领收益 补给+1/s\n渡场补给 · 重复任务\n清理渡场周边袭扰部队，恢复纵深补给线。 · 经验倍率 ×1.4\n成本系数 ×14 · 奖励范围 supply 260-420 / alloy 180-300\n任务已就绪\n选择任务\n尝试 1 次\n胜利 1 次\n上次 胜利\n通信中继站\n可进攻\n难度 ★★★★★\n地形 开阔高地\n隐蔽 18\n\n控制敌方纵深通信链路的高地中继站。\n\n敌情（侦察估算）\n兵力 约 4-8\n敌方步兵班 约 3-5\n疑似敌方反装甲小组 约 1-2\n疑似敌方轻型装甲车 约 1-2\n装甲攻击 ×1.10 · 车辆机动 ×1.10　|　伏击风险 高\n首占奖励 合金 700 / 情报 35　|　占领收益 合金+1/s\n尝试 0 次\n胜利 0 次\n尚未交战\n北岭山口\n未解锁\n难度 ★★★★★\n地形 山口阵地\n隐蔽 20\n\n通往北岭纵深的最后山口，必须稳步夺取并守住。\n\n敌情（侦察估算）\n兵力 约 3-7\n敌方步兵班 约 2-4\n疑似敌方反装甲小组 约 1-2\n疑似敌方轻型装甲车 约 1-2\n敌方防御 ×1.20 · 我方攻击 ×0.90　|　伏击风险 高\n首占奖励 合金 900 / 补给 700 / 情报 45　|　占领收益 补给+1/s 合金+1/s\n尝试 0 次\n胜利 0 次\n尚未交战\n需要先占领：通信中继站\n派遣控制台\n渡场补给 · 重复任务\n任务：渡场补给 · 河谷道路 · 补给系数 ×14\n任务类型：重复任务 · 已就绪：完成后进入任务冷却\n出击编队\n第一战斗群（待命 · 3单位 · 指挥6）\n攻击 105 · 防御 90 · 侦察 9 · 耐久 476 · 维持 15\n作战策略\n谨慎推进\n谨慎推进\n无额外消耗\n\n侦察 +30%，防御 +15%，行军与战斗时间 +25%，伏击概率降低，输出略降约 8%。\n\n侦察充分，提前发现敌方反装甲阵地\n防御稳固，承受首轮打击更稳\n伏击概率显著降低\n整体输出下降约 8%\n行军与战斗时间更长\n正面突破\n无额外消耗\n\n首阶段攻击 +25%，装甲攻击额外提高，补给消耗 +25%，侦察不足时反装甲损失风险增加。\n\n首轮攻击 +25%\n装甲单位攻击额外 +15%\n任务补给成本 +25%\n侦察不足时受反装甲伤害风险升高\n火力侦察\n情报 5\n\n侦察与压制提高，有概率提前发现高威胁单位，步兵攻击略降，消耗 5 点情报。\n\n侦察 +20%\n压制能力 +25%\n更易提前发现高威胁单位\n步兵攻击 -8%\n额外消耗情报 5\n任务成本\n资源充足\n出击消耗\n补给 210 / 情报 4\n计算方式\n维持 15 × 系数 14\n参战单位\nundefined 个\n查看部署确认\n说明：同一时间只能进行一场作战。战斗结果在派遣时即由求解器一次性算出，画面只是按事件时间轴回放，暂停或加速不会改变胜负。每场战斗最多 8 轮交火；建成雷达站可获得精确敌情，否则只能得到估算区间。\n通讯记录 / COMMS\n30 / 30\n[08:06]\n主战坦克生产完成，已进入单位库存。\n[08:06]\n装甲工厂已空闲。\n[08:09]\n各区域例行巡查完成，未发现异常。\n[08:10]\n主战坦克开始制造。\n[08:11]\n主战坦克生产完成，已进入单位库存。\n[08:11]\n装甲工厂已空闲。\n[08:11]\n编队「第一战斗群」已建立。\n[08:11]\n主战坦克已加入「第一战斗群」，指挥容量剩余4。\n[08:11]\n主战坦克已加入「第一战斗群」，指挥容量剩余2。\n[08:11]\n主战坦克已加入「第一战斗群」，指挥容量剩余0。\n[08:11]\n基地数据已保存。\n[08:11]\n基地数据已保存。\n[08:11]\n存档已载入，基地状态恢复。\n[08:11]\n1支编队已恢复，指挥容量占用 6/6。\n[08:11]\n已占领战区：废弃矿区、边境公路、敌方前哨站，占领收益持续生效。\n[08:11]\n第一战斗群向河谷渡场发起进攻（谨慎推进）。\n[08:11]\n基地数据已保存。\n[08:11]\n存档已载入，基地状态恢复。\n[08:11]\n1支编队已恢复，指挥容量占用 6/6。\n[08:11]\n已占领战区：废弃矿区、边境公路、敌方前哨站，占领收益持续生效。\n[08:11]\n第一战斗群正在河谷渡场作战，回放进度 0%，结果已锁定。\n[08:11]\n第一战斗群在河谷渡场的作战结束：胜利，无永久损失。\n[08:11]\n占领河谷渡场，获得首次占领奖励：补给 600 / 情报 30。\n[08:11]\n存档已载入，基地状态恢复。\n[08:11]\n检测到异常编队数据，已自动修复。\n[08:11]\n修复说明：活动编队状态已恢复为战斗。\n[08:11]\n1支编队已恢复，指挥容量占用 6/6。\n[08:11]\n已占领战区：废弃矿区、边境公路、敌方前哨站、河谷渡场，占领收益持续生效。\n[08:11]\n第一战斗群在河谷渡场的战斗已结束（胜利），等待返回基地。\n[08:11]\n第一战斗群已返回基地。\n返航展示已跳过",
-            "imageSha256": "fa84b43dc0664e69eeab71001fe89e2bc6ab07b54f94389f91bb03f3aa97580a",
+            "domText": "◣\n钢铁指令\nIRON COMMAND · 指挥终端\n▤\n补给\n1,760/ 5,000\n+4/s\n◈\n合金\n30/ 5,000\n+2/s\n◎\n情报\n118/ 500\n+0.1/s\n⚡\n电力\n12/ 30\n正常\n✦\n指挥容量\n6/ 6\n已满\n基地时间\n08:11:20\n第1天\n❚❚\n1×\n2×\n4×\n保存\n读取\n新游戏\n视图：基地全景 / BASE VIEW\n指挥区\n工业区\n军营区\n后勤区\n基地出口\nFPS 60 · 暂停\n概览\n建设\n生产\n部队\n编队\n战区\n维修\n科研\n战报\n战区目标\n阶段5 · 已开放\n作战目标\n4 / 6 已占领\n废弃矿区\n已占领\n难度 ★☆☆☆☆\n地形 开阔地\n隐蔽 4\n\n少量敌方步兵驻守的旧采掘场。\n\n敌情（侦察估算）\n兵力 约 1-5\n敌方步兵班 约 2-4\n装甲攻击 ×1.10 · 车辆机动 ×1.10　|　伏击风险 低\n首占奖励 合金 300　|　占领收益 合金+1/s\n废料回收 · 重复任务\n清理矿区残余威胁，并回收可用合金。 · 经验倍率 ×0.8\n成本系数 ×4 · 奖励范围 alloy 100-180\n任务已就绪\n选择任务\n尝试 0 次\n胜利 0 次\n尚未交战\n边境公路\n已占领\n难度 ★★☆☆☆\n地形 公路\n隐蔽 8\n\n敌方巡逻队与反装甲小组控制的运输干线。\n\n敌情（侦察估算）\n兵力 约 4-8\n敌方步兵班 约 3-5\n疑似敌方反装甲小组 约 1-3\n车辆机动 ×1.10 · 伏击风险略高　|　伏击风险 中\n首占奖励 补给 400 / 情报 10　|　占领收益 补给+1/s\n补给护送 · 重复任务\n护送运输队穿过仍不稳定的边境公路。 · 经验倍率 ×1\n成本系数 ×7 · 奖励范围 supply 180-300 / intel 2-5\n任务已就绪\n选择任务\n尝试 0 次\n胜利 0 次\n尚未交战\n敌方前哨站\n已占领\n难度 ★★★☆☆\n地形 防御阵地\n隐蔽 14\n\n构筑了工事的前进基地，火力密集。\n\n敌情（侦察估算）\n兵力 约 8-12\n敌方步兵班 约 4-6\n疑似敌方反装甲小组 约 2-4\n疑似敌方轻型装甲车 约 1-3\n敌方防御 ×1.20 · 我方攻击 ×0.90　|　伏击风险 高\n首占奖励 合金 500 / 情报 25\n残敌清剿 · 重复任务\n清剿前哨站周边残余武装，获取情报和工业材料。 · 经验倍率 ×1.25\n成本系数 ×10 · 奖励范围 alloy 220-360 / intel 6-12\n任务已就绪\n选择任务\n尝试 0 次\n胜利 0 次\n尚未交战\n河谷渡场\n已占领\n难度 ★★★★☆\n地形 河谷道路\n隐蔽 16\n\n穿越河谷的旧渡场，是向纵深推进的关键补给节点。\n\n敌情（侦察估算）\n兵力 约 1-5\n敌方步兵班 约 2-4\n车辆机动 ×1.10 · 伏击风险略高　|　伏击风险 高\n首占奖励 补给 600 / 情报 30　|　占领收益 补给+1/s\n渡场补给 · 重复任务\n清理渡场周边袭扰部队，恢复纵深补给线。 · 经验倍率 ×1.4\n成本系数 ×14 · 奖励范围 supply 260-420 / alloy 180-300\n任务已就绪\n选择任务\n尝试 1 次\n胜利 1 次\n上次 胜利\n通信中继站\n可进攻\n难度 ★★★★★\n地形 开阔高地\n隐蔽 18\n\n控制敌方纵深通信链路的高地中继站。\n\n敌情（侦察估算）\n兵力 约 4-8\n敌方步兵班 约 3-5\n疑似敌方反装甲小组 约 1-2\n疑似敌方轻型装甲车 约 1-2\n装甲攻击 ×1.10 · 车辆机动 ×1.10　|　伏击风险 高\n首占奖励 合金 700 / 情报 35　|　占领收益 合金+1/s\n尝试 0 次\n胜利 0 次\n尚未交战\n北岭山口\n未解锁\n难度 ★★★★★\n地形 山口阵地\n隐蔽 20\n\n通往北岭纵深的最后山口，必须稳步夺取并守住。\n\n敌情（侦察估算）\n兵力 约 3-7\n敌方步兵班 约 2-4\n疑似敌方反装甲小组 约 1-2\n疑似敌方轻型装甲车 约 1-2\n敌方防御 ×1.20 · 我方攻击 ×0.90　|　伏击风险 高\n首占奖励 合金 900 / 补给 700 / 情报 45　|　占领收益 补给+1/s 合金+1/s\n尝试 0 次\n胜利 0 次\n尚未交战\n需要先占领：通信中继站\n派遣控制台\n渡场补给 · 重复任务\n任务：渡场补给 · 河谷道路 · 补给系数 ×14\n任务类型：重复任务 · 已就绪：完成后进入任务冷却\n出击编队\n第一战斗群（待命 · 3单位 · 指挥6）\n攻击 105 · 防御 90 · 侦察 9 · 耐久 476 · 维持 15\n作战策略\n谨慎推进\n谨慎推进\n无额外消耗\n\n侦察 +30%，防御 +15%，行军与战斗时间 +25%，伏击概率降低，输出略降约 8%。\n\n侦察充分，提前发现敌方反装甲阵地\n防御稳固，承受首轮打击更稳\n伏击概率显著降低\n整体输出下降约 8%\n行军与战斗时间更长\n正面突破\n无额外消耗\n\n首阶段攻击 +25%，装甲攻击额外提高，补给消耗 +25%，侦察不足时反装甲损失风险增加。\n\n首轮攻击 +25%\n装甲单位攻击额外 +15%\n任务补给成本 +25%\n侦察不足时受反装甲伤害风险升高\n火力侦察\n情报 5\n\n侦察与压制提高，有概率提前发现高威胁单位，步兵攻击略降，消耗 5 点情报。\n\n侦察 +20%\n压制能力 +25%\n更易提前发现高威胁单位\n步兵攻击 -8%\n额外消耗情报 5\n任务成本\n资源充足\n出击消耗\n补给 210 / 情报 4\n计算方式\n维持 15 × 系数 14\n参战单位\nundefined 个\n查看部署确认\n说明：同一时间只能进行一场作战。战斗结果在派遣时即由求解器一次性算出，画面只是按事件时间轴回放，暂停或加速不会改变胜负。每场战斗最多 8 轮交火；建成雷达站可获得精确敌情，否则只能得到估算区间。\n通讯记录 / COMMS\n30 / 30\n[08:06]\n主战坦克生产完成，已进入单位库存。\n[08:06]\n装甲工厂已空闲。\n[08:09]\n各区域例行巡查完成，未发现异常。\n[08:10]\n主战坦克开始制造。\n[08:11]\n主战坦克生产完成，已进入单位库存。\n[08:11]\n装甲工厂已空闲。\n[08:11]\n编队「第一战斗群」已建立。\n[08:11]\n主战坦克已加入「第一战斗群」，指挥容量剩余4。\n[08:11]\n主战坦克已加入「第一战斗群」，指挥容量剩余2。\n[08:11]\n主战坦克已加入「第一战斗群」，指挥容量剩余0。\n[08:11]\n基地数据已保存。\n[08:11]\n基地数据已保存。\n[08:11]\n存档已载入，基地状态恢复。\n[08:11]\n1支编队已恢复，指挥容量占用 6/6。\n[08:11]\n已占领战区：废弃矿区、边境公路、敌方前哨站，占领收益持续生效。\n[08:11]\n第一战斗群向河谷渡场发起进攻（谨慎推进）。\n[08:11]\n基地数据已保存。\n[08:11]\n存档已载入，基地状态恢复。\n[08:11]\n1支编队已恢复，指挥容量占用 6/6。\n[08:11]\n已占领战区：废弃矿区、边境公路、敌方前哨站，占领收益持续生效。\n[08:11]\n第一战斗群正在河谷渡场作战，回放进度 0%，结果已锁定。\n[08:11]\n第一战斗群在河谷渡场的作战结束：胜利，无永久损失。\n[08:11]\n占领河谷渡场，获得首次占领奖励：补给 600 / 情报 30。\n[08:11]\n存档已载入，基地状态恢复。\n[08:11]\n检测到异常编队数据，已自动修复。\n[08:11]\n修复说明：活动编队状态已恢复为战斗。\n[08:11]\n1支编队已恢复，指挥容量占用 6/6。\n[08:11]\n已占领战区：废弃矿区、边境公路、敌方前哨站、河谷渡场，占领收益持续生效。\n[08:11]\n第一战斗群在河谷渡场的战斗已结束（胜利），等待返回基地。\n[08:11]\n第一战斗群已返回基地。\n返航展示已跳过",
+            "imageSha256": "ddbef1b0c2cae0bc9d722f42c0a4ff3548c373dabac9f149169eb102244a437f",
             "screenshot": {
               "path": "screenshots/stage9-A/s9-a-13-operation.png",
-              "sha256": "fa84b43dc0664e69eeab71001fe89e2bc6ab07b54f94389f91bb03f3aa97580a"
+              "sha256": "ddbef1b0c2cae0bc9d722f42c0a4ff3548c373dabac9f149169eb102244a437f"
             }
           },
           {
@@ -5331,11 +5312,11 @@
               "riverCaptured": true,
               "operationCooldownUntil": 0
             },
-            "domText": "◣\n钢铁指令\nIRON COMMAND · 指挥终端\n▤\n补给\n1,761/ 5,000\n+4/s\n◈\n合金\n30/ 5,000\n+2/s\n◎\n情报\n118/ 500\n+0.1/s\n⚡\n电力\n12/ 30\n正常\n✦\n指挥容量\n6/ 6\n已满\n基地时间\n08:11:20\n第1天\n❚❚\n1×\n2×\n4×\n保存\n读取\n新游戏\n视图：基地全景 / BASE VIEW\n指挥区\n工业区\n军营区\n后勤区\n基地出口\nFPS 60 · 暂停\n概览\n建设\n生产\n部队\n编队\n战区\n维修\n科研\n战报\n战区目标\n阶段5 · 已开放\n作战目标\n4 / 6 已占领\n废弃矿区\n已占领\n难度 ★☆☆☆☆\n地形 开阔地\n隐蔽 4\n\n少量敌方步兵驻守的旧采掘场。\n\n敌情（侦察估算）\n兵力 约 1-5\n敌方步兵班 约 2-4\n装甲攻击 ×1.10 · 车辆机动 ×1.10　|　伏击风险 低\n首占奖励 合金 300　|　占领收益 合金+1/s\n废料回收 · 重复任务\n清理矿区残余威胁，并回收可用合金。 · 经验倍率 ×0.8\n成本系数 ×4 · 奖励范围 alloy 100-180\n任务已就绪\n选择任务\n尝试 0 次\n胜利 0 次\n尚未交战\n边境公路\n已占领\n难度 ★★☆☆☆\n地形 公路\n隐蔽 8\n\n敌方巡逻队与反装甲小组控制的运输干线。\n\n敌情（侦察估算）\n兵力 约 4-8\n敌方步兵班 约 3-5\n疑似敌方反装甲小组 约 1-3\n车辆机动 ×1.10 · 伏击风险略高　|　伏击风险 中\n首占奖励 补给 400 / 情报 10　|　占领收益 补给+1/s\n补给护送 · 重复任务\n护送运输队穿过仍不稳定的边境公路。 · 经验倍率 ×1\n成本系数 ×7 · 奖励范围 supply 180-300 / intel 2-5\n任务已就绪\n选择任务\n尝试 0 次\n胜利 0 次\n尚未交战\n敌方前哨站\n已占领\n难度 ★★★☆☆\n地形 防御阵地\n隐蔽 14\n\n构筑了工事的前进基地，火力密集。\n\n敌情（侦察估算）\n兵力 约 8-12\n敌方步兵班 约 4-6\n疑似敌方反装甲小组 约 2-4\n疑似敌方轻型装甲车 约 1-3\n敌方防御 ×1.20 · 我方攻击 ×0.90　|　伏击风险 高\n首占奖励 合金 500 / 情报 25\n残敌清剿 · 重复任务\n清剿前哨站周边残余武装，获取情报和工业材料。 · 经验倍率 ×1.25\n成本系数 ×10 · 奖励范围 alloy 220-360 / intel 6-12\n任务已就绪\n选择任务\n尝试 0 次\n胜利 0 次\n尚未交战\n河谷渡场\n已占领\n难度 ★★★★☆\n地形 河谷道路\n隐蔽 16\n\n穿越河谷的旧渡场，是向纵深推进的关键补给节点。\n\n敌情（侦察估算）\n兵力 约 1-5\n敌方步兵班 约 2-4\n车辆机动 ×1.10 · 伏击风险略高　|　伏击风险 高\n首占奖励 补给 600 / 情报 30　|　占领收益 补给+1/s\n渡场补给 · 重复任务\n清理渡场周边袭扰部队，恢复纵深补给线。 · 经验倍率 ×1.4\n成本系数 ×14 · 奖励范围 supply 260-420 / alloy 180-300\n任务已就绪\n选择任务\n尝试 1 次\n胜利 1 次\n上次 胜利\n通信中继站\n可进攻\n难度 ★★★★★\n地形 开阔高地\n隐蔽 18\n\n控制敌方纵深通信链路的高地中继站。\n\n敌情（侦察估算）\n兵力 约 4-8\n敌方步兵班 约 3-5\n疑似敌方反装甲小组 约 1-2\n疑似敌方轻型装甲车 约 1-2\n装甲攻击 ×1.10 · 车辆机动 ×1.10　|　伏击风险 高\n首占奖励 合金 700 / 情报 35　|　占领收益 合金+1/s\n尝试 0 次\n胜利 0 次\n尚未交战\n北岭山口\n未解锁\n难度 ★★★★★\n地形 山口阵地\n隐蔽 20\n\n通往北岭纵深的最后山口，必须稳步夺取并守住。\n\n敌情（侦察估算）\n兵力 约 3-7\n敌方步兵班 约 2-4\n疑似敌方反装甲小组 约 1-2\n疑似敌方轻型装甲车 约 1-2\n敌方防御 ×1.20 · 我方攻击 ×0.90　|　伏击风险 高\n首占奖励 合金 900 / 补给 700 / 情报 45　|　占领收益 补给+1/s 合金+1/s\n尝试 0 次\n胜利 0 次\n尚未交战\n需要先占领：通信中继站\n派遣控制台\n渡场补给 · 重复任务\n任务：渡场补给 · 河谷道路 · 补给系数 ×14\n任务类型：重复任务 · 已就绪：完成后进入任务冷却\n出击编队\n第一战斗群（待命 · 3单位 · 指挥6）\n攻击 105 · 防御 90 · 侦察 9 · 耐久 476 · 维持 15\n作战策略\n谨慎推进\n谨慎推进\n无额外消耗\n\n侦察 +30%，防御 +15%，行军与战斗时间 +25%，伏击概率降低，输出略降约 8%。\n\n侦察充分，提前发现敌方反装甲阵地\n防御稳固，承受首轮打击更稳\n伏击概率显著降低\n整体输出下降约 8%\n行军与战斗时间更长\n正面突破\n无额外消耗\n\n首阶段攻击 +25%，装甲攻击额外提高，补给消耗 +25%，侦察不足时反装甲损失风险增加。\n\n首轮攻击 +25%\n装甲单位攻击额外 +15%\n任务补给成本 +25%\n侦察不足时受反装甲伤害风险升高\n火力侦察\n情报 5\n\n侦察与压制提高，有概率提前发现高威胁单位，步兵攻击略降，消耗 5 点情报。\n\n侦察 +20%\n压制能力 +25%\n更易提前发现高威胁单位\n步兵攻击 -8%\n额外消耗情报 5\n任务成本\n资源充足\n出击消耗\n补给 210 / 情报 4\n计算方式\n维持 15 × 系数 14\n参战单位\nundefined 个\n等待确认\n部署确认 / DEPLOYMENT REVIEW\n待确认\n第一战斗群 → 河谷渡场\n重复任务 · 策略 谨慎推进 · 渡场补给\n目标战区\n河谷渡场\n预计消耗\n补给 210 / 情报 4\n冷却安排\n已就绪：完成后进入任务冷却\n确认时游戏时间\n29480 秒\n实际派遣快照 · 参战单位\n3 个\n主战坦克\nHP 156/160 · 状态 待命 · 训练有素 · intact\n主战坦克\nHP 160/160 · 状态 待命 · 训练有素 · intact\n主战坦克\nHP 160/160 · 状态 待命 · 训练有素 · intact\n以上清单来自本次派遣将写入的 dispatchSnapshot；确认时核心层会再次校验资格与资源。\n取消派遣\n确认派遣\n说明：同一时间只能进行一场作战。战斗结果在派遣时即由求解器一次性算出，画面只是按事件时间轴回放，暂停或加速不会改变胜负。每场战斗最多 8 轮交火；建成雷达站可获得精确敌情，否则只能得到估算区间。\n通讯记录 / COMMS\n30 / 30\n[08:06]\n主战坦克生产完成，已进入单位库存。\n[08:06]\n装甲工厂已空闲。\n[08:09]\n各区域例行巡查完成，未发现异常。\n[08:10]\n主战坦克开始制造。\n[08:11]\n主战坦克生产完成，已进入单位库存。\n[08:11]\n装甲工厂已空闲。\n[08:11]\n编队「第一战斗群」已建立。\n[08:11]\n主战坦克已加入「第一战斗群」，指挥容量剩余4。\n[08:11]\n主战坦克已加入「第一战斗群」，指挥容量剩余2。\n[08:11]\n主战坦克已加入「第一战斗群」，指挥容量剩余0。\n[08:11]\n基地数据已保存。\n[08:11]\n基地数据已保存。\n[08:11]\n存档已载入，基地状态恢复。\n[08:11]\n1支编队已恢复，指挥容量占用 6/6。\n[08:11]\n已占领战区：废弃矿区、边境公路、敌方前哨站，占领收益持续生效。\n[08:11]\n第一战斗群向河谷渡场发起进攻（谨慎推进）。\n[08:11]\n基地数据已保存。\n[08:11]\n存档已载入，基地状态恢复。\n[08:11]\n1支编队已恢复，指挥容量占用 6/6。\n[08:11]\n已占领战区：废弃矿区、边境公路、敌方前哨站，占领收益持续生效。\n[08:11]\n第一战斗群正在河谷渡场作战，回放进度 0%，结果已锁定。\n[08:11]\n第一战斗群在河谷渡场的作战结束：胜利，无永久损失。\n[08:11]\n占领河谷渡场，获得首次占领奖励：补给 600 / 情报 30。\n[08:11]\n存档已载入，基地状态恢复。\n[08:11]\n检测到异常编队数据，已自动修复。\n[08:11]\n修复说明：活动编队状态已恢复为战斗。\n[08:11]\n1支编队已恢复，指挥容量占用 6/6。\n[08:11]\n已占领战区：废弃矿区、边境公路、敌方前哨站、河谷渡场，占领收益持续生效。\n[08:11]\n第一战斗群在河谷渡场的战斗已结束（胜利），等待返回基地。\n[08:11]\n第一战斗群已返回基地。\n返航展示已跳过",
-            "imageSha256": "6f050794385300006af4b32ecd32f8c65709f844dd91eaddb69a83f1a4deb804",
+            "domText": "◣\n钢铁指令\nIRON COMMAND · 指挥终端\n▤\n补给\n1,760/ 5,000\n+4/s\n◈\n合金\n30/ 5,000\n+2/s\n◎\n情报\n118/ 500\n+0.1/s\n⚡\n电力\n12/ 30\n正常\n✦\n指挥容量\n6/ 6\n已满\n基地时间\n08:11:20\n第1天\n❚❚\n1×\n2×\n4×\n保存\n读取\n新游戏\n视图：基地全景 / BASE VIEW\n指挥区\n工业区\n军营区\n后勤区\n基地出口\nFPS 60 · 暂停\n概览\n建设\n生产\n部队\n编队\n战区\n维修\n科研\n战报\n战区目标\n阶段5 · 已开放\n作战目标\n4 / 6 已占领\n废弃矿区\n已占领\n难度 ★☆☆☆☆\n地形 开阔地\n隐蔽 4\n\n少量敌方步兵驻守的旧采掘场。\n\n敌情（侦察估算）\n兵力 约 1-5\n敌方步兵班 约 2-4\n装甲攻击 ×1.10 · 车辆机动 ×1.10　|　伏击风险 低\n首占奖励 合金 300　|　占领收益 合金+1/s\n废料回收 · 重复任务\n清理矿区残余威胁，并回收可用合金。 · 经验倍率 ×0.8\n成本系数 ×4 · 奖励范围 alloy 100-180\n任务已就绪\n选择任务\n尝试 0 次\n胜利 0 次\n尚未交战\n边境公路\n已占领\n难度 ★★☆☆☆\n地形 公路\n隐蔽 8\n\n敌方巡逻队与反装甲小组控制的运输干线。\n\n敌情（侦察估算）\n兵力 约 4-8\n敌方步兵班 约 3-5\n疑似敌方反装甲小组 约 1-3\n车辆机动 ×1.10 · 伏击风险略高　|　伏击风险 中\n首占奖励 补给 400 / 情报 10　|　占领收益 补给+1/s\n补给护送 · 重复任务\n护送运输队穿过仍不稳定的边境公路。 · 经验倍率 ×1\n成本系数 ×7 · 奖励范围 supply 180-300 / intel 2-5\n任务已就绪\n选择任务\n尝试 0 次\n胜利 0 次\n尚未交战\n敌方前哨站\n已占领\n难度 ★★★☆☆\n地形 防御阵地\n隐蔽 14\n\n构筑了工事的前进基地，火力密集。\n\n敌情（侦察估算）\n兵力 约 8-12\n敌方步兵班 约 4-6\n疑似敌方反装甲小组 约 2-4\n疑似敌方轻型装甲车 约 1-3\n敌方防御 ×1.20 · 我方攻击 ×0.90　|　伏击风险 高\n首占奖励 合金 500 / 情报 25\n残敌清剿 · 重复任务\n清剿前哨站周边残余武装，获取情报和工业材料。 · 经验倍率 ×1.25\n成本系数 ×10 · 奖励范围 alloy 220-360 / intel 6-12\n任务已就绪\n选择任务\n尝试 0 次\n胜利 0 次\n尚未交战\n河谷渡场\n已占领\n难度 ★★★★☆\n地形 河谷道路\n隐蔽 16\n\n穿越河谷的旧渡场，是向纵深推进的关键补给节点。\n\n敌情（侦察估算）\n兵力 约 1-5\n敌方步兵班 约 2-4\n车辆机动 ×1.10 · 伏击风险略高　|　伏击风险 高\n首占奖励 补给 600 / 情报 30　|　占领收益 补给+1/s\n渡场补给 · 重复任务\n清理渡场周边袭扰部队，恢复纵深补给线。 · 经验倍率 ×1.4\n成本系数 ×14 · 奖励范围 supply 260-420 / alloy 180-300\n任务已就绪\n选择任务\n尝试 1 次\n胜利 1 次\n上次 胜利\n通信中继站\n可进攻\n难度 ★★★★★\n地形 开阔高地\n隐蔽 18\n\n控制敌方纵深通信链路的高地中继站。\n\n敌情（侦察估算）\n兵力 约 4-8\n敌方步兵班 约 3-5\n疑似敌方反装甲小组 约 1-2\n疑似敌方轻型装甲车 约 1-2\n装甲攻击 ×1.10 · 车辆机动 ×1.10　|　伏击风险 高\n首占奖励 合金 700 / 情报 35　|　占领收益 合金+1/s\n尝试 0 次\n胜利 0 次\n尚未交战\n北岭山口\n未解锁\n难度 ★★★★★\n地形 山口阵地\n隐蔽 20\n\n通往北岭纵深的最后山口，必须稳步夺取并守住。\n\n敌情（侦察估算）\n兵力 约 3-7\n敌方步兵班 约 2-4\n疑似敌方反装甲小组 约 1-2\n疑似敌方轻型装甲车 约 1-2\n敌方防御 ×1.20 · 我方攻击 ×0.90　|　伏击风险 高\n首占奖励 合金 900 / 补给 700 / 情报 45　|　占领收益 补给+1/s 合金+1/s\n尝试 0 次\n胜利 0 次\n尚未交战\n需要先占领：通信中继站\n派遣控制台\n渡场补给 · 重复任务\n任务：渡场补给 · 河谷道路 · 补给系数 ×14\n任务类型：重复任务 · 已就绪：完成后进入任务冷却\n出击编队\n第一战斗群（待命 · 3单位 · 指挥6）\n攻击 105 · 防御 90 · 侦察 9 · 耐久 476 · 维持 15\n作战策略\n谨慎推进\n谨慎推进\n无额外消耗\n\n侦察 +30%，防御 +15%，行军与战斗时间 +25%，伏击概率降低，输出略降约 8%。\n\n侦察充分，提前发现敌方反装甲阵地\n防御稳固，承受首轮打击更稳\n伏击概率显著降低\n整体输出下降约 8%\n行军与战斗时间更长\n正面突破\n无额外消耗\n\n首阶段攻击 +25%，装甲攻击额外提高，补给消耗 +25%，侦察不足时反装甲损失风险增加。\n\n首轮攻击 +25%\n装甲单位攻击额外 +15%\n任务补给成本 +25%\n侦察不足时受反装甲伤害风险升高\n火力侦察\n情报 5\n\n侦察与压制提高，有概率提前发现高威胁单位，步兵攻击略降，消耗 5 点情报。\n\n侦察 +20%\n压制能力 +25%\n更易提前发现高威胁单位\n步兵攻击 -8%\n额外消耗情报 5\n任务成本\n资源充足\n出击消耗\n补给 210 / 情报 4\n计算方式\n维持 15 × 系数 14\n参战单位\nundefined 个\n等待确认\n部署确认 / DEPLOYMENT REVIEW\n待确认\n第一战斗群 → 河谷渡场\n重复任务 · 策略 谨慎推进 · 渡场补给\n目标战区\n河谷渡场\n预计消耗\n补给 210 / 情报 4\n冷却安排\n已就绪：完成后进入任务冷却\n确认时游戏时间\n29480 秒\n实际派遣快照 · 参战单位\n3 个\n主战坦克\nHP 160/160 · 状态 待命 · 训练有素 · intact\n主战坦克\nHP 160/160 · 状态 待命 · 训练有素 · intact\n主战坦克\nHP 156/160 · 状态 待命 · 训练有素 · intact\n以上清单来自本次派遣将写入的 dispatchSnapshot；确认时核心层会再次校验资格与资源。\n取消派遣\n确认派遣\n说明：同一时间只能进行一场作战。战斗结果在派遣时即由求解器一次性算出，画面只是按事件时间轴回放，暂停或加速不会改变胜负。每场战斗最多 8 轮交火；建成雷达站可获得精确敌情，否则只能得到估算区间。\n通讯记录 / COMMS\n30 / 30\n[08:06]\n主战坦克生产完成，已进入单位库存。\n[08:06]\n装甲工厂已空闲。\n[08:09]\n各区域例行巡查完成，未发现异常。\n[08:10]\n主战坦克开始制造。\n[08:11]\n主战坦克生产完成，已进入单位库存。\n[08:11]\n装甲工厂已空闲。\n[08:11]\n编队「第一战斗群」已建立。\n[08:11]\n主战坦克已加入「第一战斗群」，指挥容量剩余4。\n[08:11]\n主战坦克已加入「第一战斗群」，指挥容量剩余2。\n[08:11]\n主战坦克已加入「第一战斗群」，指挥容量剩余0。\n[08:11]\n基地数据已保存。\n[08:11]\n基地数据已保存。\n[08:11]\n存档已载入，基地状态恢复。\n[08:11]\n1支编队已恢复，指挥容量占用 6/6。\n[08:11]\n已占领战区：废弃矿区、边境公路、敌方前哨站，占领收益持续生效。\n[08:11]\n第一战斗群向河谷渡场发起进攻（谨慎推进）。\n[08:11]\n基地数据已保存。\n[08:11]\n存档已载入，基地状态恢复。\n[08:11]\n1支编队已恢复，指挥容量占用 6/6。\n[08:11]\n已占领战区：废弃矿区、边境公路、敌方前哨站，占领收益持续生效。\n[08:11]\n第一战斗群正在河谷渡场作战，回放进度 0%，结果已锁定。\n[08:11]\n第一战斗群在河谷渡场的作战结束：胜利，无永久损失。\n[08:11]\n占领河谷渡场，获得首次占领奖励：补给 600 / 情报 30。\n[08:11]\n存档已载入，基地状态恢复。\n[08:11]\n检测到异常编队数据，已自动修复。\n[08:11]\n修复说明：活动编队状态已恢复为战斗。\n[08:11]\n1支编队已恢复，指挥容量占用 6/6。\n[08:11]\n已占领战区：废弃矿区、边境公路、敌方前哨站、河谷渡场，占领收益持续生效。\n[08:11]\n第一战斗群在河谷渡场的战斗已结束（胜利），等待返回基地。\n[08:11]\n第一战斗群已返回基地。\n返航展示已跳过",
+            "imageSha256": "bfbb3cfef1642cc880de5d6d50488a0c355a96598883d5fc3a0f9481cccd3478",
             "screenshot": {
               "path": "screenshots/stage9-A/s9-a-14-operation_review.png",
-              "sha256": "6f050794385300006af4b32ecd32f8c65709f844dd91eaddb69a83f1a4deb804"
+              "sha256": "bfbb3cfef1642cc880de5d6d50488a0c355a96598883d5fc3a0f9481cccd3478"
             }
           },
           {
@@ -5355,11 +5336,11 @@
               "riverCaptured": true,
               "operationCooldownUntil": 0
             },
-            "domText": "◣\n钢铁指令\nIRON COMMAND · 指挥终端\n▤\n补给\n1,761/ 5,000\n+4/s\n◈\n合金\n30/ 5,000\n+2/s\n◎\n情报\n118/ 500\n+0.1/s\n⚡\n电力\n12/ 30\n正常\n✦\n指挥容量\n6/ 6\n已满\n基地时间\n08:11:20\n第1天\n❚❚\n1×\n2×\n4×\n保存\n读取\n新游戏\n视图：基地全景 / BASE VIEW\n指挥区\n工业区\n军营区\n后勤区\n基地出口\nFPS 60 · 暂停\n概览\n建设\n生产\n部队\n编队\n战区\n维修\n科研\n战报\n战区目标\n阶段5 · 已开放\n作战目标\n4 / 6 已占领\n废弃矿区\n已占领\n难度 ★☆☆☆☆\n地形 开阔地\n隐蔽 4\n\n少量敌方步兵驻守的旧采掘场。\n\n敌情（侦察估算）\n兵力 约 1-5\n敌方步兵班 约 2-4\n装甲攻击 ×1.10 · 车辆机动 ×1.10　|　伏击风险 低\n首占奖励 合金 300　|　占领收益 合金+1/s\n废料回收 · 重复任务\n清理矿区残余威胁，并回收可用合金。 · 经验倍率 ×0.8\n成本系数 ×4 · 奖励范围 alloy 100-180\n任务已就绪\n选择任务\n尝试 0 次\n胜利 0 次\n尚未交战\n边境公路\n已占领\n难度 ★★☆☆☆\n地形 公路\n隐蔽 8\n\n敌方巡逻队与反装甲小组控制的运输干线。\n\n敌情（侦察估算）\n兵力 约 4-8\n敌方步兵班 约 3-5\n疑似敌方反装甲小组 约 1-3\n车辆机动 ×1.10 · 伏击风险略高　|　伏击风险 中\n首占奖励 补给 400 / 情报 10　|　占领收益 补给+1/s\n补给护送 · 重复任务\n护送运输队穿过仍不稳定的边境公路。 · 经验倍率 ×1\n成本系数 ×7 · 奖励范围 supply 180-300 / intel 2-5\n任务已就绪\n选择任务\n尝试 0 次\n胜利 0 次\n尚未交战\n敌方前哨站\n已占领\n难度 ★★★☆☆\n地形 防御阵地\n隐蔽 14\n\n构筑了工事的前进基地，火力密集。\n\n敌情（侦察估算）\n兵力 约 8-12\n敌方步兵班 约 4-6\n疑似敌方反装甲小组 约 2-4\n疑似敌方轻型装甲车 约 1-3\n敌方防御 ×1.20 · 我方攻击 ×0.90　|　伏击风险 高\n首占奖励 合金 500 / 情报 25\n残敌清剿 · 重复任务\n清剿前哨站周边残余武装，获取情报和工业材料。 · 经验倍率 ×1.25\n成本系数 ×10 · 奖励范围 alloy 220-360 / intel 6-12\n任务已就绪\n选择任务\n尝试 0 次\n胜利 0 次\n尚未交战\n河谷渡场\n已占领\n难度 ★★★★☆\n地形 河谷道路\n隐蔽 16\n\n穿越河谷的旧渡场，是向纵深推进的关键补给节点。\n\n敌情（侦察估算）\n兵力 约 1-5\n敌方步兵班 约 2-4\n车辆机动 ×1.10 · 伏击风险略高　|　伏击风险 高\n首占奖励 补给 600 / 情报 30　|　占领收益 补给+1/s\n渡场补给 · 重复任务\n清理渡场周边袭扰部队，恢复纵深补给线。 · 经验倍率 ×1.4\n成本系数 ×14 · 奖励范围 supply 260-420 / alloy 180-300\n任务已就绪\n选择任务\n尝试 1 次\n胜利 1 次\n上次 胜利\n通信中继站\n可进攻\n难度 ★★★★★\n地形 开阔高地\n隐蔽 18\n\n控制敌方纵深通信链路的高地中继站。\n\n敌情（侦察估算）\n兵力 约 4-8\n敌方步兵班 约 3-5\n疑似敌方反装甲小组 约 1-2\n疑似敌方轻型装甲车 约 1-2\n装甲攻击 ×1.10 · 车辆机动 ×1.10　|　伏击风险 高\n首占奖励 合金 700 / 情报 35　|　占领收益 合金+1/s\n尝试 0 次\n胜利 0 次\n尚未交战\n北岭山口\n未解锁\n难度 ★★★★★\n地形 山口阵地\n隐蔽 20\n\n通往北岭纵深的最后山口，必须稳步夺取并守住。\n\n敌情（侦察估算）\n兵力 约 3-7\n敌方步兵班 约 2-4\n疑似敌方反装甲小组 约 1-2\n疑似敌方轻型装甲车 约 1-2\n敌方防御 ×1.20 · 我方攻击 ×0.90　|　伏击风险 高\n首占奖励 合金 900 / 补给 700 / 情报 45　|　占领收益 补给+1/s 合金+1/s\n尝试 0 次\n胜利 0 次\n尚未交战\n需要先占领：通信中继站\n派遣控制台\n渡场补给 · 重复任务\n任务：渡场补给 · 河谷道路 · 补给系数 ×14\n任务类型：重复任务 · 已就绪：完成后进入任务冷却\n出击编队\n第一战斗群（待命 · 3单位 · 指挥6）\n攻击 105 · 防御 90 · 侦察 9 · 耐久 476 · 维持 15\n作战策略\n谨慎推进\n谨慎推进\n无额外消耗\n\n侦察 +30%，防御 +15%，行军与战斗时间 +25%，伏击概率降低，输出略降约 8%。\n\n侦察充分，提前发现敌方反装甲阵地\n防御稳固，承受首轮打击更稳\n伏击概率显著降低\n整体输出下降约 8%\n行军与战斗时间更长\n正面突破\n无额外消耗\n\n首阶段攻击 +25%，装甲攻击额外提高，补给消耗 +25%，侦察不足时反装甲损失风险增加。\n\n首轮攻击 +25%\n装甲单位攻击额外 +15%\n任务补给成本 +25%\n侦察不足时受反装甲伤害风险升高\n火力侦察\n情报 5\n\n侦察与压制提高，有概率提前发现高威胁单位，步兵攻击略降，消耗 5 点情报。\n\n侦察 +20%\n压制能力 +25%\n更易提前发现高威胁单位\n步兵攻击 -8%\n额外消耗情报 5\n任务成本\n资源充足\n出击消耗\n补给 210 / 情报 4\n计算方式\n维持 15 × 系数 14\n参战单位\nundefined 个\n查看部署确认\n说明：同一时间只能进行一场作战。战斗结果在派遣时即由求解器一次性算出，画面只是按事件时间轴回放，暂停或加速不会改变胜负。每场战斗最多 8 轮交火；建成雷达站可获得精确敌情，否则只能得到估算区间。\n通讯记录 / COMMS\n30 / 30\n[08:06]\n主战坦克生产完成，已进入单位库存。\n[08:06]\n装甲工厂已空闲。\n[08:09]\n各区域例行巡查完成，未发现异常。\n[08:10]\n主战坦克开始制造。\n[08:11]\n主战坦克生产完成，已进入单位库存。\n[08:11]\n装甲工厂已空闲。\n[08:11]\n编队「第一战斗群」已建立。\n[08:11]\n主战坦克已加入「第一战斗群」，指挥容量剩余4。\n[08:11]\n主战坦克已加入「第一战斗群」，指挥容量剩余2。\n[08:11]\n主战坦克已加入「第一战斗群」，指挥容量剩余0。\n[08:11]\n基地数据已保存。\n[08:11]\n基地数据已保存。\n[08:11]\n存档已载入，基地状态恢复。\n[08:11]\n1支编队已恢复，指挥容量占用 6/6。\n[08:11]\n已占领战区：废弃矿区、边境公路、敌方前哨站，占领收益持续生效。\n[08:11]\n第一战斗群向河谷渡场发起进攻（谨慎推进）。\n[08:11]\n基地数据已保存。\n[08:11]\n存档已载入，基地状态恢复。\n[08:11]\n1支编队已恢复，指挥容量占用 6/6。\n[08:11]\n已占领战区：废弃矿区、边境公路、敌方前哨站，占领收益持续生效。\n[08:11]\n第一战斗群正在河谷渡场作战，回放进度 0%，结果已锁定。\n[08:11]\n第一战斗群在河谷渡场的作战结束：胜利，无永久损失。\n[08:11]\n占领河谷渡场，获得首次占领奖励：补给 600 / 情报 30。\n[08:11]\n存档已载入，基地状态恢复。\n[08:11]\n检测到异常编队数据，已自动修复。\n[08:11]\n修复说明：活动编队状态已恢复为战斗。\n[08:11]\n1支编队已恢复，指挥容量占用 6/6。\n[08:11]\n已占领战区：废弃矿区、边境公路、敌方前哨站、河谷渡场，占领收益持续生效。\n[08:11]\n第一战斗群在河谷渡场的战斗已结束（胜利），等待返回基地。\n[08:11]\n第一战斗群已返回基地。\n返航展示已跳过",
-            "imageSha256": "56d04900618056cc53d35f2e3029e5fd58243df452509e1041c839b1e0dc9b48",
+            "domText": "◣\n钢铁指令\nIRON COMMAND · 指挥终端\n▤\n补给\n1,760/ 5,000\n+4/s\n◈\n合金\n30/ 5,000\n+2/s\n◎\n情报\n118/ 500\n+0.1/s\n⚡\n电力\n12/ 30\n正常\n✦\n指挥容量\n6/ 6\n已满\n基地时间\n08:11:20\n第1天\n❚❚\n1×\n2×\n4×\n保存\n读取\n新游戏\n视图：基地全景 / BASE VIEW\n指挥区\n工业区\n军营区\n后勤区\n基地出口\nFPS 60 · 暂停\n概览\n建设\n生产\n部队\n编队\n战区\n维修\n科研\n战报\n战区目标\n阶段5 · 已开放\n作战目标\n4 / 6 已占领\n废弃矿区\n已占领\n难度 ★☆☆☆☆\n地形 开阔地\n隐蔽 4\n\n少量敌方步兵驻守的旧采掘场。\n\n敌情（侦察估算）\n兵力 约 1-5\n敌方步兵班 约 2-4\n装甲攻击 ×1.10 · 车辆机动 ×1.10　|　伏击风险 低\n首占奖励 合金 300　|　占领收益 合金+1/s\n废料回收 · 重复任务\n清理矿区残余威胁，并回收可用合金。 · 经验倍率 ×0.8\n成本系数 ×4 · 奖励范围 alloy 100-180\n任务已就绪\n选择任务\n尝试 0 次\n胜利 0 次\n尚未交战\n边境公路\n已占领\n难度 ★★☆☆☆\n地形 公路\n隐蔽 8\n\n敌方巡逻队与反装甲小组控制的运输干线。\n\n敌情（侦察估算）\n兵力 约 4-8\n敌方步兵班 约 3-5\n疑似敌方反装甲小组 约 1-3\n车辆机动 ×1.10 · 伏击风险略高　|　伏击风险 中\n首占奖励 补给 400 / 情报 10　|　占领收益 补给+1/s\n补给护送 · 重复任务\n护送运输队穿过仍不稳定的边境公路。 · 经验倍率 ×1\n成本系数 ×7 · 奖励范围 supply 180-300 / intel 2-5\n任务已就绪\n选择任务\n尝试 0 次\n胜利 0 次\n尚未交战\n敌方前哨站\n已占领\n难度 ★★★☆☆\n地形 防御阵地\n隐蔽 14\n\n构筑了工事的前进基地，火力密集。\n\n敌情（侦察估算）\n兵力 约 8-12\n敌方步兵班 约 4-6\n疑似敌方反装甲小组 约 2-4\n疑似敌方轻型装甲车 约 1-3\n敌方防御 ×1.20 · 我方攻击 ×0.90　|　伏击风险 高\n首占奖励 合金 500 / 情报 25\n残敌清剿 · 重复任务\n清剿前哨站周边残余武装，获取情报和工业材料。 · 经验倍率 ×1.25\n成本系数 ×10 · 奖励范围 alloy 220-360 / intel 6-12\n任务已就绪\n选择任务\n尝试 0 次\n胜利 0 次\n尚未交战\n河谷渡场\n已占领\n难度 ★★★★☆\n地形 河谷道路\n隐蔽 16\n\n穿越河谷的旧渡场，是向纵深推进的关键补给节点。\n\n敌情（侦察估算）\n兵力 约 1-5\n敌方步兵班 约 2-4\n车辆机动 ×1.10 · 伏击风险略高　|　伏击风险 高\n首占奖励 补给 600 / 情报 30　|　占领收益 补给+1/s\n渡场补给 · 重复任务\n清理渡场周边袭扰部队，恢复纵深补给线。 · 经验倍率 ×1.4\n成本系数 ×14 · 奖励范围 supply 260-420 / alloy 180-300\n任务已就绪\n选择任务\n尝试 1 次\n胜利 1 次\n上次 胜利\n通信中继站\n可进攻\n难度 ★★★★★\n地形 开阔高地\n隐蔽 18\n\n控制敌方纵深通信链路的高地中继站。\n\n敌情（侦察估算）\n兵力 约 4-8\n敌方步兵班 约 3-5\n疑似敌方反装甲小组 约 1-2\n疑似敌方轻型装甲车 约 1-2\n装甲攻击 ×1.10 · 车辆机动 ×1.10　|　伏击风险 高\n首占奖励 合金 700 / 情报 35　|　占领收益 合金+1/s\n尝试 0 次\n胜利 0 次\n尚未交战\n北岭山口\n未解锁\n难度 ★★★★★\n地形 山口阵地\n隐蔽 20\n\n通往北岭纵深的最后山口，必须稳步夺取并守住。\n\n敌情（侦察估算）\n兵力 约 3-7\n敌方步兵班 约 2-4\n疑似敌方反装甲小组 约 1-2\n疑似敌方轻型装甲车 约 1-2\n敌方防御 ×1.20 · 我方攻击 ×0.90　|　伏击风险 高\n首占奖励 合金 900 / 补给 700 / 情报 45　|　占领收益 补给+1/s 合金+1/s\n尝试 0 次\n胜利 0 次\n尚未交战\n需要先占领：通信中继站\n派遣控制台\n渡场补给 · 重复任务\n任务：渡场补给 · 河谷道路 · 补给系数 ×14\n任务类型：重复任务 · 已就绪：完成后进入任务冷却\n出击编队\n第一战斗群（待命 · 3单位 · 指挥6）\n攻击 105 · 防御 90 · 侦察 9 · 耐久 476 · 维持 15\n作战策略\n谨慎推进\n谨慎推进\n无额外消耗\n\n侦察 +30%，防御 +15%，行军与战斗时间 +25%，伏击概率降低，输出略降约 8%。\n\n侦察充分，提前发现敌方反装甲阵地\n防御稳固，承受首轮打击更稳\n伏击概率显著降低\n整体输出下降约 8%\n行军与战斗时间更长\n正面突破\n无额外消耗\n\n首阶段攻击 +25%，装甲攻击额外提高，补给消耗 +25%，侦察不足时反装甲损失风险增加。\n\n首轮攻击 +25%\n装甲单位攻击额外 +15%\n任务补给成本 +25%\n侦察不足时受反装甲伤害风险升高\n火力侦察\n情报 5\n\n侦察与压制提高，有概率提前发现高威胁单位，步兵攻击略降，消耗 5 点情报。\n\n侦察 +20%\n压制能力 +25%\n更易提前发现高威胁单位\n步兵攻击 -8%\n额外消耗情报 5\n任务成本\n资源充足\n出击消耗\n补给 210 / 情报 4\n计算方式\n维持 15 × 系数 14\n参战单位\nundefined 个\n查看部署确认\n说明：同一时间只能进行一场作战。战斗结果在派遣时即由求解器一次性算出，画面只是按事件时间轴回放，暂停或加速不会改变胜负。每场战斗最多 8 轮交火；建成雷达站可获得精确敌情，否则只能得到估算区间。\n通讯记录 / COMMS\n30 / 30\n[08:06]\n主战坦克生产完成，已进入单位库存。\n[08:06]\n装甲工厂已空闲。\n[08:09]\n各区域例行巡查完成，未发现异常。\n[08:10]\n主战坦克开始制造。\n[08:11]\n主战坦克生产完成，已进入单位库存。\n[08:11]\n装甲工厂已空闲。\n[08:11]\n编队「第一战斗群」已建立。\n[08:11]\n主战坦克已加入「第一战斗群」，指挥容量剩余4。\n[08:11]\n主战坦克已加入「第一战斗群」，指挥容量剩余2。\n[08:11]\n主战坦克已加入「第一战斗群」，指挥容量剩余0。\n[08:11]\n基地数据已保存。\n[08:11]\n基地数据已保存。\n[08:11]\n存档已载入，基地状态恢复。\n[08:11]\n1支编队已恢复，指挥容量占用 6/6。\n[08:11]\n已占领战区：废弃矿区、边境公路、敌方前哨站，占领收益持续生效。\n[08:11]\n第一战斗群向河谷渡场发起进攻（谨慎推进）。\n[08:11]\n基地数据已保存。\n[08:11]\n存档已载入，基地状态恢复。\n[08:11]\n1支编队已恢复，指挥容量占用 6/6。\n[08:11]\n已占领战区：废弃矿区、边境公路、敌方前哨站，占领收益持续生效。\n[08:11]\n第一战斗群正在河谷渡场作战，回放进度 0%，结果已锁定。\n[08:11]\n第一战斗群在河谷渡场的作战结束：胜利，无永久损失。\n[08:11]\n占领河谷渡场，获得首次占领奖励：补给 600 / 情报 30。\n[08:11]\n存档已载入，基地状态恢复。\n[08:11]\n检测到异常编队数据，已自动修复。\n[08:11]\n修复说明：活动编队状态已恢复为战斗。\n[08:11]\n1支编队已恢复，指挥容量占用 6/6。\n[08:11]\n已占领战区：废弃矿区、边境公路、敌方前哨站、河谷渡场，占领收益持续生效。\n[08:11]\n第一战斗群在河谷渡场的战斗已结束（胜利），等待返回基地。\n[08:11]\n第一战斗群已返回基地。\n返航展示已跳过",
+            "imageSha256": "217f71c402a019075b3cc96e0e9639912c2a7eec928648bf99c078136ae3fd9f",
             "screenshot": {
               "path": "screenshots/stage9-A/s9-a-15-operation_cancel.png",
-              "sha256": "56d04900618056cc53d35f2e3029e5fd58243df452509e1041c839b1e0dc9b48"
+              "sha256": "217f71c402a019075b3cc96e0e9639912c2a7eec928648bf99c078136ae3fd9f"
             }
           },
           {
@@ -5372,24 +5353,24 @@
               "saveRevision": 32,
               "activeBattleSessionId": null,
               "activeBattle": {
-                "battleSessionId": "battle-session-23-river_crossing-9d4e1d3f9099f0d9a9ba-1",
+                "battleSessionId": "battle-session-23-river_crossing-898411d5937067e7602c-1",
                 "replayReadOnly": true,
                 "settled": false,
                 "elapsed": 0,
                 "returnElapsed": 0
               },
-              "sessionId": "battle-session-23-river_crossing-9d4e1d3f9099f0d9a9ba-1",
+              "sessionId": "battle-session-23-river_crossing-898411d5937067e7602c-1",
               "sessionLifecycle": "returned",
               "sessionCount": 1,
               "reportCount": 1,
               "riverCaptured": true,
               "operationCooldownUntil": 0
             },
-            "domText": "◣\n钢铁指令\nIRON COMMAND · 指挥终端\n▤\n补给\n1,761/ 5,000\n+4/s\n◈\n合金\n30/ 5,000\n+2/s\n◎\n情报\n118/ 500\n+0.1/s\n⚡\n电力\n12/ 30\n正常\n✦\n指挥容量\n6/ 6\n已满\n基地时间\n08:11:20\n第1天\n❚❚\n1×\n2×\n4×\n保存\n读取\n新游戏\n演出：自动\n通用规划 · 正式旁路\n概览\n建设\n生产\n部队\n编队\n战区\n维修\n科研\n战报\n战区目标\n阶段5 · 已开放\n当前作战\n进行中\n第一战斗群 → 河谷渡场\n策略 谨慎推进 · 队形 装甲楔形 · 种子 2307575583 · 进度 0%（0 / 60 秒）\n侦察阶段开始\n侦察阶段开始\n跳过返航动画\n查看完整战报\n作战目标\n4 / 6 已占领\n废弃矿区\n已占领\n难度 ★☆☆☆☆\n地形 开阔地\n隐蔽 4\n\n少量敌方步兵驻守的旧采掘场。\n\n敌情（侦察估算）\n兵力 约 1-5\n敌方步兵班 约 2-4\n装甲攻击 ×1.10 · 车辆机动 ×1.10　|　伏击风险 低\n首占奖励 合金 300　|　占领收益 合金+1/s\n废料回收 · 重复任务\n清理矿区残余威胁，并回收可用合金。 · 经验倍率 ×0.8\n成本系数 ×4 · 奖励范围 alloy 100-180\n任务已就绪\n选择任务\n尝试 0 次\n胜利 0 次\n尚未交战\n边境公路\n已占领\n难度 ★★☆☆☆\n地形 公路\n隐蔽 8\n\n敌方巡逻队与反装甲小组控制的运输干线。\n\n敌情（侦察估算）\n兵力 约 4-8\n敌方步兵班 约 3-5\n疑似敌方反装甲小组 约 1-3\n车辆机动 ×1.10 · 伏击风险略高　|　伏击风险 中\n首占奖励 补给 400 / 情报 10　|　占领收益 补给+1/s\n补给护送 · 重复任务\n护送运输队穿过仍不稳定的边境公路。 · 经验倍率 ×1\n成本系数 ×7 · 奖励范围 supply 180-300 / intel 2-5\n任务已就绪\n选择任务\n尝试 0 次\n胜利 0 次\n尚未交战\n敌方前哨站\n已占领\n难度 ★★★☆☆\n地形 防御阵地\n隐蔽 14\n\n构筑了工事的前进基地，火力密集。\n\n敌情（侦察估算）\n兵力 约 8-12\n敌方步兵班 约 4-6\n疑似敌方反装甲小组 约 2-4\n疑似敌方轻型装甲车 约 1-3\n敌方防御 ×1.20 · 我方攻击 ×0.90　|　伏击风险 高\n首占奖励 合金 500 / 情报 25\n残敌清剿 · 重复任务\n清剿前哨站周边残余武装，获取情报和工业材料。 · 经验倍率 ×1.25\n成本系数 ×10 · 奖励范围 alloy 220-360 / intel 6-12\n任务已就绪\n选择任务\n尝试 0 次\n胜利 0 次\n尚未交战\n河谷渡场\n交战中\n难度 ★★★★☆\n地形 河谷道路\n隐蔽 16\n\n穿越河谷的旧渡场，是向纵深推进的关键补给节点。\n\n敌情（侦察估算）\n兵力 约 1-5\n敌方步兵班 约 2-4\n车辆机动 ×1.10 · 伏击风险略高　|　伏击风险 高\n首占奖励 补给 600 / 情报 30　|　占领收益 补给+1/s\n渡场补给 · 重复任务\n清理渡场周边袭扰部队，恢复纵深补给线。 · 经验倍率 ×1.4\n成本系数 ×14 · 奖励范围 supply 260-420 / alloy 180-300\n任务已就绪\n选择任务\n尝试 1 次\n胜利 1 次\n上次 胜利\n通信中继站\n可进攻\n难度 ★★★★★\n地形 开阔高地\n隐蔽 18\n\n控制敌方纵深通信链路的高地中继站。\n\n敌情（侦察估算）\n兵力 约 4-8\n敌方步兵班 约 3-5\n疑似敌方反装甲小组 约 1-2\n疑似敌方轻型装甲车 约 1-2\n装甲攻击 ×1.10 · 车辆机动 ×1.10　|　伏击风险 高\n首占奖励 合金 700 / 情报 35　|　占领收益 合金+1/s\n尝试 0 次\n胜利 0 次\n尚未交战\n北岭山口\n未解锁\n难度 ★★★★★\n地形 山口阵地\n隐蔽 20\n\n通往北岭纵深的最后山口，必须稳步夺取并守住。\n\n敌情（侦察估算）\n兵力 约 3-7\n敌方步兵班 约 2-4\n疑似敌方反装甲小组 约 1-2\n疑似敌方轻型装甲车 约 1-2\n敌方防御 ×1.20 · 我方攻击 ×0.90　|　伏击风险 高\n首占奖励 合金 900 / 补给 700 / 情报 45　|　占领收益 补给+1/s 合金+1/s\n尝试 0 次\n胜利 0 次\n尚未交战\n需要先占领：通信中继站\n派遣控制台\n渡场补给 · 重复任务\n任务：渡场补给 · 河谷道路 · 补给系数 ×14\n任务类型：重复任务 · 已就绪：完成后进入任务冷却\n出击编队\n第一战斗群（待命 · 3单位 · 指挥6）\n攻击 105 · 防御 90 · 侦察 9 · 耐久 476 · 维持 15\n作战策略\n谨慎推进\n谨慎推进\n无额外消耗\n\n侦察 +30%，防御 +15%，行军与战斗时间 +25%，伏击概率降低，输出略降约 8%。\n\n侦察充分，提前发现敌方反装甲阵地\n防御稳固，承受首轮打击更稳\n伏击概率显著降低\n整体输出下降约 8%\n行军与战斗时间更长\n正面突破\n无额外消耗\n\n首阶段攻击 +25%，装甲攻击额外提高，补给消耗 +25%，侦察不足时反装甲损失风险增加。\n\n首轮攻击 +25%\n装甲单位攻击额外 +15%\n任务补给成本 +25%\n侦察不足时受反装甲伤害风险升高\n火力侦察\n情报 5\n\n侦察与压制提高，有概率提前发现高威胁单位，步兵攻击略降，消耗 5 点情报。\n\n侦察 +20%\n压制能力 +25%\n更易提前发现高威胁单位\n步兵攻击 -8%\n额外消耗情报 5\n任务成本\n资源充足\n出击消耗\n补给 210 / 情报 4\n计算方式\n维持 15 × 系数 14\n参战单位\nundefined 个\n作战进行中\n已有一场作战正在进行，请先返回基地。\n说明：同一时间只能进行一场作战。战斗结果在派遣时即由求解器一次性算出，画面只是按事件时间轴回放，暂停或加速不会改变胜负。每场战斗最多 8 轮交火；建成雷达站可获得精确敌情，否则只能得到估算区间。\n通讯记录 / COMMS\n30 / 30\n[08:06]\n主战坦克生产完成，已进入单位库存。\n[08:06]\n装甲工厂已空闲。\n[08:09]\n各区域例行巡查完成，未发现异常。\n[08:10]\n主战坦克开始制造。\n[08:11]\n主战坦克生产完成，已进入单位库存。\n[08:11]\n装甲工厂已空闲。\n[08:11]\n编队「第一战斗群」已建立。\n[08:11]\n主战坦克已加入「第一战斗群」，指挥容量剩余4。\n[08:11]\n主战坦克已加入「第一战斗群」，指挥容量剩余2。\n[08:11]\n主战坦克已加入「第一战斗群」，指挥容量剩余0。\n[08:11]\n基地数据已保存。\n[08:11]\n基地数据已保存。\n[08:11]\n存档已载入，基地状态恢复。\n[08:11]\n1支编队已恢复，指挥容量占用 6/6。\n[08:11]\n已占领战区：废弃矿区、边境公路、敌方前哨站，占领收益持续生效。\n[08:11]\n第一战斗群向河谷渡场发起进攻（谨慎推进）。\n[08:11]\n基地数据已保存。\n[08:11]\n存档已载入，基地状态恢复。\n[08:11]\n1支编队已恢复，指挥容量占用 6/6。\n[08:11]\n已占领战区：废弃矿区、边境公路、敌方前哨站，占领收益持续生效。\n[08:11]\n第一战斗群正在河谷渡场作战，回放进度 0%，结果已锁定。\n[08:11]\n第一战斗群在河谷渡场的作战结束：胜利，无永久损失。\n[08:11]\n占领河谷渡场，获得首次占领奖励：补给 600 / 情报 30。\n[08:11]\n存档已载入，基地状态恢复。\n[08:11]\n检测到异常编队数据，已自动修复。\n[08:11]\n修复说明：活动编队状态已恢复为战斗。\n[08:11]\n1支编队已恢复，指挥容量占用 6/6。\n[08:11]\n已占领战区：废弃矿区、边境公路、敌方前哨站、河谷渡场，占领收益持续生效。\n[08:11]\n第一战斗群在河谷渡场的战斗已结束（胜利），等待返回基地。\n[08:11]\n第一战斗群已返回基地。\n已进入只读战报回放",
-            "imageSha256": "43f6f0b53e977201b813088bbd9df8bc5e5880530d4f0f01f440fdc3df5f15fb",
+            "domText": "◣\n钢铁指令\nIRON COMMAND · 指挥终端\n▤\n补给\n1,760/ 5,000\n+4/s\n◈\n合金\n30/ 5,000\n+2/s\n◎\n情报\n118/ 500\n+0.1/s\n⚡\n电力\n12/ 30\n正常\n✦\n指挥容量\n6/ 6\n已满\n基地时间\n08:11:20\n第1天\n❚❚\n1×\n2×\n4×\n保存\n读取\n新游戏\n演出：自动\n通用规划 · 正式旁路\n概览\n建设\n生产\n部队\n编队\n战区\n维修\n科研\n战报\n战区目标\n阶段5 · 已开放\n当前作战\n进行中\n第一战斗群 → 河谷渡场\n策略 谨慎推进 · 队形 装甲楔形 · 种子 1527140601 · 进度 0%（0 / 60 秒）\n侦察阶段开始\n侦察阶段开始\n跳过返航动画\n查看完整战报\n作战目标\n4 / 6 已占领\n废弃矿区\n已占领\n难度 ★☆☆☆☆\n地形 开阔地\n隐蔽 4\n\n少量敌方步兵驻守的旧采掘场。\n\n敌情（侦察估算）\n兵力 约 1-5\n敌方步兵班 约 2-4\n装甲攻击 ×1.10 · 车辆机动 ×1.10　|　伏击风险 低\n首占奖励 合金 300　|　占领收益 合金+1/s\n废料回收 · 重复任务\n清理矿区残余威胁，并回收可用合金。 · 经验倍率 ×0.8\n成本系数 ×4 · 奖励范围 alloy 100-180\n任务已就绪\n选择任务\n尝试 0 次\n胜利 0 次\n尚未交战\n边境公路\n已占领\n难度 ★★☆☆☆\n地形 公路\n隐蔽 8\n\n敌方巡逻队与反装甲小组控制的运输干线。\n\n敌情（侦察估算）\n兵力 约 4-8\n敌方步兵班 约 3-5\n疑似敌方反装甲小组 约 1-3\n车辆机动 ×1.10 · 伏击风险略高　|　伏击风险 中\n首占奖励 补给 400 / 情报 10　|　占领收益 补给+1/s\n补给护送 · 重复任务\n护送运输队穿过仍不稳定的边境公路。 · 经验倍率 ×1\n成本系数 ×7 · 奖励范围 supply 180-300 / intel 2-5\n任务已就绪\n选择任务\n尝试 0 次\n胜利 0 次\n尚未交战\n敌方前哨站\n已占领\n难度 ★★★☆☆\n地形 防御阵地\n隐蔽 14\n\n构筑了工事的前进基地，火力密集。\n\n敌情（侦察估算）\n兵力 约 8-12\n敌方步兵班 约 4-6\n疑似敌方反装甲小组 约 2-4\n疑似敌方轻型装甲车 约 1-3\n敌方防御 ×1.20 · 我方攻击 ×0.90　|　伏击风险 高\n首占奖励 合金 500 / 情报 25\n残敌清剿 · 重复任务\n清剿前哨站周边残余武装，获取情报和工业材料。 · 经验倍率 ×1.25\n成本系数 ×10 · 奖励范围 alloy 220-360 / intel 6-12\n任务已就绪\n选择任务\n尝试 0 次\n胜利 0 次\n尚未交战\n河谷渡场\n交战中\n难度 ★★★★☆\n地形 河谷道路\n隐蔽 16\n\n穿越河谷的旧渡场，是向纵深推进的关键补给节点。\n\n敌情（侦察估算）\n兵力 约 1-5\n敌方步兵班 约 2-4\n车辆机动 ×1.10 · 伏击风险略高　|　伏击风险 高\n首占奖励 补给 600 / 情报 30　|　占领收益 补给+1/s\n渡场补给 · 重复任务\n清理渡场周边袭扰部队，恢复纵深补给线。 · 经验倍率 ×1.4\n成本系数 ×14 · 奖励范围 supply 260-420 / alloy 180-300\n任务已就绪\n选择任务\n尝试 1 次\n胜利 1 次\n上次 胜利\n通信中继站\n可进攻\n难度 ★★★★★\n地形 开阔高地\n隐蔽 18\n\n控制敌方纵深通信链路的高地中继站。\n\n敌情（侦察估算）\n兵力 约 4-8\n敌方步兵班 约 3-5\n疑似敌方反装甲小组 约 1-2\n疑似敌方轻型装甲车 约 1-2\n装甲攻击 ×1.10 · 车辆机动 ×1.10　|　伏击风险 高\n首占奖励 合金 700 / 情报 35　|　占领收益 合金+1/s\n尝试 0 次\n胜利 0 次\n尚未交战\n北岭山口\n未解锁\n难度 ★★★★★\n地形 山口阵地\n隐蔽 20\n\n通往北岭纵深的最后山口，必须稳步夺取并守住。\n\n敌情（侦察估算）\n兵力 约 3-7\n敌方步兵班 约 2-4\n疑似敌方反装甲小组 约 1-2\n疑似敌方轻型装甲车 约 1-2\n敌方防御 ×1.20 · 我方攻击 ×0.90　|　伏击风险 高\n首占奖励 合金 900 / 补给 700 / 情报 45　|　占领收益 补给+1/s 合金+1/s\n尝试 0 次\n胜利 0 次\n尚未交战\n需要先占领：通信中继站\n派遣控制台\n渡场补给 · 重复任务\n任务：渡场补给 · 河谷道路 · 补给系数 ×14\n任务类型：重复任务 · 已就绪：完成后进入任务冷却\n出击编队\n第一战斗群（待命 · 3单位 · 指挥6）\n攻击 105 · 防御 90 · 侦察 9 · 耐久 476 · 维持 15\n作战策略\n谨慎推进\n谨慎推进\n无额外消耗\n\n侦察 +30%，防御 +15%，行军与战斗时间 +25%，伏击概率降低，输出略降约 8%。\n\n侦察充分，提前发现敌方反装甲阵地\n防御稳固，承受首轮打击更稳\n伏击概率显著降低\n整体输出下降约 8%\n行军与战斗时间更长\n正面突破\n无额外消耗\n\n首阶段攻击 +25%，装甲攻击额外提高，补给消耗 +25%，侦察不足时反装甲损失风险增加。\n\n首轮攻击 +25%\n装甲单位攻击额外 +15%\n任务补给成本 +25%\n侦察不足时受反装甲伤害风险升高\n火力侦察\n情报 5\n\n侦察与压制提高，有概率提前发现高威胁单位，步兵攻击略降，消耗 5 点情报。\n\n侦察 +20%\n压制能力 +25%\n更易提前发现高威胁单位\n步兵攻击 -8%\n额外消耗情报 5\n任务成本\n资源充足\n出击消耗\n补给 210 / 情报 4\n计算方式\n维持 15 × 系数 14\n参战单位\nundefined 个\n作战进行中\n已有一场作战正在进行，请先返回基地。\n说明：同一时间只能进行一场作战。战斗结果在派遣时即由求解器一次性算出，画面只是按事件时间轴回放，暂停或加速不会改变胜负。每场战斗最多 8 轮交火；建成雷达站可获得精确敌情，否则只能得到估算区间。\n通讯记录 / COMMS\n30 / 30\n[08:06]\n主战坦克生产完成，已进入单位库存。\n[08:06]\n装甲工厂已空闲。\n[08:09]\n各区域例行巡查完成，未发现异常。\n[08:10]\n主战坦克开始制造。\n[08:11]\n主战坦克生产完成，已进入单位库存。\n[08:11]\n装甲工厂已空闲。\n[08:11]\n编队「第一战斗群」已建立。\n[08:11]\n主战坦克已加入「第一战斗群」，指挥容量剩余4。\n[08:11]\n主战坦克已加入「第一战斗群」，指挥容量剩余2。\n[08:11]\n主战坦克已加入「第一战斗群」，指挥容量剩余0。\n[08:11]\n基地数据已保存。\n[08:11]\n基地数据已保存。\n[08:11]\n存档已载入，基地状态恢复。\n[08:11]\n1支编队已恢复，指挥容量占用 6/6。\n[08:11]\n已占领战区：废弃矿区、边境公路、敌方前哨站，占领收益持续生效。\n[08:11]\n第一战斗群向河谷渡场发起进攻（谨慎推进）。\n[08:11]\n基地数据已保存。\n[08:11]\n存档已载入，基地状态恢复。\n[08:11]\n1支编队已恢复，指挥容量占用 6/6。\n[08:11]\n已占领战区：废弃矿区、边境公路、敌方前哨站，占领收益持续生效。\n[08:11]\n第一战斗群正在河谷渡场作战，回放进度 0%，结果已锁定。\n[08:11]\n第一战斗群在河谷渡场的作战结束：胜利，无永久损失。\n[08:11]\n占领河谷渡场，获得首次占领奖励：补给 600 / 情报 30。\n[08:11]\n存档已载入，基地状态恢复。\n[08:11]\n检测到异常编队数据，已自动修复。\n[08:11]\n修复说明：活动编队状态已恢复为战斗。\n[08:11]\n1支编队已恢复，指挥容量占用 6/6。\n[08:11]\n已占领战区：废弃矿区、边境公路、敌方前哨站、河谷渡场，占领收益持续生效。\n[08:11]\n第一战斗群在河谷渡场的战斗已结束（胜利），等待返回基地。\n[08:11]\n第一战斗群已返回基地。\n已进入只读战报回放",
+            "imageSha256": "4dbb5375dcba2c7cc0fbdb06652fd1010d882e96cda59a205874f8d622b3c890",
             "screenshot": {
               "path": "screenshots/stage9-A/s9-a-16-replay.png",
-              "sha256": "43f6f0b53e977201b813088bbd9df8bc5e5880530d4f0f01f440fdc3df5f15fb"
+              "sha256": "4dbb5375dcba2c7cc0fbdb06652fd1010d882e96cda59a205874f8d622b3c890"
             }
           },
           {
@@ -5401,24 +5382,24 @@
               "saveRevision": 33,
               "activeBattleSessionId": null,
               "activeBattle": {
-                "battleSessionId": "battle-session-23-river_crossing-9d4e1d3f9099f0d9a9ba-1",
+                "battleSessionId": "battle-session-23-river_crossing-898411d5937067e7602c-1",
                 "replayReadOnly": true,
                 "settled": false,
                 "elapsed": 30,
                 "returnElapsed": 0
               },
-              "sessionId": "battle-session-23-river_crossing-9d4e1d3f9099f0d9a9ba-1",
+              "sessionId": "battle-session-23-river_crossing-898411d5937067e7602c-1",
               "sessionLifecycle": "returned",
               "sessionCount": 1,
               "reportCount": 1,
               "riverCaptured": true,
               "operationCooldownUntil": 0
             },
-            "domText": "◣\n钢铁指令\nIRON COMMAND · 指挥终端\n▤\n补给\n1,761/ 5,000\n+4/s\n◈\n合金\n30/ 5,000\n+2/s\n◎\n情报\n118/ 500\n+0.1/s\n⚡\n电力\n12/ 30\n正常\n✦\n指挥容量\n6/ 6\n已满\n基地时间\n08:11:20\n第1天\n❚❚\n1×\n2×\n4×\n保存\n读取\n新游戏\n演出：自动\n通用规划 · 正式旁路\n概览\n建设\n生产\n部队\n编队\n战区\n维修\n科研\n战报\n战区目标\n阶段5 · 已开放\n当前作战\n进行中\n第一战斗群 → 河谷渡场\n策略 谨慎推进 · 队形 装甲楔形 · 种子 2307575583 · 进度 50%（30 / 60 秒）\n交火阶段开始\n敌方步兵班受到39点伤害\n跳过返航动画\n查看完整战报\n作战目标\n4 / 6 已占领\n废弃矿区\n已占领\n难度 ★☆☆☆☆\n地形 开阔地\n隐蔽 4\n\n少量敌方步兵驻守的旧采掘场。\n\n敌情（侦察估算）\n兵力 约 1-5\n敌方步兵班 约 2-4\n装甲攻击 ×1.10 · 车辆机动 ×1.10　|　伏击风险 低\n首占奖励 合金 300　|　占领收益 合金+1/s\n废料回收 · 重复任务\n清理矿区残余威胁，并回收可用合金。 · 经验倍率 ×0.8\n成本系数 ×4 · 奖励范围 alloy 100-180\n任务已就绪\n选择任务\n尝试 0 次\n胜利 0 次\n尚未交战\n边境公路\n已占领\n难度 ★★☆☆☆\n地形 公路\n隐蔽 8\n\n敌方巡逻队与反装甲小组控制的运输干线。\n\n敌情（侦察估算）\n兵力 约 4-8\n敌方步兵班 约 3-5\n疑似敌方反装甲小组 约 1-3\n车辆机动 ×1.10 · 伏击风险略高　|　伏击风险 中\n首占奖励 补给 400 / 情报 10　|　占领收益 补给+1/s\n补给护送 · 重复任务\n护送运输队穿过仍不稳定的边境公路。 · 经验倍率 ×1\n成本系数 ×7 · 奖励范围 supply 180-300 / intel 2-5\n任务已就绪\n选择任务\n尝试 0 次\n胜利 0 次\n尚未交战\n敌方前哨站\n已占领\n难度 ★★★☆☆\n地形 防御阵地\n隐蔽 14\n\n构筑了工事的前进基地，火力密集。\n\n敌情（侦察估算）\n兵力 约 8-12\n敌方步兵班 约 4-6\n疑似敌方反装甲小组 约 2-4\n疑似敌方轻型装甲车 约 1-3\n敌方防御 ×1.20 · 我方攻击 ×0.90　|　伏击风险 高\n首占奖励 合金 500 / 情报 25\n残敌清剿 · 重复任务\n清剿前哨站周边残余武装，获取情报和工业材料。 · 经验倍率 ×1.25\n成本系数 ×10 · 奖励范围 alloy 220-360 / intel 6-12\n任务已就绪\n选择任务\n尝试 0 次\n胜利 0 次\n尚未交战\n河谷渡场\n交战中\n难度 ★★★★☆\n地形 河谷道路\n隐蔽 16\n\n穿越河谷的旧渡场，是向纵深推进的关键补给节点。\n\n敌情（侦察估算）\n兵力 约 1-5\n敌方步兵班 约 2-4\n车辆机动 ×1.10 · 伏击风险略高　|　伏击风险 高\n首占奖励 补给 600 / 情报 30　|　占领收益 补给+1/s\n渡场补给 · 重复任务\n清理渡场周边袭扰部队，恢复纵深补给线。 · 经验倍率 ×1.4\n成本系数 ×14 · 奖励范围 supply 260-420 / alloy 180-300\n任务已就绪\n选择任务\n尝试 1 次\n胜利 1 次\n上次 胜利\n通信中继站\n可进攻\n难度 ★★★★★\n地形 开阔高地\n隐蔽 18\n\n控制敌方纵深通信链路的高地中继站。\n\n敌情（侦察估算）\n兵力 约 4-8\n敌方步兵班 约 3-5\n疑似敌方反装甲小组 约 1-2\n疑似敌方轻型装甲车 约 1-2\n装甲攻击 ×1.10 · 车辆机动 ×1.10　|　伏击风险 高\n首占奖励 合金 700 / 情报 35　|　占领收益 合金+1/s\n尝试 0 次\n胜利 0 次\n尚未交战\n北岭山口\n未解锁\n难度 ★★★★★\n地形 山口阵地\n隐蔽 20\n\n通往北岭纵深的最后山口，必须稳步夺取并守住。\n\n敌情（侦察估算）\n兵力 约 3-7\n敌方步兵班 约 2-4\n疑似敌方反装甲小组 约 1-2\n疑似敌方轻型装甲车 约 1-2\n敌方防御 ×1.20 · 我方攻击 ×0.90　|　伏击风险 高\n首占奖励 合金 900 / 补给 700 / 情报 45　|　占领收益 补给+1/s 合金+1/s\n尝试 0 次\n胜利 0 次\n尚未交战\n需要先占领：通信中继站\n派遣控制台\n渡场补给 · 重复任务\n任务：渡场补给 · 河谷道路 · 补给系数 ×14\n任务类型：重复任务 · 已就绪：完成后进入任务冷却\n出击编队\n第一战斗群（待命 · 3单位 · 指挥6）\n攻击 105 · 防御 90 · 侦察 9 · 耐久 476 · 维持 15\n作战策略\n谨慎推进\n谨慎推进\n无额外消耗\n\n侦察 +30%，防御 +15%，行军与战斗时间 +25%，伏击概率降低，输出略降约 8%。\n\n侦察充分，提前发现敌方反装甲阵地\n防御稳固，承受首轮打击更稳\n伏击概率显著降低\n整体输出下降约 8%\n行军与战斗时间更长\n正面突破\n无额外消耗\n\n首阶段攻击 +25%，装甲攻击额外提高，补给消耗 +25%，侦察不足时反装甲损失风险增加。\n\n首轮攻击 +25%\n装甲单位攻击额外 +15%\n任务补给成本 +25%\n侦察不足时受反装甲伤害风险升高\n火力侦察\n情报 5\n\n侦察与压制提高，有概率提前发现高威胁单位，步兵攻击略降，消耗 5 点情报。\n\n侦察 +20%\n压制能力 +25%\n更易提前发现高威胁单位\n步兵攻击 -8%\n额外消耗情报 5\n任务成本\n资源充足\n出击消耗\n补给 210 / 情报 4\n计算方式\n维持 15 × 系数 14\n参战单位\nundefined 个\n作战进行中\n已有一场作战正在进行，请先返回基地。\n说明：同一时间只能进行一场作战。战斗结果在派遣时即由求解器一次性算出，画面只是按事件时间轴回放，暂停或加速不会改变胜负。每场战斗最多 8 轮交火；建成雷达站可获得精确敌情，否则只能得到估算区间。\n通讯记录 / COMMS\n30 / 30\n[08:06]\n装甲工厂已空闲。\n[08:09]\n各区域例行巡查完成，未发现异常。\n[08:10]\n主战坦克开始制造。\n[08:11]\n主战坦克生产完成，已进入单位库存。\n[08:11]\n装甲工厂已空闲。\n[08:11]\n编队「第一战斗群」已建立。\n[08:11]\n主战坦克已加入「第一战斗群」，指挥容量剩余4。\n[08:11]\n主战坦克已加入「第一战斗群」，指挥容量剩余2。\n[08:11]\n主战坦克已加入「第一战斗群」，指挥容量剩余0。\n[08:11]\n基地数据已保存。\n[08:11]\n基地数据已保存。\n[08:11]\n存档已载入，基地状态恢复。\n[08:11]\n1支编队已恢复，指挥容量占用 6/6。\n[08:11]\n已占领战区：废弃矿区、边境公路、敌方前哨站，占领收益持续生效。\n[08:11]\n第一战斗群向河谷渡场发起进攻（谨慎推进）。\n[08:11]\n基地数据已保存。\n[08:11]\n存档已载入，基地状态恢复。\n[08:11]\n1支编队已恢复，指挥容量占用 6/6。\n[08:11]\n已占领战区：废弃矿区、边境公路、敌方前哨站，占领收益持续生效。\n[08:11]\n第一战斗群正在河谷渡场作战，回放进度 0%，结果已锁定。\n[08:11]\n第一战斗群在河谷渡场的作战结束：胜利，无永久损失。\n[08:11]\n占领河谷渡场，获得首次占领奖励：补给 600 / 情报 30。\n[08:11]\n存档已载入，基地状态恢复。\n[08:11]\n检测到异常编队数据，已自动修复。\n[08:11]\n修复说明：活动编队状态已恢复为战斗。\n[08:11]\n1支编队已恢复，指挥容量占用 6/6。\n[08:11]\n已占领战区：废弃矿区、边境公路、敌方前哨站、河谷渡场，占领收益持续生效。\n[08:11]\n第一战斗群在河谷渡场的战斗已结束（胜利），等待返回基地。\n[08:11]\n第一战斗群已返回基地。\n[08:11]\n基地数据已保存。\n基地数据已保存",
-            "imageSha256": "97566ef8c819ef9cba20e52076ef29b36183dc92cf0cba86923ad94a76830a0f",
+            "domText": "◣\n钢铁指令\nIRON COMMAND · 指挥终端\n▤\n补给\n1,760/ 5,000\n+4/s\n◈\n合金\n30/ 5,000\n+2/s\n◎\n情报\n118/ 500\n+0.1/s\n⚡\n电力\n12/ 30\n正常\n✦\n指挥容量\n6/ 6\n已满\n基地时间\n08:11:20\n第1天\n❚❚\n1×\n2×\n4×\n保存\n读取\n新游戏\n演出：自动\n通用规划 · 正式旁路\n概览\n建设\n生产\n部队\n编队\n战区\n维修\n科研\n战报\n战区目标\n阶段5 · 已开放\n当前作战\n进行中\n第一战斗群 → 河谷渡场\n策略 谨慎推进 · 队形 装甲楔形 · 种子 1527140601 · 进度 50%（30 / 60 秒）\n交火阶段开始\n敌方步兵班受到40点伤害\n跳过返航动画\n查看完整战报\n作战目标\n4 / 6 已占领\n废弃矿区\n已占领\n难度 ★☆☆☆☆\n地形 开阔地\n隐蔽 4\n\n少量敌方步兵驻守的旧采掘场。\n\n敌情（侦察估算）\n兵力 约 1-5\n敌方步兵班 约 2-4\n装甲攻击 ×1.10 · 车辆机动 ×1.10　|　伏击风险 低\n首占奖励 合金 300　|　占领收益 合金+1/s\n废料回收 · 重复任务\n清理矿区残余威胁，并回收可用合金。 · 经验倍率 ×0.8\n成本系数 ×4 · 奖励范围 alloy 100-180\n任务已就绪\n选择任务\n尝试 0 次\n胜利 0 次\n尚未交战\n边境公路\n已占领\n难度 ★★☆☆☆\n地形 公路\n隐蔽 8\n\n敌方巡逻队与反装甲小组控制的运输干线。\n\n敌情（侦察估算）\n兵力 约 4-8\n敌方步兵班 约 3-5\n疑似敌方反装甲小组 约 1-3\n车辆机动 ×1.10 · 伏击风险略高　|　伏击风险 中\n首占奖励 补给 400 / 情报 10　|　占领收益 补给+1/s\n补给护送 · 重复任务\n护送运输队穿过仍不稳定的边境公路。 · 经验倍率 ×1\n成本系数 ×7 · 奖励范围 supply 180-300 / intel 2-5\n任务已就绪\n选择任务\n尝试 0 次\n胜利 0 次\n尚未交战\n敌方前哨站\n已占领\n难度 ★★★☆☆\n地形 防御阵地\n隐蔽 14\n\n构筑了工事的前进基地，火力密集。\n\n敌情（侦察估算）\n兵力 约 8-12\n敌方步兵班 约 4-6\n疑似敌方反装甲小组 约 2-4\n疑似敌方轻型装甲车 约 1-3\n敌方防御 ×1.20 · 我方攻击 ×0.90　|　伏击风险 高\n首占奖励 合金 500 / 情报 25\n残敌清剿 · 重复任务\n清剿前哨站周边残余武装，获取情报和工业材料。 · 经验倍率 ×1.25\n成本系数 ×10 · 奖励范围 alloy 220-360 / intel 6-12\n任务已就绪\n选择任务\n尝试 0 次\n胜利 0 次\n尚未交战\n河谷渡场\n交战中\n难度 ★★★★☆\n地形 河谷道路\n隐蔽 16\n\n穿越河谷的旧渡场，是向纵深推进的关键补给节点。\n\n敌情（侦察估算）\n兵力 约 1-5\n敌方步兵班 约 2-4\n车辆机动 ×1.10 · 伏击风险略高　|　伏击风险 高\n首占奖励 补给 600 / 情报 30　|　占领收益 补给+1/s\n渡场补给 · 重复任务\n清理渡场周边袭扰部队，恢复纵深补给线。 · 经验倍率 ×1.4\n成本系数 ×14 · 奖励范围 supply 260-420 / alloy 180-300\n任务已就绪\n选择任务\n尝试 1 次\n胜利 1 次\n上次 胜利\n通信中继站\n可进攻\n难度 ★★★★★\n地形 开阔高地\n隐蔽 18\n\n控制敌方纵深通信链路的高地中继站。\n\n敌情（侦察估算）\n兵力 约 4-8\n敌方步兵班 约 3-5\n疑似敌方反装甲小组 约 1-2\n疑似敌方轻型装甲车 约 1-2\n装甲攻击 ×1.10 · 车辆机动 ×1.10　|　伏击风险 高\n首占奖励 合金 700 / 情报 35　|　占领收益 合金+1/s\n尝试 0 次\n胜利 0 次\n尚未交战\n北岭山口\n未解锁\n难度 ★★★★★\n地形 山口阵地\n隐蔽 20\n\n通往北岭纵深的最后山口，必须稳步夺取并守住。\n\n敌情（侦察估算）\n兵力 约 3-7\n敌方步兵班 约 2-4\n疑似敌方反装甲小组 约 1-2\n疑似敌方轻型装甲车 约 1-2\n敌方防御 ×1.20 · 我方攻击 ×0.90　|　伏击风险 高\n首占奖励 合金 900 / 补给 700 / 情报 45　|　占领收益 补给+1/s 合金+1/s\n尝试 0 次\n胜利 0 次\n尚未交战\n需要先占领：通信中继站\n派遣控制台\n渡场补给 · 重复任务\n任务：渡场补给 · 河谷道路 · 补给系数 ×14\n任务类型：重复任务 · 已就绪：完成后进入任务冷却\n出击编队\n第一战斗群（待命 · 3单位 · 指挥6）\n攻击 105 · 防御 90 · 侦察 9 · 耐久 476 · 维持 15\n作战策略\n谨慎推进\n谨慎推进\n无额外消耗\n\n侦察 +30%，防御 +15%，行军与战斗时间 +25%，伏击概率降低，输出略降约 8%。\n\n侦察充分，提前发现敌方反装甲阵地\n防御稳固，承受首轮打击更稳\n伏击概率显著降低\n整体输出下降约 8%\n行军与战斗时间更长\n正面突破\n无额外消耗\n\n首阶段攻击 +25%，装甲攻击额外提高，补给消耗 +25%，侦察不足时反装甲损失风险增加。\n\n首轮攻击 +25%\n装甲单位攻击额外 +15%\n任务补给成本 +25%\n侦察不足时受反装甲伤害风险升高\n火力侦察\n情报 5\n\n侦察与压制提高，有概率提前发现高威胁单位，步兵攻击略降，消耗 5 点情报。\n\n侦察 +20%\n压制能力 +25%\n更易提前发现高威胁单位\n步兵攻击 -8%\n额外消耗情报 5\n任务成本\n资源充足\n出击消耗\n补给 210 / 情报 4\n计算方式\n维持 15 × 系数 14\n参战单位\nundefined 个\n作战进行中\n已有一场作战正在进行，请先返回基地。\n说明：同一时间只能进行一场作战。战斗结果在派遣时即由求解器一次性算出，画面只是按事件时间轴回放，暂停或加速不会改变胜负。每场战斗最多 8 轮交火；建成雷达站可获得精确敌情，否则只能得到估算区间。\n通讯记录 / COMMS\n30 / 30\n[08:06]\n装甲工厂已空闲。\n[08:09]\n各区域例行巡查完成，未发现异常。\n[08:10]\n主战坦克开始制造。\n[08:11]\n主战坦克生产完成，已进入单位库存。\n[08:11]\n装甲工厂已空闲。\n[08:11]\n编队「第一战斗群」已建立。\n[08:11]\n主战坦克已加入「第一战斗群」，指挥容量剩余4。\n[08:11]\n主战坦克已加入「第一战斗群」，指挥容量剩余2。\n[08:11]\n主战坦克已加入「第一战斗群」，指挥容量剩余0。\n[08:11]\n基地数据已保存。\n[08:11]\n基地数据已保存。\n[08:11]\n存档已载入，基地状态恢复。\n[08:11]\n1支编队已恢复，指挥容量占用 6/6。\n[08:11]\n已占领战区：废弃矿区、边境公路、敌方前哨站，占领收益持续生效。\n[08:11]\n第一战斗群向河谷渡场发起进攻（谨慎推进）。\n[08:11]\n基地数据已保存。\n[08:11]\n存档已载入，基地状态恢复。\n[08:11]\n1支编队已恢复，指挥容量占用 6/6。\n[08:11]\n已占领战区：废弃矿区、边境公路、敌方前哨站，占领收益持续生效。\n[08:11]\n第一战斗群正在河谷渡场作战，回放进度 0%，结果已锁定。\n[08:11]\n第一战斗群在河谷渡场的作战结束：胜利，无永久损失。\n[08:11]\n占领河谷渡场，获得首次占领奖励：补给 600 / 情报 30。\n[08:11]\n存档已载入，基地状态恢复。\n[08:11]\n检测到异常编队数据，已自动修复。\n[08:11]\n修复说明：活动编队状态已恢复为战斗。\n[08:11]\n1支编队已恢复，指挥容量占用 6/6。\n[08:11]\n已占领战区：废弃矿区、边境公路、敌方前哨站、河谷渡场，占领收益持续生效。\n[08:11]\n第一战斗群在河谷渡场的战斗已结束（胜利），等待返回基地。\n[08:11]\n第一战斗群已返回基地。\n[08:11]\n基地数据已保存。\n基地数据已保存",
+            "imageSha256": "c7dc7f0455ab572b05db0e8393648176798a238e55bad9ec660e43fbbe78c79f",
             "screenshot": {
               "path": "screenshots/stage9-A/s9-a-17-replay_reload.png",
-              "sha256": "97566ef8c819ef9cba20e52076ef29b36183dc92cf0cba86923ad94a76830a0f"
+              "sha256": "c7dc7f0455ab572b05db0e8393648176798a238e55bad9ec660e43fbbe78c79f"
             }
           },
           {
@@ -5430,42 +5411,42 @@
               "reason": "replay",
               "method": "Page.reload",
               "before": {
-                "timeOrigin": 1786658801433.6,
+                "timeOrigin": 1786565569905.5,
                 "readyState": "complete",
                 "navigationType": "reload"
               },
               "after": {
-                "timeOrigin": 1786658804700.7,
+                "timeOrigin": 1786565573360.3,
                 "readyState": "complete",
                 "navigationType": "reload"
               },
-              "beforeLoaderId": "3FA4BAB19811721302048EF9F31F9888",
-              "afterLoaderId": "99C679543D2D4DE1B9CF633DEF192807",
-              "loaderId": "99C679543D2D4DE1B9CF633DEF192807",
+              "beforeLoaderId": "6DCEBCA7B32A7F547CAE01198461E160",
+              "afterLoaderId": "1751FA7563B018151778761D9185BCBE",
+              "loaderId": "1751FA7563B018151778761D9185BCBE",
               "timeOriginChanged": true
             },
             "state": {
               "saveRevision": 35,
               "activeBattleSessionId": null,
               "activeBattle": {
-                "battleSessionId": "battle-session-23-river_crossing-9d4e1d3f9099f0d9a9ba-1",
+                "battleSessionId": "battle-session-23-river_crossing-898411d5937067e7602c-1",
                 "replayReadOnly": true,
                 "settled": false,
                 "elapsed": 30,
                 "returnElapsed": 0
               },
-              "sessionId": "battle-session-23-river_crossing-9d4e1d3f9099f0d9a9ba-1",
+              "sessionId": "battle-session-23-river_crossing-898411d5937067e7602c-1",
               "sessionLifecycle": "returned",
               "sessionCount": 1,
               "reportCount": 1,
               "riverCaptured": true,
               "operationCooldownUntil": 0
             },
-            "domText": "◣\n钢铁指令\nIRON COMMAND · 指挥终端\n▤\n补给\n1,761/ 5,000\n+4/s\n◈\n合金\n30/ 5,000\n+2/s\n◎\n情报\n118/ 500\n+0.1/s\n⚡\n电力\n12/ 30\n正常\n✦\n指挥容量\n6/ 6\n已满\n基地时间\n08:11:20\n第1天\n❚❚\n1×\n2×\n4×\n保存\n读取\n新游戏\n演出：自动\n通用规划 · 正式旁路\n概览\n建设\n生产\n部队\n编队\n战区\n维修\n科研\n战报\n战区目标\n阶段5 · 已开放\n当前作战\n进行中\n第一战斗群 → 河谷渡场\n策略 谨慎推进 · 队形 装甲楔形 · 种子 2307575583 · 进度 50%（30 / 60 秒）\n交火阶段开始\n敌方步兵班受到39点伤害\n跳过返航动画\n查看完整战报\n作战目标\n4 / 6 已占领\n废弃矿区\n已占领\n难度 ★☆☆☆☆\n地形 开阔地\n隐蔽 4\n\n少量敌方步兵驻守的旧采掘场。\n\n敌情（侦察估算）\n兵力 约 1-5\n敌方步兵班 约 2-4\n装甲攻击 ×1.10 · 车辆机动 ×1.10　|　伏击风险 低\n首占奖励 合金 300　|　占领收益 合金+1/s\n废料回收 · 重复任务\n清理矿区残余威胁，并回收可用合金。 · 经验倍率 ×0.8\n成本系数 ×4 · 奖励范围 alloy 100-180\n任务已就绪\n选择任务\n尝试 0 次\n胜利 0 次\n尚未交战\n边境公路\n已占领\n难度 ★★☆☆☆\n地形 公路\n隐蔽 8\n\n敌方巡逻队与反装甲小组控制的运输干线。\n\n敌情（侦察估算）\n兵力 约 4-8\n敌方步兵班 约 3-5\n疑似敌方反装甲小组 约 1-3\n车辆机动 ×1.10 · 伏击风险略高　|　伏击风险 中\n首占奖励 补给 400 / 情报 10　|　占领收益 补给+1/s\n补给护送 · 重复任务\n护送运输队穿过仍不稳定的边境公路。 · 经验倍率 ×1\n成本系数 ×7 · 奖励范围 supply 180-300 / intel 2-5\n任务已就绪\n选择任务\n尝试 0 次\n胜利 0 次\n尚未交战\n敌方前哨站\n已占领\n难度 ★★★☆☆\n地形 防御阵地\n隐蔽 14\n\n构筑了工事的前进基地，火力密集。\n\n敌情（侦察估算）\n兵力 约 8-12\n敌方步兵班 约 4-6\n疑似敌方反装甲小组 约 2-4\n疑似敌方轻型装甲车 约 1-3\n敌方防御 ×1.20 · 我方攻击 ×0.90　|　伏击风险 高\n首占奖励 合金 500 / 情报 25\n残敌清剿 · 重复任务\n清剿前哨站周边残余武装，获取情报和工业材料。 · 经验倍率 ×1.25\n成本系数 ×10 · 奖励范围 alloy 220-360 / intel 6-12\n任务已就绪\n选择任务\n尝试 0 次\n胜利 0 次\n尚未交战\n河谷渡场\n交战中\n难度 ★★★★☆\n地形 河谷道路\n隐蔽 16\n\n穿越河谷的旧渡场，是向纵深推进的关键补给节点。\n\n敌情（侦察估算）\n兵力 约 1-5\n敌方步兵班 约 2-4\n车辆机动 ×1.10 · 伏击风险略高　|　伏击风险 高\n首占奖励 补给 600 / 情报 30　|　占领收益 补给+1/s\n渡场补给 · 重复任务\n清理渡场周边袭扰部队，恢复纵深补给线。 · 经验倍率 ×1.4\n成本系数 ×14 · 奖励范围 supply 260-420 / alloy 180-300\n任务已就绪\n选择任务\n尝试 1 次\n胜利 1 次\n上次 胜利\n通信中继站\n可进攻\n难度 ★★★★★\n地形 开阔高地\n隐蔽 18\n\n控制敌方纵深通信链路的高地中继站。\n\n敌情（侦察估算）\n兵力 约 4-8\n敌方步兵班 约 3-5\n疑似敌方反装甲小组 约 1-2\n疑似敌方轻型装甲车 约 1-2\n装甲攻击 ×1.10 · 车辆机动 ×1.10　|　伏击风险 高\n首占奖励 合金 700 / 情报 35　|　占领收益 合金+1/s\n尝试 0 次\n胜利 0 次\n尚未交战\n北岭山口\n未解锁\n难度 ★★★★★\n地形 山口阵地\n隐蔽 20\n\n通往北岭纵深的最后山口，必须稳步夺取并守住。\n\n敌情（侦察估算）\n兵力 约 3-7\n敌方步兵班 约 2-4\n疑似敌方反装甲小组 约 1-2\n疑似敌方轻型装甲车 约 1-2\n敌方防御 ×1.20 · 我方攻击 ×0.90　|　伏击风险 高\n首占奖励 合金 900 / 补给 700 / 情报 45　|　占领收益 补给+1/s 合金+1/s\n尝试 0 次\n胜利 0 次\n尚未交战\n需要先占领：通信中继站\n派遣控制台\n通信中继站\n目标：通信中继站 · 开阔高地 · 补给系数 ×20\n任务类型：战役任务 · 战区首次占领任务，无重复任务冷却\n出击编队\n第一战斗群（待命 · 3单位 · 指挥6）\n攻击 105 · 防御 90 · 侦察 9 · 耐久 476 · 维持 15\n作战策略\n谨慎推进\n谨慎推进\n无额外消耗\n\n侦察 +30%，防御 +15%，行军与战斗时间 +25%，伏击概率降低，输出略降约 8%。\n\n侦察充分，提前发现敌方反装甲阵地\n防御稳固，承受首轮打击更稳\n伏击概率显著降低\n整体输出下降约 8%\n行军与战斗时间更长\n正面突破\n无额外消耗\n\n首阶段攻击 +25%，装甲攻击额外提高，补给消耗 +25%，侦察不足时反装甲损失风险增加。\n\n首轮攻击 +25%\n装甲单位攻击额外 +15%\n任务补给成本 +25%\n侦察不足时受反装甲伤害风险升高\n火力侦察\n情报 5\n\n侦察与压制提高，有概率提前发现高威胁单位，步兵攻击略降，消耗 5 点情报。\n\n侦察 +20%\n压制能力 +25%\n更易提前发现高威胁单位\n步兵攻击 -8%\n额外消耗情报 5\n任务成本\n资源充足\n出击消耗\n补给 300\n计算方式\n维持 15 × 系数 20 × 策略 1\n参战单位\n3 个\n作战进行中\n已有一场作战正在进行，请先返回基地。\n说明：同一时间只能进行一场作战。战斗结果在派遣时即由求解器一次性算出，画面只是按事件时间轴回放，暂停或加速不会改变胜负。每场战斗最多 8 轮交火；建成雷达站可获得精确敌情，否则只能得到估算区间。\n通讯记录 / COMMS\n30 / 30\n[08:11]\n装甲工厂已空闲。\n[08:11]\n编队「第一战斗群」已建立。\n[08:11]\n主战坦克已加入「第一战斗群」，指挥容量剩余4。\n[08:11]\n主战坦克已加入「第一战斗群」，指挥容量剩余2。\n[08:11]\n主战坦克已加入「第一战斗群」，指挥容量剩余0。\n[08:11]\n基地数据已保存。\n[08:11]\n基地数据已保存。\n[08:11]\n存档已载入，基地状态恢复。\n[08:11]\n1支编队已恢复，指挥容量占用 6/6。\n[08:11]\n已占领战区：废弃矿区、边境公路、敌方前哨站，占领收益持续生效。\n[08:11]\n第一战斗群向河谷渡场发起进攻（谨慎推进）。\n[08:11]\n基地数据已保存。\n[08:11]\n存档已载入，基地状态恢复。\n[08:11]\n1支编队已恢复，指挥容量占用 6/6。\n[08:11]\n已占领战区：废弃矿区、边境公路、敌方前哨站，占领收益持续生效。\n[08:11]\n第一战斗群正在河谷渡场作战，回放进度 0%，结果已锁定。\n[08:11]\n第一战斗群在河谷渡场的作战结束：胜利，无永久损失。\n[08:11]\n占领河谷渡场，获得首次占领奖励：补给 600 / 情报 30。\n[08:11]\n存档已载入，基地状态恢复。\n[08:11]\n检测到异常编队数据，已自动修复。\n[08:11]\n修复说明：活动编队状态已恢复为战斗。\n[08:11]\n1支编队已恢复，指挥容量占用 6/6。\n[08:11]\n已占领战区：废弃矿区、边境公路、敌方前哨站、河谷渡场，占领收益持续生效。\n[08:11]\n第一战斗群在河谷渡场的战斗已结束（胜利），等待返回基地。\n[08:11]\n第一战斗群已返回基地。\n[08:11]\n基地数据已保存。\n[08:11]\n存档已载入，基地状态恢复。\n[08:11]\n1支编队已恢复，指挥容量占用 6/6。\n[08:11]\n已占领战区：废弃矿区、边境公路、敌方前哨站、河谷渡场，占领收益持续生效。\n[08:11]\n第一战斗群正在河谷渡场作战，回放进度 50%，结果已锁定。",
-            "imageSha256": "7836c91987e42cc0759931f88df2e54c7b142daa2ddc218556e91a74151f1d0c",
+            "domText": "◣\n钢铁指令\nIRON COMMAND · 指挥终端\n▤\n补给\n1,760/ 5,000\n+4/s\n◈\n合金\n30/ 5,000\n+2/s\n◎\n情报\n118/ 500\n+0.1/s\n⚡\n电力\n12/ 30\n正常\n✦\n指挥容量\n6/ 6\n已满\n基地时间\n08:11:20\n第1天\n❚❚\n1×\n2×\n4×\n保存\n读取\n新游戏\n演出：自动\n通用规划 · 正式旁路\n概览\n建设\n生产\n部队\n编队\n战区\n维修\n科研\n战报\n战区目标\n阶段5 · 已开放\n当前作战\n进行中\n第一战斗群 → 河谷渡场\n策略 谨慎推进 · 队形 装甲楔形 · 种子 1527140601 · 进度 50%（30 / 60 秒）\n交火阶段开始\n敌方步兵班受到40点伤害\n跳过返航动画\n查看完整战报\n作战目标\n4 / 6 已占领\n废弃矿区\n已占领\n难度 ★☆☆☆☆\n地形 开阔地\n隐蔽 4\n\n少量敌方步兵驻守的旧采掘场。\n\n敌情（侦察估算）\n兵力 约 1-5\n敌方步兵班 约 2-4\n装甲攻击 ×1.10 · 车辆机动 ×1.10　|　伏击风险 低\n首占奖励 合金 300　|　占领收益 合金+1/s\n废料回收 · 重复任务\n清理矿区残余威胁，并回收可用合金。 · 经验倍率 ×0.8\n成本系数 ×4 · 奖励范围 alloy 100-180\n任务已就绪\n选择任务\n尝试 0 次\n胜利 0 次\n尚未交战\n边境公路\n已占领\n难度 ★★☆☆☆\n地形 公路\n隐蔽 8\n\n敌方巡逻队与反装甲小组控制的运输干线。\n\n敌情（侦察估算）\n兵力 约 4-8\n敌方步兵班 约 3-5\n疑似敌方反装甲小组 约 1-3\n车辆机动 ×1.10 · 伏击风险略高　|　伏击风险 中\n首占奖励 补给 400 / 情报 10　|　占领收益 补给+1/s\n补给护送 · 重复任务\n护送运输队穿过仍不稳定的边境公路。 · 经验倍率 ×1\n成本系数 ×7 · 奖励范围 supply 180-300 / intel 2-5\n任务已就绪\n选择任务\n尝试 0 次\n胜利 0 次\n尚未交战\n敌方前哨站\n已占领\n难度 ★★★☆☆\n地形 防御阵地\n隐蔽 14\n\n构筑了工事的前进基地，火力密集。\n\n敌情（侦察估算）\n兵力 约 8-12\n敌方步兵班 约 4-6\n疑似敌方反装甲小组 约 2-4\n疑似敌方轻型装甲车 约 1-3\n敌方防御 ×1.20 · 我方攻击 ×0.90　|　伏击风险 高\n首占奖励 合金 500 / 情报 25\n残敌清剿 · 重复任务\n清剿前哨站周边残余武装，获取情报和工业材料。 · 经验倍率 ×1.25\n成本系数 ×10 · 奖励范围 alloy 220-360 / intel 6-12\n任务已就绪\n选择任务\n尝试 0 次\n胜利 0 次\n尚未交战\n河谷渡场\n交战中\n难度 ★★★★☆\n地形 河谷道路\n隐蔽 16\n\n穿越河谷的旧渡场，是向纵深推进的关键补给节点。\n\n敌情（侦察估算）\n兵力 约 1-5\n敌方步兵班 约 2-4\n车辆机动 ×1.10 · 伏击风险略高　|　伏击风险 高\n首占奖励 补给 600 / 情报 30　|　占领收益 补给+1/s\n渡场补给 · 重复任务\n清理渡场周边袭扰部队，恢复纵深补给线。 · 经验倍率 ×1.4\n成本系数 ×14 · 奖励范围 supply 260-420 / alloy 180-300\n任务已就绪\n选择任务\n尝试 1 次\n胜利 1 次\n上次 胜利\n通信中继站\n可进攻\n难度 ★★★★★\n地形 开阔高地\n隐蔽 18\n\n控制敌方纵深通信链路的高地中继站。\n\n敌情（侦察估算）\n兵力 约 4-8\n敌方步兵班 约 3-5\n疑似敌方反装甲小组 约 1-2\n疑似敌方轻型装甲车 约 1-2\n装甲攻击 ×1.10 · 车辆机动 ×1.10　|　伏击风险 高\n首占奖励 合金 700 / 情报 35　|　占领收益 合金+1/s\n尝试 0 次\n胜利 0 次\n尚未交战\n北岭山口\n未解锁\n难度 ★★★★★\n地形 山口阵地\n隐蔽 20\n\n通往北岭纵深的最后山口，必须稳步夺取并守住。\n\n敌情（侦察估算）\n兵力 约 3-7\n敌方步兵班 约 2-4\n疑似敌方反装甲小组 约 1-2\n疑似敌方轻型装甲车 约 1-2\n敌方防御 ×1.20 · 我方攻击 ×0.90　|　伏击风险 高\n首占奖励 合金 900 / 补给 700 / 情报 45　|　占领收益 补给+1/s 合金+1/s\n尝试 0 次\n胜利 0 次\n尚未交战\n需要先占领：通信中继站\n派遣控制台\n通信中继站\n目标：通信中继站 · 开阔高地 · 补给系数 ×20\n任务类型：战役任务 · 战区首次占领任务，无重复任务冷却\n出击编队\n第一战斗群（待命 · 3单位 · 指挥6）\n攻击 105 · 防御 90 · 侦察 9 · 耐久 476 · 维持 15\n作战策略\n谨慎推进\n谨慎推进\n无额外消耗\n\n侦察 +30%，防御 +15%，行军与战斗时间 +25%，伏击概率降低，输出略降约 8%。\n\n侦察充分，提前发现敌方反装甲阵地\n防御稳固，承受首轮打击更稳\n伏击概率显著降低\n整体输出下降约 8%\n行军与战斗时间更长\n正面突破\n无额外消耗\n\n首阶段攻击 +25%，装甲攻击额外提高，补给消耗 +25%，侦察不足时反装甲损失风险增加。\n\n首轮攻击 +25%\n装甲单位攻击额外 +15%\n任务补给成本 +25%\n侦察不足时受反装甲伤害风险升高\n火力侦察\n情报 5\n\n侦察与压制提高，有概率提前发现高威胁单位，步兵攻击略降，消耗 5 点情报。\n\n侦察 +20%\n压制能力 +25%\n更易提前发现高威胁单位\n步兵攻击 -8%\n额外消耗情报 5\n任务成本\n资源充足\n出击消耗\n补给 300\n计算方式\n维持 15 × 系数 20 × 策略 1\n参战单位\n3 个\n作战进行中\n已有一场作战正在进行，请先返回基地。\n说明：同一时间只能进行一场作战。战斗结果在派遣时即由求解器一次性算出，画面只是按事件时间轴回放，暂停或加速不会改变胜负。每场战斗最多 8 轮交火；建成雷达站可获得精确敌情，否则只能得到估算区间。\n通讯记录 / COMMS\n30 / 30\n[08:11]\n装甲工厂已空闲。\n[08:11]\n编队「第一战斗群」已建立。\n[08:11]\n主战坦克已加入「第一战斗群」，指挥容量剩余4。\n[08:11]\n主战坦克已加入「第一战斗群」，指挥容量剩余2。\n[08:11]\n主战坦克已加入「第一战斗群」，指挥容量剩余0。\n[08:11]\n基地数据已保存。\n[08:11]\n基地数据已保存。\n[08:11]\n存档已载入，基地状态恢复。\n[08:11]\n1支编队已恢复，指挥容量占用 6/6。\n[08:11]\n已占领战区：废弃矿区、边境公路、敌方前哨站，占领收益持续生效。\n[08:11]\n第一战斗群向河谷渡场发起进攻（谨慎推进）。\n[08:11]\n基地数据已保存。\n[08:11]\n存档已载入，基地状态恢复。\n[08:11]\n1支编队已恢复，指挥容量占用 6/6。\n[08:11]\n已占领战区：废弃矿区、边境公路、敌方前哨站，占领收益持续生效。\n[08:11]\n第一战斗群正在河谷渡场作战，回放进度 0%，结果已锁定。\n[08:11]\n第一战斗群在河谷渡场的作战结束：胜利，无永久损失。\n[08:11]\n占领河谷渡场，获得首次占领奖励：补给 600 / 情报 30。\n[08:11]\n存档已载入，基地状态恢复。\n[08:11]\n检测到异常编队数据，已自动修复。\n[08:11]\n修复说明：活动编队状态已恢复为战斗。\n[08:11]\n1支编队已恢复，指挥容量占用 6/6。\n[08:11]\n已占领战区：废弃矿区、边境公路、敌方前哨站、河谷渡场，占领收益持续生效。\n[08:11]\n第一战斗群在河谷渡场的战斗已结束（胜利），等待返回基地。\n[08:11]\n第一战斗群已返回基地。\n[08:11]\n基地数据已保存。\n[08:11]\n存档已载入，基地状态恢复。\n[08:11]\n1支编队已恢复，指挥容量占用 6/6。\n[08:11]\n已占领战区：废弃矿区、边境公路、敌方前哨站、河谷渡场，占领收益持续生效。\n[08:11]\n第一战斗群正在河谷渡场作战，回放进度 50%，结果已锁定。",
+            "imageSha256": "8d3e00687f381746428f2e734d0f72851fe3d4f4011e70e66b8c9d3b14582784",
             "screenshot": {
               "path": "screenshots/stage9-A/s9-a-18-final.png",
-              "sha256": "7836c91987e42cc0759931f88df2e54c7b142daa2ddc218556e91a74151f1d0c"
+              "sha256": "8d3e00687f381746428f2e734d0f72851fe3d4f4011e70e66b8c9d3b14582784"
             }
           }
         ]
