@@ -1,9 +1,10 @@
 import assert from 'node:assert/strict';
+import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { verifyStage10PABrowser } from './lib/stage10-P-A-verifier.mjs';
+import { verifyStage10PABrowser, verifyStage10PAMachineEvidence } from './lib/stage10-P-A-verifier.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const evidenceDir = path.join(root, 'evidence/stage10-P-A');
@@ -11,9 +12,15 @@ const read = (name) => JSON.parse(fs.readFileSync(path.join(evidenceDir, name), 
 const browser = read('stage10-P-A-browser.json');
 const machine = read('stage10-P-A-machine.json');
 const stateEquivalence = read('stage10-P-A-state-equivalence.json');
+const gitHead = execFileSync('git', ['rev-parse', 'HEAD'], { cwd: root, encoding: 'utf8' }).trim();
 const verified = verifyStage10PABrowser(browser, { root });
+const machineVerified = verifyStage10PAMachineEvidence(machine, {
+  currentHead: gitHead,
+  requiredGates: ['historical-core-regression', 'stage9-relevant-regression', 'stage10-focused-tests', 'stage10-browser'],
+  stateEquivalence
+});
 
-const failures = [...verified.failures];
+const failures = [...verified.failures, ...machineVerified.failures];
 if (machine.stage !== '10-P-A') failures.push({ field: 'machine.stage', expected: '10-P-A', actual: machine.stage });
 if (machine.baseSha !== 'ca408bb7031afda79a65af7aad27b6b64b7c18c4') failures.push({ field: 'machine.baseSha', expected: 'ca408bb7031afda79a65af7aad27b6b64b7c18c4', actual: machine.baseSha });
 if (machine.saveVersion !== 10) failures.push({ field: 'machine.saveVersion', expected: 10, actual: machine.saveVersion });
@@ -33,7 +40,8 @@ const output = {
   passed: failures.length === 0,
   failureCount: failures.length,
   failures,
-  recomputed: verified.recomputed
+  recomputed: verified.recomputed,
+  machineRecomputed: { machineHeadSha: machine.headSha, currentHead: gitHead, headBound: machine.headSha === gitHead, runtimeGatesBound: machine.runtimeGates?.boundToHead === true }
 };
 fs.writeFileSync(path.join(evidenceDir, 'stage10-P-A-verdict.json'), `${JSON.stringify(output, null, 2)}\n`);
 assert.equal(output.passed, true, JSON.stringify(failures, null, 2));

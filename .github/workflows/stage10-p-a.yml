@@ -2,7 +2,9 @@ name: stage10-p-a-command-ui
 
 on:
   push:
-    branches: [auto/stage10-p-a-command-ui-foundation]
+    branches:
+      - auto/stage10-p-a-command-ui-foundation
+      - auto/stage10-p-a1-downstream-regression-final-closure
   pull_request:
     branches: [main]
   workflow_dispatch:
@@ -12,8 +14,10 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 70
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout exact workflow head
+        uses: actions/checkout@v4
         with:
+          ref: ${{ github.sha }}
           fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
@@ -21,22 +25,24 @@ jobs:
       - name: Install project runtime
         run: npm install --ignore-scripts --no-audit --no-fund
       - name: Historical core regression
-        run: npm run --ignore-scripts test
+        run: node tests/record-stage10-P-A-runtime-gate.mjs historical-core-regression -- npm run --ignore-scripts test
       - name: Stage 9 relevant regression
-        run: npm run test:stage9-E:fast
+        run: node tests/record-stage10-P-A-runtime-gate.mjs stage9-relevant-regression -- npm run test:stage9-E:fast
       - name: Restore accepted historical evidence bytes
         run: node tests/stage9-E1-restore-historical-evidence.mjs
-      - name: Stage 10-P-A unit and canonical equivalence
-        run: npm run test:stage10-P-A
+      - name: Stage 10-P-A focused unit and canonical equivalence
+        run: node tests/record-stage10-P-A-runtime-gate.mjs stage10-focused-tests -- npm run test:stage10-P-A
       - name: Stage 10-P-A real browser evidence
-        run: npm run browser:stage10-P-A
+        run: node tests/record-stage10-P-A-runtime-gate.mjs stage10-browser -- npm run browser:stage10-P-A
       - name: Stage 10-P-A strong verifier and tamper corpus
-        run: npm run verify:stage10-P-A
+        run: node tests/record-stage10-P-A-runtime-gate.mjs stage10-strong-verifier -- npm run verify:stage10-P-A
+      - name: Stage 10-P-A final runtime closure
+        run: node tests/generate-stage10-P-A-final-closure.mjs
       - name: Upload Stage 10-P-A audit evidence
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: stage10-p-a-${{ github.sha }}-${{ github.run_id }}-${{ github.run_attempt }}
+          name: stage10-p-a1-closure-${{ github.sha }}-${{ github.run_id }}-${{ github.run_attempt }}
           path: |
             evidence/stage10-P-A/
             screenshots/stage10-P-A/

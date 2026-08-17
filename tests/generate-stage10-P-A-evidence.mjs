@@ -14,6 +14,37 @@ const git = (...args) => execFileSync('git', args, { cwd: root, encoding: 'utf8'
 const read = (relativePath) => fs.readFileSync(path.join(root, relativePath), 'utf8');
 const stateEquivalence = JSON.parse(read('evidence/stage10-P-A/stage10-P-A-state-equivalence.json'));
 const browser = JSON.parse(read('evidence/stage10-P-A/stage10-P-A-browser.json'));
+const gitHead = git('rev-parse', 'HEAD');
+
+// Runtime gate records are produced by tests/record-stage10-P-A-runtime-gate.mjs
+// while the real gate commands execute. Machine evidence may only claim a
+// regression passed when this run actually recorded a passing gate at the
+// current HEAD; anything else fails closed instead of hardcoding true.
+const RUNTIME_GATE_FILE = 'evidence/stage10-P-A/stage10-P-A-runtime-gates.json';
+const REQUIRED_RUNTIME_GATES = [
+  'historical-core-regression',
+  'stage9-relevant-regression',
+  'stage10-focused-tests',
+  'stage10-browser'
+];
+const runtimeGateStatus = (() => {
+  const status = { file: RUNTIME_GATE_FILE, headSha: null, currentHead: gitHead, boundToHead: false, recorded: [], missing: REQUIRED_RUNTIME_GATES.slice(), gates: {} };
+  try {
+    const parsed = JSON.parse(read(RUNTIME_GATE_FILE));
+    status.headSha = parsed?.headSha || null;
+    status.gates = parsed?.gates && typeof parsed.gates === 'object' ? parsed.gates : {};
+    status.recorded = Object.keys(status.gates);
+  } catch {
+    status.gates = {};
+  }
+  status.boundToHead = status.headSha === gitHead;
+  status.missing = REQUIRED_RUNTIME_GATES.filter((label) => status.boundToHead !== true || status.gates[label]?.exitCode !== 0);
+  return status;
+})();
+const runtimeGatePassed = (label) => runtimeGateStatus.boundToHead === true && runtimeGateStatus.gates[label]?.exitCode === 0;
+if (runtimeGateStatus.missing.length > 0) {
+  console.error(`runtime gates not satisfied at HEAD ${gitHead}: ${runtimeGateStatus.missing.join(', ')}; run npm run gate:stage10-P-A (each step records its real exit code) before generating evidence`);
+}
 
 const frozenFiles = [
   'js/config.js',
@@ -47,15 +78,19 @@ const allowedPresentationChange = (file) => [
   /^assets\/command\//,
   /^tests\/(browser\/)?stage10-P-A/,
   /^tests\/lib\/stage10-P-A/,
+  /^tests\/lib\/stage9-frozen-authority\.mjs$/,
+  /^tests\/record-stage10-P-A-runtime-gate\.mjs$/,
   /^tests\/(generate|build|verify)-stage10-P-A/,
   /^tests\/stage3-test\.mjs$/,
   /^tests\/stage9-E-integration-test\.mjs$/,
+  /^stage9_e_.*\.json$/,
   /^package\.json$/,
   /^\.github\/workflows\/stage10-p-a\.yml$/,
   /^evidence\/stage10-P-A\//,
   /^screenshots\/stage10-P-A\//,
   /^STAGE10-P-A-SELFCHECK\.json$/,
   /^HANDOFF-STAGE10-P-A\.md$/,
+  /^HANDOFF-STAGE10-P-A1\.md$/,
   /^progress\.md$/,
   /^iron-command-stage10-P-A-command-ui-foundation\.zip$/
 ].some((pattern) => pattern.test(file));
@@ -80,27 +115,44 @@ const componentChecks = {
   oneTooltipAndInspectorHost: /new QuickTooltip/.test(commandUiSource) && /new CommandInspector/.test(commandUiSource)
 };
 
+const equivalenceByDomain = Object.fromEntries((stateEquivalence.cases || []).map((row) => [row.domain, row]));
+const constructionCase = equivalenceByDomain.construction;
+const unitProductionCase = equivalenceByDomain.unit_production;
+const equipmentProductionCase = equivalenceByDomain.equipment_production;
+const presentationReadOnlyCase = equivalenceByDomain.presentation_read_only;
 const functionalRegression = {
-  constructionSemantics: true,
-  unitProductionSemantics: true,
-  equipmentProductionSemantics: true,
-  cancellationSemantics: true,
-  saveReloadAndOfflineSemantics: true,
-  historicalCoreRegression: true,
-  stage9RelevantRegression: true,
-  stage10CommandUiTests: true,
-  stage10BrowserEvidence: browser.passed === true && browser.pageErrors?.length === 0 && browser.consoleErrors?.length === 0
+  // Sourced from the real runtime gate records of this run at this HEAD.
+  historicalCoreRegression: runtimeGatePassed('historical-core-regression'),
+  stage9RelevantRegression: runtimeGatePassed('stage9-relevant-regression'),
+  stage10CommandUiTests: runtimeGatePassed('stage10-focused-tests'),
+  stage10BrowserRun: runtimeGatePassed('stage10-browser'),
+  // Sourced from the canonical state equivalence artifact recomputed in this run.
+  constructionSemantics: constructionCase?.equivalent === true && constructionCase?.cancelEquivalent === true,
+  unitProductionSemantics: unitProductionCase?.equivalent === true,
+  equipmentProductionSemantics: equipmentProductionCase?.equivalent === true && equipmentProductionCase?.queuedCancelEquivalent === true,
+  presentationReadOnly: presentationReadOnlyCase?.equivalent === true && (stateEquivalence.canonicalFieldsAdded || []).length === 0,
+  // Sourced from the browser evidence artifact of this run.
+  stage10BrowserEvidence: browser.passed === true && (browser.pageErrors?.length || 0) === 0 && (browser.consoleErrors?.length || 0) === 0
 };
 
 const authorityPassed = frozenFileProof.every((row) => row.unchanged) && forbiddenChangedFiles.length === 0;
 const output = {
   stage: '10-P-A',
   baseSha,
-  headSha: git('rev-parse', 'HEAD'),
+  headSha: gitHead,
   saveVersion: SAVE_VERSION,
   currentStage: '10-P-A',
   componentChecks,
   functionalRegression,
+  runtimeGates: {
+    required: REQUIRED_RUNTIME_GATES,
+    headSha: runtimeGateStatus.headSha,
+    currentHead: runtimeGateStatus.currentHead,
+    boundToHead: runtimeGateStatus.boundToHead,
+    recorded: runtimeGateStatus.recorded,
+    missing: runtimeGateStatus.missing,
+    gates: runtimeGateStatus.gates
+  },
   canonicalStateEquivalence: {
     passed: stateEquivalence.passed === true,
     caseCount: stateEquivalence.cases?.length || 0,
@@ -119,5 +171,5 @@ const output = {
 
 fs.mkdirSync(evidenceDir, { recursive: true });
 fs.writeFileSync(path.join(evidenceDir, 'stage10-P-A-machine.json'), `${JSON.stringify(output, null, 2)}\n`);
-console.log(JSON.stringify({ stage: output.stage, passed: output.passed, baseSha: output.baseSha, headSha: output.headSha, saveVersion: output.saveVersion, frozenFiles: frozenFileProof.length, forbiddenChangedFiles }));
+console.log(JSON.stringify({ stage: output.stage, passed: output.passed, baseSha: output.baseSha, headSha: output.headSha, saveVersion: output.saveVersion, frozenFiles: frozenFileProof.length, runtimeGatesMissing: runtimeGateStatus.missing, forbiddenChangedFiles }));
 if (!output.passed) process.exitCode = 1;

@@ -146,8 +146,9 @@
   "gate:stage8-2G": "npm test && npm run browser:stage8-2G-E-A-1 && npm run browser:stage8-2G-E-B && npm run browser:stage8-2G-E-C && npm run browser:stage9-A && npm run browser:stage9-B && npm run browser:stage9-C && npm run test:stage9-E:fast",
     "test:stage10-P-A": "node tests/stage10-P-A-command-ui-test.mjs && node tests/stage10-P-A-state-equivalence.mjs",
     "browser:stage10-P-A": "node tests/browser/stage10-P-A-command-ui.mjs",
-    "verify:stage10-P-A": "node tests/generate-stage10-P-A-evidence.mjs && node tests/stage10-P-A-strong-evidence-test.mjs && node tests/stage10-P-A-evidence-tamper-test.mjs && node tests/generate-stage10-P-A-selfcheck.mjs",
-    "gate:stage10-P-A": "npm run --ignore-scripts test && npm run test:stage9-E:fast && node tests/stage9-E1-restore-historical-evidence.mjs && npm run test:stage10-P-A && npm run browser:stage10-P-A && npm run verify:stage10-P-A",
+    "verify:stage10-P-A": "node tests/generate-stage10-P-A-evidence.mjs && node tests/stage10-P-A-strong-evidence-test.mjs && node tests/stage10-P-A-evidence-tamper-test.mjs && node tests/generate-stage10-P-A-selfcheck.mjs && node tests/stage10-P-A-selfcheck-contract-test.mjs",
+    "closure:stage10-P-A": "node tests/generate-stage10-P-A-final-closure.mjs",
+    "gate:stage10-P-A": "node tests/record-stage10-P-A-runtime-gate.mjs historical-core-regression -- npm run --ignore-scripts test && node tests/record-stage10-P-A-runtime-gate.mjs stage9-relevant-regression -- npm run test:stage9-E:fast && node tests/stage9-E1-restore-historical-evidence.mjs && node tests/record-stage10-P-A-runtime-gate.mjs stage10-focused-tests -- npm run test:stage10-P-A && node tests/record-stage10-P-A-runtime-gate.mjs stage10-browser -- npm run browser:stage10-P-A && node tests/record-stage10-P-A-runtime-gate.mjs stage10-strong-verifier -- npm run verify:stage10-P-A && npm run closure:stage10-P-A",
     "build:stage10-P-A": "node tests/build-stage10-P-A-delivery-package.mjs",
     "verify:stage10-P-A-package": "node tests/verify-stage10-P-A-delivery-package.mjs",
     "verify:clean-clone": "node tests/verify-clean-clone.mjs"

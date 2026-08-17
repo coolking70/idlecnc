@@ -18,6 +18,8 @@ export const STAGE10_PA_REQUIRED_FRAMES = [
   '13-mobile-inspector.png'
 ];
 
+export const STAGE10_PA_ACCEPTED_STAGE9_BASE = 'ca408bb7031afda79a65af7aad27b6b64b7c18c4';
+
 const PNG_SIGNATURE = Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]);
 const sha256 = (bytes) => crypto.createHash('sha256').update(bytes).digest('hex');
 
@@ -126,4 +128,49 @@ export function verifyStage10PABrowser(candidate, { root }) {
       longPressCoverage: frameByName.get('13-mobile-inspector.png')?.dom?.inspectorVisible === true
     }
   };
+}
+
+// Independent machine-evidence verification for Stage 10-P-A. It re-derives the
+// claims that matter for delivery closure from the candidate itself plus the
+// caller-provided bindings, so a forged or stale machine evidence JSON is
+// rejected even when it declares passed=true.
+export function verifyStage10PAMachineEvidence(candidate, { currentHead, requiredGates, stateEquivalence }) {
+  const failures = [];
+  const fail = (field, expected, actual) => failures.push({ field, expected, actual });
+
+  if (candidate?.stage !== '10-P-A') fail('machine.stage', '10-P-A', candidate?.stage);
+  if (candidate?.baseSha !== STAGE10_PA_ACCEPTED_STAGE9_BASE) fail('machine.baseSha', STAGE10_PA_ACCEPTED_STAGE9_BASE, candidate?.baseSha);
+  if (typeof currentHead === 'string' && candidate?.headSha !== currentHead) fail('machine.headSha', currentHead, candidate?.headSha);
+  if (candidate?.saveVersion !== 10) fail('machine.saveVersion', 10, candidate?.saveVersion);
+  if (candidate?.currentStage !== '10-P-A') fail('machine.currentStage', '10-P-A', candidate?.currentStage);
+
+  if (candidate?.authority?.gameplayAuthorityChanged !== false) fail('machine.authority.gameplayAuthorityChanged', false, candidate?.authority?.gameplayAuthorityChanged);
+  if (candidate?.authority?.passed !== true) fail('machine.authority.passed', true, candidate?.authority?.passed);
+  const frozenRows = candidate?.authority?.frozenFileProof;
+  if (!Array.isArray(frozenRows) || frozenRows.length < 13 || !frozenRows.every((row) => row?.unchanged === true)) {
+    fail('machine.authority.frozenFileProof', '>= 13 rows all unchanged', { rows: frozenRows?.length, changed: frozenRows?.filter((row) => row?.unchanged !== true).map((row) => row?.file) });
+  }
+
+  if (!Object.values(candidate?.componentChecks || {}).every(Boolean)) fail('machine.componentChecks', 'all true', candidate?.componentChecks);
+  if (!Object.values(candidate?.functionalRegression || {}).every(Boolean)) fail('machine.functionalRegression', 'all true', candidate?.functionalRegression);
+
+  const gates = candidate?.runtimeGates;
+  if (gates?.boundToHead !== true) fail('machine.runtimeGates.boundToHead', true, gates?.boundToHead);
+  if (typeof currentHead === 'string' && gates?.headSha !== currentHead) fail('machine.runtimeGates.headSha', currentHead, gates?.headSha);
+  if (Array.isArray(requiredGates)) {
+    requiredGates.forEach((label) => {
+      if (gates?.gates?.[label]?.exitCode !== 0) fail(`machine.runtimeGates.gates.${label}.exitCode`, 0, gates?.gates?.[label] ? gates.gates[label].exitCode : 'missing record');
+    });
+  }
+
+  const equivalenceClaim = candidate?.canonicalStateEquivalence;
+  if (equivalenceClaim?.passed !== true) fail('machine.canonicalStateEquivalence.passed', true, equivalenceClaim?.passed);
+  if (Array.isArray(equivalenceClaim?.canonicalFieldsAdded) && equivalenceClaim.canonicalFieldsAdded.length !== 0) fail('machine.canonicalStateEquivalence.canonicalFieldsAdded', [], equivalenceClaim.canonicalFieldsAdded);
+  if (stateEquivalence) {
+    if (equivalenceClaim?.caseCount !== stateEquivalence.cases?.length) fail('machine.canonicalStateEquivalence.caseCount', stateEquivalence.cases?.length, equivalenceClaim?.caseCount);
+    if (stateEquivalence.passed !== true || !stateEquivalence.cases?.every((row) => row.equivalent === true)) fail('stateEquivalenceArtifact', 'all cases equivalent', stateEquivalence);
+  }
+
+  if (candidate?.passed !== true) fail('machine.passed', true, candidate?.passed);
+  return { passed: failures.length === 0, failures };
 }
