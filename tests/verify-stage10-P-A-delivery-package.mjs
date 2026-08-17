@@ -14,7 +14,8 @@ const required = [
   'tests/stage10-P-A-command-ui-test.mjs', 'tests/browser/stage10-P-A-command-ui.mjs',
   'evidence/stage10-P-A/stage10-P-A-machine.json', 'evidence/stage10-P-A/stage10-P-A-browser.json',
   'evidence/stage10-P-A/stage10-P-A-state-equivalence.json', 'evidence/stage10-P-A/stage10-P-A-selfcheck.json',
-  'screenshots/stage10-P-A/13-mobile-inspector.png', 'HANDOFF-STAGE10-P-A.md', 'STAGE10-P-A-SELFCHECK.json'
+  'evidence/stage10-P-A/stage10-P-A-runtime-gates.json',
+  'screenshots/stage10-P-A/13-mobile-inspector.png', 'HANDOFF-STAGE10-P-A.md', 'HANDOFF-STAGE10-P-A1.md', 'STAGE10-P-A-SELFCHECK.json'
 ];
 required.forEach((file) => assert.equal(entries.includes(`${prefix}${file}`), true, `missing package entry ${file}`));
 const forbidden = entries.filter((entry) => /(^|\/)(\.git|node_modules|browser-profiles|artifacts|output|dist)(\/|$)/.test(entry) || /\.zip$/i.test(entry));

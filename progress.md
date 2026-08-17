@@ -2,7 +2,23 @@
 
 继续开发现有《钢铁指令 / IRON COMMAND》项目：以已完成阶段6的 `iron-command-stage6.zip` 为基础，在原项目中完成阶段7；保留阶段3～6功能与测试，完成数据完整性修复、技术实验室、科研系统和离线科研结算；阶段7完成后停止，不实现单位升级、装备、新战区、随机事件或战斗中手动指挥。
 
-## Current request: Stage 10-P-A
+## Current request: Stage 10-P-A.1
+
+Downstream regression & final-head closure hotfix on top of Stage 10-P-A remote head `b0f51e44bde6f607e14fe77832041ba6acc50fd0`: make the Stage 9 frozen-authority regression downstream-safe, stop hardcoding regression/closure flags, and bind the final delivery closure to the real CI workflow head. No UI rework, no gameplay change, `SAVE_VERSION` stays `10`. Stop before Stage 10-P-B or Stage 10-A.
+
+# Stage 10-P-A.1 progress
+
+- [x] Reproduced the failing gate locally: `npm run test:stage9-E:fast` ended 22/23 at `b0f51e4`; the failure was the last source-scope guard diffing the whole repo against the Stage 9-D.1 baseline, misreading every downstream addition (including `tests/lib/stage10-P-A-verifier.mjs`) as a Stage 9 authority violation. The same pattern existed in stage9-A/B/C and was recorded by stage9-D.
+- [x] New shared guard `tests/lib/stage9-frozen-authority.mjs`: explicit frozen manifest (13 authority files + frozen planner path + frozen `js/battle-presentation/universal/` prefix) compared byte-wise by SHA-256 against the accepted Stage 9 closure baseline `ca408bb7`, fail-closed on missing/unreadable/mismatch, 63 targets all unchanged.
+- [x] Stage 9 semantic checks untouched; `test:stage9-E:fast` is 23/23 again, stage9-A/B/C/D guards downstream-safe.
+- [x] Runtime gate recorder + machine evidence no longer hardcode `stage9RelevantRegression`/`historicalCoreRegression`; they come from this run's recorded gate exit codes bound to the producing HEAD.
+- [x] Independent verifier extended to machine evidence; tamper corpus now 16 cases (9 browser + 7 machine incl. head SHA mismatch, stale gate head, authority flag forgery, equivalence flip), all rejected with `passedFlagOnlyCases=0`.
+- [x] Committed selfcheck is implementation-only by contract (`implementationPassed=true`, `deliveryClosed=false`, `passed=false`); contract test locks it.
+- [x] Final runtime closure generator binds git HEAD === workflow head, five recorded gates, fresh Stage 9-E 23/23 core evidence, browser/equivalence/verdict/tamper artifacts, `SAVE_VERSION=10`, authority unchanged; fails closed otherwise.
+- [x] Workflow checks out exact `github.sha`, records every gate, runs the closure step, uploads same-run evidence; no `continue-on-error`.
+- [ ] Push the final closure commit and confirm its GitHub Actions run reaches `conclusion=success` with the runtime closure bound to that head.
+
+# Stage 10-P-A original request
 
 Starting from exact accepted Stage 9 baseline `ca408bb7031afda79a65af7aad27b6b64b7c18c4`, implement only the C&C Command UI Foundation presentation rework: reusable CommandTile/Grid/Tooltip/Inspector/LongPress primitives and complete migration of Construction, Unit Production, Equipment Production, and Production Queue. Preserve Stage 9 gameplay authority and `SAVE_VERSION=10`; add focused tests, real desktop/mobile browser evidence, integrity verification, handoff, CI gate, and compact audit ZIP. Stop before Stage 10-P-B or Stage 10-A.
 
@@ -13,9 +29,9 @@ Starting from exact accepted Stage 9 baseline `ca408bb7031afda79a65af7aad27b6b64
 - [x] Reusable presentation models and Command UI primitives, including shared tooltip/inspector hosts and Pointer Events long press.
 - [x] Construction, Unit Production, Equipment Production, and Production Queue migrations.
 - [x] Focused tests, canonical-state equivalence, 13-frame desktop/mobile browser evidence, integrity/tamper verifier, CI gate, handoff, and compact ZIP.
-- [x] Full `npm test` historical regression and Stage 9 relevant regression pass; accepted historical evidence restored byte-for-byte afterward.
+- [x] Full `npm test` historical regression pass; Stage 9 relevant regression was later shown to be 22/23 at this head (see Stage 10-P-A.1 above: the committed local claim predated the CI failure and is corrected by the downstream-safe guard).
 - [x] Immutable implementation checkpoint and final evidence/package regeneration.
-- [ ] Push the final evidence commit and inspect its remote CI run (post-commit result is reported in the final response).
+- [x] Pushed `b0f51e4`; its CI run `31837650080` failed the Stage 9 regression step (fixed in Stage 10-P-A.1).
 
 # Stage 7 progress
 

@@ -22,8 +22,8 @@
       "file": "01-construction-command-grid.png",
       "phase": "construction_command_grid",
       "path": "screenshots/stage10-P-A/01-construction-command-grid.png",
-      "sha256": "78b6923ec2518c950a5094c844bd5a23f9c9086a8f7de2f45fa3f5183625a251",
-      "bytes": 271070,
+      "sha256": "71b43a9e10d39491945ceccd6dd3188373ea7f2a85cd098dcf819cce437815e2",
+      "bytes": 271027,
       "dimensions": {
         "width": 1366,
         "height": 900,
@@ -66,8 +66,8 @@
       "file": "02-construction-hover-tooltip.png",
       "phase": "construction_hover_tooltip",
       "path": "screenshots/stage10-P-A/02-construction-hover-tooltip.png",
-      "sha256": "9797a11c5cb89dee61b95c657f17642c3f64427d6fbb71d27e8d8f1e6a708d6c",
-      "bytes": 277518,
+      "sha256": "91ff0c824548c2fa3ea5faa4a0186cadab339dde00fb8efc8b811020191aa8ab",
+      "bytes": 277569,
       "dimensions": {
         "width": 1366,
         "height": 900,
@@ -111,8 +111,8 @@
       "file": "03-construction-active-progress.png",
       "phase": "construction_active_progress",
       "path": "screenshots/stage10-P-A/03-construction-active-progress.png",
-      "sha256": "1d95cf219b7657d7e045cb287a77bef5604cc8baeba6e40bd0fdf02733b40427",
-      "bytes": 290222,
+      "sha256": "e00cb509ab2a7b0ee42790a756ba45ef9c1dc9204b3be9294bf71d76a4855888",
+      "bytes": 290519,
       "dimensions": {
         "width": 1366,
         "height": 900,
@@ -161,8 +161,8 @@
       "file": "04-unit-production-command-grid.png",
       "phase": "unit_production_command_grid",
       "path": "screenshots/stage10-P-A/04-unit-production-command-grid.png",
-      "sha256": "384cf87e38b213ee9706af68bd3f64569fad016fdc8ff091405563903eab08da",
-      "bytes": 254296,
+      "sha256": "2e956bfa0923eec57763a044c1921b39d2d99f846fc457d43e0c923471f8af90",
+      "bytes": 254368,
       "dimensions": {
         "width": 1366,
         "height": 900,
@@ -209,8 +209,8 @@
       "file": "05-unit-hover-tooltip.png",
       "phase": "unit_hover_tooltip",
       "path": "screenshots/stage10-P-A/05-unit-hover-tooltip.png",
-      "sha256": "4e13ff0c9b5e06b046b210a2ad8f9fe8e7f57902830b3c3122a51ecada1c3d1a",
-      "bytes": 258760,
+      "sha256": "8a71772f7c2ee061c60d675d1209e1aeb131e84f1c732dc4790bdead152d8b12",
+      "bytes": 258656,
       "dimensions": {
         "width": 1366,
         "height": 900,
@@ -258,8 +258,8 @@
       "file": "06-unit-locked-state.png",
       "phase": "unit_locked_state",
       "path": "screenshots/stage10-P-A/06-unit-locked-state.png",
-      "sha256": "d032819d7589922842404e0631b42bb3280596708a05d4052662587fefc3c603",
-      "bytes": 274914,
+      "sha256": "e88b593a13172faccfa45ed8e9a72aaf8b65931153d1d9319fffe716ae4e6c80",
+      "bytes": 274939,
       "dimensions": {
         "width": 1366,
         "height": 900,
@@ -306,8 +306,8 @@
       "file": "07-unit-resource-insufficient.png",
       "phase": "unit_resource_insufficient",
       "path": "screenshots/stage10-P-A/07-unit-resource-insufficient.png",
-      "sha256": "218347b135a9051933fb0649b562893bfd1d0b36a2fbc0a5e2093c890ad1a29a",
-      "bytes": 258572,
+      "sha256": "e811c364c0aebb27366877b6aca528d46714b9fd0efb91e0c8950bd98167003c",
+      "bytes": 258744,
       "dimensions": {
         "width": 1366,
         "height": 900,
@@ -354,8 +354,8 @@
       "file": "08-production-queue.png",
       "phase": "production_queue",
       "path": "screenshots/stage10-P-A/08-production-queue.png",
-      "sha256": "f10c5cc3940a18ef04bf5cd4f8576f5ac76e3e29ab10cf24e8e02e7c6c3e1f6e",
-      "bytes": 284634,
+      "sha256": "e66e60c2b7495d26b5241345f6c60f71571cabd33f6a7a5ddb119b91cac9469b",
+      "bytes": 285014,
       "dimensions": {
         "width": 1366,
         "height": 900,
@@ -421,8 +421,8 @@
       "file": "09-equipment-command-grid.png",
       "phase": "equipment_command_grid",
       "path": "screenshots/stage10-P-A/09-equipment-command-grid.png",
-      "sha256": "813499feb2c817e0256590d1c1f3da49b55255b95c70d704c797d26fdf367197",
-      "bytes": 260565,
+      "sha256": "bd938449812599c9663684cec9ad6af05b15021d9082fd4944950c439a11851c",
+      "bytes": 260931,
       "dimensions": {
         "width": 1366,
         "height": 900,
@@ -469,8 +469,8 @@
       "file": "10-equipment-tooltip.png",
       "phase": "equipment_hover_tooltip",
       "path": "screenshots/stage10-P-A/10-equipment-tooltip.png",
-      "sha256": "ed52a27e733910459f7f1091ea87eb91e0f783ec968f3ff576a54adf5380ae70",
-      "bytes": 273261,
+      "sha256": "5ca014a21a25cb2b5ccf4f613b1333a80ce09cef460e245b9d2f75affa16087b",
+      "bytes": 273331,
       "dimensions": {
         "width": 1366,
         "height": 900,
@@ -1035,7 +1035,7 @@
     {
       "name": "unique screenshot 01-construction-command-grid.png",
       "passed": true,
-      "details": "78b6923ec2518c950a5094c844bd5a23f9c9086a8f7de2f45fa3f5183625a251"
+      "details": "71b43a9e10d39491945ceccd6dd3188373ea7f2a85cd098dcf819cce437815e2"
     },
     {
       "name": "01-construction-command-grid.png one tooltip host",
@@ -1082,7 +1082,7 @@
     {
       "name": "unique screenshot 02-construction-hover-tooltip.png",
       "passed": true,
-      "details": "9797a11c5cb89dee61b95c657f17642c3f64427d6fbb71d27e8d8f1e6a708d6c"
+      "details": "91ff0c824548c2fa3ea5faa4a0186cadab339dde00fb8efc8b811020191aa8ab"
     },
     {
       "name": "02-construction-hover-tooltip.png one tooltip host",
@@ -1139,7 +1139,7 @@
     {
       "name": "unique screenshot 03-construction-active-progress.png",
       "passed": true,
-      "details": "1d95cf219b7657d7e045cb287a77bef5604cc8baeba6e40bd0fdf02733b40427"
+      "details": "e00cb509ab2a7b0ee42790a756ba45ef9c1dc9204b3be9294bf71d76a4855888"
     },
     {
       "name": "03-construction-active-progress.png one tooltip host",
@@ -1188,7 +1188,7 @@
     {
       "name": "unique screenshot 04-unit-production-command-grid.png",
       "passed": true,
-      "details": "384cf87e38b213ee9706af68bd3f64569fad016fdc8ff091405563903eab08da"
+      "details": "2e956bfa0923eec57763a044c1921b39d2d99f846fc457d43e0c923471f8af90"
     },
     {
       "name": "04-unit-production-command-grid.png one tooltip host",
@@ -1243,7 +1243,7 @@
     {
       "name": "unique screenshot 05-unit-hover-tooltip.png",
       "passed": true,
-      "details": "4e13ff0c9b5e06b046b210a2ad8f9fe8e7f57902830b3c3122a51ecada1c3d1a"
+      "details": "8a71772f7c2ee061c60d675d1209e1aeb131e84f1c732dc4790bdead152d8b12"
     },
     {
       "name": "05-unit-hover-tooltip.png one tooltip host",
@@ -1298,7 +1298,7 @@
     {
       "name": "unique screenshot 06-unit-locked-state.png",
       "passed": true,
-      "details": "d032819d7589922842404e0631b42bb3280596708a05d4052662587fefc3c603"
+      "details": "e88b593a13172faccfa45ed8e9a72aaf8b65931153d1d9319fffe716ae4e6c80"
     },
     {
       "name": "06-unit-locked-state.png one tooltip host",
@@ -1358,7 +1358,7 @@
     {
       "name": "unique screenshot 07-unit-resource-insufficient.png",
       "passed": true,
-      "details": "218347b135a9051933fb0649b562893bfd1d0b36a2fbc0a5e2093c890ad1a29a"
+      "details": "e811c364c0aebb27366877b6aca528d46714b9fd0efb91e0c8950bd98167003c"
     },
     {
       "name": "07-unit-resource-insufficient.png one tooltip host",
@@ -1462,7 +1462,7 @@
     {
       "name": "unique screenshot 08-production-queue.png",
       "passed": true,
-      "details": "f10c5cc3940a18ef04bf5cd4f8576f5ac76e3e29ab10cf24e8e02e7c6c3e1f6e"
+      "details": "e66e60c2b7495d26b5241345f6c60f71571cabd33f6a7a5ddb119b91cac9469b"
     },
     {
       "name": "08-production-queue.png one tooltip host",
@@ -1523,7 +1523,7 @@
     {
       "name": "unique screenshot 09-equipment-command-grid.png",
       "passed": true,
-      "details": "813499feb2c817e0256590d1c1f3da49b55255b95c70d704c797d26fdf367197"
+      "details": "bd938449812599c9663684cec9ad6af05b15021d9082fd4944950c439a11851c"
     },
     {
       "name": "09-equipment-command-grid.png one tooltip host",
@@ -1578,7 +1578,7 @@
     {
       "name": "unique screenshot 10-equipment-tooltip.png",
       "passed": true,
-      "details": "ed52a27e733910459f7f1091ea87eb91e0f783ec968f3ff576a54adf5380ae70"
+      "details": "5ca014a21a25cb2b5ccf4f613b1333a80ce09cef460e245b9d2f75affa16087b"
     },
     {
       "name": "10-equipment-tooltip.png one tooltip host",

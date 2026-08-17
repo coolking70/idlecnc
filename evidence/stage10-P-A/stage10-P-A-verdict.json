@@ -12,5 +12,11 @@
     "mobileCoverage": true,
     "hoverCoverage": true,
     "longPressCoverage": true
+  },
+  "machineRecomputed": {
+    "machineHeadSha": "c7a7b4f87e88b59fdcb799002e905bada6a9a20b",
+    "currentHead": "c7a7b4f87e88b59fdcb799002e905bada6a9a20b",
+    "headBound": true,
+    "runtimeGatesBound": true
   }
 }

@@ -1,7 +1,7 @@
 {
   "stage": "10-P-A",
   "baseSha": "ca408bb7031afda79a65af7aad27b6b64b7c18c4",
-  "headSha": "136b8573eefb85911f35b23c3043f5f5f6c87832",
+  "headSha": "c7a7b4f87e88b59fdcb799002e905bada6a9a20b",
   "saveVersion": 10,
   "currentStage": "10-P-A",
   "componentChecks": {
@@ -19,15 +19,71 @@
     "oneTooltipAndInspectorHost": true
   },
   "functionalRegression": {
-    "constructionSemantics": true,
-    "unitProductionSemantics": true,
-    "equipmentProductionSemantics": true,
-    "cancellationSemantics": true,
-    "saveReloadAndOfflineSemantics": true,
     "historicalCoreRegression": true,
     "stage9RelevantRegression": true,
     "stage10CommandUiTests": true,
+    "stage10BrowserRun": true,
+    "constructionSemantics": true,
+    "unitProductionSemantics": true,
+    "equipmentProductionSemantics": true,
+    "presentationReadOnly": true,
     "stage10BrowserEvidence": true
+  },
+  "runtimeGates": {
+    "required": [
+      "historical-core-regression",
+      "stage9-relevant-regression",
+      "stage10-focused-tests",
+      "stage10-browser"
+    ],
+    "headSha": "c7a7b4f87e88b59fdcb799002e905bada6a9a20b",
+    "currentHead": "c7a7b4f87e88b59fdcb799002e905bada6a9a20b",
+    "boundToHead": true,
+    "recorded": [
+      "historical-core-regression",
+      "stage9-relevant-regression",
+      "stage10-focused-tests",
+      "stage10-browser"
+    ],
+    "missing": [],
+    "gates": {
+      "historical-core-regression": {
+        "label": "historical-core-regression",
+        "command": "npm run --ignore-scripts test",
+        "exitCode": 0,
+        "signal": null,
+        "startedAt": "2026-08-17T04:11:05.050Z",
+        "finishedAt": "2026-08-17T04:18:00.819Z",
+        "durationMs": 415802
+      },
+      "stage9-relevant-regression": {
+        "label": "stage9-relevant-regression",
+        "command": "npm run test:stage9-E:fast",
+        "exitCode": 0,
+        "signal": null,
+        "startedAt": "2026-08-17T04:18:00.878Z",
+        "finishedAt": "2026-08-17T04:18:06.963Z",
+        "durationMs": 6085
+      },
+      "stage10-focused-tests": {
+        "label": "stage10-focused-tests",
+        "command": "npm run test:stage10-P-A",
+        "exitCode": 0,
+        "signal": null,
+        "startedAt": "2026-08-17T04:18:08.764Z",
+        "finishedAt": "2026-08-17T04:18:08.982Z",
+        "durationMs": 218
+      },
+      "stage10-browser": {
+        "label": "stage10-browser",
+        "command": "npm run browser:stage10-P-A",
+        "exitCode": 0,
+        "signal": null,
+        "startedAt": "2026-08-17T13:03:58.736Z",
+        "finishedAt": "2026-08-17T13:04:48.610Z",
+        "durationMs": 49874
+      }
+    }
   },
   "canonicalStateEquivalence": {
     "passed": true,
@@ -117,14 +173,22 @@
       }
     ],
     "changedFiles": [
-      "HANDOFF-STAGE10-P-A.md",
-      "STAGE10-P-A-SELFCHECK.json",
       "evidence/stage10-P-A/stage10-P-A-browser.json",
-      "evidence/stage10-P-A/stage10-P-A-machine.json",
-      "evidence/stage10-P-A/stage10-P-A-selfcheck.json",
-      "evidence/stage10-P-A/stage10-P-A-state-equivalence.json",
-      "evidence/stage10-P-A/stage10-P-A-tamper.json",
-      "evidence/stage10-P-A/stage10-P-A-verdict.json"
+      "progress.md",
+      "screenshots/stage10-P-A/01-construction-command-grid.png",
+      "screenshots/stage10-P-A/02-construction-hover-tooltip.png",
+      "screenshots/stage10-P-A/03-construction-active-progress.png",
+      "screenshots/stage10-P-A/04-unit-production-command-grid.png",
+      "screenshots/stage10-P-A/05-unit-hover-tooltip.png",
+      "screenshots/stage10-P-A/06-unit-locked-state.png",
+      "screenshots/stage10-P-A/07-unit-resource-insufficient.png",
+      "screenshots/stage10-P-A/08-production-queue.png",
+      "screenshots/stage10-P-A/09-equipment-command-grid.png",
+      "screenshots/stage10-P-A/10-equipment-tooltip.png",
+      "stage9_e_core_evidence.json",
+      "tests/verify-stage10-P-A-delivery-package.mjs",
+      "HANDOFF-STAGE10-P-A1.md",
+      "evidence/stage10-P-A/stage10-P-A-runtime-gates.json"
     ],
     "forbiddenChangedFiles": [],
     "readOnlyPresentationBoundary": true,
