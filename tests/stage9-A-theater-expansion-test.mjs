@@ -1,5 +1,4 @@
 import assert from 'node:assert/strict';
-import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -23,6 +22,7 @@ import { getOperationCost, sanitizeOperations } from '../js/operations.js';
 import { migrate } from '../js/save.js';
 import { settleOfflineProgress } from '../js/offline.js';
 import { computeSaveDiff, productionStateSnapshot } from '../js/save-diff.js';
+import { readStage9FrozenAuthorityStatus } from './lib/stage9-frozen-authority.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const clone = (value) => JSON.parse(JSON.stringify(value));
@@ -334,23 +334,15 @@ check('success save diff is limited to battle-authoritative paths', () => {
 });
 
 check('authority freeze excludes solver, planner, choreographer and presentation mutations', () => {
-  const forbidden = ['js/battle.js', 'js/theater.js', 'js/save-diff.js', 'js/battle-presentation/universal/', 'experiments/battle-sandbox/universal-planner/universal-planner.js'];
-  const allowedPerformanceHelper = 'tests/lib/perf-environment.mjs';
-  const status = requireGitNames();
-  assert.deepEqual(status.filter((file) => forbidden.some((prefix) => file === prefix || file.startsWith(prefix))), []);
-  assert.deepEqual(status.filter((file) => file.startsWith('tests/lib/') && file !== allowedPerformanceHelper), []);
-  writeEvidence('stage9_a_authority_check.json', { stage: '9-A', passed: true, forbiddenPaths: forbidden, allowedPerformanceHelper, changedFiles: status });
+  const frozenAuthority = readStage9FrozenAuthorityStatus(root);
+  assert.equal(frozenAuthority.passed, true, JSON.stringify({
+    baseline: frozenAuthority.baseline,
+    gitHead: frozenAuthority.gitHead,
+    checkedCount: frozenAuthority.checkedCount,
+    violations: frozenAuthority.violations
+  }, null, 2));
+  writeEvidence('stage9_a_authority_check.json', { stage: '9-A', passed: true, frozenAuthorityBaseline: frozenAuthority.baseline, frozenAuthorityCheckedCount: frozenAuthority.checkedCount, frozenAuthorityViolations: frozenAuthority.violations });
 });
-
-function requireGitNames() {
-  // Stage 9-A regression runs from the accepted Stage 9-D.1 baseline. The
-  // earlier Stage 9-A baseline predates the already-accepted production
-  // session / salvage metadata wiring in js/theater.js.
-  const baseline = '5f7bbdd00fe5a2b3a029bcbbc8e550019f0034b6';
-  const committed = execFileSync('git', ['diff', '--name-only', `${baseline}..HEAD`], { cwd: root, encoding: 'utf8' }).split(/\r?\n/).filter(Boolean);
-  const working = execFileSync('git', ['diff', '--name-only', 'HEAD'], { cwd: root, encoding: 'utf8' }).split(/\r?\n/).filter(Boolean);
-  return [...new Set([...committed, ...working])].sort();
-}
 
 const coverage = JSON.parse(fs.readFileSync(path.join(root, 'experiments/battle-sandbox/universal-planner/scenarios/coverage.json'), 'utf8'));
 writeEvidence('stage9_a_coverage_rebaseline.json', {
