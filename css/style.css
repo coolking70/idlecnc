@@ -1951,3 +1951,106 @@ button {
     border-radius: 12px 12px 0 0;
   }
 }
+
+/* ==========================================================
+   Stage 10-P-B：全量 Command UI 迁移
+   ======================================================== */
+
+.command-filter-row {
+  display: flex; flex-wrap: wrap; gap: 8px; margin: 4px 0 10px;
+}
+.command-filter-row .units-filter {
+  display: inline-flex; align-items: center; gap: 5px;
+  color: var(--text-mute); font-size: 10px;
+}
+.command-filter-row select {
+  background: rgba(10, 14, 12, .8); color: var(--text);
+  border: 1px solid #2c352f; border-radius: 4px;
+  font-size: 10px; padding: 3px 6px;
+}
+
+.command-roster-grid { grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); }
+.command-roster-grid .command-tile { min-height: 128px; }
+.command-roster-grid .command-tile-media { height: 78px; }
+
+.command-formation-grid { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); }
+.command-formation-grid .command-tile { min-height: 132px; }
+.command-formation-grid .command-tile-media { height: 80px; }
+
+.command-theater-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+.command-theater-grid .command-tile { min-height: 132px; }
+.command-theater-grid .command-tile-media { height: 80px; }
+
+.command-strategy-grid { grid-template-columns: repeat(auto-fill, minmax(104px, 1fr)); }
+.command-strategy-grid .command-tile { min-height: 108px; }
+.command-strategy-grid .command-tile-media { height: 58px; }
+
+.command-repair-grid { grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); }
+.command-repair-grid .command-tile { min-height: 118px; }
+.command-repair-grid .command-tile-media { height: 68px; }
+
+.command-report-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+.command-report-grid .command-tile { min-height: 116px; }
+.command-report-grid .command-tile-media { height: 62px; }
+
+.command-overview-grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); }
+.command-overview-grid .command-tile { min-height: 122px; }
+.command-overview-grid .command-tile-media { height: 70px; }
+
+.command-research-current { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+
+.research-tree-compact { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-top: 6px; }
+.research-tree-compact .research-branch h4 { margin: 2px 0 6px; font-size: 10px; color: var(--text-mute); letter-spacing: 1px; }
+.research-tree-compact .research-branch-list { display: grid; grid-template-columns: 1fr; gap: 6px; }
+.research-tree-compact .command-tile { min-height: 92px; }
+.research-tree-compact .command-tile-media { height: 46px; }
+@media (max-width: 1100px) { .research-tree-compact { grid-template-columns: 1fr; } }
+
+.ov-command-head { margin-top: 0; }
+.ov-status-line {
+  margin: 2px 0 10px; color: var(--text-mute); font-size: 10px; letter-spacing: .4px;
+  display: flex; flex-wrap: wrap; gap: 4px 14px;
+}
+.ov-warnings { margin-top: 8px; }
+.ov-warnings:empty { display: none; }
+.ov-warnings .bc-reason { margin: 3px 0; }
+
+/* Inspector 扩展：分组 / 多操作 / 输入 */
+.command-inspector-section { margin-top: 10px; }
+.command-inspector-section h4 {
+  margin: 0 0 4px; font-size: 9px; letter-spacing: 1px;
+  color: var(--accent-dim); text-transform: uppercase;
+}
+.command-inspector-list { margin: 4px 0 0; padding-left: 16px; }
+.command-inspector-list li { color: var(--text); font-size: 11px; margin: 2px 0; }
+.command-inspector-actions {
+  display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px;
+}
+.command-inspector-input {
+  display: inline-flex; align-items: center; gap: 5px; flex: 1 1 100%;
+}
+.command-inspector-input span { color: var(--text-mute); font-size: 10px; }
+.command-inspector-input input {
+  flex: 1; background: rgba(10, 14, 12, .85); color: var(--text);
+  border: 1px solid #2c352f; border-radius: 4px; padding: 5px 8px; font-size: 12px;
+}
+.command-inspector-input button {
+  background: #243128; color: var(--text); border: 1px solid var(--accent-dim);
+  border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 11px;
+}
+.command-inspector-action.is-danger { border-color: rgba(226, 89, 63, .6); color: #ffb9a6; }
+
+/* 紧凑 Command 导航（收紧文字 Tab，不重建应用 shell） */
+#panel-tabs { gap: 4px; }
+#panel-tabs .tab {
+  min-width: 0; padding: 6px 10px; font-size: 11px; letter-spacing: .4px;
+  white-space: nowrap;
+}
+@media (max-width: 900px) {
+  #panel-tabs {
+    overflow-x: auto; -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; flex-wrap: nowrap;
+  }
+  #panel-tabs::-webkit-scrollbar { display: none; }
+  #panel-tabs .tab { flex: 0 0 auto; padding: 6px 9px; font-size: 10.5px; }
+}

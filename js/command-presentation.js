@@ -8,11 +8,26 @@
 
 import {
   BASE_LAYOUT, BUILDINGS, BUILDING_STATUS, EQUIPMENT, RESOURCE_DEFS,
-  TECHNOLOGIES, UNITS
+  TECHNOLOGIES, UNITS, DAMAGE_STATES, REPAIR, RESEARCH, FORMATION,
+  FORMATION_PRESETS, THEATERS, OPERATIONS, EQUIPMENT_RULES
 } from './config.js';
 import { buildableList, canBuild, getConstructionProgress } from './construction.js';
 import { canQueueEquipment, canQueueUnit, getProductionProgress, inventoryCount } from './production.js';
-import { equipmentInventoryCounts, getEquipmentDefinition } from './equipment.js';
+import { equipmentInventoryCounts, getEquipmentDefinition, canEquipEquipment, getUnitEquipment } from './equipment.js';
+import {
+  canQueueRepair, getActiveRepairs, getQueuedRepairs, getRepairProgress,
+  getRepairRemaining, getRepairCost, getRepairTime
+} from './repairs.js';
+import { hasResearchCenter, getResearchProgress, getTechnologyState } from './research.js';
+import { getUnitRank, getRankProgress, formatUnitDisplayName, getUnitEffectiveStats } from './units.js';
+import { damageStateOfUnit } from './unit-status.js';
+import {
+  canCreateFormation, canApplyPreset, canAddUnit, getAvailableUnits,
+  getFormationStats, getFormationWarnings, getPresetCommandCost
+} from './formations.js';
+import {
+  listTheaters, listStrategies, getTheaterIntel, hasRadar, getReports, getOperation
+} from './theater.js';
 import { formatDuration, formatInt, safeNumber } from './utils.js';
 
 const UNIT_IMAGES = {
@@ -327,4 +342,654 @@ export function buildProductionQueueModels(state) {
 export function buildProductionStatusModel(state) {
   const progress = getProductionProgress(state);
   return progress ? { name: progress.name, percent: progress.percent, remainingText: progress.remainingText } : null;
+}
+
+/* ==========================================================
+ * Stage 10-P-B：全量 Command UI 迁移模型
+ * 全部为只读纯函数：只读 canonical state 与现有 authority
+ * selector，不做任何 gameplay 判定或状态修改。
+ * ======================================================== */
+
+const DAMAGE_LABELS = {
+  [DAMAGE_STATES.INTACT]: '完好',
+  [DAMAGE_STATES.LIGHT]: '轻伤',
+  [DAMAGE_STATES.HEAVY]: '重伤',
+  [DAMAGE_STATES.DESTROYED]: '已损毁'
+};
+
+const UNIT_STATUS_LABELS = { ready: '待命', assigned: '已编队', repairing: '维修中', deployed: '部署中' };
+
+const FORMATION_STATUS_LABELS = { idle: '待命', deployed: '作战中' };
+
+const TECH_STATUS_LABELS = { completed: '已完成', researching: '研究中', queued: '队列中', available: '可研究', locked: '未解锁' };
+
+function inspectModel({ id, name, image, state, badges = [], progress = null, ariaLabel, tooltip, inspector, actionId = null, actionPayload = null, disabled = false }) {
+  return {
+    id, name,
+    image, imageAlt: '',
+    state,
+    disabled,
+    locked: false,
+    progress,
+    badges,
+    actionId,
+    actionPayload,
+    inspectOnClick: true,
+    ariaLabel,
+    tooltip,
+    inspector
+  };
+}
+
+/* ---------------- Units：单位花名册 ---------------- */
+
+export function buildUnitRosterModels(state) {
+  const units = Array.isArray(state.units) ? state.units : [];
+  return units.map((unit) => {
+    const def = UNITS[unit.type] || {};
+    const rank = getUnitRank(unit);
+    const damage = damageStateOfUnit(unit);
+    const damageLabel = DAMAGE_LABELS[damage] || '完好';
+    const progress = getRankProgress(unit);
+    const stats = getUnitEffectiveStats(unit, state.equipment);
+    const equipped = getUnitEquipment(state.equipment, unit.id);
+    const formation = (state.formations || []).find((f) => (f.unitIds || []).includes(unit.id));
+    const badges = [
+      { label: UNIT_STATUS_LABELS[unit.status] || unit.status, tone: unit.status === 'ready' ? 'complete' : 'default' },
+      { label: rank.name, tone: rank.id === 'recruit' ? 'default' : 'count' }
+    ];
+    if (damage !== DAMAGE_STATES.INTACT) badges.push({ label: damageLabel, tone: damage === DAMAGE_STATES.HEAVY ? 'resource' : 'progress' });
+    const actions = [];
+    equipped.forEach((item) => {
+      actions.push({
+        id: 'unequip-equipment',
+        label: `卸载 ${item.name}`,
+        payload: { unitId: unit.id, equipmentInstanceId: item.instanceId }
+      });
+    });
+    const mounted = new Set(equipped.map((item) => item.instanceId));
+    (state.equipment?.inventory || []).forEach((instance) => {
+      if (mounted.has(instance.id)) return;
+      const equipmentDef = getEquipmentDefinition(instance.equipmentId);
+      if (!equipmentDef) return;
+      const check = canEquipEquipment(state, unit.id, instance.id);
+      actions.push({
+        id: 'equip-equipment',
+        label: `挂载 ${equipmentDef.name}`,
+        payload: { unitId: unit.id, equipmentInstanceId: instance.id },
+        disabled: !check.ok
+      });
+    });
+    return inspectModel({
+      id: `unit-instance:${unit.id}`,
+      name: formatUnitDisplayName(unit),
+      image: UNIT_IMAGES[unit.type] || UNIT_IMAGES.scout_car,
+      state: unit.status === 'repairing' ? 'active' : damage !== DAMAGE_STATES.INTACT ? 'disabled' : 'available',
+      badges,
+      ariaLabel: `${formatUnitDisplayName(unit)}，${rank.name}，${damageLabel}`,
+      tooltip: {
+        title: formatUnitDisplayName(unit),
+        role: def.name || unit.type,
+        status: `${UNIT_STATUS_LABELS[unit.status] || unit.status} · ${damageLabel} · HP ${Math.round(safeNumber(unit.hp, 0))}/${Math.round(safeNumber(unit.maxHp, 0))}`
+      },
+      inspector: {
+        title: formatUnitDisplayName(unit),
+        eyebrow: `${def.name || unit.type} · ${rank.name}`,
+        description: def.desc || '',
+        rows: [
+          { label: '状态', value: `${UNIT_STATUS_LABELS[unit.status] || unit.status} · ${damageLabel}` },
+          { label: '生命', value: `${Math.round(safeNumber(unit.hp, 0))} / ${Math.round(safeNumber(unit.maxHp, 0))}` },
+          { label: '经验 / 战斗', value: `${formatInt(safeNumber(unit.experience, 0))} / ${safeNumber(unit.battles, 0)} 次` },
+          { label: '等级进度', value: progress.nextRankName ? `距${progress.nextRankName}还需 ${progress.remaining}` : '已达最高等级' },
+          { label: '所属编队', value: formation ? formation.name : '库存（未编队）' },
+          { label: '装备槽位', value: `${equipped.length} / ${EQUIPMENT_RULES.maxSlotsPerUnit}` }
+        ],
+        sections: [
+          {
+            title: '实际战斗属性（含装备与等级修正）',
+            rows: ['attack', 'antiArmor', 'defense', 'scouting', 'mobility', 'repair']
+              .map((key) => ({ label: key, value: `${stats[key]}（基础 ${safeNumber(def.stats?.[key], 0)}）` }))
+          }
+        ],
+        inputs: [{
+          label: '呼号',
+          value: unit.callsign || '',
+          maxLength: 12,
+          placeholder: '输入呼号',
+          actionId: 'rename-unit',
+          payload: { unitId: unit.id }
+        }],
+        actions
+      }
+    });
+  });
+}
+
+/* ---------------- Formations：编队指挥 ---------------- */
+
+export function buildFormationCommandModels(state) {
+  const models = [];
+  const create = canCreateFormation(state);
+  models.push(inspectModel({
+    id: 'formation:new',
+    name: '新建编队',
+    image: UNIT_IMAGES.infantry,
+    state: create.ok ? 'available' : 'locked',
+    badges: create.ok ? [] : [{ label: 'LOCK', tone: 'lock' }],
+    ariaLabel: '新建空编队',
+    tooltip: { title: '新建编队', role: '指挥', status: create.ok ? '可创建' : create.reason },
+    inspector: {
+      title: '新建编队',
+      eyebrow: '指挥',
+      description: '创建一支空编队后再挑选库存单位编入；也可在下方预设模板中一键组建。',
+      rows: [
+        { label: '编队上限', value: `${(state.formations || []).length} / ${FORMATION.maxFormations}` },
+        { label: '指挥容量', value: `${formatInt(safeNumber(state.command?.used, 0))} / ${formatInt(safeNumber(state.command?.capacity, 0))}` },
+        { label: '当前状态', value: create.ok ? '可创建' : create.reason }
+      ],
+      actions: [{ id: 'create-formation', label: '新建空编队', disabled: !create.ok }]
+    }
+  }));
+  FORMATION_PRESETS.forEach((preset) => {
+    const check = canApplyPreset(state, preset.id);
+    const comp = Object.keys(preset.units).map((t) => `${UNITS[t]?.name || t}×${preset.units[t]}`).join('、');
+    models.push(inspectModel({
+      id: `formation-preset:${preset.id}`,
+      name: preset.name,
+      image: UNIT_IMAGES.mbt,
+      state: check.ok ? 'available' : 'locked',
+      badges: [{ label: `C${getPresetCommandCost(preset.id)}`, tone: 'count' }, ...(check.ok ? [] : [{ label: '!', tone: 'resource' }])],
+      ariaLabel: `预设 ${preset.name}，${check.ok ? '点击组建' : check.reason}`,
+      tooltip: { title: preset.name, role: '预设模板', status: check.ok ? comp : check.reason },
+      inspector: {
+        title: preset.name,
+        eyebrow: '预设模板 · 一键组建',
+        description: comp,
+        rows: [
+          { label: '编成', value: comp },
+          { label: '指挥占用', value: String(getPresetCommandCost(preset.id)) },
+          { label: '当前状态', value: check.ok ? '可组建' : check.reason }
+        ],
+        actions: [{ id: 'apply-preset', label: '一键组建', payload: { presetId: preset.id }, disabled: !check.ok }]
+      }
+    }));
+  });
+  (state.formations || []).forEach((formation) => {
+    const stats = getFormationStats(state, formation);
+    const warnings = getFormationWarnings(state, formation);
+    const comp = Object.keys(stats.byType).map((t) => `${UNITS[t]?.name || t}×${stats.byType[t]}`).join('、');
+    const pool = getAvailableUnits(state);
+    const actions = [];
+    formation.unitIds.forEach((unitId) => {
+      const unit = (state.units || []).find((u) => u.id === unitId);
+      if (!unit) return;
+      actions.push({
+        id: 'remove-unit',
+        label: `移出 ${formatUnitDisplayName(unit)}`,
+        payload: { formationId: formation.id, unitId },
+        disabled: formation.status !== 'idle'
+      });
+    });
+    Object.keys(UNITS).forEach((typeId) => {
+      const group = pool.filter((u) => u.type === typeId);
+      if (!group.length) return;
+      const check = canAddUnit(state, formation.id, group[0].id);
+      actions.push({
+        id: 'add-unit',
+        label: `编入 ${UNITS[typeId].name} ×1`,
+        payload: { formationId: formation.id, unitId: group[0].id },
+        disabled: !check.ok || formation.status !== 'idle'
+      });
+    });
+    actions.push({
+      id: 'disband-formation',
+      label: '解散编队',
+      payload: { formationId: formation.id },
+      disabled: formation.status !== 'idle',
+      danger: true
+    });
+    models.push(inspectModel({
+      id: `formation:${formation.id}`,
+      name: formation.name,
+      image: UNIT_IMAGES.mbt,
+      state: formation.status === 'deployed' ? 'active' : stats.count === 0 ? 'locked' : 'available',
+      badges: [
+        { label: FORMATION_STATUS_LABELS[formation.status] || formation.status, tone: formation.status === 'idle' ? 'complete' : 'progress' },
+        { label: `×${stats.count}`, tone: 'count' }
+      ],
+      ariaLabel: `${formation.name}，${stats.count} 个单位`,
+      tooltip: {
+        title: formation.name,
+        role: '编队',
+        status: `${FORMATION_STATUS_LABELS[formation.status] || formation.status} · ${stats.count} 单位 · 指挥 ${stats.command} · 攻击 ${formatInt(stats.attack)} · 防御 ${formatInt(stats.defense)}`
+      },
+      inspector: {
+        title: formation.name,
+        eyebrow: `编队 · ${FORMATION_STATUS_LABELS[formation.status] || formation.status}`,
+        description: comp || '空编队',
+        rows: [
+          { label: '单位数量', value: String(stats.count) },
+          { label: '指挥占用', value: String(stats.command) },
+          { label: '总生命值', value: `${formatInt(stats.hp)} / ${formatInt(stats.maxHp)}` },
+          { label: '完好度', value: `${Math.round(stats.avgHp * 100)}%` },
+          { label: '总攻击 / 反装甲', value: `${formatInt(stats.attack)} / ${formatInt(stats.antiArmor)}` },
+          { label: '总防御 / 侦察', value: `${formatInt(stats.defense)} / ${formatInt(stats.scouting)}` },
+          { label: '总维修', value: formatInt(stats.repair) },
+          { label: '平均机动', value: String(stats.avgMobility.toFixed(1)) },
+          { label: '任务补给消耗', value: `${formatInt(stats.upkeep)}/次` }
+        ],
+        sections: [{ title: '编成评估', rows: warnings.map((text) => ({ label: '提示', value: text })) }],
+        actions
+      }
+    }));
+  });
+  return models;
+}
+
+/* ---------------- Theater：战区与任务 ---------------- */
+
+export function buildTheaterCommandModels(state) {
+  const models = [];
+  listTheaters(state).forEach((view) => {
+    const intel = getTheaterIntel(state, view.id);
+    const statusLabel = view.engaged ? '交战中' : view.captured ? '已占领' : view.unlocked ? '可进攻' : '未解锁';
+    const tileState = view.captured ? 'completed' : view.engaged ? 'active' : view.unlocked ? 'available' : 'locked';
+    const badges = [
+      { label: statusLabel, tone: view.captured ? 'complete' : view.engaged ? 'progress' : view.unlocked ? 'count' : 'lock' },
+      { label: '★'.repeat(Math.max(1, Math.min(5, view.difficulty))), tone: 'default' }
+    ];
+    if (!view.captured && Object.keys(view.firstReward || {}).length) badges.push({ label: '首占奖励', tone: 'progress' });
+    const rows = [
+      { label: '地形', value: `${view.terrainName} · 隐蔽 ${view.concealment}` },
+      { label: '补给系数', value: `×${view.supplyMultiplier}` },
+      { label: '战绩', value: `尝试 ${view.attempts} 次 / 胜利 ${view.victories} 次${view.lastResult ? ` · 上次 ${view.lastResult}` : ''}` }
+    ];
+    if (view.captured) {
+      const income = Object.keys(view.captureIncome || {})
+        .map((k) => `${RESOURCE_DEFS[k.replace('PerSec', '')]?.name || k}+${view.captureIncome[k]}/s`);
+      rows.push({ label: '占领收益', value: income.join(' ') || '无' });
+    } else {
+      rows.push({ label: '首占奖励', value: Object.keys(view.firstReward || {}).length ? formatMissionCostText(view.firstReward) : '无' });
+    }
+    if (!view.unlocked) rows.push({ label: '解锁条件', value: view.lockReason || '—' });
+    const sections = [];
+    if (intel) {
+      sections.push({
+        title: `敌情（${intel.accurate ? '雷达确认' : '侦察估算'} · 兵力 ${intel.totalText}）`,
+        rows: intel.units.map((u) => ({ label: u.threat ? '⚠ 威胁' : '敌军', value: u.label }))
+          .concat([{ label: '地形影响', value: intel.terrainEffects.join(' · ') || '无' }, { label: '伏击风险', value: intel.ambushText }])
+      });
+    }
+    models.push(inspectModel({
+      id: `theater:${view.id}`,
+      name: view.name,
+      image: 'assets/battle/sample-assets/industrial-cover.svg',
+      state: tileState,
+      badges,
+      ariaLabel: `${view.name}，${statusLabel}`,
+      tooltip: { title: view.name, role: '战区', status: `${statusLabel} · ${view.terrainName} · 难度 ${view.difficulty}` },
+      inspector: { title: view.name, eyebrow: '战区', description: view.desc, rows, sections, actions: [{ id: 'select-theater', label: '选为行动目标', payload: { theaterId: view.id, operationId: null } }] }
+    }));
+    if (view.captured) {
+      Object.values(OPERATIONS).filter((operation) => operation.theaterId === view.id).forEach((operation) => {
+        const op = getOperation(state, operation.id);
+        const cooling = safeNumber(op?.cooldownRemaining, 0) > 0;
+        models.push(inspectModel({
+          id: `operation:${operation.id}`,
+          name: operation.name,
+          image: UNIT_IMAGES.scout_car,
+          state: cooling ? 'locked' : 'available',
+          badges: [
+            { label: '任务', tone: 'count' },
+            ...(cooling ? [{ label: '冷却', tone: 'lock' }] : [])
+          ],
+          ariaLabel: `${operation.name} 重复任务`,
+          tooltip: { title: operation.name, role: '重复任务', status: op?.cooldownText || '可执行' },
+          inspector: {
+            title: operation.name,
+            eyebrow: '重复任务',
+            description: operation.desc,
+            rows: [
+              { label: '经验倍率', value: `×${operation.experienceMultiplier}` },
+              { label: '补给系数', value: `×${operation.supplyMultiplier}` },
+              { label: '冷却', value: op?.cooldownText || '—' },
+              { label: '奖励范围', value: Object.keys(operation.rewards || {}).map((key) => `${key} ${operation.rewards[key].min}-${operation.rewards[key].max}`).join(' / ') }
+            ],
+            actions: [{ id: 'select-theater', label: '选为行动任务', payload: { theaterId: view.id, operationId: operation.id }, disabled: cooling }]
+          }
+        }));
+      });
+    }
+  });
+  return models;
+}
+
+export function buildStrategyModels(state, selectedStrategyId) {
+  return listStrategies(state).map((strategy) => ({
+    id: `strategy:${strategy.id}`,
+    name: strategy.name,
+    image: UNIT_IMAGES.at_infantry,
+    imageAlt: '',
+    state: 'available',
+    disabled: false,
+    locked: false,
+    progress: null,
+    badges: [
+      { label: strategy.id === selectedStrategyId ? '已选' : '', tone: 'count' },
+      ...(strategy.cost && Object.keys(strategy.cost).length ? [{ label: formatMissionCostText(strategy.cost), tone: 'progress' }] : [])
+    ].filter((badge) => badge.label),
+    actionId: 'select-strategy',
+    actionPayload: { strategyId: strategy.id },
+    selected: strategy.id === selectedStrategyId,
+    ariaLabel: `策略 ${strategy.name}`,
+    tooltip: { title: strategy.name, role: '作战策略', status: strategy.desc },
+    inspector: {
+      title: strategy.name,
+      eyebrow: '作战策略',
+      description: strategy.desc,
+      rows: [
+        { label: '额外成本', value: strategy.cost && Object.keys(strategy.cost).length ? formatMissionCostText(strategy.cost) : '无' },
+        ...strategy.advantages.map((text) => ({ label: '优势', value: text })),
+        ...strategy.risks.map((text) => ({ label: '风险', value: text }))
+      ]
+    }
+  }));
+}
+
+/* ---------------- Repairs：维修指挥 ---------------- */
+
+export function buildRepairCommandModels(state) {
+  const labels = DAMAGE_LABELS;
+  const active = getActiveRepairs(state).map((job) => inspectModel({
+    id: `repair-active:${job.id}`,
+    name: job.unitName,
+    image: UNIT_IMAGES.infantry,
+    state: 'active',
+    badges: [{ label: labels[job.severity] || job.severity, tone: 'progress' }, { label: '维修中', tone: 'complete' }],
+    progress: Math.round(safeNumber(getRepairProgress(job), 0) * 100),
+    ariaLabel: `${job.unitName} 维修中`,
+    tooltip: { title: job.unitName, role: '维修工位', duration: `剩余 ${formatDuration(getRepairRemaining(job))}`, status: '维修中' },
+    inspector: {
+      title: job.unitName,
+      eyebrow: '维修工位',
+      rows: [
+        { label: '损伤', value: labels[job.severity] || job.severity },
+        { label: '进度', value: `${Math.round(safeNumber(getRepairProgress(job), 0) * 100)}%` },
+        { label: '剩余时间', value: formatDuration(getRepairRemaining(job)) }
+      ],
+      actions: [{ id: 'cancel-repair', label: '取消维修', payload: { jobId: job.id }, danger: true }]
+    }
+  }));
+  const queued = getQueuedRepairs(state).map((job) => inspectModel({
+    id: `repair-queued:${job.id}`,
+    name: job.unitName,
+    image: UNIT_IMAGES.infantry,
+    state: 'queued',
+    badges: [{ label: labels[job.severity] || job.severity, tone: 'progress' }, { label: '队列', tone: 'queued' }],
+    ariaLabel: `${job.unitName} 等待维修`,
+    tooltip: { title: job.unitName, role: '维修队列', duration: `预计 ${formatDuration(job.duration)}`, status: '排队中' },
+    inspector: {
+      title: job.unitName,
+      eyebrow: '维修队列',
+      rows: [
+        { label: '损伤', value: labels[job.severity] || job.severity },
+        { label: '预计时长', value: formatDuration(job.duration) }
+      ],
+      actions: [{ id: 'cancel-repair', label: '取消排队', payload: { jobId: job.id }, danger: true }]
+    }
+  }));
+  const candidates = (state.units || []).filter((unit) => {
+    if (!unit || unit.status === 'repairing' || unit.status === 'deployed') return false;
+    const ds = damageStateOfUnit(unit);
+    return ds === DAMAGE_STATES.LIGHT || ds === DAMAGE_STATES.HEAVY;
+  }).map((unit) => {
+    const def = UNITS[unit.type] || {};
+    const ds = damageStateOfUnit(unit);
+    const check = canQueueRepair(state, unit.id);
+    const cost = getRepairCost(ds);
+    const costText = Object.keys(cost).map((k) => `${RESOURCE_DEFS[k]?.name || k} ${formatInt(cost[k])}`).join(' · ');
+    return inspectModel({
+      id: `repair-candidate:${unit.id}`,
+      name: formatUnitDisplayName(unit),
+      image: UNIT_IMAGES[unit.type] || UNIT_IMAGES.scout_car,
+      state: check.ok ? 'available' : 'insufficient',
+      badges: [{ label: labels[ds] || ds, tone: ds === DAMAGE_STATES.HEAVY ? 'resource' : 'progress' }, ...(check.ok ? [] : [{ label: '!', tone: 'resource' }])],
+      actionId: check.ok ? 'repair-unit' : null,
+      actionPayload: { unitId: unit.id },
+      disabled: !check.ok,
+      ariaLabel: `${formatUnitDisplayName(unit)}，${check.ok ? '点击送去维修' : check.reason}`,
+      tooltip: { title: formatUnitDisplayName(unit), role: def.name, cost: costText, duration: `预计 ${formatDuration(getRepairTime(state, unit.id))}`, status: check.ok ? '可维修' : check.reason },
+      inspector: {
+        title: formatUnitDisplayName(unit),
+        eyebrow: `${def.name || unit.type} · ${labels[ds] || ds}`,
+        rows: [
+          { label: '耐久', value: `${formatInt(safeNumber(unit.hp, 0))} / ${formatInt(safeNumber(unit.maxHp, 0))}` },
+          { label: '维修费用', value: costText || '——' },
+          { label: '预计时长', value: formatDuration(getRepairTime(state, unit.id)) },
+          { label: '当前状态', value: check.ok ? '可排队维修' : check.reason }
+        ],
+        actions: [{ id: 'repair-unit', label: '送去维修', payload: { unitId: unit.id }, disabled: !check.ok }]
+      }
+    });
+  });
+  return { active, queued, candidates };
+}
+
+/* ---------------- Research：科研 ---------------- */
+
+export function buildResearchCommandModels(state) {
+  const built = hasResearchCenter(state);
+  const progress = getResearchProgress(state);
+  const currentModels = progress ? [inspectModel({
+    id: `research-current:${progress.techId || progress.id || 'current'}`,
+    name: progress.name,
+    image: 'assets/command/building-research.svg',
+    state: 'active',
+    badges: [{ label: '研究中', tone: 'complete' }, { label: `${Math.round(progress.percent)}%`, tone: 'progress' }],
+    progress: progress.percent,
+    ariaLabel: `${progress.name} 研究中 ${Math.round(progress.percent)}%`,
+    tooltip: { title: progress.name, role: '当前研究', duration: `剩余 ${formatDuration(Math.ceil(progress.remaining))}`, status: `已用 ${formatDuration(Math.floor(progress.elapsed))}` },
+    inspector: {
+      title: progress.name,
+      eyebrow: '当前研究',
+      rows: [
+        { label: '进度', value: `${Math.round(progress.percent)}%` },
+        { label: '已用时间', value: formatDuration(Math.floor(progress.elapsed)) },
+        { label: '剩余时间', value: formatDuration(Math.ceil(progress.remaining)) }
+      ],
+      actions: [{ id: 'cancel-current-research', label: '取消当前研究', payload: { confirm: true }, danger: true }]
+    }
+  })] : [];
+  const queueModels = ((state.research && state.research.queue) || []).map((task, index) => inspectModel({
+    id: `research-queued:${task.id}`,
+    name: (TECHNOLOGIES[task.techId] || {}).name || task.techId,
+    image: 'assets/command/building-research.svg',
+    state: 'queued',
+    badges: [{ label: `队列 ${index + 2}`, tone: 'queued' }],
+    ariaLabel: `${(TECHNOLOGIES[task.techId] || {}).name || task.techId} 排队中`,
+    tooltip: { title: (TECHNOLOGIES[task.techId] || {}).name || task.techId, role: '科研队列', duration: formatDuration(task.duration), status: `队列第 ${index + 2} 位` },
+    inspector: {
+      title: (TECHNOLOGIES[task.techId] || {}).name || task.techId,
+      eyebrow: `科研队列 · 第 ${index + 2} 位`,
+      rows: [
+        { label: '时长', value: formatDuration(task.duration) },
+        { label: '已支付', value: Object.keys(task.costPaid || {}).map((k) => `${RESOURCE_DEFS[k]?.name || k} ${formatInt(task.costPaid[k])}`).join(' · ') || '免费' }
+      ],
+      actions: [{ id: 'cancel-queued-research', label: '取消排队', payload: { taskId: task.id, confirm: true }, danger: true }]
+    }
+  }));
+  const techModels = Object.values(TECHNOLOGIES).map((tech) => {
+    const view = getTechnologyState(state, tech.id);
+    const checkOk = built && view.status === 'available';
+    const costs = costRows(tech.cost, state);
+    return inspectModel({
+      id: `research:${tech.id}`,
+      name: tech.name,
+      image: 'assets/command/building-research.svg',
+      state: view.status === 'completed' ? 'completed' : view.status === 'researching' || view.status === 'queued' ? 'active' : view.status === 'available' ? (built ? 'available' : 'disabled') : 'locked',
+      badges: [{ label: TECH_STATUS_LABELS[view.status] || view.status, tone: view.status === 'completed' ? 'complete' : view.status === 'available' ? 'count' : 'lock' }],
+      actionId: checkOk ? 'research' : null,
+      actionPayload: { techId: tech.id },
+      disabled: !checkOk,
+      ariaLabel: `${tech.name}，${TECH_STATUS_LABELS[view.status] || view.status}`,
+      tooltip: { title: tech.name, role: `${{ industry: '工业', military: '军备', command: '指挥' }[tech.branch] || tech.branch} · ${tech.tier}级`, cost: costText(costs), duration: formatDuration(tech.researchTime), status: view.status === 'available' ? (built ? '可研究' : '需先建成技术实验室') : (TECH_STATUS_LABELS[view.status] || view.reason || '') },
+      inspector: {
+        title: tech.name,
+        eyebrow: `${{ industry: '工业', military: '军备', command: '指挥' }[tech.branch] || tech.branch} · ${tech.tier}级`,
+        description: tech.desc,
+        rows: [
+          { label: '研究成本', value: costText(costs) },
+          { label: '研究时间', value: formatDuration(tech.researchTime) },
+          { label: '前置科技', value: (tech.requires || []).map((id) => TECHNOLOGIES[id]?.name || id).join('、') || '无' },
+          { label: '当前状态', value: view.status === 'available' ? (built ? '可研究' : '需先建成技术实验室') : (TECH_STATUS_LABELS[view.status] || view.reason || '') }
+        ],
+        actions: [{ id: 'research', label: '开始研究', payload: { techId: tech.id }, disabled: !checkOk }]
+      }
+    });
+  });
+  return { current: currentModels, queue: queueModels, tech: techModels, labBuilt: built };
+}
+
+/* ---------------- Reports：战报 ---------------- */
+
+const RESULT_LABELS_SHORT = { victory: '胜利', pyrrhic: '惨胜', withdraw: '撤军', defeat: '失败', wiped: '全灭' };
+
+export function buildReportModels(state) {
+  return getReports(state).map((report) => {
+    const resultShort = RESULT_LABELS_SHORT[report.result] || report.result;
+    const lostN = ((report.losses && report.losses.friendly) || []).filter((l) => !l.recovered).length;
+    return inspectModel({
+      id: `report:${report.id}`,
+      name: report.missionKind === 'operation' ? `任务 · ${report.theaterName}` : report.theaterName,
+      image: report.missionKind === 'operation' ? UNIT_IMAGES.scout_car : 'assets/battle/sample-assets/industrial-cover.svg',
+      state: ['victory', 'pyrrhic'].includes(report.result) ? 'completed' : 'disabled',
+      badges: [
+        { label: resultShort, tone: ['victory', 'pyrrhic'].includes(report.result) ? 'complete' : 'resource' },
+        { label: `T+${formatInt(safeNumber(report.startedAt, 0))}s`, tone: 'default' },
+        { label: report.formationName, tone: 'count' }
+      ],
+      ariaLabel: `${report.theaterName} 战报，${resultShort}`,
+      tooltip: { title: report.theaterName, role: `${resultShort} · ${report.strategyName}`, status: `${(report.rounds || []).length} 轮 · 损失 ${lostN} · 种子 ${report.seed}` },
+      inspector: {
+        title: report.theaterName,
+        eyebrow: `${resultShort} · ${report.strategyName} · ${report.formationName}`,
+        description: report.summary || '',
+        rows: [
+          { label: '随机种子', value: String(report.seed) },
+          { label: '战斗时长', value: `${formatInt(safeNumber(report.duration, 0))} 秒` },
+          { label: '我方参战 / 敌方兵力', value: `${((report.initial && report.initial.friendly) || []).length} / ${((report.initial && report.initial.enemy) || []).length}` },
+          { label: '我方永久损失', value: ((report.losses && report.losses.friendly) || []).filter((l) => !l.recovered).map((l) => l.name).join('、') || '无' },
+          { label: '战地抢救回收', value: ((report.losses && report.losses.friendly) || []).filter((l) => l.recovered).map((l) => l.name).join('、') || '无' },
+          { label: '敌方损失', value: `${((report.losses && report.losses.enemy) || []).length} 个单位` },
+          { label: '是否占领', value: report.capture ? '是' : '否' },
+          { label: '首占奖励', value: Object.keys(report.rewards || {}).length ? formatMissionCostText(report.rewards) : '无' }
+        ],
+        sections: [
+          ...(report.phases || []).map((phase) => ({
+            title: phase.title,
+            rows: (phase.details && phase.details.length ? phase.details : [phase.summary || '']).map((text) => ({ label: '经过', value: text }))
+          })),
+          {
+            title: '胜负原因',
+            rows: [
+              ...((report.reasons && report.reasons.advantages) || []).map((text) => ({ label: '优势', value: text })),
+              ...((report.reasons && report.reasons.problems) || []).map((text) => ({ label: '问题', value: text }))
+            ]
+          }
+        ],
+        listSections: (report.events || []).length ? [{ title: '事件时间轴', items: (report.events || []).map((ev) => `${safeNumber(ev.t, 0).toFixed(1)}s  ${ev.text || ''}`) }] : []
+      }
+    });
+  });
+}
+
+/* ---------------- Overview：指挥官总览 ---------------- */
+
+export function buildOverviewCommandModels(state) {
+  const models = [];
+  const construction = buildCurrentConstructionModel(state);
+  if (construction) {
+    construction.eyebrow = null;
+    models.push(construction);
+  }
+  const production = getProductionProgress(state);
+  if (production) {
+    models.push(inspectModel({
+      id: 'overview:production',
+      name: production.name,
+      image: UNIT_IMAGES.infantry,
+      state: 'active',
+      badges: [{ label: '生产中', tone: 'complete' }, { label: `${Math.round(production.percent)}%`, tone: 'progress' }],
+      progress: production.percent,
+      ariaLabel: `${production.name} 生产中`,
+      tooltip: { title: production.name, role: '当前生产', duration: `剩余 ${production.remainingText}`, status: '生产中' },
+      inspector: { title: production.name, eyebrow: '当前生产', rows: [{ label: '进度', value: `${Math.round(production.percent)}%` }, { label: '剩余时间', value: production.remainingText }] }
+    }));
+  }
+  const research = getResearchProgress(state);
+  if (research) {
+    models.push(inspectModel({
+      id: 'overview:research',
+      name: research.name,
+      image: 'assets/command/building-research.svg',
+      state: 'active',
+      badges: [{ label: '研究中', tone: 'complete' }, { label: `${Math.round(research.percent)}%`, tone: 'progress' }],
+      progress: research.percent,
+      ariaLabel: `${research.name} 研究中`,
+      tooltip: { title: research.name, role: '当前研究', duration: `剩余 ${formatDuration(Math.ceil(research.remaining))}`, status: '研究中' },
+      inspector: { title: research.name, eyebrow: '当前研究', rows: [{ label: '进度', value: `${Math.round(research.percent)}%` }, { label: '剩余时间', value: formatDuration(Math.ceil(research.remaining)) }] }
+    }));
+  }
+  const repairsActive = getActiveRepairs(state);
+  if (repairsActive.length) {
+    models.push(inspectModel({
+      id: 'overview:repairs',
+      name: `维修 ×${repairsActive.length}`,
+      image: UNIT_IMAGES.repair_vehicle,
+      state: 'active',
+      badges: [{ label: `${Math.round(safeNumber(getRepairProgress(repairsActive[0]), 0) * 100)}%`, tone: 'progress' }],
+      ariaLabel: `${repairsActive.length} 项维修进行中`,
+      tooltip: { title: '维修车间', role: '维修', status: `${repairsActive.length} 项进行中` },
+      inspector: {
+        title: '维修车间',
+        eyebrow: '维修',
+        rows: repairsActive.map((job) => ({ label: job.unitName, value: `${Math.round(safeNumber(getRepairProgress(job), 0) * 100)}% · 剩余 ${formatDuration(getRepairRemaining(job))}` }))
+      }
+    }));
+  }
+  const activeBattle = state.activeBattle;
+  if (activeBattle) {
+    models.push(inspectModel({
+      id: 'overview:battle',
+      name: `${activeBattle.formationName} → ${activeBattle.theaterName}`,
+      image: UNIT_IMAGES.at_infantry,
+      state: 'active',
+      badges: [{ label: activeBattle.settled ? '待返回' : '交战中', tone: 'progress' }],
+      ariaLabel: '当前作战',
+      tooltip: { title: '当前作战', role: '战区', status: `${activeBattle.formationName} → ${activeBattle.theaterName}` },
+      inspector: { title: '当前作战', eyebrow: '战区', rows: [{ label: '编队', value: activeBattle.formationName }, { label: '目标', value: activeBattle.theaterName }, { label: '状态', value: activeBattle.settled ? '已结束，待返回基地' : '交战中' }] }
+    }));
+  }
+  const readyFormations = (state.formations || []).filter((f) => f.status === 'idle' && (f.unitIds || []).length > 0);
+  models.push(inspectModel({
+    id: 'overview:formations',
+    name: `可行动编队 ×${readyFormations.length}`,
+    image: UNIT_IMAGES.mbt,
+    state: readyFormations.length ? 'available' : 'locked',
+    badges: [{ label: `×${readyFormations.length}`, tone: 'count' }],
+    ariaLabel: `${readyFormations.length} 支可行动编队`,
+    tooltip: { title: '可行动编队', role: '指挥', status: readyFormations.length ? `${readyFormations.length} 支待命` : '暂无待命编队' },
+    inspector: {
+      title: '可行动编队',
+      eyebrow: '指挥',
+      rows: readyFormations.length
+        ? readyFormations.map((f) => ({ label: f.name, value: `${(f.unitIds || []).length} 单位 · 待命` }))
+        : [{ label: '状态', value: '暂无待命编队，请先组建编队' }]
+    }
+  }));
+  return models;
+}
+
+function formatMissionCostText(cost = {}) {
+  return Object.keys(cost).map((key) => `${RESOURCE_DEFS[key]?.name || key} ${formatInt(cost[key])}`).join(' / ') || '无';
 }

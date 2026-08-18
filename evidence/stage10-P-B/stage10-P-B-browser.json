@@ -1,0 +1,158 @@
+{
+  "stage": "10-P-B",
+  "passed": true,
+  "frames": [
+    "01-desktop-overview.png",
+    "02-desktop-theater-grid.png",
+    "03-desktop-units-roster.png",
+    "04-desktop-unit-inspector.png",
+    "05-desktop-formations.png",
+    "06-desktop-research.png",
+    "07-mobile-units.png",
+    "08-mobile-inspector.png"
+  ],
+  "assertions": [
+    {
+      "name": "production page booted",
+      "passed": true
+    },
+    {
+      "passed": true
+    },
+    {
+      "name": "overview no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "unique screenshot 01-desktop-overview.png",
+      "passed": true
+    },
+    {
+      "passed": true
+    },
+    {
+      "passed": true
+    },
+    {
+      "name": "theater grid lists theaters",
+      "passed": true
+    },
+    {
+      "name": "theater tile primary does not open inspector",
+      "passed": true
+    },
+    {
+      "name": "dispatch console follows theater tile selection",
+      "passed": true
+    },
+    {
+      "name": "theater no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "unique screenshot 02-desktop-theater-grid.png",
+      "passed": true
+    },
+    {
+      "passed": true
+    },
+    {
+      "name": "units no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "unique screenshot 03-desktop-units-roster.png",
+      "passed": true
+    },
+    {
+      "passed": true
+    },
+    {
+      "name": "unit inspector exposes rename input",
+      "passed": true
+    },
+    {
+      "name": "unit inspector shows formation row",
+      "passed": true
+    },
+    {
+      "name": "unique screenshot 04-desktop-unit-inspector.png",
+      "passed": true
+    },
+    {
+      "passed": true
+    },
+    {
+      "passed": true
+    },
+    {
+      "name": "formation inspector exposes create action",
+      "passed": true
+    },
+    {
+      "name": "create-formation inspector action created a formation tile",
+      "passed": true
+    },
+    {
+      "name": "formations no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "unique screenshot 05-desktop-formations.png",
+      "passed": true
+    },
+    {
+      "passed": true
+    },
+    {
+      "name": "research shows locked tech tiles",
+      "passed": true
+    },
+    {
+      "name": "research no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "unique screenshot 06-desktop-research.png",
+      "passed": true
+    },
+    {
+      "passed": true
+    },
+    {
+      "name": "mobile units no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "unique screenshot 07-mobile-units.png",
+      "passed": true
+    },
+    {
+      "passed": true
+    },
+    {
+      "name": "long press did not trigger a primary action",
+      "passed": true
+    },
+    {
+      "name": "unique screenshot 08-mobile-inspector.png",
+      "passed": true
+    },
+    {
+      "name": "zero page errors",
+      "passed": true
+    },
+    {
+      "name": "zero console errors",
+      "passed": true
+    }
+  ],
+  "pageErrors": [],
+  "consoleErrors": [],
+  "saveVersion": 10,
+  "viewportChecks": [
+    "desktop-1440",
+    "mobile-390"
+  ],
+  "generatedAt": "2026-08-18T05:08:45.556Z"
+}

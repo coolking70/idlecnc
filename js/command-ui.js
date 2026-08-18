@@ -208,21 +208,86 @@ export class CommandInspector {
     this.panel.setAttribute('aria-labelledby', title.id);
     this.panel.appendChild(head);
     if (model.description) this.panel.appendChild(node('p', 'command-inspector-description', model.description));
-    const rows = node('dl', 'command-inspector-rows');
-    (model.rows || []).forEach((row) => {
-      rows.append(node('dt', '', row.label), node('dd', '', row.value));
+    const appendRows = (rows) => {
+      const list = node('dl', 'command-inspector-rows');
+      rows.forEach((row) => {
+        list.append(node('dt', '', row.label), node('dd', '', row.value));
+      });
+      return list;
+    };
+    this.panel.appendChild(appendRows(model.rows || []));
+    (model.sections || []).forEach((section) => {
+      if (!section?.rows?.length) return;
+      const box = node('section', 'command-inspector-section');
+      box.appendChild(node('h4', '', section.title || ''));
+      box.appendChild(appendRows(section.rows));
+      this.panel.appendChild(box);
     });
-    this.panel.appendChild(rows);
-    if (model.actionId) {
-      const action = node('button', `command-inspector-action${model.actionId.startsWith('cancel-') ? ' is-danger' : ''}`, model.actionId.startsWith('cancel-') ? '取消项目' : '执行');
-      action.type = 'button';
-      action.dataset.inspectorAction = model.actionId;
-      action.addEventListener('click', () => {
-        this.actionHandler?.(model.actionId, model.actionPayload || {});
+    (model.listSections || []).forEach((section) => {
+      if (!section?.items?.length) return;
+      const box = node('section', 'command-inspector-section');
+      box.appendChild(node('h4', '', section.title || ''));
+      const ul = node('ul', 'command-inspector-list');
+      section.items.forEach((item) => ul.appendChild(node('li', '', item)));
+      box.appendChild(ul);
+      this.panel.appendChild(box);
+    });
+    const actionsBar = node('div', 'command-inspector-actions');
+    let hasAction = false;
+    (model.inputs || []).forEach((inputModel) => {
+      const wrap = node('label', 'command-inspector-input');
+      wrap.appendChild(node('span', '', inputModel.label || ''));
+      const input = node('input');
+      input.type = 'text';
+      input.maxLength = inputModel.maxLength || 32;
+      input.value = inputModel.value || '';
+      if (inputModel.placeholder) input.placeholder = inputModel.placeholder;
+      const submit = node('button', '', inputModel.submitLabel || '保存');
+      submit.type = 'button';
+      submit.dataset.inspectorAction = inputModel.actionId;
+      submit.addEventListener('click', () => {
+        this.actionHandler?.(inputModel.actionId, { ...(inputModel.payload || {}), value: input.value });
         this.close();
       });
-      this.panel.appendChild(action);
+      input.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+          event.preventDefault();
+          this.actionHandler?.(inputModel.actionId, { ...(inputModel.payload || {}), value: input.value });
+          this.close();
+        }
+      });
+      wrap.append(input, submit);
+      actionsBar.appendChild(wrap);
+      hasAction = true;
+    });
+    const pushAction = (label, actionId, payload = {}, { danger = false, disabled = false } = {}) => {
+      const action = node('button', `command-inspector-action${danger ? ' is-danger' : ''}`, label);
+      action.type = 'button';
+      action.dataset.inspectorAction = actionId;
+      action.disabled = Boolean(disabled);
+      action.addEventListener('click', () => {
+        this.actionHandler?.(actionId, payload);
+        this.close();
+      });
+      actionsBar.appendChild(action);
+      hasAction = true;
+    };
+    (model.actions || []).forEach((action) => {
+      if (!action?.id) return;
+      pushAction(action.label || action.id, action.id, action.payload || {}, {
+        danger: Boolean(action.danger) || /^cancel-|disband/.test(action.id),
+        disabled: Boolean(action.disabled)
+      });
+    });
+    if (model.actionId) {
+      pushAction(
+        /^cancel-/.test(model.actionId) ? '取消项目' : '执行',
+        model.actionId,
+        model.actionPayload || {},
+        { danger: /^cancel-/.test(model.actionId) }
+      );
     }
+    if (hasAction) this.panel.appendChild(actionsBar);
     this.host.hidden = false;
     document.body.classList.add('command-inspector-open');
     document.addEventListener('keydown', this._key);
