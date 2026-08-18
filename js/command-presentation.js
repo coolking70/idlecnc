@@ -9,7 +9,7 @@
 import {
   BASE_LAYOUT, BUILDINGS, BUILDING_STATUS, EQUIPMENT, RESOURCE_DEFS,
   TECHNOLOGIES, UNITS, DAMAGE_STATES, REPAIR, RESEARCH, FORMATION,
-  FORMATION_PRESETS, THEATERS, OPERATIONS, EQUIPMENT_RULES
+  FORMATION_PRESETS, FORMATION_STATUS, FORMATION_STATUS_LABEL, THEATERS, OPERATIONS, EQUIPMENT_RULES
 } from './config.js';
 import { buildableList, canBuild, getConstructionProgress } from './construction.js';
 import { canQueueEquipment, canQueueUnit, getProductionProgress, inventoryCount } from './production.js';
@@ -359,11 +359,24 @@ const DAMAGE_LABELS = {
 
 const UNIT_STATUS_LABELS = { ready: '待命', assigned: '已编队', repairing: '维修中', deployed: '部署中' };
 
-const FORMATION_STATUS_LABELS = { idle: '待命', deployed: '作战中' };
+/* Formation status labels reuse the canonical FORMATION_STATUS_LABEL from
+ * config.js (idle / rallying / marching / fighting / returning / repairing).
+ * The presentation never maintains a reduced copy of that mapping. */
+const formationStatusLabels = FORMATION_STATUS_LABEL;
+
+/* Non-idle canonical formation statuses are busy: the tile must read as
+ * active, never as available. */
+const FORMATION_BUSY_STATUSES = new Set([
+  FORMATION_STATUS.RALLYING,
+  FORMATION_STATUS.MARCHING,
+  FORMATION_STATUS.FIGHTING,
+  FORMATION_STATUS.RETURNING,
+  FORMATION_STATUS.REPAIRING
+]);
 
 const TECH_STATUS_LABELS = { completed: '已完成', researching: '研究中', queued: '队列中', available: '可研究', locked: '未解锁' };
 
-function inspectModel({ id, name, image, state, badges = [], progress = null, ariaLabel, tooltip, inspector, actionId = null, actionPayload = null, disabled = false }) {
+function inspectModel({ id, name, image, state, badges = [], progress = null, ariaLabel, tooltip, inspector, actionId = null, actionPayload = null, disabled = false, inspectOnClick = true }) {
   return {
     id, name,
     image, imageAlt: '',
@@ -374,7 +387,7 @@ function inspectModel({ id, name, image, state, badges = [], progress = null, ar
     badges,
     actionId,
     actionPayload,
-    inspectOnClick: true,
+    inspectOnClick,
     ariaLabel,
     tooltip,
     inspector
@@ -548,24 +561,26 @@ export function buildFormationCommandModels(state) {
       disabled: formation.status !== 'idle',
       danger: true
     });
+    const busy = FORMATION_BUSY_STATUSES.has(formation.status);
+    const formationStatusLabel = formationStatusLabels[formation.status] || formation.status;
     models.push(inspectModel({
       id: `formation:${formation.id}`,
       name: formation.name,
       image: UNIT_IMAGES.mbt,
-      state: formation.status === 'deployed' ? 'active' : stats.count === 0 ? 'locked' : 'available',
+      state: busy ? 'active' : stats.count === 0 ? 'locked' : 'available',
       badges: [
-        { label: FORMATION_STATUS_LABELS[formation.status] || formation.status, tone: formation.status === 'idle' ? 'complete' : 'progress' },
+        { label: formationStatusLabel, tone: formation.status === FORMATION_STATUS.IDLE ? 'complete' : 'progress' },
         { label: `×${stats.count}`, tone: 'count' }
       ],
-      ariaLabel: `${formation.name}，${stats.count} 个单位`,
+      ariaLabel: `${formation.name}，${stats.count} 个单位，${formationStatusLabel}`,
       tooltip: {
         title: formation.name,
         role: '编队',
-        status: `${FORMATION_STATUS_LABELS[formation.status] || formation.status} · ${stats.count} 单位 · 指挥 ${stats.command} · 攻击 ${formatInt(stats.attack)} · 防御 ${formatInt(stats.defense)}`
+        status: `${formationStatusLabel} · ${stats.count} 单位 · 指挥 ${stats.command} · 攻击 ${formatInt(stats.attack)} · 防御 ${formatInt(stats.defense)}`
       },
       inspector: {
         title: formation.name,
-        eyebrow: `编队 · ${FORMATION_STATUS_LABELS[formation.status] || formation.status}`,
+        eyebrow: `编队 · ${formationStatusLabel}`,
         description: comp || '空编队',
         rows: [
           { label: '单位数量', value: String(stats.count) },
@@ -757,6 +772,10 @@ export function buildRepairCommandModels(state) {
       actionId: check.ok ? 'repair-unit' : null,
       actionPayload: { unitId: unit.id },
       disabled: !check.ok,
+      /* Safe primary action: a plain click / tap sends the unit to repair.
+       * Details stay reachable through hover, long press, ⓘ and context menu;
+       * when repair is not allowed the tile only opens details. */
+      inspectOnClick: !check.ok,
       ariaLabel: `${formatUnitDisplayName(unit)}，${check.ok ? '点击送去维修' : check.reason}`,
       tooltip: { title: formatUnitDisplayName(unit), role: def.name, cost: costText, duration: `预计 ${formatDuration(getRepairTime(state, unit.id))}`, status: check.ok ? '可维修' : check.reason },
       inspector: {
@@ -831,6 +850,9 @@ export function buildResearchCommandModels(state) {
       actionId: checkOk ? 'research' : null,
       actionPayload: { techId: tech.id },
       disabled: !checkOk,
+      /* Safe primary action: a plain click / tap starts an available research.
+       * Locked / completed / researching / queued tiles keep details-only. */
+      inspectOnClick: !checkOk,
       ariaLabel: `${tech.name}，${TECH_STATUS_LABELS[view.status] || view.status}`,
       tooltip: { title: tech.name, role: `${{ industry: '工业', military: '军备', command: '指挥' }[tech.branch] || tech.branch} · ${tech.tier}级`, cost: costText(costs), duration: formatDuration(tech.researchTime), status: view.status === 'available' ? (built ? '可研究' : '需先建成技术实验室') : (TECH_STATUS_LABELS[view.status] || view.reason || '') },
       inspector: {

@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { BUILDING_STATUS, DAMAGE_STATES, SAVE_VERSION, TECHNOLOGIES, UNIT_RANKS } from '../js/config.js';
+import { BUILDING_STATUS, DAMAGE_STATES, FORMATION_STATUS, SAVE_VERSION, TECHNOLOGIES, UNIT_RANKS } from '../js/config.js';
 import { createInitialState } from '../js/state.js';
 import { recalcDerived } from '../js/economy.js';
 import {
@@ -123,6 +123,89 @@ check('research tiles map authority states to available/locked/researching/compl
   assert.ok(withLab.current[0].progress > 0);
   assert.ok(withLab.current[0].inspector.actions.some((action) => action.id === 'cancel-current-research'));
   assert.ok(withLab.tech.some((model) => model.state === 'available' && model.actionId === 'research'));
+});
+
+/* ---------------- Stage 10-P-B.1 targeted hotfix cases ---------------- */
+
+check('P-B.1 research builder still returns every technology tile', () => {
+  const models = buildResearchCommandModels(readyState());
+  assert.equal(models.tech.length, Object.keys(TECHNOLOGIES).length);
+  Object.keys(TECHNOLOGIES).forEach((techId) => {
+    assert.ok(models.tech.some((model) => model.id === `research:${techId}`), `missing research:${techId}`);
+  });
+});
+
+check('P-B.1 research branch grouping keeps all tiles per branch grid', () => {
+  const models = buildResearchCommandModels(readyState());
+  const uiSource = fs.readFileSync(path.join(root, 'js/ui.js'), 'utf8');
+  /* The Stage 10-P-B.1 regression: _updateResearch called branchGrid.update once
+   * per TECH with a single model, so CommandGrid.update (full replacement)
+   * dropped every earlier tile of the branch. The fix must update each branch
+   * grid exactly once with the branch's complete tech set. */
+  assert.doesNotMatch(uiSource, /Object\.keys\(TECHNOLOGIES\)\.forEach\(\(techId\) => \{[\s\S]{0,400}?branchGrids\[branch\]\?\.update/, 'ui.js must not update branch grids per tech');
+  const byBranch = { industry: [], military: [], command: [] };
+  models.tech.forEach((model) => {
+    const techId = model.id.slice('research:'.length);
+    const branch = (TECHNOLOGIES[techId] || {}).branch;
+    if (byBranch[branch]) byBranch[branch].push(model.id);
+  });
+  Object.entries(byBranch).forEach(([branch, ids]) => {
+    const expected = Object.values(TECHNOLOGIES).filter((tech) => tech.branch === branch).map((tech) => `research:${tech.id}`);
+    assert.deepEqual(ids.sort(), expected.sort(), `branch ${branch} must receive all of its tiles`);
+  });
+  assert.equal(Object.values(byBranch).reduce((sum, ids) => sum + ids.length, 0), Object.keys(TECHNOLOGIES).length);
+});
+
+check('P-B.1 repair candidate: primary click sends to repair, disabled keeps details', () => {
+  const state = readyState();
+  const { candidates } = buildRepairCommandModels(state);
+  const candidate = candidates.find((model) => model.id === 'repair-candidate:u2');
+  assert.equal(candidate.actionId, 'repair-unit');
+  assert.equal(candidate.inspectOnClick, false);
+  const poor = readyState(); poor.resources = { supply: 0, alloy: 0, intel: 0 };
+  const blocked = buildRepairCommandModels(poor).candidates.find((model) => model.id === 'repair-candidate:u2');
+  assert.equal(blocked.actionId, null);
+  assert.equal(blocked.disabled, true);
+  assert.equal(blocked.inspectOnClick, true);
+  const { active, queued } = buildRepairCommandModels(state);
+  assert.ok(active.every((model) => model.inspectOnClick === true));
+  assert.ok(queued.every((model) => model.inspectOnClick === true));
+});
+
+check('P-B.1 research available: primary click starts research, other states keep details', () => {
+  const withLab = buildResearchCommandModels(readyState());
+  const available = withLab.tech.filter((model) => model.actionId === 'research');
+  assert.ok(available.length >= 1);
+  assert.ok(available.every((model) => model.inspectOnClick === false));
+  const notAvailable = withLab.tech.filter((model) => model.actionId !== 'research');
+  assert.ok(notAvailable.length >= 1);
+  assert.ok(notAvailable.every((model) => model.inspectOnClick === true));
+  assert.ok(withLab.current.every((model) => model.inspectOnClick === true));
+  assert.ok(withLab.queue.every((model) => model.inspectOnClick === true));
+});
+
+check('P-B.1 busy formation statuses never render as available', () => {
+  [FORMATION_STATUS.RALLYING, FORMATION_STATUS.MARCHING, FORMATION_STATUS.FIGHTING,
+    FORMATION_STATUS.RETURNING, FORMATION_STATUS.REPAIRING].forEach((status) => {
+    const state = readyState();
+    state.formations[0].status = status;
+    const models = buildFormationCommandModels(state);
+    const formation = models.find((model) => model.id === 'formation:f1');
+    assert.ok(formation, `missing formation tile for ${status}`);
+    assert.notEqual(formation.state, 'available', `${status} must not render as available`);
+    assert.equal(formation.state, 'active', `${status} should render as active/busy`);
+  });
+  const idle = buildFormationCommandModels(readyState()).find((model) => model.id === 'formation:f1');
+  assert.equal(idle.state, 'available');
+  const statusLabels = new Set();
+  [FORMATION_STATUS.IDLE, FORMATION_STATUS.RALLYING, FORMATION_STATUS.MARCHING,
+    FORMATION_STATUS.FIGHTING, FORMATION_STATUS.RETURNING, FORMATION_STATUS.REPAIRING].forEach((status) => {
+    const state = readyState();
+    state.formations[0].status = status;
+    const model = buildFormationCommandModels(state).find((row) => row.id === 'formation:f1');
+    statusLabels.add(model.badges[0].label);
+  });
+  assert.equal(statusLabels.size, 6, 'each canonical formation status has its own label');
 });
 
 check('report tiles are compact history records with the full report in the inspector', () => {

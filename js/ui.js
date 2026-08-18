@@ -2722,9 +2722,16 @@ export class UI {
       const currentModels = [...models.current, ...models.queue];
       r.currentGrid.update(currentModels);
       r.currentEmpty.hidden = currentModels.length > 0;
-      Object.keys(TECHNOLOGIES).forEach((techId) => {
-        const branch = TECHNOLOGIES[techId].branch;
-        r.branchGrids[branch]?.update(models.tech.filter((model) => model.id === `research:${techId}`));
+      /* Stage 10-P-B.1: CommandGrid.update(models) replaces the whole grid,
+       * so each branch grid must be updated exactly once with ALL of its
+       * tech tiles. Updating per tech dropped every earlier tile of the
+       * branch and left only the last tech per branch rendered. */
+      const branchTechIds = {};
+      Object.values(TECHNOLOGIES).forEach((tech) => {
+        (branchTechIds[tech.branch] = branchTechIds[tech.branch] || []).push(`research:${tech.id}`);
+      });
+      Object.keys(r.branchGrids).forEach((branch) => {
+        r.branchGrids[branch]?.update(models.tech.filter((model) => (branchTechIds[branch] || []).includes(model.id)));
       });
       return;
     }

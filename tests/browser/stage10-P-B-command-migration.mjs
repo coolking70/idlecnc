@@ -180,8 +180,53 @@ async function main() {
     assert(await waitFor('Boolean(document.querySelector(\'.research-tree-compact [data-command-id^="research:"]\'))', 'research tile'));
     const researchingTile = await cdp.evaluate('Boolean(document.querySelector(\'[data-command-id^="research:"][data-command-state="locked"]\'))');
     assert(researchingTile, 'research shows locked tech tiles');
+    /* Stage 10-P-B.1: every technology must render. The old per-tech
+     * branchGrid.update() dropped all but the last tech of each branch. */
+    const renderedTechTiles = await cdp.evaluate('document.querySelectorAll(\'[data-command-id^="research:"]\').length');
+    assert(renderedTechTiles === 9, 'all 9 research tiles render (no per-branch update drop)', { renderedTechTiles });
+    const branchCounts = await cdp.evaluate(`(() => {
+      const counts = {};
+      document.querySelectorAll('.research-branch').forEach((branch) => {
+        counts[branch.dataset.branch] = branch.querySelectorAll('[data-command-id^="research:"]').length;
+      });
+      return counts;
+    })()`);
+    assert(branchCounts.industry === 3, 'industry branch shows all 3 techs', branchCounts);
+    assert(branchCounts.military === 3, 'military branch shows all 3 techs', branchCounts);
+    assert(branchCounts.command === 3, 'command branch shows all 3 techs', branchCounts);
+    /* Plain click on an available tech starts research instead of opening the inspector. */
+    const researchBefore = await cdp.evaluate('window.__IRON_COMMAND__.getState().research.current');
+    assert(researchBefore === null, 'no research running before click', researchBefore);
+    await mouseClick('[data-command-id="research:logistics_optimization"]');
+    await sleep(300);
+    const researchAfter = await cdp.evaluate('window.__IRON_COMMAND__.getState().research.current');
+    assert(Boolean(researchAfter && researchAfter.techId === 'logistics_optimization'), 'plain click started the research', researchAfter);
+    const researchInspectorHidden = await cdp.evaluate('document.querySelector("#command-inspector-host").hidden');
+    assert(researchInspectorHidden === true, 'research primary click did not open the inspector');
     assert(await noHorizontalOverflow(), 'research no horizontal overflow');
     await capture(frames[5]);
+
+    /* 06b Desktop repair candidate: plain click queues the repair */
+    await openTab('repairs');
+    assert(await waitFor('Boolean(document.querySelector(\'[data-command-scope="repairs"] [data-command-id="repair-candidate:pb-u2"]\'))', 'repair candidate tile'));
+    const repairUnitBefore = await cdp.evaluate(`(() => {
+      const state = window.__IRON_COMMAND__.getState();
+      const unit = state.units.find((u) => u.id === 'pb-u2');
+      return { status: unit.status, jobs: (state.repairs || []).length };
+    })()`);
+    await mouseClick('[data-command-id="repair-candidate:pb-u2"]');
+    await sleep(300);
+    const repairUnitAfter = await cdp.evaluate(`(() => {
+      const state = window.__IRON_COMMAND__.getState();
+      const unit = state.units.find((u) => u.id === 'pb-u2');
+      return { status: unit.status, jobs: (state.repairs || []).length };
+    })()`);
+    assert(repairUnitBefore.status === 'ready', 'damaged unit starts ready');
+    assert(repairUnitBefore.jobs === 0, 'no repair jobs before the click');
+    assert(repairUnitAfter.status === 'repairing', 'plain click sent the unit to repair', repairUnitAfter);
+    assert(repairUnitAfter.jobs === 1, 'plain click created the repair job', repairUnitAfter);
+    const repairInspectorHidden = await cdp.evaluate('document.querySelector("#command-inspector-host").hidden');
+    assert(repairInspectorHidden === true, 'repair primary click did not open the inspector');
 
     /* 07 Mobile roster + compact nav */
     await viewport(390, 844, true);
@@ -190,16 +235,27 @@ async function main() {
     assert(await noHorizontalOverflow(), 'mobile units no horizontal overflow');
     await capture(frames[6]);
 
-    /* 08 Mobile long-press inspector without primary action */
-    const before = await cdp.evaluate('window.__IRON_COMMAND__.getState().units.length');
-    const box = await rect('[data-command-id="unit-instance:pb-u1"]');
+    /* 08 Mobile long-press on a tile WITH a real primary action:
+     * inspector only, canonical research selection untouched. The running
+     * research keeps elapsing during the press, so compare the semantic
+     * selection (current tech/job identity, queue, completed), not the
+     * live progress numbers. */
+    await openTab('research');
+    const pressTarget = await waitFor('Boolean(document.querySelector(\'[data-command-id="research:standardized_training"][data-action="research"]\'))', 'available research tile with primary action');
+    assert(pressTarget, 'long-press target has a real primary action');
+    const researchIdentity = () => cdp.evaluate(`(() => {
+      const r = window.__IRON_COMMAND__.getState().research;
+      return JSON.stringify({ currentId: r.current ? r.current.id : null, currentTech: r.current ? r.current.techId : null, queue: (r.queue || []).map((task) => task.techId), completed: r.completed || [] });
+    })()`);
+    const researchIdentityBefore = await researchIdentity();
+    const box = await rect('[data-command-id="research:standardized_training"]');
     await cdp.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [{ x: box.x, y: box.y, radiusX: 2, radiusY: 2, force: 1, id: 1 }] });
     await sleep(620);
     await cdp.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
     await sleep(200);
     assert(await waitFor('Boolean(document.querySelector(\'#command-inspector-host:not([hidden])\'))', 'mobile long-press opens inspector'));
-    const after = await cdp.evaluate('window.__IRON_COMMAND__.getState().units.length');
-    assert(after === before, 'long press did not trigger a primary action', { before, after });
+    const researchIdentityAfter = await researchIdentity();
+    assert(researchIdentityAfter === researchIdentityBefore, 'long press did not trigger the primary action', { researchIdentityBefore, researchIdentityAfter });
     await capture(frames[7]);
 
     assert(pageErrors.length === 0, 'zero page errors', pageErrors);

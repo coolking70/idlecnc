@@ -109,11 +109,62 @@
       "passed": true
     },
     {
+      "name": "all 9 research tiles render (no per-branch update drop)",
+      "passed": true
+    },
+    {
+      "name": "industry branch shows all 3 techs",
+      "passed": true
+    },
+    {
+      "name": "military branch shows all 3 techs",
+      "passed": true
+    },
+    {
+      "name": "command branch shows all 3 techs",
+      "passed": true
+    },
+    {
+      "name": "no research running before click",
+      "passed": true
+    },
+    {
+      "name": "plain click started the research",
+      "passed": true
+    },
+    {
+      "name": "research primary click did not open the inspector",
+      "passed": true
+    },
+    {
       "name": "research no horizontal overflow",
       "passed": true
     },
     {
       "name": "unique screenshot 06-desktop-research.png",
+      "passed": true
+    },
+    {
+      "passed": true
+    },
+    {
+      "name": "damaged unit starts ready",
+      "passed": true
+    },
+    {
+      "name": "no repair jobs before the click",
+      "passed": true
+    },
+    {
+      "name": "plain click sent the unit to repair",
+      "passed": true
+    },
+    {
+      "name": "plain click created the repair job",
+      "passed": true
+    },
+    {
+      "name": "repair primary click did not open the inspector",
       "passed": true
     },
     {
@@ -128,10 +179,14 @@
       "passed": true
     },
     {
+      "name": "long-press target has a real primary action",
       "passed": true
     },
     {
-      "name": "long press did not trigger a primary action",
+      "passed": true
+    },
+    {
+      "name": "long press did not trigger the primary action",
       "passed": true
     },
     {
@@ -154,5 +209,5 @@
     "desktop-1440",
     "mobile-390"
   ],
-  "generatedAt": "2026-08-18T05:08:45.556Z"
+  "generatedAt": "2026-08-18T06:48:58.347Z"
 }
