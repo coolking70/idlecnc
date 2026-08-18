@@ -1,0 +1,84 @@
+{
+  "stage": "10-A",
+  "passed": true,
+  "frames": [
+    "01-formation-task-menu.png",
+    "02-recon-assigned.png",
+    "03-recon-after-reload.png",
+    "04-recalled-idle.png"
+  ],
+  "assertions": [
+    {
+      "name": "production page booted",
+      "passed": true
+    },
+    {
+      "name": "inspector lists PATROL / RECON / SECURITY",
+      "passed": true
+    },
+    {
+      "name": "unique screenshot 01-formation-task-menu.png",
+      "passed": true
+    },
+    {
+      "name": true,
+      "passed": true
+    },
+    {
+      "name": "RECON task active in canonical state",
+      "passed": true
+    },
+    {
+      "name": "formation tile shows RECON badge",
+      "passed": true
+    },
+    {
+      "name": "unique screenshot 02-recon-assigned.png",
+      "passed": true
+    },
+    {
+      "name": "RECON survives save + reload",
+      "passed": true
+    },
+    {
+      "name": "tile still shows RECON after reload",
+      "passed": true
+    },
+    {
+      "name": "unique screenshot 03-recon-after-reload.png",
+      "passed": true
+    },
+    {
+      "name": "inspector shows OPERATIONAL TASK rows",
+      "passed": true
+    },
+    {
+      "name": "recall clears the task",
+      "passed": true
+    },
+    {
+      "name": "tile returns to idle",
+      "passed": true
+    },
+    {
+      "name": "formation status is idle after recall",
+      "passed": true
+    },
+    {
+      "name": "unique screenshot 04-recalled-idle.png",
+      "passed": true
+    },
+    {
+      "name": "zero page errors",
+      "passed": true
+    },
+    {
+      "name": "zero console errors",
+      "passed": true
+    }
+  ],
+  "pageErrors": [],
+  "consoleErrors": [],
+  "saveVersion": 10,
+  "generatedAt": "2026-08-18T12:07:04.772Z"
+}

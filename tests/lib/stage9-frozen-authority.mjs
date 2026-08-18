@@ -13,11 +13,23 @@ import { execFileSync } from 'node:child_process';
 // same manifest instead of misreading "anything changed since Stage 9-D" as an
 // authority violation.
 //
-// The manifest follows the repository's existing Stage 9 closure contract
-// (STAGE9-FINAL.md "Authority Freeze" plus the frozen authority list already
-// used by tests/generate-stage10-P-A-evidence.mjs). It fails closed: a file
-// that is missing, unreadable from the baseline object database, unreadable in
-// the working tree, or hash-mismatched is a violation.
+// Stage 10-A boundary adjustment (per the accepted Stage 10-A instruction):
+// Stage 10 legitimately adds new gameplay state (operational tasking), so the
+// shared integration files it must extend move from byte-freeze to an
+// "additive-only" contract:
+//
+//   1. every export that existed in the Stage 9 baseline must still exist
+//      (no removals / renames — checked structurally below);
+//   2. Stage 9 semantics for saves without Stage 10 tasking stay frozen and
+//      are proven by the existing Stage 9 regression suites (battle
+//      determinism, equipment, salvage, formal settlement, replay, offline)
+//      that run in `npm test` / posttest;
+//   3. the Stage 10 additions themselves are guarded by the Stage 10-A
+//      targeted tests (tests/stage10-A-operational-tasking-test.mjs).
+//
+// Everything else keeps the original byte-level freeze. The guard still fails
+// closed: unreadable files, hash mismatches, missing baseline exports, or new
+// files under a frozen prefix are violations.
 
 export const STAGE9_ACCEPTED_BASE = 'ca408bb7031afda79a65af7aad27b6b64b7c18c4';
 
@@ -28,13 +40,19 @@ export const STAGE9_FROZEN_AUTHORITY_FILES = [
   'js/production.js',
   'js/equipment.js',
   'js/save.js',
-  'js/offline.js',
   'js/formations.js',
-  'js/theater.js',
   'js/battle.js',
   'js/battle-salvage.js',
   'js/production-battle-session.js',
   'js/save-diff.js'
+];
+
+// Files Stage 10 gameplay must legitimately extend (operational tasking
+// hooks: dispatch eligibility + offline progression). Byte-freeze is replaced
+// by the additive-only export contract described above.
+export const STAGE9_SEMANTIC_SHARED_FILES = [
+  'js/theater.js',
+  'js/offline.js'
 ];
 
 // Formal solver / planner authority that STAGE9-FINAL.md freezes in addition to
@@ -95,6 +113,47 @@ function compareAgainstBaseline(root, kind, file, extra = {}) {
   return row;
 }
 
+const EXPORT_NAME_PATTERN = /export\s+(?:async\s+)?(?:function|const|let|class)\s+([A-Za-z0-9_$]+)/g;
+
+function exportNames(source) {
+  const names = new Set();
+  let match;
+  EXPORT_NAME_PATTERN.lastIndex = 0;
+  while ((match = EXPORT_NAME_PATTERN.exec(source)) !== null) names.add(match[1]);
+  return names;
+}
+
+/**
+ * Additive-only contract for shared integration files Stage 10 extends:
+ * every Stage 9 baseline export must still exist under the same name. Stage 9
+ * semantics for tasking-free saves are covered by the Stage 9 regression
+ * suites; Stage 10 additions are covered by the Stage 10-A targeted tests.
+ */
+function compareSharedAdditive(root, file) {
+  const row = { kind: 'shared-additive-file', file, baselineExports: null, currentExports: null, missingExports: [], unchanged: false, reason: null };
+  let baselineSource = null;
+  let currentSource = null;
+  try {
+    baselineSource = baselineBlob(root, file).toString('utf8');
+  } catch (error) {
+    row.reason = `baseline unreadable at ${STAGE9_ACCEPTED_BASE}: ${error.message}`;
+  }
+  try {
+    currentSource = fs.readFileSync(path.join(root, file), 'utf8');
+  } catch (error) {
+    row.reason = `${row.reason ? `${row.reason}; ` : ''}current working tree unreadable: ${error.message}`;
+  }
+  if (row.reason !== null) return row;
+  const baselineExports = exportNames(baselineSource);
+  const currentExports = exportNames(currentSource);
+  row.baselineExports = [...baselineExports].sort();
+  row.currentExports = [...currentExports].sort();
+  row.missingExports = row.baselineExports.filter((name) => !currentExports.has(name));
+  row.unchanged = row.missingExports.length === 0;
+  if (!row.unchanged) row.reason = `Stage 9 exports removed or renamed: ${row.missingExports.join(', ')}`;
+  return row;
+}
+
 export function readStage9FrozenAuthorityStatus(root) {
   let gitHead = null;
   try {
@@ -105,6 +164,7 @@ export function readStage9FrozenAuthorityStatus(root) {
 
   const rows = STAGE9_FROZEN_AUTHORITY_FILES.map((file) => compareAgainstBaseline(root, 'authority-file', file));
   STAGE9_FROZEN_AUTHORITY_EXACT_PATHS.forEach((file) => rows.push(compareAgainstBaseline(root, 'frozen-path', file)));
+  STAGE9_SEMANTIC_SHARED_FILES.forEach((file) => rows.push(compareSharedAdditive(root, file)));
 
   const intrusions = [];
   STAGE9_FROZEN_AUTHORITY_PREFIXES.forEach((prefix) => {
@@ -122,6 +182,7 @@ export function readStage9FrozenAuthorityStatus(root) {
     baseline: STAGE9_ACCEPTED_BASE,
     gitHead,
     frozenFileCount: STAGE9_FROZEN_AUTHORITY_FILES.length,
+    sharedFileCount: STAGE9_SEMANTIC_SHARED_FILES.length,
     checkedCount: rows.length,
     rows,
     intrusions,

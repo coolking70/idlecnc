@@ -28,6 +28,10 @@ import {
 import {
   listTheaters, listStrategies, getTheaterIntel, hasRadar, getReports, getOperation
 } from './theater.js';
+import {
+  getOperationalTask, describeOperationalTask, canAssignOperationalTask,
+  OPERATIONAL_TASK, OPERATIONAL_TASK_TYPE
+} from './tasking.js';
 import { formatDuration, formatInt, safeNumber } from './utils.js';
 
 const UNIT_IMAGES = {
@@ -532,6 +536,11 @@ export function buildFormationCommandModels(state) {
     const warnings = getFormationWarnings(state, formation);
     const comp = Object.keys(stats.byType).map((t) => `${UNITS[t]?.name || t}×${stats.byType[t]}`).join('、');
     const pool = getAvailableUnits(state);
+    const task = getOperationalTask(state, formation.id);
+    const taskDesc = task ? describeOperationalTask(task) : null;
+    const tasked = Boolean(task);
+    const busy = FORMATION_BUSY_STATUSES.has(formation.status);
+    const formationStatusLabel = formationStatusLabels[formation.status] || formation.status;
     const actions = [];
     formation.unitIds.forEach((unitId) => {
       const unit = (state.units || []).find((u) => u.id === unitId);
@@ -540,7 +549,7 @@ export function buildFormationCommandModels(state) {
         id: 'remove-unit',
         label: `移出 ${formatUnitDisplayName(unit)}`,
         payload: { formationId: formation.id, unitId },
-        disabled: formation.status !== 'idle'
+        disabled: formation.status !== FORMATION_STATUS.IDLE || tasked
       });
     });
     Object.keys(UNITS).forEach((typeId) => {
@@ -551,36 +560,84 @@ export function buildFormationCommandModels(state) {
         id: 'add-unit',
         label: `编入 ${UNITS[typeId].name} ×1`,
         payload: { formationId: formation.id, unitId: group[0].id },
-        disabled: !check.ok || formation.status !== 'idle'
+        disabled: !check.ok || formation.status !== FORMATION_STATUS.IDLE || tasked
       });
     });
+
+    /* Stage 10-A：OPERATIONAL TASK —— 空闲编队可下达，任务编队可召回 */
+    const unlockedTheaters = listTheaters(state).filter((row) => row.unlocked);
+    const taskProbeTheater = unlockedTheaters[0]?.id || null;
+    const taskSections = [];
+    let taskRows = [];
+    if (taskDesc) {
+      taskRows = [
+        { label: '任务类型', value: taskDesc.typeLabel },
+        { label: '目标战区', value: taskDesc.theaterName },
+        { label: '已执行时间', value: taskDesc.elapsedText },
+        { label: '周期消耗', value: `${taskDesc.upkeepPerInterval} / ${OPERATIONAL_TASK.costIntervalSec}s` },
+        { label: '补给不足周期', value: String(taskDesc.missedIntervals) }
+      ];
+      taskRows.push(taskDesc.type === OPERATIONAL_TASK_TYPE.RECON
+        ? { label: '累积侦察点', value: String(taskDesc.reconPoints) }
+        : taskDesc.type === OPERATIONAL_TASK_TYPE.PATROL
+          ? { label: '累积巡逻时长', value: formatDuration(Math.floor(taskDesc.patrolTime)) }
+          : { label: '累积警戒时长', value: formatDuration(Math.floor(taskDesc.securityTime)) });
+      actions.push({ id: 'recall-task', label: '召回作战任务', payload: { formationId: formation.id } });
+    } else if (stats.count > 0 && formation.status === FORMATION_STATUS.IDLE) {
+      const probeCheck = taskProbeTheater
+        ? canAssignOperationalTask(state, formation.id, OPERATIONAL_TASK_TYPE.PATROL, taskProbeTheater)
+        : { ok: false, reason: '暂无已解锁战区' };
+      OPERATIONAL_TASK.types.forEach((taskType) => {
+        actions.push({
+          id: 'choose-task',
+          label: `下达 ${OPERATIONAL_TASK.shortLabels[taskType]}`,
+          payload: { formationId: formation.id, taskType },
+          disabled: !probeCheck.ok
+        });
+      });
+      taskRows = [probeCheck.ok
+        ? { label: '状态', value: '可下达持续性任务：巡逻 / 侦察 / 警戒' }
+        : { label: '状态', value: probeCheck.reason || '当前不可下达任务' }];
+    }
+    if (taskRows.length) taskSections.push({ title: 'OPERATIONAL TASK', rows: taskRows });
+
     actions.push({
       id: 'disband-formation',
       label: '解散编队',
       payload: { formationId: formation.id },
-      disabled: formation.status !== 'idle',
+      disabled: formation.status !== FORMATION_STATUS.IDLE || tasked,
       danger: true
     });
-    const busy = FORMATION_BUSY_STATUSES.has(formation.status);
-    const formationStatusLabel = formationStatusLabels[formation.status] || formation.status;
     models.push(inspectModel({
       id: `formation:${formation.id}`,
       name: formation.name,
       image: UNIT_IMAGES.mbt,
-      state: busy ? 'active' : stats.count === 0 ? 'locked' : 'available',
-      badges: [
-        { label: formationStatusLabel, tone: formation.status === FORMATION_STATUS.IDLE ? 'complete' : 'progress' },
-        { label: `×${stats.count}`, tone: 'count' }
-      ],
-      ariaLabel: `${formation.name}，${stats.count} 个单位，${formationStatusLabel}`,
+      state: tasked || busy ? 'active' : stats.count === 0 ? 'locked' : 'available',
+      badges: tasked
+        ? [
+            { label: OPERATIONAL_TASK.shortLabels[task.type] || task.type, tone: 'progress' },
+            { label: taskDesc.elapsedText, tone: 'count' },
+            { label: `×${stats.count}`, tone: 'count' }
+          ]
+        : [
+            { label: formationStatusLabel, tone: formation.status === FORMATION_STATUS.IDLE ? 'complete' : 'progress' },
+            { label: `×${stats.count}`, tone: 'count' }
+          ],
+      ariaLabel: tasked
+        ? `${formation.name}，正在执行${OPERATIONAL_TASK.shortLabels[task.type]}任务，${taskDesc.elapsedText}`
+        : `${formation.name}，${stats.count} 个单位，${formationStatusLabel}`,
       tooltip: {
         title: formation.name,
         role: '编队',
-        status: `${formationStatusLabel} · ${stats.count} 单位 · 指挥 ${stats.command} · 攻击 ${formatInt(stats.attack)} · 防御 ${formatInt(stats.defense)}`
+        status: tasked
+          ? `${OPERATIONAL_TASK.shortLabels[task.type]} · ${taskDesc.theaterName} · 已执行 ${taskDesc.elapsedText}`
+          : `${formationStatusLabel} · ${stats.count} 单位 · 指挥 ${stats.command} · 攻击 ${formatInt(stats.attack)} · 防御 ${formatInt(stats.defense)}`
       },
       inspector: {
         title: formation.name,
-        eyebrow: `编队 · ${formationStatusLabel}`,
+        eyebrow: tasked
+          ? `编队 · ${OPERATIONAL_TASK.shortLabels[task.type]} 任务执行中`
+          : `编队 · ${formationStatusLabel}`,
         description: comp || '空编队',
         rows: [
           { label: '单位数量', value: String(stats.count) },
@@ -593,7 +650,10 @@ export function buildFormationCommandModels(state) {
           { label: '平均机动', value: String(stats.avgMobility.toFixed(1)) },
           { label: '任务补给消耗', value: `${formatInt(stats.upkeep)}/次` }
         ],
-        sections: [{ title: '编成评估', rows: warnings.map((text) => ({ label: '提示', value: text })) }],
+        sections: [
+          { title: '编成评估', rows: warnings.map((text) => ({ label: '提示', value: text })) },
+          ...taskSections
+        ],
         actions
       }
     }));

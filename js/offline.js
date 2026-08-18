@@ -20,6 +20,7 @@ import { advanceOffline as advanceConstruction } from './construction.js';
 import { advanceOffline as advanceProduction } from './production.js';
 import { tickRepairs, getActiveRepairs, getRepairRemaining } from './repairs.js';
 import { tickResearch, getResearchProgress } from './research.js';
+import { tickOperationalTasks } from './tasking.js'; // Stage 10-A：离线期间按同一时间粒度推进作战任务
 import { logEvent, emit, LOG_LEVEL } from './events.js';
 import { safeNumber, clamp, formatDuration, formatInt } from './utils.js';
 
@@ -213,6 +214,9 @@ export function settleOfflineProgress(state, seconds, options = {}) {
 
       const researchResult = tickResearch(state, step, { ignorePause: true });
       (researchResult.completed || []).forEach((id) => completedResearch.push(TECHNOLOGIES[id] ? TECHNOLOGIES[id].name : id));
+
+      // 5. Stage 10-A：作战任务随离线时长推进（确定性，与其它系统同粒度）
+      tickOperationalTasks(state, step);
 
       // 结构可能已变化，刷新派生数值供下一段使用
       recalcDerived(state);

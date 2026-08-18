@@ -27,6 +27,7 @@ import { safeNumber, clamp, randomSeed, formatInt } from './utils.js';
 import { getDamageState } from './unit-status.js';
 import { getUnitRank, getUnitEffectiveStats, formatUnitDisplayName } from './units.js';
 import { getEquipmentComposition } from './equipment.js';
+import { getOperationalTask } from './tasking.js'; // Stage 10-A：派遣资格互斥（任务编队不可派遣）
 import { compareBattleReports, validateBattleOutcomeConsistency, stableStringify } from './integrity.js';
 import { OPERATION_CODE, getOperationCost, canDispatchOperation, operationCooldown } from './operations.js';
 import {
@@ -50,6 +51,7 @@ export const THEATER_CODE = {
   NO_BATTLE: 'no_battle',
   FORMATION_NOT_FOUND: 'formation_not_found',
   FORMATION_BUSY: 'formation_busy',
+  FORMATION_TASKED: 'formation_tasked', /* Stage 10-A：编队正在执行作战任务 */
   FORMATION_EMPTY: 'formation_empty',
   NO_COMBAT_UNIT: 'no_combat_unit',
   UNIT_UNAVAILABLE: 'unit_unavailable',
@@ -592,6 +594,11 @@ export function canDispatch(state, formationId, theaterId, strategyId) {
 
   if (formation.status !== FORMATION_STATUS.IDLE) {
     return fail(THEATER_CODE.FORMATION_BUSY, '该编队当前不是待命状态');
+  }
+
+  // Stage 10-A：正在执行作战任务的编队必须先召回才能参加正式派遣
+  if (getOperationalTask(state, formationId)) {
+    return fail(THEATER_CODE.FORMATION_TASKED, '该编队正在执行作战任务，请先召回');
   }
 
   const ids = Array.isArray(formation.unitIds) ? formation.unitIds : [];

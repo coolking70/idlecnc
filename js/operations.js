@@ -1,6 +1,7 @@
 /** 阶段8可重复作战任务：配置查询、解锁、成本与冷却。 */
 
 import { OPERATIONS, STRATEGIES, THEATERS, FORMATION_STATUS, UNITS } from './config.js';
+import { getOperationalTask } from './tasking.js'; // Stage 10-A：任务编队不可参加重复任务派遣
 import { missingResources } from './economy.js';
 import { safeNumber, formatDuration } from './utils.js';
 
@@ -79,6 +80,9 @@ export function canDispatchOperation(state, formationId, operationId, strategyId
   const formation = (state.formations || []).find((item) => item && item.id === formationId);
   if (!formation || formation.status !== FORMATION_STATUS.IDLE || !(formation.unitIds || []).length) {
     return { ok: false, code: OPERATION_CODE.FORMATION_INVALID, reason: '编队不存在或当前不可派遣' };
+  }
+  if (getOperationalTask(state, formationId)) {
+    return { ok: false, code: OPERATION_CODE.FORMATION_TASKED, reason: '该编队正在执行作战任务，请先召回' };
   }
   const ids = new Set();
   for (const unitId of formation.unitIds) {

@@ -37,6 +37,11 @@ import {
   resolveFormation
 } from './formations.js';
 import {
+  canAssignOperationalTask, assignOperationalTask, recallOperationalTask,
+  getOperationalTask, listOperationalTasks, tickOperationalTasks,
+  OPERATIONAL_TASK, OPERATIONAL_TASK_TYPE
+} from './tasking.js';
+import {
   listTheaters, listStrategies, getTheaterState, getTheaterIntel, getMissionCost,
   canDispatch, dispatchFormation, tickActiveBattle, tickBattleReturn, settleActiveBattle,
   finishBattleReturn, skipBattleReturn, closeBattleResult, abortInvalidBattle,
@@ -342,6 +347,8 @@ function handleDisbandFormation(formationId, { confirm = true } = {}) {
     if (ui) ui.toast(FORMATION.reasons.notFound, 'warn');
     return { ok: false, code: 'not_found', reason: FORMATION.reasons.notFound, formation: null };
   }
+  const taskedGuard = guardFormationNotTasked(getState(), formationId);
+  if (taskedGuard) return taskedGuard;
   if (confirm && typeof window !== 'undefined' && typeof window.confirm === 'function') {
     const n = (target.unitIds || []).length;
     if (!window.confirm(`确定要解散「${target.name}」吗？${n}个单位将返回库存。`)) {
@@ -351,6 +358,37 @@ function handleDisbandFormation(formationId, { confirm = true } = {}) {
   return runFormationAction(
     (s) => disbandFormation(s, formationId),
     (r) => `编队「${r.formation.name}」已解散`
+  );
+}
+
+/* ------------------------------------------------------------
+ * Stage 10-A：持续性作战任务（Operational Tasking）
+ * ---------------------------------------------------------- */
+
+/** 编队执行任务期间禁止调整成员 / 解散（命令层守卫，权威状态在 tasking.js） */
+function guardFormationNotTasked(state, formationId) {
+  if (!getOperationalTask(state, formationId)) return null;
+  const result = { ok: false, code: 'formation_tasked', reason: '该编队正在执行作战任务，请先召回', formation: null };
+  if (ui) ui.toast(result.reason, 'warn');
+  return result;
+}
+
+/** 下达持续性作战任务（PATROL / RECON / SECURITY） */
+function handleAssignOperationalTask(formationId, taskType, theaterId) {
+  return runFormationAction(
+    (state) => assignOperationalTask(state, formationId, taskType, theaterId),
+    (r, state) => {
+      const formation = (state.formations || []).find((f) => f && f.id === formationId);
+      return `「${formation ? formation.name : '编队'}」已开始执行${OPERATIONAL_TASK.labels[taskType] || taskType}任务`;
+    }
+  );
+}
+
+/** 召回作战任务，编队恢复待命 */
+function handleRecallOperationalTask(formationId) {
+  return runFormationAction(
+    (state) => recallOperationalTask(state, formationId),
+    () => '作战任务已召回，编队恢复待命'
   );
 }
 
@@ -364,6 +402,8 @@ function handleRenameFormation(formationId, name) {
 
 /** 把库存中的单位编入编队 */
 function handleAddUnit(formationId, unitId) {
+  const tasked = guardFormationNotTasked(getState(), formationId);
+  if (tasked) return tasked;
   return runFormationAction(
     (state) => addUnit(state, formationId, unitId),
     (r) => `${r.unitName || '单位'}已加入「${r.formation.name}」`
@@ -372,6 +412,8 @@ function handleAddUnit(formationId, unitId) {
 
 /** 把单位移出编队，返回库存 */
 function handleRemoveUnit(formationId, unitId) {
+  const tasked = guardFormationNotTasked(getState(), formationId);
+  if (tasked) return tasked;
   return runFormationAction(
     (state) => removeUnit(state, formationId, unitId),
     (r) => `${r.unitName || '单位'}已返回库存`
@@ -831,6 +873,7 @@ function stepLogic(state, step) {
   tickActiveBattle(state, step);   // 阶段5：只推进播放进度，胜负在派遣时已定
   tickBattleReturn(state, step);   // 阶段8.1：结算后只推进返航展示
   tickRepairs(state, step);        // 阶段6起有实际内容
+  tickOperationalTasks(state, step); // Stage 10-A：作战任务随游戏时间推进（暂停时 step=0）
   const researchResult = tickResearch(state, step);
   if (researchResult.completed.length) recalcDerived(state);
 
@@ -946,6 +989,8 @@ function boot() {
     onCancelCurrentResearch: (opts) => handleCancelCurrentResearch(opts),
     onCancelQueuedResearch: (taskId, opts) => handleCancelQueuedResearch(taskId, opts),
     onPresentationModeChange: (mode) => battlePresentationRouter?.setPreference(mode)
+    ,onAssignOperationalTask: (formationId, taskType, theaterId) => handleAssignOperationalTask(formationId, taskType, theaterId)
+    ,onRecallOperationalTask: (formationId) => handleRecallOperationalTask(formationId)
     ,onRenameUnit: (unitId, callsign) => handleRenameUnit(unitId, callsign)
     ,onEquipEquipment: (unitId, equipmentInstanceId) => handleEquipEquipment(unitId, equipmentInstanceId)
     ,onUnequipEquipment: (unitId, equipmentInstanceId) => handleUnequipEquipment(unitId, equipmentInstanceId)
@@ -1250,6 +1295,27 @@ function boot() {
       } catch (err) {
         return { ok: false, code: 'error', reason: String(err), formation: null };
       }
+    },
+    /* ---- Stage 10-A：作战任务调试接口 ---- */
+    canAssignTask: (formationId, taskType, theaterId) => {
+      try { return canAssignOperationalTask(getState(), formationId, taskType, theaterId); }
+      catch (err) { return { ok: false, code: 'error', reason: String(err), task: null }; }
+    },
+    assignTask: (formationId, taskType, theaterId) => {
+      try { return handleAssignOperationalTask(formationId, taskType, theaterId); }
+      catch (err) { return { ok: false, code: 'error', reason: String(err), task: null }; }
+    },
+    recallTask: (formationId) => {
+      try { return handleRecallOperationalTask(formationId); }
+      catch (err) { return { ok: false, code: 'error', reason: String(err), task: null }; }
+    },
+    getTask: (formationId) => {
+      try { return getOperationalTask(getState(), formationId); }
+      catch (err) { return null; }
+    },
+    listTasks: () => {
+      try { return listOperationalTasks(getState()); }
+      catch (err) { return []; }
     },
     /** 查询单位能否加入编队 */
     canAddUnit: (formationId, unitId) => {

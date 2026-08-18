@@ -51,6 +51,9 @@ import {
 } from './utils.js';
 import { CategoryBar, CommandSurface } from './command-ui.js';
 import {
+  canAssignOperationalTask, OPERATIONAL_TASK
+} from './tasking.js';
+import {
   buildConstructionTileModels, buildCurrentConstructionModel,
   buildUnitProductionTileModels, buildEquipmentProductionTileModels,
   buildProductionQueueModels,
@@ -290,6 +293,38 @@ export class UI {
     else if (actionId === 'claim-battle-salvage') this._onTheaterAction('onClaimBattleSalvage', payload.battleSessionId);
     else if (actionId === 'select-theater') this._selectTheaterTarget(payload.theaterId, payload.operationId);
     else if (actionId === 'select-strategy') this._selectStrategy(payload.strategyId);
+    /* Stage 10-A：作战任务（选择任务 → 选择战区 → 下达 / 召回） */
+    else if (actionId === 'choose-task') this._chooseOperationalTaskTheater(payload);
+    else if (actionId === 'assign-task') this._onFormationAction('onAssignOperationalTask', payload.formationId, payload.taskType, payload.theaterId);
+    else if (actionId === 'recall-task') this._onFormationAction('onRecallOperationalTask', payload.formationId);
+  }
+
+  /** Stage 10-A：任务类型选定后，Inspector 内选择目标战区再下达（纯 UI 选择态） */
+  _chooseOperationalTaskTheater(payload = {}) {
+    const state = this._lastState;
+    if (!state || !payload.formationId || !payload.taskType) return;
+    const formation = (state.formations || []).find((f) => f && f.id === payload.formationId);
+    if (!formation) return;
+    const theaters = listTheaters(state).filter((row) => row.unlocked);
+    this.commandSurface.inspector.open({
+      title: `${OPERATIONAL_TASK.labels[payload.taskType] || payload.taskType}`,
+      eyebrow: 'OPERATIONAL TASK · 选择目标战区',
+      description: OPERATIONAL_TASK.descs[payload.taskType] || '',
+      rows: [
+        { label: '出击编队', value: formation.name },
+        { label: '周期消耗', value: `${Object.entries(OPERATIONAL_TASK.upkeepPerInterval[payload.taskType] || {}).map(([k, v]) => `${k} ${v}`).join(' / ') || '无'} / ${OPERATIONAL_TASK.costIntervalSec}s` },
+        { label: '说明', value: '任务是持续性派遣：随游戏时间推进，暂停时不推进；召回后编队恢复待命。' }
+      ],
+      actions: theaters.map((row) => {
+        const check = canAssignOperationalTask(state, payload.formationId, payload.taskType, row.id);
+        return {
+          id: 'assign-task',
+          label: `前往 ${row.name}`,
+          payload: { formationId: payload.formationId, taskType: payload.taskType, theaterId: row.id },
+          disabled: !check.ok
+        };
+      })
+    });
   }
 
   _onCommandPrimary(model) {
