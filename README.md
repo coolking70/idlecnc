@@ -582,7 +582,7 @@ __IRON_COMMAND__.validateActiveBattleDeterministically()
 - campaign-victory 使用 `infantry + at_infantry + scout_car + mbt + mbt + repair_vehicle` 严格支持阵容；四份 Fixture 均由正式求解器确定性生成。
 - Manifest 增加 `validation`、`supported`、`missingRequirements`；新增交付包自检器和 20 项 A.2 正式测试。
 - `npm test`：608 passed / 0 failed；adapter 76 / 76；integrity 85 / 85；五组旧沙盒测试全部通过。
-- 完成 `STAGE8-2D-A-2-DELIVERY.md` 与 `iron-command-stage8-2D-A-2-outcome-fixture-hotfix.zip`；8.2D-B 未启动。
+- 该阶段的详细交付记录与代码封包已归档在 Git 历史中；8.2D-B 未启动。
 
 ## Stage 8.2D-A.3
 
@@ -590,7 +590,7 @@ __IRON_COMMAND__.validateActiveBattleDeterministically()
 - 原生、插入、归并排序在 1000 组候选数据和正式 Fixture seed 1..200 下生成完全一致战报；8 个独立 Node 进程 Fixture 哈希一致。
 - Manifest 正式边界补入 `js/battle-targeting.js` 与 `js/utils.js`，四张截图增加 `viewerScreenshot` SHA 和 Fixture report hash 绑定。
 - `verify-delivery-package.mjs` 和 `build-delivery-package.mjs` 均自启临时 HTTP 服务器，不依赖预先运行的 8000 端口。
-- package version 更新为 `0.8.1-hotfix.3`；`npm test` 为 627 passed / 0 failed；完成 `STAGE8-2D-A-3-DELIVERY.md` 与 A.3 交付 ZIP。
+- package version 更新为 `0.8.1-hotfix.3`；`npm test` 为 627 passed / 0 failed；A.3 历史交付材料已归档在 Git 历史中。
 - 8.2D-B 未启动。
 
 ## Stage 8.2E-A
@@ -598,7 +598,7 @@ __IRON_COMMAND__.validateActiveBattleDeterministically()
 - 正式战斗页面已接入 `js/battle-presentation/` 参数化公路胜利演出侧车，默认自动准入正式 `activeBattle.report`，不读取 `experiments/`。
 - 支持 session-only 的 `auto / legacy / contract` 偏好；实际模式为 `contract_road_victory` 或 `legacy`，任何不支持报告或渲染异常都会安全回退旧 BattleRenderer。
 - 演出时间由正式战斗 elapsed 驱动，计划按 battle/report/seed/result 缓存；结算、返航、跳过返航、读档与回基地均保持原业务语义。
-- 交付说明见 `STAGE8-2E-A-DELIVERY.md`，浏览器取帧见 `screenshots/stage8-2E-A-screenshot-manifest.json`，自包含封包验证由 `tests/build-stage8-2E-A-delivery-package.mjs` / `tests/verify-stage8-2E-A-delivery-package.mjs` 完成。
+- 浏览器取帧见 `screenshots/stage8-2E-A-screenshot-manifest.json`；历史交付说明已归档在 Git 历史中，自包含封包仍可由 `tests/build-stage8-2E-A-delivery-package.mjs` / `tests/verify-stage8-2E-A-delivery-package.mjs` 重新生成与验证。
 # 阶段 8.2E-A.2.2 验证器收口
 
 最终交付验证命令：
@@ -608,4 +608,4 @@ npm run verify:stage8-2E-A-2-2
 npm run build:stage8-2E-A-2-2
 ```
 
-验证器采用显式测试清单、按需静态服务器、进程组终止和可配置全局超时；统计从实际测试输出生成。详见 `STAGE8-2E-A-2-2-DELIVERY.md`。
+验证器采用显式测试清单、按需静态服务器、进程组终止和可配置全局超时；统计从实际测试输出生成。详细历史说明保留在 Git 历史中。
