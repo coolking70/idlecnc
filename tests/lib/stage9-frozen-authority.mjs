@@ -22,10 +22,15 @@ import { execFileSync } from 'node:child_process';
 //      (no removals / renames — checked structurally below);
 //   2. Stage 9 semantics for saves without Stage 10 tasking stay frozen and
 //      are proven by the existing Stage 9 regression suites (battle
-//      determinism, equipment, salvage, formal settlement, replay, offline)
-//      that run in `npm test` / posttest;
+//      determinism, equipment, salvage, formal settlement, replay, offline,
+//      formation lifecycle) that run in `npm test` / posttest;
 //   3. the Stage 10 additions themselves are guarded by the Stage 10-A
 //      targeted tests (tests/stage10-A-operational-tasking-test.mjs).
+//
+// Stage 10-A.1: js/formations.js joins theater.js / offline.js under this
+// contract because tasking-aware member-management guards are genuine
+// authority-layer invariants (tasked formations keep the Stage 9 idle
+// lifecycle, so the idle-only edit checks cannot see the conflict).
 //
 // Everything else keeps the original byte-level freeze. The guard still fails
 // closed: unreadable files, hash mismatches, missing baseline exports, or new
@@ -40,7 +45,6 @@ export const STAGE9_FROZEN_AUTHORITY_FILES = [
   'js/production.js',
   'js/equipment.js',
   'js/save.js',
-  'js/formations.js',
   'js/battle.js',
   'js/battle-salvage.js',
   'js/production-battle-session.js',
@@ -48,11 +52,15 @@ export const STAGE9_FROZEN_AUTHORITY_FILES = [
 ];
 
 // Files Stage 10 gameplay must legitimately extend (operational tasking
-// hooks: dispatch eligibility + offline progression). Byte-freeze is replaced
-// by the additive-only export contract described above.
+// hooks: dispatch eligibility, offline progression, and the Stage 10-A.1
+// tasking-aware member-management guards in the formation authority).
+// Byte-freeze is replaced by the additive-only export contract described
+// above; Stage 9 formation semantics remain guarded by the Stage 9
+// regression suites, the additive behavior by the Stage 10-A tests.
 export const STAGE9_SEMANTIC_SHARED_FILES = [
   'js/theater.js',
-  'js/offline.js'
+  'js/offline.js',
+  'js/formations.js'
 ];
 
 // Formal solver / planner authority that STAGE9-FINAL.md freezes in addition to

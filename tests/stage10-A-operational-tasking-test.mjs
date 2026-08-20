@@ -8,9 +8,9 @@ import assert from 'node:assert/strict';
  * 本文件不重复 Stage9 语义回归（由既有 stage9 套件覆盖）。
  */
 
-import { BUILDING_STATUS, FORMATION_STATUS, SAVE_VERSION } from '../js/config.js';
+import { BUILDING_STATUS, FORMATION_STATUS, SAVE_VERSION, OPERATIONS } from '../js/config.js';
 import { createInitialState } from '../js/state.js';
-import { recalcDerived } from '../js/economy.js';
+import { recalcDerived, tickEconomy } from '../js/economy.js';
 import { saveGame, loadGame, SAVE_KEY } from '../js/save.js';
 import { dispatchFormation } from '../js/theater.js';
 import { settleOfflineProgress } from '../js/offline.js';
@@ -18,8 +18,14 @@ import {
   OPERATIONAL_TASK, OPERATIONAL_TASK_TYPE,
   canAssignOperationalTask, assignOperationalTask, recallOperationalTask,
   getOperationalTask, listOperationalTasks, describeOperationalTask,
-  tickOperationalTasks
+  tickOperationalTasks, operationalTaskBoundaryRemaining
 } from '../js/tasking.js';
+import { canQueueRepair, queueRepair, REPAIR_CODE } from '../js/repairs.js';
+import {
+  canAddUnit, addUnit, removeUnit, disbandFormation, renameFormation,
+  FORMATION_CODE
+} from '../js/formations.js';
+import { canDispatchOperation, OPERATION_CODE } from '../js/operations.js';
 import { buildFormationCommandModels } from '../js/command-presentation.js';
 
 const clone = (value) => JSON.parse(JSON.stringify(value));
@@ -280,6 +286,179 @@ check('formation command UI exposes task badges, inspector and recall action', (
   assert.ok(section.rows.some((r) => r.label === '累积侦察点'));
   assert.ok(tasked.inspector.actions.some((a) => a.id === 'recall-task'));
   assert.equal(tasked.inspector.actions.find((a) => a.id === 'disband-formation').disabled, true);
+});
+
+console.log('\n── Stage 10-A.1 tasking consistency hotfix ──');
+
+/* Stage 10-A.1 targeted hotfix cases: tasking ↔ repair 互斥、编队权威守卫、
+ * 派遣结果码、offline 周期边界与 online/offline 等价。 */
+
+function taskedDamagedState({ taskType = OPERATIONAL_TASK_TYPE.RECON } = {}) {
+  const state = readyState({ units: 2 });
+  state.units[0].hp = 40; state.units[0].damage = 'heavy'; // 受损可送修成员
+  recalcDerived(state);
+  const assign = assignOperationalTask(state, 'f1', taskType, THEATER);
+  assert.equal(assign.ok, true);
+  return state;
+}
+
+check('A.1 tasked formation member cannot enter repair (both directions blocked)', () => {
+  const state = taskedDamagedState();
+  const before = clone(state);
+  const check1 = canQueueRepair(state, 'u1');
+  assert.equal(check1.ok, false);
+  assert.equal(check1.code, 'formation_tasked');
+  assert.equal(REPAIR_CODE.FORMATION_TASKED, 'formation_tasked');
+  const queued = queueRepair(state, 'u1');
+  assert.equal(queued.ok, false);
+  assert.equal(queued.code, 'formation_tasked');
+  // 权威层拒绝后 canonical state 完全不变
+  assert.deepEqual(state, before);
+});
+
+check('A.1 recalling the task re-enables repair (no permanent lock)', () => {
+  const state = taskedDamagedState();
+  recallOperationalTask(state, 'f1');
+  const check = canQueueRepair(state, 'u1');
+  assert.equal(check.ok, true);
+  assert.equal(check.code, 'ready');
+  const queued = queueRepair(state, 'u1');
+  assert.equal(queued.ok, true);
+});
+
+check('A.1 tasked formation rejects direct member mutation and disband at authority level', () => {
+  const state = readyState({ units: 2 });
+  state.units.push({ id: 'free1', type: 'infantry', hp: 100, maxHp: 100, damage: 'intact', status: 'ready', formationId: null, experience: 0, battles: 0, callsign: null, createdAt: 9 });
+  recalcDerived(state);
+  assignOperationalTask(state, 'f1', OPERATIONAL_TASK_TYPE.PATROL, THEATER);
+  const before = clone(state);
+
+  assert.equal(removeUnit(state, 'f1', 'u1').code, 'formation_tasked');
+  assert.equal(disbandFormation(state, 'f1').code, 'formation_tasked');
+  const addCheck = canAddUnit(state, 'f1', 'free1');
+  assert.equal(addCheck.ok, false);
+  assert.equal(addCheck.code, 'formation_tasked');
+  assert.equal(addUnit(state, 'f1', 'free1').code, 'formation_tasked');
+  assert.equal(FORMATION_CODE.FORMATION_TASKED, 'formation_tasked');
+
+  // 重命名在任务期间仍然允许（不改变任务 / 成员语义）
+  const rename = renameFormation(state, 'f1', '改名测试');
+  assert.equal(rename.ok, true);
+  assert.equal(state.formations[0].name, '改名测试');
+  // 除名字（与重命名日志）外，canonical gameplay 字段保持不变
+  const gameplay = (s) => JSON.stringify({ units: s.units, command: s.command, formations: s.formations.map((f) => ({ ...f, name: f.id })) });
+  before.formations[0].name = '改名测试';
+  assert.equal(gameplay(state), gameplay(before));
+});
+
+check('A.1 repeated-operation dispatch returns formation_tasked, never undefined', () => {
+  const state = readyState({ units: 2 });
+  assignOperationalTask(state, 'f1', OPERATIONAL_TASK_TYPE.SECURITY, THEATER);
+  const opId = Object.keys(OPERATIONS).find((id) => OPERATIONS[id].theaterId === THEATER);
+  assert.ok(opId, 'fixture theater must host an operation');
+  state.theaters[THEATER].captured = true;
+  const blocked = canDispatchOperation(state, 'f1', opId, 'cautious');
+  assert.equal(blocked.ok, false);
+  assert.equal(blocked.code, 'formation_tasked');
+  assert.equal(OPERATION_CODE.FORMATION_TASKED, 'formation_tasked');
+});
+
+function taskingSummary(state) {
+  return JSON.stringify((state.formations || []).map((f) => {
+    const t = f.tasking;
+    return t ? {
+      id: f.id,
+      type: t.type,
+      stats: { intervalsCharged: t.stats.intervalsCharged, missedIntervals: t.stats.missedIntervals },
+      // timeSec 会有在线细步长累加的浮点尾差（3600.000000004），按整数语义比较
+      results: { ...t.results, patrolTime: Math.floor(t.results.patrolTime || 0), securityTime: Math.floor(t.results.securityTime || 0), reconPoints: t.results.reconPoints || 0 }
+    } : null;
+  }));
+}
+
+function onlineAdvance(state, seconds, stepSec = 0.05) {
+  for (let elapsed = 0; elapsed < seconds; elapsed += stepSec) {
+    tickEconomy(state, stepSec);
+    tickOperationalTasks(state, stepSec);
+  }
+}
+
+check('A.1 offline task upkeep boundaries match online stepping (resource cap scenario)', () => {
+  // 资源充足场景：离线单步会让经济先一次性增长到 cap 再统一扣 120 个周期，
+  // 与在线“边增长边扣”产生偏差（旧 bug 实测偏差可达 1190 补给）。
+  const make = () => {
+    const state = readyState({ units: 2 });
+    assignOperationalTask(state, 'f1', OPERATIONAL_TASK_TYPE.PATROL, THEATER);
+    return state;
+  };
+  const online = make();
+  onlineAdvance(online, 3600);
+  const offline = make();
+  settleOfflineProgress(offline, 3600, { createReport: false });
+
+  assert.equal(Math.floor(getOperationalTask(offline, 'f1').stats.timeSec), 3600);
+  assert.ok(Math.abs(online.resources.supply - offline.resources.supply) < 0.01, `supply mismatch: online=${online.resources.supply} offline=${offline.resources.supply}`);
+  const onTask = getOperationalTask(online, 'f1');
+  const offTask = getOperationalTask(offline, 'f1');
+  assert.equal(offTask.stats.intervalsCharged, onTask.stats.intervalsCharged);
+  assert.equal(offTask.stats.missedIntervals, onTask.stats.missedIntervals);
+  assert.equal(Math.floor(offTask.results.patrolTime), Math.floor(onTask.results.patrolTime));
+  assert.equal(offTask.results.patrolTime >= 3600 - 1, true);
+});
+
+check('A.1 low-resource offline/online equivalence (missed intervals)', () => {
+  // 低补给 + 电力 brownout（发电站移除、雷达站耗电）场景：6 支 PATROL
+  // 每周期共需 60 补给，而 brownout 下补给增速仅 +30/周期，
+  // missed / charged 的结算顺序真实参与结果，offline 必须与 online 一致。
+  const make = () => {
+    const state = createInitialState();
+    state.resources = { supply: 5, alloy: 9000, intel: 900 };
+    state.buildings = state.buildings.filter((b) => b.type !== 'power_plant');
+    state.buildings.push(
+      { id: 'b-radar', type: 'radar_station', status: BUILDING_STATUS.OPERATIONAL, progress: 1 },
+      { id: 'b-barracks', type: 'barracks', status: BUILDING_STATUS.OPERATIONAL, progress: 1 }
+    );
+    for (let i = 0; i < 6; i += 1) {
+      state.units.push({ id: `lu${i + 1}`, type: 'infantry', hp: 100, maxHp: 100, damage: 'intact', status: 'assigned', formationId: `lf${i + 1}`, experience: 0, battles: 0, callsign: null, createdAt: i + 1 });
+      state.formations.push({ id: `lf${i + 1}`, name: `低补给${i + 1}`, unitIds: [`lu${i + 1}`], status: FORMATION_STATUS.IDLE, createdAt: i + 1 });
+    }
+    recalcDerived(state);
+    assert.equal(state.power.used > state.power.produced, true, 'fixture must be in brownout');
+    for (let i = 0; i < 6; i += 1) {
+      assert.equal(assignOperationalTask(state, `lf${i + 1}`, OPERATIONAL_TASK_TYPE.PATROL, THEATER).ok, true);
+    }
+    return state;
+  };
+  const online = make();
+  onlineAdvance(online, 3600);
+  const offline = make();
+  settleOfflineProgress(offline, 3600, { createReport: false });
+
+  assert.ok(Math.abs(online.resources.supply - offline.resources.supply) < 0.01, `low-supply mismatch: online=${online.resources.supply} offline=${offline.resources.supply}`);
+  const onlineSummary = taskingSummary(online);
+  const offlineSummary = taskingSummary(offline);
+  assert.equal(offlineSummary, onlineSummary);
+  const missed = offline.formations.reduce((sum, f) => sum + f.tasking.stats.missedIntervals, 0);
+  const charged = offline.formations.reduce((sum, f) => sum + f.tasking.stats.intervalsCharged, 0);
+  assert.ok(missed > 0, 'fixture must actually produce missed intervals');
+  // intervalsCharged 是 boundary cursor（已处理 interval 总数，含 missed），
+  // 每个 30s 周期恰好处理一次：6 编队 × 120 周期。
+  assert.equal(charged, 6 * 120);
+  assert.ok(missed <= charged, 'missed intervals cannot exceed processed intervals');
+});
+
+check('A.1 operationalTaskBoundaryRemaining is a read-only authority cursor', () => {
+  const state = readyState({ units: 2 });
+  assert.equal(operationalTaskBoundaryRemaining(state), Infinity);
+  assignOperationalTask(state, 'f1', OPERATIONAL_TASK_TYPE.PATROL, THEATER);
+  const before = clone(state);
+  assert.equal(operationalTaskBoundaryRemaining(state), OPERATIONAL_TASK.costIntervalSec);
+  tickOperationalTasks(state, 10);
+  assert.equal(operationalTaskBoundaryRemaining(state), OPERATIONAL_TASK.costIntervalSec - 10);
+  tickOperationalTasks(state, 20);
+  assert.equal(operationalTaskBoundaryRemaining(state), OPERATIONAL_TASK.costIntervalSec);
+  // 只读：不改变 canonical state（timeSec 除外，那是 tick 的合法推进）
+  assert.equal(state.formations[0].tasking.stats.intervalsCharged, before.formations[0].tasking.stats.intervalsCharged + 1);
 });
 
 console.log(`\nStage 10-A operational tasking: ${passed}/${total} passed`);

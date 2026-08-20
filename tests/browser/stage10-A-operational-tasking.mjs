@@ -16,8 +16,10 @@ const sha256 = (data) => crypto.createHash('sha256').update(data).digest('hex');
 const frames = [
   '01-formation-task-menu.png',
   '02-recon-assigned.png',
-  '03-recon-after-reload.png',
-  '04-recalled-idle.png'
+  '03-recon-repair-blocked.png',
+  '04-recon-after-reload.png',
+  '05-recalled-idle.png',
+  '06-recalled-repair-allowed.png'
 ];
 
 async function main() {
@@ -96,11 +98,11 @@ async function main() {
       hashes.add(hash);
     };
 
-    /* seed: 1 idle formation + pause */
+    /* seed: 1 idle formation (damaged member → later a repair candidate) + pause */
     await cdp.evaluate(`(() => {
       const s=window.__IRON_COMMAND__.getState();
       s.resources={ supply:9000, alloy:9000, intel:900 };
-      s.units.push({ id:'a-u1', type:'mbt', hp:100, maxHp:100, damage:'intact', status:'assigned', formationId:'a-f1', experience:0, battles:0, callsign:null, createdAt:1 });
+      s.units.push({ id:'a-u1', type:'mbt', hp:40, maxHp:100, damage:'heavy', status:'assigned', formationId:'a-f1', experience:0, battles:0, callsign:null, createdAt:1 });
       s.formations.push({ id:'a-f1', name:'第一梯队', unitIds:['a-u1'], status:'idle', createdAt:1 });
       s.time.speed=0; s.time.lastSpeed=1;
       return window.advanceTime(0);
@@ -137,7 +139,28 @@ async function main() {
     assert(tileBadge.includes('RECON'), 'formation tile shows RECON badge', { tileBadge });
     await capture(frames[1]);
 
-    /* 3. 保存 / reload 后 RECON 仍存在 */
+    /* 3. Stage 10-A.1: RECON 执行期间，受损成员在维修页被权威层拒绝
+     * （UI 直接消费 canQueueRepair 的 formation_tasked 原因，不自动召回） */
+    await mouseClick('button[data-tab="repairs"]');
+    await waitFor('Boolean(document.querySelector(\'[data-command-scope="repairs"] [data-command-id="repair-candidate:a-u1"]\'))', 'repair candidate tile while RECON active');
+    const candidateBlocked = await cdp.evaluate(`(() => {
+      const tile = document.querySelector('[data-command-id="repair-candidate:a-u1"]');
+      return { action: tile.dataset.action || '', state: tile.dataset.commandState || '', aria: tile.getAttribute('aria-label') || '' };
+    })()`);
+    assert(candidateBlocked.action !== 'repair-unit', 'tasked member tile has no repair primary action', candidateBlocked);
+    assert(candidateBlocked.aria.includes('正在执行作战任务'), 'authority reason surfaces on the tile', candidateBlocked);
+    await mouseClick('[data-command-id="repair-candidate:a-u1"]');
+    await waitFor('Boolean(document.querySelector(\'#command-inspector-host:not([hidden])\'))', 'blocked candidate opens details');
+    const blockedInspector = await inspectorText();
+    assert(blockedInspector.includes('正在执行作战任务'), 'inspector shows the authority rejection reason', { blockedInspector });
+    await cdp.send('Input.dispatchKeyEvent', { type: 'keyDown', key: 'Escape', code: 'Escape', windowsVirtualKeyCode: 27 });
+    await cdp.send('Input.dispatchKeyEvent', { type: 'keyUp', key: 'Escape', code: 'Escape', windowsVirtualKeyCode: 27 });
+    await sleep(200);
+    const repairJobsWhileTasked = await cdp.evaluate('(window.__IRON_COMMAND__.getState().repairs || []).length');
+    assert(repairJobsWhileTasked === 0, 'no repair job created while RECON is active', { repairJobsWhileTasked });
+    await capture(frames[2]);
+
+    /* 4. 保存 / reload 后 RECON 仍存在 */
     await cdp.evaluate('window.__IRON_COMMAND__.save()');
     await sleep(200);
     await cdp.send('Page.reload');
@@ -153,9 +176,9 @@ async function main() {
     await waitFor('Boolean(document.querySelector(\'[data-command-id="formation:a-f1"]\'))', 'formation tile after reload');
     const badgeAfterReload = await cdp.evaluate('document.querySelector(\'[data-command-id="formation:a-f1"] .command-badges\')?.textContent || ""');
     assert(badgeAfterReload.includes('RECON'), 'tile still shows RECON after reload', { badgeAfterReload });
-    await capture(frames[2]);
+    await capture(frames[3]);
 
-    /* 4. Recall 后恢复 idle */
+    /* 5. Recall 后恢复 idle */
     await mouseClick('[data-command-id="formation:a-f1"]');
     await waitFor('Boolean(document.querySelector(\'#command-inspector-host:not([hidden])\'))', 'inspector after reload');
     assert((await inspectorText()).includes('任务类型'), 'inspector shows OPERATIONAL TASK rows');
@@ -173,7 +196,28 @@ async function main() {
       ? await cdp.evaluate('(() => { const s=window.__IRON_COMMAND__.getState(); return s.formations.find((f) => f.id === "a-f1").status; })()')
       : null;
     assert(dispatchReady === 'idle', 'formation status is idle after recall', { dispatchReady });
-    await capture(frames[3]);
+    await capture(frames[4]);
+
+    /* 6. Stage 10-A.1: Recall 之后维修恢复正常（非永久锁死） */
+    await mouseClick('button[data-tab="repairs"]');
+    await waitFor('Boolean(document.querySelector(\'[data-command-scope="repairs"] [data-command-id="repair-candidate:a-u1"]\'))', 'repair candidate tile after recall');
+    const candidateReady = await cdp.evaluate(`(() => {
+      const tile = document.querySelector('[data-command-id="repair-candidate:a-u1"]');
+      return { action: tile.dataset.action || '', state: tile.dataset.commandState || '', aria: tile.getAttribute('aria-label') || '' };
+    })()`);
+    assert(candidateReady.action === 'repair-unit', 'recalled formation member regains the repair primary action', candidateReady);
+    assert(candidateReady.aria.includes('送去维修'), 'tile advertises the repair action again', candidateReady);
+    const repairsBefore = await cdp.evaluate('(window.__IRON_COMMAND__.getState().repairs || []).length');
+    await mouseClick('[data-command-id="repair-candidate:a-u1"]');
+    await sleep(300);
+    const repairsAfter = await cdp.evaluate(`(() => {
+      const state = window.__IRON_COMMAND__.getState();
+      const unit = state.units.find((u) => u.id === 'a-u1');
+      return { jobs: (state.repairs || []).length, unitStatus: unit.status };
+    })()`);
+    assert(repairsAfter.jobs === repairsBefore + 1, 'plain click queues the repair after recall', { repairsBefore, repairsAfter });
+    assert(repairsAfter.unitStatus === 'repairing', 'unit entered repairing after recall', repairsAfter);
+    await capture(frames[5]);
 
     assert(pageErrors.length === 0, 'zero page errors', pageErrors);
     assert(consoleErrors.length === 0, 'zero console errors', consoleErrors);

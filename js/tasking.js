@@ -211,6 +211,31 @@ export function describeOperationalTask(task) {
 }
 
 /**
+ * 距离最近一次任务周期结算边界的时间（只读，供 offline 事件步进使用）。
+ *
+ * 对所有 active task：
+ *   nextBoundary = (intervalsCharged + 1) * costIntervalSec - stats.timeSec
+ * （intervalsCharged 无论 charged 还是 missed 都代表已处理的 interval，
+ * 因此是天然的 boundary cursor），取最小正值。
+ * 没有任何 active task 时返回 Infinity。
+ * 30 秒规则仍由本模块（tasking authority）唯一提供，调用方不得复制数值。
+ */
+export function operationalTaskBoundaryRemaining(state) {
+  if (!isObject(state) || !Array.isArray(state.formations)) return Infinity;
+  let next = Infinity;
+  state.formations.forEach((formation) => {
+    if (!formation) return;
+    const task = getOperationalTask(state, formation.id);
+    if (!task) return;
+    const timeSec = safeNumber(task.stats && task.stats.timeSec, 0);
+    const intervalsCharged = safeNumber(task.stats && task.stats.intervalsCharged, 0);
+    const boundary = (intervalsCharged + 1) * OPERATIONAL_TASK.costIntervalSec - timeSec;
+    if (boundary > 0) next = Math.min(next, boundary);
+  });
+  return next;
+}
+
+/**
  * 任务时间推进（确定性）。调用方负责传入正式 game time 增量：
  *  - 在线：main tick 的 step（暂停时 step=0，天然不推进）；
  *  - 离线：offline 结算循环内逐段 step（与施工 / 维修 / 科研同粒度）。

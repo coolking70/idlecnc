@@ -20,7 +20,7 @@ import { advanceOffline as advanceConstruction } from './construction.js';
 import { advanceOffline as advanceProduction } from './production.js';
 import { tickRepairs, getActiveRepairs, getRepairRemaining } from './repairs.js';
 import { tickResearch, getResearchProgress } from './research.js';
-import { tickOperationalTasks } from './tasking.js'; // Stage 10-A：离线期间按同一时间粒度推进作战任务
+import { tickOperationalTasks, operationalTaskBoundaryRemaining } from './tasking.js'; // Stage 10-A：离线期间按同一时间粒度推进作战任务；A.1：任务周期结算边界参与事件步进
 import { logEvent, emit, LOG_LEVEL } from './events.js';
 import { safeNumber, clamp, formatDuration, formatInt } from './utils.js';
 
@@ -122,6 +122,16 @@ function researchRemaining(state) {
   return progress ? progress.remaining : Infinity;
 }
 
+/**
+ * Stage 10-A.1：最近一次作战任务周期结算边界（无任务返回 Infinity）。
+ * 由 tasking authority 提供（30 秒规则不复制到本模块），使离线步进
+ * 恰好在每次任务 upkeep 结算前切分，与在线「经济与任务连续交替」
+ * 的顺序保持一致（先 tickEconomy 增长到边界，再结算任务消耗）。
+ */
+function operationalTaskBoundary(state) {
+  return operationalTaskBoundaryRemaining(state);
+}
+
 function snapshotResources(state) {
   const out = {};
   Object.keys(RESOURCE_DEFS).forEach((key) => {
@@ -169,12 +179,13 @@ export function settleOfflineProgress(state, seconds, options = {}) {
     while (remaining > 1e-9 && steps < MAX_STEPS) {
       steps += 1;
 
-      // 下一个事件点：施工完成 / 生产完成 / 维修完成 / 离线结束
+      // 下一个事件点：施工完成 / 生产完成 / 维修完成 / 研究完成 / 任务周期结算 / 离线结束
       const nextEvent = Math.min(
         constructionRemaining(state),
         productionRemaining(state),
         repairRemaining(state),
-        researchRemaining(state)
+        researchRemaining(state),
+        operationalTaskBoundary(state)
       );
       const step = Number.isFinite(nextEvent)
         ? Math.min(remaining, Math.max(nextEvent, MIN_STEP))

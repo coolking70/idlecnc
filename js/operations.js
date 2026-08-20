@@ -8,6 +8,7 @@ import { safeNumber, formatDuration } from './utils.js';
 export const OPERATION_CODE = {
   UNKNOWN: 'unknown_operation', THEATER_NOT_CAPTURED: 'theater_not_captured',
   COOLDOWN: 'cooldown', BATTLE_ACTIVE: 'battle_active', FORMATION_INVALID: 'formation_invalid',
+  FORMATION_TASKED: 'formation_tasked', // Stage 10-A.1：任务编队不可参加重复任务派遣（此前返回 undefined）
   RESOURCE: 'resource', READY: 'ready', UNKNOWN_STRATEGY: 'unknown_strategy'
 };
 

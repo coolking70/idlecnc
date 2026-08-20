@@ -4,8 +4,10 @@
   "frames": [
     "01-formation-task-menu.png",
     "02-recon-assigned.png",
-    "03-recon-after-reload.png",
-    "04-recalled-idle.png"
+    "03-recon-repair-blocked.png",
+    "04-recon-after-reload.png",
+    "05-recalled-idle.png",
+    "06-recalled-repair-allowed.png"
   ],
   "assertions": [
     {
@@ -37,6 +39,26 @@
       "passed": true
     },
     {
+      "name": "tasked member tile has no repair primary action",
+      "passed": true
+    },
+    {
+      "name": "authority reason surfaces on the tile",
+      "passed": true
+    },
+    {
+      "name": "inspector shows the authority rejection reason",
+      "passed": true
+    },
+    {
+      "name": "no repair job created while RECON is active",
+      "passed": true
+    },
+    {
+      "name": "unique screenshot 03-recon-repair-blocked.png",
+      "passed": true
+    },
+    {
       "name": "RECON survives save + reload",
       "passed": true
     },
@@ -45,7 +67,7 @@
       "passed": true
     },
     {
-      "name": "unique screenshot 03-recon-after-reload.png",
+      "name": "unique screenshot 04-recon-after-reload.png",
       "passed": true
     },
     {
@@ -65,7 +87,27 @@
       "passed": true
     },
     {
-      "name": "unique screenshot 04-recalled-idle.png",
+      "name": "unique screenshot 05-recalled-idle.png",
+      "passed": true
+    },
+    {
+      "name": "recalled formation member regains the repair primary action",
+      "passed": true
+    },
+    {
+      "name": "tile advertises the repair action again",
+      "passed": true
+    },
+    {
+      "name": "plain click queues the repair after recall",
+      "passed": true
+    },
+    {
+      "name": "unit entered repairing after recall",
+      "passed": true
+    },
+    {
+      "name": "unique screenshot 06-recalled-repair-allowed.png",
       "passed": true
     },
     {
@@ -80,5 +122,5 @@
   "pageErrors": [],
   "consoleErrors": [],
   "saveVersion": 10,
-  "generatedAt": "2026-08-18T12:07:04.772Z"
+  "generatedAt": "2026-08-20T07:55:04.870Z"
 }
