@@ -3,7 +3,7 @@
 Branch: `auto/stage10-b-dynamic-theater-pressure`
 Parent: `auto/stage10-a1a-offline-boundary-final-closure`（起始 HEAD `ce33ca24ee189eceab0fcb2fa7982ea206e18269`）
 Implementation SHA: `fda6c2a`
-Final HEAD: `fda6c2a`（单 commit，含本 handoff 前的实现提交）
+Final HEAD: `cd21d21`（实现 `fda6c2a` + handoff 文档提交）
 
 ## State shape
 ```js
