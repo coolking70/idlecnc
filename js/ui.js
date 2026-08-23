@@ -60,7 +60,7 @@ import {
   buildUnitRosterModels, buildFormationCommandModels,
   buildTheaterCommandModels, buildStrategyModels,
   buildRepairCommandModels, buildResearchCommandModels,
-  buildReportModels, buildOverviewCommandModels
+  buildReportModels, buildOverviewCommandModels, buildDoctrineModels
 } from './command-presentation.js';
 
 /** 战斗结果 → 样式修饰类 */
@@ -293,6 +293,7 @@ export class UI {
     else if (actionId === 'claim-battle-salvage') this._onTheaterAction('onClaimBattleSalvage', payload.battleSessionId);
     else if (actionId === 'select-theater') this._selectTheaterTarget(payload.theaterId, payload.operationId);
     else if (actionId === 'select-strategy') this._selectStrategy(payload.strategyId);
+    else if (actionId === 'set-doctrine') this.handlers.onSetDoctrine?.(payload.doctrineId);
     /* Stage 10-A：作战任务（选择任务 → 选择战区 → 下达 / 召回） */
     else if (actionId === 'choose-task') this._chooseOperationalTaskTheater(payload);
     else if (actionId === 'assign-task') this._onFormationAction('onAssignOperationalTask', payload.formationId, payload.taskType, payload.theaterId);
@@ -337,6 +338,7 @@ export class UI {
     else if (actionId === 'research') this.handlers.onResearch?.(payload.techId);
     else if (actionId === 'select-theater') this._selectTheaterTarget(payload.theaterId, payload.operationId);
     else if (actionId === 'select-strategy') this._selectStrategy(payload.strategyId);
+    else if (actionId === 'set-doctrine') this.handlers.onSetDoctrine?.(payload.doctrineId);
   }
 
   /** 战区目标选择（Stage 10-P-B：Tile 主操作） */
@@ -3480,6 +3482,16 @@ export class UI {
     page.appendChild(r.ovGridRoot);
     r.ovGrid = this.commandSurface.createGrid(r.ovGridRoot, () => {});
 
+    /* Stage 10-C：COMMAND DOCTRINE —— 全局指挥方针（点击立即切换） */
+    const doctrineHead = el('div', 'command-section-head');
+    doctrineHead.appendChild(el('span', '', 'COMMAND DOCTRINE'));
+    doctrineHead.appendChild(el('small', '', '全局战略倾向 · 点击切换，立即生效'));
+    page.appendChild(doctrineHead);
+    r.ovDoctrineGridRoot = el('div', 'command-grid command-doctrine-grid');
+    r.ovDoctrineGridRoot.dataset.commandScope = 'doctrine';
+    page.appendChild(r.ovDoctrineGridRoot);
+    r.ovDoctrineGrid = this.commandSurface.createGrid(r.ovDoctrineGridRoot, (model) => this._onCommandPrimary(model));
+
     r.ovWarnBox = el('div', 'ov-warnings');
     page.appendChild(r.ovWarnBox);
 
@@ -3819,6 +3831,7 @@ export class UI {
       const models = buildOverviewCommandModels(state);
       r.ovGrid.update(models);
       r.ovEmpty.hidden = models.length > 1;
+      if (r.ovDoctrineGrid) r.ovDoctrineGrid.update(buildDoctrineModels(state));
       const warns = [];
       if (used > produced) warns.push('电力超载：部分设施效率下降，请增建发电设施。');
       if (!hasRepairShop(state) && (state.units || []).some((u) => u.status === 'repairing')) warns.push('维修车间未建成，维修队列不会推进。');

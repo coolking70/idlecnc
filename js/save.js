@@ -292,6 +292,11 @@ export function migrate(data, report = {}) {
   if (data.theaterPressure && typeof data.theaterPressure === 'object' && !Array.isArray(data.theaterPressure)) {
     merged.theaterPressure = data.theaterPressure;
   }
+  // Stage 10-C：指挥方针随存档透传（additive；老存档无此字段时保持缺省，
+  // 由 doctrine authority 读取时回落 BALANCED，Stage9 行为不变）。
+  if (typeof data.doctrine === 'string' && data.doctrine) {
+    merged.doctrine = data.doctrine;
+  }
   const theaterFix = sanitizeTheaters(merged);
   if (theaterFix.repaired) {
     report.notes = (report.notes || []).concat(theaterFix.notes);

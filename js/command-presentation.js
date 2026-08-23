@@ -33,6 +33,10 @@ import {
   OPERATIONAL_TASK, OPERATIONAL_TASK_TYPE
 } from './tasking.js';
 import { theaterPressureView, theaterTaskCounts } from './theater-pressure.js';
+import {
+  DOCTRINE, DOCTRINE_TYPE, getActiveDoctrine,
+  getTaskEffectMultiplier, getUpkeepMultiplier
+} from './doctrine.js';
 import { formatDuration, formatInt, safeNumber } from './utils.js';
 
 const UNIT_IMAGES = {
@@ -1093,4 +1097,74 @@ export function buildOverviewCommandModels(state) {
 
 function formatMissionCostText(cost = {}) {
   return Object.keys(cost).map((key) => `${RESOURCE_DEFS[key]?.name || key} ${formatInt(cost[key])}`).join(' / ') || '无';
+}
+
+
+/* ---------------- Doctrine：指挥方针（Stage 10-C） ---------------- */
+
+const DOCTRINE_IMAGES = {
+  [DOCTRINE_TYPE.BALANCED]: 'assets/command/building-radar.svg',
+  [DOCTRINE_TYPE.RECON]: 'assets/command/unit-scout.svg',
+  [DOCTRINE_TYPE.CONTROL]: 'assets/command/unit-at.svg',
+  [DOCTRINE_TYPE.SECURITY]: 'assets/command/unit-repair.svg'
+};
+
+function doctrineEffectRows(doctrineId) {
+  const effects = DOCTRINE.taskEffectMultiplier[doctrineId];
+  const upkeep = DOCTRINE.upkeepMultiplier[doctrineId];
+  const percent = (value) => `${value >= 1 ? '+' : ''}${Math.round((value - 1) * 100)}%`;
+  if (!effects && !upkeep) {
+    return [{ label: '效果修正', value: '无（基础规则）' }, { label: '维护修正', value: '无（基础规则）' }];
+  }
+  const taskNames = { patrol: 'PATROL', recon: 'RECON', security: 'SECURITY' };
+  const metricNames = { control: '控制力增长', recon: '侦察掌握增长', security: '安全度增长', threat: '威胁压制' };
+  const rows = [];
+  Object.keys(effects || {}).forEach((taskType) => {
+    Object.keys(effects[taskType] || {}).forEach((metric) => {
+      rows.push({ label: `${taskNames[taskType]} · ${metricNames[metric]}`, value: percent(effects[taskType][metric]) });
+    });
+  });
+  Object.keys(upkeep || {}).forEach((taskType) => {
+    rows.push({ label: `${taskNames[taskType]} · 周期维护`, value: percent(upkeep[taskType]) });
+  });
+  return rows;
+}
+
+export function buildDoctrineModels(state) {
+  const active = getActiveDoctrine(state);
+  return DOCTRINE.types.map((doctrineId) => {
+    const isActive = doctrineId === active;
+    return {
+      id: `doctrine:${doctrineId}`,
+      name: DOCTRINE.shortLabels[doctrineId],
+      image: DOCTRINE_IMAGES[doctrineId],
+      imageAlt: '',
+      state: isActive ? 'active' : 'available',
+      disabled: false,
+      locked: false,
+      progress: null,
+      badges: isActive ? [{ label: 'ACTIVE', tone: 'complete' }] : [],
+      actionId: 'set-doctrine',
+      actionPayload: { doctrineId },
+      inspectOnClick: false,
+      selected: isActive,
+      ariaLabel: `${DOCTRINE.labels[doctrineId]}${isActive ? '，当前启用' : '，点击切换'}`,
+      tooltip: {
+        title: DOCTRINE.shortLabels[doctrineId],
+        role: '指挥方针',
+        status: isActive ? '当前启用' : DOCTRINE.descs[doctrineId]
+      },
+      inspector: {
+        title: DOCTRINE.labels[doctrineId],
+        eyebrow: isActive ? '指挥方针 · 当前启用' : '指挥方针',
+        description: DOCTRINE.descs[doctrineId],
+        rows: [
+          ...doctrineEffectRows(doctrineId),
+          { label: '当前倍率实测', value: `${getTaskEffectMultiplier(state, 'recon', 'recon')}× recon 效果 / ${getUpkeepMultiplier(state, 'recon')}× recon 维护` },
+          { label: '切换规则', value: '立即生效，只影响之后的推进；无冷却、无切换成本。' }
+        ],
+        actions: [{ id: 'set-doctrine', label: isActive ? '当前启用' : '切换到此方针', payload: { doctrineId }, disabled: isActive }]
+      }
+    };
+  });
 }

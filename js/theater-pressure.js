@@ -30,6 +30,7 @@
 
 import { THEATERS } from './config.js';
 import { getOperationalTask, OPERATIONAL_TASK_TYPE } from './tasking.js';
+import { getTaskEffectMultiplier } from './doctrine.js'; // Stage 10-C：任务效果倍率由 doctrine authority 提供
 import { safeNumber } from './utils.js';
 
 export const PRESSURE_METRICS = ['threat', 'control', 'recon', 'security'];
@@ -138,7 +139,9 @@ export function tickTheaterPressure(state, dt) {
       let rate = 0;
       if (hasTasks) {
         Object.keys(counts).forEach((taskType) => {
-          rate += (counts[taskType] || 0) * ((THEATER_PRESSURE.perTaskPerSecond[taskType] || {})[metric] || 0);
+          // Stage 10-C：任务效果按当前 doctrine 倍率缩放（切换只影响之后的推进）
+          const baseRate = (THEATER_PRESSURE.perTaskPerSecond[taskType] || {})[metric] || 0;
+          rate += (counts[taskType] || 0) * baseRate * getTaskEffectMultiplier(state, taskType, metric);
         });
       } else {
         rate = THEATER_PRESSURE.idlePerSecond[metric] || 0;

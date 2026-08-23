@@ -21,6 +21,7 @@
 
 import { FORMATION_STATUS, RESOURCE_DEFS, THEATERS } from './config.js';
 import { listTheaters } from './theater.js';
+import { getUpkeepMultiplier, scaleCost } from './doctrine.js'; // Stage 10-C：维护倍率由 doctrine authority 提供
 import { safeNumber } from './utils.js';
 
 export const OPERATIONAL_TASK_TYPE = {
@@ -262,7 +263,8 @@ export function tickOperationalTasks(state, dt, options = {}) {
     const intervalsEarned = Math.floor(stats.timeSec / OPERATIONAL_TASK.costIntervalSec);
     while (safeNumber(stats.intervalsCharged, 0) < intervalsEarned) {
       stats.intervalsCharged = safeNumber(stats.intervalsCharged, 0) + 1;
-      const cost = OPERATIONAL_TASK.upkeepPerInterval[task.type] || {};
+      // Stage 10-C：周期维护按当前 doctrine 倍率缩放（切换只影响之后的结算）
+      const cost = scaleCost(OPERATIONAL_TASK.upkeepPerInterval[task.type] || {}, getUpkeepMultiplier(state, task.type));
       const affordable = Object.keys(cost).every((key) => safeNumber(state.resources && state.resources[key], 0) >= safeNumber(cost[key], 0));
       if (affordable) {
         Object.keys(cost).forEach((key) => {

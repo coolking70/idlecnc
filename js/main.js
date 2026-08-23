@@ -45,6 +45,9 @@ import {
   tickTheaterPressure, ensureTheaterPressure, theaterPressureView
 } from './theater-pressure.js';
 import {
+  getActiveDoctrine, setDoctrine, ensureDoctrine, DOCTRINE
+} from './doctrine.js';
+import {
   listTheaters, listStrategies, getTheaterState, getTheaterIntel, getMissionCost,
   canDispatch, dispatchFormation, tickActiveBattle, tickBattleReturn, settleActiveBattle,
   finishBattleReturn, skipBattleReturn, closeBattleResult, abortInvalidBattle,
@@ -387,6 +390,24 @@ function handleAssignOperationalTask(formationId, taskType, theaterId) {
   );
 }
 
+/** Stage 10-C：切换指挥方针（立即生效、立即保存、无确认弹窗） */
+function handleSetDoctrine(doctrineId) {
+  const state = getState();
+  const result = setDoctrine(state, doctrineId);
+  if (!result.ok) {
+    if (ui) ui.toast(result.reason || '未知指挥方针', 'warn');
+    return result;
+  }
+  saveGame(state, { silent: true });
+  if (ui) {
+    ui.toast(`指挥方针已切换：${DOCTRINE.labels[result.doctrine] || result.doctrine}`, 'info');
+    ui.refreshOverview(state);
+    ui.refreshTheater(state);
+    ui.refreshFormations(state);
+  }
+  return result;
+}
+
 /** 召回作战任务，编队恢复待命 */
 function handleRecallOperationalTask(formationId) {
   return runFormationAction(
@@ -721,6 +742,10 @@ function handleLoad() {
     return;
   }
   const state = getState();
+  // P3（Stage 10-B 遗留）：手动读档后立即初始化 canonical 派生结构，
+  // 不依赖下一次 tick（老存档缺 theaterPressure / doctrine 时在此补齐）。
+  ensureTheaterPressure(state);
+  ensureDoctrine(state);
   battlePresentationRouter?.reset();
   logEvent(state, '存档已载入，基地状态恢复。', LOG_LEVEL.GOOD);
   writeLoadNotes(state, res);
@@ -809,6 +834,8 @@ function handleNewGame() {
   newGame();
   battlePresentationRouter?.reset();
   const state = getState();
+  ensureTheaterPressure(state); // 新游戏同样立即具备 canonical pressure 结构
+  ensureDoctrine(state);        // 默认 BALANCED
   writeWelcomeLog(state);
   if (ui) {
     ui.setSpeed(state.time.speed);
@@ -993,6 +1020,7 @@ function boot() {
     onCancelCurrentResearch: (opts) => handleCancelCurrentResearch(opts),
     onCancelQueuedResearch: (taskId, opts) => handleCancelQueuedResearch(taskId, opts),
     onPresentationModeChange: (mode) => battlePresentationRouter?.setPreference(mode)
+    ,onSetDoctrine: (doctrineId) => handleSetDoctrine(doctrineId)
     ,onAssignOperationalTask: (formationId, taskType, theaterId) => handleAssignOperationalTask(formationId, taskType, theaterId)
     ,onRecallOperationalTask: (formationId) => handleRecallOperationalTask(formationId)
     ,onRenameUnit: (unitId, callsign) => handleRenameUnit(unitId, callsign)
@@ -1023,6 +1051,7 @@ function boot() {
   const loaded = hasSave() ? loadGame() : { ok: false };
   const state = getState();
   ensureTheaterPressure(state); // Stage 10-B：老存档自动补齐战区压力默认值
+  ensureDoctrine(state);        // Stage 10-C：老存档自动回落 BALANCED
   if (loaded.ok) {
     logEvent(state, '存档已载入，基地状态恢复。', LOG_LEVEL.GOOD);
     writeLoadNotes(state, loaded);
@@ -1326,6 +1355,15 @@ function boot() {
     theaterPressure: (theaterId) => {
       try { return theaterPressureView(getState(), theaterId); }
       catch (err) { return null; }
+    },
+    /* ---- Stage 10-C：指挥方针调试接口 ---- */
+    doctrine: () => {
+      try { return getActiveDoctrine(getState()); }
+      catch (err) { return 'balanced'; }
+    },
+    setDoctrine: (doctrineId) => {
+      try { return handleSetDoctrine(doctrineId); }
+      catch (err) { return { ok: false, code: 'error', reason: String(err), doctrine: null }; }
     },
     /** 查询单位能否加入编队 */
     canAddUnit: (formationId, unitId) => {

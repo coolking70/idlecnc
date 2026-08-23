@@ -1,0 +1,75 @@
+{
+  "stage": "10-C",
+  "passed": true,
+  "frames": [
+    "01-balanced-initial.png",
+    "02-switched-recon.png",
+    "03-recon-bonus-running.png"
+  ],
+  "assertions": [
+    {
+      "name": "production page booted",
+      "passed": true
+    },
+    {
+      "name": "debug API reports balanced",
+      "passed": true
+    },
+    {
+      "name": "doctrine grid present on overview",
+      "passed": true
+    },
+    {
+      "name": "BALANCED marked ACTIVE",
+      "passed": true
+    },
+    {
+      "name": "four doctrine tiles",
+      "passed": true
+    },
+    {
+      "name": "unique screenshot 01-balanced-initial.png",
+      "passed": true
+    },
+    {
+      "name": "doctrine switched to recon",
+      "passed": true
+    },
+    {
+      "name": "RECON now ACTIVE",
+      "passed": true
+    },
+    {
+      "name": "BALANCED no longer ACTIVE",
+      "passed": true
+    },
+    {
+      "name": "unique screenshot 02-switched-recon.png",
+      "passed": true
+    },
+    {
+      "name": "RECON doctrine boosts recon growth to 60 (1.5x)",
+      "passed": true
+    },
+    {
+      "name": "theater tile reflects running task",
+      "passed": true
+    },
+    {
+      "name": "unique screenshot 03-recon-bonus-running.png",
+      "passed": true
+    },
+    {
+      "name": "zero page errors",
+      "passed": true
+    },
+    {
+      "name": "zero console errors",
+      "passed": true
+    }
+  ],
+  "pageErrors": [],
+  "consoleErrors": [],
+  "saveVersion": 10,
+  "generatedAt": "2026-08-23T15:52:51.477Z"
+}
