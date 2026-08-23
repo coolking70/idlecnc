@@ -20,7 +20,10 @@ import { advanceOffline as advanceConstruction } from './construction.js';
 import { advanceOffline as advanceProduction } from './production.js';
 import { tickRepairs, getActiveRepairs, getRepairRemaining } from './repairs.js';
 import { tickResearch, getResearchProgress } from './research.js';
-import { tickOperationalTasks, operationalTaskBoundaryRemaining } from './tasking.js'; // Stage 10-A：离线期间按同一时间粒度推进作战任务；A.1：任务周期结算边界参与事件步进
+import {
+  tickOperationalTasks, operationalTaskBoundaryRemaining,
+  getOperationalTask, OPERATIONAL_TASK
+} from './tasking.js'; // Stage 10-A：离线期间按同一时间粒度推进作战任务；A.1：任务周期结算边界参与事件步进；A.1a：任务边界 step 预算
 import { logEvent, emit, LOG_LEVEL } from './events.js';
 import { safeNumber, clamp, formatDuration, formatInt } from './utils.js';
 
@@ -132,6 +135,26 @@ function operationalTaskBoundary(state) {
   return operationalTaskBoundaryRemaining(state);
 }
 
+/**
+ * Stage 10-A.1a：离线步进预算。
+ *
+ * 基础预算保持 Stage 9 的 MAX_STEPS（无任务时行为与 Stage 9 完全一致）。
+ * 有作战任务时，任务周期结算边界是合法的事件源：每支执行中编队在
+ * `total` 秒内最多产生 ceil(total / costIntervalSec)+1 个边界，相位彼此
+ * 错开时这些边界互不合并。按该理论上界为任务边界追加专属预算，
+ * 保证合法长离线（如 6 支错相编队 × 8 小时 ≈ 5760 个边界）不会被
+ * 安全阀提前截断；安全阀本身仍然保留（预算推导错误或状态异常时仍可截断）。
+ */
+function offlineStepLimit(state, totalSeconds) {
+  const activeTaskCount = Array.isArray(state && state.formations)
+    ? state.formations.filter((f) => f && getOperationalTask(state, f.id)).length
+    : 0;
+  if (activeTaskCount === 0) return MAX_STEPS;
+  const interval = Math.max(1, safeNumber(OPERATIONAL_TASK.costIntervalSec, 30));
+  const perTaskBoundaries = Math.floor(Math.max(0, totalSeconds) / interval) + 2;
+  return MAX_STEPS + activeTaskCount * perTaskBoundaries;
+}
+
 function snapshotResources(state) {
   const out = {};
   Object.keys(RESOURCE_DEFS).forEach((key) => {
@@ -173,10 +196,11 @@ export function settleOfflineProgress(state, seconds, options = {}) {
 
   let remaining = total;
   let steps = 0;
+  const stepLimit = offlineStepLimit(state, total);
 
   if (total > 0) {
     recalcDerived(state);
-    while (remaining > 1e-9 && steps < MAX_STEPS) {
+    while (remaining > 1e-9 && steps < stepLimit) {
       steps += 1;
 
       // 下一个事件点：施工完成 / 生产完成 / 维修完成 / 研究完成 / 任务周期结算 / 离线结束
@@ -248,7 +272,7 @@ export function settleOfflineProgress(state, seconds, options = {}) {
   const truncated = remaining > 1e-9;
   const report = buildOfflineReport({
     seconds: consumedSeconds, consumedSeconds, consumedPreciseSeconds, requestedSeconds: total,
-    remainingSeconds, truncated, maxSteps: MAX_STEPS, before, after, buildingsCompleted,
+    remainingSeconds, truncated, maxSteps: stepLimit, before, after, buildingsCompleted,
     unitsProduced, equipmentProduced, repairsCompleted, completedResearch, operationsReady, steps,
     battlePaused: Boolean(state.activeBattle)
   });
