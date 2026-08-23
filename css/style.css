@@ -2060,7 +2060,20 @@ button {
 .command-doctrine-grid .command-tile { min-height: 118px; }
 .command-doctrine-grid .command-tile-media { height: 66px; }
 
-/* Stage 10-C：指挥方针 Tile */
-.command-doctrine-grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); }
-.command-doctrine-grid .command-tile { min-height: 118px; }
-.command-doctrine-grid .command-tile-media { height: 66px; }
+/* Stage 10-D：Overview 自动任务调度 */
+.auto-operations-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 12px;
+  padding: 10px 12px;
+  border: 1px solid rgba(93, 181, 255, .22);
+  background: rgba(8, 20, 32, .66);
+}
+.auto-operations-status { color: var(--text); font-size: 12px; letter-spacing: .035em; }
+.auto-operations-metrics { margin-top: 4px; color: var(--dim); font-size: 11px; }
+.auto-operations-toggle.is-enabled { border-color: rgba(74, 224, 154, .52); color: #8ff0bd; }
+@media (max-width: 520px) {
+  .auto-operations-panel { grid-template-columns: 1fr; }
+}

@@ -60,6 +60,9 @@ export function createInitialState() {
     /** 编队（阶段4） */
     formations: [],
 
+    /** Stage 10-D：自动补充 Operational Task；默认由玩家显式开启 */
+    autoOperations: { enabled: false },
+
     /** 维修队列（阶段6） */
     repairs: [],
 

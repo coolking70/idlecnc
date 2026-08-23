@@ -48,6 +48,10 @@ import {
   getActiveDoctrine, setDoctrine, ensureDoctrine, DOCTRINE
 } from './doctrine.js';
 import {
+  ensureAutoOperations, isAutoOperationsEnabled, setAutoOperationsEnabled,
+  releaseAutoTaskHold, runAutoOperationsPlanner, autoOperationsSummary
+} from './auto-operations.js';
+import {
   listTheaters, listStrategies, getTheaterState, getTheaterIntel, getMissionCost,
   canDispatch, dispatchFormation, tickActiveBattle, tickBattleReturn, settleActiveBattle,
   finishBattleReturn, skipBattleReturn, closeBattleResult, abortInvalidBattle,
@@ -408,6 +412,39 @@ function handleSetDoctrine(doctrineId) {
   return result;
 }
 
+/** Stage 10-D：玩家显式开关自动任务调度；开启时立即补一次合法空闲编队。 */
+function handleSetAutoOperations(enabled) {
+  const state = getState();
+  const result = setAutoOperationsEnabled(state, enabled === true);
+  if (!result.ok) return result;
+  if (result.enabled) runAutoOperationsPlanner(state);
+  saveGame(state, { silent: true });
+  if (ui) {
+    ui.toast(`AUTO OPERATIONS ${result.enabled ? 'ENABLED' : 'DISABLED'}`, result.enabled ? 'info' : 'warn');
+    ui.refreshOverview(state);
+    ui.refreshFormations(state);
+  }
+  return result;
+}
+
+/** 清除玩家召回留下的 manual hold；若已开启自动调度则立即重新评估。 */
+function handleReleaseAutoTaskHold(formationId) {
+  const state = getState();
+  const result = releaseAutoTaskHold(state, formationId);
+  if (!result.ok) {
+    if (ui) ui.toast(result.reason || '无法恢复自动调度', 'warn');
+    return result;
+  }
+  runAutoOperationsPlanner(state);
+  saveGame(state, { silent: true });
+  if (ui) {
+    ui.toast('已恢复自动调度', 'info');
+    ui.refreshFormations(state);
+    ui.refreshOverview(state);
+  }
+  return result;
+}
+
 /** 召回作战任务，编队恢复待命 */
 function handleRecallOperationalTask(formationId) {
   return runFormationAction(
@@ -746,6 +783,7 @@ function handleLoad() {
   // 不依赖下一次 tick（老存档缺 theaterPressure / doctrine 时在此补齐）。
   ensureTheaterPressure(state);
   ensureDoctrine(state);
+  ensureAutoOperations(state);
   battlePresentationRouter?.reset();
   logEvent(state, '存档已载入，基地状态恢复。', LOG_LEVEL.GOOD);
   writeLoadNotes(state, res);
@@ -836,6 +874,7 @@ function handleNewGame() {
   const state = getState();
   ensureTheaterPressure(state); // 新游戏同样立即具备 canonical pressure 结构
   ensureDoctrine(state);        // 默认 BALANCED
+  ensureAutoOperations(state);  // 默认 disabled
   writeWelcomeLog(state);
   if (ui) {
     ui.setSpeed(state.time.speed);
@@ -894,6 +933,8 @@ function checkCapWarnings(state) {
  * ---------------------------------------------------------- */
 
 function stepLogic(state, step) {
+  // Stage 10-D：与离线结算一样在时间段起点补任务，使本段 task/pressure 全量生效。
+  runAutoOperationsPlanner(state);
   state.time.game += step;
   state.time.played += step;
 
@@ -907,6 +948,7 @@ function stepLogic(state, step) {
   tickTheaterPressure(state, step);  // Stage 10-B：战区压力随游戏时间推进（与任务同序）
   const researchResult = tickResearch(state, step);
   if (researchResult.completed.length) recalcDerived(state);
+  runAutoOperationsPlanner(state);   // 现有系统在本步释放出的编队于同一边界重新评估
 
   ambientTimer += step;
   if (ambientTimer >= AMBIENT_INTERVAL) {
@@ -1021,6 +1063,8 @@ function boot() {
     onCancelQueuedResearch: (taskId, opts) => handleCancelQueuedResearch(taskId, opts),
     onPresentationModeChange: (mode) => battlePresentationRouter?.setPreference(mode)
     ,onSetDoctrine: (doctrineId) => handleSetDoctrine(doctrineId)
+    ,onSetAutoOperations: (enabled) => handleSetAutoOperations(enabled)
+    ,onReleaseAutoTaskHold: (formationId) => handleReleaseAutoTaskHold(formationId)
     ,onAssignOperationalTask: (formationId, taskType, theaterId) => handleAssignOperationalTask(formationId, taskType, theaterId)
     ,onRecallOperationalTask: (formationId) => handleRecallOperationalTask(formationId)
     ,onRenameUnit: (unitId, callsign) => handleRenameUnit(unitId, callsign)
@@ -1052,6 +1096,7 @@ function boot() {
   const state = getState();
   ensureTheaterPressure(state); // Stage 10-B：老存档自动补齐战区压力默认值
   ensureDoctrine(state);        // Stage 10-C：老存档自动回落 BALANCED
+  ensureAutoOperations(state);  // Stage 10-D：老存档默认 disabled
   if (loaded.ok) {
     logEvent(state, '存档已载入，基地状态恢复。', LOG_LEVEL.GOOD);
     writeLoadNotes(state, loaded);
@@ -1364,6 +1409,23 @@ function boot() {
     setDoctrine: (doctrineId) => {
       try { return handleSetDoctrine(doctrineId); }
       catch (err) { return { ok: false, code: 'error', reason: String(err), doctrine: null }; }
+    },
+    /* ---- Stage 10-D：自动 Operational Task 调度 ---- */
+    autoOperations: () => {
+      try { return autoOperationsSummary(getState()); }
+      catch (err) { return { enabled: false, autoManaged: 0, manualHold: 0 }; }
+    },
+    setAutoOperations: (enabled) => {
+      try { return handleSetAutoOperations(enabled === true); }
+      catch (err) { return { ok: false, code: 'error', reason: String(err) }; }
+    },
+    runAutoOperations: () => {
+      try { return runAutoOperationsPlanner(getState()); }
+      catch (err) { return { enabled: isAutoOperationsEnabled(getState()), assigned: [], skipped: [] }; }
+    },
+    releaseAutoTaskHold: (formationId) => {
+      try { return handleReleaseAutoTaskHold(formationId); }
+      catch (err) { return { ok: false, code: 'error', reason: String(err) }; }
     },
     /** 查询单位能否加入编队 */
     canAddUnit: (formationId, unitId) => {
@@ -1919,6 +1981,13 @@ function boot() {
       gameTime: Math.round(state.time.game),
       speed: state.time.speed,
       resources: { ...state.resources },
+      autoOperations: autoOperationsSummary(state),
+      operationalTasks: listOperationalTasks(state).map((row) => ({
+        formationId: row.formationId,
+        type: row.task.type,
+        theaterId: row.task.theaterId,
+        autoAssigned: row.task.autoAssigned === true
+      })),
       research: {
         current: state.research && state.research.current ? state.research.current.techId : null,
         queue: state.research && Array.isArray(state.research.queue) ? state.research.queue.map((x) => x.techId) : [],

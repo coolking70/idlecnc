@@ -37,6 +37,7 @@ import {
   DOCTRINE, DOCTRINE_TYPE, getActiveDoctrine,
   getTaskEffectMultiplier, getUpkeepMultiplier
 } from './doctrine.js';
+import { isFormationOnAutoHold } from './auto-operations.js';
 import { formatDuration, formatInt, safeNumber } from './utils.js';
 
 const UNIT_IMAGES = {
@@ -542,8 +543,9 @@ export function buildFormationCommandModels(state) {
     const comp = Object.keys(stats.byType).map((t) => `${UNITS[t]?.name || t}×${stats.byType[t]}`).join('、');
     const pool = getAvailableUnits(state);
     const task = getOperationalTask(state, formation.id);
-    const taskDesc = task ? describeOperationalTask(task) : null;
+    const taskDesc = task ? describeOperationalTask(task, state) : null;
     const tasked = Boolean(task);
+    const autoHold = isFormationOnAutoHold(formation);
     const busy = FORMATION_BUSY_STATUSES.has(formation.status);
     const formationStatusLabel = formationStatusLabels[formation.status] || formation.status;
     const actions = [];
@@ -577,6 +579,7 @@ export function buildFormationCommandModels(state) {
     if (taskDesc) {
       taskRows = [
         { label: '任务类型', value: taskDesc.typeLabel },
+        { label: '调度来源', value: task.autoAssigned === true ? 'AUTO OPERATIONS' : '玩家手动下达' },
         { label: '目标战区', value: taskDesc.theaterName },
         { label: '已执行时间', value: taskDesc.elapsedText },
         { label: '周期消耗', value: `${taskDesc.upkeepPerInterval} / ${OPERATIONAL_TASK.costIntervalSec}s` },
@@ -605,6 +608,13 @@ export function buildFormationCommandModels(state) {
         : { label: '状态', value: probeCheck.reason || '当前不可下达任务' }];
     }
     if (taskRows.length) taskSections.push({ title: 'OPERATIONAL TASK', rows: taskRows });
+    if (autoHold) {
+      taskSections.push({
+        title: 'AUTO HOLD',
+        rows: [{ label: '状态', value: '玩家已手动召回；自动系统不会重新分配此编队。' }]
+      });
+      actions.push({ id: 'release-auto-hold', label: '恢复自动调度', payload: { formationId: formation.id } });
+    }
 
     actions.push({
       id: 'disband-formation',
@@ -620,11 +630,13 @@ export function buildFormationCommandModels(state) {
       state: tasked || busy ? 'active' : stats.count === 0 ? 'locked' : 'available',
       badges: tasked
         ? [
+            ...(task.autoAssigned === true ? [{ label: 'AUTO', tone: 'complete' }] : []),
             { label: OPERATIONAL_TASK.shortLabels[task.type] || task.type, tone: 'progress' },
             { label: taskDesc.elapsedText, tone: 'count' },
             { label: `×${stats.count}`, tone: 'count' }
           ]
         : [
+            ...(autoHold ? [{ label: 'AUTO HOLD', tone: 'resource' }] : []),
             { label: formationStatusLabel, tone: formation.status === FORMATION_STATUS.IDLE ? 'complete' : 'progress' },
             { label: `×${stats.count}`, tone: 'count' }
           ],
@@ -641,8 +653,8 @@ export function buildFormationCommandModels(state) {
       inspector: {
         title: formation.name,
         eyebrow: tasked
-          ? `编队 · ${OPERATIONAL_TASK.shortLabels[task.type]} 任务执行中`
-          : `编队 · ${formationStatusLabel}`,
+          ? `编队 · ${task.autoAssigned === true ? 'AUTO · ' : ''}${OPERATIONAL_TASK.shortLabels[task.type]} 任务执行中`
+          : `编队 · ${autoHold ? 'AUTO HOLD · ' : ''}${formationStatusLabel}`,
         description: comp || '空编队',
         rows: [
           { label: '单位数量', value: String(stats.count) },
