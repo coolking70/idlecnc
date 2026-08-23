@@ -23,7 +23,8 @@ import { tickResearch, getResearchProgress } from './research.js';
 import {
   tickOperationalTasks, operationalTaskBoundaryRemaining,
   getOperationalTask, OPERATIONAL_TASK
-} from './tasking.js'; // Stage 10-A：离线期间按同一时间粒度推进作战任务；A.1：任务周期结算边界参与事件步进；A.1a：任务边界 step 预算
+} from './tasking.js'; // Stage 10-A：离线任务推进；A.1：任务边界参与事件步进；A.1a：任务边界 step 预算
+import { tickTheaterPressure } from './theater-pressure.js'; // Stage 10-B：战区压力离线推进
 import { logEvent, emit, LOG_LEVEL } from './events.js';
 import { safeNumber, clamp, formatDuration, formatInt } from './utils.js';
 
@@ -252,6 +253,10 @@ export function settleOfflineProgress(state, seconds, options = {}) {
 
       // 5. Stage 10-A：作战任务随离线时长推进（确定性，与其它系统同粒度）
       tickOperationalTasks(state, step);
+
+      // 6. Stage 10-B：战区压力与在线同序推进（线性速率，直接适配事件步，
+      //    不新增离线事件边界）
+      tickTheaterPressure(state, step);
 
       // 结构可能已变化，刷新派生数值供下一段使用
       recalcDerived(state);

@@ -42,6 +42,9 @@ import {
   OPERATIONAL_TASK, OPERATIONAL_TASK_TYPE
 } from './tasking.js';
 import {
+  tickTheaterPressure, ensureTheaterPressure, theaterPressureView
+} from './theater-pressure.js';
+import {
   listTheaters, listStrategies, getTheaterState, getTheaterIntel, getMissionCost,
   canDispatch, dispatchFormation, tickActiveBattle, tickBattleReturn, settleActiveBattle,
   finishBattleReturn, skipBattleReturn, closeBattleResult, abortInvalidBattle,
@@ -874,6 +877,7 @@ function stepLogic(state, step) {
   tickBattleReturn(state, step);   // 阶段8.1：结算后只推进返航展示
   tickRepairs(state, step);        // 阶段6起有实际内容
   tickOperationalTasks(state, step); // Stage 10-A：作战任务随游戏时间推进（暂停时 step=0）
+  tickTheaterPressure(state, step);  // Stage 10-B：战区压力随游戏时间推进（与任务同序）
   const researchResult = tickResearch(state, step);
   if (researchResult.completed.length) recalcDerived(state);
 
@@ -1018,6 +1022,7 @@ function boot() {
   // 读档；没有存档则开新局
   const loaded = hasSave() ? loadGame() : { ok: false };
   const state = getState();
+  ensureTheaterPressure(state); // Stage 10-B：老存档自动补齐战区压力默认值
   if (loaded.ok) {
     logEvent(state, '存档已载入，基地状态恢复。', LOG_LEVEL.GOOD);
     writeLoadNotes(state, loaded);
@@ -1316,6 +1321,11 @@ function boot() {
     listTasks: () => {
       try { return listOperationalTasks(getState()); }
       catch (err) { return []; }
+    },
+    /* ---- Stage 10-B：战区压力调试接口（只读） ---- */
+    theaterPressure: (theaterId) => {
+      try { return theaterPressureView(getState(), theaterId); }
+      catch (err) { return null; }
     },
     /** 查询单位能否加入编队 */
     canAddUnit: (formationId, unitId) => {

@@ -84,7 +84,9 @@ check('theater tiles stay compact: status badge on tile, intel/rewards in inspec
   const models = buildTheaterCommandModels(readyState());
   assert.equal(models.length, 6);
   const first = models.find((model) => model.id.startsWith('theater:'));
-  assert.ok(first.badges.length >= 2 && first.badges.length <= 3);
+  // Stage 10-B 追加 THREAT/CTRL/任务 徽标；紧凑契约放宽为 ≤6，
+  // 仍禁止把完整属性表铺在 Tile 上。
+  assert.ok(first.badges.length >= 2 && first.badges.length <= 6);
   assert.ok(first.inspector.rows.some((row) => row.label === '地形'));
   assert.ok(first.inspector.actions.some((action) => action.id === 'select-theater'));
 });

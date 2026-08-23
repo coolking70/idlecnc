@@ -32,6 +32,7 @@ import {
   getOperationalTask, describeOperationalTask, canAssignOperationalTask,
   OPERATIONAL_TASK, OPERATIONAL_TASK_TYPE
 } from './tasking.js';
+import { theaterPressureView, theaterTaskCounts } from './theater-pressure.js';
 import { formatDuration, formatInt, safeNumber } from './utils.js';
 
 const UNIT_IMAGES = {
@@ -669,11 +670,17 @@ export function buildTheaterCommandModels(state) {
     const intel = getTheaterIntel(state, view.id);
     const statusLabel = view.engaged ? '交战中' : view.captured ? '已占领' : view.unlocked ? '可进攻' : '未解锁';
     const tileState = view.captured ? 'completed' : view.engaged ? 'active' : view.unlocked ? 'available' : 'locked';
+    const pressure = theaterPressureView(state, view.id);
+    const taskCounts = theaterTaskCounts(state, view.id);
+    const activeTaskCount = taskCounts.patrol + taskCounts.recon + taskCounts.security;
     const badges = [
       { label: statusLabel, tone: view.captured ? 'complete' : view.engaged ? 'progress' : view.unlocked ? 'count' : 'lock' },
+      { label: `THREAT ${Math.round(pressure.threat)}`, tone: pressure.threat >= 60 ? 'resource' : 'progress' },
+      { label: `CTRL ${Math.round(pressure.control)}`, tone: pressure.control >= 60 ? 'complete' : 'count' },
       { label: '★'.repeat(Math.max(1, Math.min(5, view.difficulty))), tone: 'default' }
     ];
     if (!view.captured && Object.keys(view.firstReward || {}).length) badges.push({ label: '首占奖励', tone: 'progress' });
+    if (activeTaskCount > 0) badges.push({ label: `任务 ×${activeTaskCount}`, tone: 'progress' });
     const rows = [
       { label: '地形', value: `${view.terrainName} · 隐蔽 ${view.concealment}` },
       { label: '补给系数', value: `×${view.supplyMultiplier}` },
@@ -688,6 +695,18 @@ export function buildTheaterCommandModels(state) {
     }
     if (!view.unlocked) rows.push({ label: '解锁条件', value: view.lockReason || '—' });
     const sections = [];
+    sections.push({
+      title: 'THEATER PRESSURE · 战区压力',
+      rows: [
+        { label: 'Threat 威胁', value: `${Math.round(pressure.threat)} / 100` },
+        { label: 'Control 控制力', value: `${Math.round(pressure.control)} / 100` },
+        { label: 'Recon 侦察掌握', value: `${Math.round(pressure.recon)} / 100` },
+        { label: 'Security 安全度', value: `${Math.round(pressure.security)} / 100` },
+        { label: '任务影响', value: activeTaskCount > 0
+          ? `巡逻 ×${taskCounts.patrol} · 侦察 ×${taskCounts.recon} · 警戒 ×${taskCounts.security}（效果叠加中）`
+          : '无执行中任务（威胁缓慢回升，其余指标缓慢衰减）' }
+      ]
+    });
     if (intel) {
       sections.push({
         title: `敌情（${intel.accurate ? '雷达确认' : '侦察估算'} · 兵力 ${intel.totalText}）`,

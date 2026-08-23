@@ -44,7 +44,6 @@ export const STAGE9_FROZEN_AUTHORITY_FILES = [
   'js/construction.js',
   'js/production.js',
   'js/equipment.js',
-  'js/save.js',
   'js/battle.js',
   'js/battle-salvage.js',
   'js/production-battle-session.js',
@@ -60,7 +59,11 @@ export const STAGE9_FROZEN_AUTHORITY_FILES = [
 export const STAGE9_SEMANTIC_SHARED_FILES = [
   'js/theater.js',
   'js/offline.js',
-  'js/formations.js'
+  'js/formations.js',
+  // Stage 10-B: migrate() carries the additive theaterPressure payload for
+  // the dynamic-theater-pressure stage; save/load semantics for Stage 9
+  // saves stay covered by the Stage 9 regression suites.
+  'js/save.js'
 ];
 
 // Formal solver / planner authority that STAGE9-FINAL.md freezes in addition to
