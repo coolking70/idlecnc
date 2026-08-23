@@ -14,7 +14,9 @@ Original prompt: Continue idlecnc from `auto/stage10-c-command-doctrine` on `aut
 - Added `test:stage10-D` (21/21) and `browser:stage10-D` (15/15, three unique screenshots, 0 page errors, 0 console errors); all screenshots visually inspected.
 - Requested regressions passed: Stage 10-A 27/27 + A.1a 5/5, Stage 10-B 16/16, Stage 10-C 15/15, Stage 10-P-B 22/22, Stage 9 frozen authority exit 0.
 - `render_game_to_text` now exposes concise Auto Operations and active Operational Task state for deterministic browser observation.
-- TODO: write handoff against implementation SHA, commit handoff, push branch. Do not start Stage 10-E.
+- Implementation committed as `2829a76688ca9ee7cb48d186de37b163fdfb1cc6`.
+- `HANDOFF-STAGE10-D.md` records parent, implementation SHA, state/planner/hold rules, changed files, verification, and limitations.
+- Stage 10-D complete; push the branch and stop. Do not start Stage 10-E.
 
 ## Active milestone
 
