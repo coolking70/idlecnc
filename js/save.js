@@ -297,6 +297,10 @@ export function migrate(data, report = {}) {
   if (typeof data.doctrine === 'string' && data.doctrine) {
     merged.doctrine = data.doctrine;
   }
+  // Stage 10-D：老存档缺失时必须保持 disabled；只接受严格布尔 true。
+  merged.autoOperations = {
+    enabled: Boolean(data.autoOperations && data.autoOperations.enabled === true)
+  };
   const theaterFix = sanitizeTheaters(merged);
   if (theaterFix.repaired) {
     report.notes = (report.notes || []).concat(theaterFix.notes);

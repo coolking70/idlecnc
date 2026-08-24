@@ -155,7 +155,7 @@ export function canAssignOperationalTask(state, formationId, taskType, theaterId
  * 下达任务：校验通过后写入 formation.tasking（canonical state）。
  * @returns {{ok:boolean, code:string, reason:string, task?:object}}
  */
-export function assignOperationalTask(state, formationId, taskType, theaterId) {
+export function assignOperationalTask(state, formationId, taskType, theaterId, options = {}) {
   const check = canAssignOperationalTask(state, formationId, taskType, theaterId);
   if (!check.ok) return check;
   const now = safeNumber(state.time && state.time.game, 0);
@@ -165,6 +165,7 @@ export function assignOperationalTask(state, formationId, taskType, theaterId) {
     status: 'active',
     startedAt: now,
     lastTickAt: now,
+    autoAssigned: options.autoAssigned === true,
     stats: { timeSec: 0, intervalsCharged: 0, missedIntervals: 0 },
     results: {}
   };
@@ -176,13 +177,15 @@ export function assignOperationalTask(state, formationId, taskType, theaterId) {
  * 召回任务：清除 formation.tasking，编队立即恢复可用（待命 / 可派遣）。
  * 返回被召回任务的快照，供 UI 提示。
  */
-export function recallOperationalTask(state, formationId) {
+export function recallOperationalTask(state, formationId, options = {}) {
   if (!isObject(state)) return fail(TASKING_CODE.STATE_INVALID, '状态无效');
   const formation = findFormation(state, formationId);
   if (!formation) return fail(TASKING_CODE.UNKNOWN_FORMATION, '编队不存在');
   const task = getOperationalTask(state, formationId);
   if (!task) return fail(TASKING_CODE.NOT_TASKED, '该编队没有执行中的作战任务');
   formation.tasking = null;
+  // 默认调用代表玩家手动召回；自动系统若未来需要召回必须显式传 manual:false。
+  if (options.manual !== false) formation.autoTaskHold = true;
   return pass({ recalled: JSON.parse(JSON.stringify(task)), formationId });
 }
 
@@ -191,7 +194,7 @@ function upkeepText(cost) {
 }
 
 /** 任务的可读摘要（纯函数，供 tooltip / inspector / 测试使用） */
-export function describeOperationalTask(task) {
+export function describeOperationalTask(task, state = null) {
   if (!isObject(task) || task.status !== 'active') return null;
   const stats = task.stats || {};
   const results = task.results || {};
@@ -207,7 +210,9 @@ export function describeOperationalTask(task) {
     securityTime: safeNumber(results.securityTime, 0),
     intervalsCharged: safeNumber(stats.intervalsCharged, 0),
     missedIntervals: safeNumber(stats.missedIntervals, 0),
-    upkeepPerInterval: upkeepText(OPERATIONAL_TASK.upkeepPerInterval[task.type] || {})
+    upkeepPerInterval: upkeepText(scaleCost(
+      OPERATIONAL_TASK.upkeepPerInterval[task.type] || {}, getUpkeepMultiplier(state, task.type)
+    ))
   };
 }
 

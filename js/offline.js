@@ -25,6 +25,7 @@ import {
   getOperationalTask, OPERATIONAL_TASK
 } from './tasking.js'; // Stage 10-A：离线任务推进；A.1：任务边界参与事件步进；A.1a：任务边界 step 预算
 import { tickTheaterPressure } from './theater-pressure.js'; // Stage 10-B：战区压力离线推进
+import { runAutoOperationsPlanner } from './auto-operations.js'; // Stage 10-D：离线与在线同边界补任务
 import { logEvent, emit, LOG_LEVEL } from './events.js';
 import { safeNumber, clamp, formatDuration, formatInt } from './utils.js';
 
@@ -201,6 +202,7 @@ export function settleOfflineProgress(state, seconds, options = {}) {
 
   if (total > 0) {
     recalcDerived(state);
+    runAutoOperationsPlanner(state);
     while (remaining > 1e-9 && steps < stepLimit) {
       steps += 1;
 
@@ -257,6 +259,9 @@ export function settleOfflineProgress(state, seconds, options = {}) {
       // 6. Stage 10-B：战区压力与在线同序推进（线性速率，直接适配事件步，
       //    不新增离线事件边界）
       tickTheaterPressure(state, step);
+
+      // 7. Stage 10-D：每个现有 event step 后补充新近空闲的合法编队。
+      runAutoOperationsPlanner(state);
 
       // 结构可能已变化，刷新派生数值供下一段使用
       recalcDerived(state);

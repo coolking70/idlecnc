@@ -53,6 +53,7 @@ import { CategoryBar, CommandSurface } from './command-ui.js';
 import {
   canAssignOperationalTask, OPERATIONAL_TASK
 } from './tasking.js';
+import { autoOperationsSummary } from './auto-operations.js';
 import {
   buildConstructionTileModels, buildCurrentConstructionModel,
   buildUnitProductionTileModels, buildEquipmentProductionTileModels,
@@ -298,6 +299,7 @@ export class UI {
     else if (actionId === 'choose-task') this._chooseOperationalTaskTheater(payload);
     else if (actionId === 'assign-task') this._onFormationAction('onAssignOperationalTask', payload.formationId, payload.taskType, payload.theaterId);
     else if (actionId === 'recall-task') this._onFormationAction('onRecallOperationalTask', payload.formationId);
+    else if (actionId === 'release-auto-hold') this._onFormationAction('onReleaseAutoTaskHold', payload.formationId);
   }
 
   /** Stage 10-A：任务类型选定后，Inspector 内选择目标战区再下达（纯 UI 选择态） */
@@ -3492,6 +3494,28 @@ export class UI {
     page.appendChild(r.ovDoctrineGridRoot);
     r.ovDoctrineGrid = this.commandSurface.createGrid(r.ovDoctrineGridRoot, (model) => this._onCommandPrimary(model));
 
+    /* Stage 10-D：AUTO OPERATIONS 总开关与只读计数 */
+    const autoHead = el('div', 'command-section-head');
+    autoHead.appendChild(el('span', '', 'AUTO OPERATIONS'));
+    autoHead.appendChild(el('small', '', '仅自动补充 PATROL / RECON / SECURITY'));
+    page.appendChild(autoHead);
+    r.ovAutoOperations = el('div', 'auto-operations-panel');
+    const autoCopy = el('div');
+    r.ovAutoStatus = el('div', 'auto-operations-status', 'DISABLED');
+    r.ovAutoMetrics = el('div', 'auto-operations-metrics', '自动管理 0 · AUTO HOLD 0');
+    autoCopy.appendChild(r.ovAutoStatus);
+    autoCopy.appendChild(r.ovAutoMetrics);
+    r.ovAutoOperations.appendChild(autoCopy);
+    r.ovAutoToggle = el('button', 'btn auto-operations-toggle', 'DISABLED');
+    r.ovAutoToggle.type = 'button';
+    r.ovAutoToggle.dataset.action = 'toggle-auto-operations';
+    r.ovAutoToggle.addEventListener('click', () => {
+      const summary = autoOperationsSummary(this._lastState);
+      this.handlers.onSetAutoOperations?.(!summary.enabled);
+    });
+    r.ovAutoOperations.appendChild(r.ovAutoToggle);
+    page.appendChild(r.ovAutoOperations);
+
     r.ovWarnBox = el('div', 'ov-warnings');
     page.appendChild(r.ovWarnBox);
 
@@ -3832,6 +3856,14 @@ export class UI {
       r.ovGrid.update(models);
       r.ovEmpty.hidden = models.length > 1;
       if (r.ovDoctrineGrid) r.ovDoctrineGrid.update(buildDoctrineModels(state));
+      if (r.ovAutoToggle) {
+        const auto = autoOperationsSummary(state);
+        setText(r.ovAutoStatus, auto.enabled ? 'ENABLED · 自动补充空闲编队任务' : 'DISABLED · 不产生任何自动行为');
+        setText(r.ovAutoMetrics, `自动管理 ${auto.autoManaged} · AUTO HOLD ${auto.manualHold}`);
+        setText(r.ovAutoToggle, auto.enabled ? 'ENABLED' : 'DISABLED');
+        r.ovAutoToggle.classList.toggle('is-enabled', auto.enabled);
+        r.ovAutoToggle.setAttribute('aria-pressed', auto.enabled ? 'true' : 'false');
+      }
       const warns = [];
       if (used > produced) warns.push('电力超载：部分设施效率下降，请增建发电设施。');
       if (!hasRepairShop(state) && (state.units || []).some((u) => u.status === 'repairing')) warns.push('维修车间未建成，维修队列不会推进。');
