@@ -11,7 +11,9 @@ Original prompt: Continue idlecnc from `auto/stage10-c-command-doctrine` on `aut
 - Frozen guard direct run: `PASS (63 checks)`; imported API reports zero violations and remains callable.
 - Regressions passed: Stage 10-D 21/21, Stage 10-A 27/27 + A.1a 5/5, Stage 10-B 16/16, Stage 10-C 15/15.
 - Skill browser startup state confirms new-game Auto Operations disabled after boot ensure; screenshot inspected and base view is healthy.
-- TODO: commit hotfix, write minimal handoff against implementation HEAD, commit handoff, push. Do not start Stage 10-E.
+- Hotfix implementation committed as `cc9cabb4fdd1f382952ef486cc1706de2f58eee0`.
+- `HANDOFF-STAGE10-D1.md` records parent, hotfix HEAD, both fixes, and tests.
+- TODO: commit handoff and push the D1 branch. Do not start Stage 10-E.
 
 ## Stage 10-D work in progress (2026-08-24)
 
