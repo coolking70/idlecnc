@@ -2,6 +2,17 @@ Original prompt: Continue idlecnc from `auto/stage10-c-command-doctrine` on `aut
 
 # Current development status
 
+## Stage 10-D.1 freeze guard hotfix (2026-08-24)
+
+- Branch: `auto/stage10-d1-stage9-freeze-guard-hotfix`; parent `auto/stage10-d-auto-operations` @ `46e1b85`.
+- Removed the Stage 10-D field from byte-frozen `js/state.js`; fresh state is canonicalized to `{ enabled:false }` by `ensureAutoOperations()` during boot/new-game.
+- Added a direct-execution entrypoint to `tests/lib/stage9-frozen-authority.mjs`; importing the module remains side-effect free.
+- Updated the Stage 10-D fresh-state assertion to verify both the byte-freeze boundary and post-ensure disabled default.
+- Frozen guard direct run: `PASS (63 checks)`; imported API reports zero violations and remains callable.
+- Regressions passed: Stage 10-D 21/21, Stage 10-A 27/27 + A.1a 5/5, Stage 10-B 16/16, Stage 10-C 15/15.
+- Skill browser startup state confirms new-game Auto Operations disabled after boot ensure; screenshot inspected and base view is healthy.
+- TODO: commit hotfix, write minimal handoff against implementation HEAD, commit handoff, push. Do not start Stage 10-E.
+
 ## Stage 10-D work in progress (2026-08-24)
 
 - Created `auto/stage10-d-auto-operations` from exact parent SHA `01710cd777af9ba39ebe005ffb93f5b7490bb854`.

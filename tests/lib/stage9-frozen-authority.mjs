@@ -2,6 +2,7 @@ import crypto from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
 import { execFileSync } from 'node:child_process';
+import { fileURLToPath } from 'node:url';
 
 // Downstream-safe Stage 9 frozen authority guard.
 //
@@ -201,3 +202,22 @@ export function readStage9FrozenAuthorityStatus(root) {
     passed: violations.length === 0
   };
 }
+
+/** Direct CLI entrypoint; importing this module remains side-effect free. */
+function runDirectCheck() {
+  const modulePath = fileURLToPath(import.meta.url);
+  const root = path.resolve(path.dirname(modulePath), '../..');
+  const status = readStage9FrozenAuthorityStatus(root);
+  if (status.passed) {
+    console.log(`Stage 9 frozen authority: PASS (${status.checkedCount} checks)`);
+    return;
+  }
+  console.error(`Stage 9 frozen authority: FAIL (${status.violations.length} violation${status.violations.length === 1 ? '' : 's'})`);
+  status.violations.forEach((violation) => {
+    console.error(`- [${violation.kind}] ${violation.file}: ${violation.reason || 'check failed'}`);
+  });
+  process.exitCode = 1;
+}
+
+const invokedPath = process.argv[1] ? path.resolve(process.argv[1]) : null;
+if (invokedPath === path.resolve(fileURLToPath(import.meta.url))) runDirectCheck();

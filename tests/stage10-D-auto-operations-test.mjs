@@ -71,6 +71,8 @@ console.log('\n── Stage 10-D Auto Operations ──');
 check('SAVE_VERSION remains 10 and fresh state defaults disabled', () => {
   const state = createInitialState();
   assert.equal(SAVE_VERSION, 10);
+  assert.equal(state.autoOperations, undefined, 'Stage 9 byte-frozen state factory stays unchanged');
+  assert.equal(ensureAutoOperations(state), true);
   assert.deepEqual(state.autoOperations, { enabled: false });
   assert.equal(isAutoOperationsEnabled(state), false);
 });
