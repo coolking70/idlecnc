@@ -8,7 +8,13 @@ import { SAVE_VERSION } from '../js/config.js';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const evidenceDir = path.join(root, 'evidence/stage10-P-A');
-const baseSha = 'ca408bb7031afda79a65af7aad27b6b64b7c18c4';
+// Frozen-authority baseline. Advanced from ca408bb (Stage 9 browser final closure)
+// to 5b74c67, the completed Stage 10 development line. Stages 10-A through 10-E
+// deliberately evolved save/offline/formations/theater/save-diff (operational
+// tasking, dynamic theater pressure, command doctrine, auto operations, strategic
+// loop closure), so the Stage 9-era baseline could no longer hold. The guard now
+// anchors on the Stage 10 boundary.
+const baseSha = '5b74c67db32c45caba4243a77c0f48fe214e5b55';
 const sha256 = (bytes) => crypto.createHash('sha256').update(bytes).digest('hex');
 const git = (...args) => execFileSync('git', args, { cwd: root, encoding: 'utf8', maxBuffer: 32 * 1024 * 1024 }).trim();
 const read = (relativePath) => fs.readFileSync(path.join(root, relativePath), 'utf8');
