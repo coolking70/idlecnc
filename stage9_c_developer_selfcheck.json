@@ -18,9 +18,7 @@
     "browserApiFlagsFalse": true,
     "performanceMeasurementValid": true,
     "performanceBudgetUnchanged": true,
-    "forbiddenChangedFiles": [
-      "js/theater.js"
-    ],
+    "forbiddenChangedFiles": [],
     "scripts": {
       "posttestIncludesStage9C": true,
       "gateIncludesStage9C": true,
@@ -99,6 +97,6 @@
     }
   ],
   "noBattleDrops": true,
-  "noAuthorityChanges": false,
+  "noAuthorityChanges": true,
   "passed": true
 }

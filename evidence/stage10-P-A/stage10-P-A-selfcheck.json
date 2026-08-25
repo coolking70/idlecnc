@@ -1,0 +1,31 @@
+{
+  "stage": "10-P-A",
+  "scope": "implementation static selfcheck; delivery closure is produced only by the final CI runtime closure (evidence/stage10-P-A/stage10-P-A-final-closure.json)",
+  "implementationCheckpointHeadSha": "c7a7b4f87e88b59fdcb799002e905bada6a9a20b",
+  "baseStage9Sha": "ca408bb7031afda79a65af7aad27b6b64b7c18c4",
+  "gameplayAuthorityChanged": false,
+  "saveVersionChanged": false,
+  "constructionMigrated": true,
+  "unitProductionMigrated": true,
+  "equipmentProductionMigrated": true,
+  "queueMigrated": true,
+  "desktopPassed": true,
+  "mobilePassed": true,
+  "hoverPassed": true,
+  "longPressPassed": true,
+  "historicalRegressionPassed": true,
+  "stage9RegressionPassed": true,
+  "focusedTestsPassed": true,
+  "stateEquivalencePassed": true,
+  "browserEvidencePassed": true,
+  "strongEvidencePassed": true,
+  "tamperPassed": true,
+  "implementationPassed": true,
+  "deliveryClosed": false,
+  "externalGateRuns": {
+    "finalClosureWorkflowRunId": null,
+    "finalClosureHead": null,
+    "finalClosureConclusion": null
+  },
+  "passed": false
+}

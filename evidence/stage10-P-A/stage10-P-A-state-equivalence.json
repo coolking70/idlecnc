@@ -1,0 +1,29 @@
+{
+  "stage": "10-P-A",
+  "saveVersion": 10,
+  "comparison": "legacy authority call vs presentation-model-resolved call",
+  "canonicalFieldsAdded": [],
+  "cases": [
+    {
+      "domain": "construction",
+      "equivalent": true,
+      "cancelEquivalent": true
+    },
+    {
+      "domain": "unit_production",
+      "equivalent": true,
+      "rapidClicks": 3
+    },
+    {
+      "domain": "equipment_production",
+      "equivalent": true,
+      "queuedCancelEquivalent": true
+    },
+    {
+      "domain": "presentation_read_only",
+      "equivalent": true,
+      "canonicalFieldsAdded": []
+    }
+  ],
+  "passed": true
+}

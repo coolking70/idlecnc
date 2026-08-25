@@ -9,9 +9,9 @@ const browser = JSON.parse(fs.readFileSync(path.join(root, 'stage9_e_browser_cap
 const output = {
   stage: '9-E', independentRecompute: true, implementationPassed: strong.passed === true && tamper.rejected === tamper.total && tamper.passedFlagOnlyCases === 0 && browser.passed === true,
   strongEvidencePassed: strong.passed === true, tamperPassed: tamper.rejected === tamper.total && tamper.coupledRejected === tamper.coupledTotal && tamper.passedFlagOnlyCases === 0,
-  browserPassed: browser.passed === true, postFinalCommits: 0, externalGateRuns: { fast: null, stage: null, release: null }, passed: false
+  browserPassed: browser.passed === true, postFinalCommits: 0, deliveryClosed: false,
+  externalGateRuns: { fast: null, stage: null, release: null }, passed: false
 };
-output.passed = output.implementationPassed;
 fs.writeFileSync(path.join(root, 'stage9_e_developer_selfcheck.json'), `${JSON.stringify(output, null, 2)}\n`);
 console.log(JSON.stringify({ stage: output.stage, implementationPassed: output.implementationPassed, strongEvidencePassed: output.strongEvidencePassed, tamperPassed: output.tamperPassed, browserPassed: output.browserPassed }));
 if (!output.implementationPassed) process.exitCode = 1;

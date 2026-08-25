@@ -1,7 +1,6 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
-import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 
 import {
@@ -28,6 +27,7 @@ import {
 } from '../js/theater.js';
 import { claimBattleSalvage, deriveSalvageOffer } from '../js/battle-salvage.js';
 import { canonicalHash } from '../js/production-battle-session.js';
+import { readStage9FrozenAuthorityStatus } from './lib/stage9-frozen-authority.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const clone = (value) => JSON.parse(JSON.stringify(value));
@@ -79,11 +79,6 @@ function fixture() {
   state.command.capacity = 999;
   state.theaters.river_crossing.captured = true;
   return state;
-}
-
-function sourceChangedFiles() {
-  return execFileSync('git', ['diff', '--name-only', '5f7bbdd00fe5a2b3a029bcbbc8e550019f0034b6', '--'], { cwd: root, encoding: 'utf8' })
-    .split('\n').map((row) => row.trim()).filter(Boolean);
 }
 
 console.log('\n── Stage 9-E integrated campaign / equipment milestone closure ──');
@@ -353,10 +348,14 @@ check('offline production is independent from battle and idempotent', () => {
   assert.equal(state.activeBattle, null);
 });
 
-check('production/runtime changes do not touch frozen authority modules', () => {
-  const changed = sourceChangedFiles();
-  assert.equal(changed.some((file) => file === 'js/battle.js' || file === 'js/save-diff.js' || file.startsWith('js/battle-presentation/universal/') || file.startsWith('tests/lib/')), false, changed.join(', '));
-  assert.deepEqual(changed.filter((file) => file.startsWith('js/')), ['js/config.js']);
+check('downstream stages keep the frozen Stage 9 authority manifest byte-identical to the accepted baseline', () => {
+  const status = readStage9FrozenAuthorityStatus(root);
+  assert.equal(status.passed, true, JSON.stringify({
+    baseline: status.baseline,
+    gitHead: status.gitHead,
+    checkedCount: status.checkedCount,
+    violations: status.violations
+  }, null, 2));
 });
 
 const evidence = {

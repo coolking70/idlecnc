@@ -1,7 +1,6 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
-import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 
 import { BATTLE_RESULT, SAVE_VERSION, SALVAGE_RULES, THEATERS } from '../js/config.js';
@@ -15,6 +14,7 @@ import { emptyEquipmentState, getEquipmentDefinition, canEquipEquipment, equipEq
 import { migrate } from '../js/save.js';
 import { computeSaveDiff } from '../js/save-diff.js';
 import { dispatchFormation, tickActiveBattle } from '../js/theater.js';
+import { readStage9FrozenAuthorityStatus } from './lib/stage9-frozen-authority.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const clone = (value) => JSON.parse(JSON.stringify(value));
@@ -285,17 +285,14 @@ check('salvage sanitizer is idempotent after forged cleanup', () => {
   assert.deepEqual(state, once);
 });
 
-const committedChanged = execFileSync('git', ['diff', '--name-only', '5f7bbdd00fe5a2b3a029bcbbc8e550019f0034b6', 'HEAD'], { cwd: root, encoding: 'utf8' }).split(/\r?\n/).filter(Boolean);
-const workingChanged = execFileSync('git', ['diff', '--name-only'], { cwd: root, encoding: 'utf8' }).split(/\r?\n/).filter(Boolean);
-const untrackedChanged = execFileSync('git', ['ls-files', '--others', '--exclude-standard'], { cwd: root, encoding: 'utf8' }).split(/\r?\n/).filter(Boolean);
-const changed = [...new Set([...committedChanged, ...workingChanged, ...untrackedChanged])];
-const forbiddenAuthorityPrefixes = ['js/battle.js', 'js/save-diff.js', 'js/battle-presentation/universal/', 'tests/lib/'];
+const frozenAuthority = readStage9FrozenAuthorityStatus(root);
 const evidence = {
   stage: '9-D', independentRecompute: true, saveVersion: SAVE_VERSION, salvageRules: SALVAGE_RULES,
-  testCount: checks.length, passed: checks.every((row) => row.passed), checks,
-  forbiddenAuthorityFilesChanged: changed.filter((file) => forbiddenAuthorityPrefixes.some((prefix) => file === prefix || file.startsWith(prefix))),
-  productionSessionMetadataOnly: changed.includes('js/production-battle-session.js'),
-  theaterMetadataOnly: changed.includes('js/theater.js'),
+  testCount: checks.length, passed: checks.every((row) => row.passed) && frozenAuthority.passed, checks,
+  frozenAuthority: { baseline: frozenAuthority.baseline, gitHead: frozenAuthority.gitHead, checkedCount: frozenAuthority.checkedCount, violations: frozenAuthority.violations },
+  forbiddenAuthorityFilesChanged: frozenAuthority.violations.map((row) => row.file),
+  productionSessionUnchanged: frozenAuthority.rows.find((row) => row.file === 'js/production-battle-session.js')?.unchanged === true,
+  theaterUnchanged: frozenAuthority.rows.find((row) => row.file === 'js/theater.js')?.unchanged === true,
   formalSettlementEquipmentUnchanged: true, legacyCutoff: 'only explicit salvageRulesVersion=1 is eligible; missing/0/unknown fail closed',
   noBattleDropInSolver: true
 };

@@ -94,7 +94,7 @@
       "passed": true
     },
     {
-      "name": "production/runtime changes do not touch frozen authority modules",
+      "name": "downstream stages keep the frozen Stage 9 authority manifest byte-identical to the accepted baseline",
       "passed": true
     }
   ],

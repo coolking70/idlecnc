@@ -287,6 +287,20 @@ export function migrate(data, report = {}) {
       }
     });
   }
+  // Stage 10-B：动态战区压力随存档透传（additive；老存档无此字段时保持缺省，
+  // 由 theater-pressure authority 在初始化时补齐默认值，Stage9 行为不变）。
+  if (data.theaterPressure && typeof data.theaterPressure === 'object' && !Array.isArray(data.theaterPressure)) {
+    merged.theaterPressure = data.theaterPressure;
+  }
+  // Stage 10-C：指挥方针随存档透传（additive；老存档无此字段时保持缺省，
+  // 由 doctrine authority 读取时回落 BALANCED，Stage9 行为不变）。
+  if (typeof data.doctrine === 'string' && data.doctrine) {
+    merged.doctrine = data.doctrine;
+  }
+  // Stage 10-D：老存档缺失时必须保持 disabled；只接受严格布尔 true。
+  merged.autoOperations = {
+    enabled: Boolean(data.autoOperations && data.autoOperations.enabled === true)
+  };
   const theaterFix = sanitizeTheaters(merged);
   if (theaterFix.repaired) {
     report.notes = (report.notes || []).concat(theaterFix.notes);

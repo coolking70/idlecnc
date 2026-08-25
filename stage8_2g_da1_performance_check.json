@@ -1,16 +1,16 @@
 {
   "stage": "8.2G-D-A.1",
   "sampleCount": 60,
-  "p95RenderMs": 4.4661,
-  "maxRenderMs": 4.7666,
+  "p95RenderMs": 10.4484,
+  "maxRenderMs": 10.7093,
   "noWallClockInSemanticResolver": true,
   "bounded": true,
   "environment": {
-    "platform": "darwin",
-    "arch": "arm64",
-    "cpuModel": "Apple M5",
-    "cpuCount": 10,
-    "nodeVersion": "v25.2.1"
+    "platform": "linux",
+    "arch": "x64",
+    "cpuModel": "AMD EPYC 9754 128-Core Processor",
+    "cpuCount": 8,
+    "nodeVersion": "v22.23.2"
   },
   "passed": true
 }

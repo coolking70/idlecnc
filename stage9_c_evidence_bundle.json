@@ -2,7 +2,7 @@
   "stage": "9-C.1",
   "version": 2,
   "generatedBy": "tests/generate-stage9-C-evidence.mjs",
-  "saveVersion": 10,
+  "saveVersion": 9,
   "machine": {
     "stage": "9-C.1",
     "version": 2,
@@ -164,12 +164,12 @@
       },
       {
         "kind": "click",
-        "selector": "[data-action=\"cancel-production-queue\"][data-job-id=\"equipment_job_mss2j9qm_9\"]",
+        "selector": "[data-action=\"cancel-production-queue\"][data-job-id=\"equipment_job_msqj0ztp_9\"]",
         "source": "production_ui",
         "syntheticApiCall": false,
         "label": "移除",
         "action": "cancel-production-queue",
-        "jobId": "equipment_job_mss2j9qm_9"
+        "jobId": "equipment_job_msqj0ztp_9"
       },
       {
         "kind": "real_reload",
@@ -413,68 +413,68 @@
         "reason": "production_queue",
         "method": "Page.reload",
         "before": {
-          "timeOrigin": 1786658824697.4,
+          "timeOrigin": 1786565593181.3,
           "readyState": "complete",
           "navigationType": "navigate"
         },
         "after": {
-          "timeOrigin": 1786658825470.5,
+          "timeOrigin": 1786565593956.9,
           "readyState": "complete",
           "navigationType": "reload"
         },
-        "beforeLoaderId": "D9C2D797F4676E3269029855BDA0116D",
-        "afterLoaderId": "DB6652425243FABF17AA38CAB2950909",
+        "beforeLoaderId": "2925309605E04038B43933D9D8A0C6BC",
+        "afterLoaderId": "53C8C0ADB766F159C66B45D17EE6E10F",
         "timeOriginChanged": true
       },
       {
         "reason": "completed_unmounted",
         "method": "Page.reload",
         "before": {
-          "timeOrigin": 1786658825470.5,
+          "timeOrigin": 1786565593956.9,
           "readyState": "complete",
           "navigationType": "reload"
         },
         "after": {
-          "timeOrigin": 1786658832264.9,
+          "timeOrigin": 1786565600669.4,
           "readyState": "complete",
           "navigationType": "reload"
         },
-        "beforeLoaderId": "DB6652425243FABF17AA38CAB2950909",
-        "afterLoaderId": "57800A0488827689976DA026F559CF81",
+        "beforeLoaderId": "53C8C0ADB766F159C66B45D17EE6E10F",
+        "afterLoaderId": "9FF6BF3E8166FBA9D3B2AD541350AD68",
         "timeOriginChanged": true
       },
       {
         "reason": "running_battle",
         "method": "Page.reload",
         "before": {
-          "timeOrigin": 1786658832264.9,
+          "timeOrigin": 1786565600669.4,
           "readyState": "complete",
           "navigationType": "reload"
         },
         "after": {
-          "timeOrigin": 1786658834955.4,
+          "timeOrigin": 1786565603254.5,
           "readyState": "complete",
           "navigationType": "reload"
         },
-        "beforeLoaderId": "57800A0488827689976DA026F559CF81",
-        "afterLoaderId": "0D3EA294B05622891B8160D3BE5C5063",
+        "beforeLoaderId": "9FF6BF3E8166FBA9D3B2AD541350AD68",
+        "afterLoaderId": "02D6A9294158668017CC812EBB5E5D8A",
         "timeOriginChanged": true
       },
       {
         "reason": "replay",
         "method": "Page.reload",
         "before": {
-          "timeOrigin": 1786658834955.4,
+          "timeOrigin": 1786565603254.5,
           "readyState": "complete",
           "navigationType": "reload"
         },
         "after": {
-          "timeOrigin": 1786658836848.5,
+          "timeOrigin": 1786565605093.7,
           "readyState": "complete",
           "navigationType": "reload"
         },
-        "beforeLoaderId": "0D3EA294B05622891B8160D3BE5C5063",
-        "afterLoaderId": "9E40B3759D7C092069E48C9985032C5A",
+        "beforeLoaderId": "02D6A9294158668017CC812EBB5E5D8A",
+        "afterLoaderId": "9D3D44270E9D54269BBB6365D3B6430C",
         "timeOriginChanged": true
       }
     ],
@@ -507,18 +507,18 @@
                 "current": {
                   "kind": "equipment",
                   "equipmentId": "anti_armor_sights",
-                  "id": "equipment_job_mss2j8f0_f"
+                  "id": "equipment_job_msqj0yio_f"
                 },
                 "queue": 0
               },
               "reportCount": 0,
               "ledgerCount": 0
             },
-            "domText": "◣\n钢铁指令\nIRON COMMAND · 指挥终端\n▤\n补给\n3,820/ 5,000\n+2/s\n◈\n合金\n3,860/ 5,000\n+1/s\n◎\n情报\n400/ 500\n+0.1/s\n⚡\n电力\n0/ 30\n空载\n✦\n指挥容量\n0/ 999\n空闲\n基地时间\n08:00:00\n第1天\n❚❚\n1×\n2×\n4×\n保存\n读取\n新游戏\n视图：基地全景 / BASE VIEW\n指挥区\n工业区\n军营区\n后勤区\n基地出口\nFPS 62 · 暂停\n概览\n建设\n生产\n部队\n编队\n战区\n维修\n科研\n战报\n单位生产\n阶段3 · 已开放\n当前生产线\n已暂停\n当前项目：反装甲瞄具\n生产设施\n装甲工厂\n状态\n生产中（推演已暂停）\n已用时间\n0秒\n总生产时间\n18秒\n预计剩余\n18秒\n0%\n基地推演已暂停，生产进度不会推进。\n取消当前项目\n等待队列\n最多 5 项（含当前）\n队列为空，可同时排队多项生产。\n可生产单位\n步兵班\n步兵\n\n地形适应好，可为车辆提供掩护，单独面对装甲较弱。\n\n来源建筑\n兵营\n生产时间\n10 秒\n攻击\n12\n反装甲\n4\n防御\n10\n侦察\n2\n机动\n5\n维修\n0\n生命值\n100\n任务补给消耗\n1\n指挥占用\n1\n生产成本\n补给 100\n当前库存\n0\n加入训练队列\n需要先建成兵营\n反装甲班\n步兵\n\n对坦克伤害高，但容易被压制。\n\n来源建筑\n兵营\n生产时间\n14 秒\n攻击\n18\n反装甲\n25\n防御\n7\n侦察\n2\n机动\n4\n维修\n0\n生命值\n90\n任务补给消耗\n2\n指挥占用\n1\n生产成本\n补给 130\n合金 30\n当前库存\n0\n加入训练队列\n需要先建成兵营\n侦察车\n车辆\n\n提升情报准确度、降低伏击风险，正面战斗力弱。\n\n来源建筑\n装甲工厂\n生产时间\n18 秒\n攻击\n6\n反装甲\n2\n防御\n6\n侦察\n20\n机动\n15\n维修\n0\n生命值\n90\n任务补给消耗\n2\n指挥占用\n1\n生产成本\n补给 100\n合金 120\n当前库存\n0\n加入制造队列\n主战坦克\n装甲\n\n正面突破能力强，被反装甲单位克制，维修成本高。\n\n来源建筑\n装甲工厂\n生产时间\n30 秒\n攻击\n35\n反装甲\n20\n防御\n30\n侦察\n3\n机动\n10\n维修\n0\n生命值\n160\n任务补给消耗\n5\n指挥占用\n2\n生产成本\n补给 220\n合金 300\n当前库存\n1\n加入制造队列\n维修车\n支援\n\n降低战后永久损失，战斗中恢复少量装甲耐久，无攻击能力。\n\n来源建筑\n装甲工厂\n生产时间\n24 秒\n攻击\n0\n反装甲\n0\n防御\n8\n侦察\n2\n机动\n8\n维修\n20\n生命值\n110\n任务补给消耗\n3\n指挥占用\n1\n生产成本\n补给 150\n合金 180\n当前库存\n0\n加入制造队列\n装备制造\n装甲工厂生产\n反装甲瞄具\nweapon\n\n提高反装甲火力与目标识别能力，不改变生命上限。\n\n适用单位\n反装甲班、主战坦克\n制造时间\n18 秒\n科研前置\n模块化装配\n制造成本\n补给 180\n合金 140\n库存实例\n0\n制造中\n战术指挥链\nutility\n\n提升战术通信与目标感知，不改变生命上限。\n\n适用单位\n步兵班、反装甲班、侦察车\n制造时间\n22 秒\n科研前置\n模块化装配\n制造成本\n补给 220\n合金 170\n库存实例\n0\n加入制造队列\n机动维修架\nutility\n\n增强野战抢修效率与保障防护，不改变生命上限。\n\n适用单位\n步兵班、维修车\n制造时间\n26 秒\n科研前置\n野战维护规程\n制造成本\n补给 260\n合金 220\n库存实例\n0\n加入制造队列\n反应装甲模块\narmor\n\n提高装甲防护并保持车辆机动，不改变生命上限。\n\n适用单位\n侦察车、主战坦克、维修车\n制造时间\n32 秒\n科研前置\n复合装甲\n制造成本\n补给 320\n合金 280\n库存实例\n0\n加入制造队列\n精确火控组件\nweapon\n\n提高直接火力与反装甲精度，不改变生命上限。\n\n适用单位\n反装甲班、主战坦克\n制造时间\n38 秒\n科研前置\n扩建储备设施\n制造成本\n补给 380\n合金 340\n库存实例\n0\n加入制造队列\n单位库存\n库存总单位\n1\n空闲单位\n1\n已编入编队\n0\n维修中\n0\n步兵班\n× 0\n反装甲班\n× 0\n侦察车\n× 0\n主战坦克\n× 1\n维修车\n× 0\n说明：同时只生产 1 个单位，当前生产 + 等待队列最多 5 项。取消正在生产的单位返还 50% 成本，取消等待任务返还 100% 成本。库存单位不占用指挥容量，只有编入作战编队后才会占用。\n通讯记录 / COMMS\n2 / 30\n[08:00]\n基地数据已保存。\n[08:00]\n反装甲瞄具开始制造。\n反装甲瞄具已加入制造队列",
-            "imageSha256": "a15fd8cf42e9c3c505d5ac053d3ca5af1f0c25f373b246b4899b11ecbefd7851",
+            "domText": "◣\n钢铁指令\nIRON COMMAND · 指挥终端\n▤\n补给\n3,820/ 5,000\n+2/s\n◈\n合金\n3,860/ 5,000\n+1/s\n◎\n情报\n400/ 500\n+0.1/s\n⚡\n电力\n0/ 30\n空载\n✦\n指挥容量\n0/ 999\n空闲\n基地时间\n08:00:00\n第1天\n❚❚\n1×\n2×\n4×\n保存\n读取\n新游戏\n视图：基地全景 / BASE VIEW\n指挥区\n工业区\n军营区\n后勤区\n基地出口\nFPS 63 · 暂停\n概览\n建设\n生产\n部队\n编队\n战区\n维修\n科研\n战报\n单位生产\n阶段3 · 已开放\n当前生产线\n已暂停\n当前项目：反装甲瞄具\n生产设施\n装甲工厂\n状态\n生产中（推演已暂停）\n已用时间\n0秒\n总生产时间\n18秒\n预计剩余\n18秒\n0%\n基地推演已暂停，生产进度不会推进。\n取消当前项目\n等待队列\n最多 5 项（含当前）\n队列为空，可同时排队多项生产。\n可生产单位\n步兵班\n步兵\n\n地形适应好，可为车辆提供掩护，单独面对装甲较弱。\n\n来源建筑\n兵营\n生产时间\n10 秒\n攻击\n12\n反装甲\n4\n防御\n10\n侦察\n2\n机动\n5\n维修\n0\n生命值\n100\n任务补给消耗\n1\n指挥占用\n1\n生产成本\n补给 100\n当前库存\n0\n加入训练队列\n需要先建成兵营\n反装甲班\n步兵\n\n对坦克伤害高，但容易被压制。\n\n来源建筑\n兵营\n生产时间\n14 秒\n攻击\n18\n反装甲\n25\n防御\n7\n侦察\n2\n机动\n4\n维修\n0\n生命值\n90\n任务补给消耗\n2\n指挥占用\n1\n生产成本\n补给 130\n合金 30\n当前库存\n0\n加入训练队列\n需要先建成兵营\n侦察车\n车辆\n\n提升情报准确度、降低伏击风险，正面战斗力弱。\n\n来源建筑\n装甲工厂\n生产时间\n18 秒\n攻击\n6\n反装甲\n2\n防御\n6\n侦察\n20\n机动\n15\n维修\n0\n生命值\n90\n任务补给消耗\n2\n指挥占用\n1\n生产成本\n补给 100\n合金 120\n当前库存\n0\n加入制造队列\n主战坦克\n装甲\n\n正面突破能力强，被反装甲单位克制，维修成本高。\n\n来源建筑\n装甲工厂\n生产时间\n30 秒\n攻击\n35\n反装甲\n20\n防御\n30\n侦察\n3\n机动\n10\n维修\n0\n生命值\n160\n任务补给消耗\n5\n指挥占用\n2\n生产成本\n补给 220\n合金 300\n当前库存\n1\n加入制造队列\n维修车\n支援\n\n降低战后永久损失，战斗中恢复少量装甲耐久，无攻击能力。\n\n来源建筑\n装甲工厂\n生产时间\n24 秒\n攻击\n0\n反装甲\n0\n防御\n8\n侦察\n2\n机动\n8\n维修\n20\n生命值\n110\n任务补给消耗\n3\n指挥占用\n1\n生产成本\n补给 150\n合金 180\n当前库存\n0\n加入制造队列\n装备制造\n装甲工厂生产\n反装甲瞄具\nweapon\n\n提高反装甲火力与目标识别能力，不改变生命上限。\n\n适用单位\n反装甲班、主战坦克\n制造时间\n18 秒\n科研前置\n模块化装配\n制造成本\n补给 180\n合金 140\n库存实例\n0\n制造中\n战术指挥链\nutility\n\n提升战术通信与目标感知，不改变生命上限。\n\n适用单位\n步兵班、反装甲班、侦察车\n制造时间\n22 秒\n科研前置\n模块化装配\n制造成本\n补给 220\n合金 170\n库存实例\n0\n加入制造队列\n机动维修架\nutility\n\n增强野战抢修效率与保障防护，不改变生命上限。\n\n适用单位\n步兵班、维修车\n制造时间\n26 秒\n科研前置\n野战维护规程\n制造成本\n补给 260\n合金 220\n库存实例\n0\n加入制造队列\n反应装甲模块\narmor\n\n提高装甲防护并保持车辆机动，不改变生命上限。\n\n适用单位\n侦察车、主战坦克、维修车\n制造时间\n32 秒\n科研前置\n复合装甲\n制造成本\n补给 320\n合金 280\n库存实例\n0\n加入制造队列\n精确火控组件\nweapon\n\n提高直接火力与反装甲精度，不改变生命上限。\n\n适用单位\n反装甲班、主战坦克\n制造时间\n38 秒\n科研前置\n扩建储备设施\n制造成本\n补给 380\n合金 340\n库存实例\n0\n加入制造队列\n单位库存\n库存总单位\n1\n空闲单位\n1\n已编入编队\n0\n维修中\n0\n步兵班\n× 0\n反装甲班\n× 0\n侦察车\n× 0\n主战坦克\n× 1\n维修车\n× 0\n说明：同时只生产 1 个单位，当前生产 + 等待队列最多 5 项。取消正在生产的单位返还 50% 成本，取消等待任务返还 100% 成本。库存单位不占用指挥容量，只有编入作战编队后才会占用。\n通讯记录 / COMMS\n2 / 30\n[08:00]\n基地数据已保存。\n[08:00]\n反装甲瞄具开始制造。\n反装甲瞄具已加入制造队列",
+            "imageSha256": "d3f1c51cd0e541752901e2ed3595e93d2ec471ddaee5cd0ace29c2b6aa0e65d1",
             "screenshot": {
               "path": "screenshots/stage9-C/s9-c-01-production-queue.png",
-              "sha256": "a15fd8cf42e9c3c505d5ac053d3ca5af1f0c25f373b246b4899b11ecbefd7851"
+              "sha256": "d3f1c51cd0e541752901e2ed3595e93d2ec471ddaee5cd0ace29c2b6aa0e65d1"
             }
           },
           {
@@ -530,17 +530,17 @@
               "reason": "production_queue",
               "method": "Page.reload",
               "before": {
-                "timeOrigin": 1786658824697.4,
+                "timeOrigin": 1786565593181.3,
                 "readyState": "complete",
                 "navigationType": "navigate"
               },
               "after": {
-                "timeOrigin": 1786658825470.5,
+                "timeOrigin": 1786565593956.9,
                 "readyState": "complete",
                 "navigationType": "reload"
               },
-              "beforeLoaderId": "D9C2D797F4676E3269029855BDA0116D",
-              "afterLoaderId": "DB6652425243FABF17AA38CAB2950909",
+              "beforeLoaderId": "2925309605E04038B43933D9D8A0C6BC",
+              "afterLoaderId": "53C8C0ADB766F159C66B45D17EE6E10F",
               "timeOriginChanged": true
             },
             "state": {
@@ -555,7 +555,7 @@
                 "current": {
                   "kind": "equipment",
                   "equipmentId": "anti_armor_sights",
-                  "id": "equipment_job_mss2j8f0_f"
+                  "id": "equipment_job_msqj0yio_f"
                 },
                 "queue": 0
               },
@@ -563,10 +563,10 @@
               "ledgerCount": 0
             },
             "domText": "◣\n钢铁指令\nIRON COMMAND · 指挥终端\n▤\n补给\n3,820/ 6,000\n+3/s\n◈\n合金\n3,860/ 6,000\n+2/s\n◎\n情报\n400/ 500\n+0.1/s\n⚡\n电力\n8/ 30\n正常\n✦\n指挥容量\n0/ 8\n空闲\n基地时间\n08:00:00\n第1天\n❚❚\n1×\n2×\n4×\n保存\n读取\n新游戏\n视图：基地全景 / BASE VIEW\n指挥区\n工业区\n军营区\n后勤区\n基地出口\nFPS 0 · 暂停\n概览\n建设\n生产\n部队\n编队\n战区\n维修\n科研\n战报\n单位生产\n阶段3 · 已开放\n当前生产线\n已暂停\n当前项目：反装甲瞄具\n生产设施\n装甲工厂\n状态\n生产中（推演已暂停）\n已用时间\n0秒\n总生产时间\n18秒\n预计剩余\n18秒\n0%\n基地推演已暂停，生产进度不会推进。\n取消当前项目\n等待队列\n最多 5 项（含当前）\n队列为空，可同时排队多项生产。\n可生产单位\n步兵班\n步兵\n\n地形适应好，可为车辆提供掩护，单独面对装甲较弱。\n\n来源建筑\n兵营\n生产时间\n10 秒\n攻击\n12\n反装甲\n4\n防御\n10\n侦察\n2\n机动\n5\n维修\n0\n生命值\n100\n任务补给消耗\n1\n指挥占用\n1\n生产成本\n补给 100\n当前库存\n0\n加入训练队列\n需要先建成兵营\n反装甲班\n步兵\n\n对坦克伤害高，但容易被压制。\n\n来源建筑\n兵营\n生产时间\n14 秒\n攻击\n18\n反装甲\n25\n防御\n7\n侦察\n2\n机动\n4\n维修\n0\n生命值\n90\n任务补给消耗\n2\n指挥占用\n1\n生产成本\n补给 130\n合金 30\n当前库存\n0\n加入训练队列\n需要先建成兵营\n侦察车\n车辆\n\n提升情报准确度、降低伏击风险，正面战斗力弱。\n\n来源建筑\n装甲工厂\n生产时间\n18 秒\n攻击\n6\n反装甲\n2\n防御\n6\n侦察\n20\n机动\n15\n维修\n0\n生命值\n90\n任务补给消耗\n2\n指挥占用\n1\n生产成本\n补给 100\n合金 120\n当前库存\n0\n加入制造队列\n主战坦克\n装甲\n\n正面突破能力强，被反装甲单位克制，维修成本高。\n\n来源建筑\n装甲工厂\n生产时间\n30 秒\n攻击\n35\n反装甲\n20\n防御\n30\n侦察\n3\n机动\n10\n维修\n0\n生命值\n160\n任务补给消耗\n5\n指挥占用\n2\n生产成本\n补给 220\n合金 300\n当前库存\n1\n加入制造队列\n维修车\n支援\n\n降低战后永久损失，战斗中恢复少量装甲耐久，无攻击能力。\n\n来源建筑\n装甲工厂\n生产时间\n24 秒\n攻击\n0\n反装甲\n0\n防御\n8\n侦察\n2\n机动\n8\n维修\n20\n生命值\n110\n任务补给消耗\n3\n指挥占用\n1\n生产成本\n补给 150\n合金 180\n当前库存\n0\n加入制造队列\n装备制造\n装甲工厂生产\n反装甲瞄具\nweapon\n\n提高反装甲火力与目标识别能力，不改变生命上限。\n\n适用单位\n反装甲班、主战坦克\n制造时间\n18 秒\n科研前置\n模块化装配\n制造成本\n补给 180\n合金 140\n库存实例\n0\n制造中\n战术指挥链\nutility\n\n提升战术通信与目标感知，不改变生命上限。\n\n适用单位\n步兵班、反装甲班、侦察车\n制造时间\n22 秒\n科研前置\n模块化装配\n制造成本\n补给 220\n合金 170\n库存实例\n0\n加入制造队列\n机动维修架\nutility\n\n增强野战抢修效率与保障防护，不改变生命上限。\n\n适用单位\n步兵班、维修车\n制造时间\n26 秒\n科研前置\n野战维护规程\n制造成本\n补给 260\n合金 220\n库存实例\n0\n加入制造队列\n反应装甲模块\narmor\n\n提高装甲防护并保持车辆机动，不改变生命上限。\n\n适用单位\n侦察车、主战坦克、维修车\n制造时间\n32 秒\n科研前置\n复合装甲\n制造成本\n补给 320\n合金 280\n库存实例\n0\n加入制造队列\n精确火控组件\nweapon\n\n提高直接火力与反装甲精度，不改变生命上限。\n\n适用单位\n反装甲班、主战坦克\n制造时间\n38 秒\n科研前置\n扩建储备设施\n制造成本\n补给 380\n合金 340\n库存实例\n0\n加入制造队列\n单位库存\n库存总单位\n1\n空闲单位\n1\n已编入编队\n0\n维修中\n0\n步兵班\n× 0\n反装甲班\n× 0\n侦察车\n× 0\n主战坦克\n× 1\n维修车\n× 0\n说明：同时只生产 1 个单位，当前生产 + 等待队列最多 5 项。取消正在生产的单位返还 50% 成本，取消等待任务返还 100% 成本。库存单位不占用指挥容量，只有编入作战编队后才会占用。\n通讯记录 / COMMS\n3 / 30\n[08:00]\n基地数据已保存。\n[08:00]\n反装甲瞄具开始制造。\n[08:00]\n存档已载入，基地状态恢复。",
-            "imageSha256": "045ccedaad120e9e563e793c3e4139374b35590e9b4b11e6532618fe5dcda0b3",
+            "imageSha256": "98bdb0dc09e65259bb13746a1db6f6afdd3231eec63fa92d03c108791fa7b53c",
             "screenshot": {
               "path": "screenshots/stage9-C/s9-c-02-production-queue-reload.png",
-              "sha256": "045ccedaad120e9e563e793c3e4139374b35590e9b4b11e6532618fe5dcda0b3"
+              "sha256": "98bdb0dc09e65259bb13746a1db6f6afdd3231eec63fa92d03c108791fa7b53c"
             }
           },
           {
@@ -589,11 +589,11 @@
               "reportCount": 0,
               "ledgerCount": 0
             },
-            "domText": "◣\n钢铁指令\nIRON COMMAND · 指挥终端\n▤\n补给\n3,784/ 6,000\n+3/s\n◈\n合金\n3,826/ 6,000\n+2/s\n◎\n情报\n401/ 500\n+0.1/s\n⚡\n电力\n8/ 30\n正常\n✦\n指挥容量\n0/ 8\n空闲\n基地时间\n08:00:18\n第1天\n❚❚\n1×\n2×\n4×\n保存\n读取\n新游戏\n视图：基地全景 / BASE VIEW\n指挥区\n工业区\n军营区\n后勤区\n基地出口\nFPS 60 · 暂停\n概览\n建设\n生产\n部队\n编队\n战区\n维修\n科研\n战报\n单位生产\n阶段3 · 已开放\n当前生产线\n空闲\n生产线当前空闲\n可批准新的训练或制造任务。\n等待队列\n最多 5 项（含当前）\n队列为空，可同时排队多项生产。\n可生产单位\n步兵班\n步兵\n\n地形适应好，可为车辆提供掩护，单独面对装甲较弱。\n\n来源建筑\n兵营\n生产时间\n10 秒\n攻击\n12\n反装甲\n4\n防御\n10\n侦察\n2\n机动\n5\n维修\n0\n生命值\n100\n任务补给消耗\n1\n指挥占用\n1\n生产成本\n补给 100\n当前库存\n0\n加入训练队列\n需要先建成兵营\n反装甲班\n步兵\n\n对坦克伤害高，但容易被压制。\n\n来源建筑\n兵营\n生产时间\n14 秒\n攻击\n18\n反装甲\n25\n防御\n7\n侦察\n2\n机动\n4\n维修\n0\n生命值\n90\n任务补给消耗\n2\n指挥占用\n1\n生产成本\n补给 130\n合金 30\n当前库存\n0\n加入训练队列\n需要先建成兵营\n侦察车\n车辆\n\n提升情报准确度、降低伏击风险，正面战斗力弱。\n\n来源建筑\n装甲工厂\n生产时间\n18 秒\n攻击\n6\n反装甲\n2\n防御\n6\n侦察\n20\n机动\n15\n维修\n0\n生命值\n90\n任务补给消耗\n2\n指挥占用\n1\n生产成本\n补给 100\n合金 120\n当前库存\n0\n加入制造队列\n主战坦克\n装甲\n\n正面突破能力强，被反装甲单位克制，维修成本高。\n\n来源建筑\n装甲工厂\n生产时间\n30 秒\n攻击\n35\n反装甲\n20\n防御\n30\n侦察\n3\n机动\n10\n维修\n0\n生命值\n160\n任务补给消耗\n5\n指挥占用\n2\n生产成本\n补给 220\n合金 300\n当前库存\n1\n加入制造队列\n维修车\n支援\n\n降低战后永久损失，战斗中恢复少量装甲耐久，无攻击能力。\n\n来源建筑\n装甲工厂\n生产时间\n24 秒\n攻击\n0\n反装甲\n0\n防御\n8\n侦察\n2\n机动\n8\n维修\n20\n生命值\n110\n任务补给消耗\n3\n指挥占用\n1\n生产成本\n补给 150\n合金 180\n当前库存\n0\n加入制造队列\n装备制造\n装甲工厂生产\n反装甲瞄具\nweapon\n\n提高反装甲火力与目标识别能力，不改变生命上限。\n\n适用单位\n反装甲班、主战坦克\n制造时间\n18 秒\n科研前置\n模块化装配\n制造成本\n补给 180\n合金 140\n库存实例\n1\n加入制造队列\n战术指挥链\nutility\n\n提升战术通信与目标感知，不改变生命上限。\n\n适用单位\n步兵班、反装甲班、侦察车\n制造时间\n22 秒\n科研前置\n模块化装配\n制造成本\n补给 220\n合金 170\n库存实例\n0\n加入制造队列\n机动维修架\nutility\n\n增强野战抢修效率与保障防护，不改变生命上限。\n\n适用单位\n步兵班、维修车\n制造时间\n26 秒\n科研前置\n野战维护规程\n制造成本\n补给 260\n合金 220\n库存实例\n0\n加入制造队列\n反应装甲模块\narmor\n\n提高装甲防护并保持车辆机动，不改变生命上限。\n\n适用单位\n侦察车、主战坦克、维修车\n制造时间\n32 秒\n科研前置\n复合装甲\n制造成本\n补给 320\n合金 280\n库存实例\n0\n加入制造队列\n精确火控组件\nweapon\n\n提高直接火力与反装甲精度，不改变生命上限。\n\n适用单位\n反装甲班、主战坦克\n制造时间\n38 秒\n科研前置\n扩建储备设施\n制造成本\n补给 380\n合金 340\n库存实例\n0\n加入制造队列\n单位库存\n库存总单位\n1\n空闲单位\n1\n已编入编队\n0\n维修中\n0\n步兵班\n× 0\n反装甲班\n× 0\n侦察车\n× 0\n主战坦克\n× 1\n维修车\n× 0\n说明：同时只生产 1 个单位，当前生产 + 等待队列最多 5 项。取消正在生产的单位返还 50% 成本，取消等待任务返还 100% 成本。库存单位不占用指挥容量，只有编入作战编队后才会占用。\n通讯记录 / COMMS\n9 / 30\n[08:00]\n基地数据已保存。\n[08:00]\n反装甲瞄具开始制造。\n[08:00]\n存档已载入，基地状态恢复。\n[08:00]\n反装甲瞄具生产已取消，返还补给90 · 合金70。\n[08:00]\n反装甲瞄具开始制造。\n[08:00]\n战术指挥链已加入制造队列，当前排在第2位。\n[08:00]\n战术指挥链已从等待队列移除，返还补给220 · 合金170。\n[08:00]\n反装甲瞄具制造完成，已进入装备库存。\n[08:00]\n装甲工厂已空闲。\n推演已暂停",
-            "imageSha256": "8b2225946ccded7bd0fb08d55e36884dffaff4eba08d091a84e49eec2c2f07a2",
+            "domText": "◣\n钢铁指令\nIRON COMMAND · 指挥终端\n▤\n补给\n3,784/ 6,000\n+3/s\n◈\n合金\n3,825/ 6,000\n+2/s\n◎\n情报\n401/ 500\n+0.1/s\n⚡\n电力\n8/ 30\n正常\n✦\n指挥容量\n0/ 8\n空闲\n基地时间\n08:00:17\n第1天\n❚❚\n1×\n2×\n4×\n保存\n读取\n新游戏\n视图：基地全景 / BASE VIEW\n指挥区\n工业区\n军营区\n后勤区\n基地出口\nFPS 60 · 暂停\n概览\n建设\n生产\n部队\n编队\n战区\n维修\n科研\n战报\n单位生产\n阶段3 · 已开放\n当前生产线\n空闲\n生产线当前空闲\n可批准新的训练或制造任务。\n等待队列\n最多 5 项（含当前）\n队列为空，可同时排队多项生产。\n可生产单位\n步兵班\n步兵\n\n地形适应好，可为车辆提供掩护，单独面对装甲较弱。\n\n来源建筑\n兵营\n生产时间\n10 秒\n攻击\n12\n反装甲\n4\n防御\n10\n侦察\n2\n机动\n5\n维修\n0\n生命值\n100\n任务补给消耗\n1\n指挥占用\n1\n生产成本\n补给 100\n当前库存\n0\n加入训练队列\n需要先建成兵营\n反装甲班\n步兵\n\n对坦克伤害高，但容易被压制。\n\n来源建筑\n兵营\n生产时间\n14 秒\n攻击\n18\n反装甲\n25\n防御\n7\n侦察\n2\n机动\n4\n维修\n0\n生命值\n90\n任务补给消耗\n2\n指挥占用\n1\n生产成本\n补给 130\n合金 30\n当前库存\n0\n加入训练队列\n需要先建成兵营\n侦察车\n车辆\n\n提升情报准确度、降低伏击风险，正面战斗力弱。\n\n来源建筑\n装甲工厂\n生产时间\n18 秒\n攻击\n6\n反装甲\n2\n防御\n6\n侦察\n20\n机动\n15\n维修\n0\n生命值\n90\n任务补给消耗\n2\n指挥占用\n1\n生产成本\n补给 100\n合金 120\n当前库存\n0\n加入制造队列\n主战坦克\n装甲\n\n正面突破能力强，被反装甲单位克制，维修成本高。\n\n来源建筑\n装甲工厂\n生产时间\n30 秒\n攻击\n35\n反装甲\n20\n防御\n30\n侦察\n3\n机动\n10\n维修\n0\n生命值\n160\n任务补给消耗\n5\n指挥占用\n2\n生产成本\n补给 220\n合金 300\n当前库存\n1\n加入制造队列\n维修车\n支援\n\n降低战后永久损失，战斗中恢复少量装甲耐久，无攻击能力。\n\n来源建筑\n装甲工厂\n生产时间\n24 秒\n攻击\n0\n反装甲\n0\n防御\n8\n侦察\n2\n机动\n8\n维修\n20\n生命值\n110\n任务补给消耗\n3\n指挥占用\n1\n生产成本\n补给 150\n合金 180\n当前库存\n0\n加入制造队列\n装备制造\n装甲工厂生产\n反装甲瞄具\nweapon\n\n提高反装甲火力与目标识别能力，不改变生命上限。\n\n适用单位\n反装甲班、主战坦克\n制造时间\n18 秒\n科研前置\n模块化装配\n制造成本\n补给 180\n合金 140\n库存实例\n1\n加入制造队列\n战术指挥链\nutility\n\n提升战术通信与目标感知，不改变生命上限。\n\n适用单位\n步兵班、反装甲班、侦察车\n制造时间\n22 秒\n科研前置\n模块化装配\n制造成本\n补给 220\n合金 170\n库存实例\n0\n加入制造队列\n机动维修架\nutility\n\n增强野战抢修效率与保障防护，不改变生命上限。\n\n适用单位\n步兵班、维修车\n制造时间\n26 秒\n科研前置\n野战维护规程\n制造成本\n补给 260\n合金 220\n库存实例\n0\n加入制造队列\n反应装甲模块\narmor\n\n提高装甲防护并保持车辆机动，不改变生命上限。\n\n适用单位\n侦察车、主战坦克、维修车\n制造时间\n32 秒\n科研前置\n复合装甲\n制造成本\n补给 320\n合金 280\n库存实例\n0\n加入制造队列\n精确火控组件\nweapon\n\n提高直接火力与反装甲精度，不改变生命上限。\n\n适用单位\n反装甲班、主战坦克\n制造时间\n38 秒\n科研前置\n扩建储备设施\n制造成本\n补给 380\n合金 340\n库存实例\n0\n加入制造队列\n单位库存\n库存总单位\n1\n空闲单位\n1\n已编入编队\n0\n维修中\n0\n步兵班\n× 0\n反装甲班\n× 0\n侦察车\n× 0\n主战坦克\n× 1\n维修车\n× 0\n说明：同时只生产 1 个单位，当前生产 + 等待队列最多 5 项。取消正在生产的单位返还 50% 成本，取消等待任务返还 100% 成本。库存单位不占用指挥容量，只有编入作战编队后才会占用。\n通讯记录 / COMMS\n9 / 30\n[08:00]\n基地数据已保存。\n[08:00]\n反装甲瞄具开始制造。\n[08:00]\n存档已载入，基地状态恢复。\n[08:00]\n反装甲瞄具生产已取消，返还补给90 · 合金70。\n[08:00]\n反装甲瞄具开始制造。\n[08:00]\n战术指挥链已加入制造队列，当前排在第2位。\n[08:00]\n战术指挥链已从等待队列移除，返还补给220 · 合金170。\n[08:00]\n反装甲瞄具制造完成，已进入装备库存。\n[08:00]\n装甲工厂已空闲。\n推演已暂停",
+            "imageSha256": "08f00846c60c69716045df40b25275fff734d60c91f6bdec923d00bfdb7b6652",
             "screenshot": {
               "path": "screenshots/stage9-C/s9-c-03-completed-unmounted.png",
-              "sha256": "8b2225946ccded7bd0fb08d55e36884dffaff4eba08d091a84e49eec2c2f07a2"
+              "sha256": "08f00846c60c69716045df40b25275fff734d60c91f6bdec923d00bfdb7b6652"
             }
           },
           {
@@ -605,17 +605,17 @@
               "reason": "completed_unmounted",
               "method": "Page.reload",
               "before": {
-                "timeOrigin": 1786658825470.5,
+                "timeOrigin": 1786565593956.9,
                 "readyState": "complete",
                 "navigationType": "reload"
               },
               "after": {
-                "timeOrigin": 1786658832264.9,
+                "timeOrigin": 1786565600669.4,
                 "readyState": "complete",
                 "navigationType": "reload"
               },
-              "beforeLoaderId": "DB6652425243FABF17AA38CAB2950909",
-              "afterLoaderId": "57800A0488827689976DA026F559CF81",
+              "beforeLoaderId": "53C8C0ADB766F159C66B45D17EE6E10F",
+              "afterLoaderId": "9FF6BF3E8166FBA9D3B2AD541350AD68",
               "timeOriginChanged": true
             },
             "state": {
@@ -633,11 +633,11 @@
               "reportCount": 0,
               "ledgerCount": 0
             },
-            "domText": "◣\n钢铁指令\nIRON COMMAND · 指挥终端\n▤\n补给\n3,784/ 6,000\n+3/s\n◈\n合金\n3,826/ 6,000\n+2/s\n◎\n情报\n401/ 500\n+0.1/s\n⚡\n电力\n8/ 30\n正常\n✦\n指挥容量\n0/ 8\n空闲\n基地时间\n08:00:18\n第1天\n❚❚\n1×\n2×\n4×\n保存\n读取\n新游戏\n视图：基地全景 / BASE VIEW\n指挥区\n工业区\n军营区\n后勤区\n基地出口\nFPS 0 · 暂停\n概览\n建设\n生产\n部队\n编队\n战区\n维修\n科研\n战报\n单位生产\n阶段3 · 已开放\n当前生产线\n空闲\n生产线当前空闲\n可批准新的训练或制造任务。\n等待队列\n最多 5 项（含当前）\n队列为空，可同时排队多项生产。\n可生产单位\n步兵班\n步兵\n\n地形适应好，可为车辆提供掩护，单独面对装甲较弱。\n\n来源建筑\n兵营\n生产时间\n10 秒\n攻击\n12\n反装甲\n4\n防御\n10\n侦察\n2\n机动\n5\n维修\n0\n生命值\n100\n任务补给消耗\n1\n指挥占用\n1\n生产成本\n补给 100\n当前库存\n0\n加入训练队列\n需要先建成兵营\n反装甲班\n步兵\n\n对坦克伤害高，但容易被压制。\n\n来源建筑\n兵营\n生产时间\n14 秒\n攻击\n18\n反装甲\n25\n防御\n7\n侦察\n2\n机动\n4\n维修\n0\n生命值\n90\n任务补给消耗\n2\n指挥占用\n1\n生产成本\n补给 130\n合金 30\n当前库存\n0\n加入训练队列\n需要先建成兵营\n侦察车\n车辆\n\n提升情报准确度、降低伏击风险，正面战斗力弱。\n\n来源建筑\n装甲工厂\n生产时间\n18 秒\n攻击\n6\n反装甲\n2\n防御\n6\n侦察\n20\n机动\n15\n维修\n0\n生命值\n90\n任务补给消耗\n2\n指挥占用\n1\n生产成本\n补给 100\n合金 120\n当前库存\n0\n加入制造队列\n主战坦克\n装甲\n\n正面突破能力强，被反装甲单位克制，维修成本高。\n\n来源建筑\n装甲工厂\n生产时间\n30 秒\n攻击\n35\n反装甲\n20\n防御\n30\n侦察\n3\n机动\n10\n维修\n0\n生命值\n160\n任务补给消耗\n5\n指挥占用\n2\n生产成本\n补给 220\n合金 300\n当前库存\n1\n加入制造队列\n维修车\n支援\n\n降低战后永久损失，战斗中恢复少量装甲耐久，无攻击能力。\n\n来源建筑\n装甲工厂\n生产时间\n24 秒\n攻击\n0\n反装甲\n0\n防御\n8\n侦察\n2\n机动\n8\n维修\n20\n生命值\n110\n任务补给消耗\n3\n指挥占用\n1\n生产成本\n补给 150\n合金 180\n当前库存\n0\n加入制造队列\n装备制造\n装甲工厂生产\n反装甲瞄具\nweapon\n\n提高反装甲火力与目标识别能力，不改变生命上限。\n\n适用单位\n反装甲班、主战坦克\n制造时间\n18 秒\n科研前置\n模块化装配\n制造成本\n补给 180\n合金 140\n库存实例\n1\n加入制造队列\n战术指挥链\nutility\n\n提升战术通信与目标感知，不改变生命上限。\n\n适用单位\n步兵班、反装甲班、侦察车\n制造时间\n22 秒\n科研前置\n模块化装配\n制造成本\n补给 220\n合金 170\n库存实例\n0\n加入制造队列\n机动维修架\nutility\n\n增强野战抢修效率与保障防护，不改变生命上限。\n\n适用单位\n步兵班、维修车\n制造时间\n26 秒\n科研前置\n野战维护规程\n制造成本\n补给 260\n合金 220\n库存实例\n0\n加入制造队列\n反应装甲模块\narmor\n\n提高装甲防护并保持车辆机动，不改变生命上限。\n\n适用单位\n侦察车、主战坦克、维修车\n制造时间\n32 秒\n科研前置\n复合装甲\n制造成本\n补给 320\n合金 280\n库存实例\n0\n加入制造队列\n精确火控组件\nweapon\n\n提高直接火力与反装甲精度，不改变生命上限。\n\n适用单位\n反装甲班、主战坦克\n制造时间\n38 秒\n科研前置\n扩建储备设施\n制造成本\n补给 380\n合金 340\n库存实例\n0\n加入制造队列\n单位库存\n库存总单位\n1\n空闲单位\n1\n已编入编队\n0\n维修中\n0\n步兵班\n× 0\n反装甲班\n× 0\n侦察车\n× 0\n主战坦克\n× 1\n维修车\n× 0\n说明：同时只生产 1 个单位，当前生产 + 等待队列最多 5 项。取消正在生产的单位返还 50% 成本，取消等待任务返还 100% 成本。库存单位不占用指挥容量，只有编入作战编队后才会占用。\n通讯记录 / COMMS\n10 / 30\n[08:00]\n基地数据已保存。\n[08:00]\n反装甲瞄具开始制造。\n[08:00]\n存档已载入，基地状态恢复。\n[08:00]\n反装甲瞄具生产已取消，返还补给90 · 合金70。\n[08:00]\n反装甲瞄具开始制造。\n[08:00]\n战术指挥链已加入制造队列，当前排在第2位。\n[08:00]\n战术指挥链已从等待队列移除，返还补给220 · 合金170。\n[08:00]\n反装甲瞄具制造完成，已进入装备库存。\n[08:00]\n装甲工厂已空闲。\n[08:00]\n存档已载入，基地状态恢复。",
-            "imageSha256": "311047dbcd74428f078eeb1a979f0b33f8ec3355331898c151504362bd4220c2",
+            "domText": "◣\n钢铁指令\nIRON COMMAND · 指挥终端\n▤\n补给\n3,784/ 6,000\n+3/s\n◈\n合金\n3,825/ 6,000\n+2/s\n◎\n情报\n401/ 500\n+0.1/s\n⚡\n电力\n8/ 30\n正常\n✦\n指挥容量\n0/ 8\n空闲\n基地时间\n08:00:17\n第1天\n❚❚\n1×\n2×\n4×\n保存\n读取\n新游戏\n视图：基地全景 / BASE VIEW\n指挥区\n工业区\n军营区\n后勤区\n基地出口\nFPS 0 · 暂停\n概览\n建设\n生产\n部队\n编队\n战区\n维修\n科研\n战报\n单位生产\n阶段3 · 已开放\n当前生产线\n空闲\n生产线当前空闲\n可批准新的训练或制造任务。\n等待队列\n最多 5 项（含当前）\n队列为空，可同时排队多项生产。\n可生产单位\n步兵班\n步兵\n\n地形适应好，可为车辆提供掩护，单独面对装甲较弱。\n\n来源建筑\n兵营\n生产时间\n10 秒\n攻击\n12\n反装甲\n4\n防御\n10\n侦察\n2\n机动\n5\n维修\n0\n生命值\n100\n任务补给消耗\n1\n指挥占用\n1\n生产成本\n补给 100\n当前库存\n0\n加入训练队列\n需要先建成兵营\n反装甲班\n步兵\n\n对坦克伤害高，但容易被压制。\n\n来源建筑\n兵营\n生产时间\n14 秒\n攻击\n18\n反装甲\n25\n防御\n7\n侦察\n2\n机动\n4\n维修\n0\n生命值\n90\n任务补给消耗\n2\n指挥占用\n1\n生产成本\n补给 130\n合金 30\n当前库存\n0\n加入训练队列\n需要先建成兵营\n侦察车\n车辆\n\n提升情报准确度、降低伏击风险，正面战斗力弱。\n\n来源建筑\n装甲工厂\n生产时间\n18 秒\n攻击\n6\n反装甲\n2\n防御\n6\n侦察\n20\n机动\n15\n维修\n0\n生命值\n90\n任务补给消耗\n2\n指挥占用\n1\n生产成本\n补给 100\n合金 120\n当前库存\n0\n加入制造队列\n主战坦克\n装甲\n\n正面突破能力强，被反装甲单位克制，维修成本高。\n\n来源建筑\n装甲工厂\n生产时间\n30 秒\n攻击\n35\n反装甲\n20\n防御\n30\n侦察\n3\n机动\n10\n维修\n0\n生命值\n160\n任务补给消耗\n5\n指挥占用\n2\n生产成本\n补给 220\n合金 300\n当前库存\n1\n加入制造队列\n维修车\n支援\n\n降低战后永久损失，战斗中恢复少量装甲耐久，无攻击能力。\n\n来源建筑\n装甲工厂\n生产时间\n24 秒\n攻击\n0\n反装甲\n0\n防御\n8\n侦察\n2\n机动\n8\n维修\n20\n生命值\n110\n任务补给消耗\n3\n指挥占用\n1\n生产成本\n补给 150\n合金 180\n当前库存\n0\n加入制造队列\n装备制造\n装甲工厂生产\n反装甲瞄具\nweapon\n\n提高反装甲火力与目标识别能力，不改变生命上限。\n\n适用单位\n反装甲班、主战坦克\n制造时间\n18 秒\n科研前置\n模块化装配\n制造成本\n补给 180\n合金 140\n库存实例\n1\n加入制造队列\n战术指挥链\nutility\n\n提升战术通信与目标感知，不改变生命上限。\n\n适用单位\n步兵班、反装甲班、侦察车\n制造时间\n22 秒\n科研前置\n模块化装配\n制造成本\n补给 220\n合金 170\n库存实例\n0\n加入制造队列\n机动维修架\nutility\n\n增强野战抢修效率与保障防护，不改变生命上限。\n\n适用单位\n步兵班、维修车\n制造时间\n26 秒\n科研前置\n野战维护规程\n制造成本\n补给 260\n合金 220\n库存实例\n0\n加入制造队列\n反应装甲模块\narmor\n\n提高装甲防护并保持车辆机动，不改变生命上限。\n\n适用单位\n侦察车、主战坦克、维修车\n制造时间\n32 秒\n科研前置\n复合装甲\n制造成本\n补给 320\n合金 280\n库存实例\n0\n加入制造队列\n精确火控组件\nweapon\n\n提高直接火力与反装甲精度，不改变生命上限。\n\n适用单位\n反装甲班、主战坦克\n制造时间\n38 秒\n科研前置\n扩建储备设施\n制造成本\n补给 380\n合金 340\n库存实例\n0\n加入制造队列\n单位库存\n库存总单位\n1\n空闲单位\n1\n已编入编队\n0\n维修中\n0\n步兵班\n× 0\n反装甲班\n× 0\n侦察车\n× 0\n主战坦克\n× 1\n维修车\n× 0\n说明：同时只生产 1 个单位，当前生产 + 等待队列最多 5 项。取消正在生产的单位返还 50% 成本，取消等待任务返还 100% 成本。库存单位不占用指挥容量，只有编入作战编队后才会占用。\n通讯记录 / COMMS\n10 / 30\n[08:00]\n基地数据已保存。\n[08:00]\n反装甲瞄具开始制造。\n[08:00]\n存档已载入，基地状态恢复。\n[08:00]\n反装甲瞄具生产已取消，返还补给90 · 合金70。\n[08:00]\n反装甲瞄具开始制造。\n[08:00]\n战术指挥链已加入制造队列，当前排在第2位。\n[08:00]\n战术指挥链已从等待队列移除，返还补给220 · 合金170。\n[08:00]\n反装甲瞄具制造完成，已进入装备库存。\n[08:00]\n装甲工厂已空闲。\n[08:00]\n存档已载入，基地状态恢复。",
+            "imageSha256": "5e0faf45de71d1653b37b7e12825a69f771c863751757d6a7b820a50729d1ff2",
             "screenshot": {
               "path": "screenshots/stage9-C/s9-c-04-completed-reload.png",
-              "sha256": "311047dbcd74428f078eeb1a979f0b33f8ec3355331898c151504362bd4220c2"
+              "sha256": "5e0faf45de71d1653b37b7e12825a69f771c863751757d6a7b820a50729d1ff2"
             }
           },
           {
@@ -664,11 +664,11 @@
               "reportCount": 0,
               "ledgerCount": 0
             },
-            "domText": "◣\n钢铁指令\nIRON COMMAND · 指挥终端\n▤\n补给\n3,784/ 6,000\n+3/s\n◈\n合金\n3,826/ 6,000\n+2/s\n◎\n情报\n401/ 500\n+0.1/s\n⚡\n电力\n8/ 30\n正常\n✦\n指挥容量\n0/ 8\n空闲\n基地时间\n08:00:18\n第1天\n❚❚\n1×\n2×\n4×\n保存\n读取\n新游戏\n视图：基地全景 / BASE VIEW\n指挥区\n工业区\n军营区\n后勤区\n基地出口\nFPS 62 · 暂停\n概览\n建设\n生产\n部队\n编队\n战区\n维修\n科研\n战报\n单位档案\n阶段8 · 已开放\n1\n单位总数\n1\n空闲单位\n0\n已编队单位\n0\n维修中单位\n0\n轻度受损\n0\n重度受损\n1\n新兵\n0\n训练有素\n0\n老兵\n0\n精锐\n类型\n全部类型\n步兵\n车辆\n装甲\n支援\n状态\n全部状态\n空闲\n已编队\n维修中\n受损\n等级\n全部等级\n新兵\n训练有素\n老兵\n精锐\n排序\n创建时间\n经验\n战斗次数\n生命比例\n单位类型\n单位列表\n1 个\n主战坦克\n新兵 · 主战坦克\n经验 0 · 战斗 0 · HP 160/160 · intact\n单位详情\n主战坦克\n新兵\n保存呼号\n单位类型\n主战坦克\n创建时间\n08:00:00\n来源建筑\n装甲工厂\n经验\n0\n战斗次数\n0\n生命\n160 / 160\n损伤\nintact\n等级进度\n距训练有素还需 10\n战斗中实际属性\nattack\n35（基础 35）\nantiArmor\n22（基础 20）\ndefense\n30（基础 30）\nscouting\n3.09（基础 3）\nmobility\n10（基础 10）\nrepair\n0（基础 0）\n装备槽位（1/2）\n反装甲瞄具 · 槽位1\n卸载\n战术光学组 · 初始配发 · equipment-starter-1\n挂载\n强化底盘 · 初始配发 · equipment-starter-2\n挂载\n野战工具包 · 初始配发 · equipment-starter-3\n挂载\n通讯记录 / COMMS\n10 / 30\n[08:00]\n基地数据已保存。\n[08:00]\n反装甲瞄具开始制造。\n[08:00]\n存档已载入，基地状态恢复。\n[08:00]\n反装甲瞄具生产已取消，返还补给90 · 合金70。\n[08:00]\n反装甲瞄具开始制造。\n[08:00]\n战术指挥链已加入制造队列，当前排在第2位。\n[08:00]\n战术指挥链已从等待队列移除，返还补给220 · 合金170。\n[08:00]\n反装甲瞄具制造完成，已进入装备库存。\n[08:00]\n装甲工厂已空闲。\n[08:00]\n存档已载入，基地状态恢复。\n装备已挂载",
-            "imageSha256": "afa357d4c357fbce6edaadba235d9199f63f246deb954ff983e74b655c06fd56",
+            "domText": "◣\n钢铁指令\nIRON COMMAND · 指挥终端\n▤\n补给\n3,784/ 6,000\n+3/s\n◈\n合金\n3,825/ 6,000\n+2/s\n◎\n情报\n401/ 500\n+0.1/s\n⚡\n电力\n8/ 30\n正常\n✦\n指挥容量\n0/ 8\n空闲\n基地时间\n08:00:17\n第1天\n❚❚\n1×\n2×\n4×\n保存\n读取\n新游戏\n视图：基地全景 / BASE VIEW\n指挥区\n工业区\n军营区\n后勤区\n基地出口\nFPS 61 · 暂停\n概览\n建设\n生产\n部队\n编队\n战区\n维修\n科研\n战报\n单位档案\n阶段8 · 已开放\n1\n单位总数\n1\n空闲单位\n0\n已编队单位\n0\n维修中单位\n0\n轻度受损\n0\n重度受损\n1\n新兵\n0\n训练有素\n0\n老兵\n0\n精锐\n类型\n全部类型\n步兵\n车辆\n装甲\n支援\n状态\n全部状态\n空闲\n已编队\n维修中\n受损\n等级\n全部等级\n新兵\n训练有素\n老兵\n精锐\n排序\n创建时间\n经验\n战斗次数\n生命比例\n单位类型\n单位列表\n1 个\n主战坦克\n新兵 · 主战坦克\n经验 0 · 战斗 0 · HP 160/160 · intact\n单位详情\n主战坦克\n新兵\n保存呼号\n单位类型\n主战坦克\n创建时间\n08:00:00\n来源建筑\n装甲工厂\n经验\n0\n战斗次数\n0\n生命\n160 / 160\n损伤\nintact\n等级进度\n距训练有素还需 10\n战斗中实际属性\nattack\n35（基础 35）\nantiArmor\n22（基础 20）\ndefense\n30（基础 30）\nscouting\n3.09（基础 3）\nmobility\n10（基础 10）\nrepair\n0（基础 0）\n装备槽位（1/2）\n反装甲瞄具 · 槽位1\n卸载\n战术光学组 · scouting×1.15 mobility×1.03\n挂载\n强化底盘 · defense×1.08 mobility×1.04\n挂载\n野战工具包 · repair×1.2 defense×1.02\n挂载\n通讯记录 / COMMS\n10 / 30\n[08:00]\n基地数据已保存。\n[08:00]\n反装甲瞄具开始制造。\n[08:00]\n存档已载入，基地状态恢复。\n[08:00]\n反装甲瞄具生产已取消，返还补给90 · 合金70。\n[08:00]\n反装甲瞄具开始制造。\n[08:00]\n战术指挥链已加入制造队列，当前排在第2位。\n[08:00]\n战术指挥链已从等待队列移除，返还补给220 · 合金170。\n[08:00]\n反装甲瞄具制造完成，已进入装备库存。\n[08:00]\n装甲工厂已空闲。\n[08:00]\n存档已载入，基地状态恢复。\n装备已挂载",
+            "imageSha256": "8244d27139c20995b7f9b3ea374dbb1a8bfa2243c3a757c7e95e78579cbef4df",
             "screenshot": {
               "path": "screenshots/stage9-C/s9-c-05-mounted.png",
-              "sha256": "afa357d4c357fbce6edaadba235d9199f63f246deb954ff983e74b655c06fd56"
+              "sha256": "8244d27139c20995b7f9b3ea374dbb1a8bfa2243c3a757c7e95e78579cbef4df"
             }
           },
           {
@@ -676,18 +676,18 @@
             "file": "s9-c-06-running.png",
             "semantic": "running_battle_equipment_change_attempt",
             "phase": "running_battle_equipment_change_attempt",
-            "sessionId": "battle-session-14-scrap_mine-e831747db877938f3cfb-1",
+            "sessionId": "battle-session-14-scrap_mine-87cb5d9aee2347f3d2f1-1",
             "state": {
-              "activeBattleSessionId": "battle-session-14-scrap_mine-e831747db877938f3cfb-1",
+              "activeBattleSessionId": "battle-session-14-scrap_mine-87cb5d9aee2347f3d2f1-1",
               "activeBattle": {
-                "battleSessionId": "battle-session-14-scrap_mine-e831747db877938f3cfb-1",
+                "battleSessionId": "battle-session-14-scrap_mine-87cb5d9aee2347f3d2f1-1",
                 "replayReadOnly": false,
                 "settled": false,
                 "settlementAllowed": true,
-                "deploymentHash": "e831747db877938f3cfbc367efc92ed4319646746d1b40324c70db32fc114774",
-                "formalReportHash": "cac0f3244ef4574541c33d5ac3e5bb0b06ada9f64bf7d2b0399e44269029c6e2",
-                "settlementId": "settlement-b04ec6f0459363a948447df58ddf57807ea0f8c06fea9a34376e5d26c3c63ee9",
-                "reportId": "battle_2089849983_fm_mss2jewv_6_scrap_mine_cautious",
+                "deploymentHash": "87cb5d9aee2347f3d2f19101ab1ef965e0b5263f5f4aa5230aa8380ea1522561",
+                "formalReportHash": "7bf39b8e4183e60bed526a32107cccfae0be6b98432bb3e9ba4b3b6a2cdcab45",
+                "settlementId": "settlement-f7d3ce52c3758b03e7ab0e4e9729e2388d6455a68a06717d246ed19f646661e7",
+                "reportId": "battle_3992048898_fm_msqj14wv_6_scrap_mine_cautious",
                 "historicalEquipment": {
                   "stage9-c-browser-unit": [
                     {
@@ -706,11 +706,11 @@
                 }
               },
               "authoritativeSession": {
-                "battleSessionId": "battle-session-14-scrap_mine-e831747db877938f3cfb-1",
+                "battleSessionId": "battle-session-14-scrap_mine-87cb5d9aee2347f3d2f1-1",
                 "missionId": "scrap_mine",
                 "deploymentSnapshot": {
                   "formation": {
-                    "id": "fm_mss2jewv_6",
+                    "id": "fm_msqj14wv_6",
                     "name": "第一战斗群",
                     "experience": 0,
                     "unitIds": [
@@ -800,17 +800,17 @@
                   "missionId": "scrap_mine",
                   "operation": null
                 },
-                "deploymentSnapshotId": "deployment-e831747db877938f3cfbc367efc92ed4319646746d1b40324c70db32fc114774",
-                "deploymentHash": "e831747db877938f3cfbc367efc92ed4319646746d1b40324c70db32fc114774",
-                "formalReportId": "battle_2089849983_fm_mss2jewv_6_scrap_mine_cautious",
-                "formalReportHash": "cac0f3244ef4574541c33d5ac3e5bb0b06ada9f64bf7d2b0399e44269029c6e2",
-                "sourceReportHash": "cac0f3244ef4574541c33d5ac3e5bb0b06ada9f64bf7d2b0399e44269029c6e2",
+                "deploymentSnapshotId": "deployment-87cb5d9aee2347f3d2f19101ab1ef965e0b5263f5f4aa5230aa8380ea1522561",
+                "deploymentHash": "87cb5d9aee2347f3d2f19101ab1ef965e0b5263f5f4aa5230aa8380ea1522561",
+                "formalReportId": "battle_3992048898_fm_msqj14wv_6_scrap_mine_cautious",
+                "formalReportHash": "7bf39b8e4183e60bed526a32107cccfae0be6b98432bb3e9ba4b3b6a2cdcab45",
+                "sourceReportHash": "7bf39b8e4183e60bed526a32107cccfae0be6b98432bb3e9ba4b3b6a2cdcab45",
                 "sourceSaveRevision": 14,
-                "settlementId": "settlement-b04ec6f0459363a948447df58ddf57807ea0f8c06fea9a34376e5d26c3c63ee9",
+                "settlementId": "settlement-f7d3ce52c3758b03e7ab0e4e9729e2388d6455a68a06717d246ed19f646661e7",
                 "sessionOrigin": "production",
                 "formalReport": {
-                  "id": "battle_2089849983_fm_mss2jewv_6_scrap_mine_cautious",
-                  "seed": 2089849983,
+                  "id": "battle_3992048898_fm_msqj14wv_6_scrap_mine_cautious",
+                  "seed": 3992048898,
                   "theaterId": "scrap_mine",
                   "theaterName": "废弃矿区",
                   "terrain": "open",
@@ -818,9 +818,9 @@
                   "missionKind": "campaign",
                   "missionId": "scrap_mine",
                   "strategyName": "谨慎推进",
-                  "formationId": "fm_mss2jewv_6",
+                  "formationId": "fm_msqj14wv_6",
                   "formationName": "第一战斗群",
-                  "startedAt": 2089849983,
+                  "startedAt": 3992048898,
                   "initial": {
                     "friendly": [
                       {
@@ -1165,7 +1165,7 @@
                       "t": 12.95,
                       "type": "fire",
                       "actor": "unit_stage9-c-browser-unit",
-                      "target": "enemy_infantry_2",
+                      "target": "enemy_infantry_1",
                       "value": 0,
                       "text": "主战坦克向敌方步兵班开火"
                     },
@@ -1173,15 +1173,15 @@
                       "t": 14.25,
                       "type": "damage",
                       "actor": "unit_stage9-c-browser-unit",
-                      "target": "enemy_infantry_2",
-                      "value": 47,
-                      "text": "敌方步兵班受到47点伤害"
+                      "target": "enemy_infantry_1",
+                      "value": 55,
+                      "text": "敌方步兵班受到55点伤害"
                     },
                     {
                       "t": 15.55,
                       "type": "suppress",
                       "actor": "unit_stage9-c-browser-unit",
-                      "target": "enemy_infantry_2",
+                      "target": "enemy_infantry_1",
                       "value": 0,
                       "text": "敌方步兵班被压制，下次攻击下降"
                     },
@@ -1189,7 +1189,7 @@
                       "t": 16.84,
                       "type": "fire",
                       "actor": "unit_stage9-c-browser-unit",
-                      "target": "enemy_infantry_2",
+                      "target": "enemy_infantry_1",
                       "value": 0,
                       "text": "主战坦克向敌方步兵班开火"
                     },
@@ -1197,15 +1197,15 @@
                       "t": 18.14,
                       "type": "damage",
                       "actor": "unit_stage9-c-browser-unit",
-                      "target": "enemy_infantry_2",
-                      "value": 43,
-                      "text": "敌方步兵班受到43点伤害"
+                      "target": "enemy_infantry_1",
+                      "value": 51,
+                      "text": "敌方步兵班受到51点伤害"
                     },
                     {
                       "t": 19.43,
                       "type": "suppress",
                       "actor": "unit_stage9-c-browser-unit",
-                      "target": "enemy_infantry_2",
+                      "target": "enemy_infantry_1",
                       "value": 0,
                       "text": "敌方步兵班被压制，下次攻击下降"
                     },
@@ -1213,14 +1213,14 @@
                       "t": 20.73,
                       "type": "destroy",
                       "actor": "unit_stage9-c-browser-unit",
-                      "target": "enemy_infantry_2",
+                      "target": "enemy_infantry_1",
                       "value": 0,
                       "text": "敌方步兵班被摧毁"
                     },
                     {
                       "t": 22.02,
                       "type": "fire",
-                      "actor": "enemy_infantry_1",
+                      "actor": "enemy_infantry_2",
                       "target": "unit_stage9-c-browser-unit",
                       "value": 0,
                       "text": "敌方步兵班向主战坦克开火"
@@ -1228,7 +1228,7 @@
                     {
                       "t": 23.32,
                       "type": "damage",
-                      "actor": "enemy_infantry_1",
+                      "actor": "enemy_infantry_2",
                       "target": "unit_stage9-c-browser-unit",
                       "value": 1,
                       "text": "主战坦克受到1点伤害"
@@ -1253,7 +1253,7 @@
                       "t": 27.2,
                       "type": "fire",
                       "actor": "unit_stage9-c-browser-unit",
-                      "target": "enemy_infantry_1",
+                      "target": "enemy_infantry_2",
                       "value": 0,
                       "text": "主战坦克向敌方步兵班开火"
                     },
@@ -1261,22 +1261,22 @@
                       "t": 28.5,
                       "type": "damage",
                       "actor": "unit_stage9-c-browser-unit",
-                      "target": "enemy_infantry_1",
-                      "value": 52,
-                      "text": "敌方步兵班受到52点伤害"
+                      "target": "enemy_infantry_2",
+                      "value": 48,
+                      "text": "敌方步兵班受到48点伤害"
                     },
                     {
                       "t": 29.8,
                       "type": "suppress",
                       "actor": "unit_stage9-c-browser-unit",
-                      "target": "enemy_infantry_1",
+                      "target": "enemy_infantry_2",
                       "value": 0,
                       "text": "敌方步兵班被压制，下次攻击下降"
                     },
                     {
                       "t": 31.09,
                       "type": "fire",
-                      "actor": "enemy_infantry_1",
+                      "actor": "enemy_infantry_2",
                       "target": "unit_stage9-c-browser-unit",
                       "value": 0,
                       "text": "敌方步兵班向主战坦克开火"
@@ -1284,7 +1284,7 @@
                     {
                       "t": 32.39,
                       "type": "damage",
-                      "actor": "enemy_infantry_1",
+                      "actor": "enemy_infantry_2",
                       "target": "unit_stage9-c-browser-unit",
                       "value": 1,
                       "text": "主战坦克受到1点伤害"
@@ -1309,7 +1309,7 @@
                       "t": 36.27,
                       "type": "fire",
                       "actor": "unit_stage9-c-browser-unit",
-                      "target": "enemy_infantry_1",
+                      "target": "enemy_infantry_2",
                       "value": 0,
                       "text": "主战坦克向敌方步兵班开火"
                     },
@@ -1317,15 +1317,15 @@
                       "t": 37.57,
                       "type": "damage",
                       "actor": "unit_stage9-c-browser-unit",
-                      "target": "enemy_infantry_1",
-                      "value": 52,
-                      "text": "敌方步兵班受到52点伤害"
+                      "target": "enemy_infantry_2",
+                      "value": 43,
+                      "text": "敌方步兵班受到43点伤害"
                     },
                     {
                       "t": 38.86,
                       "type": "suppress",
                       "actor": "unit_stage9-c-browser-unit",
-                      "target": "enemy_infantry_1",
+                      "target": "enemy_infantry_2",
                       "value": 0,
                       "text": "敌方步兵班被压制，下次攻击下降"
                     },
@@ -1333,7 +1333,7 @@
                       "t": 40.16,
                       "type": "destroy",
                       "actor": "unit_stage9-c-browser-unit",
-                      "target": "enemy_infantry_1",
+                      "target": "enemy_infantry_2",
                       "value": 0,
                       "text": "敌方步兵班被摧毁"
                     },
@@ -1366,8 +1366,8 @@
                       "type": "damage",
                       "actor": "unit_stage9-c-browser-unit",
                       "target": "enemy_infantry_3",
-                      "value": 49,
-                      "text": "敌方步兵班受到49点伤害"
+                      "value": 45,
+                      "text": "敌方步兵班受到45点伤害"
                     },
                     {
                       "t": 46.64,
@@ -1406,8 +1406,8 @@
                       "type": "damage",
                       "actor": "unit_stage9-c-browser-unit",
                       "target": "enemy_infantry_3",
-                      "value": 48,
-                      "text": "敌方步兵班受到48点伤害"
+                      "value": 47,
+                      "text": "敌方步兵班受到47点伤害"
                     },
                     {
                       "t": 53.11,
@@ -1478,14 +1478,14 @@
                     "friendly": [],
                     "enemy": [
                       {
-                        "id": "enemy_infantry_2",
+                        "id": "enemy_infantry_1",
                         "realId": null,
                         "type": "enemy_infantry",
                         "name": "敌方步兵班",
                         "side": "enemy"
                       },
                       {
-                        "id": "enemy_infantry_1",
+                        "id": "enemy_infantry_2",
                         "realId": null,
                         "type": "enemy_infantry",
                         "name": "敌方步兵班",
@@ -1598,7 +1598,7 @@
                   "experienceMultiplier": 1
                 }
               },
-              "sessionId": "battle-session-14-scrap_mine-e831747db877938f3cfb-1",
+              "sessionId": "battle-session-14-scrap_mine-87cb5d9aee2347f3d2f1-1",
               "sessionLifecycle": "running",
               "equipment": {
                 "stage9-c-browser-unit": [
@@ -1613,11 +1613,11 @@
               "reportCount": 0,
               "ledgerCount": 0
             },
-            "domText": "◣\n钢铁指令\nIRON COMMAND · 指挥终端\n▤\n补给\n3,759/ 6,000\n+3/s\n◈\n合金\n3,826/ 6,000\n+2/s\n◎\n情报\n401/ 500\n+0.1/s\n⚡\n电力\n8/ 30\n正常\n✦\n指挥容量\n2/ 8\n空闲\n基地时间\n08:00:18\n第1天\n❚❚\n1×\n2×\n4×\n保存\n读取\n新游戏\n演出：自动\n通用规划 · 正式旁路\n概览\n建设\n生产\n部队\n编队\n战区\n维修\n科研\n战报\n单位档案\n阶段8 · 已开放\n1\n单位总数\n0\n空闲单位\n0\n已编队单位\n0\n维修中单位\n0\n轻度受损\n0\n重度受损\n1\n新兵\n0\n训练有素\n0\n老兵\n0\n精锐\n类型\n全部类型\n步兵\n车辆\n装甲\n支援\n状态\n全部状态\n空闲\n已编队\n维修中\n受损\n等级\n全部等级\n新兵\n训练有素\n老兵\n精锐\n排序\n创建时间\n经验\n战斗次数\n生命比例\n单位类型\n单位列表\n1 个\n主战坦克\n新兵 · 主战坦克\n经验 0 · 战斗 0 · HP 160/160 · intact\n单位详情\n主战坦克\n新兵\n保存呼号\n单位类型\n主战坦克\n创建时间\n08:00:00\n来源建筑\n装甲工厂\n经验\n0\n战斗次数\n0\n生命\n160 / 160\n损伤\nintact\n等级进度\n距训练有素还需 10\n战斗中实际属性\nattack\n35（基础 35）\nantiArmor\n22（基础 20）\ndefense\n30（基础 30）\nscouting\n3.09（基础 3）\nmobility\n10（基础 10）\nrepair\n0（基础 0）\n装备槽位（1/2）\n反装甲瞄具 · 槽位1\n卸载\n战术光学组 · 初始配发 · equipment-starter-1\n挂载\n强化底盘 · 初始配发 · equipment-starter-2\n挂载\n野战工具包 · 初始配发 · equipment-starter-3\n挂载\n通讯记录 / COMMS\n13 / 30\n[08:00]\n基地数据已保存。\n[08:00]\n反装甲瞄具开始制造。\n[08:00]\n存档已载入，基地状态恢复。\n[08:00]\n反装甲瞄具生产已取消，返还补给90 · 合金70。\n[08:00]\n反装甲瞄具开始制造。\n[08:00]\n战术指挥链已加入制造队列，当前排在第2位。\n[08:00]\n战术指挥链已从等待队列移除，返还补给220 · 合金170。\n[08:00]\n反装甲瞄具制造完成，已进入装备库存。\n[08:00]\n装甲工厂已空闲。\n[08:00]\n存档已载入，基地状态恢复。\n[08:00]\n编队「第一战斗群」已建立。\n[08:00]\n主战坦克已加入「第一战斗群」，指挥容量剩余6。\n[08:00]\n第一战斗群向废弃矿区发起进攻（谨慎推进）。\n正式战斗或结果面板期间不能变更装备",
-            "imageSha256": "ad8d180bfd9190fa2114231d7535014f0ca91fe44abeed2c5ffbaa5dd4f478ab",
+            "domText": "◣\n钢铁指令\nIRON COMMAND · 指挥终端\n▤\n补给\n3,759/ 6,000\n+3/s\n◈\n合金\n3,825/ 6,000\n+2/s\n◎\n情报\n401/ 500\n+0.1/s\n⚡\n电力\n8/ 30\n正常\n✦\n指挥容量\n2/ 8\n空闲\n基地时间\n08:00:17\n第1天\n❚❚\n1×\n2×\n4×\n保存\n读取\n新游戏\n演出：自动\n通用规划 · 正式旁路\n概览\n建设\n生产\n部队\n编队\n战区\n维修\n科研\n战报\n单位档案\n阶段8 · 已开放\n1\n单位总数\n0\n空闲单位\n0\n已编队单位\n0\n维修中单位\n0\n轻度受损\n0\n重度受损\n1\n新兵\n0\n训练有素\n0\n老兵\n0\n精锐\n类型\n全部类型\n步兵\n车辆\n装甲\n支援\n状态\n全部状态\n空闲\n已编队\n维修中\n受损\n等级\n全部等级\n新兵\n训练有素\n老兵\n精锐\n排序\n创建时间\n经验\n战斗次数\n生命比例\n单位类型\n单位列表\n1 个\n主战坦克\n新兵 · 主战坦克\n经验 0 · 战斗 0 · HP 160/160 · intact\n单位详情\n主战坦克\n新兵\n保存呼号\n单位类型\n主战坦克\n创建时间\n08:00:00\n来源建筑\n装甲工厂\n经验\n0\n战斗次数\n0\n生命\n160 / 160\n损伤\nintact\n等级进度\n距训练有素还需 10\n战斗中实际属性\nattack\n35（基础 35）\nantiArmor\n22（基础 20）\ndefense\n30（基础 30）\nscouting\n3.09（基础 3）\nmobility\n10（基础 10）\nrepair\n0（基础 0）\n装备槽位（1/2）\n反装甲瞄具 · 槽位1\n卸载\n战术光学组 · scouting×1.15 mobility×1.03\n挂载\n强化底盘 · defense×1.08 mobility×1.04\n挂载\n野战工具包 · repair×1.2 defense×1.02\n挂载\n通讯记录 / COMMS\n13 / 30\n[08:00]\n基地数据已保存。\n[08:00]\n反装甲瞄具开始制造。\n[08:00]\n存档已载入，基地状态恢复。\n[08:00]\n反装甲瞄具生产已取消，返还补给90 · 合金70。\n[08:00]\n反装甲瞄具开始制造。\n[08:00]\n战术指挥链已加入制造队列，当前排在第2位。\n[08:00]\n战术指挥链已从等待队列移除，返还补给220 · 合金170。\n[08:00]\n反装甲瞄具制造完成，已进入装备库存。\n[08:00]\n装甲工厂已空闲。\n[08:00]\n存档已载入，基地状态恢复。\n[08:00]\n编队「第一战斗群」已建立。\n[08:00]\n主战坦克已加入「第一战斗群」，指挥容量剩余6。\n[08:00]\n第一战斗群向废弃矿区发起进攻（谨慎推进）。\n正式战斗或结果面板期间不能变更装备",
+            "imageSha256": "012a219b3042e383348876e2645ac984fe59be57741f16afa3c2eba8686b4e57",
             "screenshot": {
               "path": "screenshots/stage9-C/s9-c-06-running.png",
-              "sha256": "ad8d180bfd9190fa2114231d7535014f0ca91fe44abeed2c5ffbaa5dd4f478ab"
+              "sha256": "012a219b3042e383348876e2645ac984fe59be57741f16afa3c2eba8686b4e57"
             }
           },
           {
@@ -1629,31 +1629,31 @@
               "reason": "running_battle",
               "method": "Page.reload",
               "before": {
-                "timeOrigin": 1786658832264.9,
+                "timeOrigin": 1786565600669.4,
                 "readyState": "complete",
                 "navigationType": "reload"
               },
               "after": {
-                "timeOrigin": 1786658834955.4,
+                "timeOrigin": 1786565603254.5,
                 "readyState": "complete",
                 "navigationType": "reload"
               },
-              "beforeLoaderId": "57800A0488827689976DA026F559CF81",
-              "afterLoaderId": "0D3EA294B05622891B8160D3BE5C5063",
+              "beforeLoaderId": "9FF6BF3E8166FBA9D3B2AD541350AD68",
+              "afterLoaderId": "02D6A9294158668017CC812EBB5E5D8A",
               "timeOriginChanged": true
             },
-            "sessionId": "battle-session-14-scrap_mine-e831747db877938f3cfb-1",
+            "sessionId": "battle-session-14-scrap_mine-87cb5d9aee2347f3d2f1-1",
             "state": {
-              "activeBattleSessionId": "battle-session-14-scrap_mine-e831747db877938f3cfb-1",
+              "activeBattleSessionId": "battle-session-14-scrap_mine-87cb5d9aee2347f3d2f1-1",
               "activeBattle": {
-                "battleSessionId": "battle-session-14-scrap_mine-e831747db877938f3cfb-1",
+                "battleSessionId": "battle-session-14-scrap_mine-87cb5d9aee2347f3d2f1-1",
                 "replayReadOnly": false,
                 "settled": false,
                 "settlementAllowed": true,
-                "deploymentHash": "e831747db877938f3cfbc367efc92ed4319646746d1b40324c70db32fc114774",
-                "formalReportHash": "cac0f3244ef4574541c33d5ac3e5bb0b06ada9f64bf7d2b0399e44269029c6e2",
-                "settlementId": "settlement-b04ec6f0459363a948447df58ddf57807ea0f8c06fea9a34376e5d26c3c63ee9",
-                "reportId": "battle_2089849983_fm_mss2jewv_6_scrap_mine_cautious",
+                "deploymentHash": "87cb5d9aee2347f3d2f19101ab1ef965e0b5263f5f4aa5230aa8380ea1522561",
+                "formalReportHash": "7bf39b8e4183e60bed526a32107cccfae0be6b98432bb3e9ba4b3b6a2cdcab45",
+                "settlementId": "settlement-f7d3ce52c3758b03e7ab0e4e9729e2388d6455a68a06717d246ed19f646661e7",
+                "reportId": "battle_3992048898_fm_msqj14wv_6_scrap_mine_cautious",
                 "historicalEquipment": {
                   "stage9-c-browser-unit": [
                     {
@@ -1672,11 +1672,11 @@
                 }
               },
               "authoritativeSession": {
-                "battleSessionId": "battle-session-14-scrap_mine-e831747db877938f3cfb-1",
+                "battleSessionId": "battle-session-14-scrap_mine-87cb5d9aee2347f3d2f1-1",
                 "missionId": "scrap_mine",
                 "deploymentSnapshot": {
                   "formation": {
-                    "id": "fm_mss2jewv_6",
+                    "id": "fm_msqj14wv_6",
                     "name": "第一战斗群",
                     "experience": 0,
                     "unitIds": [
@@ -1766,17 +1766,17 @@
                   "missionId": "scrap_mine",
                   "operation": null
                 },
-                "deploymentSnapshotId": "deployment-e831747db877938f3cfbc367efc92ed4319646746d1b40324c70db32fc114774",
-                "deploymentHash": "e831747db877938f3cfbc367efc92ed4319646746d1b40324c70db32fc114774",
-                "formalReportId": "battle_2089849983_fm_mss2jewv_6_scrap_mine_cautious",
-                "formalReportHash": "cac0f3244ef4574541c33d5ac3e5bb0b06ada9f64bf7d2b0399e44269029c6e2",
-                "sourceReportHash": "cac0f3244ef4574541c33d5ac3e5bb0b06ada9f64bf7d2b0399e44269029c6e2",
+                "deploymentSnapshotId": "deployment-87cb5d9aee2347f3d2f19101ab1ef965e0b5263f5f4aa5230aa8380ea1522561",
+                "deploymentHash": "87cb5d9aee2347f3d2f19101ab1ef965e0b5263f5f4aa5230aa8380ea1522561",
+                "formalReportId": "battle_3992048898_fm_msqj14wv_6_scrap_mine_cautious",
+                "formalReportHash": "7bf39b8e4183e60bed526a32107cccfae0be6b98432bb3e9ba4b3b6a2cdcab45",
+                "sourceReportHash": "7bf39b8e4183e60bed526a32107cccfae0be6b98432bb3e9ba4b3b6a2cdcab45",
                 "sourceSaveRevision": 14,
-                "settlementId": "settlement-b04ec6f0459363a948447df58ddf57807ea0f8c06fea9a34376e5d26c3c63ee9",
+                "settlementId": "settlement-f7d3ce52c3758b03e7ab0e4e9729e2388d6455a68a06717d246ed19f646661e7",
                 "sessionOrigin": "production",
                 "formalReport": {
-                  "id": "battle_2089849983_fm_mss2jewv_6_scrap_mine_cautious",
-                  "seed": 2089849983,
+                  "id": "battle_3992048898_fm_msqj14wv_6_scrap_mine_cautious",
+                  "seed": 3992048898,
                   "theaterId": "scrap_mine",
                   "theaterName": "废弃矿区",
                   "terrain": "open",
@@ -1784,9 +1784,9 @@
                   "missionKind": "campaign",
                   "missionId": "scrap_mine",
                   "strategyName": "谨慎推进",
-                  "formationId": "fm_mss2jewv_6",
+                  "formationId": "fm_msqj14wv_6",
                   "formationName": "第一战斗群",
-                  "startedAt": 2089849983,
+                  "startedAt": 3992048898,
                   "initial": {
                     "friendly": [
                       {
@@ -2131,7 +2131,7 @@
                       "t": 12.95,
                       "type": "fire",
                       "actor": "unit_stage9-c-browser-unit",
-                      "target": "enemy_infantry_2",
+                      "target": "enemy_infantry_1",
                       "value": 0,
                       "text": "主战坦克向敌方步兵班开火"
                     },
@@ -2139,15 +2139,15 @@
                       "t": 14.25,
                       "type": "damage",
                       "actor": "unit_stage9-c-browser-unit",
-                      "target": "enemy_infantry_2",
-                      "value": 47,
-                      "text": "敌方步兵班受到47点伤害"
+                      "target": "enemy_infantry_1",
+                      "value": 55,
+                      "text": "敌方步兵班受到55点伤害"
                     },
                     {
                       "t": 15.55,
                       "type": "suppress",
                       "actor": "unit_stage9-c-browser-unit",
-                      "target": "enemy_infantry_2",
+                      "target": "enemy_infantry_1",
                       "value": 0,
                       "text": "敌方步兵班被压制，下次攻击下降"
                     },
@@ -2155,7 +2155,7 @@
                       "t": 16.84,
                       "type": "fire",
                       "actor": "unit_stage9-c-browser-unit",
-                      "target": "enemy_infantry_2",
+                      "target": "enemy_infantry_1",
                       "value": 0,
                       "text": "主战坦克向敌方步兵班开火"
                     },
@@ -2163,15 +2163,15 @@
                       "t": 18.14,
                       "type": "damage",
                       "actor": "unit_stage9-c-browser-unit",
-                      "target": "enemy_infantry_2",
-                      "value": 43,
-                      "text": "敌方步兵班受到43点伤害"
+                      "target": "enemy_infantry_1",
+                      "value": 51,
+                      "text": "敌方步兵班受到51点伤害"
                     },
                     {
                       "t": 19.43,
                       "type": "suppress",
                       "actor": "unit_stage9-c-browser-unit",
-                      "target": "enemy_infantry_2",
+                      "target": "enemy_infantry_1",
                       "value": 0,
                       "text": "敌方步兵班被压制，下次攻击下降"
                     },
@@ -2179,14 +2179,14 @@
                       "t": 20.73,
                       "type": "destroy",
                       "actor": "unit_stage9-c-browser-unit",
-                      "target": "enemy_infantry_2",
+                      "target": "enemy_infantry_1",
                       "value": 0,
                       "text": "敌方步兵班被摧毁"
                     },
                     {
                       "t": 22.02,
                       "type": "fire",
-                      "actor": "enemy_infantry_1",
+                      "actor": "enemy_infantry_2",
                       "target": "unit_stage9-c-browser-unit",
                       "value": 0,
                       "text": "敌方步兵班向主战坦克开火"
@@ -2194,7 +2194,7 @@
                     {
                       "t": 23.32,
                       "type": "damage",
-                      "actor": "enemy_infantry_1",
+                      "actor": "enemy_infantry_2",
                       "target": "unit_stage9-c-browser-unit",
                       "value": 1,
                       "text": "主战坦克受到1点伤害"
@@ -2219,7 +2219,7 @@
                       "t": 27.2,
                       "type": "fire",
                       "actor": "unit_stage9-c-browser-unit",
-                      "target": "enemy_infantry_1",
+                      "target": "enemy_infantry_2",
                       "value": 0,
                       "text": "主战坦克向敌方步兵班开火"
                     },
@@ -2227,22 +2227,22 @@
                       "t": 28.5,
                       "type": "damage",
                       "actor": "unit_stage9-c-browser-unit",
-                      "target": "enemy_infantry_1",
-                      "value": 52,
-                      "text": "敌方步兵班受到52点伤害"
+                      "target": "enemy_infantry_2",
+                      "value": 48,
+                      "text": "敌方步兵班受到48点伤害"
                     },
                     {
                       "t": 29.8,
                       "type": "suppress",
                       "actor": "unit_stage9-c-browser-unit",
-                      "target": "enemy_infantry_1",
+                      "target": "enemy_infantry_2",
                       "value": 0,
                       "text": "敌方步兵班被压制，下次攻击下降"
                     },
                     {
                       "t": 31.09,
                       "type": "fire",
-                      "actor": "enemy_infantry_1",
+                      "actor": "enemy_infantry_2",
                       "target": "unit_stage9-c-browser-unit",
                       "value": 0,
                       "text": "敌方步兵班向主战坦克开火"
@@ -2250,7 +2250,7 @@
                     {
                       "t": 32.39,
                       "type": "damage",
-                      "actor": "enemy_infantry_1",
+                      "actor": "enemy_infantry_2",
                       "target": "unit_stage9-c-browser-unit",
                       "value": 1,
                       "text": "主战坦克受到1点伤害"
@@ -2275,7 +2275,7 @@
                       "t": 36.27,
                       "type": "fire",
                       "actor": "unit_stage9-c-browser-unit",
-                      "target": "enemy_infantry_1",
+                      "target": "enemy_infantry_2",
                       "value": 0,
                       "text": "主战坦克向敌方步兵班开火"
                     },
@@ -2283,15 +2283,15 @@
                       "t": 37.57,
                       "type": "damage",
                       "actor": "unit_stage9-c-browser-unit",
-                      "target": "enemy_infantry_1",
-                      "value": 52,
-                      "text": "敌方步兵班受到52点伤害"
+                      "target": "enemy_infantry_2",
+                      "value": 43,
+                      "text": "敌方步兵班受到43点伤害"
                     },
                     {
                       "t": 38.86,
                       "type": "suppress",
                       "actor": "unit_stage9-c-browser-unit",
-                      "target": "enemy_infantry_1",
+                      "target": "enemy_infantry_2",
                       "value": 0,
                       "text": "敌方步兵班被压制，下次攻击下降"
                     },
@@ -2299,7 +2299,7 @@
                       "t": 40.16,
                       "type": "destroy",
                       "actor": "unit_stage9-c-browser-unit",
-                      "target": "enemy_infantry_1",
+                      "target": "enemy_infantry_2",
                       "value": 0,
                       "text": "敌方步兵班被摧毁"
                     },
@@ -2332,8 +2332,8 @@
                       "type": "damage",
                       "actor": "unit_stage9-c-browser-unit",
                       "target": "enemy_infantry_3",
-                      "value": 49,
-                      "text": "敌方步兵班受到49点伤害"
+                      "value": 45,
+                      "text": "敌方步兵班受到45点伤害"
                     },
                     {
                       "t": 46.64,
@@ -2372,8 +2372,8 @@
                       "type": "damage",
                       "actor": "unit_stage9-c-browser-unit",
                       "target": "enemy_infantry_3",
-                      "value": 48,
-                      "text": "敌方步兵班受到48点伤害"
+                      "value": 47,
+                      "text": "敌方步兵班受到47点伤害"
                     },
                     {
                       "t": 53.11,
@@ -2444,14 +2444,14 @@
                     "friendly": [],
                     "enemy": [
                       {
-                        "id": "enemy_infantry_2",
+                        "id": "enemy_infantry_1",
                         "realId": null,
                         "type": "enemy_infantry",
                         "name": "敌方步兵班",
                         "side": "enemy"
                       },
                       {
-                        "id": "enemy_infantry_1",
+                        "id": "enemy_infantry_2",
                         "realId": null,
                         "type": "enemy_infantry",
                         "name": "敌方步兵班",
@@ -2564,7 +2564,7 @@
                   "experienceMultiplier": 1
                 }
               },
-              "sessionId": "battle-session-14-scrap_mine-e831747db877938f3cfb-1",
+              "sessionId": "battle-session-14-scrap_mine-87cb5d9aee2347f3d2f1-1",
               "sessionLifecycle": "running",
               "equipment": {
                 "stage9-c-browser-unit": [
@@ -2579,11 +2579,11 @@
               "reportCount": 0,
               "ledgerCount": 0
             },
-            "domText": "◣\n钢铁指令\nIRON COMMAND · 指挥终端\n▤\n补给\n3,759/ 6,000\n+3/s\n◈\n合金\n3,826/ 6,000\n+2/s\n◎\n情报\n401/ 500\n+0.1/s\n⚡\n电力\n8/ 30\n正常\n✦\n指挥容量\n2/ 8\n空闲\n基地时间\n08:00:18\n第1天\n❚❚\n1×\n2×\n4×\n保存\n读取\n新游戏\n演出：自动\n通用规划 · 正式旁路\n概览\n建设\n生产\n部队\n编队\n战区\n维修\n科研\n战报\n单位档案\n阶段8 · 已开放\n1\n单位总数\n0\n空闲单位\n0\n已编队单位\n0\n维修中单位\n0\n轻度受损\n0\n重度受损\n1\n新兵\n0\n训练有素\n0\n老兵\n0\n精锐\n类型\n全部类型\n步兵\n车辆\n装甲\n支援\n状态\n全部状态\n空闲\n已编队\n维修中\n受损\n等级\n全部等级\n新兵\n训练有素\n老兵\n精锐\n排序\n创建时间\n经验\n战斗次数\n生命比例\n单位类型\n单位列表\n1 个\n主战坦克\n新兵 · 主战坦克\n经验 0 · 战斗 0 · HP 160/160 · intact\n单位详情\n主战坦克\n新兵\n保存呼号\n单位类型\n主战坦克\n创建时间\n08:00:00\n来源建筑\n装甲工厂\n经验\n0\n战斗次数\n0\n生命\n160 / 160\n损伤\nintact\n等级进度\n距训练有素还需 10\n战斗中实际属性\nattack\n35（基础 35）\nantiArmor\n22（基础 20）\ndefense\n30（基础 30）\nscouting\n3.09（基础 3）\nmobility\n10（基础 10）\nrepair\n0（基础 0）\n装备槽位（1/2）\n反装甲瞄具 · 槽位1\n卸载\n战术光学组 · 初始配发 · equipment-starter-1\n挂载\n强化底盘 · 初始配发 · equipment-starter-2\n挂载\n野战工具包 · 初始配发 · equipment-starter-3\n挂载\n通讯记录 / COMMS\n16 / 30\n[08:00]\n基地数据已保存。\n[08:00]\n反装甲瞄具开始制造。\n[08:00]\n存档已载入，基地状态恢复。\n[08:00]\n反装甲瞄具生产已取消，返还补给90 · 合金70。\n[08:00]\n反装甲瞄具开始制造。\n[08:00]\n战术指挥链已加入制造队列，当前排在第2位。\n[08:00]\n战术指挥链已从等待队列移除，返还补给220 · 合金170。\n[08:00]\n反装甲瞄具制造完成，已进入装备库存。\n[08:00]\n装甲工厂已空闲。\n[08:00]\n存档已载入，基地状态恢复。\n[08:00]\n编队「第一战斗群」已建立。\n[08:00]\n主战坦克已加入「第一战斗群」，指挥容量剩余6。\n[08:00]\n第一战斗群向废弃矿区发起进攻（谨慎推进）。\n[08:00]\n存档已载入，基地状态恢复。\n[08:00]\n1支编队已恢复，指挥容量占用 2/8。\n[08:00]\n第一战斗群正在废弃矿区作战，回放进度 0%，结果已锁定。\n正式战斗或结果面板期间不能变更装备",
-            "imageSha256": "d4fe18a25840a686447b65cf8248843c125a29a13dc37a0c865492b7d8b6ef7b",
+            "domText": "◣\n钢铁指令\nIRON COMMAND · 指挥终端\n▤\n补给\n3,759/ 6,000\n+3/s\n◈\n合金\n3,825/ 6,000\n+2/s\n◎\n情报\n401/ 500\n+0.1/s\n⚡\n电力\n8/ 30\n正常\n✦\n指挥容量\n2/ 8\n空闲\n基地时间\n08:00:17\n第1天\n❚❚\n1×\n2×\n4×\n保存\n读取\n新游戏\n演出：自动\n通用规划 · 正式旁路\n概览\n建设\n生产\n部队\n编队\n战区\n维修\n科研\n战报\n单位档案\n阶段8 · 已开放\n1\n单位总数\n0\n空闲单位\n0\n已编队单位\n0\n维修中单位\n0\n轻度受损\n0\n重度受损\n1\n新兵\n0\n训练有素\n0\n老兵\n0\n精锐\n类型\n全部类型\n步兵\n车辆\n装甲\n支援\n状态\n全部状态\n空闲\n已编队\n维修中\n受损\n等级\n全部等级\n新兵\n训练有素\n老兵\n精锐\n排序\n创建时间\n经验\n战斗次数\n生命比例\n单位类型\n单位列表\n1 个\n主战坦克\n新兵 · 主战坦克\n经验 0 · 战斗 0 · HP 160/160 · intact\n单位详情\n主战坦克\n新兵\n保存呼号\n单位类型\n主战坦克\n创建时间\n08:00:00\n来源建筑\n装甲工厂\n经验\n0\n战斗次数\n0\n生命\n160 / 160\n损伤\nintact\n等级进度\n距训练有素还需 10\n战斗中实际属性\nattack\n35（基础 35）\nantiArmor\n22（基础 20）\ndefense\n30（基础 30）\nscouting\n3.09（基础 3）\nmobility\n10（基础 10）\nrepair\n0（基础 0）\n装备槽位（1/2）\n反装甲瞄具 · 槽位1\n卸载\n战术光学组 · scouting×1.15 mobility×1.03\n挂载\n强化底盘 · defense×1.08 mobility×1.04\n挂载\n野战工具包 · repair×1.2 defense×1.02\n挂载\n通讯记录 / COMMS\n16 / 30\n[08:00]\n基地数据已保存。\n[08:00]\n反装甲瞄具开始制造。\n[08:00]\n存档已载入，基地状态恢复。\n[08:00]\n反装甲瞄具生产已取消，返还补给90 · 合金70。\n[08:00]\n反装甲瞄具开始制造。\n[08:00]\n战术指挥链已加入制造队列，当前排在第2位。\n[08:00]\n战术指挥链已从等待队列移除，返还补给220 · 合金170。\n[08:00]\n反装甲瞄具制造完成，已进入装备库存。\n[08:00]\n装甲工厂已空闲。\n[08:00]\n存档已载入，基地状态恢复。\n[08:00]\n编队「第一战斗群」已建立。\n[08:00]\n主战坦克已加入「第一战斗群」，指挥容量剩余6。\n[08:00]\n第一战斗群向废弃矿区发起进攻（谨慎推进）。\n[08:00]\n存档已载入，基地状态恢复。\n[08:00]\n1支编队已恢复，指挥容量占用 2/8。\n[08:00]\n第一战斗群正在废弃矿区作战，回放进度 0%，结果已锁定。\n正式战斗或结果面板期间不能变更装备",
+            "imageSha256": "40fc2645a1f765ebfa1d685b7fa1d3513a0703fecf9e7562dbb78adf350dafb7",
             "screenshot": {
               "path": "screenshots/stage9-C/s9-c-07-running-reload.png",
-              "sha256": "d4fe18a25840a686447b65cf8248843c125a29a13dc37a0c865492b7d8b6ef7b"
+              "sha256": "40fc2645a1f765ebfa1d685b7fa1d3513a0703fecf9e7562dbb78adf350dafb7"
             }
           },
           {
@@ -2594,14 +2594,14 @@
             "state": {
               "activeBattleSessionId": null,
               "activeBattle": {
-                "battleSessionId": "battle-session-14-scrap_mine-e831747db877938f3cfb-1",
+                "battleSessionId": "battle-session-14-scrap_mine-87cb5d9aee2347f3d2f1-1",
                 "replayReadOnly": true,
                 "settled": false,
                 "settlementAllowed": false,
-                "deploymentHash": "e831747db877938f3cfbc367efc92ed4319646746d1b40324c70db32fc114774",
-                "formalReportHash": "cac0f3244ef4574541c33d5ac3e5bb0b06ada9f64bf7d2b0399e44269029c6e2",
-                "settlementId": "settlement-b04ec6f0459363a948447df58ddf57807ea0f8c06fea9a34376e5d26c3c63ee9",
-                "reportId": "battle_2089849983_fm_mss2jewv_6_scrap_mine_cautious",
+                "deploymentHash": "87cb5d9aee2347f3d2f19101ab1ef965e0b5263f5f4aa5230aa8380ea1522561",
+                "formalReportHash": "7bf39b8e4183e60bed526a32107cccfae0be6b98432bb3e9ba4b3b6a2cdcab45",
+                "settlementId": "settlement-f7d3ce52c3758b03e7ab0e4e9729e2388d6455a68a06717d246ed19f646661e7",
+                "reportId": "battle_3992048898_fm_msqj14wv_6_scrap_mine_cautious",
                 "historicalEquipment": {
                   "stage9-c-browser-unit": [
                     {
@@ -2620,11 +2620,11 @@
                 }
               },
               "authoritativeSession": {
-                "battleSessionId": "battle-session-14-scrap_mine-e831747db877938f3cfb-1",
+                "battleSessionId": "battle-session-14-scrap_mine-87cb5d9aee2347f3d2f1-1",
                 "missionId": "scrap_mine",
                 "deploymentSnapshot": {
                   "formation": {
-                    "id": "fm_mss2jewv_6",
+                    "id": "fm_msqj14wv_6",
                     "name": "第一战斗群",
                     "experience": 0,
                     "unitIds": [
@@ -2714,17 +2714,17 @@
                   "missionId": "scrap_mine",
                   "operation": null
                 },
-                "deploymentSnapshotId": "deployment-e831747db877938f3cfbc367efc92ed4319646746d1b40324c70db32fc114774",
-                "deploymentHash": "e831747db877938f3cfbc367efc92ed4319646746d1b40324c70db32fc114774",
-                "formalReportId": "battle_2089849983_fm_mss2jewv_6_scrap_mine_cautious",
-                "formalReportHash": "cac0f3244ef4574541c33d5ac3e5bb0b06ada9f64bf7d2b0399e44269029c6e2",
-                "sourceReportHash": "cac0f3244ef4574541c33d5ac3e5bb0b06ada9f64bf7d2b0399e44269029c6e2",
+                "deploymentSnapshotId": "deployment-87cb5d9aee2347f3d2f19101ab1ef965e0b5263f5f4aa5230aa8380ea1522561",
+                "deploymentHash": "87cb5d9aee2347f3d2f19101ab1ef965e0b5263f5f4aa5230aa8380ea1522561",
+                "formalReportId": "battle_3992048898_fm_msqj14wv_6_scrap_mine_cautious",
+                "formalReportHash": "7bf39b8e4183e60bed526a32107cccfae0be6b98432bb3e9ba4b3b6a2cdcab45",
+                "sourceReportHash": "7bf39b8e4183e60bed526a32107cccfae0be6b98432bb3e9ba4b3b6a2cdcab45",
                 "sourceSaveRevision": 14,
-                "settlementId": "settlement-b04ec6f0459363a948447df58ddf57807ea0f8c06fea9a34376e5d26c3c63ee9",
+                "settlementId": "settlement-f7d3ce52c3758b03e7ab0e4e9729e2388d6455a68a06717d246ed19f646661e7",
                 "sessionOrigin": "production",
                 "formalReport": {
-                  "id": "battle_2089849983_fm_mss2jewv_6_scrap_mine_cautious",
-                  "seed": 2089849983,
+                  "id": "battle_3992048898_fm_msqj14wv_6_scrap_mine_cautious",
+                  "seed": 3992048898,
                   "theaterId": "scrap_mine",
                   "theaterName": "废弃矿区",
                   "terrain": "open",
@@ -2732,9 +2732,9 @@
                   "missionKind": "campaign",
                   "missionId": "scrap_mine",
                   "strategyName": "谨慎推进",
-                  "formationId": "fm_mss2jewv_6",
+                  "formationId": "fm_msqj14wv_6",
                   "formationName": "第一战斗群",
-                  "startedAt": 2089849983,
+                  "startedAt": 3992048898,
                   "initial": {
                     "friendly": [
                       {
@@ -3079,7 +3079,7 @@
                       "t": 12.95,
                       "type": "fire",
                       "actor": "unit_stage9-c-browser-unit",
-                      "target": "enemy_infantry_2",
+                      "target": "enemy_infantry_1",
                       "value": 0,
                       "text": "主战坦克向敌方步兵班开火"
                     },
@@ -3087,15 +3087,15 @@
                       "t": 14.25,
                       "type": "damage",
                       "actor": "unit_stage9-c-browser-unit",
-                      "target": "enemy_infantry_2",
-                      "value": 47,
-                      "text": "敌方步兵班受到47点伤害"
+                      "target": "enemy_infantry_1",
+                      "value": 55,
+                      "text": "敌方步兵班受到55点伤害"
                     },
                     {
                       "t": 15.55,
                       "type": "suppress",
                       "actor": "unit_stage9-c-browser-unit",
-                      "target": "enemy_infantry_2",
+                      "target": "enemy_infantry_1",
                       "value": 0,
                       "text": "敌方步兵班被压制，下次攻击下降"
                     },
@@ -3103,7 +3103,7 @@
                       "t": 16.84,
                       "type": "fire",
                       "actor": "unit_stage9-c-browser-unit",
-                      "target": "enemy_infantry_2",
+                      "target": "enemy_infantry_1",
                       "value": 0,
                       "text": "主战坦克向敌方步兵班开火"
                     },
@@ -3111,15 +3111,15 @@
                       "t": 18.14,
                       "type": "damage",
                       "actor": "unit_stage9-c-browser-unit",
-                      "target": "enemy_infantry_2",
-                      "value": 43,
-                      "text": "敌方步兵班受到43点伤害"
+                      "target": "enemy_infantry_1",
+                      "value": 51,
+                      "text": "敌方步兵班受到51点伤害"
                     },
                     {
                       "t": 19.43,
                       "type": "suppress",
                       "actor": "unit_stage9-c-browser-unit",
-                      "target": "enemy_infantry_2",
+                      "target": "enemy_infantry_1",
                       "value": 0,
                       "text": "敌方步兵班被压制，下次攻击下降"
                     },
@@ -3127,14 +3127,14 @@
                       "t": 20.73,
                       "type": "destroy",
                       "actor": "unit_stage9-c-browser-unit",
-                      "target": "enemy_infantry_2",
+                      "target": "enemy_infantry_1",
                       "value": 0,
                       "text": "敌方步兵班被摧毁"
                     },
                     {
                       "t": 22.02,
                       "type": "fire",
-                      "actor": "enemy_infantry_1",
+                      "actor": "enemy_infantry_2",
                       "target": "unit_stage9-c-browser-unit",
                       "value": 0,
                       "text": "敌方步兵班向主战坦克开火"
@@ -3142,7 +3142,7 @@
                     {
                       "t": 23.32,
                       "type": "damage",
-                      "actor": "enemy_infantry_1",
+                      "actor": "enemy_infantry_2",
                       "target": "unit_stage9-c-browser-unit",
                       "value": 1,
                       "text": "主战坦克受到1点伤害"
@@ -3167,7 +3167,7 @@
                       "t": 27.2,
                       "type": "fire",
                       "actor": "unit_stage9-c-browser-unit",
-                      "target": "enemy_infantry_1",
+                      "target": "enemy_infantry_2",
                       "value": 0,
                       "text": "主战坦克向敌方步兵班开火"
                     },
@@ -3175,22 +3175,22 @@
                       "t": 28.5,
                       "type": "damage",
                       "actor": "unit_stage9-c-browser-unit",
-                      "target": "enemy_infantry_1",
-                      "value": 52,
-                      "text": "敌方步兵班受到52点伤害"
+                      "target": "enemy_infantry_2",
+                      "value": 48,
+                      "text": "敌方步兵班受到48点伤害"
                     },
                     {
                       "t": 29.8,
                       "type": "suppress",
                       "actor": "unit_stage9-c-browser-unit",
-                      "target": "enemy_infantry_1",
+                      "target": "enemy_infantry_2",
                       "value": 0,
                       "text": "敌方步兵班被压制，下次攻击下降"
                     },
                     {
                       "t": 31.09,
                       "type": "fire",
-                      "actor": "enemy_infantry_1",
+                      "actor": "enemy_infantry_2",
                       "target": "unit_stage9-c-browser-unit",
                       "value": 0,
                       "text": "敌方步兵班向主战坦克开火"
@@ -3198,7 +3198,7 @@
                     {
                       "t": 32.39,
                       "type": "damage",
-                      "actor": "enemy_infantry_1",
+                      "actor": "enemy_infantry_2",
                       "target": "unit_stage9-c-browser-unit",
                       "value": 1,
                       "text": "主战坦克受到1点伤害"
@@ -3223,7 +3223,7 @@
                       "t": 36.27,
                       "type": "fire",
                       "actor": "unit_stage9-c-browser-unit",
-                      "target": "enemy_infantry_1",
+                      "target": "enemy_infantry_2",
                       "value": 0,
                       "text": "主战坦克向敌方步兵班开火"
                     },
@@ -3231,15 +3231,15 @@
                       "t": 37.57,
                       "type": "damage",
                       "actor": "unit_stage9-c-browser-unit",
-                      "target": "enemy_infantry_1",
-                      "value": 52,
-                      "text": "敌方步兵班受到52点伤害"
+                      "target": "enemy_infantry_2",
+                      "value": 43,
+                      "text": "敌方步兵班受到43点伤害"
                     },
                     {
                       "t": 38.86,
                       "type": "suppress",
                       "actor": "unit_stage9-c-browser-unit",
-                      "target": "enemy_infantry_1",
+                      "target": "enemy_infantry_2",
                       "value": 0,
                       "text": "敌方步兵班被压制，下次攻击下降"
                     },
@@ -3247,7 +3247,7 @@
                       "t": 40.16,
                       "type": "destroy",
                       "actor": "unit_stage9-c-browser-unit",
-                      "target": "enemy_infantry_1",
+                      "target": "enemy_infantry_2",
                       "value": 0,
                       "text": "敌方步兵班被摧毁"
                     },
@@ -3280,8 +3280,8 @@
                       "type": "damage",
                       "actor": "unit_stage9-c-browser-unit",
                       "target": "enemy_infantry_3",
-                      "value": 49,
-                      "text": "敌方步兵班受到49点伤害"
+                      "value": 45,
+                      "text": "敌方步兵班受到45点伤害"
                     },
                     {
                       "t": 46.64,
@@ -3320,8 +3320,8 @@
                       "type": "damage",
                       "actor": "unit_stage9-c-browser-unit",
                       "target": "enemy_infantry_3",
-                      "value": 48,
-                      "text": "敌方步兵班受到48点伤害"
+                      "value": 47,
+                      "text": "敌方步兵班受到47点伤害"
                     },
                     {
                       "t": 53.11,
@@ -3392,14 +3392,14 @@
                     "friendly": [],
                     "enemy": [
                       {
-                        "id": "enemy_infantry_2",
+                        "id": "enemy_infantry_1",
                         "realId": null,
                         "type": "enemy_infantry",
                         "name": "敌方步兵班",
                         "side": "enemy"
                       },
                       {
-                        "id": "enemy_infantry_1",
+                        "id": "enemy_infantry_2",
                         "realId": null,
                         "type": "enemy_infantry",
                         "name": "敌方步兵班",
@@ -3512,7 +3512,7 @@
                   "experienceMultiplier": 1
                 }
               },
-              "sessionId": "battle-session-14-scrap_mine-e831747db877938f3cfb-1",
+              "sessionId": "battle-session-14-scrap_mine-87cb5d9aee2347f3d2f1-1",
               "sessionLifecycle": "returned",
               "equipment": {
                 "stage9-c-browser-unit": [
@@ -3527,11 +3527,11 @@
               "reportCount": 1,
               "ledgerCount": 1
             },
-            "domText": "◣\n钢铁指令\nIRON COMMAND · 指挥终端\n▤\n补给\n3,759/ 6,000\n+3/s\n◈\n合金\n4,126/ 6,000\n+3/s\n◎\n情报\n401/ 500\n+0.1/s\n⚡\n电力\n8/ 30\n正常\n✦\n指挥容量\n2/ 8\n空闲\n基地时间\n08:00:18\n第1天\n❚❚\n1×\n2×\n4×\n保存\n读取\n新游戏\n演出：自动\n通用规划 · 正式旁路\n概览\n建设\n生产\n部队\n编队\n战区\n维修\n科研\n战报\n单位档案\n阶段8 · 已开放\n1\n单位总数\n0\n空闲单位\n1\n已编队单位\n0\n维修中单位\n0\n轻度受损\n0\n重度受损\n0\n新兵\n1\n训练有素\n0\n老兵\n0\n精锐\n类型\n全部类型\n步兵\n车辆\n装甲\n支援\n状态\n全部状态\n空闲\n已编队\n维修中\n受损\n等级\n全部等级\n新兵\n训练有素\n老兵\n精锐\n排序\n创建时间\n经验\n战斗次数\n生命比例\n单位类型\n单位列表\n1 个\n主战坦克\n训练有素 · 主战坦克\n经验 10 · 战斗 1 · HP 151/160 · intact\n单位详情\n主战坦克\n训练有素\n保存呼号\n单位类型\n主战坦克\n创建时间\n08:00:00\n来源建筑\n装甲工厂\n经验\n10\n战斗次数\n1\n生命\n151 / 160\n损伤\nintact\n等级进度\n距老兵还需 20\n战斗中实际属性\nattack\n36.05（基础 35）\nantiArmor\n22.66（基础 20）\ndefense\n30.9（基础 30）\nscouting\n3.09（基础 3）\nmobility\n10（基础 10）\nrepair\n0（基础 0）\n装备槽位（1/2）\n反装甲瞄具 · 槽位1\n卸载\n战术光学组 · 初始配发 · equipment-starter-1\n挂载\n强化底盘 · 初始配发 · equipment-starter-2\n挂载\n野战工具包 · 初始配发 · equipment-starter-3\n挂载\n通讯记录 / COMMS\n19 / 30\n[08:00]\n基地数据已保存。\n[08:00]\n反装甲瞄具开始制造。\n[08:00]\n存档已载入，基地状态恢复。\n[08:00]\n反装甲瞄具生产已取消，返还补给90 · 合金70。\n[08:00]\n反装甲瞄具开始制造。\n[08:00]\n战术指挥链已加入制造队列，当前排在第2位。\n[08:00]\n战术指挥链已从等待队列移除，返还补给220 · 合金170。\n[08:00]\n反装甲瞄具制造完成，已进入装备库存。\n[08:00]\n装甲工厂已空闲。\n[08:00]\n存档已载入，基地状态恢复。\n[08:00]\n编队「第一战斗群」已建立。\n[08:00]\n主战坦克已加入「第一战斗群」，指挥容量剩余6。\n[08:00]\n第一战斗群向废弃矿区发起进攻（谨慎推进）。\n[08:00]\n存档已载入，基地状态恢复。\n[08:00]\n1支编队已恢复，指挥容量占用 2/8。\n[08:00]\n第一战斗群正在废弃矿区作战，回放进度 0%，结果已锁定。\n[08:00]\n第一战斗群在废弃矿区的作战结束：胜利，无永久损失。\n[08:00]\n占领废弃矿区，获得首次占领奖励：合金 300。\n[08:00]\n第一战斗群已返回基地。\n只读回放期间不能变更装备",
-            "imageSha256": "e586cddeb0e687bcdb75ae268a65f1ae8fe307387934ce0272c1c0c2b92694d4",
+            "domText": "◣\n钢铁指令\nIRON COMMAND · 指挥终端\n▤\n补给\n3,759/ 6,000\n+3/s\n◈\n合金\n4,125/ 6,000\n+3/s\n◎\n情报\n401/ 500\n+0.1/s\n⚡\n电力\n8/ 30\n正常\n✦\n指挥容量\n2/ 8\n空闲\n基地时间\n08:00:17\n第1天\n❚❚\n1×\n2×\n4×\n保存\n读取\n新游戏\n演出：自动\n通用规划 · 正式旁路\n概览\n建设\n生产\n部队\n编队\n战区\n维修\n科研\n战报\n单位档案\n阶段8 · 已开放\n1\n单位总数\n0\n空闲单位\n1\n已编队单位\n0\n维修中单位\n0\n轻度受损\n0\n重度受损\n0\n新兵\n1\n训练有素\n0\n老兵\n0\n精锐\n类型\n全部类型\n步兵\n车辆\n装甲\n支援\n状态\n全部状态\n空闲\n已编队\n维修中\n受损\n等级\n全部等级\n新兵\n训练有素\n老兵\n精锐\n排序\n创建时间\n经验\n战斗次数\n生命比例\n单位类型\n单位列表\n1 个\n主战坦克\n训练有素 · 主战坦克\n经验 10 · 战斗 1 · HP 151/160 · intact\n单位详情\n主战坦克\n训练有素\n保存呼号\n单位类型\n主战坦克\n创建时间\n08:00:00\n来源建筑\n装甲工厂\n经验\n10\n战斗次数\n1\n生命\n151 / 160\n损伤\nintact\n等级进度\n距老兵还需 20\n战斗中实际属性\nattack\n36.05（基础 35）\nantiArmor\n22.66（基础 20）\ndefense\n30.9（基础 30）\nscouting\n3.09（基础 3）\nmobility\n10（基础 10）\nrepair\n0（基础 0）\n装备槽位（1/2）\n反装甲瞄具 · 槽位1\n卸载\n战术光学组 · scouting×1.15 mobility×1.03\n挂载\n强化底盘 · defense×1.08 mobility×1.04\n挂载\n野战工具包 · repair×1.2 defense×1.02\n挂载\n通讯记录 / COMMS\n19 / 30\n[08:00]\n基地数据已保存。\n[08:00]\n反装甲瞄具开始制造。\n[08:00]\n存档已载入，基地状态恢复。\n[08:00]\n反装甲瞄具生产已取消，返还补给90 · 合金70。\n[08:00]\n反装甲瞄具开始制造。\n[08:00]\n战术指挥链已加入制造队列，当前排在第2位。\n[08:00]\n战术指挥链已从等待队列移除，返还补给220 · 合金170。\n[08:00]\n反装甲瞄具制造完成，已进入装备库存。\n[08:00]\n装甲工厂已空闲。\n[08:00]\n存档已载入，基地状态恢复。\n[08:00]\n编队「第一战斗群」已建立。\n[08:00]\n主战坦克已加入「第一战斗群」，指挥容量剩余6。\n[08:00]\n第一战斗群向废弃矿区发起进攻（谨慎推进）。\n[08:00]\n存档已载入，基地状态恢复。\n[08:00]\n1支编队已恢复，指挥容量占用 2/8。\n[08:00]\n第一战斗群正在废弃矿区作战，回放进度 0%，结果已锁定。\n[08:00]\n第一战斗群在废弃矿区的作战结束：胜利，无永久损失。\n[08:00]\n占领废弃矿区，获得首次占领奖励：合金 300。\n[08:00]\n第一战斗群已返回基地。\n只读回放期间不能变更装备",
+            "imageSha256": "0e1fa492b1b5ffe68c0f82b55b5b593b2e7cc34297e79c87aa845e8a2e7c09c0",
             "screenshot": {
               "path": "screenshots/stage9-C/s9-c-08-replay.png",
-              "sha256": "e586cddeb0e687bcdb75ae268a65f1ae8fe307387934ce0272c1c0c2b92694d4"
+              "sha256": "0e1fa492b1b5ffe68c0f82b55b5b593b2e7cc34297e79c87aa845e8a2e7c09c0"
             }
           },
           {
@@ -3543,30 +3543,30 @@
               "reason": "replay",
               "method": "Page.reload",
               "before": {
-                "timeOrigin": 1786658834955.4,
+                "timeOrigin": 1786565603254.5,
                 "readyState": "complete",
                 "navigationType": "reload"
               },
               "after": {
-                "timeOrigin": 1786658836848.5,
+                "timeOrigin": 1786565605093.7,
                 "readyState": "complete",
                 "navigationType": "reload"
               },
-              "beforeLoaderId": "0D3EA294B05622891B8160D3BE5C5063",
-              "afterLoaderId": "9E40B3759D7C092069E48C9985032C5A",
+              "beforeLoaderId": "02D6A9294158668017CC812EBB5E5D8A",
+              "afterLoaderId": "9D3D44270E9D54269BBB6365D3B6430C",
               "timeOriginChanged": true
             },
             "state": {
               "activeBattleSessionId": null,
               "activeBattle": {
-                "battleSessionId": "battle-session-14-scrap_mine-e831747db877938f3cfb-1",
+                "battleSessionId": "battle-session-14-scrap_mine-87cb5d9aee2347f3d2f1-1",
                 "replayReadOnly": true,
                 "settled": false,
                 "settlementAllowed": false,
-                "deploymentHash": "e831747db877938f3cfbc367efc92ed4319646746d1b40324c70db32fc114774",
-                "formalReportHash": "cac0f3244ef4574541c33d5ac3e5bb0b06ada9f64bf7d2b0399e44269029c6e2",
-                "settlementId": "settlement-b04ec6f0459363a948447df58ddf57807ea0f8c06fea9a34376e5d26c3c63ee9",
-                "reportId": "battle_2089849983_fm_mss2jewv_6_scrap_mine_cautious",
+                "deploymentHash": "87cb5d9aee2347f3d2f19101ab1ef965e0b5263f5f4aa5230aa8380ea1522561",
+                "formalReportHash": "7bf39b8e4183e60bed526a32107cccfae0be6b98432bb3e9ba4b3b6a2cdcab45",
+                "settlementId": "settlement-f7d3ce52c3758b03e7ab0e4e9729e2388d6455a68a06717d246ed19f646661e7",
+                "reportId": "battle_3992048898_fm_msqj14wv_6_scrap_mine_cautious",
                 "historicalEquipment": {
                   "stage9-c-browser-unit": [
                     {
@@ -3585,11 +3585,11 @@
                 }
               },
               "authoritativeSession": {
-                "battleSessionId": "battle-session-14-scrap_mine-e831747db877938f3cfb-1",
+                "battleSessionId": "battle-session-14-scrap_mine-87cb5d9aee2347f3d2f1-1",
                 "missionId": "scrap_mine",
                 "deploymentSnapshot": {
                   "formation": {
-                    "id": "fm_mss2jewv_6",
+                    "id": "fm_msqj14wv_6",
                     "name": "第一战斗群",
                     "experience": 0,
                     "unitIds": [
@@ -3679,17 +3679,17 @@
                   "missionId": "scrap_mine",
                   "operation": null
                 },
-                "deploymentSnapshotId": "deployment-e831747db877938f3cfbc367efc92ed4319646746d1b40324c70db32fc114774",
-                "deploymentHash": "e831747db877938f3cfbc367efc92ed4319646746d1b40324c70db32fc114774",
-                "formalReportId": "battle_2089849983_fm_mss2jewv_6_scrap_mine_cautious",
-                "formalReportHash": "cac0f3244ef4574541c33d5ac3e5bb0b06ada9f64bf7d2b0399e44269029c6e2",
-                "sourceReportHash": "cac0f3244ef4574541c33d5ac3e5bb0b06ada9f64bf7d2b0399e44269029c6e2",
+                "deploymentSnapshotId": "deployment-87cb5d9aee2347f3d2f19101ab1ef965e0b5263f5f4aa5230aa8380ea1522561",
+                "deploymentHash": "87cb5d9aee2347f3d2f19101ab1ef965e0b5263f5f4aa5230aa8380ea1522561",
+                "formalReportId": "battle_3992048898_fm_msqj14wv_6_scrap_mine_cautious",
+                "formalReportHash": "7bf39b8e4183e60bed526a32107cccfae0be6b98432bb3e9ba4b3b6a2cdcab45",
+                "sourceReportHash": "7bf39b8e4183e60bed526a32107cccfae0be6b98432bb3e9ba4b3b6a2cdcab45",
                 "sourceSaveRevision": 14,
-                "settlementId": "settlement-b04ec6f0459363a948447df58ddf57807ea0f8c06fea9a34376e5d26c3c63ee9",
+                "settlementId": "settlement-f7d3ce52c3758b03e7ab0e4e9729e2388d6455a68a06717d246ed19f646661e7",
                 "sessionOrigin": "production",
                 "formalReport": {
-                  "id": "battle_2089849983_fm_mss2jewv_6_scrap_mine_cautious",
-                  "seed": 2089849983,
+                  "id": "battle_3992048898_fm_msqj14wv_6_scrap_mine_cautious",
+                  "seed": 3992048898,
                   "theaterId": "scrap_mine",
                   "theaterName": "废弃矿区",
                   "terrain": "open",
@@ -3697,9 +3697,9 @@
                   "missionKind": "campaign",
                   "missionId": "scrap_mine",
                   "strategyName": "谨慎推进",
-                  "formationId": "fm_mss2jewv_6",
+                  "formationId": "fm_msqj14wv_6",
                   "formationName": "第一战斗群",
-                  "startedAt": 2089849983,
+                  "startedAt": 3992048898,
                   "initial": {
                     "friendly": [
                       {
@@ -4044,7 +4044,7 @@
                       "t": 12.95,
                       "type": "fire",
                       "actor": "unit_stage9-c-browser-unit",
-                      "target": "enemy_infantry_2",
+                      "target": "enemy_infantry_1",
                       "value": 0,
                       "text": "主战坦克向敌方步兵班开火"
                     },
@@ -4052,15 +4052,15 @@
                       "t": 14.25,
                       "type": "damage",
                       "actor": "unit_stage9-c-browser-unit",
-                      "target": "enemy_infantry_2",
-                      "value": 47,
-                      "text": "敌方步兵班受到47点伤害"
+                      "target": "enemy_infantry_1",
+                      "value": 55,
+                      "text": "敌方步兵班受到55点伤害"
                     },
                     {
                       "t": 15.55,
                       "type": "suppress",
                       "actor": "unit_stage9-c-browser-unit",
-                      "target": "enemy_infantry_2",
+                      "target": "enemy_infantry_1",
                       "value": 0,
                       "text": "敌方步兵班被压制，下次攻击下降"
                     },
@@ -4068,7 +4068,7 @@
                       "t": 16.84,
                       "type": "fire",
                       "actor": "unit_stage9-c-browser-unit",
-                      "target": "enemy_infantry_2",
+                      "target": "enemy_infantry_1",
                       "value": 0,
                       "text": "主战坦克向敌方步兵班开火"
                     },
@@ -4076,15 +4076,15 @@
                       "t": 18.14,
                       "type": "damage",
                       "actor": "unit_stage9-c-browser-unit",
-                      "target": "enemy_infantry_2",
-                      "value": 43,
-                      "text": "敌方步兵班受到43点伤害"
+                      "target": "enemy_infantry_1",
+                      "value": 51,
+                      "text": "敌方步兵班受到51点伤害"
                     },
                     {
                       "t": 19.43,
                       "type": "suppress",
                       "actor": "unit_stage9-c-browser-unit",
-                      "target": "enemy_infantry_2",
+                      "target": "enemy_infantry_1",
                       "value": 0,
                       "text": "敌方步兵班被压制，下次攻击下降"
                     },
@@ -4092,14 +4092,14 @@
                       "t": 20.73,
                       "type": "destroy",
                       "actor": "unit_stage9-c-browser-unit",
-                      "target": "enemy_infantry_2",
+                      "target": "enemy_infantry_1",
                       "value": 0,
                       "text": "敌方步兵班被摧毁"
                     },
                     {
                       "t": 22.02,
                       "type": "fire",
-                      "actor": "enemy_infantry_1",
+                      "actor": "enemy_infantry_2",
                       "target": "unit_stage9-c-browser-unit",
                       "value": 0,
                       "text": "敌方步兵班向主战坦克开火"
@@ -4107,7 +4107,7 @@
                     {
                       "t": 23.32,
                       "type": "damage",
-                      "actor": "enemy_infantry_1",
+                      "actor": "enemy_infantry_2",
                       "target": "unit_stage9-c-browser-unit",
                       "value": 1,
                       "text": "主战坦克受到1点伤害"
@@ -4132,7 +4132,7 @@
                       "t": 27.2,
                       "type": "fire",
                       "actor": "unit_stage9-c-browser-unit",
-                      "target": "enemy_infantry_1",
+                      "target": "enemy_infantry_2",
                       "value": 0,
                       "text": "主战坦克向敌方步兵班开火"
                     },
@@ -4140,22 +4140,22 @@
                       "t": 28.5,
                       "type": "damage",
                       "actor": "unit_stage9-c-browser-unit",
-                      "target": "enemy_infantry_1",
-                      "value": 52,
-                      "text": "敌方步兵班受到52点伤害"
+                      "target": "enemy_infantry_2",
+                      "value": 48,
+                      "text": "敌方步兵班受到48点伤害"
                     },
                     {
                       "t": 29.8,
                       "type": "suppress",
                       "actor": "unit_stage9-c-browser-unit",
-                      "target": "enemy_infantry_1",
+                      "target": "enemy_infantry_2",
                       "value": 0,
                       "text": "敌方步兵班被压制，下次攻击下降"
                     },
                     {
                       "t": 31.09,
                       "type": "fire",
-                      "actor": "enemy_infantry_1",
+                      "actor": "enemy_infantry_2",
                       "target": "unit_stage9-c-browser-unit",
                       "value": 0,
                       "text": "敌方步兵班向主战坦克开火"
@@ -4163,7 +4163,7 @@
                     {
                       "t": 32.39,
                       "type": "damage",
-                      "actor": "enemy_infantry_1",
+                      "actor": "enemy_infantry_2",
                       "target": "unit_stage9-c-browser-unit",
                       "value": 1,
                       "text": "主战坦克受到1点伤害"
@@ -4188,7 +4188,7 @@
                       "t": 36.27,
                       "type": "fire",
                       "actor": "unit_stage9-c-browser-unit",
-                      "target": "enemy_infantry_1",
+                      "target": "enemy_infantry_2",
                       "value": 0,
                       "text": "主战坦克向敌方步兵班开火"
                     },
@@ -4196,15 +4196,15 @@
                       "t": 37.57,
                       "type": "damage",
                       "actor": "unit_stage9-c-browser-unit",
-                      "target": "enemy_infantry_1",
-                      "value": 52,
-                      "text": "敌方步兵班受到52点伤害"
+                      "target": "enemy_infantry_2",
+                      "value": 43,
+                      "text": "敌方步兵班受到43点伤害"
                     },
                     {
                       "t": 38.86,
                       "type": "suppress",
                       "actor": "unit_stage9-c-browser-unit",
-                      "target": "enemy_infantry_1",
+                      "target": "enemy_infantry_2",
                       "value": 0,
                       "text": "敌方步兵班被压制，下次攻击下降"
                     },
@@ -4212,7 +4212,7 @@
                       "t": 40.16,
                       "type": "destroy",
                       "actor": "unit_stage9-c-browser-unit",
-                      "target": "enemy_infantry_1",
+                      "target": "enemy_infantry_2",
                       "value": 0,
                       "text": "敌方步兵班被摧毁"
                     },
@@ -4245,8 +4245,8 @@
                       "type": "damage",
                       "actor": "unit_stage9-c-browser-unit",
                       "target": "enemy_infantry_3",
-                      "value": 49,
-                      "text": "敌方步兵班受到49点伤害"
+                      "value": 45,
+                      "text": "敌方步兵班受到45点伤害"
                     },
                     {
                       "t": 46.64,
@@ -4285,8 +4285,8 @@
                       "type": "damage",
                       "actor": "unit_stage9-c-browser-unit",
                       "target": "enemy_infantry_3",
-                      "value": 48,
-                      "text": "敌方步兵班受到48点伤害"
+                      "value": 47,
+                      "text": "敌方步兵班受到47点伤害"
                     },
                     {
                       "t": 53.11,
@@ -4357,14 +4357,14 @@
                     "friendly": [],
                     "enemy": [
                       {
-                        "id": "enemy_infantry_2",
+                        "id": "enemy_infantry_1",
                         "realId": null,
                         "type": "enemy_infantry",
                         "name": "敌方步兵班",
                         "side": "enemy"
                       },
                       {
-                        "id": "enemy_infantry_1",
+                        "id": "enemy_infantry_2",
                         "realId": null,
                         "type": "enemy_infantry",
                         "name": "敌方步兵班",
@@ -4477,7 +4477,7 @@
                   "experienceMultiplier": 1
                 }
               },
-              "sessionId": "battle-session-14-scrap_mine-e831747db877938f3cfb-1",
+              "sessionId": "battle-session-14-scrap_mine-87cb5d9aee2347f3d2f1-1",
               "sessionLifecycle": "returned",
               "equipment": {
                 "stage9-c-browser-unit": [
@@ -4492,11 +4492,11 @@
               "reportCount": 1,
               "ledgerCount": 1
             },
-            "domText": "◣\n钢铁指令\nIRON COMMAND · 指挥终端\n▤\n补给\n3,759/ 6,000\n+3/s\n◈\n合金\n4,126/ 6,000\n+3/s\n◎\n情报\n401/ 500\n+0.1/s\n⚡\n电力\n8/ 30\n正常\n✦\n指挥容量\n2/ 8\n空闲\n基地时间\n08:00:18\n第1天\n❚❚\n1×\n2×\n4×\n保存\n读取\n新游戏\n演出：自动\n通用规划 · 正式旁路\n概览\n建设\n生产\n部队\n编队\n战区\n维修\n科研\n战报\n单位档案\n阶段8 · 已开放\n1\n单位总数\n0\n空闲单位\n1\n已编队单位\n0\n维修中单位\n0\n轻度受损\n0\n重度受损\n0\n新兵\n1\n训练有素\n0\n老兵\n0\n精锐\n类型\n全部类型\n步兵\n车辆\n装甲\n支援\n状态\n全部状态\n空闲\n已编队\n维修中\n受损\n等级\n全部等级\n新兵\n训练有素\n老兵\n精锐\n排序\n创建时间\n经验\n战斗次数\n生命比例\n单位类型\n单位列表\n1 个\n主战坦克\n训练有素 · 主战坦克\n经验 10 · 战斗 1 · HP 151/160 · intact\n单位详情\n主战坦克\n训练有素\n保存呼号\n单位类型\n主战坦克\n创建时间\n08:00:00\n来源建筑\n装甲工厂\n经验\n10\n战斗次数\n1\n生命\n151 / 160\n损伤\nintact\n等级进度\n距老兵还需 20\n战斗中实际属性\nattack\n36.05（基础 35）\nantiArmor\n22.66（基础 20）\ndefense\n30.9（基础 30）\nscouting\n3.09（基础 3）\nmobility\n10（基础 10）\nrepair\n0（基础 0）\n装备槽位（1/2）\n反装甲瞄具 · 槽位1\n卸载\n战术光学组 · 初始配发 · equipment-starter-1\n挂载\n强化底盘 · 初始配发 · equipment-starter-2\n挂载\n野战工具包 · 初始配发 · equipment-starter-3\n挂载\n通讯记录 / COMMS\n23 / 30\n[08:00]\n基地数据已保存。\n[08:00]\n反装甲瞄具开始制造。\n[08:00]\n存档已载入，基地状态恢复。\n[08:00]\n反装甲瞄具生产已取消，返还补给90 · 合金70。\n[08:00]\n反装甲瞄具开始制造。\n[08:00]\n战术指挥链已加入制造队列，当前排在第2位。\n[08:00]\n战术指挥链已从等待队列移除，返还补给220 · 合金170。\n[08:00]\n反装甲瞄具制造完成，已进入装备库存。\n[08:00]\n装甲工厂已空闲。\n[08:00]\n存档已载入，基地状态恢复。\n[08:00]\n编队「第一战斗群」已建立。\n[08:00]\n主战坦克已加入「第一战斗群」，指挥容量剩余6。\n[08:00]\n第一战斗群向废弃矿区发起进攻（谨慎推进）。\n[08:00]\n存档已载入，基地状态恢复。\n[08:00]\n1支编队已恢复，指挥容量占用 2/8。\n[08:00]\n第一战斗群正在废弃矿区作战，回放进度 0%，结果已锁定。\n[08:00]\n第一战斗群在废弃矿区的作战结束：胜利，无永久损失。\n[08:00]\n占领废弃矿区，获得首次占领奖励：合金 300。\n[08:00]\n第一战斗群已返回基地。\n[08:00]\n存档已载入，基地状态恢复。\n[08:00]\n1支编队已恢复，指挥容量占用 2/8。\n[08:00]\n已占领战区：废弃矿区，占领收益持续生效。\n[08:00]\n第一战斗群正在废弃矿区作战，回放进度 0%，结果已锁定。\n只读回放期间不能变更装备",
-            "imageSha256": "6f4646910ef241f99fa0b971bea89d0cdc17b1aa1e9ff214ded6107e7fb34c9a",
+            "domText": "◣\n钢铁指令\nIRON COMMAND · 指挥终端\n▤\n补给\n3,759/ 6,000\n+3/s\n◈\n合金\n4,125/ 6,000\n+3/s\n◎\n情报\n401/ 500\n+0.1/s\n⚡\n电力\n8/ 30\n正常\n✦\n指挥容量\n2/ 8\n空闲\n基地时间\n08:00:17\n第1天\n❚❚\n1×\n2×\n4×\n保存\n读取\n新游戏\n演出：自动\n通用规划 · 正式旁路\n概览\n建设\n生产\n部队\n编队\n战区\n维修\n科研\n战报\n单位档案\n阶段8 · 已开放\n1\n单位总数\n0\n空闲单位\n1\n已编队单位\n0\n维修中单位\n0\n轻度受损\n0\n重度受损\n0\n新兵\n1\n训练有素\n0\n老兵\n0\n精锐\n类型\n全部类型\n步兵\n车辆\n装甲\n支援\n状态\n全部状态\n空闲\n已编队\n维修中\n受损\n等级\n全部等级\n新兵\n训练有素\n老兵\n精锐\n排序\n创建时间\n经验\n战斗次数\n生命比例\n单位类型\n单位列表\n1 个\n主战坦克\n训练有素 · 主战坦克\n经验 10 · 战斗 1 · HP 151/160 · intact\n单位详情\n主战坦克\n训练有素\n保存呼号\n单位类型\n主战坦克\n创建时间\n08:00:00\n来源建筑\n装甲工厂\n经验\n10\n战斗次数\n1\n生命\n151 / 160\n损伤\nintact\n等级进度\n距老兵还需 20\n战斗中实际属性\nattack\n36.05（基础 35）\nantiArmor\n22.66（基础 20）\ndefense\n30.9（基础 30）\nscouting\n3.09（基础 3）\nmobility\n10（基础 10）\nrepair\n0（基础 0）\n装备槽位（1/2）\n反装甲瞄具 · 槽位1\n卸载\n战术光学组 · scouting×1.15 mobility×1.03\n挂载\n强化底盘 · defense×1.08 mobility×1.04\n挂载\n野战工具包 · repair×1.2 defense×1.02\n挂载\n通讯记录 / COMMS\n23 / 30\n[08:00]\n基地数据已保存。\n[08:00]\n反装甲瞄具开始制造。\n[08:00]\n存档已载入，基地状态恢复。\n[08:00]\n反装甲瞄具生产已取消，返还补给90 · 合金70。\n[08:00]\n反装甲瞄具开始制造。\n[08:00]\n战术指挥链已加入制造队列，当前排在第2位。\n[08:00]\n战术指挥链已从等待队列移除，返还补给220 · 合金170。\n[08:00]\n反装甲瞄具制造完成，已进入装备库存。\n[08:00]\n装甲工厂已空闲。\n[08:00]\n存档已载入，基地状态恢复。\n[08:00]\n编队「第一战斗群」已建立。\n[08:00]\n主战坦克已加入「第一战斗群」，指挥容量剩余6。\n[08:00]\n第一战斗群向废弃矿区发起进攻（谨慎推进）。\n[08:00]\n存档已载入，基地状态恢复。\n[08:00]\n1支编队已恢复，指挥容量占用 2/8。\n[08:00]\n第一战斗群正在废弃矿区作战，回放进度 0%，结果已锁定。\n[08:00]\n第一战斗群在废弃矿区的作战结束：胜利，无永久损失。\n[08:00]\n占领废弃矿区，获得首次占领奖励：合金 300。\n[08:00]\n第一战斗群已返回基地。\n[08:00]\n存档已载入，基地状态恢复。\n[08:00]\n1支编队已恢复，指挥容量占用 2/8。\n[08:00]\n已占领战区：废弃矿区，占领收益持续生效。\n[08:00]\n第一战斗群正在废弃矿区作战，回放进度 0%，结果已锁定。\n只读回放期间不能变更装备",
+            "imageSha256": "1ae7e4c86a59a4bb36797c2959c6a244a393aaf24134da3984a2cf57be0b1b3f",
             "screenshot": {
               "path": "screenshots/stage9-C/s9-c-09-replay-reload.png",
-              "sha256": "6f4646910ef241f99fa0b971bea89d0cdc17b1aa1e9ff214ded6107e7fb34c9a"
+              "sha256": "1ae7e4c86a59a4bb36797c2959c6a244a393aaf24134da3984a2cf57be0b1b3f"
             }
           }
         ]
@@ -4702,7 +4702,7 @@
     "migration": {
       "stage": "9-C",
       "independentRecompute": true,
-      "saveVersion": 10,
+      "saveVersion": 9,
       "oldSaveCreatesNothing": true,
       "productionQueueRestored": true,
       "danglingUnitReferenceRemoved": true,
@@ -4735,9 +4735,6 @@
               "acquisition": {
                 "kind": "starter",
                 "label": "初始装备补给"
-              },
-              "provenance": {
-                "kind": "starter"
               }
             },
             {
@@ -4748,9 +4745,6 @@
               "acquisition": {
                 "kind": "starter",
                 "label": "初始装备补给"
-              },
-              "provenance": {
-                "kind": "starter"
               }
             },
             {
@@ -4761,14 +4755,10 @@
               "acquisition": {
                 "kind": "starter",
                 "label": "初始装备补给"
-              },
-              "provenance": {
-                "kind": "starter"
               }
             }
           ],
-          "bindings": {},
-          "salvageClaims": {}
+          "bindings": {}
         },
         "equipmentAfterFirst": {
           "inventory": [
@@ -4780,9 +4770,6 @@
               "acquisition": {
                 "kind": "starter",
                 "label": "初始装备补给"
-              },
-              "provenance": {
-                "kind": "starter"
               }
             },
             {
@@ -4793,9 +4780,6 @@
               "acquisition": {
                 "kind": "starter",
                 "label": "初始装备补给"
-              },
-              "provenance": {
-                "kind": "starter"
               }
             },
             {
@@ -4806,9 +4790,6 @@
               "acquisition": {
                 "kind": "starter",
                 "label": "初始装备补给"
-              },
-              "provenance": {
-                "kind": "starter"
               }
             },
             {
@@ -4825,14 +4806,10 @@
                   "alloy": 140
                 },
                 "buildTime": 18
-              },
-              "provenance": {
-                "kind": "production"
               }
             }
           ],
-          "bindings": {},
-          "salvageClaims": {}
+          "bindings": {}
         },
         "equipmentAfterSecond": {
           "inventory": [
@@ -4844,9 +4821,6 @@
               "acquisition": {
                 "kind": "starter",
                 "label": "初始装备补给"
-              },
-              "provenance": {
-                "kind": "starter"
               }
             },
             {
@@ -4857,9 +4831,6 @@
               "acquisition": {
                 "kind": "starter",
                 "label": "初始装备补给"
-              },
-              "provenance": {
-                "kind": "starter"
               }
             },
             {
@@ -4870,9 +4841,6 @@
               "acquisition": {
                 "kind": "starter",
                 "label": "初始装备补给"
-              },
-              "provenance": {
-                "kind": "starter"
               }
             },
             {
@@ -4889,14 +4857,10 @@
                   "alloy": 140
                 },
                 "buildTime": 18
-              },
-              "provenance": {
-                "kind": "production"
               }
             }
           ],
-          "bindings": {},
-          "salvageClaims": {}
+          "bindings": {}
         },
         "producedInstanceId": "equipment-production-anti_armor_sights-1",
         "reportEquipmentProduced": [
@@ -4917,9 +4881,6 @@
                 "acquisition": {
                   "kind": "starter",
                   "label": "初始装备补给"
-                },
-                "provenance": {
-                  "kind": "starter"
                 }
               },
               {
@@ -4930,9 +4891,6 @@
                 "acquisition": {
                   "kind": "starter",
                   "label": "初始装备补给"
-                },
-                "provenance": {
-                  "kind": "starter"
                 }
               },
               {
@@ -4943,9 +4901,6 @@
                 "acquisition": {
                   "kind": "starter",
                   "label": "初始装备补给"
-                },
-                "provenance": {
-                  "kind": "starter"
                 }
               },
               {
@@ -4962,14 +4917,10 @@
                     "alloy": 140
                   },
                   "buildTime": 18
-                },
-                "provenance": {
-                  "kind": "production"
                 }
               }
             ],
-            "bindings": {},
-            "salvageClaims": {}
+            "bindings": {}
           }
         },
         "battlePaused": true,
@@ -5009,9 +4960,6 @@
             "acquisition": {
               "kind": "starter",
               "label": "初始装备补给"
-            },
-            "provenance": {
-              "kind": "starter"
             }
           },
           {
@@ -5022,9 +4970,6 @@
             "acquisition": {
               "kind": "starter",
               "label": "初始装备补给"
-            },
-            "provenance": {
-              "kind": "starter"
             }
           },
           {
@@ -5035,9 +4980,6 @@
             "acquisition": {
               "kind": "starter",
               "label": "初始装备补给"
-            },
-            "provenance": {
-              "kind": "starter"
             }
           }
         ],
@@ -5045,8 +4987,7 @@
           "stage9-c-formal-unit": [
             "equipment-starter-2"
           ]
-        },
-        "salvageClaims": {}
+        }
       },
       "beforeSettlement": {
         "equipment": {
@@ -5059,9 +5000,6 @@
               "acquisition": {
                 "kind": "starter",
                 "label": "初始装备补给"
-              },
-              "provenance": {
-                "kind": "starter"
               }
             },
             {
@@ -5072,9 +5010,6 @@
               "acquisition": {
                 "kind": "starter",
                 "label": "初始装备补给"
-              },
-              "provenance": {
-                "kind": "starter"
               }
             },
             {
@@ -5085,9 +5020,6 @@
               "acquisition": {
                 "kind": "starter",
                 "label": "初始装备补给"
-              },
-              "provenance": {
-                "kind": "starter"
               }
             }
           ],
@@ -5095,10 +5027,9 @@
             "stage9-c-formal-unit": [
               "equipment-starter-2"
             ]
-          },
-          "salvageClaims": {}
+          }
         },
-        "equipmentHash": "cee17f2f179b901be67576ffe0dbd0f5008690e369ab7d29df79f00cc8f0b6e1",
+        "equipmentHash": "4ec48a0852320d5750de7a0b29ad505fa810b844b7b52435592753db4603483f",
         "reportCount": 0,
         "ledgerCount": 0,
         "activeBattle": {
@@ -5119,9 +5050,6 @@
               "acquisition": {
                 "kind": "starter",
                 "label": "初始装备补给"
-              },
-              "provenance": {
-                "kind": "starter"
               }
             },
             {
@@ -5132,9 +5060,6 @@
               "acquisition": {
                 "kind": "starter",
                 "label": "初始装备补给"
-              },
-              "provenance": {
-                "kind": "starter"
               }
             },
             {
@@ -5145,9 +5070,6 @@
               "acquisition": {
                 "kind": "starter",
                 "label": "初始装备补给"
-              },
-              "provenance": {
-                "kind": "starter"
               }
             }
           ],
@@ -5155,10 +5077,9 @@
             "stage9-c-formal-unit": [
               "equipment-starter-2"
             ]
-          },
-          "salvageClaims": {}
+          }
         },
-        "equipmentHash": "cee17f2f179b901be67576ffe0dbd0f5008690e369ab7d29df79f00cc8f0b6e1",
+        "equipmentHash": "4ec48a0852320d5750de7a0b29ad505fa810b844b7b52435592753db4603483f",
         "reportCount": 1,
         "ledgerCount": 1,
         "activeBattle": {
@@ -5220,21 +5141,6 @@
       "stage": "9-C",
       "independentRecompute": true,
       "changedFiles": [
-        ".github/workflows/core-regression.yml",
-        ".github/workflows/stage9-d-fast.yml",
-        ".github/workflows/stage9-d-stage-gate.yml",
-        "README.md",
-        "STAGE9-C-1B-DELIVERY.md",
-        "STAGE9-C-1B-PERF-ROOT-CAUSE.md",
-        "STAGE9-D-DELIVERY.md",
-        "js/battle-salvage.js",
-        "js/config.js",
-        "js/equipment.js",
-        "js/main.js",
-        "js/production-battle-session.js",
-        "js/save.js",
-        "js/theater.js",
-        "js/ui.js",
         "package.json",
         "progress.md",
         "screenshots/stage8-2G-E-A-1/e-a1-01-base-before-battle.png",
@@ -5272,6 +5178,7 @@
         "stage9_a_generalization_check.json",
         "stage9_a_mission_generalization_check.json",
         "stage9_a_performance_check.json",
+        "stage9_a_regression_check.json",
         "stage9_a_save_diff_check.json",
         "stage9_a_theater_chain_check.json",
         "stage9_b_authority_check.json",
@@ -5284,67 +5191,20 @@
         "stage9_b_performance_check.json",
         "stage9_b_replay_historical_check.json",
         "stage9_c_authority_check.json",
-        "stage9_c_battle_isolation_check.json",
-        "stage9_c_formal_settlement_isolation_check.json",
-        "stage9_c_migration_check.json",
+        "stage9_c_browser_capture_manifest.json",
+        "stage9_c_browser_integrity_check.json",
+        "stage9_c_evidence_bundle.json",
         "stage9_c_performance_check.json",
-        "stage9_c_regression_check.json",
-        "stage9_d_browser_capture_manifest.json",
-        "stage9_d_core_machine_evidence.json",
-        "stage9_d_developer_selfcheck.json",
-        "stage9_d_evidence_bundle.json",
-        "stage9_d_machine_evidence.json",
-        "stage9_d_performance_check.json",
-        "stage9_d_strong_evidence_verdict.json",
-        "stage9_d_tamper_results.json",
-        "tests/browser/stage9-D-battle-salvage.mjs",
-        "tests/generate-stage8-2G-DC1-machine-evidence.mjs",
-        "tests/generate-stage8-2G-EB-developer-selfcheck.mjs",
-        "tests/generate-stage8-2G-EC-developer-selfcheck.mjs",
-        "tests/generate-stage9-A-developer-selfcheck.mjs",
-        "tests/generate-stage9-B-developer-selfcheck.mjs",
-        "tests/generate-stage9-B-evidence.mjs",
-        "tests/generate-stage9-C-developer-selfcheck.mjs",
-        "tests/generate-stage9-C-evidence.mjs",
-        "tests/generate-stage9-C1b-node-core-runtime.mjs",
-        "tests/generate-stage9-C1b-performance-result.mjs",
-        "tests/generate-stage9-C1b-runtime-closure.mjs",
-        "tests/generate-stage9-D-developer-selfcheck.mjs",
-        "tests/generate-stage9-D-evidence.mjs",
-        "tests/generate-stage9-D-machine-evidence.mjs",
-        "tests/lib/perf-environment.mjs",
-        "tests/stage6-test.mjs",
-        "tests/stage7-test.mjs",
-        "tests/stage8-1-1-test.mjs",
-        "tests/stage8-1-test.mjs",
-        "tests/stage8-2E-A-2-1-test.mjs",
-        "tests/stage8-2E-A-2-2-test.mjs",
-        "tests/stage8-2E-A-2-3-test.mjs",
-        "tests/stage8-2E-A-2-4-test.mjs",
-        "tests/stage8-2E-A-2-test.mjs",
-        "tests/stage8-2G-B-test.mjs",
-        "tests/stage8-2G-D-C-1-performance-environment-test.mjs",
-        "tests/stage8-2G-D-C-1-performance-test.mjs",
-        "tests/stage8-2G-D-C-1-performance-verifier.mjs",
-        "tests/stage8-test.mjs",
-        "tests/stage9-A-theater-expansion-test.mjs",
-        "tests/stage9-B-equipment-test.mjs",
-        "tests/stage9-B-strong-evidence-test.mjs",
-        "tests/stage9-C-equipment-acquisition-test.mjs",
-        "tests/stage9-C-strong-evidence-test.mjs",
-        "tests/stage9-D-battle-salvage-test.mjs",
-        "tests/stage9-D-evidence-tamper-test.mjs",
-        "tests/stage9-D-evidence-verifier.mjs",
-        "tests/stage9-D-performance-test.mjs",
-        "tests/stage9-D-strong-evidence-test.mjs",
-        "tests/verify-clean-clone.mjs"
+        "stage9_c_reload_check.json",
+        "tests/stage9-A-performance-test.mjs"
       ],
       "forbiddenPaths": [
         "js/save-diff.js",
+        "tests/lib/",
         "js/battle.js",
+        "js/theater.js",
         "js/battle-presentation/universal/"
       ],
-      "allowedPerformanceHelper": "tests/lib/perf-environment.mjs",
       "authorityFieldChanges": 0,
       "solverPlannerChoreographerChanged": false,
       "saveDiffChanged": false,
@@ -5361,7 +5221,7 @@
     "regression": {
       "stage": "9-C",
       "independentRecompute": true,
-      "saveVersion": 10,
+      "saveVersion": 9,
       "stage9A": {
         "theaters": 6,
         "operations": 6
@@ -5504,32 +5364,32 @@
         "afterGreaterThanBefore": true,
         "loaderChanged": true,
         "declaredTimeOriginConsistent": true,
-        "beforeLoaderId": "D9C2D797F4676E3269029855BDA0116D",
-        "afterLoaderId": "DB6652425243FABF17AA38CAB2950909"
+        "beforeLoaderId": "2925309605E04038B43933D9D8A0C6BC",
+        "afterLoaderId": "53C8C0ADB766F159C66B45D17EE6E10F"
       },
       {
         "reason": "completed_unmounted",
         "afterGreaterThanBefore": true,
         "loaderChanged": true,
         "declaredTimeOriginConsistent": true,
-        "beforeLoaderId": "DB6652425243FABF17AA38CAB2950909",
-        "afterLoaderId": "57800A0488827689976DA026F559CF81"
+        "beforeLoaderId": "53C8C0ADB766F159C66B45D17EE6E10F",
+        "afterLoaderId": "9FF6BF3E8166FBA9D3B2AD541350AD68"
       },
       {
         "reason": "running_battle",
         "afterGreaterThanBefore": true,
         "loaderChanged": true,
         "declaredTimeOriginConsistent": true,
-        "beforeLoaderId": "57800A0488827689976DA026F559CF81",
-        "afterLoaderId": "0D3EA294B05622891B8160D3BE5C5063"
+        "beforeLoaderId": "9FF6BF3E8166FBA9D3B2AD541350AD68",
+        "afterLoaderId": "02D6A9294158668017CC812EBB5E5D8A"
       },
       {
         "reason": "replay",
         "afterGreaterThanBefore": true,
         "loaderChanged": true,
         "declaredTimeOriginConsistent": true,
-        "beforeLoaderId": "0D3EA294B05622891B8160D3BE5C5063",
-        "afterLoaderId": "9E40B3759D7C092069E48C9985032C5A"
+        "beforeLoaderId": "02D6A9294158668017CC812EBB5E5D8A",
+        "afterLoaderId": "9D3D44270E9D54269BBB6365D3B6430C"
       }
     ],
     "afterLoaderIdsUnique": true,
@@ -5551,57 +5411,57 @@
     "hashes": [
       {
         "file": "s9-c-01-production-queue.png",
-        "declared": "a15fd8cf42e9c3c505d5ac053d3ca5af1f0c25f373b246b4899b11ecbefd7851",
-        "manifest": "a15fd8cf42e9c3c505d5ac053d3ca5af1f0c25f373b246b4899b11ecbefd7851",
-        "actual": "a15fd8cf42e9c3c505d5ac053d3ca5af1f0c25f373b246b4899b11ecbefd7851"
+        "declared": "d3f1c51cd0e541752901e2ed3595e93d2ec471ddaee5cd0ace29c2b6aa0e65d1",
+        "manifest": "d3f1c51cd0e541752901e2ed3595e93d2ec471ddaee5cd0ace29c2b6aa0e65d1",
+        "actual": "d3f1c51cd0e541752901e2ed3595e93d2ec471ddaee5cd0ace29c2b6aa0e65d1"
       },
       {
         "file": "s9-c-02-production-queue-reload.png",
-        "declared": "045ccedaad120e9e563e793c3e4139374b35590e9b4b11e6532618fe5dcda0b3",
-        "manifest": "045ccedaad120e9e563e793c3e4139374b35590e9b4b11e6532618fe5dcda0b3",
-        "actual": "045ccedaad120e9e563e793c3e4139374b35590e9b4b11e6532618fe5dcda0b3"
+        "declared": "98bdb0dc09e65259bb13746a1db6f6afdd3231eec63fa92d03c108791fa7b53c",
+        "manifest": "98bdb0dc09e65259bb13746a1db6f6afdd3231eec63fa92d03c108791fa7b53c",
+        "actual": "98bdb0dc09e65259bb13746a1db6f6afdd3231eec63fa92d03c108791fa7b53c"
       },
       {
         "file": "s9-c-03-completed-unmounted.png",
-        "declared": "8b2225946ccded7bd0fb08d55e36884dffaff4eba08d091a84e49eec2c2f07a2",
-        "manifest": "8b2225946ccded7bd0fb08d55e36884dffaff4eba08d091a84e49eec2c2f07a2",
-        "actual": "8b2225946ccded7bd0fb08d55e36884dffaff4eba08d091a84e49eec2c2f07a2"
+        "declared": "08f00846c60c69716045df40b25275fff734d60c91f6bdec923d00bfdb7b6652",
+        "manifest": "08f00846c60c69716045df40b25275fff734d60c91f6bdec923d00bfdb7b6652",
+        "actual": "08f00846c60c69716045df40b25275fff734d60c91f6bdec923d00bfdb7b6652"
       },
       {
         "file": "s9-c-04-completed-reload.png",
-        "declared": "311047dbcd74428f078eeb1a979f0b33f8ec3355331898c151504362bd4220c2",
-        "manifest": "311047dbcd74428f078eeb1a979f0b33f8ec3355331898c151504362bd4220c2",
-        "actual": "311047dbcd74428f078eeb1a979f0b33f8ec3355331898c151504362bd4220c2"
+        "declared": "5e0faf45de71d1653b37b7e12825a69f771c863751757d6a7b820a50729d1ff2",
+        "manifest": "5e0faf45de71d1653b37b7e12825a69f771c863751757d6a7b820a50729d1ff2",
+        "actual": "5e0faf45de71d1653b37b7e12825a69f771c863751757d6a7b820a50729d1ff2"
       },
       {
         "file": "s9-c-05-mounted.png",
-        "declared": "afa357d4c357fbce6edaadba235d9199f63f246deb954ff983e74b655c06fd56",
-        "manifest": "afa357d4c357fbce6edaadba235d9199f63f246deb954ff983e74b655c06fd56",
-        "actual": "afa357d4c357fbce6edaadba235d9199f63f246deb954ff983e74b655c06fd56"
+        "declared": "8244d27139c20995b7f9b3ea374dbb1a8bfa2243c3a757c7e95e78579cbef4df",
+        "manifest": "8244d27139c20995b7f9b3ea374dbb1a8bfa2243c3a757c7e95e78579cbef4df",
+        "actual": "8244d27139c20995b7f9b3ea374dbb1a8bfa2243c3a757c7e95e78579cbef4df"
       },
       {
         "file": "s9-c-06-running.png",
-        "declared": "ad8d180bfd9190fa2114231d7535014f0ca91fe44abeed2c5ffbaa5dd4f478ab",
-        "manifest": "ad8d180bfd9190fa2114231d7535014f0ca91fe44abeed2c5ffbaa5dd4f478ab",
-        "actual": "ad8d180bfd9190fa2114231d7535014f0ca91fe44abeed2c5ffbaa5dd4f478ab"
+        "declared": "012a219b3042e383348876e2645ac984fe59be57741f16afa3c2eba8686b4e57",
+        "manifest": "012a219b3042e383348876e2645ac984fe59be57741f16afa3c2eba8686b4e57",
+        "actual": "012a219b3042e383348876e2645ac984fe59be57741f16afa3c2eba8686b4e57"
       },
       {
         "file": "s9-c-07-running-reload.png",
-        "declared": "d4fe18a25840a686447b65cf8248843c125a29a13dc37a0c865492b7d8b6ef7b",
-        "manifest": "d4fe18a25840a686447b65cf8248843c125a29a13dc37a0c865492b7d8b6ef7b",
-        "actual": "d4fe18a25840a686447b65cf8248843c125a29a13dc37a0c865492b7d8b6ef7b"
+        "declared": "40fc2645a1f765ebfa1d685b7fa1d3513a0703fecf9e7562dbb78adf350dafb7",
+        "manifest": "40fc2645a1f765ebfa1d685b7fa1d3513a0703fecf9e7562dbb78adf350dafb7",
+        "actual": "40fc2645a1f765ebfa1d685b7fa1d3513a0703fecf9e7562dbb78adf350dafb7"
       },
       {
         "file": "s9-c-08-replay.png",
-        "declared": "e586cddeb0e687bcdb75ae268a65f1ae8fe307387934ce0272c1c0c2b92694d4",
-        "manifest": "e586cddeb0e687bcdb75ae268a65f1ae8fe307387934ce0272c1c0c2b92694d4",
-        "actual": "e586cddeb0e687bcdb75ae268a65f1ae8fe307387934ce0272c1c0c2b92694d4"
+        "declared": "0e1fa492b1b5ffe68c0f82b55b5b593b2e7cc34297e79c87aa845e8a2e7c09c0",
+        "manifest": "0e1fa492b1b5ffe68c0f82b55b5b593b2e7cc34297e79c87aa845e8a2e7c09c0",
+        "actual": "0e1fa492b1b5ffe68c0f82b55b5b593b2e7cc34297e79c87aa845e8a2e7c09c0"
       },
       {
         "file": "s9-c-09-replay-reload.png",
-        "declared": "6f4646910ef241f99fa0b971bea89d0cdc17b1aa1e9ff214ded6107e7fb34c9a",
-        "manifest": "6f4646910ef241f99fa0b971bea89d0cdc17b1aa1e9ff214ded6107e7fb34c9a",
-        "actual": "6f4646910ef241f99fa0b971bea89d0cdc17b1aa1e9ff214ded6107e7fb34c9a"
+        "declared": "1ae7e4c86a59a4bb36797c2959c6a244a393aaf24134da3984a2cf57be0b1b3f",
+        "manifest": "1ae7e4c86a59a4bb36797c2959c6a244a393aaf24134da3984a2cf57be0b1b3f",
+        "actual": "1ae7e4c86a59a4bb36797c2959c6a244a393aaf24134da3984a2cf57be0b1b3f"
       }
     ],
     "uniqueHashes": 9,
@@ -5637,321 +5497,12 @@
       "samples": [
         {
           "attempt": 1,
-          "probes": [
-            {
-              "probe": 1,
-              "snapshotBefore": {
-                "platform": "darwin",
-                "arch": "arm64",
-                "nodeVersion": "v25.2.1",
-                "cpuCount": 10,
-                "availableCpuCount": 10,
-                "effectiveCpuCount": 10,
-                "cpuModel": "Apple M5",
-                "loadAverage": [
-                  3.451,
-                  4.697,
-                  4.105
-                ],
-                "normalizedLoad1": 0.345,
-                "spareEffectiveCores": 6.549,
-                "cgroup": {
-                  "available": false,
-                  "version": null,
-                  "quotaCores": null
-                }
-              },
-              "snapshotAfter": {
-                "platform": "darwin",
-                "arch": "arm64",
-                "nodeVersion": "v25.2.1",
-                "cpuCount": 10,
-                "availableCpuCount": 10,
-                "effectiveCpuCount": 10,
-                "cpuModel": "Apple M5",
-                "loadAverage": [
-                  3.451,
-                  4.697,
-                  4.105
-                ],
-                "normalizedLoad1": 0.345,
-                "spareEffectiveCores": 6.549,
-                "cgroup": {
-                  "available": false,
-                  "version": null,
-                  "quotaCores": null
-                }
-              },
-              "eventLoopJitterMs": [
-                1.386417,
-                1.073708,
-                1.057125,
-                1.06,
-                0.054208,
-                0.646834,
-                0.348583,
-                1.035209,
-                1.058333,
-                1.057834,
-                1.041791,
-                1.043958
-              ],
-              "calibration": {
-                "iterations": 1200000,
-                "checksum": 1725827320,
-                "warmupMs": [
-                  2.402125,
-                  1.627,
-                  1.498042,
-                  1.495042,
-                  1.451708,
-                  1.435667
-                ],
-                "samplesMs": [
-                  1.426708,
-                  1.416292,
-                  1.409625,
-                  1.415459,
-                  1.424209,
-                  1.428917,
-                  1.43075,
-                  1.430625,
-                  1.414417,
-                  1.4065,
-                  1.431542,
-                  1.406334
-                ]
-              },
-              "cgroupThrottle": {
-                "available": false,
-                "throttledUsecDelta": null,
-                "throttledWallRatio": null,
-                "nrThrottledDelta": null
-              }
-            },
-            {
-              "probe": 2,
-              "snapshotBefore": {
-                "platform": "darwin",
-                "arch": "arm64",
-                "nodeVersion": "v25.2.1",
-                "cpuCount": 10,
-                "availableCpuCount": 10,
-                "effectiveCpuCount": 10,
-                "cpuModel": "Apple M5",
-                "loadAverage": [
-                  3.451,
-                  4.697,
-                  4.105
-                ],
-                "normalizedLoad1": 0.345,
-                "spareEffectiveCores": 6.549,
-                "cgroup": {
-                  "available": false,
-                  "version": null,
-                  "quotaCores": null
-                }
-              },
-              "snapshotAfter": {
-                "platform": "darwin",
-                "arch": "arm64",
-                "nodeVersion": "v25.2.1",
-                "cpuCount": 10,
-                "availableCpuCount": 10,
-                "effectiveCpuCount": 10,
-                "cpuModel": "Apple M5",
-                "loadAverage": [
-                  3.451,
-                  4.697,
-                  4.105
-                ],
-                "normalizedLoad1": 0.345,
-                "spareEffectiveCores": 6.549,
-                "cgroup": {
-                  "available": false,
-                  "version": null,
-                  "quotaCores": null
-                }
-              },
-              "eventLoopJitterMs": [
-                1.309125,
-                1.033334,
-                1.027541,
-                1.100375,
-                1.0475,
-                1.048708,
-                1.051084,
-                1.047,
-                1.0575,
-                1.044875,
-                1.03625,
-                1.031042
-              ],
-              "calibration": {
-                "iterations": 1200000,
-                "checksum": 1725827320,
-                "warmupMs": [
-                  1.406,
-                  1.43375,
-                  1.399209,
-                  1.405583,
-                  1.391708,
-                  1.422875
-                ],
-                "samplesMs": [
-                  1.397459,
-                  1.441208,
-                  1.39575,
-                  1.410791,
-                  1.422333,
-                  1.46,
-                  1.407958,
-                  1.407958,
-                  1.41125,
-                  1.42,
-                  1.406042,
-                  1.410708
-                ]
-              },
-              "cgroupThrottle": {
-                "available": false,
-                "throttledUsecDelta": null,
-                "throttledWallRatio": null,
-                "nrThrottledDelta": null
-              }
-            },
-            {
-              "probe": 3,
-              "snapshotBefore": {
-                "platform": "darwin",
-                "arch": "arm64",
-                "nodeVersion": "v25.2.1",
-                "cpuCount": 10,
-                "availableCpuCount": 10,
-                "effectiveCpuCount": 10,
-                "cpuModel": "Apple M5",
-                "loadAverage": [
-                  3.451,
-                  4.697,
-                  4.105
-                ],
-                "normalizedLoad1": 0.345,
-                "spareEffectiveCores": 6.549,
-                "cgroup": {
-                  "available": false,
-                  "version": null,
-                  "quotaCores": null
-                }
-              },
-              "snapshotAfter": {
-                "platform": "darwin",
-                "arch": "arm64",
-                "nodeVersion": "v25.2.1",
-                "cpuCount": 10,
-                "availableCpuCount": 10,
-                "effectiveCpuCount": 10,
-                "cpuModel": "Apple M5",
-                "loadAverage": [
-                  3.451,
-                  4.697,
-                  4.105
-                ],
-                "normalizedLoad1": 0.345,
-                "spareEffectiveCores": 6.549,
-                "cgroup": {
-                  "available": false,
-                  "version": null,
-                  "quotaCores": null
-                }
-              },
-              "eventLoopJitterMs": [
-                1.080916,
-                1.038083,
-                1.026709,
-                1.035875,
-                1.033666,
-                1.03775,
-                1.034917,
-                1.026375,
-                1.0275,
-                1.040042,
-                1.031042,
-                1.026042
-              ],
-              "calibration": {
-                "iterations": 1200000,
-                "checksum": 1725827320,
-                "warmupMs": [
-                  1.413875,
-                  1.372084,
-                  1.421292,
-                  1.39625,
-                  1.409041,
-                  1.400834
-                ],
-                "samplesMs": [
-                  1.400083,
-                  1.41,
-                  1.435833,
-                  1.405291,
-                  1.414375,
-                  1.421875,
-                  1.415042,
-                  1.405958,
-                  1.417791,
-                  1.407584,
-                  1.409833,
-                  1.439375
-                ]
-              },
-              "cgroupThrottle": {
-                "available": false,
-                "throttledUsecDelta": null,
-                "throttledWallRatio": null,
-                "nrThrottledDelta": null
-              }
-            }
-          ],
-          "evaluation": {
-            "qualified": true,
-            "reason": "QUALIFIED",
-            "reasons": [],
-            "metrics": {
-              "maximumNormalizedLoad1": 0.345,
-              "minimumEffectiveCpuCount": 10,
-              "eventLoop": {
-                "count": 36,
-                "medianMs": 1.038083,
-                "p90Ms": 1.080916,
-                "p95Ms": 1.309125,
-                "maxMs": 1.386417,
-                "meanMs": 1.003813,
-                "coefficientOfVariation": 0.220229
-              },
-              "calibration": {
-                "count": 36,
-                "medianMs": 1.414375,
-                "p90Ms": 1.435833,
-                "p95Ms": 1.441208,
-                "maxMs": 1.46,
-                "meanMs": 1.417108,
-                "coefficientOfVariation": 0.009473,
-                "p95MedianRatio": 1.018972,
-                "maxMedianRatio": 1.032258,
-                "warmupDriftRatio": 0.000354
-              },
-              "maxCgroupThrottledWallRatio": null,
-              "productCanary": {
-                "sceneCount": 0,
-                "expectedSceneCount": 3,
-                "rows": []
-              }
-            }
-          }
+          "normalizedLoad1": 0.692,
+          "spareCores": 3.076
         }
       ],
-      "loadBefore": 0.345,
-      "loadAfter": 0.345
+      "loadBefore": 0.692,
+      "loadAfter": 0.692
     },
     "scenarios": {
       "effectiveStats": {
@@ -5959,24 +5510,24 @@
         "warmup": 20,
         "samples": 120,
         "metric": "p95",
-        "p95Ms": 0.0069,
-        "maxMs": 0.0161
+        "p95Ms": 0.0078,
+        "maxMs": 0.2076
       },
       "snapshot": {
         "name": "snapshot",
         "warmup": 20,
         "samples": 120,
         "metric": "p95",
-        "p95Ms": 0.0367,
-        "maxMs": 0.1519
+        "p95Ms": 0.0343,
+        "maxMs": 0.1378
       },
       "inventory": {
         "name": "inventoryCounts",
         "warmup": 20,
         "samples": 120,
         "metric": "p95",
-        "p95Ms": 0.0003,
-        "maxMs": 0.0031
+        "p95Ms": 0.0004,
+        "maxMs": 0.008
       }
     },
     "hotPathGuards": {
@@ -5996,9 +5547,6 @@
             "acquisition": {
               "kind": "starter",
               "label": "初始装备补给"
-            },
-            "provenance": {
-              "kind": "starter"
             }
           },
           {
@@ -6009,9 +5557,6 @@
             "acquisition": {
               "kind": "starter",
               "label": "初始装备补给"
-            },
-            "provenance": {
-              "kind": "starter"
             }
           },
           {
@@ -6022,9 +5567,6 @@
             "acquisition": {
               "kind": "starter",
               "label": "初始装备补给"
-            },
-            "provenance": {
-              "kind": "starter"
             }
           }
         ],
@@ -6033,8 +5575,7 @@
             "equipment-starter-1",
             "equipment-starter-3"
           ]
-        },
-        "salvageClaims": {}
+        }
       },
       "maxSlotsPerUnit": 2,
       "catalogCount": 8

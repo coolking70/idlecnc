@@ -22,321 +22,12 @@
     "samples": [
       {
         "attempt": 1,
-        "probes": [
-          {
-            "probe": 1,
-            "snapshotBefore": {
-              "platform": "darwin",
-              "arch": "arm64",
-              "nodeVersion": "v25.2.1",
-              "cpuCount": 10,
-              "availableCpuCount": 10,
-              "effectiveCpuCount": 10,
-              "cpuModel": "Apple M5",
-              "loadAverage": [
-                5.229,
-                5.112,
-                4.29
-              ],
-              "normalizedLoad1": 0.523,
-              "spareEffectiveCores": 4.771,
-              "cgroup": {
-                "available": false,
-                "version": null,
-                "quotaCores": null
-              }
-            },
-            "snapshotAfter": {
-              "platform": "darwin",
-              "arch": "arm64",
-              "nodeVersion": "v25.2.1",
-              "cpuCount": 10,
-              "availableCpuCount": 10,
-              "effectiveCpuCount": 10,
-              "cpuModel": "Apple M5",
-              "loadAverage": [
-                5.229,
-                5.112,
-                4.29
-              ],
-              "normalizedLoad1": 0.523,
-              "spareEffectiveCores": 4.771,
-              "cgroup": {
-                "available": false,
-                "version": null,
-                "quotaCores": null
-              }
-            },
-            "eventLoopJitterMs": [
-              1.341625,
-              1.062708,
-              1.061292,
-              1.036917,
-              1.062792,
-              1.10525,
-              1.039916,
-              1.054958,
-              1.0975,
-              1.094125,
-              1.068667,
-              1.048
-            ],
-            "calibration": {
-              "iterations": 1200000,
-              "checksum": 1725827320,
-              "warmupMs": [
-                2.772125,
-                1.8295,
-                1.82425,
-                1.84325,
-                1.828875,
-                1.723875
-              ],
-              "samplesMs": [
-                1.732167,
-                1.713167,
-                1.694875,
-                1.62475,
-                1.625459,
-                1.62525,
-                1.612541,
-                1.557167,
-                1.565583,
-                1.552959,
-                1.553208,
-                1.51175
-              ]
-            },
-            "cgroupThrottle": {
-              "available": false,
-              "throttledUsecDelta": null,
-              "throttledWallRatio": null,
-              "nrThrottledDelta": null
-            }
-          },
-          {
-            "probe": 2,
-            "snapshotBefore": {
-              "platform": "darwin",
-              "arch": "arm64",
-              "nodeVersion": "v25.2.1",
-              "cpuCount": 10,
-              "availableCpuCount": 10,
-              "effectiveCpuCount": 10,
-              "cpuModel": "Apple M5",
-              "loadAverage": [
-                5.229,
-                5.112,
-                4.29
-              ],
-              "normalizedLoad1": 0.523,
-              "spareEffectiveCores": 4.771,
-              "cgroup": {
-                "available": false,
-                "version": null,
-                "quotaCores": null
-              }
-            },
-            "snapshotAfter": {
-              "platform": "darwin",
-              "arch": "arm64",
-              "nodeVersion": "v25.2.1",
-              "cpuCount": 10,
-              "availableCpuCount": 10,
-              "effectiveCpuCount": 10,
-              "cpuModel": "Apple M5",
-              "loadAverage": [
-                5.229,
-                5.112,
-                4.29
-              ],
-              "normalizedLoad1": 0.523,
-              "spareEffectiveCores": 4.771,
-              "cgroup": {
-                "available": false,
-                "version": null,
-                "quotaCores": null
-              }
-            },
-            "eventLoopJitterMs": [
-              0.101167,
-              1.068875,
-              1.050583,
-              1.046542,
-              1.032875,
-              1.048875,
-              1.043167,
-              1.040542,
-              1.032709,
-              0.756333,
-              1.041958,
-              1.051042
-            ],
-            "calibration": {
-              "iterations": 1200000,
-              "checksum": 1725827320,
-              "warmupMs": [
-                2.15725,
-                2.142458,
-                2.014167,
-                1.968584,
-                1.994334,
-                1.9125
-              ],
-              "samplesMs": [
-                1.821292,
-                1.821542,
-                1.820958,
-                1.742166,
-                1.7175,
-                1.711916,
-                1.718041,
-                1.66025,
-                1.62475,
-                1.625333,
-                1.630375,
-                1.618875
-              ]
-            },
-            "cgroupThrottle": {
-              "available": false,
-              "throttledUsecDelta": null,
-              "throttledWallRatio": null,
-              "nrThrottledDelta": null
-            }
-          },
-          {
-            "probe": 3,
-            "snapshotBefore": {
-              "platform": "darwin",
-              "arch": "arm64",
-              "nodeVersion": "v25.2.1",
-              "cpuCount": 10,
-              "availableCpuCount": 10,
-              "effectiveCpuCount": 10,
-              "cpuModel": "Apple M5",
-              "loadAverage": [
-                5.229,
-                5.112,
-                4.29
-              ],
-              "normalizedLoad1": 0.523,
-              "spareEffectiveCores": 4.771,
-              "cgroup": {
-                "available": false,
-                "version": null,
-                "quotaCores": null
-              }
-            },
-            "snapshotAfter": {
-              "platform": "darwin",
-              "arch": "arm64",
-              "nodeVersion": "v25.2.1",
-              "cpuCount": 10,
-              "availableCpuCount": 10,
-              "effectiveCpuCount": 10,
-              "cpuModel": "Apple M5",
-              "loadAverage": [
-                5.229,
-                5.112,
-                4.29
-              ],
-              "normalizedLoad1": 0.523,
-              "spareEffectiveCores": 4.771,
-              "cgroup": {
-                "available": false,
-                "version": null,
-                "quotaCores": null
-              }
-            },
-            "eventLoopJitterMs": [
-              1.055958,
-              1.046375,
-              1.048167,
-              1.043,
-              1.041125,
-              1.046042,
-              1.0425,
-              1.042333,
-              1.044208,
-              1.046084,
-              1.046875,
-              0.33025
-            ],
-            "calibration": {
-              "iterations": 1200000,
-              "checksum": 1725827320,
-              "warmupMs": [
-                2.15675,
-                2.142125,
-                2.151167,
-                2.148166,
-                2.107875,
-                1.956125
-              ],
-              "samplesMs": [
-                1.968333,
-                1.8375,
-                1.839583,
-                1.83725,
-                1.831,
-                1.79975,
-                1.712917,
-                1.729917,
-                1.711666,
-                1.677417,
-                1.615084,
-                1.616542
-              ]
-            },
-            "cgroupThrottle": {
-              "available": false,
-              "throttledUsecDelta": null,
-              "throttledWallRatio": null,
-              "nrThrottledDelta": null
-            }
-          }
-        ],
-        "evaluation": {
-          "qualified": true,
-          "reason": "QUALIFIED",
-          "reasons": [],
-          "metrics": {
-            "maximumNormalizedLoad1": 0.523,
-            "minimumEffectiveCpuCount": 10,
-            "eventLoop": {
-              "count": 36,
-              "medianMs": 1.046375,
-              "p90Ms": 1.094125,
-              "p95Ms": 1.10525,
-              "maxMs": 1.341625,
-              "meanMs": 1.006148,
-              "coefficientOfVariation": 0.204914
-            },
-            "calibration": {
-              "count": 36,
-              "medianMs": 1.694875,
-              "p90Ms": 1.83725,
-              "p95Ms": 1.839583,
-              "maxMs": 1.968333,
-              "meanMs": 1.696079,
-              "coefficientOfVariation": 0.061,
-              "p95MedianRatio": 1.08538,
-              "maxMedianRatio": 1.161344,
-              "warmupDriftRatio": 0.176685
-            },
-            "maxCgroupThrottledWallRatio": null,
-            "productCanary": {
-              "sceneCount": 0,
-              "expectedSceneCount": 3,
-              "rows": []
-            }
-          }
-        }
+        "normalizedLoad1": 0.692,
+        "spareCores": 3.076
       }
     ],
-    "loadBefore": 0.523,
-    "loadAfter": 0.523
+    "loadBefore": 0.692,
+    "loadAfter": 0.692
   },
   "scenarios": {
     "effectiveStats": {
@@ -344,24 +35,24 @@
       "warmup": 20,
       "samples": 120,
       "metric": "p95",
-      "p95Ms": 0.0081,
-      "maxMs": 0.0196
+      "p95Ms": 0.0078,
+      "maxMs": 0.2076
     },
     "snapshot": {
       "name": "snapshot",
       "warmup": 20,
       "samples": 120,
       "metric": "p95",
-      "p95Ms": 0.0442,
-      "maxMs": 0.232
+      "p95Ms": 0.0343,
+      "maxMs": 0.1378
     },
     "inventory": {
       "name": "inventoryCounts",
       "warmup": 20,
       "samples": 120,
       "metric": "p95",
-      "p95Ms": 0.0003,
-      "maxMs": 0.0037
+      "p95Ms": 0.0004,
+      "maxMs": 0.008
     }
   },
   "hotPathGuards": {
@@ -381,9 +72,6 @@
           "acquisition": {
             "kind": "starter",
             "label": "初始装备补给"
-          },
-          "provenance": {
-            "kind": "starter"
           }
         },
         {
@@ -394,9 +82,6 @@
           "acquisition": {
             "kind": "starter",
             "label": "初始装备补给"
-          },
-          "provenance": {
-            "kind": "starter"
           }
         },
         {
@@ -407,9 +92,6 @@
           "acquisition": {
             "kind": "starter",
             "label": "初始装备补给"
-          },
-          "provenance": {
-            "kind": "starter"
           }
         }
       ],
@@ -418,8 +100,7 @@
           "equipment-starter-1",
           "equipment-starter-3"
         ]
-      },
-      "salvageClaims": {}
+      }
     },
     "maxSlotsPerUnit": 2,
     "catalogCount": 8

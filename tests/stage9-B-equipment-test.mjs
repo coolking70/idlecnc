@@ -2,7 +2,6 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 
 import {
@@ -27,6 +26,7 @@ import {
 import { migrate } from '../js/save.js';
 import { computeSaveDiff } from '../js/save-diff.js';
 import { canonicalHash } from '../js/production-battle-session.js';
+import { readStage9FrozenAuthorityStatus } from './lib/stage9-frozen-authority.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const clone = (value) => JSON.parse(JSON.stringify(value));
@@ -66,13 +66,6 @@ function formationOf(state) { return state.formations[0]; }
 
 function diffPaths(before, after) {
   return computeSaveDiff(before, after).map((row) => row.path).filter(Boolean);
-}
-
-function sourceChangedFiles() {
-  const baseline = '5f7bbdd00fe5a2b3a029bcbbc8e550019f0034b6';
-  const committed = execFileSync('git', ['diff', '--name-only', `${baseline}..HEAD`], { cwd: root, encoding: 'utf8' }).split(/\r?\n/).filter(Boolean);
-  const working = execFileSync('git', ['diff', '--name-only', 'HEAD'], { cwd: root, encoding: 'utf8' }).split(/\r?\n/).filter(Boolean);
-  return [...new Set([...committed, ...working])].sort();
 }
 
 console.log('\n── Stage 9-B equipment core / persistence / snapshot ──');
@@ -270,14 +263,13 @@ check('equipment mutation changes only equipment paths and settlement never chan
 });
 
 check('authority freeze, Stage 9-A constants and UI authority boundaries are untouched', () => {
-  const changed = sourceChangedFiles();
-  const allowedPerformanceHelper = 'tests/lib/perf-environment.mjs';
-  const forbidden = [
-    'js/battle.js', 'js/save-diff.js',
-    'js/battle-presentation/universal/', 'experiments/battle-sandbox/universal-planner/universal-planner.js'
-  ];
-  assert.deepEqual(changed.filter((file) => forbidden.some((prefix) => file === prefix || file.startsWith(prefix))), []);
-  assert.deepEqual(changed.filter((file) => file.startsWith('tests/lib/') && file !== allowedPerformanceHelper), []);
+  const frozenAuthority = readStage9FrozenAuthorityStatus(root);
+  assert.equal(frozenAuthority.passed, true, JSON.stringify({
+    baseline: frozenAuthority.baseline,
+    gitHead: frozenAuthority.gitHead,
+    checkedCount: frozenAuthority.checkedCount,
+    violations: frozenAuthority.violations
+  }, null, 2));
   assert.equal(Object.keys(THEATERS).length, 6);
   assert.equal(Object.keys(OPERATIONS).length, 6);
   const ui = fs.readFileSync(path.join(root, 'js/ui.js'), 'utf8');
@@ -285,7 +277,10 @@ check('authority freeze, Stage 9-A constants and UI authority boundaries are unt
   assert.match(ui, /dataset\.action = 'unequip-equipment'/);
   assert.match(ui, /getUnitEffectiveStats\(unit, state\.equipment\)/);
   writeEvidence('stage9_b_authority_check.json', {
-    stage: '9-B', passed: true, changedFiles: changed, forbiddenPaths: forbidden, allowedPerformanceHelper,
+    stage: '9-B', passed: true,
+    frozenAuthorityBaseline: frozenAuthority.baseline,
+    frozenAuthorityCheckedCount: frozenAuthority.checkedCount,
+    frozenAuthorityViolations: frozenAuthority.violations,
     solverPlannerChoreographerChanged: false, saveDiffChanged: false,
     stage9A: { theaterCount: Object.keys(THEATERS).length, operationCount: Object.keys(OPERATIONS).length },
     uiReadsAuthoritativeStats: true

@@ -63,7 +63,7 @@
       "rejected": true,
       "recomputedPassed": false,
       "unexpectedChangedPaths": [
-        "buildings[id=bld_mss2dfqy_59].level"
+        "buildings[id=bld_mslsyka2_59].level"
       ],
       "source": "recursive save diff"
     },
@@ -99,7 +99,7 @@
       "rejected": true,
       "recomputedPassed": false,
       "unexpectedChangedPaths": [
-        "buildings[id=bld_mss2dfqy_59].level"
+        "buildings[id=bld_mslsyka2_59].level"
       ],
       "source": "recursive save diff"
     },
@@ -108,7 +108,7 @@
       "rejected": true,
       "recomputedPassed": false,
       "unexpectedChangedPaths": [
-        "buildings[id=bld_mss2dfqy_59].level"
+        "buildings[id=bld_mslsyka2_59].level"
       ],
       "source": "recursive save diff"
     },
@@ -164,6 +164,95 @@
       "case": "replay_settlement_permission",
       "rejected": true,
       "source": "replay persistence"
+    },
+    {
+      "case": "fake_ui_provenance",
+      "rejected": true,
+      "errors": [
+        "browser_action_provenance",
+        "independent_probe"
+      ]
+    },
+    {
+      "case": "fake_reload_method",
+      "rejected": true,
+      "errors": [
+        "browser_real_reload_method:0",
+        "independent_probe"
+      ]
+    },
+    {
+      "case": "fake_reload_time_origin",
+      "rejected": true,
+      "errors": [
+        "browser_real_reload_time_origin_declaration:1",
+        "independent_probe"
+      ]
+    },
+    {
+      "case": "fake_real_reload_same_time_origin",
+      "rejected": true,
+      "errors": [
+        "browser_real_reload_time_origin:0",
+        "browser_real_reload_time_origin_declaration:0",
+        "independent_probe"
+      ]
+    },
+    {
+      "case": "fake_real_reload_flag_mismatch",
+      "rejected": true,
+      "errors": [
+        "browser_real_reload_time_origin_declaration:0",
+        "independent_probe"
+      ]
+    },
+    {
+      "case": "fake_real_reload_same_loader_id",
+      "rejected": true,
+      "errors": [
+        "browser_real_reload_loader:1",
+        "browser_real_reload_loader_uniqueness",
+        "independent_probe"
+      ]
+    },
+    {
+      "case": "fake_save_diff_unexpected_paths",
+      "rejected": true,
+      "errors": [
+        "evidence:saveDiffUnexpectedPaths"
+      ]
+    },
+    {
+      "case": "fake_production_entry",
+      "rejected": true,
+      "errors": [
+        "browser_production_entry",
+        "independent_probe"
+      ]
+    },
+    {
+      "case": "fake_dispatch_api_used",
+      "rejected": true,
+      "errors": [
+        "browser_api_shortcut",
+        "independent_probe"
+      ]
+    },
+    {
+      "case": "fake_replay_api_used",
+      "rejected": true,
+      "errors": [
+        "browser_api_shortcut",
+        "independent_probe"
+      ]
+    },
+    {
+      "case": "tampered_png_hash",
+      "rejected": true,
+      "errors": [
+        "browser_png_hash:e-a1-01-base-before-battle.png",
+        "independent_probe"
+      ]
     },
     {
       "case": "fake_ui_provenance",
@@ -272,9 +361,9 @@
       ]
     }
   ],
-  "coreRejectionCount": 24,
+  "coreRejectionCount": 35,
   "evidenceTamperRejectionCount": 13,
-  "rejectionCount": 37,
+  "rejectionCount": 48,
   "declaredPassedPreserved": true,
   "passed": true
 }

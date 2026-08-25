@@ -13,8 +13,8 @@ import path from 'node:path';
  *      （必须从 git 克隆，而不是复制工作目录，否则未提交的脏文件会污染验证）
  *   2. 在临时目录 fetch 只读的 authority 基线对象（Stage 9-A/B/C 与历史基线）
  *   3. 在临时目录执行 `npm install --ignore-scripts`
- *   4. 在临时目录跑完整门禁链 `npm run gate:stage8-2G`
- *   5. 输出 JSON 结果：克隆的 commit SHA、各步骤结论、总体 passed
+ *   4. 在临时目录跑由 IRON_CLEAN_CLONE_GATE_SCRIPT 选择的功能门禁
+ *   5. 输出 JSON 结果：当前/克隆 commit SHA、门禁脚本、各步骤结论、总体 passed
  *   6. 结束后清理临时目录
  *
  * 约束：
@@ -38,6 +38,7 @@ const authorityBaseline = 'e72eedac27423902b94ebab69b2fa053ca99b112';
 // accepted Stage 9-D.1 baseline; shallow clones must fetch that exact object.
 const stage9Baseline = '5f7bbdd00fe5a2b3a029bcbbc8e550019f0034b6';
 const DEFAULT_GATE_TIMEOUT_MS = 3_600_000;
+const DEFAULT_GATE_SCRIPT = 'gate:stage8-2G';
 const steps = [];
 const outputTail = (value, limit = 4000) => String(value || '').slice(-limit);
 const positiveInteger = (value, fallback) => {
@@ -45,6 +46,8 @@ const positiveInteger = (value, fallback) => {
   return Number.isInteger(parsed) && parsed > 0 ? parsed : fallback;
 };
 const gateTimeoutMs = positiveInteger(process.env.IRON_CLEAN_CLONE_TIMEOUT_MS, DEFAULT_GATE_TIMEOUT_MS);
+const gateScript = process.env.IRON_CLEAN_CLONE_GATE_SCRIPT || DEFAULT_GATE_SCRIPT;
+const qualifiedPerformanceInput = process.env.IRON_CLEAN_CLONE_PERFORMANCE_INPUT || null;
 
 const record = (step, passed, exitCode = null, extra = {}) => {
   const entry = { step, passed };
@@ -55,6 +58,9 @@ const record = (step, passed, exitCode = null, extra = {}) => {
 
 const tmpRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'clean-clone-'));
 let overallPassed = false;
+let currentHead = null;
+let clonedHead = null;
+let headMatches = false;
 
 try {
   // 1. 从 git 克隆当前 HEAD（depth 1，file:// 协议），非复制工作目录
@@ -73,9 +79,9 @@ try {
   }
 
   // 克隆的 HEAD 必须等于当前仓库 HEAD
-  const currentHead = run('git', ['rev-parse', 'HEAD'], root).trim();
-  const clonedHead = run('git', ['rev-parse', 'HEAD'], cloneDir).trim();
-  const headMatches = currentHead === clonedHead;
+  currentHead = run('git', ['rev-parse', 'HEAD'], root).trim();
+  clonedHead = run('git', ['rev-parse', 'HEAD'], cloneDir).trim();
+  headMatches = currentHead === clonedHead;
   record('clone-head-matches', headMatches, null, { currentHead, clonedHead });
   if (!headMatches) throw new Error(`clone HEAD mismatch: current=${currentHead} cloned=${clonedHead}`);
 
@@ -119,11 +125,38 @@ try {
     throw error;
   }
 
-  // 4. 在干净克隆内跑完整门禁链 gate:stage8-2G（含 npm test 与全部 browser 门禁）
+  // Reuse the same-run qualified D-C.1 artifact when the selected functional
+  // gate needs its read-only input. This copies evidence into the temporary
+  // clone without running the formal performance measurement a second time.
+  if (qualifiedPerformanceInput) {
+    try {
+      const source = path.resolve(root, qualifiedPerformanceInput);
+      const rootPrefix = `${root}${path.sep}`;
+      if (source !== root && !source.startsWith(rootPrefix)) throw new Error('qualified performance input must stay inside repository root');
+      if (!fs.existsSync(source)) throw new Error(`qualified performance input missing: ${qualifiedPerformanceInput}`);
+      fs.copyFileSync(source, path.join(cloneDir, 'stage8_2g_dc1_performance_check.json'));
+      record('qualified-performance-input', true, 0, {
+        source: path.relative(root, source),
+        target: 'stage8_2g_dc1_performance_check.json',
+        reusedSameRunArtifact: true,
+        formalMeasurementRerun: false
+      });
+    } catch (error) {
+      record('qualified-performance-input', false, null, {
+        source: qualifiedPerformanceInput,
+        message: String(error.message || error)
+      });
+      throw error;
+    }
+  }
+
+  // 4. 在干净克隆内跑选定功能门禁。Stage 9-E.1 使用 release functional，
+  // 避免在 clean clone 再次执行正式 D-C.1 performance measurement。
   const gateStartedAt = Date.now();
   try {
-    const gateOutput = run('npm', ['run', 'gate:stage8-2G'], cloneDir, { timeout: gateTimeoutMs });
-    record('gate:stage8-2G', true, 0, {
+    const gateOutput = run('npm', ['run', gateScript], cloneDir, { timeout: gateTimeoutMs });
+    record(`gate:${gateScript}`, true, 0, {
+      gateScript,
       timeoutMs: gateTimeoutMs,
       elapsedMs: Date.now() - gateStartedAt,
       tail: outputTail(gateOutput, 2000)
@@ -132,7 +165,8 @@ try {
     const elapsedMs = Date.now() - gateStartedAt;
     const timeoutTriggered = error?.code === 'ETIMEDOUT'
       || (error?.signal === 'SIGTERM' && elapsedMs >= gateTimeoutMs - 1000);
-    record('gate:stage8-2G', false, null, {
+    record(`gate:${gateScript}`, false, null, {
+      gateScript,
       timeoutMs: gateTimeoutMs,
       elapsedMs,
       timeoutTriggered,
@@ -160,8 +194,12 @@ try {
 }
 
 const result = {
-  commitSha: (() => { try { return run('git', ['rev-parse', 'HEAD'], root).trim(); } catch { return null; } })(),
+  commitSha: currentHead || (() => { try { return run('git', ['rev-parse', 'HEAD'], root).trim(); } catch { return null; } })(),
+  currentHead,
+  clonedHead,
+  headMatches,
   cloneMethod: 'git-clone-file-local',
+  gateScript,
   gateTimeoutMs,
   steps,
   overallPassed,

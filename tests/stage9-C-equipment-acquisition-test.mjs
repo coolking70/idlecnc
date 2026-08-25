@@ -1,7 +1,6 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
-import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 
 import {
@@ -26,6 +25,7 @@ import { settleOfflineProgress } from '../js/offline.js';
 import { computeSaveDiff } from '../js/save-diff.js';
 import { dispatchFormation, tickActiveBattle } from '../js/theater.js';
 import { canonicalHash } from '../js/production-battle-session.js';
+import { readStage9FrozenAuthorityStatus } from './lib/stage9-frozen-authority.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const clone = (value) => JSON.parse(JSON.stringify(value));
@@ -358,17 +358,17 @@ check('UI uses real data-action hooks and authoritative qualification functions'
 
 let authorityEvidence;
 check('authority freeze and Stage 9-A / 9-B boundaries remain untouched', () => {
-  const baseline = '5f7bbdd00fe5a2b3a029bcbbc8e550019f0034b6';
-  const committed = execFileSync('git', ['diff', '--name-only', `${baseline}..HEAD`], { cwd: root, encoding: 'utf8' }).split(/\r?\n/).filter(Boolean);
-  const working = execFileSync('git', ['diff', '--name-only', 'HEAD'], { cwd: root, encoding: 'utf8' }).split(/\r?\n/).filter(Boolean);
-  const changed = [...new Set([...committed, ...working])].sort();
-  const allowedPerformanceHelper = 'tests/lib/perf-environment.mjs';
-  const forbidden = ['js/save-diff.js', 'js/battle.js', 'js/battle-presentation/universal/'];
-  assert.equal(changed.some((file) => forbidden.some((prefix) => file === prefix || file.startsWith(prefix)) || (file.startsWith('tests/lib/') && file !== allowedPerformanceHelper)), false);
+  const frozenAuthority = readStage9FrozenAuthorityStatus(root);
+  assert.equal(frozenAuthority.passed, true, JSON.stringify({
+    baseline: frozenAuthority.baseline,
+    gitHead: frozenAuthority.gitHead,
+    checkedCount: frozenAuthority.checkedCount,
+    violations: frozenAuthority.violations
+  }, null, 2));
   assert.equal(Object.keys(THEATERS).length, 6);
   assert.equal(Object.keys(OPERATIONS).length, 6);
   assert.equal(Object.keys(TECHNOLOGIES).length, 9);
-  authorityEvidence = { stage: '9-C', independentRecompute: true, changedFiles: changed, forbiddenPaths: forbidden, allowedPerformanceHelper, authorityFieldChanges: 0, solverPlannerChoreographerChanged: false, saveDiffChanged: false, stage9A: { theaterCount: Object.keys(THEATERS).length, operationCount: Object.keys(OPERATIONS).length }, stage9B: { battleLocked: true, noHpEquipment: true, historicalSnapshotContract: true } };
+  authorityEvidence = { stage: '9-C', independentRecompute: true, frozenAuthorityBaseline: frozenAuthority.baseline, frozenAuthorityCheckedCount: frozenAuthority.checkedCount, frozenAuthorityViolations: frozenAuthority.violations, authorityFieldChanges: 0, solverPlannerChoreographerChanged: false, saveDiffChanged: false, stage9A: { theaterCount: Object.keys(THEATERS).length, operationCount: Object.keys(OPERATIONS).length }, stage9B: { battleLocked: true, noHpEquipment: true, historicalSnapshotContract: true } };
   write('stage9_c_authority_check.json', authorityEvidence);
 });
 

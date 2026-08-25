@@ -988,7 +988,7 @@ check('58 读档时无主施工建筑恢复后能正常继续施工完成', () =
  * ========================================================== */
 section('十二、生产页构建');
 
-check('59 生产页可构建，5 张单位卡片齐全且不抛异常', () => {
+check('59 Command 生产页可构建，5 个单位 Tile 齐全且不抛异常', () => {
   const s = readyBase();
   let ui = null;
   assert.doesNotThrow(() => {
@@ -997,26 +997,28 @@ check('59 生产页可构建，5 张单位卡片齐全且不抛异常', () => {
   });
   const p = ui.refs.prod;
   assert.ok(p, '生产页引用应存在');
-  assert.equal(Object.keys(p.cards).length, 5, '应有 5 张单位卡片');
-  Object.keys(UNITS).forEach((id) => assert.ok(p.cards[id], `缺少 ${UNITS[id].name} 卡片`));
+  assert.equal(p.unitGrid.tiles.size, 5, '应有 5 个单位 CommandTile');
+  Object.keys(UNITS).forEach((id) => assert.ok(p.unitGrid.tiles.get(`unit:${id}`), `缺少 ${UNITS[id].name} Tile`));
 });
 
-check('60 生产页刷新时按钮禁用状态与禁用原因正确', () => {
+check('60 CommandTile 刷新时 aria-disabled 与按需披露的禁用原因正确', () => {
   const s = readyBase();
   const ui = new UI({ onProduce() {}, onCancelCurrentProduction() {}, onCancelQueuedProduction() {} });
   ui.refreshProduction(s);
   ui.refreshProduction(s);
-  assert.equal(ui.refs.prod.cards.infantry.btn.disabled, false, '资源充足时按钮应可用');
+  let tile = ui.refs.prod.unitGrid.tiles.get('unit:infantry');
+  assert.equal(tile.model.disabled, false, '资源充足时 Tile 应可用');
+  assert.equal(tile.root.getAttribute('aria-disabled'), 'false');
 
   s.resources.supply = 0; s.resources.alloy = 0;
   ui.refreshProduction(s);
-  const card = ui.refs.prod.cards.infantry;
-  assert.equal(card.btn.disabled, true, '资源不足时按钮应禁用');
-  assert.equal(card.reason.hidden, false, '应显示禁用原因');
-  assert.ok(card.reason.textContent.includes('补给不足'), `实际：${card.reason.textContent}`);
+  tile = ui.refs.prod.unitGrid.tiles.get('unit:infantry');
+  assert.equal(tile.model.disabled, true, '资源不足时 Tile 应阻止主操作');
+  assert.equal(tile.root.getAttribute('aria-disabled'), 'true');
+  assert.ok(tile.model.tooltip.status.includes('补给不足'), `实际：${tile.model.tooltip.status}`);
 });
 
-check('61 生产中刷新：进度条百分比与库存数量正确显示', () => {
+check('61 生产中刷新：紧凑队列进度与库存角标正确显示', () => {
   const s = readyBase();
   const ui = new UI({ onProduce() {}, onCancelCurrentProduction() {}, onCancelQueuedProduction() {} });
   ui.refreshProduction(s);
@@ -1025,12 +1027,12 @@ check('61 生产中刷新：进度条百分比与库存数量正确显示', () =
   tick(s, 15);
   ui.refreshProduction(s);
   const p = ui.refs.prod;
-  assert.equal(p.activeBox.hidden, false, '应显示生产中面板');
-  assert.equal(p.idleBox.hidden, true);
-  assert.equal(p.linePercent.textContent, '50%');
-  assert.equal(p.lineBar.style.width, '50%');
-  assert.equal(p.cards.infantry.invCount.textContent, '1', '步兵班库存应为 1');
-  assert.equal(p.invTotal.textContent, '1');
+  const active = Array.from(p.queueGrid.tiles.values()).find((tile) => tile.model.state === 'active');
+  assert.ok(active, '应显示生产中队列 Tile');
+  const expectedProgress = prod.getProductionProgress(s).percent;
+  assert.equal(active.model.progress, expectedProgress, `Tile=${active.model.progress}, selector=${expectedProgress}`);
+  const infantry = p.unitGrid.tiles.get('unit:infantry');
+  assert.ok(infantry.model.badges.some((badge) => badge.label === '×1'), `步兵班库存角标应为 ×1，实际 ${JSON.stringify(infantry.model.badges)}`);
 });
 
 /* ============================================================

@@ -1,0 +1,50 @@
+{
+  "headSha": "c7a7b4f87e88b59fdcb799002e905bada6a9a20b",
+  "gates": {
+    "historical-core-regression": {
+      "label": "historical-core-regression",
+      "command": "npm run --ignore-scripts test",
+      "exitCode": 0,
+      "signal": null,
+      "startedAt": "2026-08-17T04:11:05.050Z",
+      "finishedAt": "2026-08-17T04:18:00.819Z",
+      "durationMs": 415802
+    },
+    "stage9-relevant-regression": {
+      "label": "stage9-relevant-regression",
+      "command": "npm run test:stage9-E:fast",
+      "exitCode": 0,
+      "signal": null,
+      "startedAt": "2026-08-17T04:18:00.878Z",
+      "finishedAt": "2026-08-17T04:18:06.963Z",
+      "durationMs": 6085
+    },
+    "stage10-focused-tests": {
+      "label": "stage10-focused-tests",
+      "command": "npm run test:stage10-P-A",
+      "exitCode": 0,
+      "signal": null,
+      "startedAt": "2026-08-17T04:18:08.764Z",
+      "finishedAt": "2026-08-17T04:18:08.982Z",
+      "durationMs": 218
+    },
+    "stage10-browser": {
+      "label": "stage10-browser",
+      "command": "npm run browser:stage10-P-A",
+      "exitCode": 0,
+      "signal": null,
+      "startedAt": "2026-08-17T13:03:58.736Z",
+      "finishedAt": "2026-08-17T13:04:48.610Z",
+      "durationMs": 49874
+    },
+    "stage10-strong-verifier": {
+      "label": "stage10-strong-verifier",
+      "command": "npm run verify:stage10-P-A",
+      "exitCode": 0,
+      "signal": null,
+      "startedAt": "2026-08-17T13:04:54.534Z",
+      "finishedAt": "2026-08-17T13:04:55.110Z",
+      "durationMs": 576
+    }
+  }
+}

@@ -21,6 +21,7 @@ import { recalcDerived } from './economy.js';
 import { logEvent, emit, LOG_LEVEL } from './events.js';
 import { uid, safeNumber } from './utils.js';
 import { damageStateOfUnit } from './unit-status.js';
+import { getOperationalTask } from './tasking.js'; // Stage 10-A.1：任务编队成员管理 / 解散由权威层拒绝
 
 /* ============================================================
  * 结果码与结果对象
@@ -32,6 +33,7 @@ export const FORMATION_CODE = {
   NAME_INVALID: 'name_invalid',
   NOT_FOUND: 'not_found',
   NOT_IDLE: 'not_idle',
+  FORMATION_TASKED: 'formation_tasked', // Stage 10-A.1：执行作战任务的编队不可调整成员 / 解散
   UNIT_INVALID: 'unit_invalid',
   UNIT_ASSIGNED: 'unit_assigned',
   UNIT_NOT_READY: 'unit_not_ready',
@@ -95,6 +97,18 @@ function findUnit(state, unitId) {
 export function isEditable(formation) {
   if (!formation) return false;
   return FORMATION.editableStatuses.includes(formation.status);
+}
+
+/**
+ * Stage 10-A.1：编队正在执行持续性作战任务时的权威层守卫。
+ * 任务编队保持 Stage 9 的 idle 生命周期（isEditable 无法识别），
+ * 因此成员调整与解散必须在这里以 tasking 状态为准拒绝；
+ * 玩家需先通过 tasking.js 的 recall 释放编队。
+ * 重命名不受影响；本函数只读，不修改任何状态。
+ */
+function failIfTasked(state, formation) {
+  if (!formation || !getOperationalTask(state, formation.id)) return null;
+  return fail(FORMATION_CODE.FORMATION_TASKED, '该编队正在执行作战任务，请先召回', { formation });
 }
 
 /** 单位显示名 */
@@ -223,6 +237,8 @@ export function disbandFormation(state, formationId) {
   const formation = resolveFormation(state, formationId);
   if (!formation) return fail(FORMATION_CODE.NOT_FOUND, R.notFound);
   if (!isEditable(formation)) return fail(FORMATION_CODE.NOT_IDLE, R.notIdle, { formation });
+  const tasked = failIfTasked(state, formation);
+  if (tasked) return tasked;
 
   const unitIds = formation.unitIds.slice();
   unitIds.forEach((unitId) => detachUnit(findUnit(state, unitId)));
@@ -247,6 +263,8 @@ export function canAddUnit(state, formationId, unitId) {
   const formation = resolveFormation(state, formationId);
   if (!formation) return fail(FORMATION_CODE.NOT_FOUND, R.notFound);
   if (!isEditable(formation)) return fail(FORMATION_CODE.NOT_IDLE, R.notIdle, { formation });
+  const tasked = failIfTasked(state, formation);
+  if (tasked) return tasked;
 
   const unit = findUnit(state, unitId);
   if (!unit) return fail(FORMATION_CODE.UNIT_INVALID, R.unitInvalid, { formation });
@@ -302,6 +320,8 @@ export function removeUnit(state, formationId, unitId) {
   const formation = resolveFormation(state, formationId);
   if (!formation) return fail(FORMATION_CODE.NOT_FOUND, R.notFound);
   if (!isEditable(formation)) return fail(FORMATION_CODE.NOT_IDLE, R.notIdle, { formation });
+  const tasked = failIfTasked(state, formation);
+  if (tasked) return tasked;
 
   const pos = formation.unitIds.indexOf(unitId);
   if (pos < 0) return fail(FORMATION_CODE.NOT_MEMBER, '该单位不在此编队中', { formation });

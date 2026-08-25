@@ -1,12 +1,15 @@
 /** 阶段8可重复作战任务：配置查询、解锁、成本与冷却。 */
 
 import { OPERATIONS, STRATEGIES, THEATERS, FORMATION_STATUS, UNITS } from './config.js';
+import { getOperationalTask } from './tasking.js';
+import { getStrategicMissionModifiers } from './strategic-loop.js'; // Stage 10-E：repeat Operation 与首次出击共用同一战略成本 modifier 权威 // Stage 10-A：任务编队不可参加重复任务派遣
 import { missingResources } from './economy.js';
 import { safeNumber, formatDuration } from './utils.js';
 
 export const OPERATION_CODE = {
   UNKNOWN: 'unknown_operation', THEATER_NOT_CAPTURED: 'theater_not_captured',
   COOLDOWN: 'cooldown', BATTLE_ACTIVE: 'battle_active', FORMATION_INVALID: 'formation_invalid',
+  FORMATION_TASKED: 'formation_tasked', // Stage 10-A.1：任务编队不可参加重复任务派遣（此前返回 undefined）
   RESOURCE: 'resource', READY: 'ready', UNKNOWN_STRATEGY: 'unknown_strategy'
 };
 
@@ -58,13 +61,26 @@ export function getOperationCost(state, formationId, operationId, strategyId) {
     const unit = (state.units || []).find((item) => item && item.id === id);
     return sum + safeNumber(unit && UNITS[unit.type] && UNITS[unit.type].upkeep, 0);
   }, 0);
-  const supply = Math.ceil(upkeep * safeNumber(op.supplyMultiplier, 1) * safeNumber(strategy.mods && strategy.mods.upkeep, 1));
+  // Stage 10-E：战区压力 modifier（初始 pressure 时倍率为 1，旧成本不变；
+  // 取整规则沿用 Math.ceil / 整数叠加）
+  const strategic = getStrategicMissionModifiers(state, op.theaterId);
+  const supply = Math.ceil(upkeep * safeNumber(op.supplyMultiplier, 1) * safeNumber(strategy.mods && strategy.mods.upkeep, 1) * strategic.supplyMultiplier);
   const cost = {};
   if (supply > 0) cost.supply = supply;
-  Object.keys(strategy.cost || {}).forEach((key) => { cost[key] = safeNumber(cost[key], 0) + safeNumber(strategy.cost[key], 0); });
-  if (safeNumber(op.intelCost, 0) > 0) cost.intel = safeNumber(cost.intel, 0) + safeNumber(op.intelCost, 0);
+  Object.keys(strategy.cost || {}).forEach((key) => {
+    const scale = key === 'supply' ? strategic.supplyMultiplier : key === 'intel' ? strategic.intelMultiplier : 1;
+    cost[key] = safeNumber(cost[key], 0) + Math.round(safeNumber(strategy.cost[key], 0) * scale);
+  });
+  if (safeNumber(op.intelCost, 0) > 0) cost.intel = safeNumber(cost.intel, 0) + Math.round(safeNumber(op.intelCost, 0) * strategic.intelMultiplier);
   const missing = missingResources(state, cost);
-  return { cost, missing, affordable: missing.length === 0, breakdown: { upkeep, supplyMultiplier: op.supplyMultiplier, strategyCost: { ...(strategy.cost || {}) }, intelCost: op.intelCost || 0 } };
+  return {
+    cost, missing, affordable: missing.length === 0,
+    breakdown: {
+      upkeep, supplyMultiplier: op.supplyMultiplier, strategyCost: { ...(strategy.cost || {}) }, intelCost: op.intelCost || 0,
+      strategicSupplyMultiplier: strategic.supplyMultiplier,
+      strategicIntelMultiplier: strategic.intelMultiplier
+    }
+  };
 }
 
 export function canDispatchOperation(state, formationId, operationId, strategyId) {
@@ -79,6 +95,9 @@ export function canDispatchOperation(state, formationId, operationId, strategyId
   const formation = (state.formations || []).find((item) => item && item.id === formationId);
   if (!formation || formation.status !== FORMATION_STATUS.IDLE || !(formation.unitIds || []).length) {
     return { ok: false, code: OPERATION_CODE.FORMATION_INVALID, reason: '编队不存在或当前不可派遣' };
+  }
+  if (getOperationalTask(state, formationId)) {
+    return { ok: false, code: OPERATION_CODE.FORMATION_TASKED, reason: '该编队正在执行作战任务，请先召回' };
   }
   const ids = new Set();
   for (const unitId of formation.unitIds) {
