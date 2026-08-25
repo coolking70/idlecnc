@@ -1566,6 +1566,8 @@ export class UI {
       const cCap = safeNumber(state.command.capacity, 0);
       f.capTag.textContent = `编队 ${formations.length}/${FORMATION.maxFormations} · 指挥 ${formatInt(cUsed)}/${formatInt(cCap)}`;
       if (this.selectedFormationId && !formations.some((x) => x.id === this.selectedFormationId)) this.selectedFormationId = null;
+      // 选中回落：无选中且存在编队时自动选中首支（与旧编队页一致，Inspector 才有内容）
+      if (!this.selectedFormationId && formations.length > 0) this.selectedFormationId = formations[0].id;
       const models = buildFormationCommandModels(state);
       models.forEach((model) => {
         if (model.id === `formation:${this.selectedFormationId}`) model.selected = true;
