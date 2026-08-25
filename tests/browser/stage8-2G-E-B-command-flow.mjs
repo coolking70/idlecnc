@@ -135,6 +135,13 @@ async function main() {
       throw new Error('E-B selector timeout: ' + label + ' ' + selector);
     };
     const clickTab = async (tabId) => click('button[data-tab="' + tabId + '"]', { tab: tabId });
+    // Stage 10-P-B moved several controls into the shared Command Inspector.
+    // Reaching them stays a real two-step DOM interaction: click the tile to
+    // open the Inspector, then click the Inspector action.
+    const clickInspectorAction = async (tileSelector, actionId, details = {}) => {
+      await click(tileSelector, { ...details, inspectorHost: true });
+      return click('[data-inspector-action="' + actionId + '"]', details);
+    };
     const saveByUi = async () => click('#btn-save', { action: 'save' });
     const capture = async (index, extra = {}) => {
       await sleep(160);
@@ -194,7 +201,7 @@ async function main() {
     await capture(0, { phase: 'base_before_command_flow' });
 
     await clickTab('construction');
-    await click('[data-action="build"][data-building-type="barracks"]', { action: 'build' });
+    await click('[data-command-id="construction:barracks"][data-action="build"]', { action: 'build' });
     await cdp.evaluate(call('setSpeed', 4));
     await waitUntil((current) => current.buildings?.some((row) => row.type === 'barracks' && row.status === 'operational'), 'barracks operational');
     await cdp.evaluate(call('setSpeed', 0));
@@ -202,25 +209,25 @@ async function main() {
     await clickTab('production');
     for (let i = 0; i < 5; i += 1) {
       const beforeCount = (await state()).units.filter((row) => row.type === 'infantry').length;
-      await click('[data-action="produce"][data-unit-type="infantry"]', { action: 'produce', ordinal: i + 1 });
+      await click('[data-command-id="unit:infantry"][data-action="produce-unit"]', { action: 'produce', ordinal: i + 1 });
       await cdp.evaluate(call('setSpeed', 4));
       await waitUntil((current) => current.units.filter((row) => row.type === 'infantry').length > beforeCount, 'infantry production ' + (i + 1));
       await cdp.evaluate(call('setSpeed', 0));
     }
 
     await clickTab('formations');
-    await click('[data-action="create-formation"]', { action: 'create-formation' });
+    await clickInspectorAction('[data-command-id="formation:new"]', 'create-formation', { action: 'create-formation' });
     await waitUntil((current) => current.formations?.length === 1, 'formation created');
     while ((await state()).formations[0].unitIds.length < 5) {
       const beforeCount = (await state()).formations[0].unitIds.length;
-      await click('[data-action="add-unit"]', { action: 'add-unit' });
+      await clickInspectorAction('[data-command-id^="formation:f"]', 'add-unit', { action: 'add-unit' });
       await waitUntil((current) => current.formations?.[0]?.unitIds?.length > beforeCount, 'formation unit added');
     }
     await saveByUi();
 
     await clickTab('theater');
-    await click('[data-action="select-theater"][data-theater="scrap_mine"]', { action: 'select-theater', theaterId: 'scrap_mine' });
-    await click('[data-action="select-strategy"][data-strategy="cautious"]', { action: 'select-strategy', strategyId: 'cautious' });
+    await click('[data-command-id="theater:scrap_mine"][data-action="select-theater"]', { action: 'select-theater', theaterId: 'scrap_mine' });
+    await click('[data-command-id="strategy:cautious"][data-action="select-strategy"]', { action: 'select-strategy', strategyId: 'cautious' });
     await waitUntil((current) => current.formations?.some((row) => row.status === 'idle' && row.unitIds.length === 5), 'campaign eligibility');
     await capture(1, { phase: 'campaign_eligibility', eligibilityVisible: true });
 
@@ -239,8 +246,8 @@ async function main() {
     if (reviewAfterReload) throw new Error('deployment review survived reload without active battle');
     await capture(3, { phase: 'review_after_real_reload', realReload: reviewReload, activeBattleAfterReload: safeFallback.activeBattle, reviewVisibleAfterReload: reviewAfterReload });
 
-    await click('[data-action="select-theater"][data-theater="scrap_mine"]', { action: 'select-theater', theaterId: 'scrap_mine' });
-    await click('[data-action="select-strategy"][data-strategy="cautious"]', { action: 'select-strategy', strategyId: 'cautious' });
+    await click('[data-command-id="theater:scrap_mine"][data-action="select-theater"]', { action: 'select-theater', theaterId: 'scrap_mine' });
+    await click('[data-command-id="strategy:cautious"][data-action="select-strategy"]', { action: 'select-strategy', strategyId: 'cautious' });
     await click('[data-action="launch-battle"]', { action: 'open-deployment-review' });
     await waitForSelector('[data-action="confirm-dispatch"]', 'confirm dispatch DOM');
     const beforeDispatch = await state();
@@ -271,7 +278,10 @@ async function main() {
     await capture(7, { phase: 'result_after_real_reload', realReload: resultReload, reloadPreservedResult: resultAfter.activeBattle?.settled === true });
 
     await click('[data-action="view-report"]', { action: 'view-report' });
-    await waitForSelector('[data-action="replay-report"]', 'report view');
+    await waitForSelector('[data-command-id^="report:"]', 'report view');
+    // Stage 10-P-B: the full report body lives in the Command Inspector, so the
+    // report_view frame must have it open to capture the same evidence as before.
+    await click('[data-command-id^="report:"]', { action: 'open-report-inspector' });
     await capture(8, { phase: 'report_view', reportViewedByProductionUi: true });
     await clickTab('theater');
     await click('[data-action="return-from-battle"]', { action: 'return-from-battle' });
@@ -280,7 +290,7 @@ async function main() {
     await capture(9, { phase: 'base_after_return', returnedByProductionUi: true });
 
     await clickTab('theater');
-    await click('[data-action="select-operation"][data-operation-id="salvage_run"]', { action: 'select-operation', operationId: 'salvage_run' });
+    await click('[data-command-id="operation:salvage_run"][data-action="select-theater"]', { action: 'select-operation', operationId: 'salvage_run' });
     await waitUntil((current) => current.theaters?.scrap_mine?.captured === true, 'operation task selected');
     await capture(10, { phase: 'operation_selected', missionKind: 'operation', eligibilityVisible: true });
     await click('[data-action="launch-battle"]', { action: 'open-operation-review' });
@@ -294,8 +304,8 @@ async function main() {
     await capture(12, { phase: 'operation_cancelled', noSessionCreated: true });
 
     await clickTab('reports');
-    await waitForSelector('[data-action="replay-report"]', 'replay control');
-    await click('[data-action="replay-report"]', { action: 'replay-report' });
+    await waitForSelector('[data-command-id^="report:"]', 'replay control');
+    await clickInspectorAction('[data-command-id^="report:"]', 'replay-report', { action: 'replay-report' });
     const replayStarted = await waitUntil((current) => current.activeBattle?.replayReadOnly === true, 'replay start');
     await clickTab('theater');
     await capture(13, { phase: 'replay_start', replayReadOnly: true, replayApiUsed: false });

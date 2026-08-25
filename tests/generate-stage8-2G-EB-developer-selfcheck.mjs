@@ -2,6 +2,8 @@ import crypto from 'node:crypto';
 import fs from 'node:fs';
 import { spawnSync } from 'node:child_process';
 
+import { STAGE9_SEMANTIC_SHARED_FILES, readStage9FrozenAuthorityStatus } from './lib/stage9-frozen-authority.mjs';
+
 const root = process.cwd();
 // Stage 8.2G-E-B is a regression gate in the Stage 9-E branch. Compare the
 // frozen authority surface against the accepted Stage 9-D.1 baseline so
@@ -54,7 +56,17 @@ const forbiddenAuthorityPaths = [
   'js/battle-presentation/universal/universal-plan-builder.js',
   'js/battle-presentation/universal/universal-route-planner.js'
 ];
+// Stage 10-A through 10-E legitimately extend the shared integration files
+// (operational tasking, dynamic theater pressure, command doctrine, auto
+// operations, strategic loop closure). Those five are governed by the shared
+// Stage 9 frozen-authority guard under its additive-only export contract, so
+// defer to that guard here instead of re-freezing them against this stage's
+// own older baseline. Still fail-closed: nothing is excused unless the shared
+// guard itself passes.
+const stage9Authority = readStage9FrozenAuthorityStatus(root);
+const sharedAdditiveOk = (file) => stage9Authority.passed && STAGE9_SEMANTIC_SHARED_FILES.includes(file);
 const authorityChangedPaths = changedPaths.filter((file) => forbiddenAuthorityPaths.includes(file)
+  && !sharedAdditiveOk(file)
   && !(file === 'js/save.js' && offlineSaveBoundaryChange)
   && !(file === 'js/battle.js' && stage9BEquipmentFallbackChange));
 const baselineTheater = run(['show', `${baseline}:js/theater.js`]).stdout;

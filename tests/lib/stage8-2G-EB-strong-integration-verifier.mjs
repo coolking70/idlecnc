@@ -268,7 +268,10 @@ function verifyBrowserManifest(manifest, root, errors, source) {
   if (bySemantic('running_battle')?.state?.sessionCount !== 1 || bySemantic('running_battle')?.doubleClickSessionDelta !== 1) errors.push('browser_double_confirm');
   if (bySemantic('operation_cancelled')?.state?.sessionCount !== 1 || bySemantic('operation_cancelled')?.noSessionCreated !== true) errors.push('browser_operation_cancel_side_effect');
   if (resultReload?.state?.activeBattle?.settled !== true) errors.push('browser_result_reload');
-  if (!reportView?.domText?.includes('战报详情')) errors.push('browser_report_view');
+  // Stage 10-P-B replaced the standalone '战报详情' card with the Command
+  // Inspector. Assert on the report body itself (seed row + outcome analysis),
+  // which is strictly more than the old single heading proved.
+  if (!reportView?.domText?.includes('随机种子') || !reportView?.domText?.includes('胜负原因')) errors.push('browser_report_view');
   if (baseAfter?.state?.activeBattle !== null || baseAfter?.state?.reportCount !== 1) errors.push('browser_return_base');
   if (replayStart?.state?.activeBattle?.replayReadOnly !== true || replayStart?.state?.activeBattleSessionId !== null) errors.push('browser_replay_start');
   if (replayAfter?.state?.activeBattle?.replayReadOnly !== true || replayAfter?.state?.activeBattleSessionId !== null) errors.push('browser_replay_reload');

@@ -5,16 +5,11 @@ import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 
 import { SAVE_VERSION } from '../js/config.js';
+import { STAGE9_ACCEPTED_BASE, readStage9FrozenAuthorityStatus } from './lib/stage9-frozen-authority.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const evidenceDir = path.join(root, 'evidence/stage10-P-A');
-// Frozen-authority baseline. Advanced from ca408bb (Stage 9 browser final closure)
-// to 5b74c67, the completed Stage 10 development line. Stages 10-A through 10-E
-// deliberately evolved save/offline/formations/theater/save-diff (operational
-// tasking, dynamic theater pressure, command doctrine, auto operations, strategic
-// loop closure), so the Stage 9-era baseline could no longer hold. The guard now
-// anchors on the Stage 10 boundary.
-const baseSha = '5b74c67db32c45caba4243a77c0f48fe214e5b55';
+const baseSha = STAGE9_ACCEPTED_BASE;
 const sha256 = (bytes) => crypto.createHash('sha256').update(bytes).digest('hex');
 const git = (...args) => execFileSync('git', args, { cwd: root, encoding: 'utf8', maxBuffer: 32 * 1024 * 1024 }).trim();
 const read = (relativePath) => fs.readFileSync(path.join(root, relativePath), 'utf8');
@@ -52,27 +47,23 @@ if (runtimeGateStatus.missing.length > 0) {
   console.error(`runtime gates not satisfied at HEAD ${gitHead}: ${runtimeGateStatus.missing.join(', ')}; run npm run gate:stage10-P-A (each step records its real exit code) before generating evidence`);
 }
 
-const frozenFiles = [
-  'js/config.js',
-  'js/state.js',
-  'js/construction.js',
-  'js/production.js',
-  'js/equipment.js',
-  'js/save.js',
-  'js/offline.js',
-  'js/formations.js',
-  'js/theater.js',
-  'js/battle.js',
-  'js/battle-salvage.js',
-  'js/production-battle-session.js',
-  'js/save-diff.js'
-];
-
-const frozenFileProof = frozenFiles.map((file) => {
-  const baseBytes = execFileSync('git', ['show', `${baseSha}:${file}`], { cwd: root, maxBuffer: 32 * 1024 * 1024 });
-  const currentBytes = fs.readFileSync(path.join(root, file));
-  return { file, baseSha256: sha256(baseBytes), currentSha256: sha256(currentBytes), unchanged: baseBytes.equals(currentBytes) };
-});
+// Authority proof comes from the shared Stage 9 frozen-authority guard rather
+// than a second, independently maintained file list here. That module is the
+// single source of truth: it byte-freezes the eight closed Stage 9 gameplay
+// files against the accepted baseline, and holds theater/offline/formations/
+// save/save-diff to an additive-only export contract, because Stage 10-A
+// through 10-E legitimately extend those five (operational tasking, dynamic
+// theater pressure, command doctrine, auto operations, strategic loop
+// closure). Duplicating the list here previously byte-froze all thirteen and
+// silently went stale the moment Stage 10 touched the shared five.
+const stage9Authority = readStage9FrozenAuthorityStatus(root);
+const frozenFileProof = stage9Authority.rows.map((row) => ({
+  file: row.file,
+  kind: row.kind,
+  baseSha256: row.baseSha256 ?? null,
+  currentSha256: row.currentSha256 ?? null,
+  unchanged: row.unchanged === true
+}));
 
 const porcelain = execFileSync('git', ['status', '--porcelain=v1', '--untracked-files=all'], { cwd: root, encoding: 'utf8', maxBuffer: 32 * 1024 * 1024 }).split('\n').filter(Boolean);
 const changedFiles = porcelain.map((line) => line.slice(3)).map((file) => file.includes(' -> ') ? file.split(' -> ').at(-1) : file);
@@ -141,7 +132,7 @@ const functionalRegression = {
   stage10BrowserEvidence: browser.passed === true && (browser.pageErrors?.length || 0) === 0 && (browser.consoleErrors?.length || 0) === 0
 };
 
-const authorityPassed = frozenFileProof.every((row) => row.unchanged) && forbiddenChangedFiles.length === 0;
+const authorityPassed = stage9Authority.passed && forbiddenChangedFiles.length === 0;
 const output = {
   stage: '10-P-A',
   baseSha,
@@ -177,5 +168,5 @@ const output = {
 
 fs.mkdirSync(evidenceDir, { recursive: true });
 fs.writeFileSync(path.join(evidenceDir, 'stage10-P-A-machine.json'), `${JSON.stringify(output, null, 2)}\n`);
-console.log(JSON.stringify({ stage: output.stage, passed: output.passed, baseSha: output.baseSha, headSha: output.headSha, saveVersion: output.saveVersion, frozenFiles: frozenFileProof.length, runtimeGatesMissing: runtimeGateStatus.missing, forbiddenChangedFiles }));
+console.log(JSON.stringify({ stage: output.stage, passed: output.passed, baseSha: output.baseSha, headSha: output.headSha, saveVersion: output.saveVersion, frozenFiles: frozenFileProof.length, authorityViolations: stage9Authority.violations.map((row) => `${row.kind}:${row.file}`), runtimeGatesMissing: runtimeGateStatus.missing, forbiddenChangedFiles }));
 if (!output.passed) process.exitCode = 1;
