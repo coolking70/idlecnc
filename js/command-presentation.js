@@ -37,6 +37,7 @@ import {
   DOCTRINE, DOCTRINE_TYPE, getActiveDoctrine,
   getTaskEffectMultiplier, getUpkeepMultiplier
 } from './doctrine.js';
+import { getStrategicMissionModifiers, describeStrategicSources } from './strategic-loop.js';
 import { isFormationOnAutoHold } from './auto-operations.js';
 import { formatDuration, formatInt, safeNumber } from './utils.js';
 
@@ -721,6 +722,16 @@ export function buildTheaterCommandModels(state) {
         { label: '任务影响', value: activeTaskCount > 0
           ? `巡逻 ×${taskCounts.patrol} · 侦察 ×${taskCounts.recon} · 警戒 ×${taskCounts.security}（效果叠加中）`
           : '无执行中任务（威胁缓慢回升，其余指标缓慢衰减）' }
+      ]
+    });
+    // Stage 10-E：战略成本 modifier（公式来自 strategic-loop authority，UI 不复制）
+    const strategic = getStrategicMissionModifiers(state, view.id);
+    sections.push({
+      title: 'STRATEGIC EFFECTS · 战略影响',
+      rows: [
+        { label: 'Supply Cost', value: `×${strategic.supplyMultiplier.toFixed(2)}` },
+        { label: 'Intel Cost', value: `×${strategic.intelMultiplier.toFixed(2)}` },
+        { label: '主要来源', value: describeStrategicSources(strategic) }
       ]
     });
     if (intel) {

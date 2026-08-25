@@ -129,6 +129,12 @@ function buildAllowedPaths(before, after, plan) {
   (after?.units || []).forEach((row) => { if (unitIds.has(row?.id)) paths.push(unitIndexPath('units', row.id), unitIndexPath('units', row.id, '**')); });
   if (plan?.formationUpdate?.formationId) paths.push(unitIndexPath('formations', plan.formationUpdate.formationId, '**'));
   if (plan?.theaterUpdate?.theaterId) paths.push(`theaters.${plan.theaterUpdate.theaterId}.**`);
+  // Stage 10-E：正式结算反向改写该战区的动态压力（strategic-loop authority）。
+  // 允许根键（旧档首次结算时创建容器）与本次作战目标战区的行；
+  // 其余战区的 pressure 变更仍然视为意外变更。
+  if (plan?.theaterUpdate?.theaterId) {
+    paths.push('theaterPressure', `theaterPressure.${plan.theaterUpdate.theaterId}`, `theaterPressure.${plan.theaterUpdate.theaterId}.**`);
+  }
   if (plan?.operationUpdate?.operationId) paths.push(`operations.${plan.operationUpdate.operationId}.**`);
   paths.push('stats.battlesFought', 'stats.victories');
   if (plan?.reportId) paths.push(reportIdPath('battles', plan.reportId), 'battles[*order]');

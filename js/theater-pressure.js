@@ -29,7 +29,10 @@
  */
 
 import { THEATERS } from './config.js';
-import { getOperationalTask, OPERATIONAL_TASK_TYPE } from './tasking.js';
+import { getOperationalTask } from './tasking.js';
+// 任务类型 id（与 tasking.OPERATIONAL_TASK_TYPE 同值）在此使用字面量：
+// strategic-loop → theater-pressure → tasking 存在模块环，顶层引用
+// tasking 的常量会在特定加载顺序下触发 TDZ；字面量无此问题且值稳定。
 import { getTaskEffectMultiplier } from './doctrine.js'; // Stage 10-C：任务效果倍率由 doctrine authority 提供
 import { safeNumber } from './utils.js';
 
@@ -41,11 +44,11 @@ export const THEATER_PRESSURE = {
   max: 100,
   /** 老存档 / 新战区的初始值 */
   initial: { threat: 50, control: 0, recon: 0, security: 0 },
-  /** 每支执行中任务编队对战区的每秒线性效果（叠加） */
+  /** 每支执行中任务编队对战区的每秒线性效果（叠加，键 = 任务类型 id） */
   perTaskPerSecond: {
-    [OPERATIONAL_TASK_TYPE.PATROL]: { control: 0.02, threat: -0.005 },
-    [OPERATIONAL_TASK_TYPE.RECON]: { recon: 0.02 },
-    [OPERATIONAL_TASK_TYPE.SECURITY]: { security: 0.02, threat: -0.015 }
+    patrol: { control: 0.02, threat: -0.005 },
+    recon: { recon: 0.02 },
+    security: { security: 0.02, threat: -0.015 }
   },
   /** 无任务影响时每个指标的每秒自然漂移（威胁回升，其余衰减） */
   idlePerSecond: { threat: 0.002, control: -0.001, recon: -0.001, security: -0.001 }
@@ -106,7 +109,7 @@ export function ensureTheaterPressure(state) {
 
 /** 某战区当前执行中任务的数量（按类型），供推进与 UI 摘要共用（只读） */
 export function theaterTaskCounts(state, theaterId) {
-  const counts = { [OPERATIONAL_TASK_TYPE.PATROL]: 0, [OPERATIONAL_TASK_TYPE.RECON]: 0, [OPERATIONAL_TASK_TYPE.SECURITY]: 0 };
+  const counts = { patrol: 0, recon: 0, security: 0 };
   if (!isObject(state) || !Array.isArray(state.formations)) return counts;
   state.formations.forEach((formation) => {
     if (!formation) return;
@@ -132,7 +135,7 @@ export function tickTheaterPressure(state, dt) {
   Object.keys(THEATERS).forEach((theaterId) => {
     const row = state.theaterPressure[theaterId];
     const counts = theaterTaskCounts(state, theaterId);
-    const hasTasks = (counts[OPERATIONAL_TASK_TYPE.PATROL] + counts[OPERATIONAL_TASK_TYPE.RECON] + counts[OPERATIONAL_TASK_TYPE.SECURITY]) > 0;
+    const hasTasks = (counts.patrol + counts.recon + counts.security) > 0;
     PRESSURE_METRICS.forEach((metric) => {
       // 二态规则：战区有执行中任务时只应用任务速率（可叠加、按指标生效，
       // 任务未覆盖的指标保持不变）；战区无任务时应用自然漂移。

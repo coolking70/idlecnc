@@ -28,6 +28,7 @@ import { getDamageState } from './unit-status.js';
 import { getUnitRank, getUnitEffectiveStats, formatUnitDisplayName } from './units.js';
 import { getEquipmentComposition } from './equipment.js';
 import { getOperationalTask } from './tasking.js'; // Stage 10-A：派遣资格互斥（任务编队不可派遣）
+import { getStrategicMissionModifiers, applyStrategicSettlementPressure } from './strategic-loop.js'; // Stage 10-E：战略循环（任务成本 modifier + 战斗结算反向改写压力）
 import { compareBattleReports, validateBattleOutcomeConsistency, stableStringify } from './integrity.js';
 import { OPERATION_CODE, getOperationCost, canDispatchOperation, operationCooldown } from './operations.js';
 import {
@@ -462,12 +463,16 @@ export function getMissionCost(state, formationId, theaterId, strategyId) {
     });
   }
 
+  // Stage 10-E：战区压力影响任务成本（公式在 strategic-loop authority；
+  // 初始 pressure 时倍率为 1，旧成本完全不变；取整规则沿用 Math.round）
+  const strategic = getStrategicMissionModifiers(state, theaterId);
   const base = Math.round(upkeepSum * multiplier);
-  const supply = Math.round(base * upkeepMod);
+  const supply = Math.round(base * upkeepMod * strategic.supplyMultiplier);
   const cost = {};
   if (supply > 0) cost.supply = supply;
   Object.keys((strategy && strategy.cost) || {}).forEach((key) => {
-    cost[key] = safeNumber(cost[key], 0) + safeNumber(strategy.cost[key], 0);
+    const scale = key === 'supply' ? strategic.supplyMultiplier : key === 'intel' ? strategic.intelMultiplier : 1;
+    cost[key] = safeNumber(cost[key], 0) + Math.round(safeNumber(strategy.cost[key], 0) * scale);
   });
 
   const missing = state ? missingResources(state, cost) : [];
@@ -479,7 +484,9 @@ export function getMissionCost(state, formationId, theaterId, strategyId) {
       supplyMultiplier: multiplier,
       upkeepMod,
       base,
-      strategyCost: { ...((strategy && strategy.cost) || {}) }
+      strategyCost: { ...((strategy && strategy.cost) || {}) },
+      strategicSupplyMultiplier: strategic.supplyMultiplier,
+      strategicIntelMultiplier: strategic.intelMultiplier
     },
     affordable: missing.length === 0,
     missing
@@ -1513,12 +1520,26 @@ export function settleActiveBattle(state) {
     updatedUnitIds: plan.unitUpdates.map((u) => u.unitId),
     settledGameTime: safeNumber(state.time ? state.time.game : 0, 0)
   };
+  // Stage 10-E：战斗结果反向改变战区压力。只在 exactly-once 结算提交块内
+  // 执行（settled + battleSettlementLedger + settlementReceipt.strategicPressure
+  // 三重防护）；replay / 查看战报 / skip return / save-load 都不会重复应用。
+  // 必须在 settlementReceipt 写入 session 之前完成，保证两份凭证一致。
+  const strategicOutcome = applyStrategicSettlementPressure(state, {
+    theaterId: ab.theaterId,
+    result: report.result,
+    receipt: ab.settlementReceipt
+  });
+  if (strategicOutcome.applied && strategicOutcome.logText) {
+    logEvent(state, `战区态势变化：${strategicOutcome.logText}。`, LOG_LEVEL.INFO);
+  }
+
   if (session) syncProductionSession(state, ab, {
     lifecycle: SESSION_LIFECYCLE.SETTLED,
     settlementStatus: 'applied',
     settlementReceipt: cloneJson(ab.settlementReceipt),
     presentationTime: safeNumber(ab.elapsed, 0)
   });
+
   ab.playing = false;
   ab.elapsed = ab.duration;
   ab.settled = true;
