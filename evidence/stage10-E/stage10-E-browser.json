@@ -1,0 +1,83 @@
+{
+  "stage": "10-E",
+  "passed": true,
+  "frames": [
+    "01-initial-costs.png",
+    "02-recon-control-discount.png",
+    "03-after-battle-pressure.png"
+  ],
+  "assertions": [
+    {
+      "name": "production page booted",
+      "passed": true
+    },
+    {
+      "name": "initial strategic effects show ×1.00",
+      "passed": true
+    },
+    {
+      "name": "initial sources say baseline",
+      "passed": true
+    },
+    {
+      "name": "unique screenshot 01-initial-costs.png",
+      "passed": true
+    },
+    {
+      "name": "supply multiplier below 1 after control",
+      "passed": true
+    },
+    {
+      "name": "intel multiplier 0.85 after recon 60",
+      "passed": true
+    },
+    {
+      "name": "sources explained",
+      "passed": true
+    },
+    {
+      "name": "unique screenshot 02-recon-control-discount.png",
+      "passed": true
+    },
+    {
+      "name": "formal dispatch succeeded",
+      "passed": true
+    },
+    {
+      "name": "battle settled",
+      "passed": true
+    },
+    {
+      "name": "VICTORY pressure delta applied (control 40→50, security 0→5)",
+      "passed": true
+    },
+    {
+      "name": "receipt stamped with strategic pressure",
+      "passed": true
+    },
+    {
+      "name": "repeat settle does not re-apply",
+      "passed": true
+    },
+    {
+      "name": "reload does not re-apply",
+      "passed": true
+    },
+    {
+      "name": "unique screenshot 03-after-battle-pressure.png",
+      "passed": true
+    },
+    {
+      "name": "zero page errors",
+      "passed": true
+    },
+    {
+      "name": "zero console errors",
+      "passed": true
+    }
+  ],
+  "pageErrors": [],
+  "consoleErrors": [],
+  "saveVersion": 10,
+  "generatedAt": "2026-08-25T06:51:31.465Z"
+}

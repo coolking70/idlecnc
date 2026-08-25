@@ -149,6 +149,8 @@
     "test:stage10-A": "node tests/stage10-A-operational-tasking-test.mjs && node tests/stage10-A1a-offline-boundary-test.mjs",
     "test:stage10-B": "node tests/stage10-B-theater-pressure-test.mjs",
     "test:stage10-C": "node tests/stage10-C-command-doctrine-test.mjs",
+    "test:stage10-E": "node tests/stage10-E-strategic-loop-test.mjs",
+    "browser:stage10-E": "node tests/browser/stage10-E-strategic-loop.mjs",
     "test:stage10-D": "node tests/stage10-D-auto-operations-test.mjs",
     "browser:stage10-C": "node tests/browser/stage10-C-command-doctrine.mjs",
     "browser:stage10-D": "node tests/browser/stage10-D-auto-operations.mjs",

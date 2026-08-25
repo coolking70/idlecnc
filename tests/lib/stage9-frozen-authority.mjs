@@ -47,8 +47,7 @@ export const STAGE9_FROZEN_AUTHORITY_FILES = [
   'js/equipment.js',
   'js/battle.js',
   'js/battle-salvage.js',
-  'js/production-battle-session.js',
-  'js/save-diff.js'
+  'js/production-battle-session.js'
 ];
 
 // Files Stage 10 gameplay must legitimately extend (operational tasking
@@ -64,7 +63,11 @@ export const STAGE9_SEMANTIC_SHARED_FILES = [
   // Stage 10-B: migrate() carries the additive theaterPressure payload for
   // the dynamic-theater-pressure stage; save/load semantics for Stage 9
   // saves stay covered by the Stage 9 regression suites.
-  'js/save.js'
+  'js/save.js',
+  // Stage 10-E: the formal-settlement save diff allows the battle's own
+  // theater pressure path (strategic-loop battle outcome write). All other
+  // paths stay under the original allowlist contract.
+  'js/save-diff.js'
 ];
 
 // Formal solver / planner authority that STAGE9-FINAL.md freezes in addition to
