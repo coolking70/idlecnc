@@ -148,6 +148,13 @@ async function main() {
       return result;
     };
     const clickTab = async (tabId) => click(`button[data-tab="${tabId}"]`, { tab: tabId });
+    // Stage 10-P-B: several controls moved from standalone buttons into the shared
+    // Command Inspector. Reaching them is still a real two-step DOM interaction:
+    // click the tile to open the Inspector, then click the Inspector action.
+    const clickInspectorAction = async (tileSelector, actionId, details = {}) => {
+      await click(tileSelector, { ...details, inspectorHost: true });
+      return click(`[data-inspector-action="${actionId}"]`, details);
+    };
     const saveByUi = async () => click('#btn-save', { action: 'save' });
     const capture = async (target, extra = {}) => {
       await sleep(160);
@@ -204,30 +211,30 @@ async function main() {
     await capture(machine.frames[0], { phase: 'base_before_battle', actionProvenance: actions.slice() });
 
     await clickTab('construction');
-    await click('[data-action="build"][data-building-type="barracks"]', { action: 'build' });
+    await click('[data-command-id="construction:barracks"][data-action="build"]', { action: 'build' });
     await cdp.evaluate(call('setSpeed', 4));
     await waitUntil((current) => current.buildings?.some((row) => row.type === 'barracks' && row.status === 'operational'), 'barracks operational');
     await cdp.evaluate(call('setSpeed', 0));
     await clickTab('production');
-    for (let index = 0; index < 2; index += 1) await click('[data-action="produce"][data-unit-type="infantry"]', { action: 'produce', ordinal: index + 1 });
+    for (let index = 0; index < 2; index += 1) await click('[data-command-id="unit:infantry"][data-action="produce-unit"]', { action: 'produce', ordinal: index + 1 });
     await cdp.evaluate(call('setSpeed', 4));
     await waitUntil((current) => (current.units || []).filter((row) => row.type === 'infantry').length >= 2, 'two infantry production complete');
     await cdp.evaluate(call('setSpeed', 0));
 
     await clickTab('formations');
-    await click('[data-action="create-formation"]', { action: 'create-formation' });
+    await clickInspectorAction('[data-command-id="formation:new"]', 'create-formation', { action: 'create-formation' });
     const created = await waitUntil((current) => (current.formations || []).length === 1, 'formation created');
     const formationId = created.formations[0].id;
     while ((await state()).formations[0].unitIds.length < 2) {
       const unitCountBeforeAdd = (await state()).formations[0].unitIds.length;
-      await click('[data-action="add-unit"]', { action: 'add-unit', formationId });
+      await clickInspectorAction(`[data-command-id="formation:${formationId}"]`, 'add-unit', { action: 'add-unit', formationId });
       await waitUntil((current) => current.formations?.[0]?.unitIds?.length > unitCountBeforeAdd, 'formation unit added');
     }
     await saveByUi();
 
     await clickTab('theater');
-    await click('[data-action="select-theater"][data-theater="scrap_mine"]', { action: 'select-theater', theaterId: 'scrap_mine' });
-    await click('[data-action="select-strategy"][data-strategy="cautious"]', { action: 'select-strategy', strategyId: 'cautious' });
+    await click('[data-command-id="theater:scrap_mine"][data-action="select-theater"]', { action: 'select-theater', theaterId: 'scrap_mine' });
+    await click('[data-command-id="strategy:cautious"][data-action="select-strategy"]', { action: 'select-strategy', strategyId: 'cautious' });
     await waitUntil((current) => documentReadyForLaunch(current), 'production launch control');
     await capture(machine.frames[1], { phase: 'production_ui_launch_control', productionEntry: true, actionProvenance: actions.slice() });
 
@@ -286,8 +293,10 @@ async function main() {
 
     await clickTab('reports');
     await waitUntil((current) => current.activeBattle === null && Object.keys(current.battleSettlementLedger || {}).length === 1 && (current.battles || []).length === 1, 'replay report state');
-    await cdp.evaluate(`new Promise((resolve, reject) => { const start = performance.now(); const poll = () => document.querySelector('[data-action="replay-report"]') ? resolve(true) : performance.now() - start > 5000 ? reject(new Error('replay report control timeout')) : setTimeout(poll, 25); poll(); })`);
-    const replayControl = await click('[data-action="replay-report"]', { action: 'replay-report', reportId: baseAfterSettlement.battles.at(-1)?.id || null });
+    const replayReportId = baseAfterSettlement.battles.at(-1)?.id || null;
+    const replayTileSelector = `[data-command-id="report:${replayReportId}"]`;
+    await cdp.evaluate(`new Promise((resolve, reject) => { const start = performance.now(); const poll = () => document.querySelector(${JSON.stringify(replayTileSelector)}) ? resolve(true) : performance.now() - start > 5000 ? reject(new Error('replay report tile timeout')) : setTimeout(poll, 25); poll(); })`);
+    const replayControl = await clickInspectorAction(replayTileSelector, 'replay-report', { action: 'replay-report', reportId: replayReportId });
     const replayStarted = await waitUntil((current) => current.activeBattle?.replayReadOnly === true, 'replay started by UI');
     if (replayStarted.activeBattleSessionId !== null) throw new Error('replay retained activeBattleSessionId');
     await clickTab('theater');
