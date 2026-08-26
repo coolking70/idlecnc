@@ -127,6 +127,13 @@ async function main() {
       return result;
     };
     const clickTab = async (tabId) => click(`button[data-tab="${tabId}"]`, { tab: tabId });
+    // Stage 10-P-B moved several controls into the shared Command Inspector.
+    // Reaching them stays a real two-step DOM interaction: click the tile to
+    // open the Inspector, then click the Inspector action.
+    const clickInspectorAction = async (tileSelector, actionId, details = {}) => {
+      await click(tileSelector, { ...details, inspectorHost: true });
+      return click(`[data-inspector-action="${actionId}"]`, details);
+    };
     const saveByUi = async () => click('#btn-save', { action: 'save' });
     const waitForSelector = async (selector, label, timeout = 8000) => {
       const start = Date.now();
@@ -191,18 +198,18 @@ async function main() {
 
     // Prepare one formal battle through production UI controls.
     await cdp.evaluate(call('reset')); await cdp.evaluate(call('setSpeed', 0));
-    await clickTab('construction'); await click('[data-action="build"][data-building-type="barracks"]', { action: 'build' });
+    await clickTab('construction'); await click('[data-command-id="construction:barracks"][data-action="build"]', { action: 'build' });
     await cdp.evaluate(call('setSpeed', 4)); await waitUntil((current) => current.buildings?.some((row) => row.type === 'barracks' && row.status === 'operational'), 'barracks operational'); await cdp.evaluate(call('setSpeed', 0));
     await clickTab('production');
     for (let index = 0; index < 5; index += 1) {
       const beforeCount = (await state()).units.filter((row) => row.type === 'infantry').length;
-      await click('[data-action="produce"][data-unit-type="infantry"]', { action: 'produce', ordinal: index + 1 });
+      await click('[data-command-id="unit:infantry"][data-action="produce-unit"]', { action: 'produce', ordinal: index + 1 });
       await cdp.evaluate(call('setSpeed', 4)); await waitUntil((current) => current.units.filter((row) => row.type === 'infantry').length > beforeCount, 'infantry production'); await cdp.evaluate(call('setSpeed', 0));
     }
-    await clickTab('formations'); await click('[data-action="create-formation"]', { action: 'create-formation' });
+    await clickTab('formations'); await clickInspectorAction('[data-command-id="formation:new"]', 'create-formation', { action: 'create-formation' });
     await waitUntil((current) => current.formations?.length === 1, 'formation created');
-    while ((await state()).formations[0].unitIds.length < 5) { const beforeCount = (await state()).formations[0].unitIds.length; await click('[data-action="add-unit"]', { action: 'add-unit' }); await waitUntil((current) => current.formations?.[0]?.unitIds?.length > beforeCount, 'formation unit added'); }
-    await saveByUi(); await clickTab('theater'); await click('[data-action="select-theater"][data-theater="scrap_mine"]', { action: 'select-theater', theaterId: 'scrap_mine' }); await click('[data-action="select-strategy"][data-strategy="cautious"]', { action: 'select-strategy', strategyId: 'cautious' });
+    while ((await state()).formations[0].unitIds.length < 5) { const beforeCount = (await state()).formations[0].unitIds.length; await clickInspectorAction('[data-command-id^="formation:f"]', 'add-unit', { action: 'add-unit' }); await waitUntil((current) => current.formations?.[0]?.unitIds?.length > beforeCount, 'formation unit added'); }
+    await saveByUi(); await clickTab('theater'); await click('[data-command-id="theater:scrap_mine"][data-action="select-theater"]', { action: 'select-theater', theaterId: 'scrap_mine' }); await click('[data-command-id="strategy:cautious"][data-action="select-strategy"]', { action: 'select-strategy', strategyId: 'cautious' });
     await waitUntil((current) => current.formations?.some((row) => row.status === 'idle' && row.unitIds.length === 5), 'battle eligibility');
     await click('[data-action="launch-battle"]', { action: 'open-deployment-review' }); await waitForSelector('[data-action="confirm-dispatch"]', 'deployment review');
     const beforeDispatch = await state();
@@ -220,7 +227,7 @@ async function main() {
     await click('[data-action="dismiss-offline-report"]', { action: 'dismiss-offline-report' }); await waitUntil((current) => current.offline === null, 'running offline report dismissed'); await capture(9, { phase: 'running_offline_report_dismissed' });
     const settled = await cdp.evaluate(call('tickBattle', 999)); if (!settled?.activeBattle?.settled) throw new Error('formal result did not settle'); await waitUntil((current) => current.activeBattle?.settled === true, 'formal result'); await clickTab('theater'); await capture(10, { phase: 'formal_result', ledgerCount: (await state()).battleSettlementLedger ? Object.keys((await state()).battleSettlementLedger).length : 0 });
 
-    await click('[data-action="view-report"]', { action: 'view-report' }); await clickTab('theater'); await click('[data-action="return-from-battle"]', { action: 'return-from-battle' }); await clickTab('reports'); await waitForSelector('[data-action="replay-report"]', 'replay control'); await click('[data-action="replay-report"]', { action: 'replay-report' });
+    await click('[data-action="view-report"]', { action: 'view-report' }); await clickTab('theater'); await click('[data-action="return-from-battle"]', { action: 'return-from-battle' }); await clickTab('reports'); await waitForSelector('[data-command-id^="report:"]', 'replay control'); await clickInspectorAction('[data-command-id^="report:"]', 'replay-report', { action: 'replay-report' });
     const replay = await waitUntil((current) => current.activeBattle?.replayReadOnly === true, 'replay started'); if (replay.activeBattleSessionId !== null) throw new Error('replay active session leaked'); await clickTab('theater'); await capture(11, { phase: 'replay_before_offline', replayReadOnly: true });
     await saveByUi(); const replayReload = await reloadPage('replay_offline', 120); await clickTab('theater');
     const replayAfter = await waitUntil((current) => current.activeBattle?.replayReadOnly === true && current.activeBattleSessionId === null, 'replay after offline reload'); if (replayAfter.activeBattle.elapsed !== replay.activeBattle.elapsed) throw new Error('offline time advanced replay'); await capture(12, { phase: 'replay_after_offline_reload', realReload: replayReload, canonicalSessionUnchanged: true });
