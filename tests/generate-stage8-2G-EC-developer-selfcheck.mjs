@@ -1,6 +1,8 @@
 import fs from 'node:fs';
 import { spawnSync } from 'node:child_process';
 
+import { STAGE9_SEMANTIC_SHARED_FILES, readStage9FrozenAuthorityStatus } from './lib/stage9-frozen-authority.mjs';
+
 const root = process.cwd();
 // This is a regression on the accepted Stage 9-D.1 production baseline.
 // The older E-C baseline predates the frozen session/salvage wiring and would
@@ -52,7 +54,15 @@ const equipmentSnapshotBoundaryOnly = theaterSource.includes('getUnitEffectiveSt
   && theaterSource.includes('export function buildDispatchSnapshot')
   && !theaterSource.includes('computeSaveDiff(')
   && !theaterSource.includes('TODO: E-C');
+// Stage 10-A through 10-E legitimately extend the shared integration files.
+// Those five are governed by the shared Stage 9 frozen-authority guard under
+// its additive-only export contract, so defer to that guard here rather than
+// re-freezing them against this stage's own older baseline. Still fail-closed:
+// nothing is excused unless the shared guard itself passes.
+const stage9Authority = readStage9FrozenAuthorityStatus(root);
+const sharedAdditiveOk = (file) => stage9Authority.passed && STAGE9_SEMANTIC_SHARED_FILES.includes(file);
 const authorityChangedPaths = changedPaths.filter((file) => forbiddenAuthorityPaths.includes(file)
+  && !sharedAdditiveOk(file)
   && !(file === 'js/theater.js' && equipmentSnapshotBoundaryOnly)
   && !(file === 'js/battle.js' && stage9BEquipmentFallbackChange));
 const requiredActions = bundle.uiPath.requiredActions;

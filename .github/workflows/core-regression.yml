@@ -5,8 +5,13 @@ on:
     branches:
       - main
       - auto/stage9-e1a-ci-browser-final-closure
+  # Run on every pull request regardless of base branch. This gate previously
+  # filtered to `branches: [main]`, so the Stage 10-A through 10-E pull requests
+  # — which all targeted non-main bases — never executed it. Seven stages of
+  # breakage accumulated invisibly and only surfaced when the integrated line
+  # was first proposed against main. A gate that only guards one base branch
+  # does not guard a stacked-branch workflow.
   pull_request:
-    branches: [main]
   workflow_dispatch:
 
 env:
