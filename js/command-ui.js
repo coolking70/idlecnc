@@ -264,6 +264,16 @@ export class CommandInspector {
       const action = node('button', `command-inspector-action${danger ? ' is-danger' : ''}`, label);
       action.type = 'button';
       action.dataset.inspectorAction = actionId;
+      // Mirror the action payload onto the button as data-* attributes. The
+      // pre-Stage-10-P-B controls carried these (data-unit-id,
+      // data-equipment-instance-id, ...), and evidence tests address a specific
+      // action by them. Without this an Inspector offering several actions of
+      // the same id — mount this equipment vs. that one — is not addressable.
+      Object.keys(payload || {}).forEach((key) => {
+        const value = payload[key];
+        if (value === null || value === undefined || typeof value === 'object') return;
+        action.dataset[key] = String(value);
+      });
       action.disabled = Boolean(disabled);
       action.addEventListener('click', () => {
         this.actionHandler?.(actionId, payload);
