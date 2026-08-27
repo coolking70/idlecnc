@@ -11,6 +11,8 @@ import { buildDispatchSnapshot } from '../js/theater.js';
 import { getUnitEquipment } from '../js/equipment.js';
 import { canonicalHash } from '../js/production-battle-session.js';
 
+import { driftedVerifiers, makeAuthorityPathForbidden } from './lib/reviewed-authority-exceptions.mjs';
+
 const root = process.cwd();
 const clone = (value) => JSON.parse(JSON.stringify(value));
 const read = (name) => JSON.parse(fs.readFileSync(path.join(root, name), 'utf8'));
@@ -124,7 +126,7 @@ export function verifyStage9BEvidence(candidate, { checkFiles = false } = {}) {
   if (Object.keys(THEATERS).length !== 6 || Object.keys(OPERATIONS).length !== 6) fail('stage9a_regression');
   const allowedPerformanceHelper = 'tests/lib/perf-environment.mjs';
   const forbidden = ['js/battle.js', 'js/save-diff.js', 'js/battle-presentation/universal/', 'experiments/battle-sandbox/universal-planner/universal-planner.js'];
-  if (changed.some((file) => forbidden.some((prefix) => file === prefix || file.startsWith(prefix)) || (file.startsWith('tests/lib/') && file !== allowedPerformanceHelper))) fail('authority_changed', changed);
+  if (changed.some(makeAuthorityPathForbidden(forbidden)) || driftedVerifiers().length) fail('authority_changed', changed);
   if (!source.includes('getUnitEffectiveStats(unit, state && state.equipment)') || !source.includes('sanitizeEquipment(merged)') || !source.includes("dataset.action = 'equip-equipment'")) fail('source_binding');
   if (Number(candidate.performance?.scenarios?.effectiveStats?.p95Ms) >= 16.7 || Number(candidate.performance?.scenarios?.snapshot?.p95Ms) >= 16.7) fail('performance_budget');
   if (!candidate.performance?.environment?.platform || !candidate.performance?.environment?.arch || !candidate.performance?.environment?.cpuModel || !candidate.performance?.environment?.cpuCount || !candidate.performance?.environment?.nodeVersion) fail('performance_environment');

@@ -5,6 +5,8 @@ import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { verifyStage9CEvidence } from './stage9-C-strong-evidence-test.mjs';
 
+import { driftedVerifiers, makeAuthorityPathForbidden } from './lib/reviewed-authority-exceptions.mjs';
+
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const read = (name) => JSON.parse(fs.readFileSync(path.join(root, name), 'utf8'));
 const bundle = read('stage9_c_evidence_bundle.json');
@@ -16,7 +18,7 @@ const changed = execFileSync('git', ['diff', 'e72eedac27423902b94ebab69b2fa053ca
 const packageJson = JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 'utf8'));
 const allowedPerformanceHelper = 'tests/lib/perf-environment.mjs';
 const forbidden = ['js/save-diff.js', 'js/battle.js', 'js/theater.js', 'js/battle-presentation/universal/'];
-const isForbidden = (file) => forbidden.some((prefix) => file === prefix || file.startsWith(prefix)) || (file.startsWith('tests/lib/') && file !== allowedPerformanceHelper);
+const isForbidden = (file) => makeAuthorityPathForbidden(forbidden)(file) || driftedVerifiers().includes(file);
 const requiredEvidence = [
   'stage9_c_acquisition_model_check.json', 'stage9_c_production_queue_check.json', 'stage9_c_tech_gate_check.json', 'stage9_c_catalog_check.json',
   'stage9_c_inventory_integrity_check.json', 'stage9_c_migration_check.json', 'stage9_c_reload_check.json', 'stage9_c_battle_isolation_check.json', 'stage9_c_formal_settlement_isolation_check.json',

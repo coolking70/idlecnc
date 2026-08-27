@@ -2,6 +2,8 @@ import fs from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import { SAVE_VERSION } from '../js/config.js';
 
+import { driftedVerifiers, makeAuthorityPathForbidden } from './lib/reviewed-authority-exceptions.mjs';
+
 const read = (name) => JSON.parse(fs.readFileSync(name, 'utf8'));
 const packageJson = JSON.parse(fs.readFileSync('package.json', 'utf8'));
 const workflow = fs.readFileSync('.github/workflows/core-regression.yml', 'utf8');
@@ -31,7 +33,7 @@ const answers = [
   { id: 8, question: 'historical replay', answer: 'replay reads source.deploymentSnapshot, not current equipment', verified: read('stage9_b_replay_historical_check.json').replayAfterCurrentEquipmentChanged.usesHistoricalSnapshot },
   { id: 9, question: 'settlement equipment mutation', answer: 'settlement leaves equipment unchanged', verified: read('stage9_b_save_diff_check.json').settlementEquipmentUnchanged },
   { id: 10, question: 'save diff', answer: 'mount paths are equipment-only; battle/session/ledger/formations are forbidden', verified: read('stage9_b_save_diff_check.json').mountChangedPaths.every((path) => path.startsWith('equipment.')) },
-  { id: 11, question: 'authority files', answer: 'solver/planner/choreographer/save-diff unchanged; theater snapshot boundary is the sanctioned production-side input; only perf-environment is allowed under tests/lib', verified: !changed.some((file) => ['js/battle.js', 'js/save-diff.js'].includes(file) || file.startsWith('js/battle-presentation/universal/') || (file.startsWith('tests/lib/') && file !== allowedPerformanceHelper)) },
+  { id: 11, question: 'authority files', answer: 'solver/planner/choreographer unchanged; save-diff and the other shared integration files are held to the additive-only contract by the shared Stage 9 guard; under tests/lib only perf-environment, the reviewed-exceptions list, and verifiers matching their reviewed hash are allowed', verified: !changed.some(makeAuthorityPathForbidden(['js/battle.js', 'js/save-diff.js', 'js/battle-presentation/universal/'])) && driftedVerifiers().length === 0 },
   { id: 12, question: 'Stage 9-A values', answer: 'six theaters and six operations remain configured', verified: read('stage9_b_regression_check.json').theaterCount === 6 && read('stage9_b_regression_check.json').operationCount === 6 },
   { id: 13, question: 'UI authority', answer: 'UI calls authoritative getUnitEffectiveStats/canEquipEquipment and uses equipment render signature', verified: read('stage9_b_ui_path_check.json').sourceChecks.allRequiredDomProvenance },
   { id: 14, question: 'tamper passedFlagOnlyCases', answer: tamper.passedFlagOnlyCases, verified: tamper.passedFlagOnlyCases === 0 },

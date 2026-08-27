@@ -6,10 +6,12 @@ import { fileURLToPath } from 'node:url';
 import { CURRENT_STAGE, CURRENT_STAGE_LABEL, EQUIPMENT, EQUIPMENT_RULES, OPERATIONS, SAVE_VERSION, SALVAGE_RULES, THEATERS } from '../js/config.js';
 import { verifyStage9EEvidence } from './stage9-E-evidence-verifier.mjs';
 
+import { driftedVerifiers, makeAuthorityPathForbidden } from './lib/reviewed-authority-exceptions.mjs';
+
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const readJson = (name) => JSON.parse(fs.readFileSync(path.join(root, name), 'utf8'));
 const changed = execFileSync('git', ['diff', '--name-only', '5f7bbdd00fe5a2b3a029bcbbc8e550019f0034b6', '--'], { cwd: root, encoding: 'utf8' }).split('\n').map((row) => row.trim()).filter(Boolean);
-const forbidden = changed.filter((file) => file === 'js/battle.js' || file === 'js/save-diff.js' || file.startsWith('js/battle-presentation/universal/') || file.startsWith('tests/lib/'));
+const forbidden = [...new Set([...changed.filter(makeAuthorityPathForbidden(['js/battle.js', 'js/save-diff.js', 'js/battle-presentation/universal/'])), ...driftedVerifiers()])];
 const coreEvidence = readJson('stage9_e_core_evidence.json');
 const machineEvidence = readJson('stage9_e_machine_evidence.json');
 const browserManifest = readJson('stage9_e_browser_capture_manifest.json');

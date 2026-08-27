@@ -4,6 +4,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { loadSnapshot } from './lib/perf-environment.mjs';
 
+import { driftedVerifiers, makeAuthorityPathForbidden } from './lib/reviewed-authority-exceptions.mjs';
+
 const BASELINE = '5f7bbdd00fe5a2b3a029bcbbc8e550019f0034b6';
 const outputDir = path.resolve(process.argv[2] || 'artifacts/stage9-c1b-final-closure');
 const locate = (file) => {
@@ -25,7 +27,7 @@ const githubSha = process.env.GITHUB_SHA || execFileSync('git', ['rev-parse', 'H
 const changedFiles = execFileSync('git', ['diff', '--name-only', `${BASELINE}..${githubSha}`], { encoding: 'utf8' }).trim().split('\n').filter(Boolean);
 const frozenExact = new Set(['js/battle.js', 'js/theater.js', 'js/save-diff.js', 'experiments/battle-sandbox/universal-planner/universal-planner.js']);
 const modifiedFrozenFiles = changedFiles.filter((file) => frozenExact.has(file) || file.startsWith('js/battle-presentation/universal/'));
-const otherTestsLibAuthorityHelpersModified = changedFiles.filter((file) => file.startsWith('tests/lib/') && file !== 'tests/lib/perf-environment.mjs');
+const otherTestsLibAuthorityHelpersModified = [...new Set([...changedFiles.filter((file) => file.startsWith('tests/lib/') && makeAuthorityPathForbidden([])(file)), ...driftedVerifiers()])];
 const performance = read('stage9_c1b_performance_result.json');
 const stage9 = read('stage9_c1b_stage9c_result.json');
 const cleanClone = read('stage9_c1b_clean_clone_result.json');
