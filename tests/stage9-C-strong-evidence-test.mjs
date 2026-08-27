@@ -115,7 +115,13 @@ function verifyBrowser(candidate, fail, checkFiles) {
   if ((browser.browser?.pageErrors || []).length || (browser.browser?.consoleErrors || []).length) fail('browser_errors');
   const required = ['produce-equipment', 'cancel-production-current', 'cancel-production-queue', 'equip-equipment', 'unequip-equipment', 'confirm-dispatch', 'replay-report'];
   const actions = browser.actionProvenance || [];
-  required.forEach((action) => { if (!actions.some((row) => String(row.selector).includes(`data-action="${action}"`))) fail('required_ui_action', action); });
+  // Stage 10-P-B moved several controls into the Command Inspector, where the
+  // action id is carried by data-inspector-action instead of data-action. Both
+  // are real production-UI selectors naming the action, which is the property
+  // under test, so accept either attribute.
+  const selectorNamesAction = (selector, action) => String(selector).includes(`data-action="${action}"`)
+    || String(selector).includes(`data-inspector-action="${action}"`);
+  required.forEach((action) => { if (!actions.some((row) => selectorNamesAction(row.selector, action))) fail('required_ui_action', action); });
   if (!actions.length || actions.some((row) => row.source !== 'production_ui' || row.syntheticApiCall !== false)) fail('ui_provenance');
   const reloads = browser.realReloads || [];
   const expectedReasons = ['production_queue', 'completed_unmounted', 'running_battle', 'replay'];

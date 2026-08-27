@@ -84,7 +84,13 @@ export function verifyStage9BEvidence(candidate, { checkFiles = false } = {}) {
   const actions = browser.actionProvenance || [];
   if (!actions.length || actions.some((row) => row.source !== 'production_ui' || row.syntheticApiCall !== false)) fail('action_provenance');
   const required = ['equip-equipment', 'unequip-equipment', 'confirm-dispatch', 'replay-report'];
-  required.forEach((action) => { if (!actions.some((row) => String(row.selector).includes(`data-action="${action}"`))) fail('missing_ui_action', action); });
+  // Stage 10-P-B moved several controls into the Command Inspector, where the
+  // action id is carried by data-inspector-action instead of data-action. Both
+  // are real production-UI selectors naming the action, which is the property
+  // under test, so accept either attribute.
+  const selectorNamesAction = (selector, action) => String(selector).includes(`data-action="${action}"`)
+    || String(selector).includes(`data-inspector-action="${action}"`);
+  required.forEach((action) => { if (!actions.some((row) => selectorNamesAction(row.selector, action))) fail('missing_ui_action', action); });
   if (!browser.coverage?.equipmentPanelMounted || !browser.coverage?.mountAction || !browser.coverage?.unmountAction || !browser.coverage?.runningAttempt || !browser.coverage?.resultAttempt || !browser.coverage?.replayAttempt) fail('coverage');
   const runningFrames = [frames[2], frames[3]];
   if (!runningFrames.every((frame) => frame.state?.activeBattle?.battleSessionId && frame.state?.activeBattle?.deploymentHash && frame.state?.activeBattle?.formalReportHash && frame.state?.activeBattle?.replayReadOnly === false)) fail('running_state_binding');
