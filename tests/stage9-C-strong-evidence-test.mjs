@@ -113,7 +113,10 @@ function verifyBrowser(candidate, fail, checkFiles) {
     if (checkFiles && (!frame.screenshot?.path || hashFile(frame.screenshot.path) !== frame.imageSha256)) fail('screenshot_hash_actual', frame.file);
   });
   if ((browser.browser?.pageErrors || []).length || (browser.browser?.consoleErrors || []).length) fail('browser_errors');
-  const required = ['produce-equipment', 'cancel-production-current', 'cancel-production-queue', 'equip-equipment', 'unequip-equipment', 'confirm-dispatch', 'replay-report'];
+  // Stage 10-P-B renamed the queue cancel actions when the production queue moved
+  // onto command tiles: cancel-production-current -> cancel-current-production,
+  // cancel-production-queue -> cancel-queued-production.
+  const required = ['produce-equipment', 'cancel-current-production', 'cancel-queued-production', 'equip-equipment', 'unequip-equipment', 'confirm-dispatch', 'replay-report'];
   const actions = browser.actionProvenance || [];
   // Stage 10-P-B moved several controls into the Command Inspector, where the
   // action id is carried by data-inspector-action instead of data-action. Both
