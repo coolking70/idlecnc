@@ -20,7 +20,9 @@ const framePhases = [
   'replay_after_real_reload'
 ];
 const requiredActions = [
-  'produce-equipment', 'cancel-production-current', 'equip-equipment',
+  // Stage 10-P-B renamed the queue cancel action when the production queue moved
+  // onto command tiles: cancel-production-current -> cancel-current-production.
+  'produce-equipment', 'cancel-current-production', 'equip-equipment',
   'select-theater', 'select-operation', 'select-strategy',
   'launch-battle', 'confirm-dispatch', 'running-equipment-change-attempt',
   'claim-battle-salvage', 'view-report', 'replay-report',

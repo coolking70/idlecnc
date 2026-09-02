@@ -168,12 +168,14 @@ async function main() {
     await click('[data-command-id="equipment:anti_armor_sights"][data-action="produce-equipment"]', { action: 'produce-equipment', equipmentId: 'anti_armor_sights' });
     await waitUntil((s) => s.production?.current?.kind === 'equipment', 'equipment queued'); await capture(0, { phase: 'production_queue' });
     const queueReload = await reloadPage('production_queue'); await tab('production'); await waitUntil((s) => s.production?.current?.kind === 'equipment', 'queue after reload'); await capture(1, { phase: 'production_queue_after_real_reload', realReload: queueReload });
-    await click('[data-command-id^="queue:"][data-action="cancel-current-production"]', { action: 'cancel-production-current' }); await waitUntil((s) => !s.production?.current, 'equipment queue cancelled');
+    // Stage 10-P-B: a production-queue tile carries no primary action; the cancel
+    // lives in its Inspector (model.actionId), so open the tile first.
+    await clickInspectorAction('[data-command-id^="queue:"][data-command-state="active"]', '[data-inspector-action="cancel-current-production"]', { action: 'cancel-current-production' }); await waitUntil((s) => !s.production?.current, 'equipment queue cancelled');
     await click('[data-command-id="equipment:anti_armor_sights"][data-action="produce-equipment"]', { action: 'produce-equipment-after-cancel', equipmentId: 'anti_armor_sights' });
     await click('[data-command-id="equipment:command_uplink"][data-action="produce-equipment"]', { action: 'produce-equipment-queued', equipmentId: 'command_uplink' });
     const queuedJobId = (await state()).production.queue[0].id;
-    await waitSelector(`[data-command-id="queue:${queuedJobId}"][data-action="cancel-queued-production"]`, 'queued equipment cancel control');
-    await click(`[data-command-id="queue:${queuedJobId}"][data-action="cancel-queued-production"]`, { action: 'cancel-production-queue', jobId: queuedJobId });
+    await waitSelector(`[data-command-id="queue:${queuedJobId}"]`, 'queued equipment tile');
+    await clickInspectorAction(`[data-command-id="queue:${queuedJobId}"]`, '[data-inspector-action="cancel-queued-production"]', { action: 'cancel-queued-production', jobId: queuedJobId });
     await cdp.evaluate(call('setSpeed', 4)); await waitUntil((s) => s.equipment?.inventory?.some((item) => item.id === 'equipment-production-anti_armor_sights-1'), 'equipment completed', 15000); await cdp.evaluate(call('setSpeed', 0));
     await capture(2, { phase: 'equipment_completed_unmounted' });
     const completeReload = await reloadPage('completed_unmounted'); await tab('production'); await waitUntil((s) => s.equipment?.inventory?.some((item) => item.id === 'equipment-production-anti_armor_sights-1'), 'completed equipment after reload'); await capture(3, { phase: 'equipment_completed_unmounted_after_real_reload', realReload: completeReload });
