@@ -269,9 +269,11 @@ function verifyBrowserManifest(manifest, root, errors, source) {
   if (bySemantic('operation_cancelled')?.state?.sessionCount !== 1 || bySemantic('operation_cancelled')?.noSessionCreated !== true) errors.push('browser_operation_cancel_side_effect');
   if (resultReload?.state?.activeBattle?.settled !== true) errors.push('browser_result_reload');
   // Stage 10-P-B replaced the standalone '战报详情' card with the Command
-  // Inspector. Assert on the report body itself (seed row + outcome analysis),
-  // which is strictly more than the old single heading proved.
-  if (!reportView?.domText?.includes('随机种子') || !reportView?.domText?.includes('胜负原因')) errors.push('browser_report_view');
+  // Inspector. Assert on the seed row, which the Inspector always renders for a
+  // report. Do not assert on the outcome-analysis section: it is only rendered
+  // when the battle produced advantages or problems, so binding to it makes the
+  // gate depend on the simulated outcome.
+  if (!reportView?.domText?.includes('随机种子')) errors.push('browser_report_view');
   if (baseAfter?.state?.activeBattle !== null || baseAfter?.state?.reportCount !== 1) errors.push('browser_return_base');
   if (replayStart?.state?.activeBattle?.replayReadOnly !== true || replayStart?.state?.activeBattleSessionId !== null) errors.push('browser_replay_start');
   if (replayAfter?.state?.activeBattle?.replayReadOnly !== true || replayAfter?.state?.activeBattleSessionId !== null) errors.push('browser_replay_reload');

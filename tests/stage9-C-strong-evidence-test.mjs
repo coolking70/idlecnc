@@ -18,6 +18,8 @@ import { settleOfflineProgress } from '../js/offline.js';
 import { canonicalHash, buildAuthorityHashes, createProductionBattleSession } from '../js/production-battle-session.js';
 import { computeSaveDiff } from '../js/save-diff.js';
 
+import { driftedVerifiers, makeAuthorityPathForbidden } from './lib/reviewed-authority-exceptions.mjs';
+
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const clone = (value) => JSON.parse(JSON.stringify(value));
 const equal = (a, b) => JSON.stringify(a) === JSON.stringify(b);
@@ -111,9 +113,18 @@ function verifyBrowser(candidate, fail, checkFiles) {
     if (checkFiles && (!frame.screenshot?.path || hashFile(frame.screenshot.path) !== frame.imageSha256)) fail('screenshot_hash_actual', frame.file);
   });
   if ((browser.browser?.pageErrors || []).length || (browser.browser?.consoleErrors || []).length) fail('browser_errors');
-  const required = ['produce-equipment', 'cancel-production-current', 'cancel-production-queue', 'equip-equipment', 'unequip-equipment', 'confirm-dispatch', 'replay-report'];
+  // Stage 10-P-B renamed the queue cancel actions when the production queue moved
+  // onto command tiles: cancel-production-current -> cancel-current-production,
+  // cancel-production-queue -> cancel-queued-production.
+  const required = ['produce-equipment', 'cancel-current-production', 'cancel-queued-production', 'equip-equipment', 'unequip-equipment', 'confirm-dispatch', 'replay-report'];
   const actions = browser.actionProvenance || [];
-  required.forEach((action) => { if (!actions.some((row) => String(row.selector).includes(`data-action="${action}"`))) fail('required_ui_action', action); });
+  // Stage 10-P-B moved several controls into the Command Inspector, where the
+  // action id is carried by data-inspector-action instead of data-action. Both
+  // are real production-UI selectors naming the action, which is the property
+  // under test, so accept either attribute.
+  const selectorNamesAction = (selector, action) => String(selector).includes(`data-action="${action}"`)
+    || String(selector).includes(`data-inspector-action="${action}"`);
+  required.forEach((action) => { if (!actions.some((row) => selectorNamesAction(row.selector, action))) fail('required_ui_action', action); });
   if (!actions.length || actions.some((row) => row.source !== 'production_ui' || row.syntheticApiCall !== false)) fail('ui_provenance');
   const reloads = browser.realReloads || [];
   const expectedReasons = ['production_queue', 'completed_unmounted', 'running_battle', 'replay'];
@@ -177,7 +188,7 @@ export function verifyStage9CEvidence(candidate, { checkFiles = false } = {}) {
   verifyBrowser(candidate, fail, checkFiles);
   const perf = candidate.performance; if (!perf?.measurementValid || perf?.budgetMs !== 16.7 || perf?.warmup !== 20 || perf?.samples !== 120 || !perf.environmentGuard?.fit || !Number.isFinite(Number(perf.environmentGuard.loadBefore)) || !Number.isFinite(Number(perf.environmentGuard.loadAfter)) || !perf.environment?.platform || !perf.environment?.arch || !perf.environment?.cpuModel || !perf.environment?.cpuCount || !perf.environment?.nodeVersion) fail('performance_guard');
   ['effectiveStats', 'snapshot', 'inventory'].forEach((key) => { const scenario = perf.scenarios?.[key]; if (!scenario || scenario.samples !== 120 || !(Number(scenario.p95Ms) < 16.7)) fail('performance_budget', key); });
-  const changed = sourceChangedFiles(); const allowedPerformanceHelper = 'tests/lib/perf-environment.mjs'; const forbidden = ['js/save-diff.js', 'js/battle.js', 'js/battle-presentation/universal/']; if (changed.some((file) => forbidden.some((prefix) => file === prefix || file.startsWith(prefix)) || (file.startsWith('tests/lib/') && file !== allowedPerformanceHelper))) fail('authority_changed');
+  const changed = sourceChangedFiles(); const allowedPerformanceHelper = 'tests/lib/perf-environment.mjs'; const forbidden = ['js/save-diff.js', 'js/battle.js', 'js/battle-presentation/universal/']; if (changed.some(makeAuthorityPathForbidden(forbidden)) || driftedVerifiers().length) fail('authority_changed');
   const source = ['js/config.js', 'js/equipment.js', 'js/production.js', 'js/offline.js', 'js/save.js', 'js/ui.js', 'js/main.js'].map((file) => fs.readFileSync(path.join(root, file), 'utf8')).join('\n'); if (!source.includes('queueEquipment') || !source.includes('getUnitEffectiveStats') || !source.includes('equipment-production-')) fail('source_binding');
   return { ok: errors.length === 0, errors };
 }

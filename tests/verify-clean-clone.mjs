@@ -3,6 +3,8 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 
+import { STAGE9_ACCEPTED_BASE } from './lib/stage9-frozen-authority.mjs';
+
 /**
  * verify-clean-clone.mjs
  *
@@ -37,6 +39,10 @@ const authorityBaseline = 'e72eedac27423902b94ebab69b2fa053ca99b112';
 // All Stage 9 source-diff verifiers on the current release branch use the
 // accepted Stage 9-D.1 baseline; shallow clones must fetch that exact object.
 const stage9Baseline = '5f7bbdd00fe5a2b3a029bcbbc8e550019f0034b6';
+// The shared Stage 9 frozen-authority guard compares against its own accepted
+// baseline, which is a different commit from the two above. Imported rather
+// than repeated so the clone can never fetch a baseline the guard has moved off.
+const frozenAuthorityBaseline = STAGE9_ACCEPTED_BASE;
 const DEFAULT_GATE_TIMEOUT_MS = 3_600_000;
 const DEFAULT_GATE_SCRIPT = 'gate:stage8-2G';
 const steps = [];
@@ -105,6 +111,18 @@ try {
   } catch (error) {
     record('stage9-baseline-fetch', false, null, {
       baseline: stage9Baseline,
+      message: String(error.stderr || error.message),
+      stdout: outputTail(error.stdout),
+      stderr: outputTail(error.stderr),
+    });
+    throw error;
+  }
+  try {
+    run('git', ['fetch', '--depth', '1', 'origin', frozenAuthorityBaseline], cloneDir, { timeout: 120000 });
+    record('frozen-authority-baseline-fetch', true, 0, { baseline: frozenAuthorityBaseline });
+  } catch (error) {
+    record('frozen-authority-baseline-fetch', false, null, {
+      baseline: frozenAuthorityBaseline,
       message: String(error.stderr || error.message),
       stdout: outputTail(error.stdout),
       stderr: outputTail(error.stderr),

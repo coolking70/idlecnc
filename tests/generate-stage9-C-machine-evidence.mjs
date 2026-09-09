@@ -17,7 +17,10 @@ const output = {
   productionEntry: true, fixtureLoaderUsed: false, debugOverlayUsed: false,
   dispatchApiUsed: false, replayApiUsed: false, offlineApiUsed: false, equipmentApiUsed: false,
   realReloadRequired: true, frameCount: frames.length,
-  requiredActions: ['produce-equipment', 'cancel-production-current', 'cancel-production-queue', 'equip-equipment', 'unequip-equipment', 'confirm-dispatch', 'replay-report'],
+  // Stage 10-P-B renamed the production-queue cancel actions when the queue moved
+  // onto command tiles: cancel-production-current -> cancel-current-production,
+  // cancel-production-queue -> cancel-queued-production.
+  requiredActions: ['produce-equipment', 'cancel-current-production', 'cancel-queued-production', 'equip-equipment', 'unequip-equipment', 'confirm-dispatch', 'replay-report'],
   realReloadReasons: ['production_queue', 'completed_unmounted', 'running_battle', 'replay'],
   frames: frames.map(([file, semantic], index) => ({ frame: index + 1, file, semantic }))
 };

@@ -2,6 +2,8 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import { execFileSync } from 'node:child_process';
 
+import { driftedVerifiers, makeAuthorityPathForbidden } from './lib/reviewed-authority-exceptions.mjs';
+
 const pkg = JSON.parse(fs.readFileSync('package.json', 'utf8'));
 const workflow = fs.readFileSync('.github/workflows/core-regression.yml', 'utf8');
 const manifest = JSON.parse(fs.readFileSync('stage9_a_browser_capture_manifest.json', 'utf8'));
@@ -14,8 +16,10 @@ const committed = execFileSync('git', ['diff', '--name-only', `${baseline}..HEAD
 const working = execFileSync('git', ['diff', '--name-only', 'HEAD'], { encoding: 'utf8' }).split(/\r?\n/).filter(Boolean);
 const changedFiles = [...new Set([...committed, ...working])].sort();
 const allowedPerformanceHelper = 'tests/lib/perf-environment.mjs';
+
 const forbiddenPrefixes = ['js/battle.js', 'js/save-diff.js', 'js/battle-presentation/universal/', 'experiments/battle-sandbox/universal-planner/universal-planner.js'];
-const forbiddenChangedFiles = changedFiles.filter((file) => forbiddenPrefixes.some((prefix) => file === prefix || file.startsWith(prefix)) || (file.startsWith('tests/lib/') && file !== allowedPerformanceHelper));
+const authorityPathForbidden = makeAuthorityPathForbidden(forbiddenPrefixes);
+const forbiddenChangedFiles = [...new Set([...changedFiles.filter(authorityPathForbidden), ...driftedVerifiers()])];
 const output = {
   stage: '9-A',
   changedFiles,

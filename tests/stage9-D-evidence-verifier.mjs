@@ -86,7 +86,13 @@ export function verifyStage9DEvidence(candidate, { checkFiles = false } = {}) {
     if (!timeChanged || !loaderChanged || row.timeOriginChanged !== timeChanged || row.loaderChanged !== loaderChanged) fail(errors, 'reload_true_value', row.reason);
   });
   const requiredActions = machine.requiredActions || [];
-  requiredActions.forEach((action) => { if (!(browser.actionProvenance || []).some((row) => row.kind === 'click' && String(row.selector).includes(`data-action="${action}"`))) fail(errors, 'required_action', action); });
+  // Stage 10-P-B moved several controls into the Command Inspector, where the
+  // action id is carried by data-inspector-action instead of data-action. Both
+  // are real production-UI selectors naming the action, which is the property
+  // under test, so accept either attribute.
+  const selectorNamesAction = (selector, action) => String(selector).includes(`data-action="${action}"`)
+    || String(selector).includes(`data-inspector-action="${action}"`);
+  requiredActions.forEach((action) => { if (!(browser.actionProvenance || []).some((row) => row.kind === 'click' && selectorNamesAction(row.selector, action))) fail(errors, 'required_action', action); });
   if ((browser.actionProvenance || []).some((row) => row.source !== 'production_ui' || row.syntheticApiCall !== false)) fail(errors, 'ui_provenance');
   frames.forEach((frame, index) => verifyFrame(frame, index, errors, { checkFiles }));
   frames.forEach((frame, index) => {

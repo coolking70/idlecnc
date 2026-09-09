@@ -65,7 +65,13 @@ for (const key of ['dispatchApiUsed', 'replayApiUsed', 'offlineApiUsed', 'equipm
 for (const key of ['productionEntry', 'enqueueAction', 'cancelAction', 'completionObserved', 'completedUnmounted', 'mountAction', 'runningAttempt', 'replayAttempt']) add(`coverage-${key}`, (b) => { b.browser.coverage[key] = false; });
 add('ui-source-provenance', (b) => { b.browser.actionProvenance[0].source = 'fixture'; });
 add('ui-synthetic-provenance', (b) => { b.browser.actionProvenance[0].syntheticApiCall = true; });
-for (const action of ['produce-equipment', 'cancel-production-current', 'cancel-production-queue', 'equip-equipment', 'unequip-equipment', 'confirm-dispatch', 'replay-report']) add(`missing-action-${action}`, (b) => { b.browser.actionProvenance = b.browser.actionProvenance.filter((row) => !String(row.selector).includes(`data-action="${action}"`)); });
+// Stage 10-P-B moved several controls into the Command Inspector, where the
+// action id is carried by data-inspector-action instead of data-action. Both
+// are real production-UI selectors naming the action, which is the property
+// under test, so accept either attribute.
+const selectorNamesAction = (selector, action) => String(selector).includes(`data-action="${action}"`)
+  || String(selector).includes(`data-inspector-action="${action}"`);
+for (const action of ['produce-equipment', 'cancel-current-production', 'cancel-queued-production', 'equip-equipment', 'unequip-equipment', 'confirm-dispatch', 'replay-report']) add(`missing-action-${action}`, (b) => { b.browser.actionProvenance = b.browser.actionProvenance.filter((row) => !selectorNamesAction(row.selector, action)); });
 add('reload-reason-missing', (b) => { b.browser.realReloads.pop(); });
 add('reload-reason-extra', (b) => { b.browser.realReloads.push({ reason: 'extra', before: { timeOrigin: 1 }, after: { timeOrigin: 2 }, beforeLoaderId: 'x', afterLoaderId: 'y', timeOriginChanged: true }); });
 add('reload-time-origin-equal', (b) => { b.browser.realReloads[0].after.timeOrigin = b.browser.realReloads[0].before.timeOrigin; });

@@ -14,6 +14,8 @@ import { buildDispatchSnapshot, dispatchOperation, tickActiveBattle } from '../j
 import { claimBattleSalvage, deriveSalvageOffer } from '../js/battle-salvage.js';
 import { canonicalHash } from '../js/production-battle-session.js';
 
+import { driftedVerifiers, makeAuthorityPathForbidden } from './lib/reviewed-authority-exceptions.mjs';
+
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const clone = (value) => JSON.parse(JSON.stringify(value));
 
@@ -215,7 +217,7 @@ export function verifyStage9EEvidence(candidate, { checkFiles = false, evidenceR
   const recomputed = verifyCore(candidate, failures);
   verifyBrowser(candidate, failures);
   const changed = sourceFilesChanged();
-  const forbidden = changed.filter((file) => file === 'js/battle.js' || file === 'js/save-diff.js' || file.startsWith('js/battle-presentation/universal/') || file.startsWith('tests/lib/'));
+  const forbidden = [...new Set([...changed.filter(makeAuthorityPathForbidden(['js/battle.js', 'js/save-diff.js', 'js/battle-presentation/universal/'])), ...driftedVerifiers()])];
   if (forbidden.length) fail(failures, 'authority.forbiddenFilesChanged', [], forbidden);
   if (candidate.authority?.forbiddenAuthorityFilesChanged?.length) fail(failures, 'bundle.authority.forbiddenAuthorityFilesChanged', [], candidate.authority.forbiddenAuthorityFilesChanged);
   if (checkFiles) verifyEvidenceFiles(candidate, failures, evidenceRoot);

@@ -114,6 +114,14 @@ async function main() {
       await cdp.evaluate(`document.querySelector(${JSON.stringify(selector)})?.click()`); await sleep(120); return result;
     };
     const tab = async (id) => click(`button[data-tab="${id}"]`, { tab: id });
+    // Stage 10-P-B moved several controls into the shared Command Inspector.
+    // Reaching one stays a real two-step DOM interaction: click the tile to open
+    // the Inspector, then click the Inspector action. Action buttons mirror their
+    // payload as data-* attributes, so a specific instance stays addressable.
+    const clickInspectorAction = async (tileSelector, actionSelector, details = {}, opts = {}) => {
+      await click(tileSelector, { ...details, inspectorHost: true });
+      return click(actionSelector, details, opts);
+    };
     const waitSelector = async (selector, label, timeout = 12000) => {
       const start = Date.now();
       while (Date.now() - start < timeout) { if (await cdp.evaluate(`Boolean(document.querySelector(${JSON.stringify(selector)}))`)) return true; await sleep(60); }
@@ -156,34 +164,36 @@ async function main() {
     })()`);
     await click('#btn-save', { action: 'save-seeded-acquisition-state' });
 
-    await tab('production'); await waitSelector('[data-action="produce-equipment"][data-equipment-id="anti_armor_sights"]', 'equipment production control');
-    await click('[data-action="produce-equipment"][data-equipment-id="anti_armor_sights"]', { action: 'produce-equipment', equipmentId: 'anti_armor_sights' });
+    await tab('production'); await waitSelector('[data-command-id="equipment:anti_armor_sights"][data-action="produce-equipment"]', 'equipment production control');
+    await click('[data-command-id="equipment:anti_armor_sights"][data-action="produce-equipment"]', { action: 'produce-equipment', equipmentId: 'anti_armor_sights' });
     await waitUntil((s) => s.production?.current?.kind === 'equipment', 'equipment queued'); await capture(0, { phase: 'production_queue' });
     const queueReload = await reloadPage('production_queue'); await tab('production'); await waitUntil((s) => s.production?.current?.kind === 'equipment', 'queue after reload'); await capture(1, { phase: 'production_queue_after_real_reload', realReload: queueReload });
-    await click('[data-action="cancel-production-current"]', { action: 'cancel-production-current' }); await waitUntil((s) => !s.production?.current, 'equipment queue cancelled');
-    await click('[data-action="produce-equipment"][data-equipment-id="anti_armor_sights"]', { action: 'produce-equipment-after-cancel', equipmentId: 'anti_armor_sights' });
-    await click('[data-action="produce-equipment"][data-equipment-id="command_uplink"]', { action: 'produce-equipment-queued', equipmentId: 'command_uplink' });
+    // Stage 10-P-B: a production-queue tile carries no primary action; the cancel
+    // lives in its Inspector (model.actionId), so open the tile first.
+    await clickInspectorAction('[data-command-id^="queue:"][data-command-state="active"]', '[data-inspector-action="cancel-current-production"]', { action: 'cancel-current-production' }); await waitUntil((s) => !s.production?.current, 'equipment queue cancelled');
+    await click('[data-command-id="equipment:anti_armor_sights"][data-action="produce-equipment"]', { action: 'produce-equipment-after-cancel', equipmentId: 'anti_armor_sights' });
+    await click('[data-command-id="equipment:command_uplink"][data-action="produce-equipment"]', { action: 'produce-equipment-queued', equipmentId: 'command_uplink' });
     const queuedJobId = (await state()).production.queue[0].id;
-    await waitSelector(`[data-action="cancel-production-queue"][data-job-id="${queuedJobId}"]`, 'queued equipment cancel control');
-    await click(`[data-action="cancel-production-queue"][data-job-id="${queuedJobId}"]`, { action: 'cancel-production-queue', jobId: queuedJobId });
+    await waitSelector(`[data-command-id="queue:${queuedJobId}"]`, 'queued equipment tile');
+    await clickInspectorAction(`[data-command-id="queue:${queuedJobId}"]`, '[data-inspector-action="cancel-queued-production"]', { action: 'cancel-queued-production', jobId: queuedJobId });
     await cdp.evaluate(call('setSpeed', 4)); await waitUntil((s) => s.equipment?.inventory?.some((item) => item.id === 'equipment-production-anti_armor_sights-1'), 'equipment completed', 15000); await cdp.evaluate(call('setSpeed', 0));
     await capture(2, { phase: 'equipment_completed_unmounted' });
     const completeReload = await reloadPage('completed_unmounted'); await tab('production'); await waitUntil((s) => s.equipment?.inventory?.some((item) => item.id === 'equipment-production-anti_armor_sights-1'), 'completed equipment after reload'); await capture(3, { phase: 'equipment_completed_unmounted_after_real_reload', realReload: completeReload });
-    await tab('units'); await waitSelector('[data-action="equip-equipment"][data-equipment-instance-id="equipment-production-anti_armor_sights-1"]', 'completed equipment mount control');
-    await click('[data-action="equip-equipment"][data-equipment-instance-id="equipment-production-anti_armor_sights-1"]', { action: 'equip-equipment', unitId: 'stage9-c-browser-unit', equipmentInstanceId: 'equipment-production-anti_armor_sights-1' });
+    await tab('units'); await waitSelector('[data-command-id="unit-instance:stage9-c-browser-unit"]', 'completed equipment mount control');
+    await clickInspectorAction('[data-command-id="unit-instance:stage9-c-browser-unit"]', '[data-inspector-action="equip-equipment"][data-equipment-instance-id="equipment-production-anti_armor_sights-1"]', { action: 'equip-equipment', unitId: 'stage9-c-browser-unit', equipmentInstanceId: 'equipment-production-anti_armor_sights-1' });
     await waitUntil((s) => s.equipment?.bindings?.['stage9-c-browser-unit']?.includes('equipment-production-anti_armor_sights-1'), 'equipment mounted'); await capture(4, { phase: 'equipment_mounted_after_dom_click' });
 
-    await tab('formations'); await click('[data-action="create-formation"]', { action: 'create-formation' }); await waitUntil((s) => s.formations?.length === 1, 'formation created');
-    await click('[data-action="add-unit"]', { action: 'add-unit' }); await waitUntil((s) => s.formations?.[0]?.unitIds?.includes('stage9-c-browser-unit'), 'unit added to formation');
-    await tab('theater'); await click('[data-action="select-theater"][data-theater="scrap_mine"]', { action: 'select-theater', theaterId: 'scrap_mine' }); await click('[data-action="select-strategy"][data-strategy="cautious"]', { action: 'select-strategy', strategyId: 'cautious' }); await click('[data-action="launch-battle"]', { action: 'open-deployment-review' }); await waitSelector('[data-action="confirm-dispatch"]', 'dispatch confirm'); await click('[data-action="confirm-dispatch"]', { action: 'confirm-dispatch' });
+    await tab('formations'); await clickInspectorAction('[data-command-id="formation:new"]', '[data-inspector-action="create-formation"]', { action: 'create-formation' }); await waitUntil((s) => s.formations?.length === 1, 'formation created');
+    await clickInspectorAction('[data-command-id^="formation:f"]', '[data-inspector-action="add-unit"]', { action: 'add-unit' }); await waitUntil((s) => s.formations?.[0]?.unitIds?.includes('stage9-c-browser-unit'), 'unit added to formation');
+    await tab('theater'); await click('[data-command-id="theater:scrap_mine"][data-action="select-theater"]', { action: 'select-theater', theaterId: 'scrap_mine' }); await click('[data-command-id="strategy:cautious"][data-action="select-strategy"]', { action: 'select-strategy', strategyId: 'cautious' }); await click('[data-action="launch-battle"]', { action: 'open-deployment-review' }); await waitSelector('[data-action="confirm-dispatch"]', 'dispatch confirm'); await click('[data-action="confirm-dispatch"]', { action: 'confirm-dispatch' });
     const running = await waitUntil((s) => Boolean(s.activeBattle?.battleSessionId), 'battle running');
-    await tab('units'); await click('[data-action="unequip-equipment"][data-equipment-instance-id="equipment-production-anti_armor_sights-1"]', { action: 'running-equipment-change-attempt', rejectedBy: 'battle_lock' }); await capture(5, { phase: 'running_battle_equipment_change_attempt', sessionId: running.activeBattle.battleSessionId });
-    const runningReload = await reloadPage('running_battle'); await tab('units'); await click('[data-action="unequip-equipment"][data-equipment-instance-id="equipment-production-anti_armor_sights-1"]', { action: 'running-equipment-change-attempt-after-reload', rejectedBy: 'battle_lock' }); await capture(6, { phase: 'running_after_real_reload', realReload: runningReload, sessionId: running.activeBattle.battleSessionId });
+    await tab('units'); await clickInspectorAction('[data-command-id="unit-instance:stage9-c-browser-unit"]', '[data-inspector-action="unequip-equipment"][data-equipment-instance-id="equipment-production-anti_armor_sights-1"]', { action: 'running-equipment-change-attempt', rejectedBy: 'battle_lock' }, { allowDisabled: true }); await capture(5, { phase: 'running_battle_equipment_change_attempt', sessionId: running.activeBattle.battleSessionId });
+    const runningReload = await reloadPage('running_battle'); await tab('units'); await clickInspectorAction('[data-command-id="unit-instance:stage9-c-browser-unit"]', '[data-inspector-action="unequip-equipment"][data-equipment-instance-id="equipment-production-anti_armor_sights-1"]', { action: 'running-equipment-change-attempt-after-reload', rejectedBy: 'battle_lock' }, { allowDisabled: true }); await capture(6, { phase: 'running_after_real_reload', realReload: runningReload, sessionId: running.activeBattle.battleSessionId });
     await cdp.evaluate(call('tickBattle', 999)); await waitUntil((s) => s.activeBattle?.settled === true, 'result panel');
-    await tab('theater'); await click('[data-action="view-report"]', { action: 'view-report' }); await waitSelector('[data-action="replay-report"]', 'replay report control'); await click('[data-action="return-from-battle"]', { action: 'return-from-battle' }); await waitUntil((s) => s.activeBattle === null, 'result closed');
-    await tab('reports'); await click('[data-action="replay-report"]', { action: 'replay-report' }); await waitUntil((s) => s.activeBattle?.replayReadOnly === true, 'replay started'); await tab('units');
-    await click('[data-action="unequip-equipment"][data-equipment-instance-id="equipment-production-anti_armor_sights-1"]', { action: 'replay-equipment-change-attempt', rejectedBy: 'replay_read_only' }); await capture(7, { phase: 'replay_historical_equipment_attempt' });
-    const replayReload = await reloadPage('replay'); await tab('units'); await click('[data-action="unequip-equipment"][data-equipment-instance-id="equipment-production-anti_armor_sights-1"]', { action: 'replay-equipment-change-attempt-after-reload', rejectedBy: 'replay_read_only' }); await capture(8, { phase: 'replay_after_real_reload', realReload: replayReload });
+    await tab('theater'); await click('[data-action="view-report"]', { action: 'view-report' }); await waitSelector('[data-command-id^="report:"]', 'replay report control'); await click('[data-action="return-from-battle"]', { action: 'return-from-battle' }); await waitUntil((s) => s.activeBattle === null, 'result closed');
+    await tab('reports'); await clickInspectorAction('[data-command-id^="report:"]', '[data-inspector-action="replay-report"]', { action: 'replay-report' }); await waitUntil((s) => s.activeBattle?.replayReadOnly === true, 'replay started'); await tab('units');
+    await clickInspectorAction('[data-command-id="unit-instance:stage9-c-browser-unit"]', '[data-inspector-action="unequip-equipment"][data-equipment-instance-id="equipment-production-anti_armor_sights-1"]', { action: 'replay-equipment-change-attempt', rejectedBy: 'replay_read_only' }, { allowDisabled: true }); await capture(7, { phase: 'replay_historical_equipment_attempt' });
+    const replayReload = await reloadPage('replay'); await tab('units'); await clickInspectorAction('[data-command-id="unit-instance:stage9-c-browser-unit"]', '[data-inspector-action="unequip-equipment"][data-equipment-instance-id="equipment-production-anti_armor_sights-1"]', { action: 'replay-equipment-change-attempt-after-reload', rejectedBy: 'replay_read_only' }, { allowDisabled: true }); await capture(8, { phase: 'replay_after_real_reload', realReload: replayReload });
     await cdp.evaluate(call('tickBattle', 999)); await cdp.evaluate(call('tickBattleReturn', 999)); await click('[data-action="return-from-battle"]', { action: 'return-from-battle', replayClose: true });
 
     if (pageErrors.length || consoleErrors.length) throw new Error(`Stage9-C browser errors: ${JSON.stringify({ pageErrors, consoleErrors })}`);

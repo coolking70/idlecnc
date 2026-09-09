@@ -12,6 +12,8 @@ import { getUnitEffectiveStats } from '../js/units.js';
 import { buildDispatchSnapshot } from '../js/theater.js';
 import { getUnitEquipment } from '../js/equipment.js';
 
+import { driftedVerifiers, makeAuthorityPathForbidden } from './lib/reviewed-authority-exceptions.mjs';
+
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const read = (name) => JSON.parse(fs.readFileSync(path.join(root, name), 'utf8'));
 const write = (name, value) => fs.writeFileSync(path.join(root, name), `${JSON.stringify(value, null, 2)}\n`);
@@ -49,7 +51,7 @@ const workingNames = execFileSync('git', ['diff', '--name-only', 'HEAD'], { cwd:
 const gitNames = [...new Set([...committedNames, ...workingNames])].sort();
 const allowedPerformanceHelper = 'tests/lib/perf-environment.mjs';
 const authorityForbidden = ['js/battle.js', 'js/save-diff.js', 'js/battle-presentation/universal/', 'experiments/battle-sandbox/universal-planner/universal-planner.js'];
-const authorityPathForbidden = (file) => authorityForbidden.some((prefix) => file === prefix || file.startsWith(prefix)) || (file.startsWith('tests/lib/') && file !== allowedPerformanceHelper);
+const authorityPathForbidden = makeAuthorityPathForbidden(authorityForbidden);
 
 const reloadReasons = (browser.realReloads || []).map((row) => row.reason);
 const reloadExpected = ['equipment_panel_mounted', 'running_battle', 'result', 'replay'];
@@ -87,7 +89,7 @@ const independent = {
   currentRecomputedSnapshot: { stats: snapshotUnit.stats, equipment: snapshotUnit.equipment },
   noHpEffect: independentlyComputedStats.hp === 100 && effectiveUnit.maxHp === 100,
   stage9AConstants: Object.keys(THEATERS).length === 6 && Object.keys(OPERATIONS).length === 6,
-  authorityFrozen: gitNames.every((file) => !authorityPathForbidden(file)),
+  authorityFrozen: gitNames.every((file) => !authorityPathForbidden(file)) && driftedVerifiers().length === 0,
   reloads: reloadReasons.join('|') === reloadExpected.join('|') && reloadChecks.length === 4 && reloadChecks.every((row) => row.afterGreaterThanBefore && row.loaderChanged && row.declaredTimeOriginConsistent && row.loaderIdNotRepeated),
   browserProvenance: browser.productionEntry === true && browser.fixtureLoaderUsed === false && browser.dispatchApiUsed === false && browser.replayApiUsed === false && browser.offlineApiUsed === false && browser.equipmentApiUsed === false,
   ui: uiSourceChecks.allRequiredDomProvenance,
