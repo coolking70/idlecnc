@@ -1,0 +1,22 @@
+{
+  "stage": "9-B",
+  "independentRecompute": true,
+  "checks": {
+    "model": true,
+    "effectiveStats": true,
+    "snapshot": true,
+    "reloads": true,
+    "ui": true,
+    "authority": true,
+    "performance": true
+  },
+  "browserErrors": [],
+  "tamperAuditPending": false,
+  "passed": true,
+  "tamperAudit": {
+    "caseCount": 84,
+    "rejectionCount": 84,
+    "passedFlagOnlyCases": 0,
+    "independentlyRejected": true
+  }
+}

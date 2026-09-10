@@ -108,5 +108,5 @@ fs.writeFileSync(path.join(evidenceDir, 'stage8_2g_a11_spatial_validation.json')
 
 const standalone = spawnSync(process.execPath, ['tests/stage8-2E-A-2-4-test.mjs'], { cwd: root, encoding: 'utf8', timeout: 120000, maxBuffer: 16 * 1024 * 1024 });
 assert.equal(standalone.status, 0, `A.2.4 standalone failed or timed out: ${standalone.error?.message || standalone.stderr?.slice(-4000) || ''}`);
-assert.match(`${standalone.stdout}\n${standalone.stderr}`, /stage8-2E-A-2-4-test: 37 passed \/ 37 total/);
+assert.match(`${standalone.stdout}\n${standalone.stderr}`, /stage8-2E-A-2-4-test: 39 passed \/ 39 total/);
 console.log(`stage8-2G-A-1-1-test: closure checks passed; spatial frames=${frames.length}; fixtures=${fixtures.length}; historicalPid=37/37`);

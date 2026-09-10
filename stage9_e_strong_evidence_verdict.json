@@ -1,0 +1,14 @@
+{
+  "stage": "9-E",
+  "verifier": "tests/stage9-E-evidence-verifier.mjs",
+  "independentRecompute": true,
+  "passed": true,
+  "failureCount": 0,
+  "failures": [],
+  "recomputed": {
+    "ok": true,
+    "productionId": "equipment-production-anti_armor_sights-1",
+    "salvageEquipmentId": "command_uplink",
+    "settlementUntouched": true
+  }
+}

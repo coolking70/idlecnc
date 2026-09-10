@@ -8,6 +8,8 @@ import {
   buildChildTestEnv,
   cleanupVerificationRunner,
   createVerificationRunner,
+  getAdaptiveTimeoutMs,
+  getVerificationLoadSnapshot,
   runVerificationStage
 } from './verification-runner.mjs';
 import { runActualGlobalTimeoutFixture } from './fixtures/global-timeout-fixture.mjs';
@@ -34,6 +36,18 @@ const check = async (name, fn) => { await fn(); passed += 1; console.log(`  PASS
 console.log('\n════════════════════════════════════════════');
 console.log('  钢铁指令 阶段8.2E-A.2.4 稳定性测试');
 console.log('════════════════════════════════════════════');
+
+await check('load snapshot records runtime environment', () => {
+  const load = getVerificationLoadSnapshot();
+  assert.ok(load.cpuCount >= 1);
+  assert.equal(load.loadAverage.length, 3);
+  assert.equal(typeof load.cpuModel, 'string');
+  assert.ok(load.timeoutMultiplier >= 1);
+});
+await check('adaptive timeout margin follows load pressure', () => {
+  assert.equal(getAdaptiveTimeoutMs(1000, { timeoutMultiplier: 1.25 }), 1250);
+  assert.equal(getAdaptiveTimeoutMs(1000, { timeoutMultiplier: 2 }), 2000);
+});
 
 async function runStage(stage) {
   const runner = createVerificationRunner({ globalTimeoutMs: 60000, heartbeatMs: 0 });
@@ -95,6 +109,10 @@ await check('ready-before output is preserved on startup failure', async () => {
 await check('ready-after output is preserved on business timeout', async () => {
   const result = await expectTimeout({ name: 'ready-output-timeout', command: process.execPath, args: [timeoutWorker, 'stdout', '10000'], readyPattern: /worker-ready/, startTimeoutAfterReady: true, startupTimeoutMs: 3000, timeoutMs: 1000 }, /stdout-marker/);
   assert.ok(result.error.stdout.includes('worker-ready'));
+  const observation = result.runner.timeoutObservations.at(-1);
+  assert.equal(observation.declaredTimeoutMs, 1000);
+  assert.ok(observation.effectiveTimeoutMs >= observation.declaredTimeoutMs);
+  assert.ok(observation.load.cpuCount >= 1);
 });
 await check('stderr is preserved on business timeout', async () => {
   const result = await expectTimeout({ name: 'ready-stderr-timeout', command: process.execPath, args: [timeoutWorker, 'stderr', '10000'], readyPattern: /worker-ready/, startTimeoutAfterReady: true, startupTimeoutMs: 3000, timeoutMs: 1000 }, /stderr-marker/);
@@ -191,7 +209,7 @@ await check('temporary evidence cannot overwrite static output', () => assert.ma
 await check('npm test includes the A.2.4 suite', () => assert.match(packageJson.scripts.test, /stage8-2E-A-2-4-test\.mjs/));
 await check('extra experiment manifest remains populated', () => assert.ok(fs.existsSync(path.join(root, 'tests/verification-test-manifest.mjs'))));
 await check('Fixture check and cross-process scripts remain wired', () => { assert.ok(fs.existsSync(path.join(root, 'experiments/battle-sandbox/report-adapter/fixture-generator.mjs'))); assert.ok(fs.existsSync(path.join(root, 'experiments/battle-sandbox/report-adapter/cross-process-determinism.mjs'))); });
-await check('SAVE_VERSION remains seven', () => assert.match(fs.readFileSync(path.join(root, 'js/config.js'), 'utf8'), /SAVE_VERSION\s*=\s*7/));
+await check('SAVE_VERSION is incremented to ten', () => assert.match(fs.readFileSync(path.join(root, 'js/config.js'), 'utf8'), /SAVE_VERSION\s*=\s*10/));
 await check('protected game surfaces are not referenced for mutation', () => assert.doesNotMatch(fs.readFileSync(path.join(root, 'tests/build-stage8-2E-A-2-3-delivery-package.mjs'), 'utf8'), /writeFileSync\([^\n]*(?:js|css|index\.html)/));
 await check('runner does not add generic product-test retries', () => assert.doesNotMatch(runnerSource, /retry|retries|retryCount/i));
 await check('all A.2.4 JavaScript passes syntax', () => ['tests/verification-runner.mjs', 'tests/fixtures/verifier-timeout-output-worker.mjs', 'tests/fixtures/verifier-ready-worker.mjs', 'tests/stage8-2E-A-2-4-test.mjs', 'tests/verify-stage8-2E-A-2-4-delivery-package.mjs', 'tests/build-stage8-2E-A-2-4-delivery-package.mjs'].forEach((file) => spawnSync(process.execPath, ['--check', file], { cwd: root, stdio: 'pipe' }).status === 0 || assert.fail(`${file} syntax failed`)));

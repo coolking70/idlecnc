@@ -1,0 +1,41 @@
+{
+  "stage": "9-A",
+  "sampleCount": 500,
+  "operationCountPerSample": 12,
+  "timingMs": {
+    "p50": 0.006666000000002725,
+    "p95": 0.019040999999994312,
+    "max": 0.5418329999999969
+  },
+  "environment": {
+    "platform": "darwin",
+    "arch": "arm64",
+    "nodeVersion": "v25.2.1",
+    "cpuModel": "Apple M5",
+    "cpuCount": 10
+  },
+  "method": "performance.now around real eligibility reads for all configured theaters and operations",
+  "regression": [
+    {
+      "script": "tests/stage8-2G-E-A-test.mjs",
+      "exitCode": 0,
+      "outputTail": "\n── Stage 8.2G-E-A production battle loop integration ──\n  PASS  session uses deterministic identity and required state surfaces\n  PASS  deployment snapshot is canonical and immutable against live unit changes\n  PASS  formal report binding rejects report swap and source hash tamper\n  PASS  formal result is consumed by production presentation without recalculation\n  PASS  settlement writes one ledger entry atomically with report and reward\n  PASS  exactly-once protection rejects a forced second settlement\n  PASS  reload while running preserves session, snapshot and presentation time\n  PASS  reload after formal completion applies settlement once\n  PASS  replay is read-only, same report/session, and cannot settle\n  PASS  tampered ledger reward is rejected before replay\n  PASS  tampered settlement ID, source revision, and debug origin fail closed\n  PASS  production source does not use fixture/debug settlement path\n  PASS  session hash matches independent SHA-256 implementation\n\nStage 8.2G-E-A result: 13 passed / 0 failed / 13 total\n"
+    },
+    {
+      "script": "tests/stage8-2G-E-A-1-replay-reload-test.mjs",
+      "exitCode": 0,
+      "outputTail": "\n── Stage 8.2G-E-A.1 Replay persistence, UI/save-diff model gates ──\n  PASS  canonical ProductionBattleSession stays settled/returned and immutable across replay\n  PASS  result reload preserves one settlement ledger and one formal report\n  PASS  double dispatch increments battle session sequence exactly once\n  PASS  recursive save diff recomputes formal settlement and preserves unrelated state\n  PASS  save diff rejects unrelated unit, research and theater mutations even when evidence says passed\n\nStage 8.2G-E-A.1 result: 5 passed / 0 failed / 5 total\n"
+    },
+    {
+      "script": "tests/stage8-2G-E-B-command-flow-test.mjs",
+      "exitCode": 0,
+      "outputTail": "\n── Stage 8.2G-E-B mission / deployment command flow ──\n  PASS  campaign eligibility and UI-facing cost source are deterministic\n  PASS  operation eligibility and cost come from operations authority\n  PASS  deployment review source equals the snapshot written to active battle\n  PASS  operation deployment review source includes operation identity\n  PASS  captured campaign target is rejected with readable authority code\n  PASS  uncaptured operation target is rejected without consuming resources\n  PASS  cooldown rejection has no session or resource side effect\n  PASS  resource rejection has no session, deployment, or partial write\n  PASS  double dispatch produces exactly one battle session\n  PASS  failed solver path rolls back cost and leaves no active session\n  PASS  replay remains read-only and blocks a new dispatch\n  PASS  operation result enters cooldown only after the authoritative battle settles\n\\nStage 8.2G-E-B result: 12 passed / 0 failed / 12 total\n"
+    },
+    {
+      "script": "tests/stage8-2G-E-C-offline-progression-test.mjs",
+      "exitCode": 0,
+      "outputTail": "\n── Stage 8.2G-E-C offline / idle progression ──\n  PASS  invalid or future savedAt fails closed with zero seconds\n  PASS  valid window preserves raw seconds and cap truthfully\n  PASS  clock rollback never creates negative or positive progression\n  PASS  offline window consumes savedAt through the real window helper\n  PASS  same token is exactly once and does not duplicate gains\n  PASS  pending report survives migration and remains dismissible state\n  PASS  MAX_STEPS truncation exposes consumed and remaining time\n  PASS  MAX_STEPS next savedAt retains the unconsumed window\n  PASS  active battle boundary preserves session, hashes, report and elapsed\n  PASS  settlement result boundary does not settle a second time\n  PASS  replay boundary preserves canonical session, formation, units and ledger\n  PASS  offline report builder is pure and exposes honest truncation metadata\n\nStage 8.2G-E-C result: 12 passed / 0 failed / 12 total\n"
+    }
+  ],
+  "passed": true
+}

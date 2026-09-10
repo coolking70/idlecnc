@@ -1,0 +1,36 @@
+{
+  "commitSha": "8ec82cf5d3b6deb5aa3db011b76db9198aad5213",
+  "cloneMethod": "git-clone-file-local",
+  "steps": [
+    {
+      "step": "git-clone",
+      "passed": true,
+      "exitCode": 0
+    },
+    {
+      "step": "clone-head-matches",
+      "passed": true,
+      "currentHead": "8ec82cf5d3b6deb5aa3db011b76db9198aad5213",
+      "clonedHead": "8ec82cf5d3b6deb5aa3db011b76db9198aad5213"
+    },
+    {
+      "step": "authority-baseline-fetch",
+      "passed": true,
+      "exitCode": 0,
+      "baseline": "e72eedac27423902b94ebab69b2fa053ca99b112"
+    },
+    {
+      "step": "npm-install",
+      "passed": true,
+      "exitCode": 0
+    },
+    {
+      "step": "gate:stage8-2G",
+      "passed": true,
+      "exitCode": 0,
+      "tail": "Stage 9-C equipment acquisition core: 10 passed / 0 failed / 10 total\n{\"ok\":true,\"stage\":\"9-C.1\",\"measurementValid\":true,\"p95Ms\":{\"effectiveStats\":0.0076,\"snapshot\":0.0348,\"inventory\":0.0003},\"environment\":{\"platform\":\"darwin\",\"arch\":\"arm64\",\"cpuModel\":\"Apple M5\",\"cpuCount\":10,\"nodeVersion\":\"v25.2.1\"},\"loadBefore\":0.158,\"loadAfter\":0.158}\n{\"ok\":true,\"stage\":\"9-C.1\",\"frames\":9,\"reloads\":4}\n{\"ok\":true,\"stage\":\"9-C.1\",\"screenshots\":9,\"uniqueImageHashes\":9,\"realReloads\":4}\n{\"ok\":true,\"stage\":\"9-C.1\",\"frames\":9,\"reloads\":[\"production_queue\",\"completed_unmounted\",\"running_battle\",\"replay\"],\"screenshotHashes\":9,\"bundle\":\"stage9_c_evidence_bundle.json\"}\n{\"ok\":true,\"stage\":\"9-C.1\",\"frames\":9,\"reloads\":4}\n{\"ok\":true,\"stage\":\"9-C.1\",\"cases\":141,\"rejected\":141,\"passedFlagOnlyCases\":0}\n{\"ok\":true,\"stage\":\"9-C.1\",\"tamperCases\":141,\"passedFlagOnlyCases\":0,\"reloads\":[\"production_queue\",\"completed_unmounted\",\"running_battle\",\"replay\"]}"
+    }
+  ],
+  "overallPassed": true,
+  "tempCleaned": true
+}

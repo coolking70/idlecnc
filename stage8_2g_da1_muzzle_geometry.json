@@ -90,8 +90,8 @@
         }
       },
       "narrowMuzzlePoint": {
-        "x": 836.9992,
-        "y": 433.9088,
+        "x": 837.101,
+        "y": 433.8881,
         "space": "battlefield-world",
         "source": "production-final-draw-geometry",
         "anchor": {
@@ -141,8 +141,8 @@
         }
       },
       "narrowMuzzlePoint": {
-        "x": 563.6461,
-        "y": 525.4353,
+        "x": 563.0443,
+        "y": 525.2064,
         "space": "battlefield-world",
         "source": "production-final-draw-geometry",
         "anchor": {

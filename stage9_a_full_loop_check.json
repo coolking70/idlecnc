@@ -1,0 +1,1925 @@
+{
+  "stage": "9-A",
+  "passed": true,
+  "theaterId": "mountain_pass",
+  "missionKind": "campaign",
+  "sessionId": "battle-session-0-mountain_pass-6682a1ddf669488fcb1e-1",
+  "deployment": {
+    "formation": {
+      "id": "fm_msqiwm5k_3g",
+      "name": "Stage 9 深入编队",
+      "experience": 0,
+      "unitIds": [
+        "stage9-unit-0",
+        "stage9-unit-1",
+        "stage9-unit-2",
+        "stage9-unit-3",
+        "stage9-unit-4"
+      ]
+    },
+    "units": [
+      {
+        "id": "stage9-unit-0",
+        "type": "mbt",
+        "hp": 160,
+        "maxHp": 160,
+        "experience": 0,
+        "battles": 0,
+        "callsign": null,
+        "stats": {
+          "attack": 35,
+          "antiArmor": 20,
+          "defense": 30,
+          "scouting": 3,
+          "mobility": 10,
+          "repair": 0,
+          "hp": 160
+        },
+        "equipment": [],
+        "rankId": "recruit",
+        "rankName": "新兵",
+        "rankModifiers": {
+          "attack": 1,
+          "antiArmor": 1,
+          "defense": 1,
+          "scouting": 1,
+          "mobility": 1,
+          "repair": 1
+        }
+      },
+      {
+        "id": "stage9-unit-1",
+        "type": "mbt",
+        "hp": 160,
+        "maxHp": 160,
+        "experience": 0,
+        "battles": 0,
+        "callsign": null,
+        "stats": {
+          "attack": 35,
+          "antiArmor": 20,
+          "defense": 30,
+          "scouting": 3,
+          "mobility": 10,
+          "repair": 0,
+          "hp": 160
+        },
+        "equipment": [],
+        "rankId": "recruit",
+        "rankName": "新兵",
+        "rankModifiers": {
+          "attack": 1,
+          "antiArmor": 1,
+          "defense": 1,
+          "scouting": 1,
+          "mobility": 1,
+          "repair": 1
+        }
+      },
+      {
+        "id": "stage9-unit-2",
+        "type": "mbt",
+        "hp": 160,
+        "maxHp": 160,
+        "experience": 0,
+        "battles": 0,
+        "callsign": null,
+        "stats": {
+          "attack": 35,
+          "antiArmor": 20,
+          "defense": 30,
+          "scouting": 3,
+          "mobility": 10,
+          "repair": 0,
+          "hp": 160
+        },
+        "equipment": [],
+        "rankId": "recruit",
+        "rankName": "新兵",
+        "rankModifiers": {
+          "attack": 1,
+          "antiArmor": 1,
+          "defense": 1,
+          "scouting": 1,
+          "mobility": 1,
+          "repair": 1
+        }
+      },
+      {
+        "id": "stage9-unit-3",
+        "type": "mbt",
+        "hp": 160,
+        "maxHp": 160,
+        "experience": 0,
+        "battles": 0,
+        "callsign": null,
+        "stats": {
+          "attack": 35,
+          "antiArmor": 20,
+          "defense": 30,
+          "scouting": 3,
+          "mobility": 10,
+          "repair": 0,
+          "hp": 160
+        },
+        "equipment": [],
+        "rankId": "recruit",
+        "rankName": "新兵",
+        "rankModifiers": {
+          "attack": 1,
+          "antiArmor": 1,
+          "defense": 1,
+          "scouting": 1,
+          "mobility": 1,
+          "repair": 1
+        }
+      },
+      {
+        "id": "stage9-unit-4",
+        "type": "mbt",
+        "hp": 160,
+        "maxHp": 160,
+        "experience": 0,
+        "battles": 0,
+        "callsign": null,
+        "stats": {
+          "attack": 35,
+          "antiArmor": 20,
+          "defense": 30,
+          "scouting": 3,
+          "mobility": 10,
+          "repair": 0,
+          "hp": 160
+        },
+        "equipment": [],
+        "rankId": "recruit",
+        "rankName": "新兵",
+        "rankModifiers": {
+          "attack": 1,
+          "antiArmor": 1,
+          "defense": 1,
+          "scouting": 1,
+          "mobility": 1,
+          "repair": 1
+        }
+      }
+    ],
+    "equipmentComposition": {
+      "stage9-unit-0": [],
+      "stage9-unit-1": [],
+      "stage9-unit-2": [],
+      "stage9-unit-3": [],
+      "stage9-unit-4": []
+    },
+    "buildings": {
+      "radarOperational": false
+    },
+    "research": {
+      "revision": 0,
+      "completed": []
+    },
+    "theaterId": "mountain_pass",
+    "strategyId": "cautious",
+    "missionKind": "campaign",
+    "missionId": "mountain_pass",
+    "operation": null
+  },
+  "report": {
+    "id": "battle_1_fm_msqiwm5k_3g_mountain_pass_cautious",
+    "seed": 1,
+    "theaterId": "mountain_pass",
+    "theaterName": "北岭山口",
+    "terrain": "fortified",
+    "strategyId": "cautious",
+    "missionKind": "campaign",
+    "missionId": "mountain_pass",
+    "strategyName": "谨慎推进",
+    "formationId": "fm_msqiwm5k_3g",
+    "formationName": "Stage 9 深入编队",
+    "startedAt": 1,
+    "initial": {
+      "friendly": [
+        {
+          "id": "unit_stage9-unit-0",
+          "side": "friendly",
+          "realId": "stage9-unit-0",
+          "type": "mbt",
+          "name": "主战坦克",
+          "category": "armor",
+          "shape": "tank",
+          "hp": 160,
+          "maxHp": 160,
+          "attack": 35,
+          "antiArmor": 20,
+          "defense": 30,
+          "scouting": 3,
+          "mobility": 10,
+          "repair": 0,
+          "suppressed": 0,
+          "alive": true,
+          "callsign": null,
+          "rankId": "recruit",
+          "rankName": "新兵",
+          "rankModifiers": {
+            "attack": 1,
+            "antiArmor": 1,
+            "defense": 1,
+            "scouting": 1,
+            "mobility": 1,
+            "repair": 1
+          },
+          "experience": 0,
+          "battles": 0
+        },
+        {
+          "id": "unit_stage9-unit-1",
+          "side": "friendly",
+          "realId": "stage9-unit-1",
+          "type": "mbt",
+          "name": "主战坦克",
+          "category": "armor",
+          "shape": "tank",
+          "hp": 160,
+          "maxHp": 160,
+          "attack": 35,
+          "antiArmor": 20,
+          "defense": 30,
+          "scouting": 3,
+          "mobility": 10,
+          "repair": 0,
+          "suppressed": 0,
+          "alive": true,
+          "callsign": null,
+          "rankId": "recruit",
+          "rankName": "新兵",
+          "rankModifiers": {
+            "attack": 1,
+            "antiArmor": 1,
+            "defense": 1,
+            "scouting": 1,
+            "mobility": 1,
+            "repair": 1
+          },
+          "experience": 0,
+          "battles": 0
+        },
+        {
+          "id": "unit_stage9-unit-2",
+          "side": "friendly",
+          "realId": "stage9-unit-2",
+          "type": "mbt",
+          "name": "主战坦克",
+          "category": "armor",
+          "shape": "tank",
+          "hp": 160,
+          "maxHp": 160,
+          "attack": 35,
+          "antiArmor": 20,
+          "defense": 30,
+          "scouting": 3,
+          "mobility": 10,
+          "repair": 0,
+          "suppressed": 0,
+          "alive": true,
+          "callsign": null,
+          "rankId": "recruit",
+          "rankName": "新兵",
+          "rankModifiers": {
+            "attack": 1,
+            "antiArmor": 1,
+            "defense": 1,
+            "scouting": 1,
+            "mobility": 1,
+            "repair": 1
+          },
+          "experience": 0,
+          "battles": 0
+        },
+        {
+          "id": "unit_stage9-unit-3",
+          "side": "friendly",
+          "realId": "stage9-unit-3",
+          "type": "mbt",
+          "name": "主战坦克",
+          "category": "armor",
+          "shape": "tank",
+          "hp": 160,
+          "maxHp": 160,
+          "attack": 35,
+          "antiArmor": 20,
+          "defense": 30,
+          "scouting": 3,
+          "mobility": 10,
+          "repair": 0,
+          "suppressed": 0,
+          "alive": true,
+          "callsign": null,
+          "rankId": "recruit",
+          "rankName": "新兵",
+          "rankModifiers": {
+            "attack": 1,
+            "antiArmor": 1,
+            "defense": 1,
+            "scouting": 1,
+            "mobility": 1,
+            "repair": 1
+          },
+          "experience": 0,
+          "battles": 0
+        },
+        {
+          "id": "unit_stage9-unit-4",
+          "side": "friendly",
+          "realId": "stage9-unit-4",
+          "type": "mbt",
+          "name": "主战坦克",
+          "category": "armor",
+          "shape": "tank",
+          "hp": 160,
+          "maxHp": 160,
+          "attack": 35,
+          "antiArmor": 20,
+          "defense": 30,
+          "scouting": 3,
+          "mobility": 10,
+          "repair": 0,
+          "suppressed": 0,
+          "alive": true,
+          "callsign": null,
+          "rankId": "recruit",
+          "rankName": "新兵",
+          "rankModifiers": {
+            "attack": 1,
+            "antiArmor": 1,
+            "defense": 1,
+            "scouting": 1,
+            "mobility": 1,
+            "repair": 1
+          },
+          "experience": 0,
+          "battles": 0
+        }
+      ],
+      "enemy": [
+        {
+          "id": "enemy_infantry_1",
+          "side": "enemy",
+          "realId": null,
+          "type": "enemy_infantry",
+          "name": "敌方步兵班",
+          "category": "infantry",
+          "shape": "infantry",
+          "hp": 85,
+          "maxHp": 85,
+          "attack": 10,
+          "antiArmor": 2,
+          "defense": 8,
+          "scouting": 2,
+          "mobility": 5,
+          "repair": 0,
+          "suppressed": 0,
+          "alive": true,
+          "callsign": null,
+          "rankId": null,
+          "rankName": null,
+          "rankModifiers": null,
+          "experience": 0,
+          "battles": 0
+        },
+        {
+          "id": "enemy_infantry_2",
+          "side": "enemy",
+          "realId": null,
+          "type": "enemy_infantry",
+          "name": "敌方步兵班",
+          "category": "infantry",
+          "shape": "infantry",
+          "hp": 85,
+          "maxHp": 85,
+          "attack": 10,
+          "antiArmor": 2,
+          "defense": 8,
+          "scouting": 2,
+          "mobility": 5,
+          "repair": 0,
+          "suppressed": 0,
+          "alive": true,
+          "callsign": null,
+          "rankId": null,
+          "rankName": null,
+          "rankModifiers": null,
+          "experience": 0,
+          "battles": 0
+        },
+        {
+          "id": "enemy_infantry_3",
+          "side": "enemy",
+          "realId": null,
+          "type": "enemy_infantry",
+          "name": "敌方步兵班",
+          "category": "infantry",
+          "shape": "infantry",
+          "hp": 85,
+          "maxHp": 85,
+          "attack": 10,
+          "antiArmor": 2,
+          "defense": 8,
+          "scouting": 2,
+          "mobility": 5,
+          "repair": 0,
+          "suppressed": 0,
+          "alive": true,
+          "callsign": null,
+          "rankId": null,
+          "rankName": null,
+          "rankModifiers": null,
+          "experience": 0,
+          "battles": 0
+        },
+        {
+          "id": "enemy_at_1",
+          "side": "enemy",
+          "realId": null,
+          "type": "enemy_at",
+          "name": "敌方反装甲小组",
+          "category": "at_infantry",
+          "shape": "at_infantry",
+          "hp": 80,
+          "maxHp": 80,
+          "attack": 15,
+          "antiArmor": 22,
+          "defense": 6,
+          "scouting": 2,
+          "mobility": 4,
+          "repair": 0,
+          "suppressed": 0,
+          "alive": true,
+          "callsign": null,
+          "rankId": null,
+          "rankName": null,
+          "rankModifiers": null,
+          "experience": 0,
+          "battles": 0
+        },
+        {
+          "id": "enemy_light_armor_1",
+          "side": "enemy",
+          "realId": null,
+          "type": "enemy_light_armor",
+          "name": "敌方轻型装甲车",
+          "category": "vehicle",
+          "shape": "scout",
+          "hp": 120,
+          "maxHp": 120,
+          "attack": 22,
+          "antiArmor": 10,
+          "defense": 18,
+          "scouting": 4,
+          "mobility": 11,
+          "repair": 0,
+          "suppressed": 0,
+          "alive": true,
+          "callsign": null,
+          "rankId": null,
+          "rankName": null,
+          "rankModifiers": null,
+          "experience": 0,
+          "battles": 0
+        }
+      ]
+    },
+    "final": {
+      "friendly": [
+        {
+          "id": "unit_stage9-unit-0",
+          "side": "friendly",
+          "realId": "stage9-unit-0",
+          "type": "mbt",
+          "name": "主战坦克",
+          "category": "armor",
+          "shape": "tank",
+          "hp": 160,
+          "maxHp": 160,
+          "attack": 35,
+          "antiArmor": 20,
+          "defense": 30,
+          "scouting": 3,
+          "mobility": 10,
+          "repair": 0,
+          "suppressed": 0,
+          "alive": true,
+          "callsign": null,
+          "rankId": "recruit",
+          "rankName": "新兵",
+          "rankModifiers": {
+            "attack": 1,
+            "antiArmor": 1,
+            "defense": 1,
+            "scouting": 1,
+            "mobility": 1,
+            "repair": 1
+          },
+          "experience": 0,
+          "battles": 0
+        },
+        {
+          "id": "unit_stage9-unit-1",
+          "side": "friendly",
+          "realId": "stage9-unit-1",
+          "type": "mbt",
+          "name": "主战坦克",
+          "category": "armor",
+          "shape": "tank",
+          "hp": 160,
+          "maxHp": 160,
+          "attack": 35,
+          "antiArmor": 20,
+          "defense": 30,
+          "scouting": 3,
+          "mobility": 10,
+          "repair": 0,
+          "suppressed": 0,
+          "alive": true,
+          "callsign": null,
+          "rankId": "recruit",
+          "rankName": "新兵",
+          "rankModifiers": {
+            "attack": 1,
+            "antiArmor": 1,
+            "defense": 1,
+            "scouting": 1,
+            "mobility": 1,
+            "repair": 1
+          },
+          "experience": 0,
+          "battles": 0
+        },
+        {
+          "id": "unit_stage9-unit-2",
+          "side": "friendly",
+          "realId": "stage9-unit-2",
+          "type": "mbt",
+          "name": "主战坦克",
+          "category": "armor",
+          "shape": "tank",
+          "hp": 160,
+          "maxHp": 160,
+          "attack": 35,
+          "antiArmor": 20,
+          "defense": 30,
+          "scouting": 3,
+          "mobility": 10,
+          "repair": 0,
+          "suppressed": 0,
+          "alive": true,
+          "callsign": null,
+          "rankId": "recruit",
+          "rankName": "新兵",
+          "rankModifiers": {
+            "attack": 1,
+            "antiArmor": 1,
+            "defense": 1,
+            "scouting": 1,
+            "mobility": 1,
+            "repair": 1
+          },
+          "experience": 0,
+          "battles": 0
+        },
+        {
+          "id": "unit_stage9-unit-3",
+          "side": "friendly",
+          "realId": "stage9-unit-3",
+          "type": "mbt",
+          "name": "主战坦克",
+          "category": "armor",
+          "shape": "tank",
+          "hp": 160,
+          "maxHp": 160,
+          "attack": 35,
+          "antiArmor": 20,
+          "defense": 30,
+          "scouting": 3,
+          "mobility": 10,
+          "repair": 0,
+          "suppressed": 0,
+          "alive": true,
+          "callsign": null,
+          "rankId": "recruit",
+          "rankName": "新兵",
+          "rankModifiers": {
+            "attack": 1,
+            "antiArmor": 1,
+            "defense": 1,
+            "scouting": 1,
+            "mobility": 1,
+            "repair": 1
+          },
+          "experience": 0,
+          "battles": 0
+        },
+        {
+          "id": "unit_stage9-unit-4",
+          "side": "friendly",
+          "realId": "stage9-unit-4",
+          "type": "mbt",
+          "name": "主战坦克",
+          "category": "armor",
+          "shape": "tank",
+          "hp": 89,
+          "maxHp": 160,
+          "attack": 35,
+          "antiArmor": 20,
+          "defense": 30,
+          "scouting": 3,
+          "mobility": 10,
+          "repair": 0,
+          "suppressed": 0,
+          "alive": true,
+          "callsign": null,
+          "rankId": "recruit",
+          "rankName": "新兵",
+          "rankModifiers": {
+            "attack": 1,
+            "antiArmor": 1,
+            "defense": 1,
+            "scouting": 1,
+            "mobility": 1,
+            "repair": 1
+          },
+          "experience": 0,
+          "battles": 0
+        }
+      ],
+      "enemy": [
+        {
+          "id": "enemy_infantry_1",
+          "side": "enemy",
+          "realId": null,
+          "type": "enemy_infantry",
+          "name": "敌方步兵班",
+          "category": "infantry",
+          "shape": "infantry",
+          "hp": 0,
+          "maxHp": 85,
+          "attack": 10,
+          "antiArmor": 2,
+          "defense": 8,
+          "scouting": 2,
+          "mobility": 5,
+          "repair": 0,
+          "suppressed": 1,
+          "alive": false,
+          "callsign": null,
+          "rankId": null,
+          "rankName": null,
+          "rankModifiers": null,
+          "experience": 0,
+          "battles": 0
+        },
+        {
+          "id": "enemy_infantry_2",
+          "side": "enemy",
+          "realId": null,
+          "type": "enemy_infantry",
+          "name": "敌方步兵班",
+          "category": "infantry",
+          "shape": "infantry",
+          "hp": 0,
+          "maxHp": 85,
+          "attack": 10,
+          "antiArmor": 2,
+          "defense": 8,
+          "scouting": 2,
+          "mobility": 5,
+          "repair": 0,
+          "suppressed": 1,
+          "alive": false,
+          "callsign": null,
+          "rankId": null,
+          "rankName": null,
+          "rankModifiers": null,
+          "experience": 0,
+          "battles": 0
+        },
+        {
+          "id": "enemy_infantry_3",
+          "side": "enemy",
+          "realId": null,
+          "type": "enemy_infantry",
+          "name": "敌方步兵班",
+          "category": "infantry",
+          "shape": "infantry",
+          "hp": 0,
+          "maxHp": 85,
+          "attack": 10,
+          "antiArmor": 2,
+          "defense": 8,
+          "scouting": 2,
+          "mobility": 5,
+          "repair": 0,
+          "suppressed": 1,
+          "alive": false,
+          "callsign": null,
+          "rankId": null,
+          "rankName": null,
+          "rankModifiers": null,
+          "experience": 0,
+          "battles": 0
+        },
+        {
+          "id": "enemy_at_1",
+          "side": "enemy",
+          "realId": null,
+          "type": "enemy_at",
+          "name": "敌方反装甲小组",
+          "category": "at_infantry",
+          "shape": "at_infantry",
+          "hp": 0,
+          "maxHp": 80,
+          "attack": 15,
+          "antiArmor": 22,
+          "defense": 6,
+          "scouting": 2,
+          "mobility": 4,
+          "repair": 0,
+          "suppressed": 1,
+          "alive": false,
+          "callsign": null,
+          "rankId": null,
+          "rankName": null,
+          "rankModifiers": null,
+          "experience": 0,
+          "battles": 0
+        },
+        {
+          "id": "enemy_light_armor_1",
+          "side": "enemy",
+          "realId": null,
+          "type": "enemy_light_armor",
+          "name": "敌方轻型装甲车",
+          "category": "vehicle",
+          "shape": "scout",
+          "hp": 0,
+          "maxHp": 120,
+          "attack": 22,
+          "antiArmor": 10,
+          "defense": 18,
+          "scouting": 4,
+          "mobility": 11,
+          "repair": 0,
+          "suppressed": 1,
+          "alive": false,
+          "callsign": null,
+          "rankId": null,
+          "rankName": null,
+          "rankModifiers": null,
+          "experience": 0,
+          "battles": 0
+        }
+      ]
+    },
+    "phases": [
+      {
+        "id": "scout",
+        "title": "侦察阶段",
+        "summary": "侦察判定：情报可信度 低，遭遇伏击，先手方：敌方。",
+        "details": []
+      },
+      {
+        "id": "approach",
+        "title": "接敌阶段",
+        "summary": "地形为防御阵地：敌方防御×1.2，我方攻击×0.9，先手方：敌方。",
+        "details": []
+      },
+      {
+        "id": "engage",
+        "title": "交火阶段",
+        "summary": "共进行 4 轮交火",
+        "details": [
+          "第1轮交火，双方共10次攻击",
+          "第2轮交火，双方共7次攻击",
+          "第3轮交火，双方共7次攻击",
+          "第4轮交火，双方共4次攻击"
+        ]
+      },
+      {
+        "id": "resolve",
+        "title": "结算阶段",
+        "summary": "结果：胜利",
+        "details": []
+      }
+    ],
+    "events": [
+      {
+        "t": 0,
+        "type": "phase",
+        "actor": null,
+        "target": null,
+        "value": 0,
+        "text": "侦察阶段开始"
+      },
+      {
+        "t": 0.69,
+        "type": "reveal",
+        "actor": null,
+        "target": null,
+        "value": 0,
+        "text": "敌方部署未被完全侦知"
+      },
+      {
+        "t": 1.37,
+        "type": "ambush",
+        "actor": null,
+        "target": null,
+        "value": 0,
+        "text": "Stage 9 深入编队遭遇敌方伏击"
+      },
+      {
+        "t": 2.06,
+        "type": "phase",
+        "actor": null,
+        "target": null,
+        "value": 0,
+        "text": "接敌阶段开始"
+      },
+      {
+        "t": 2.75,
+        "type": "phase",
+        "actor": null,
+        "target": null,
+        "value": 0,
+        "text": "交火阶段开始"
+      },
+      {
+        "t": 3.43,
+        "type": "fire",
+        "actor": "enemy_light_armor_1",
+        "target": "unit_stage9-unit-4",
+        "value": 0,
+        "text": "敌方轻型装甲车向主战坦克开火"
+      },
+      {
+        "t": 4.12,
+        "type": "damage",
+        "actor": "enemy_light_armor_1",
+        "target": "unit_stage9-unit-4",
+        "value": 4,
+        "text": "主战坦克受到4点伤害"
+      },
+      {
+        "t": 4.81,
+        "type": "fire",
+        "actor": "enemy_infantry_1",
+        "target": "unit_stage9-unit-4",
+        "value": 0,
+        "text": "敌方步兵班向主战坦克开火"
+      },
+      {
+        "t": 5.49,
+        "type": "damage",
+        "actor": "enemy_infantry_1",
+        "target": "unit_stage9-unit-4",
+        "value": 1,
+        "text": "主战坦克受到1点伤害"
+      },
+      {
+        "t": 6.18,
+        "type": "fire",
+        "actor": "enemy_infantry_2",
+        "target": "unit_stage9-unit-4",
+        "value": 0,
+        "text": "敌方步兵班向主战坦克开火"
+      },
+      {
+        "t": 6.87,
+        "type": "damage",
+        "actor": "enemy_infantry_2",
+        "target": "unit_stage9-unit-4",
+        "value": 1,
+        "text": "主战坦克受到1点伤害"
+      },
+      {
+        "t": 7.55,
+        "type": "fire",
+        "actor": "enemy_infantry_3",
+        "target": "unit_stage9-unit-4",
+        "value": 0,
+        "text": "敌方步兵班向主战坦克开火"
+      },
+      {
+        "t": 8.24,
+        "type": "damage",
+        "actor": "enemy_infantry_3",
+        "target": "unit_stage9-unit-4",
+        "value": 1,
+        "text": "主战坦克受到1点伤害"
+      },
+      {
+        "t": 8.93,
+        "type": "fire",
+        "actor": "enemy_at_1",
+        "target": "unit_stage9-unit-4",
+        "value": 0,
+        "text": "敌方反装甲小组向主战坦克开火"
+      },
+      {
+        "t": 9.61,
+        "type": "damage",
+        "actor": "enemy_at_1",
+        "target": "unit_stage9-unit-4",
+        "value": 19,
+        "text": "主战坦克受到19点伤害"
+      },
+      {
+        "t": 10.3,
+        "type": "fire",
+        "actor": "unit_stage9-unit-0",
+        "target": "enemy_infantry_3",
+        "value": 0,
+        "text": "主战坦克向敌方步兵班开火"
+      },
+      {
+        "t": 10.99,
+        "type": "damage",
+        "actor": "unit_stage9-unit-0",
+        "target": "enemy_infantry_3",
+        "value": 30,
+        "text": "敌方步兵班受到30点伤害"
+      },
+      {
+        "t": 11.67,
+        "type": "suppress",
+        "actor": "unit_stage9-unit-0",
+        "target": "enemy_infantry_3",
+        "value": 0,
+        "text": "敌方步兵班被压制，下次攻击下降"
+      },
+      {
+        "t": 12.36,
+        "type": "fire",
+        "actor": "unit_stage9-unit-1",
+        "target": "enemy_infantry_3",
+        "value": 0,
+        "text": "主战坦克向敌方步兵班开火"
+      },
+      {
+        "t": 13.05,
+        "type": "damage",
+        "actor": "unit_stage9-unit-1",
+        "target": "enemy_infantry_3",
+        "value": 32,
+        "text": "敌方步兵班受到32点伤害"
+      },
+      {
+        "t": 13.73,
+        "type": "suppress",
+        "actor": "unit_stage9-unit-1",
+        "target": "enemy_infantry_3",
+        "value": 0,
+        "text": "敌方步兵班被压制，下次攻击下降"
+      },
+      {
+        "t": 14.42,
+        "type": "fire",
+        "actor": "unit_stage9-unit-2",
+        "target": "enemy_infantry_3",
+        "value": 0,
+        "text": "主战坦克向敌方步兵班开火"
+      },
+      {
+        "t": 15.11,
+        "type": "damage",
+        "actor": "unit_stage9-unit-2",
+        "target": "enemy_infantry_3",
+        "value": 31,
+        "text": "敌方步兵班受到31点伤害"
+      },
+      {
+        "t": 15.8,
+        "type": "suppress",
+        "actor": "unit_stage9-unit-2",
+        "target": "enemy_infantry_3",
+        "value": 0,
+        "text": "敌方步兵班被压制，下次攻击下降"
+      },
+      {
+        "t": 16.48,
+        "type": "destroy",
+        "actor": "unit_stage9-unit-2",
+        "target": "enemy_infantry_3",
+        "value": 0,
+        "text": "敌方步兵班被摧毁"
+      },
+      {
+        "t": 17.17,
+        "type": "fire",
+        "actor": "unit_stage9-unit-3",
+        "target": "enemy_infantry_1",
+        "value": 0,
+        "text": "主战坦克向敌方步兵班开火"
+      },
+      {
+        "t": 17.86,
+        "type": "damage",
+        "actor": "unit_stage9-unit-3",
+        "target": "enemy_infantry_1",
+        "value": 30,
+        "text": "敌方步兵班受到30点伤害"
+      },
+      {
+        "t": 18.54,
+        "type": "suppress",
+        "actor": "unit_stage9-unit-3",
+        "target": "enemy_infantry_1",
+        "value": 0,
+        "text": "敌方步兵班被压制，下次攻击下降"
+      },
+      {
+        "t": 19.23,
+        "type": "fire",
+        "actor": "unit_stage9-unit-4",
+        "target": "enemy_infantry_1",
+        "value": 0,
+        "text": "主战坦克向敌方步兵班开火"
+      },
+      {
+        "t": 19.92,
+        "type": "damage",
+        "actor": "unit_stage9-unit-4",
+        "target": "enemy_infantry_1",
+        "value": 28,
+        "text": "敌方步兵班受到28点伤害"
+      },
+      {
+        "t": 20.6,
+        "type": "suppress",
+        "actor": "unit_stage9-unit-4",
+        "target": "enemy_infantry_1",
+        "value": 0,
+        "text": "敌方步兵班被压制，下次攻击下降"
+      },
+      {
+        "t": 21.29,
+        "type": "fire",
+        "actor": "enemy_light_armor_1",
+        "target": "unit_stage9-unit-4",
+        "value": 0,
+        "text": "敌方轻型装甲车向主战坦克开火"
+      },
+      {
+        "t": 21.98,
+        "type": "damage",
+        "actor": "enemy_light_armor_1",
+        "target": "unit_stage9-unit-4",
+        "value": 3,
+        "text": "主战坦克受到3点伤害"
+      },
+      {
+        "t": 22.66,
+        "type": "fire",
+        "actor": "unit_stage9-unit-0",
+        "target": "enemy_infantry_1",
+        "value": 0,
+        "text": "主战坦克向敌方步兵班开火"
+      },
+      {
+        "t": 23.35,
+        "type": "damage",
+        "actor": "unit_stage9-unit-0",
+        "target": "enemy_infantry_1",
+        "value": 30,
+        "text": "敌方步兵班受到30点伤害"
+      },
+      {
+        "t": 24.04,
+        "type": "suppress",
+        "actor": "unit_stage9-unit-0",
+        "target": "enemy_infantry_1",
+        "value": 0,
+        "text": "敌方步兵班被压制，下次攻击下降"
+      },
+      {
+        "t": 24.72,
+        "type": "destroy",
+        "actor": "unit_stage9-unit-0",
+        "target": "enemy_infantry_1",
+        "value": 0,
+        "text": "敌方步兵班被摧毁"
+      },
+      {
+        "t": 25.41,
+        "type": "fire",
+        "actor": "unit_stage9-unit-1",
+        "target": "enemy_infantry_2",
+        "value": 0,
+        "text": "主战坦克向敌方步兵班开火"
+      },
+      {
+        "t": 26.1,
+        "type": "damage",
+        "actor": "unit_stage9-unit-1",
+        "target": "enemy_infantry_2",
+        "value": 33,
+        "text": "敌方步兵班受到33点伤害"
+      },
+      {
+        "t": 26.78,
+        "type": "suppress",
+        "actor": "unit_stage9-unit-1",
+        "target": "enemy_infantry_2",
+        "value": 0,
+        "text": "敌方步兵班被压制，下次攻击下降"
+      },
+      {
+        "t": 27.47,
+        "type": "fire",
+        "actor": "unit_stage9-unit-2",
+        "target": "enemy_infantry_2",
+        "value": 0,
+        "text": "主战坦克向敌方步兵班开火"
+      },
+      {
+        "t": 28.16,
+        "type": "damage",
+        "actor": "unit_stage9-unit-2",
+        "target": "enemy_infantry_2",
+        "value": 34,
+        "text": "敌方步兵班受到34点伤害"
+      },
+      {
+        "t": 28.84,
+        "type": "suppress",
+        "actor": "unit_stage9-unit-2",
+        "target": "enemy_infantry_2",
+        "value": 0,
+        "text": "敌方步兵班被压制，下次攻击下降"
+      },
+      {
+        "t": 29.53,
+        "type": "fire",
+        "actor": "unit_stage9-unit-3",
+        "target": "enemy_infantry_2",
+        "value": 0,
+        "text": "主战坦克向敌方步兵班开火"
+      },
+      {
+        "t": 30.22,
+        "type": "damage",
+        "actor": "unit_stage9-unit-3",
+        "target": "enemy_infantry_2",
+        "value": 34,
+        "text": "敌方步兵班受到34点伤害"
+      },
+      {
+        "t": 30.9,
+        "type": "suppress",
+        "actor": "unit_stage9-unit-3",
+        "target": "enemy_infantry_2",
+        "value": 0,
+        "text": "敌方步兵班被压制，下次攻击下降"
+      },
+      {
+        "t": 31.59,
+        "type": "destroy",
+        "actor": "unit_stage9-unit-3",
+        "target": "enemy_infantry_2",
+        "value": 0,
+        "text": "敌方步兵班被摧毁"
+      },
+      {
+        "t": 32.28,
+        "type": "fire",
+        "actor": "unit_stage9-unit-4",
+        "target": "enemy_light_armor_1",
+        "value": 0,
+        "text": "主战坦克向敌方轻型装甲车开火"
+      },
+      {
+        "t": 32.96,
+        "type": "damage",
+        "actor": "unit_stage9-unit-4",
+        "target": "enemy_light_armor_1",
+        "value": 26,
+        "text": "敌方轻型装甲车受到26点伤害"
+      },
+      {
+        "t": 33.65,
+        "type": "suppress",
+        "actor": "unit_stage9-unit-4",
+        "target": "enemy_light_armor_1",
+        "value": 0,
+        "text": "敌方轻型装甲车被压制，下次攻击下降"
+      },
+      {
+        "t": 34.34,
+        "type": "fire",
+        "actor": "enemy_at_1",
+        "target": "unit_stage9-unit-4",
+        "value": 0,
+        "text": "敌方反装甲小组向主战坦克开火"
+      },
+      {
+        "t": 35.02,
+        "type": "damage",
+        "actor": "enemy_at_1",
+        "target": "unit_stage9-unit-4",
+        "value": 20,
+        "text": "主战坦克受到20点伤害"
+      },
+      {
+        "t": 35.71,
+        "type": "fire",
+        "actor": "enemy_light_armor_1",
+        "target": "unit_stage9-unit-4",
+        "value": 0,
+        "text": "敌方轻型装甲车向主战坦克开火"
+      },
+      {
+        "t": 36.4,
+        "type": "damage",
+        "actor": "enemy_light_armor_1",
+        "target": "unit_stage9-unit-4",
+        "value": 2,
+        "text": "主战坦克受到2点伤害"
+      },
+      {
+        "t": 37.08,
+        "type": "fire",
+        "actor": "unit_stage9-unit-0",
+        "target": "enemy_light_armor_1",
+        "value": 0,
+        "text": "主战坦克向敌方轻型装甲车开火"
+      },
+      {
+        "t": 37.77,
+        "type": "damage",
+        "actor": "unit_stage9-unit-0",
+        "target": "enemy_light_armor_1",
+        "value": 23,
+        "text": "敌方轻型装甲车受到23点伤害"
+      },
+      {
+        "t": 38.46,
+        "type": "fire",
+        "actor": "unit_stage9-unit-1",
+        "target": "enemy_light_armor_1",
+        "value": 0,
+        "text": "主战坦克向敌方轻型装甲车开火"
+      },
+      {
+        "t": 39.14,
+        "type": "damage",
+        "actor": "unit_stage9-unit-1",
+        "target": "enemy_light_armor_1",
+        "value": 21,
+        "text": "敌方轻型装甲车受到21点伤害"
+      },
+      {
+        "t": 39.83,
+        "type": "fire",
+        "actor": "unit_stage9-unit-2",
+        "target": "enemy_light_armor_1",
+        "value": 0,
+        "text": "主战坦克向敌方轻型装甲车开火"
+      },
+      {
+        "t": 40.52,
+        "type": "damage",
+        "actor": "unit_stage9-unit-2",
+        "target": "enemy_light_armor_1",
+        "value": 24,
+        "text": "敌方轻型装甲车受到24点伤害"
+      },
+      {
+        "t": 41.2,
+        "type": "suppress",
+        "actor": "unit_stage9-unit-2",
+        "target": "enemy_light_armor_1",
+        "value": 0,
+        "text": "敌方轻型装甲车被压制，下次攻击下降"
+      },
+      {
+        "t": 41.89,
+        "type": "fire",
+        "actor": "unit_stage9-unit-3",
+        "target": "enemy_light_armor_1",
+        "value": 0,
+        "text": "主战坦克向敌方轻型装甲车开火"
+      },
+      {
+        "t": 42.58,
+        "type": "damage",
+        "actor": "unit_stage9-unit-3",
+        "target": "enemy_light_armor_1",
+        "value": 22,
+        "text": "敌方轻型装甲车受到22点伤害"
+      },
+      {
+        "t": 43.27,
+        "type": "fire",
+        "actor": "unit_stage9-unit-4",
+        "target": "enemy_light_armor_1",
+        "value": 0,
+        "text": "主战坦克向敌方轻型装甲车开火"
+      },
+      {
+        "t": 43.95,
+        "type": "damage",
+        "actor": "unit_stage9-unit-4",
+        "target": "enemy_light_armor_1",
+        "value": 25,
+        "text": "敌方轻型装甲车受到25点伤害"
+      },
+      {
+        "t": 44.64,
+        "type": "suppress",
+        "actor": "unit_stage9-unit-4",
+        "target": "enemy_light_armor_1",
+        "value": 0,
+        "text": "敌方轻型装甲车被压制，下次攻击下降"
+      },
+      {
+        "t": 45.33,
+        "type": "destroy",
+        "actor": "unit_stage9-unit-4",
+        "target": "enemy_light_armor_1",
+        "value": 0,
+        "text": "敌方轻型装甲车被摧毁"
+      },
+      {
+        "t": 46.01,
+        "type": "fire",
+        "actor": "enemy_at_1",
+        "target": "unit_stage9-unit-4",
+        "value": 0,
+        "text": "敌方反装甲小组向主战坦克开火"
+      },
+      {
+        "t": 46.7,
+        "type": "damage",
+        "actor": "enemy_at_1",
+        "target": "unit_stage9-unit-4",
+        "value": 20,
+        "text": "主战坦克受到20点伤害"
+      },
+      {
+        "t": 47.39,
+        "type": "fire",
+        "actor": "unit_stage9-unit-0",
+        "target": "enemy_at_1",
+        "value": 0,
+        "text": "主战坦克向敌方反装甲小组开火"
+      },
+      {
+        "t": 48.07,
+        "type": "damage",
+        "actor": "unit_stage9-unit-0",
+        "target": "enemy_at_1",
+        "value": 22,
+        "text": "敌方反装甲小组受到22点伤害"
+      },
+      {
+        "t": 48.76,
+        "type": "suppress",
+        "actor": "unit_stage9-unit-0",
+        "target": "enemy_at_1",
+        "value": 0,
+        "text": "敌方反装甲小组被压制，下次攻击下降"
+      },
+      {
+        "t": 49.45,
+        "type": "fire",
+        "actor": "unit_stage9-unit-1",
+        "target": "enemy_at_1",
+        "value": 0,
+        "text": "主战坦克向敌方反装甲小组开火"
+      },
+      {
+        "t": 50.13,
+        "type": "damage",
+        "actor": "unit_stage9-unit-1",
+        "target": "enemy_at_1",
+        "value": 19,
+        "text": "敌方反装甲小组受到19点伤害"
+      },
+      {
+        "t": 50.82,
+        "type": "suppress",
+        "actor": "unit_stage9-unit-1",
+        "target": "enemy_at_1",
+        "value": 0,
+        "text": "敌方反装甲小组被压制，下次攻击下降"
+      },
+      {
+        "t": 51.51,
+        "type": "fire",
+        "actor": "unit_stage9-unit-2",
+        "target": "enemy_at_1",
+        "value": 0,
+        "text": "主战坦克向敌方反装甲小组开火"
+      },
+      {
+        "t": 52.19,
+        "type": "damage",
+        "actor": "unit_stage9-unit-2",
+        "target": "enemy_at_1",
+        "value": 24,
+        "text": "敌方反装甲小组受到24点伤害"
+      },
+      {
+        "t": 52.88,
+        "type": "suppress",
+        "actor": "unit_stage9-unit-2",
+        "target": "enemy_at_1",
+        "value": 0,
+        "text": "敌方反装甲小组被压制，下次攻击下降"
+      },
+      {
+        "t": 53.57,
+        "type": "fire",
+        "actor": "unit_stage9-unit-3",
+        "target": "enemy_at_1",
+        "value": 0,
+        "text": "主战坦克向敌方反装甲小组开火"
+      },
+      {
+        "t": 54.25,
+        "type": "damage",
+        "actor": "unit_stage9-unit-3",
+        "target": "enemy_at_1",
+        "value": 22,
+        "text": "敌方反装甲小组受到22点伤害"
+      },
+      {
+        "t": 54.94,
+        "type": "suppress",
+        "actor": "unit_stage9-unit-3",
+        "target": "enemy_at_1",
+        "value": 0,
+        "text": "敌方反装甲小组被压制，下次攻击下降"
+      },
+      {
+        "t": 55.63,
+        "type": "destroy",
+        "actor": "unit_stage9-unit-3",
+        "target": "enemy_at_1",
+        "value": 0,
+        "text": "敌方反装甲小组被摧毁"
+      },
+      {
+        "t": 56.31,
+        "type": "phase",
+        "actor": null,
+        "target": null,
+        "value": 0,
+        "text": "结算阶段开始"
+      },
+      {
+        "t": 57,
+        "type": "result",
+        "actor": null,
+        "target": null,
+        "value": 0,
+        "text": "战斗结果：胜利"
+      }
+    ],
+    "rounds": [
+      {
+        "index": 1,
+        "summary": "第1轮交火，双方共10次攻击",
+        "actions": 10
+      },
+      {
+        "index": 2,
+        "summary": "第2轮交火，双方共7次攻击",
+        "actions": 7
+      },
+      {
+        "index": 3,
+        "summary": "第3轮交火，双方共7次攻击",
+        "actions": 7
+      },
+      {
+        "index": 4,
+        "summary": "第4轮交火，双方共4次攻击",
+        "actions": 4
+      }
+    ],
+    "losses": {
+      "friendly": [],
+      "enemy": [
+        {
+          "id": "enemy_infantry_3",
+          "realId": null,
+          "type": "enemy_infantry",
+          "name": "敌方步兵班",
+          "side": "enemy"
+        },
+        {
+          "id": "enemy_infantry_1",
+          "realId": null,
+          "type": "enemy_infantry",
+          "name": "敌方步兵班",
+          "side": "enemy"
+        },
+        {
+          "id": "enemy_infantry_2",
+          "realId": null,
+          "type": "enemy_infantry",
+          "name": "敌方步兵班",
+          "side": "enemy"
+        },
+        {
+          "id": "enemy_light_armor_1",
+          "realId": null,
+          "type": "enemy_light_armor",
+          "name": "敌方轻型装甲车",
+          "side": "enemy"
+        },
+        {
+          "id": "enemy_at_1",
+          "realId": null,
+          "type": "enemy_at",
+          "name": "敌方反装甲小组",
+          "side": "enemy"
+        }
+      ]
+    },
+    "result": "victory",
+    "reasons": {
+      "advantages": [],
+      "problems": [
+        "遭遇敌方伏击，先手被夺",
+        "主战坦克遭到反装甲小组集中攻击"
+      ]
+    },
+    "rewards": {
+      "alloy": 900,
+      "supply": 700,
+      "intel": 45
+    },
+    "capture": true,
+    "duration": 60,
+    "summary": "Stage 9 深入编队在北岭山口的作战以胜利告终。我方损失 0 个单位，敌方损失 5 个单位。",
+    "scout": {
+      "friendlyScouting": 19.5,
+      "ambushChance": 0.10750000000000004,
+      "revealChance": 0.435,
+      "revealHighThreat": false,
+      "firstStrike": "enemy"
+    },
+    "modifiers": {
+      "scouting": 1.3,
+      "defense": 1.15,
+      "damage": 0.92,
+      "ambush": -0.35,
+      "firstPhaseAttack": 1,
+      "armorAttack": 1,
+      "infantryAttack": 1,
+      "suppression": 1,
+      "revealChance": 0,
+      "upkeep": 1,
+      "atRisk": 0,
+      "research": {
+        "supplyPerSec": 0,
+        "alloyPerSec": 0,
+        "supplyCap": 0,
+        "alloyCap": 0,
+        "infantryProductionTimeMultiplier": 1,
+        "vehicleProductionTimeMultiplier": 1,
+        "repairTimeMultiplier": 1,
+        "armorBattleDefenseMultiplier": 1,
+        "battleScoutingMultiplier": 1,
+        "commandCapacity": 0,
+        "combinedArmsCoordination": 0,
+        "repairScreening": 0,
+        "formationControl": 0
+      }
+    },
+    "tactics": {
+      "id": "armor_wedge",
+      "name": "装甲楔形",
+      "combinedArms": false,
+      "researchEnhanced": false,
+      "strategyId": "cautious",
+      "roles": {
+        "unit_stage9-unit-0": {
+          "actorId": "unit_stage9-unit-0",
+          "role": "armor_screen",
+          "lane": "armor_lane",
+          "order": 0,
+          "targetPriority": null
+        },
+        "unit_stage9-unit-1": {
+          "actorId": "unit_stage9-unit-1",
+          "role": "armor_screen",
+          "lane": "armor_lane",
+          "order": 1,
+          "targetPriority": null
+        },
+        "unit_stage9-unit-2": {
+          "actorId": "unit_stage9-unit-2",
+          "role": "armor_screen",
+          "lane": "armor_lane",
+          "order": 2,
+          "targetPriority": null
+        },
+        "unit_stage9-unit-3": {
+          "actorId": "unit_stage9-unit-3",
+          "role": "armor_screen",
+          "lane": "armor_lane",
+          "order": 3,
+          "targetPriority": null
+        },
+        "unit_stage9-unit-4": {
+          "actorId": "unit_stage9-unit-4",
+          "role": "armor_screen",
+          "lane": "armor_lane",
+          "order": 4,
+          "targetPriority": null
+        }
+      },
+      "roleCounts": {
+        "armor_screen": 5
+      },
+      "commands": [
+        {
+          "id": "armor_wedge",
+          "phase": "approach",
+          "roles": [
+            "vanguard",
+            "armor_screen"
+          ],
+          "intent": "装甲楔形推进，避免单车脱离"
+        }
+      ],
+      "enemyThreats": [
+        "enemy_at_1"
+      ],
+      "metrics": {
+        "armorCount": 5,
+        "infantryCount": 0,
+        "antiArmorCount": 0,
+        "repairCount": 0,
+        "scoutCount": 0,
+        "coordination": 0.08,
+        "protection": 0,
+        "armorAttack": 0
+      },
+      "modifiers": {
+        "armorProtection": 0,
+        "armorAttack": 0,
+        "infantrySupport": 0
+      },
+      "targetPriorities": {}
+    },
+    "experienceMultiplier": 1
+  },
+  "session": {
+    "battleSessionId": "battle-session-0-mountain_pass-6682a1ddf669488fcb1e-1",
+    "missionId": "mountain_pass",
+    "deploymentSnapshot": {
+      "formation": {
+        "id": "fm_msqiwm5k_3g",
+        "name": "Stage 9 深入编队",
+        "experience": 0,
+        "unitIds": [
+          "stage9-unit-0",
+          "stage9-unit-1",
+          "stage9-unit-2",
+          "stage9-unit-3",
+          "stage9-unit-4"
+        ]
+      },
+      "units": [
+        {
+          "id": "stage9-unit-0",
+          "type": "mbt",
+          "hp": 160,
+          "maxHp": 160,
+          "experience": 0,
+          "battles": 0,
+          "callsign": null,
+          "stats": {
+            "attack": 35,
+            "antiArmor": 20,
+            "defense": 30,
+            "scouting": 3,
+            "mobility": 10,
+            "repair": 0,
+            "hp": 160
+          },
+          "equipment": [],
+          "rankId": "recruit",
+          "rankName": "新兵",
+          "rankModifiers": {
+            "attack": 1,
+            "antiArmor": 1,
+            "defense": 1,
+            "scouting": 1,
+            "mobility": 1,
+            "repair": 1
+          }
+        },
+        {
+          "id": "stage9-unit-1",
+          "type": "mbt",
+          "hp": 160,
+          "maxHp": 160,
+          "experience": 0,
+          "battles": 0,
+          "callsign": null,
+          "stats": {
+            "attack": 35,
+            "antiArmor": 20,
+            "defense": 30,
+            "scouting": 3,
+            "mobility": 10,
+            "repair": 0,
+            "hp": 160
+          },
+          "equipment": [],
+          "rankId": "recruit",
+          "rankName": "新兵",
+          "rankModifiers": {
+            "attack": 1,
+            "antiArmor": 1,
+            "defense": 1,
+            "scouting": 1,
+            "mobility": 1,
+            "repair": 1
+          }
+        },
+        {
+          "id": "stage9-unit-2",
+          "type": "mbt",
+          "hp": 160,
+          "maxHp": 160,
+          "experience": 0,
+          "battles": 0,
+          "callsign": null,
+          "stats": {
+            "attack": 35,
+            "antiArmor": 20,
+            "defense": 30,
+            "scouting": 3,
+            "mobility": 10,
+            "repair": 0,
+            "hp": 160
+          },
+          "equipment": [],
+          "rankId": "recruit",
+          "rankName": "新兵",
+          "rankModifiers": {
+            "attack": 1,
+            "antiArmor": 1,
+            "defense": 1,
+            "scouting": 1,
+            "mobility": 1,
+            "repair": 1
+          }
+        },
+        {
+          "id": "stage9-unit-3",
+          "type": "mbt",
+          "hp": 160,
+          "maxHp": 160,
+          "experience": 0,
+          "battles": 0,
+          "callsign": null,
+          "stats": {
+            "attack": 35,
+            "antiArmor": 20,
+            "defense": 30,
+            "scouting": 3,
+            "mobility": 10,
+            "repair": 0,
+            "hp": 160
+          },
+          "equipment": [],
+          "rankId": "recruit",
+          "rankName": "新兵",
+          "rankModifiers": {
+            "attack": 1,
+            "antiArmor": 1,
+            "defense": 1,
+            "scouting": 1,
+            "mobility": 1,
+            "repair": 1
+          }
+        },
+        {
+          "id": "stage9-unit-4",
+          "type": "mbt",
+          "hp": 160,
+          "maxHp": 160,
+          "experience": 0,
+          "battles": 0,
+          "callsign": null,
+          "stats": {
+            "attack": 35,
+            "antiArmor": 20,
+            "defense": 30,
+            "scouting": 3,
+            "mobility": 10,
+            "repair": 0,
+            "hp": 160
+          },
+          "equipment": [],
+          "rankId": "recruit",
+          "rankName": "新兵",
+          "rankModifiers": {
+            "attack": 1,
+            "antiArmor": 1,
+            "defense": 1,
+            "scouting": 1,
+            "mobility": 1,
+            "repair": 1
+          }
+        }
+      ],
+      "equipmentComposition": {
+        "stage9-unit-0": [],
+        "stage9-unit-1": [],
+        "stage9-unit-2": [],
+        "stage9-unit-3": [],
+        "stage9-unit-4": []
+      },
+      "buildings": {
+        "radarOperational": false
+      },
+      "research": {
+        "revision": 0,
+        "completed": []
+      },
+      "theaterId": "mountain_pass",
+      "strategyId": "cautious",
+      "missionKind": "campaign",
+      "missionId": "mountain_pass",
+      "operation": null
+    },
+    "deploymentSnapshotId": "deployment-6682a1ddf669488fcb1ee5e54d8239fa3b364da4460cd744c5cc3bbdaeca0b3d",
+    "deploymentHash": "6682a1ddf669488fcb1ee5e54d8239fa3b364da4460cd744c5cc3bbdaeca0b3d",
+    "sourceSaveRevision": 0,
+    "formalReportId": "battle_1_fm_msqiwm5k_3g_mountain_pass_cautious",
+    "formalReportHash": "2764566ad13ebc09bdc3497418f6a898f97a36151a4f47d16675e2249d31732c",
+    "shotHash": "ef5d8464998e5eab93db0185c529d6aeee80b5919d2105866e383ce59acc28da",
+    "repairHash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "resultHash": "b5bb5cf793418d0c57feca3e3dd055746ee1aaabc732694c49c790735d820e4e",
+    "sourceReportHash": "2764566ad13ebc09bdc3497418f6a898f97a36151a4f47d16675e2249d31732c",
+    "sessionOrigin": "production",
+    "lifecycle": "settled",
+    "settlementId": "settlement-84236cc3c16ec3524c1541ff133754b94c73a1b96e957852c2eb7d9a30a62e71",
+    "settlementStatus": "applied",
+    "presentationState": {
+      "phase": "returning",
+      "elapsed": 60
+    },
+    "settlementState": {
+      "status": "applied",
+      "settlementId": "settlement-84236cc3c16ec3524c1541ff133754b94c73a1b96e957852c2eb7d9a30a62e71",
+      "locked": true
+    },
+    "returnState": {
+      "status": "not_started",
+      "elapsed": 0,
+      "duration": 5
+    },
+    "presentationTime": 60,
+    "createdAtGameTime": 28800,
+    "settledAtGameTime": 28800,
+    "returnedAtGameTime": null,
+    "replayReadOnly": false,
+    "settlementLocked": true,
+    "version": 1,
+    "settlementReceipt": {
+      "battleId": "battle_1_fm_msqiwm5k_3g_mountain_pass_cautious",
+      "battleSessionId": "battle-session-0-mountain_pass-6682a1ddf669488fcb1e-1",
+      "settlementId": "settlement-84236cc3c16ec3524c1541ff133754b94c73a1b96e957852c2eb7d9a30a62e71",
+      "formalReportHash": "2764566ad13ebc09bdc3497418f6a898f97a36151a4f47d16675e2249d31732c",
+      "reportId": "battle_1_fm_msqiwm5k_3g_mountain_pass_cautious",
+      "formationId": "fm_msqiwm5k_3g",
+      "theaterId": "mountain_pass",
+      "result": "victory",
+      "captured": true,
+      "granted": {
+        "alloy": 900,
+        "supply": 700,
+        "intel": 45
+      },
+      "removedUnitIds": [],
+      "updatedUnitIds": [
+        "stage9-unit-0",
+        "stage9-unit-1",
+        "stage9-unit-2",
+        "stage9-unit-3",
+        "stage9-unit-4"
+      ],
+      "settledGameTime": 28800
+    }
+  },
+  "replayReadOnly": true,
+  "canonicalSessionUnchanged": true,
+  "productionStateUnchanged": true
+}

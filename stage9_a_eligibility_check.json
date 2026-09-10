@@ -1,0 +1,90 @@
+{
+  "stage": "9-A",
+  "passed": true,
+  "rows": [
+    {
+      "operationId": "river_ferry",
+      "theaterId": "river_crossing",
+      "cost": {
+        "cost": {
+          "supply": 350,
+          "intel": 4
+        },
+        "missing": [],
+        "affordable": true,
+        "breakdown": {
+          "upkeep": 25,
+          "supplyMultiplier": 14,
+          "strategyCost": {},
+          "intelCost": 4
+        }
+      },
+      "eligibility": {
+        "ok": true,
+        "code": "ready",
+        "reason": "",
+        "cost": {
+          "supply": 350,
+          "intel": 4
+        },
+        "missing": []
+      }
+    },
+    {
+      "operationId": "relay_intercept",
+      "theaterId": "relay_station",
+      "cost": {
+        "cost": {
+          "supply": 450,
+          "intel": 6
+        },
+        "missing": [],
+        "affordable": true,
+        "breakdown": {
+          "upkeep": 25,
+          "supplyMultiplier": 18,
+          "strategyCost": {},
+          "intelCost": 6
+        }
+      },
+      "eligibility": {
+        "ok": true,
+        "code": "ready",
+        "reason": "",
+        "cost": {
+          "supply": 450,
+          "intel": 6
+        },
+        "missing": []
+      }
+    },
+    {
+      "operationId": "pass_patrol",
+      "theaterId": "mountain_pass",
+      "cost": {
+        "cost": {
+          "supply": 550,
+          "intel": 8
+        },
+        "missing": [],
+        "affordable": true,
+        "breakdown": {
+          "upkeep": 25,
+          "supplyMultiplier": 22,
+          "strategyCost": {},
+          "intelCost": 8
+        }
+      },
+      "eligibility": {
+        "ok": true,
+        "code": "ready",
+        "reason": "",
+        "cost": {
+          "supply": 550,
+          "intel": 8
+        },
+        "missing": []
+      }
+    }
+  ]
+}

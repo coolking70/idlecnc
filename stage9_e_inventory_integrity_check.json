@@ -1,0 +1,12 @@
+{
+  "stage": "9-E",
+  "kind": "inventory_integrity",
+  "independentRecompute": true,
+  "source": "current-source-recomputed",
+  "multiInstanceIsolation": true,
+  "maxSlotsPerUnit": 2,
+  "inFlightNotMountable": true,
+  "noNegativeQuantity": true,
+  "noDuplicateOwnership": true,
+  "claimExactlyOnce": true
+}

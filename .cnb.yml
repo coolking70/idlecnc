@@ -1,0 +1,35 @@
+$:
+  # ---- CNB Preview（仅预览模式）配置 ----
+  # 模型：CNB daemon:true 提供 launch daemon 上下文，
+  #        run-preview.sh 通过 `exec nginx -g 'daemon off;'` 让 nginx 成为
+  #        唯一的长期 foreground owner，业务端口固定 8686。
+  vscode:
+    - docker:
+        build: .ide/Dockerfile
+      services:
+        - name: vscode
+          options:
+            onlyPreview: true
+            launch: bash /workspace/tools/run-preview.sh
+            daemon: true
+            keepAliveTimeout: 10m
+      stages:
+        - name: prepare
+          script: ls -al
+
+  # ---- CI 流水线（保持不变） ----
+  push:
+    - name: stage8-2G-gate
+      runner:
+        cpus: 8
+      docker:
+        build:
+          dockerfile: .cnb/Dockerfile
+          by: [package.json, package-lock.json]
+      stages:
+        - name: install
+          script: npm install --ignore-scripts --no-audit --no-fund
+        - name: clean-clone-verification
+          script: npm run verify:clean-clone
+        - name: full-gate
+          script: npm run gate:stage8-2G

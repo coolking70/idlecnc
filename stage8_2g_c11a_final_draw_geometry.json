@@ -209,22 +209,22 @@
       "renderMode": "hybrid",
       "assetId": "unit_friendly_mbt",
       "logicalRect": {
-        "x": 692.475078722717,
-        "y": 486.94074552898087,
-        "width": 74.00703871292106,
-        "height": 44.40422322775263
+        "x": 692.9230632185579,
+        "y": 487.2095362264854,
+        "width": 73.11106972123922,
+        "height": 43.86664183274353
       },
       "cssRect": {
         "x": 444.52602070449876,
         "y": 310.2589285714286,
         "width": 46,
-        "height": 27.599999999999994
+        "height": 27.6
       },
       "finalCssWidth": 46,
       "finalCssHeight": 27.6,
       "screenFootprint": 46,
       "minimumScreenFootprint": 46,
-      "visualScaleBoost": 1.1564,
+      "visualScaleBoost": 1.1424,
       "rendererGeometrySource": "production-final-draw-geometry"
     },
     {
@@ -242,12 +242,12 @@
       "cssRect": {
         "x": 466.2272727272727,
         "y": 271.3982142857143,
-        "width": 22.541999999999998,
-        "height": 26.519999999999996
+        "width": 22.81825,
+        "height": 26.844999999999995
       },
-      "finalCssWidth": 22.542,
-      "finalCssHeight": 26.52,
-      "screenFootprint": 26.52,
+      "finalCssWidth": 22.8182,
+      "finalCssHeight": 26.845,
+      "screenFootprint": 26.845,
       "minimumScreenFootprint": 24,
       "visualScaleBoost": 1,
       "rendererGeometrySource": "production-final-draw-geometry"
@@ -259,22 +259,22 @@
       "renderMode": "sprite",
       "assetId": "unit_friendly_infantry",
       "logicalRect": {
-        "x": 683.7516737236763,
-        "y": 385.68050343526795,
-        "width": 32.17697335344394,
-        "height": 38.61236802413273
+        "x": 683.8401604003982,
+        "y": 385.7866874473343,
+        "width": 32,
+        "height": 38.4
       },
       "cssRect": {
         "x": 426.46509774399266,
         "y": 246.78876266321933,
-        "width": 20,
-        "height": 23.999999999999996
+        "width": 20.13375,
+        "height": 24.1605
       },
-      "finalCssWidth": 20,
-      "finalCssHeight": 24,
-      "screenFootprint": 24,
+      "finalCssWidth": 20.1337,
+      "finalCssHeight": 24.1605,
+      "screenFootprint": 24.1605,
       "minimumScreenFootprint": 24,
-      "visualScaleBoost": 1.0055,
+      "visualScaleBoost": 1,
       "rendererGeometrySource": "production-final-draw-geometry"
     },
     {
@@ -292,12 +292,12 @@
       "cssRect": {
         "x": 404.04818387330874,
         "y": 237.08980876535207,
-        "width": 34.476,
-        "height": 18.564
+        "width": 34.8985,
+        "height": 18.7915
       },
-      "finalCssWidth": 34.476,
-      "finalCssHeight": 18.564,
-      "screenFootprint": 34.476,
+      "finalCssWidth": 34.8985,
+      "finalCssHeight": 18.7915,
+      "screenFootprint": 34.8985,
       "minimumScreenFootprint": 34,
       "visualScaleBoost": 1,
       "rendererGeometrySource": "production-final-draw-geometry"
@@ -309,10 +309,10 @@
       "renderMode": "sprite",
       "assetId": "unit_friendly_scout_car",
       "logicalRect": {
-        "x": 665.982905982906,
-        "y": 440.842328042328,
-        "width": 54.700854700854705,
-        "height": 29.62962962962963
+        "x": 666.3140249580928,
+        "y": 441.0216841538875,
+        "width": 54.038616750481154,
+        "height": 29.270917406510623
       },
       "cssRect": {
         "x": 422.5,
@@ -324,7 +324,7 @@
       "finalCssHeight": 18.4167,
       "screenFootprint": 34,
       "minimumScreenFootprint": 34,
-      "visualScaleBoost": 1.0684,
+      "visualScaleBoost": 1.0554,
       "rendererGeometrySource": "production-final-draw-geometry"
     },
     {
@@ -342,12 +342,12 @@
       "cssRect": {
         "x": 523.7818181818182,
         "y": 245.0732142857143,
-        "width": 22.541999999999998,
-        "height": 26.519999999999996
+        "width": 22.81825,
+        "height": 26.844999999999995
       },
-      "finalCssWidth": 22.542,
-      "finalCssHeight": 26.52,
-      "screenFootprint": 26.52,
+      "finalCssWidth": 22.8182,
+      "finalCssHeight": 26.845,
+      "screenFootprint": 26.845,
       "minimumScreenFootprint": 24,
       "visualScaleBoost": 1,
       "rendererGeometrySource": "production-final-draw-geometry"
@@ -367,12 +367,12 @@
       "cssRect": {
         "x": 537.9636363636363,
         "y": 271.3982142857143,
-        "width": 22.541999999999998,
-        "height": 26.519999999999996
+        "width": 22.81825,
+        "height": 26.844999999999995
       },
-      "finalCssWidth": 22.542,
-      "finalCssHeight": 26.52,
-      "screenFootprint": 26.52,
+      "finalCssWidth": 22.8182,
+      "finalCssHeight": 26.845,
+      "screenFootprint": 26.845,
       "minimumScreenFootprint": 24,
       "visualScaleBoost": 1,
       "rendererGeometrySource": "production-final-draw-geometry"
@@ -384,22 +384,22 @@
       "renderMode": "sprite",
       "assetId": "unit_enemy_infantry",
       "logicalRect": {
-        "x": 820.4303285560002,
-        "y": 425.0366731307908,
-        "width": 32.17697335344394,
-        "height": 38.61236802413273
+        "x": 820.5188152327222,
+        "y": 425.14285714285717,
+        "width": 32,
+        "height": 38.4
       },
       "cssRect": {
         "x": 509.75365303244007,
         "y": 270.7714285714286,
-        "width": 20,
-        "height": 23.999999999999996
+        "width": 20.13375,
+        "height": 24.1605
       },
-      "finalCssWidth": 20,
-      "finalCssHeight": 24,
-      "screenFootprint": 24,
+      "finalCssWidth": 20.1337,
+      "finalCssHeight": 24.1605,
+      "screenFootprint": 24.1605,
       "minimumScreenFootprint": 24,
-      "visualScaleBoost": 1.0055,
+      "visualScaleBoost": 1,
       "rendererGeometrySource": "production-final-draw-geometry"
     },
     {
@@ -409,22 +409,22 @@
       "renderMode": "sprite",
       "assetId": "unit_enemy_infantry",
       "logicalRect": {
-        "x": 855.0872708990355,
-        "y": 468.2366731307908,
-        "width": 32.17697335344394,
-        "height": 38.61236802413273
+        "x": 855.1757575757574,
+        "y": 468.34285714285716,
+        "width": 32,
+        "height": 38.4
       },
       "cssRect": {
         "x": 530.8727272727272,
         "y": 297.0964285714286,
-        "width": 20,
-        "height": 23.999999999999996
+        "width": 20.13375,
+        "height": 24.1605
       },
-      "finalCssWidth": 20,
-      "finalCssHeight": 24,
-      "screenFootprint": 24,
+      "finalCssWidth": 20.1337,
+      "finalCssHeight": 24.1605,
+      "screenFootprint": 24.1605,
       "minimumScreenFootprint": 24,
-      "visualScaleBoost": 1.0055,
+      "visualScaleBoost": 1,
       "rendererGeometrySource": "production-final-draw-geometry"
     },
     {
@@ -434,22 +434,22 @@
       "renderMode": "sprite",
       "assetId": "unit_enemy_infantry",
       "logicalRect": {
-        "x": 843.450907262672,
-        "y": 511.4366731307908,
-        "width": 32.17697335344394,
-        "height": 38.61236802413273
+        "x": 843.5393939393939,
+        "y": 511.54285714285714,
+        "width": 32,
+        "height": 38.4
       },
       "cssRect": {
         "x": 523.7818181818182,
         "y": 323.4214285714286,
-        "width": 20,
-        "height": 23.999999999999996
+        "width": 20.13375,
+        "height": 24.1605
       },
-      "finalCssWidth": 20,
-      "finalCssHeight": 24,
-      "screenFootprint": 24,
+      "finalCssWidth": 20.1337,
+      "finalCssHeight": 24.1605,
+      "screenFootprint": 24.1605,
       "minimumScreenFootprint": 24,
-      "visualScaleBoost": 1.0055,
+      "visualScaleBoost": 1,
       "rendererGeometrySource": "production-final-draw-geometry"
     },
     {
@@ -459,22 +459,22 @@
       "renderMode": "sprite",
       "assetId": "unit_enemy_infantry",
       "logicalRect": {
-        "x": 866.7236345353992,
-        "y": 554.6366731307908,
-        "width": 32.17697335344394,
-        "height": 38.61236802413273
+        "x": 866.8121212121212,
+        "y": 554.7428571428571,
+        "width": 32,
+        "height": 38.4
       },
       "cssRect": {
         "x": 537.9636363636363,
         "y": 349.74642857142857,
-        "width": 20,
-        "height": 23.999999999999996
+        "width": 20.13375,
+        "height": 24.1605
       },
-      "finalCssWidth": 20,
-      "finalCssHeight": 24,
-      "screenFootprint": 24,
+      "finalCssWidth": 20.1337,
+      "finalCssHeight": 24.1605,
+      "screenFootprint": 24.1605,
       "minimumScreenFootprint": 24,
-      "visualScaleBoost": 1.0055,
+      "visualScaleBoost": 1,
       "rendererGeometrySource": "production-final-draw-geometry"
     }
   ],

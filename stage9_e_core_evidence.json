@@ -1,0 +1,156 @@
+{
+  "stage": "9-E",
+  "independentRecompute": true,
+  "passed": true,
+  "checkCount": 23,
+  "passedCount": 23,
+  "checks": [
+    {
+      "name": "product metadata is promoted to Stage 9 without changing the v10 save schema",
+      "passed": true
+    },
+    {
+      "name": "the accepted Stage 9-A campaign remains six theaters and six operations",
+      "passed": true
+    },
+    {
+      "name": "the six-theater prerequisite chain is intact",
+      "passed": true
+    },
+    {
+      "name": "the integrated fixture has an operational armor factory and the real production queue",
+      "passed": true
+    },
+    {
+      "name": "production completion enters inventory exactly once with deterministic provenance",
+      "passed": true
+    },
+    {
+      "name": "production queue remains shared with the configured concurrency and queue limits",
+      "passed": true
+    },
+    {
+      "name": "research gates are authoritative and blocked production has no side effect",
+      "passed": true
+    },
+    {
+      "name": "all eight definitions cover every unit type and use only legal non-hp modifiers",
+      "passed": true
+    },
+    {
+      "name": "starter definitions remain the original three and salvage is production-only",
+      "passed": true
+    },
+    {
+      "name": "real DOM-equivalent production result can be mounted through the equipment authority",
+      "passed": true
+    },
+    {
+      "name": "effective stats are base→rank→equipment and the snapshot carries resolved values plus composition",
+      "passed": true
+    },
+    {
+      "name": "in-flight equipment is not mountable and slot/instance integrity is strict",
+      "passed": true
+    },
+    {
+      "name": "the Stage 9 repeat operation dispatches through Formal Battle with a fixed operation identity",
+      "passed": true
+    },
+    {
+      "name": "Formal settlement does not mutate equipment or its deployment binding",
+      "passed": true
+    },
+    {
+      "name": "deterministic salvage offer is a post-settlement production instance only",
+      "passed": true
+    },
+    {
+      "name": "claim is exactly once and the save diff is equipment-only",
+      "passed": true
+    },
+    {
+      "name": "claimed salvage mounts to a compatible unit without changing the production instance",
+      "passed": true
+    },
+    {
+      "name": "real migration preserves production queue provenance, salvage claims, and bindings",
+      "passed": true
+    },
+    {
+      "name": "legacy v9 migration creates no new equipment, claims, or production record",
+      "passed": true
+    },
+    {
+      "name": "equipment sanitizer fails closed in both dangling-reference directions",
+      "passed": true
+    },
+    {
+      "name": "replay is historical and read-only after current salvage mounting",
+      "passed": true
+    },
+    {
+      "name": "offline production is independent from battle and idempotent",
+      "passed": true
+    },
+    {
+      "name": "downstream stages keep the frozen Stage 9 authority manifest byte-identical to the accepted baseline",
+      "passed": true
+    }
+  ],
+  "metadata": {
+    "currentStage": 9,
+    "currentStageLabel": "Stage 9 · Expanded Campaign & Equipment",
+    "packageVersion": "0.9.0",
+    "saveVersion": 10
+  },
+  "campaign": {
+    "theaterCount": 6,
+    "operationCount": 6,
+    "operationId": "river_ferry",
+    "theaterId": "river_crossing"
+  },
+  "equipment": {
+    "definitionCount": 8,
+    "starterCount": 3,
+    "productionCount": 5,
+    "productionInstanceId": "equipment-production-anti_armor_sights-1",
+    "salvageInstanceId": "equipment-salvage-d1112cf4f965b212dd1e05bf5303d961",
+    "salvageEquipmentId": "command_uplink",
+    "noHpModifiers": true,
+    "maxSlots": 2
+  },
+  "integration": {
+    "missionKind": "operation",
+    "missionId": "river_ferry",
+    "seed": 6,
+    "sessionId": "battle-session-0-river_ferry-9c61425f1ab79cc978ea-1",
+    "formalReportHash": "3c11b7a04140735bed1915c7d12f1561c1ba376185d77f7835aac616fdefdf1e",
+    "deploymentHash": "9c61425f1ab79cc978ea60db83273962bc6209c3e3812a9bac8217b1a0beea8e",
+    "salvageRulesVersion": 1,
+    "settlementEquipmentHash": "9f138817646c66971650e7b1d908b8f47a4851f8d8b6f536024197be1c9f9723",
+    "productionEquipmentHash": "9f138817646c66971650e7b1d908b8f47a4851f8d8b6f536024197be1c9f9723",
+    "historicalReplayComposition": [
+      {
+        "instanceId": "equipment-production-anti_armor_sights-1",
+        "equipmentId": "anti_armor_sights",
+        "name": "反装甲瞄具",
+        "slot": "weapon",
+        "slotIndex": 0,
+        "modifiers": {
+          "antiArmor": 1.1,
+          "scouting": 1.03
+        },
+        "desc": "提高反装甲火力与目标识别能力，不改变生命上限。"
+      }
+    ]
+  },
+  "boundaries": {
+    "salvageIsPostSettlement": true,
+    "settlementMutatesEquipment": false,
+    "claimDiffEquipmentOnly": true,
+    "replayReadOnly": true,
+    "offlineProductionIdempotent": true,
+    "dropsPreexistingNotImplemented": true
+  }
+}

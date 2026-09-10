@@ -1,0 +1,27 @@
+{
+  "stage": "9-C",
+  "independentRecompute": true,
+  "saveVersion": 9,
+  "stage9A": {
+    "theaters": 6,
+    "operations": 6
+  },
+  "stage9B": {
+    "equipmentStatKeys": [
+      "attack",
+      "antiArmor",
+      "defense",
+      "scouting",
+      "mobility",
+      "repair"
+    ],
+    "maxSlots": 2,
+    "roundingDigits": 4,
+    "hpAffected": false,
+    "battleLocked": true
+  },
+  "existingTechnologyCount": 9,
+  "existingUnitCount": 5,
+  "droppedEquipmentPath": false,
+  "solverPlannerChoreographerChanged": false
+}

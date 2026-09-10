@@ -19,7 +19,7 @@ import {
 } from './construction.js';
 import {
   tickProduction, queueUnit, cancelCurrentProduction, cancelQueuedProduction,
-  canQueueUnit, getProductionProgress, inventoryCount
+  canQueueUnit, queueEquipment, canQueueEquipment, getProductionProgress, inventoryCount
 } from './production.js';
 import {
   tickRepairs, canQueueRepair, queueRepair, cancelRepair as cancelRepairJob,
@@ -36,6 +36,21 @@ import {
   getFormationStats, getFormationWarnings, getFormationCommandCost, getPresetCommandCost,
   resolveFormation
 } from './formations.js';
+import {
+  canAssignOperationalTask, assignOperationalTask, recallOperationalTask,
+  getOperationalTask, listOperationalTasks, tickOperationalTasks,
+  OPERATIONAL_TASK, OPERATIONAL_TASK_TYPE
+} from './tasking.js';
+import {
+  tickTheaterPressure, ensureTheaterPressure, theaterPressureView
+} from './theater-pressure.js';
+import {
+  getActiveDoctrine, setDoctrine, ensureDoctrine, DOCTRINE
+} from './doctrine.js';
+import {
+  ensureAutoOperations, isAutoOperationsEnabled, setAutoOperationsEnabled,
+  releaseAutoTaskHold, runAutoOperationsPlanner, autoOperationsSummary
+} from './auto-operations.js';
 import {
   listTheaters, listStrategies, getTheaterState, getTheaterIntel, getMissionCost,
   canDispatch, dispatchFormation, tickActiveBattle, tickBattleReturn, settleActiveBattle,
@@ -59,6 +74,8 @@ import {
   getResearchModifiers, hasResearchCenter, sanitizeResearch
 } from './research.js';
 import { getUnitRank, renameUnit, getUnitEffectiveStats, filterUnits, sortUnits } from './units.js';
+import { equipEquipment, unequipEquipment } from './equipment.js';
+import { deriveSalvageOffer, claimBattleSalvage } from './battle-salvage.js';
 import { validateResearchHistory, validateBattleOutcomeConsistency, compareBattleReports } from './integrity.js';
 import { buildEvidenceStatePayload, buildEvidenceStateSignature, buildStageC1EvidenceStatePayload, buildStageC1EvidenceStateSignature, stageC1SemanticPredicates } from './battle-presentation/universal/evidence-integrity.js';
 import { evaluateProductionSemanticPredicate } from './battle-presentation/universal/production-semantic-predicates.js';
@@ -219,6 +236,18 @@ function handleProduce(unitType) {
   return res;
 }
 
+/** 提交装备制造：真实 UI 只转发到 production.js 的权威资格判断。 */
+function handleProduceEquipment(equipmentId) {
+  const state = getState();
+  const res = queueEquipment(state, equipmentId);
+  if (res.ok) {
+    if (ui) ui.toast(`${res.definition.name}已加入制造队列`, 'info');
+    saveGame(state, { silent: true });
+  } else if (ui) ui.toast(res.reason || '当前无法制造该装备', 'warn');
+  if (ui) ui.refreshProduction(state);
+  return res;
+}
+
 /** 取消当前生产（带二次确认） */
 function handleCancelCurrentProduction({ confirm = true } = {}) {
   const state = getState();
@@ -328,6 +357,8 @@ function handleDisbandFormation(formationId, { confirm = true } = {}) {
     if (ui) ui.toast(FORMATION.reasons.notFound, 'warn');
     return { ok: false, code: 'not_found', reason: FORMATION.reasons.notFound, formation: null };
   }
+  const taskedGuard = guardFormationNotTasked(getState(), formationId);
+  if (taskedGuard) return taskedGuard;
   if (confirm && typeof window !== 'undefined' && typeof window.confirm === 'function') {
     const n = (target.unitIds || []).length;
     if (!window.confirm(`确定要解散「${target.name}」吗？${n}个单位将返回库存。`)) {
@@ -337,6 +368,88 @@ function handleDisbandFormation(formationId, { confirm = true } = {}) {
   return runFormationAction(
     (s) => disbandFormation(s, formationId),
     (r) => `编队「${r.formation.name}」已解散`
+  );
+}
+
+/* ------------------------------------------------------------
+ * Stage 10-A：持续性作战任务（Operational Tasking）
+ * ---------------------------------------------------------- */
+
+/** 编队执行任务期间禁止调整成员 / 解散（命令层守卫，权威状态在 tasking.js） */
+function guardFormationNotTasked(state, formationId) {
+  if (!getOperationalTask(state, formationId)) return null;
+  const result = { ok: false, code: 'formation_tasked', reason: '该编队正在执行作战任务，请先召回', formation: null };
+  if (ui) ui.toast(result.reason, 'warn');
+  return result;
+}
+
+/** 下达持续性作战任务（PATROL / RECON / SECURITY） */
+function handleAssignOperationalTask(formationId, taskType, theaterId) {
+  return runFormationAction(
+    (state) => assignOperationalTask(state, formationId, taskType, theaterId),
+    (r, state) => {
+      const formation = (state.formations || []).find((f) => f && f.id === formationId);
+      return `「${formation ? formation.name : '编队'}」已开始执行${OPERATIONAL_TASK.labels[taskType] || taskType}任务`;
+    }
+  );
+}
+
+/** Stage 10-C：切换指挥方针（立即生效、立即保存、无确认弹窗） */
+function handleSetDoctrine(doctrineId) {
+  const state = getState();
+  const result = setDoctrine(state, doctrineId);
+  if (!result.ok) {
+    if (ui) ui.toast(result.reason || '未知指挥方针', 'warn');
+    return result;
+  }
+  saveGame(state, { silent: true });
+  if (ui) {
+    ui.toast(`指挥方针已切换：${DOCTRINE.labels[result.doctrine] || result.doctrine}`, 'info');
+    ui.refreshOverview(state);
+    ui.refreshTheater(state);
+    ui.refreshFormations(state);
+  }
+  return result;
+}
+
+/** Stage 10-D：玩家显式开关自动任务调度；开启时立即补一次合法空闲编队。 */
+function handleSetAutoOperations(enabled) {
+  const state = getState();
+  const result = setAutoOperationsEnabled(state, enabled === true);
+  if (!result.ok) return result;
+  if (result.enabled) runAutoOperationsPlanner(state);
+  saveGame(state, { silent: true });
+  if (ui) {
+    ui.toast(`AUTO OPERATIONS ${result.enabled ? 'ENABLED' : 'DISABLED'}`, result.enabled ? 'info' : 'warn');
+    ui.refreshOverview(state);
+    ui.refreshFormations(state);
+  }
+  return result;
+}
+
+/** 清除玩家召回留下的 manual hold；若已开启自动调度则立即重新评估。 */
+function handleReleaseAutoTaskHold(formationId) {
+  const state = getState();
+  const result = releaseAutoTaskHold(state, formationId);
+  if (!result.ok) {
+    if (ui) ui.toast(result.reason || '无法恢复自动调度', 'warn');
+    return result;
+  }
+  runAutoOperationsPlanner(state);
+  saveGame(state, { silent: true });
+  if (ui) {
+    ui.toast('已恢复自动调度', 'info');
+    ui.refreshFormations(state);
+    ui.refreshOverview(state);
+  }
+  return result;
+}
+
+/** 召回作战任务，编队恢复待命 */
+function handleRecallOperationalTask(formationId) {
+  return runFormationAction(
+    (state) => recallOperationalTask(state, formationId),
+    () => '作战任务已召回，编队恢复待命'
   );
 }
 
@@ -350,6 +463,8 @@ function handleRenameFormation(formationId, name) {
 
 /** 把库存中的单位编入编队 */
 function handleAddUnit(formationId, unitId) {
+  const tasked = guardFormationNotTasked(getState(), formationId);
+  if (tasked) return tasked;
   return runFormationAction(
     (state) => addUnit(state, formationId, unitId),
     (r) => `${r.unitName || '单位'}已加入「${r.formation.name}」`
@@ -358,6 +473,8 @@ function handleAddUnit(formationId, unitId) {
 
 /** 把单位移出编队，返回库存 */
 function handleRemoveUnit(formationId, unitId) {
+  const tasked = guardFormationNotTasked(getState(), formationId);
+  if (tasked) return tasked;
   return runFormationAction(
     (state) => removeUnit(state, formationId, unitId),
     (r) => `${r.unitName || '单位'}已返回库存`
@@ -416,6 +533,26 @@ function handleRenameUnit(unitId, callsign) {
   return res;
 }
 
+function handleEquipEquipment(unitId, equipmentInstanceId) {
+  const state = getState();
+  const res = equipEquipment(state, unitId, equipmentInstanceId);
+  if (res.ok) {
+    saveGame(state, { silent: true });
+    if (ui) { ui.refreshUnits(state); ui.refreshFormations(state); ui.refreshTheater(state); ui.toast('装备已挂载'); }
+  } else if (ui) ui.toast(res.reason || '装备挂载失败', 'warn');
+  return res;
+}
+
+function handleUnequipEquipment(unitId, equipmentInstanceId) {
+  const state = getState();
+  const res = unequipEquipment(state, unitId, equipmentInstanceId);
+  if (res.ok) {
+    saveGame(state, { silent: true });
+    if (ui) { ui.refreshUnits(state); ui.refreshFormations(state); ui.refreshTheater(state); ui.toast('装备已卸载'); }
+  } else if (ui) ui.toast(res.reason || '装备卸载失败', 'warn');
+  return res;
+}
+
 /** 玩家看完战报后返回基地：编队复位待命，清空活动战斗 */
 function handleCloseBattle() {
   const state = getState();
@@ -465,6 +602,24 @@ function handleReplayReport(reportId) {
     ui.switchTab('theater');
     ui.refreshTheater(state);
     ui.toast('已进入只读战报回放');
+  }
+  return res;
+}
+
+/** 领取战后打捞：唯一 equipment acquisition mutation seam。 */
+function handleClaimBattleSalvage(battleSessionId) {
+  const state = getState();
+  const res = claimBattleSalvage(state, battleSessionId);
+  if (res.ok) {
+    saveGame(state, { silent: true });
+    if (ui) {
+      ui.toast(`已回收${res.instance?.equipmentId || '装备'}`, 'good');
+      ui.refreshTheater(state);
+      ui.refreshUnits(state);
+      ui.refreshProduction(state);
+    }
+  } else if (ui) {
+    ui.toast(res.reason || '当前无法领取战场打捞', 'warn');
   }
   return res;
 }
@@ -587,6 +742,7 @@ function handleSettleOffline(seconds, options = {}) {
   if (ui) {
     if (typeof ui.refreshRepairs === 'function') ui.refreshRepairs(state);
     ui.refreshConstruction(state);
+    ui.refreshProduction(state);
     ui.refreshFormations(state);
     ui.refreshTheater(state);
   }
@@ -623,12 +779,18 @@ function handleLoad() {
     return;
   }
   const state = getState();
+  // P3（Stage 10-B 遗留）：手动读档后立即初始化 canonical 派生结构，
+  // 不依赖下一次 tick（老存档缺 theaterPressure / doctrine 时在此补齐）。
+  ensureTheaterPressure(state);
+  ensureDoctrine(state);
+  ensureAutoOperations(state);
   battlePresentationRouter?.reset();
   logEvent(state, '存档已载入，基地状态恢复。', LOG_LEVEL.GOOD);
   writeLoadNotes(state, res);
   if (ui) {
     ui.setSpeed(state.time.speed);
     ui.refreshConstruction(state);
+    ui.refreshProduction(state);
     ui.refreshFormations(state);      // 读档后编队列表与指挥容量同步重画
     ui.refreshTheater(state);         // 阶段5：战区进度、活动战斗与战报同步重画
     if (typeof ui.refreshRepairs === 'function') ui.refreshRepairs(state);   // 阶段6：维修队列
@@ -710,6 +872,9 @@ function handleNewGame() {
   newGame();
   battlePresentationRouter?.reset();
   const state = getState();
+  ensureTheaterPressure(state); // 新游戏同样立即具备 canonical pressure 结构
+  ensureDoctrine(state);        // 默认 BALANCED
+  ensureAutoOperations(state);  // 默认 disabled
   writeWelcomeLog(state);
   if (ui) {
     ui.setSpeed(state.time.speed);
@@ -768,6 +933,8 @@ function checkCapWarnings(state) {
  * ---------------------------------------------------------- */
 
 function stepLogic(state, step) {
+  // Stage 10-D：与离线结算一样在时间段起点补任务，使本段 task/pressure 全量生效。
+  runAutoOperationsPlanner(state);
   state.time.game += step;
   state.time.played += step;
 
@@ -777,8 +944,11 @@ function stepLogic(state, step) {
   tickActiveBattle(state, step);   // 阶段5：只推进播放进度，胜负在派遣时已定
   tickBattleReturn(state, step);   // 阶段8.1：结算后只推进返航展示
   tickRepairs(state, step);        // 阶段6起有实际内容
+  tickOperationalTasks(state, step); // Stage 10-A：作战任务随游戏时间推进（暂停时 step=0）
+  tickTheaterPressure(state, step);  // Stage 10-B：战区压力随游戏时间推进（与任务同序）
   const researchResult = tickResearch(state, step);
   if (researchResult.completed.length) recalcDerived(state);
+  runAutoOperationsPlanner(state);   // 现有系统在本步释放出的编队于同一边界重新评估
 
   ambientTimer += step;
   if (ambientTimer >= AMBIENT_INTERVAL) {
@@ -865,6 +1035,7 @@ function boot() {
     onBuild: handleBuild,
     onCancelConstruction: () => handleCancelConstruction(),
     onProduce: handleProduce,
+    onProduceEquipment: handleProduceEquipment,
     onCancelCurrentProduction: () => handleCancelCurrentProduction(),
     onCancelQueuedProduction: (jobId) => handleCancelQueuedProduction(jobId),
     /* 阶段4：编队 */
@@ -891,7 +1062,15 @@ function boot() {
     onCancelCurrentResearch: (opts) => handleCancelCurrentResearch(opts),
     onCancelQueuedResearch: (taskId, opts) => handleCancelQueuedResearch(taskId, opts),
     onPresentationModeChange: (mode) => battlePresentationRouter?.setPreference(mode)
+    ,onSetDoctrine: (doctrineId) => handleSetDoctrine(doctrineId)
+    ,onSetAutoOperations: (enabled) => handleSetAutoOperations(enabled)
+    ,onReleaseAutoTaskHold: (formationId) => handleReleaseAutoTaskHold(formationId)
+    ,onAssignOperationalTask: (formationId, taskType, theaterId) => handleAssignOperationalTask(formationId, taskType, theaterId)
+    ,onRecallOperationalTask: (formationId) => handleRecallOperationalTask(formationId)
     ,onRenameUnit: (unitId, callsign) => handleRenameUnit(unitId, callsign)
+    ,onEquipEquipment: (unitId, equipmentInstanceId) => handleEquipEquipment(unitId, equipmentInstanceId)
+    ,onUnequipEquipment: (unitId, equipmentInstanceId) => handleUnequipEquipment(unitId, equipmentInstanceId)
+    ,onClaimBattleSalvage: (battleSessionId) => handleClaimBattleSalvage(battleSessionId)
   });
 
   try {
@@ -915,6 +1094,9 @@ function boot() {
   // 读档；没有存档则开新局
   const loaded = hasSave() ? loadGame() : { ok: false };
   const state = getState();
+  ensureTheaterPressure(state); // Stage 10-B：老存档自动补齐战区压力默认值
+  ensureDoctrine(state);        // Stage 10-C：老存档自动回落 BALANCED
+  ensureAutoOperations(state);  // Stage 10-D：老存档默认 disabled
   if (loaded.ok) {
     logEvent(state, '存档已载入，基地状态恢复。', LOG_LEVEL.GOOD);
     writeLoadNotes(state, loaded);
@@ -930,8 +1112,10 @@ function boot() {
   });
 
   // 生产完成时立即落盘，避免刚生产完就关页面导致回退
-  on('production:completed', () => {
-    saveGame(getState(), { silent: true });
+    on('production:completed', () => {
+    const s = getState();
+    saveGame(s, { silent: true });
+    if (ui) ui.refreshProduction(s);
   });
 
   // 战斗结算（阶段5）：损失、占领与奖励已写入状态，立即落盘并刷新界面
@@ -964,7 +1148,9 @@ function boot() {
 
   // 离线结算完成（阶段6）：报告已写入 state.offline，立即落盘，由界面展示
   on('offline:settled', () => {
-    saveGame(getState(), { silent: true });
+    const s = getState();
+    saveGame(s, { silent: true });
+    if (ui) ui.refreshProduction(s);
   });
 
   tickAutoSave = createAutoSaver(TIME.autoSaveInterval);
@@ -1054,6 +1240,18 @@ function boot() {
         return { ok: false, reason: String(err) };
       }
     },
+    canProduceEquipment: (equipmentId) => {
+      try { return canQueueEquipment(getState(), equipmentId); }
+      catch (err) { return { ok: false, code: 'error', reason: String(err), reasons: [String(err)] }; }
+    },
+    produceEquipment: (equipmentId) => {
+      try { return handleProduceEquipment(equipmentId); }
+      catch (err) { return { ok: false, code: 'error', reason: String(err) }; }
+    },
+    equipmentInventory: () => {
+      try { return getState().equipment || { inventory: [], bindings: {} }; }
+      catch (err) { return { inventory: [], bindings: {} }; }
+    },
     /** 当前生产进度详情，空闲时返回 null */
     getProductionProgress: () => {
       try {
@@ -1113,7 +1311,18 @@ function boot() {
       try { return handleRenameUnit(unitId, callsign); } catch (err) { return { ok: false, code: 'error', reason: String(err) }; }
     },
     unitEffectiveStats: (unitId) => {
-      try { return getUnitEffectiveStats((getState().units || []).find((unit) => unit && unit.id === unitId)); } catch (err) { return null; }
+      try {
+        const state = getState();
+        return getUnitEffectiveStats((state.units || []).find((unit) => unit && unit.id === unitId), state.equipment);
+      } catch (err) { return null; }
+    },
+    salvageOffer: (battleSessionId) => {
+      try { return deriveSalvageOffer(getState(), battleSessionId); }
+      catch (err) { return { ok: false, code: 'error', reason: String(err) }; }
+    },
+    claimBattleSalvage: (battleSessionId) => {
+      try { return handleClaimBattleSalvage(battleSessionId); }
+      catch (err) { return { ok: false, code: 'error', reason: String(err) }; }
     },
 
     /* ---- 阶段4：编队调试接口 ---- */
@@ -1165,6 +1374,58 @@ function boot() {
       } catch (err) {
         return { ok: false, code: 'error', reason: String(err), formation: null };
       }
+    },
+    /* ---- Stage 10-A：作战任务调试接口 ---- */
+    canAssignTask: (formationId, taskType, theaterId) => {
+      try { return canAssignOperationalTask(getState(), formationId, taskType, theaterId); }
+      catch (err) { return { ok: false, code: 'error', reason: String(err), task: null }; }
+    },
+    assignTask: (formationId, taskType, theaterId) => {
+      try { return handleAssignOperationalTask(formationId, taskType, theaterId); }
+      catch (err) { return { ok: false, code: 'error', reason: String(err), task: null }; }
+    },
+    recallTask: (formationId) => {
+      try { return handleRecallOperationalTask(formationId); }
+      catch (err) { return { ok: false, code: 'error', reason: String(err), task: null }; }
+    },
+    getTask: (formationId) => {
+      try { return getOperationalTask(getState(), formationId); }
+      catch (err) { return null; }
+    },
+    listTasks: () => {
+      try { return listOperationalTasks(getState()); }
+      catch (err) { return []; }
+    },
+    /* ---- Stage 10-B：战区压力调试接口（只读） ---- */
+    theaterPressure: (theaterId) => {
+      try { return theaterPressureView(getState(), theaterId); }
+      catch (err) { return null; }
+    },
+    /* ---- Stage 10-C：指挥方针调试接口 ---- */
+    doctrine: () => {
+      try { return getActiveDoctrine(getState()); }
+      catch (err) { return 'balanced'; }
+    },
+    setDoctrine: (doctrineId) => {
+      try { return handleSetDoctrine(doctrineId); }
+      catch (err) { return { ok: false, code: 'error', reason: String(err), doctrine: null }; }
+    },
+    /* ---- Stage 10-D：自动 Operational Task 调度 ---- */
+    autoOperations: () => {
+      try { return autoOperationsSummary(getState()); }
+      catch (err) { return { enabled: false, autoManaged: 0, manualHold: 0 }; }
+    },
+    setAutoOperations: (enabled) => {
+      try { return handleSetAutoOperations(enabled === true); }
+      catch (err) { return { ok: false, code: 'error', reason: String(err) }; }
+    },
+    runAutoOperations: () => {
+      try { return runAutoOperationsPlanner(getState()); }
+      catch (err) { return { enabled: isAutoOperationsEnabled(getState()), assigned: [], skipped: [] }; }
+    },
+    releaseAutoTaskHold: (formationId) => {
+      try { return handleReleaseAutoTaskHold(formationId); }
+      catch (err) { return { ok: false, code: 'error', reason: String(err) }; }
     },
     /** 查询单位能否加入编队 */
     canAddUnit: (formationId, unitId) => {
@@ -1720,6 +1981,13 @@ function boot() {
       gameTime: Math.round(state.time.game),
       speed: state.time.speed,
       resources: { ...state.resources },
+      autoOperations: autoOperationsSummary(state),
+      operationalTasks: listOperationalTasks(state).map((row) => ({
+        formationId: row.formationId,
+        type: row.task.type,
+        theaterId: row.task.theaterId,
+        autoAssigned: row.task.autoAssigned === true
+      })),
       research: {
         current: state.research && state.research.current ? state.research.current.techId : null,
         queue: state.research && Array.isArray(state.research.queue) ? state.research.queue.map((x) => x.techId) : [],

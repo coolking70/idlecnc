@@ -20,6 +20,12 @@ import { advanceOffline as advanceConstruction } from './construction.js';
 import { advanceOffline as advanceProduction } from './production.js';
 import { tickRepairs, getActiveRepairs, getRepairRemaining } from './repairs.js';
 import { tickResearch, getResearchProgress } from './research.js';
+import {
+  tickOperationalTasks, operationalTaskBoundaryRemaining,
+  getOperationalTask, OPERATIONAL_TASK
+} from './tasking.js'; // Stage 10-A：离线任务推进；A.1：任务边界参与事件步进；A.1a：任务边界 step 预算
+import { tickTheaterPressure } from './theater-pressure.js'; // Stage 10-B：战区压力离线推进
+import { runAutoOperationsPlanner } from './auto-operations.js'; // Stage 10-D：离线与在线同边界补任务
 import { logEvent, emit, LOG_LEVEL } from './events.js';
 import { safeNumber, clamp, formatDuration, formatInt } from './utils.js';
 
@@ -121,6 +127,36 @@ function researchRemaining(state) {
   return progress ? progress.remaining : Infinity;
 }
 
+/**
+ * Stage 10-A.1：最近一次作战任务周期结算边界（无任务返回 Infinity）。
+ * 由 tasking authority 提供（30 秒规则不复制到本模块），使离线步进
+ * 恰好在每次任务 upkeep 结算前切分，与在线「经济与任务连续交替」
+ * 的顺序保持一致（先 tickEconomy 增长到边界，再结算任务消耗）。
+ */
+function operationalTaskBoundary(state) {
+  return operationalTaskBoundaryRemaining(state);
+}
+
+/**
+ * Stage 10-A.1a：离线步进预算。
+ *
+ * 基础预算保持 Stage 9 的 MAX_STEPS（无任务时行为与 Stage 9 完全一致）。
+ * 有作战任务时，任务周期结算边界是合法的事件源：每支执行中编队在
+ * `total` 秒内最多产生 ceil(total / costIntervalSec)+1 个边界，相位彼此
+ * 错开时这些边界互不合并。按该理论上界为任务边界追加专属预算，
+ * 保证合法长离线（如 6 支错相编队 × 8 小时 ≈ 5760 个边界）不会被
+ * 安全阀提前截断；安全阀本身仍然保留（预算推导错误或状态异常时仍可截断）。
+ */
+function offlineStepLimit(state, totalSeconds) {
+  const activeTaskCount = Array.isArray(state && state.formations)
+    ? state.formations.filter((f) => f && getOperationalTask(state, f.id)).length
+    : 0;
+  if (activeTaskCount === 0) return MAX_STEPS;
+  const interval = Math.max(1, safeNumber(OPERATIONAL_TASK.costIntervalSec, 30));
+  const perTaskBoundaries = Math.floor(Math.max(0, totalSeconds) / interval) + 2;
+  return MAX_STEPS + activeTaskCount * perTaskBoundaries;
+}
+
 function snapshotResources(state) {
   const out = {};
   Object.keys(RESOURCE_DEFS).forEach((key) => {
@@ -156,23 +192,27 @@ export function settleOfflineProgress(state, seconds, options = {}) {
 
   const buildingsCompleted = [];
   const unitsProduced = {};
+  const equipmentProduced = {};
   const repairsCompleted = [];
   const completedResearch = [];
 
   let remaining = total;
   let steps = 0;
+  const stepLimit = offlineStepLimit(state, total);
 
   if (total > 0) {
     recalcDerived(state);
-    while (remaining > 1e-9 && steps < MAX_STEPS) {
+    runAutoOperationsPlanner(state);
+    while (remaining > 1e-9 && steps < stepLimit) {
       steps += 1;
 
-      // 下一个事件点：施工完成 / 生产完成 / 维修完成 / 离线结束
+      // 下一个事件点：施工完成 / 生产完成 / 维修完成 / 研究完成 / 任务周期结算 / 离线结束
       const nextEvent = Math.min(
         constructionRemaining(state),
         productionRemaining(state),
         repairRemaining(state),
-        researchRemaining(state)
+        researchRemaining(state),
+        operationalTaskBoundary(state)
       );
       const step = Number.isFinite(nextEvent)
         ? Math.min(remaining, Math.max(nextEvent, MIN_STEP))
@@ -193,8 +233,12 @@ export function settleOfflineProgress(state, seconds, options = {}) {
       // 3. 生产推进（可能出厂 → 改变库存）
       const doneUnits = advanceProduction(state, step);
       if (isObject(doneUnits)) {
-        Object.keys(doneUnits).forEach((type) => {
+        Object.keys(doneUnits).filter((type) => UNITS[type]).forEach((type) => {
           unitsProduced[type] = (unitsProduced[type] || 0) + safeNumber(doneUnits[type], 0);
+        });
+        Object.keys(doneUnits.equipmentProduced || {}).forEach((equipmentId) => {
+          equipmentProduced[equipmentId] = (equipmentProduced[equipmentId] || 0)
+            + safeNumber(doneUnits.equipmentProduced[equipmentId], 0);
         });
       }
 
@@ -208,6 +252,16 @@ export function settleOfflineProgress(state, seconds, options = {}) {
 
       const researchResult = tickResearch(state, step, { ignorePause: true });
       (researchResult.completed || []).forEach((id) => completedResearch.push(TECHNOLOGIES[id] ? TECHNOLOGIES[id].name : id));
+
+      // 5. Stage 10-A：作战任务随离线时长推进（确定性，与其它系统同粒度）
+      tickOperationalTasks(state, step);
+
+      // 6. Stage 10-B：战区压力与在线同序推进（线性速率，直接适配事件步，
+      //    不新增离线事件边界）
+      tickTheaterPressure(state, step);
+
+      // 7. Stage 10-D：每个现有 event step 后补充新近空闲的合法编队。
+      runAutoOperationsPlanner(state);
 
       // 结构可能已变化，刷新派生数值供下一段使用
       recalcDerived(state);
@@ -228,8 +282,8 @@ export function settleOfflineProgress(state, seconds, options = {}) {
   const truncated = remaining > 1e-9;
   const report = buildOfflineReport({
     seconds: consumedSeconds, consumedSeconds, consumedPreciseSeconds, requestedSeconds: total,
-    remainingSeconds, truncated, maxSteps: MAX_STEPS, before, after, buildingsCompleted,
-    unitsProduced, repairsCompleted, completedResearch, operationsReady, steps,
+    remainingSeconds, truncated, maxSteps: stepLimit, before, after, buildingsCompleted,
+    unitsProduced, equipmentProduced, repairsCompleted, completedResearch, operationsReady, steps,
     battlePaused: Boolean(state.activeBattle)
   });
 
@@ -280,6 +334,14 @@ export function buildOfflineReport(input) {
     unitsProduced.push({ type, name: def ? def.name : type, count });
   });
 
+  const equipmentProduced = [];
+  const rawEquipment = isObject(src.equipmentProduced) ? src.equipmentProduced : {};
+  Object.keys(rawEquipment).forEach((equipmentId) => {
+    const count = Math.max(0, Math.floor(safeNumber(rawEquipment[equipmentId], 0)));
+    if (count <= 0) return;
+    equipmentProduced.push({ equipmentId, count });
+  });
+
   const buildings = Array.isArray(src.buildingsCompleted) ? src.buildingsCompleted.slice() : [];
   const repairs = Array.isArray(src.repairsCompleted) ? src.repairsCompleted.slice() : [];
   const completedResearch = Array.isArray(src.completedResearch) ? src.completedResearch.slice() : [];
@@ -293,6 +355,9 @@ export function buildOfflineReport(input) {
   if (buildings.length) lines.push(`完成工程：${buildings.join('、')}`);
   if (unitsProduced.length) {
     lines.push(`出厂单位：${unitsProduced.map((u) => `${u.name}×${u.count}`).join('、')}`);
+  }
+  if (equipmentProduced.length) {
+    lines.push(`制造装备：${equipmentProduced.map((item) => `${item.equipmentId}×${item.count}`).join('、')}`);
   }
   if (repairs.length) lines.push(`维修完成：${repairs.join('、')}`);
   if (completedResearch.length) lines.push(`完成研究：${completedResearch.join('、')}`);
@@ -312,6 +377,7 @@ export function buildOfflineReport(input) {
     gains,
     buildingsCompleted: buildings,
     unitsProduced,
+    equipmentProduced,
     repairsCompleted: repairs,
     completedResearch,
     operationsReady,

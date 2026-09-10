@@ -8,7 +8,7 @@
 import {
   PANEL_TABS, STAGE_PLACEHOLDER, CURRENT_STAGE, CURRENT_STAGE_LABEL, BUILDINGS, BUILDING_STATUS,
   RESOURCE_DEFS, BASE_LAYOUT, TIME, UNITS, CONSTRUCTION, CONSTRUCTION_UI,
-  PRODUCTION, PRODUCTION_UI, FORMATION, FORMATION_PRESETS,
+  PRODUCTION, PRODUCTION_UI, FORMATION, FORMATION_PRESETS, EQUIPMENT,
   BATTLE, BATTLE_RESULT, THEATERS, OPERATIONS, DAMAGE_STATES, REPAIR, RESEARCH, TECHNOLOGIES, UNIT_RANKS
 } from './config.js';
 import { canBuild, getConstructionProgress, buildableList } from './construction.js';
@@ -34,6 +34,13 @@ import {
   getActiveBattle, getReports, hasRadar, buildDispatchSnapshot
 } from './theater.js';
 import { getOperationCost } from './operations.js';
+import { EQUIPMENT_RULES } from './config.js';
+import {
+  canEquipEquipment, getEquipmentDefinition, getUnitEquipment,
+  equipmentInventoryCounts
+} from './equipment.js';
+import { canQueueEquipment } from './production.js';
+import { deriveSalvageOffer } from './battle-salvage.js';
 import {
   missionKindLabel, dispatchEligibilityText, operationCooldownText, unitStatusLabel
 } from './mission-command-presentation.js';
@@ -42,6 +49,20 @@ import {
   qs, el, setText, toggleClass, formatInt, formatRate, formatClock,
   formatDuration, formatWallClock, clamp, safeNumber
 } from './utils.js';
+import { CategoryBar, CommandSurface } from './command-ui.js';
+import {
+  canAssignOperationalTask, OPERATIONAL_TASK
+} from './tasking.js';
+import { autoOperationsSummary } from './auto-operations.js';
+import {
+  buildConstructionTileModels, buildCurrentConstructionModel,
+  buildUnitProductionTileModels, buildEquipmentProductionTileModels,
+  buildProductionQueueModels,
+  buildUnitRosterModels, buildFormationCommandModels,
+  buildTheaterCommandModels, buildStrategyModels,
+  buildRepairCommandModels, buildResearchCommandModels,
+  buildReportModels, buildOverviewCommandModels, buildDoctrineModels
+} from './command-presentation.js';
 
 /** 战斗结果 → 样式修饰类 */
 const RESULT_TONE = {
@@ -68,6 +89,8 @@ export class UI {
     this._buildLocked = false;
     /** 生产按钮的临时锁，防止一次点击被处理两次 */
     this._produceLocked = false;
+    /** 装备制造按钮的临时锁，防止同一实例被重复入队 */
+    this._equipmentProduceLocked = false;
     /** 编队操作的临时锁 */
     this._formationLocked = false;
     /** 当前选中的编队 ID（阶段4） */
@@ -82,6 +105,8 @@ export class UI {
     /** 仅 UI 内存中的部署确认；刷新后安全回退，不写入 production save。 */
     this.dispatchReview = null;
     this._lastState = null;
+    this.commandSurface = new CommandSurface((actionId, payload) => this._onInspectorCommand(actionId, payload));
+    this.commandCategory = 'units';
     /** 战报页选中的战报 ID（阶段5） */
     this.selectedReportId = null;
     this.presentationState = { preference: 'auto', mode: 'legacy' };
@@ -184,7 +209,17 @@ export class UI {
 
       const title = el('h3', 'page-title');
       title.appendChild(el('span', '', tab.title));
-      title.appendChild(el('small', '', tab.stage > CURRENT_STAGE ? `阶段${tab.stage}` : `阶段${tab.stage} · 已开放`));
+      const COMMAND_PAGE_LABELS = {
+        construction: 'BUILD', production: 'COMMAND PRODUCTION', units: 'ROSTER',
+        formations: 'FORMATIONS', theater: 'OPERATIONS', repairs: 'REPAIR BAY',
+        research: 'RESEARCH', reports: 'BATTLE LOG', overview: 'COMMAND OVERVIEW'
+      };
+      if (COMMAND_PAGE_LABELS[tab.id]) {
+        title.classList.add('command-page-title');
+        title.appendChild(el('small', '', COMMAND_PAGE_LABELS[tab.id]));
+      } else {
+        title.appendChild(el('small', '', tab.stage > CURRENT_STAGE ? `阶段${tab.stage}` : `阶段${tab.stage} · 已开放`));
+      }
       page.appendChild(title);
 
       if (tab.id === 'overview') {
@@ -234,10 +269,135 @@ export class UI {
    * 建设页（阶段2）
    * ======================================================== */
 
+  _onInspectorCommand(actionId, payload = {}) {
+    if (actionId === 'cancel-construction') this.handlers.onCancelConstruction?.();
+    else if (actionId === 'cancel-current-production') this.handlers.onCancelCurrentProduction?.();
+    else if (actionId === 'cancel-queued-production') this.handlers.onCancelQueuedProduction?.(payload.jobId);
+    else if (actionId === 'build') this._onBuildClick(payload.typeId);
+    else if (actionId === 'produce-unit') this._onProduceClick(payload.unitType);
+    else if (actionId === 'produce-equipment') this._onEquipmentProduceClick(payload.equipmentId);
+    /* Stage 10-P-B：迁移页面共用同一 Inspector 通道，操作仍走原 authority API */
+    else if (actionId === 'rename-unit') this.handlers.onRenameUnit?.(payload.unitId, payload.value);
+    else if (actionId === 'equip-equipment') this.handlers.onEquipEquipment?.(payload.unitId, payload.equipmentInstanceId);
+    else if (actionId === 'unequip-equipment') this.handlers.onUnequipEquipment?.(payload.unitId, payload.equipmentInstanceId);
+    else if (actionId === 'repair-unit') this.handlers.onRepair?.(payload.unitId);
+    else if (actionId === 'cancel-repair') this.handlers.onCancelRepair?.(payload.jobId);
+    else if (actionId === 'research') this.handlers.onResearch?.(payload.techId);
+    else if (actionId === 'cancel-current-research') this.handlers.onCancelCurrentResearch?.(payload);
+    else if (actionId === 'cancel-queued-research') this.handlers.onCancelQueuedResearch?.(payload.taskId, payload);
+    else if (actionId === 'create-formation') this._onFormationAction('onCreateFormation');
+    else if (actionId === 'apply-preset') this._onFormationAction('onApplyPreset', payload.presetId);
+    else if (actionId === 'disband-formation') this._onFormationAction('onDisbandFormation', payload.formationId);
+    else if (actionId === 'remove-unit') this._onFormationAction('onRemoveUnit', payload.formationId, payload.unitId);
+    else if (actionId === 'add-unit') this._onFormationAction('onAddUnit', payload.formationId, payload.unitId);
+    else if (actionId === 'replay-report') this._onTheaterAction('onReplayReport', payload.reportId);
+    else if (actionId === 'claim-battle-salvage') this._onTheaterAction('onClaimBattleSalvage', payload.battleSessionId);
+    else if (actionId === 'select-theater') this._selectTheaterTarget(payload.theaterId, payload.operationId);
+    else if (actionId === 'select-strategy') this._selectStrategy(payload.strategyId);
+    else if (actionId === 'set-doctrine') this.handlers.onSetDoctrine?.(payload.doctrineId);
+    /* Stage 10-A：作战任务（选择任务 → 选择战区 → 下达 / 召回） */
+    else if (actionId === 'choose-task') this._chooseOperationalTaskTheater(payload);
+    else if (actionId === 'assign-task') this._onFormationAction('onAssignOperationalTask', payload.formationId, payload.taskType, payload.theaterId);
+    else if (actionId === 'recall-task') this._onFormationAction('onRecallOperationalTask', payload.formationId);
+    else if (actionId === 'release-auto-hold') this._onFormationAction('onReleaseAutoTaskHold', payload.formationId);
+  }
+
+  /** Stage 10-A：任务类型选定后，Inspector 内选择目标战区再下达（纯 UI 选择态） */
+  _chooseOperationalTaskTheater(payload = {}) {
+    const state = this._lastState;
+    if (!state || !payload.formationId || !payload.taskType) return;
+    const formation = (state.formations || []).find((f) => f && f.id === payload.formationId);
+    if (!formation) return;
+    const theaters = listTheaters(state).filter((row) => row.unlocked);
+    this.commandSurface.inspector.open({
+      title: `${OPERATIONAL_TASK.labels[payload.taskType] || payload.taskType}`,
+      eyebrow: 'OPERATIONAL TASK · 选择目标战区',
+      description: OPERATIONAL_TASK.descs[payload.taskType] || '',
+      rows: [
+        { label: '出击编队', value: formation.name },
+        { label: '周期消耗', value: `${Object.entries(OPERATIONAL_TASK.upkeepPerInterval[payload.taskType] || {}).map(([k, v]) => `${k} ${v}`).join(' / ') || '无'} / ${OPERATIONAL_TASK.costIntervalSec}s` },
+        { label: '说明', value: '任务是持续性派遣：随游戏时间推进，暂停时不推进；召回后编队恢复待命。' }
+      ],
+      actions: theaters.map((row) => {
+        const check = canAssignOperationalTask(state, payload.formationId, payload.taskType, row.id);
+        return {
+          id: 'assign-task',
+          label: `前往 ${row.name}`,
+          payload: { formationId: payload.formationId, taskType: payload.taskType, theaterId: row.id },
+          disabled: !check.ok
+        };
+      })
+    });
+  }
+
+  _onCommandPrimary(model) {
+    const payload = model?.actionPayload || model?.inspector?.actionPayload || {};
+    const actionId = model?.actionId || model?.inspector?.actionId;
+    if (actionId === 'build') this._onBuildClick(payload.typeId);
+    else if (actionId === 'produce-unit') this._onProduceClick(payload.unitType);
+    else if (actionId === 'produce-equipment') this._onEquipmentProduceClick(payload.equipmentId);
+    else if (actionId === 'repair-unit') this.handlers.onRepair?.(payload.unitId);
+    else if (actionId === 'research') this.handlers.onResearch?.(payload.techId);
+    else if (actionId === 'select-theater') this._selectTheaterTarget(payload.theaterId, payload.operationId);
+    else if (actionId === 'select-strategy') this._selectStrategy(payload.strategyId);
+    else if (actionId === 'set-doctrine') this.handlers.onSetDoctrine?.(payload.doctrineId);
+  }
+
+  /** 战区目标选择（Stage 10-P-B：Tile 主操作） */
+  _selectTheaterTarget(theaterId, operationId = null) {
+    if (!theaterId) return;
+    this.dispatchReview = null;
+    this.selectedTheaterId = theaterId;
+    this.selectedOperationId = operationId;
+    if (this.refs.th) this.refs.th.sig.cost = '';
+    const fn = this.handlers.onSelectTheater;
+    if (typeof fn === 'function') fn(theaterId);
+    if (this._lastState) this._updateTheater(this._lastState);
+  }
+
+  /** 作战策略选择（Stage 10-P-B：Tile 主操作） */
+  _selectStrategy(strategyId) {
+    if (!strategyId) return;
+    this.selectedStrategyId = strategyId;
+    this.dispatchReview = null;
+    if (this.refs.th) this.refs.th.sig.cost = '';
+    if (this._lastState) this._updateTheater(this._lastState);
+  }
+
+  _setCommandCategory(categoryId) {
+    const p = this.refs.prod;
+    if (!p || !['units', 'equipment'].includes(categoryId)) return;
+    this.commandCategory = categoryId;
+    p.categoryBar?.select(categoryId);
+    if (p.unitsSection) p.unitsSection.hidden = categoryId !== 'units';
+    if (p.equipmentSection) p.equipmentSection.hidden = categoryId !== 'equipment';
+  }
+
   /** 构建建设分页：工程状态区 + 建筑项目列表 */
   _buildConstructionPage(page) {
     const r = this.refs;
-    r.build = { cards: {} };
+    r.build = {};
+
+    const currentHead = el('div', 'command-section-head');
+    currentHead.appendChild(el('span', '', 'CURRENT'));
+    currentHead.appendChild(el('small', '', '施工队列'));
+    page.appendChild(currentHead);
+    r.build.currentEmpty = el('div', 'command-empty', '施工队列空闲');
+    page.appendChild(r.build.currentEmpty);
+    r.build.currentRoot = el('div', 'command-current command-queue');
+    page.appendChild(r.build.currentRoot);
+    r.build.currentGrid = this.commandSurface.createQueue(r.build.currentRoot, (model) => this._onCommandPrimary(model));
+
+    const buildHead = el('div', 'command-section-head');
+    buildHead.appendChild(el('span', '', 'BUILD'));
+    buildHead.appendChild(el('small', '', '点击建造'));
+    page.appendChild(buildHead);
+    r.build.gridRoot = el('div', 'command-grid command-build-grid');
+    r.build.gridRoot.dataset.commandScope = 'construction';
+    page.appendChild(r.build.gridRoot);
+    r.build.commandGrid = this.commandSurface.createGrid(r.build.gridRoot, (model) => this._onCommandPrimary(model));
+    page.appendChild(el('div', 'command-gesture-hint', '点击执行 · 悬浮快览 · 长按详情'));
+    return;
 
     // —— 工程状态区 ——
     const status = el('div', 'card build-status');
@@ -431,7 +591,15 @@ export class UI {
   /** 刷新建设页：工程进度 + 每张卡片的按钮状态与禁用原因 */
   _updateConstruction(state) {
     const b = this.refs.build;
-    if (!b || !b.cards) return;
+    if (!b || !b.commandGrid) return;
+
+    this._lastState = state;
+    const current = buildCurrentConstructionModel(state);
+    b.currentGrid.update(current ? [current] : []);
+    b.currentEmpty.hidden = Boolean(current);
+    b.currentRoot.hidden = !current;
+    b.commandGrid.update(buildConstructionTileModels(state));
+    return;
 
     const job = getConstructionProgress(state);
     const paused = safeNumber(state.time.speed, 1) === 0;
@@ -517,7 +685,53 @@ export class UI {
   /** 构建生产分页：当前生产线 + 等待队列 + 单位卡片 + 单位库存 */
   _buildProductionPage(page) {
     const r = this.refs;
-    r.prod = { cards: {}, queueSig: '' };
+    r.prod = {};
+
+    const queueHead = el('div', 'command-section-head');
+    queueHead.appendChild(el('span', '', 'QUEUE'));
+    queueHead.appendChild(el('small', '', `0 / ${PRODUCTION.maxQueueSize}`));
+    r.prod.queueCount = queueHead.lastChild;
+    page.appendChild(queueHead);
+    r.prod.queueEmpty = el('div', 'command-empty', '生产队列空闲');
+    page.appendChild(r.prod.queueEmpty);
+    r.prod.queueRoot = el('div', 'command-grid command-queue');
+    r.prod.queueRoot.dataset.commandScope = 'production-queue';
+    page.appendChild(r.prod.queueRoot);
+    r.prod.queueGrid = this.commandSurface.createQueue(r.prod.queueRoot, (model) => this._onCommandPrimary(model));
+
+    r.prod.categoryRoot = el('div', 'command-category');
+    page.appendChild(r.prod.categoryRoot);
+    r.prod.categoryBar = new CategoryBar(r.prod.categoryRoot, [
+      { id: 'units', label: 'UNITS' },
+      { id: 'equipment', label: 'EQUIPMENT' }
+    ], (id) => this._setCommandCategory(id));
+
+    r.prod.unitsSection = el('section', 'command-category-panel');
+    r.prod.unitsSection.dataset.commandCategoryPanel = 'units';
+    const unitHead = el('div', 'command-section-head');
+    unitHead.appendChild(el('span', '', 'UNITS'));
+    unitHead.appendChild(el('small', '', '点击入队'));
+    r.prod.unitsSection.appendChild(unitHead);
+    r.prod.unitsRoot = el('div', 'command-grid');
+    r.prod.unitsRoot.dataset.commandScope = 'unit-production';
+    r.prod.unitsSection.appendChild(r.prod.unitsRoot);
+    r.prod.unitGrid = this.commandSurface.createGrid(r.prod.unitsRoot, (model) => this._onCommandPrimary(model));
+    page.appendChild(r.prod.unitsSection);
+
+    r.prod.equipmentSection = el('section', 'command-category-panel');
+    r.prod.equipmentSection.dataset.commandCategoryPanel = 'equipment';
+    const commandEquipmentHead = el('div', 'command-section-head');
+    commandEquipmentHead.appendChild(el('span', '', 'EQUIPMENT'));
+    commandEquipmentHead.appendChild(el('small', '', '点击入队'));
+    r.prod.equipmentSection.appendChild(commandEquipmentHead);
+    r.prod.equipmentRoot = el('div', 'command-grid');
+    r.prod.equipmentRoot.dataset.commandScope = 'equipment-production';
+    r.prod.equipmentSection.appendChild(r.prod.equipmentRoot);
+    r.prod.equipmentGrid = this.commandSurface.createGrid(r.prod.equipmentRoot, (model) => this._onCommandPrimary(model));
+    page.appendChild(r.prod.equipmentSection);
+    page.appendChild(el('div', 'command-gesture-hint', '点击生产 · 悬浮快览 · 长按详情'));
+    this._setCommandCategory(this.commandCategory);
+    return;
 
     // —— 当前生产线 ——
     const line = el('div', 'card prod-line');
@@ -569,6 +783,7 @@ export class UI {
 
     r.prod.cancelBtn = el('button', 'btn danger cs-cancel', '取消当前项目');
     r.prod.cancelBtn.type = 'button';
+    r.prod.cancelBtn.dataset.action = 'cancel-production-current';
     r.prod.cancelBtn.addEventListener('click', () => {
       const fn = this.handlers.onCancelCurrentProduction;
       if (typeof fn === 'function') fn();
@@ -599,6 +814,19 @@ export class UI {
       r.prod.cards[def.id] = card;
     });
     page.appendChild(grid);
+
+    // —— 装备制造卡片：仍然使用共享生产队列，UI 只读取权威资格结果 ——
+    const equipmentHead = el('div', 'section-head');
+    equipmentHead.appendChild(el('span', '', '装备制造'));
+    equipmentHead.appendChild(el('span', 'tag', '装甲工厂生产'));
+    page.appendChild(equipmentHead);
+    const equipmentGrid = el('div', 'unit-grid equipment-production-grid');
+    Object.values(EQUIPMENT).filter((def) => def.acquisition?.kind === 'production').forEach((def) => {
+      const card = this._renderEquipmentProductionCard(def);
+      equipmentGrid.appendChild(card.root);
+      r.prod.equipmentCards[def.id] = card;
+    });
+    page.appendChild(equipmentGrid);
 
     // —— 单位库存 ——
     const iHead = el('div', 'section-head');
@@ -705,6 +933,35 @@ export class UI {
     return { root, btn, reason, chips, invCount, def };
   }
 
+  _renderEquipmentProductionCard(def) {
+    const root = el('article', 'unit-card equipment-card');
+    root.dataset.equipmentId = def.id;
+    const head = el('div', 'bc-head');
+    head.appendChild(el('span', 'bc-name', def.name));
+    const tag = el('span', 'bc-status tag', def.slot || '装备');
+    head.appendChild(tag); root.appendChild(head);
+    root.appendChild(el('p', 'bc-desc', def.desc || ''));
+    const grid = el('div', 'bc-grid');
+    const applicable = Array.isArray(def.applicableTypes) ? def.applicableTypes.map((id) => UNITS[id]?.name || id).join('、') : '—';
+    [['适用单位', applicable], ['制造时间', `${formatInt(def.acquisition?.buildTime || 0)} 秒`], ['科研前置', def.requiresTech ? (TECHNOLOGIES[def.requiresTech]?.name || def.requiresTech) : '无']]
+      .forEach(([label, value]) => { const cell = el('div', 'bc-cell'); cell.appendChild(el('b', '', label)); cell.appendChild(el('span', '', value)); grid.appendChild(cell); });
+    root.appendChild(grid);
+    const costBox = el('div', 'bc-cost'); costBox.appendChild(el('b', '', '制造成本'));
+    const chips = {};
+    Object.keys(def.acquisition?.cost || {}).forEach((key) => {
+      const chip = el('span', 'cost-chip', `${RESOURCE_DEFS[key] ? RESOURCE_DEFS[key].name : key} ${formatInt(def.acquisition.cost[key])}`);
+      chip.dataset.res = key; chips[key] = chip; costBox.appendChild(chip);
+    });
+    root.appendChild(costBox);
+    const inv = el('div', 'uc-inv'); inv.appendChild(el('b', '', '库存实例')); const invCount = el('span', 'uc-inv-count', '0'); inv.appendChild(invCount); root.appendChild(inv);
+    const btn = el('button', 'btn primary equipment-btn', '加入制造队列');
+    btn.type = 'button'; btn.dataset.action = 'produce-equipment'; btn.dataset.equipmentId = def.id;
+    btn.addEventListener('click', () => this._onEquipmentProduceClick(def.id));
+    root.appendChild(btn);
+    const reason = el('div', 'bc-reason'); reason.hidden = true; root.appendChild(reason);
+    return { root, btn, reason, chips, invCount, def };
+  }
+
   /** 生产按钮点击：临时锁按钮，避免连点重复扣费 */
   _onProduceClick(typeId) {
     if (this._produceLocked) return;
@@ -717,22 +974,33 @@ export class UI {
     }
   }
 
+  _onEquipmentProduceClick(equipmentId) {
+    if (this._equipmentProduceLocked) return;
+    this._equipmentProduceLocked = true;
+    try {
+      if (this.handlers.onProduceEquipment) this.handlers.onProduceEquipment(equipmentId);
+    } finally {
+      this._equipmentProduceLocked = false;
+    }
+  }
+
   /** 渲染等待队列中的一项 */
   _renderQueueItem(job, index, state) {
-    const def = UNITS[job.type];
+    const def = job.kind === 'equipment' ? getEquipmentDefinition(job.equipmentId) : UNITS[job.type];
     const item = el('div', 'queue-item');
     item.dataset.jobId = job.id;
 
     const title = el('div', 'qi-title');
     title.appendChild(el('span', 'qi-idx', `${index}.`));
-    title.appendChild(el('span', 'qi-name', def ? def.name : '未知单位'));
+    title.appendChild(el('span', 'qi-name', def ? def.name : '未知项目'));
     item.appendChild(title);
 
     const meta = el('div', 'qi-meta');
     const producer = (state.buildings || []).find((b) => b.id === job.sourceBuildingId);
     const pname = producer ? (BUILDINGS[producer.type] ? BUILDINGS[producer.type].name : '生产设施') : '生产设施';
     meta.appendChild(el('span', '', `来源：${pname}`));
-    meta.appendChild(el('span', '', `时间：${formatInt(def ? def.buildTime : 0)}秒`));
+    const duration = job.kind === 'equipment' ? def?.acquisition?.buildTime : def?.buildTime;
+    meta.appendChild(el('span', '', `时间：${formatInt(duration || 0)}秒`));
     const paid = Object.keys(job.costPaid || {})
       .filter((k) => safeNumber(job.costPaid[k], 0) > 0)
       .map((k) => `${RESOURCE_DEFS[k] ? RESOURCE_DEFS[k].name : k}${formatInt(job.costPaid[k])}`)
@@ -743,6 +1011,8 @@ export class UI {
     const cancel = el('button', 'btn tiny danger qi-cancel', '移除');
     cancel.type = 'button';
     cancel.dataset.jobId = job.id;
+    cancel.dataset.action = 'cancel-production-queue';
+    if (job.kind === 'equipment') cancel.dataset.equipmentId = job.equipmentId;
     cancel.addEventListener('click', () => {
       const fn = this.handlers.onCancelQueuedProduction;
       if (typeof fn === 'function') fn(job.id);
@@ -754,7 +1024,18 @@ export class UI {
   /** 刷新生产页：当前生产线 + 等待队列 + 单位卡片 + 库存统计 */
   _updateProduction(state) {
     const p = this.refs.prod;
-    if (!p || !p.cards) return;
+    if (!p || !p.unitGrid) return;
+
+    this._lastState = state;
+    const queueModels = buildProductionQueueModels(state);
+    p.queueGrid.update(queueModels);
+    p.queueEmpty.hidden = queueModels.length > 0;
+    p.queueRoot.hidden = queueModels.length === 0;
+    setText(p.queueCount, `${queueModels.length} / ${PRODUCTION.maxQueueSize}`);
+    p.unitGrid.update(buildUnitProductionTileModels(state));
+    p.equipmentGrid.update(buildEquipmentProductionTileModels(state));
+    this._setCommandCategory(this.commandCategory);
+    return;
 
     const progress = getProductionProgress(state);
     const paused = safeNumber(state.time.speed, 1) === 0;
@@ -827,6 +1108,23 @@ export class UI {
       });
     });
 
+    // —— 装备制造卡片：库存只按已完成实例统计，生产中任务不会提前进入库存 ——
+    const equipmentCounts = equipmentInventoryCounts(state.equipment);
+    Object.keys(p.equipmentCards || {}).forEach((equipmentId) => {
+      const card = p.equipmentCards[equipmentId];
+      const def = card.def;
+      const check = canQueueEquipment(state, equipmentId);
+      setText(card.invCount, String(safeNumber(equipmentCounts[equipmentId], 0)));
+      const current = state.production?.current;
+      setText(card.btn, current?.kind === 'equipment' && current.equipmentId === equipmentId ? '制造中' : '加入制造队列');
+      card.btn.disabled = !check.ok;
+      card.reason.hidden = check.ok;
+      setText(card.reason, check.ok ? '' : (check.reasons || [check.reason]).join('；'));
+      Object.keys(card.chips).forEach((key) => {
+        toggleClass(card.chips[key], 'lack', safeNumber(state.resources?.[key], 0) < safeNumber(def.acquisition.cost[key], 0));
+      });
+    });
+
     // —— 库存统计 ——
     const units = state.units || [];
     setText(p.invTotal, String(units.length));
@@ -837,7 +1135,7 @@ export class UI {
     setText(p.invAssigned, String(assigned));
     setText(p.invRepairing, String(repairing));
 
-    const listSig = units.map((u) => `${u.type}:${counts[u.type]}`).join('|');
+    const listSig = `${units.map((u) => `${u.type}:${counts[u.type]}`).join('|')}|equipment:${JSON.stringify(state.equipment || {})}`;
     if (listSig !== p._invListSig) {
       p._invListSig = listSig;
       p.invList.innerHTML = '';
@@ -866,7 +1164,40 @@ export class UI {
 
   _buildUnitsPage(page) {
     const r = this.refs;
-    r.units = { selectedId: null, filter: 'all', status: 'all', rank: 'all', sort: 'createdAt' };
+    r.units = { selectedId: null, filter: 'all', status: 'all', rank: 'all', sort: 'createdAt', equipmentSignature: '', detailUnitId: null };
+
+    /* Stage 10-P-B：portrait roster grid + 按需展开的 Inspector */
+    const controls = el('div', 'units-controls command-filter-row');
+    const mkSelect = (label, options, key) => {
+      const wrap = el('label', 'units-filter');
+      wrap.appendChild(el('span', '', label));
+      const select = el('select');
+      options.forEach(([value, text]) => { const opt = el('option', '', text); opt.value = value; select.appendChild(opt); });
+      select.addEventListener('change', () => { r.units[key] = select.value; this._updateUnits(this._lastState); });
+      wrap.appendChild(select);
+      return select;
+    };
+    r.units.categorySelect = mkSelect('类型', [['all', '全部类型'], ['infantry', '步兵'], ['vehicle', '车辆'], ['armor', '装甲'], ['support', '支援']], 'filter');
+    r.units.statusSelect = mkSelect('状态', [['all', '全部状态'], ['ready', '空闲'], ['assigned', '已编队'], ['repairing', '维修中'], ['damaged', '受损']], 'status');
+    r.units.rankSelect = mkSelect('等级', [['all', '全部等级'], ...Object.values(UNIT_RANKS).map((rank) => [rank.id, rank.name])], 'rank');
+    r.units.sortSelect = mkSelect('排序', [['createdAt', '创建时间'], ['experience', '经验'], ['battles', '战斗次数'], ['hpRatio', '生命比例'], ['type', '单位类型']], 'sort');
+    controls.append(r.units.categorySelect.parentNode, r.units.statusSelect.parentNode, r.units.rankSelect.parentNode, r.units.sortSelect.parentNode);
+    page.appendChild(controls);
+
+    const head = el('div', 'command-section-head');
+    head.appendChild(el('span', '', 'ROSTER'));
+    r.units.headTag = el('small', '', '0 个单位');
+    head.appendChild(r.units.headTag);
+    page.appendChild(head);
+    r.units.empty = el('div', 'command-empty', '尚无单位，前往「生产」分页训练或制造');
+    page.appendChild(r.units.empty);
+    r.units.gridRoot = el('div', 'command-grid command-roster-grid');
+    r.units.gridRoot.dataset.commandScope = 'units';
+    page.appendChild(r.units.gridRoot);
+    r.units.grid = this.commandSurface.createGrid(r.units.gridRoot, () => {});
+    page.appendChild(el('div', 'command-gesture-hint', '点击查看档案 · 悬浮快览 · 长按详情'));
+    return;
+    {
     const summary = el('div', 'card units-summary');
     r.units.summary = el('div', 'units-summary-grid');
     summary.appendChild(r.units.summary);
@@ -898,6 +1229,7 @@ export class UI {
     columns.appendChild(r.units.list);
     columns.appendChild(r.units.detail);
     page.appendChild(columns);
+    }
   }
 
   _renderUnitSummary(state) {
@@ -910,7 +1242,18 @@ export class UI {
   _updateUnits(state) {
     this._lastState = state;
     const r = this.refs.units;
-    if (!r || !r.list) return;
+    if (!r) return;
+    if (r.grid) {
+      /* Presentation adapter：只把过滤排序后的单位视图交给只读 builder（浅克隆，不改 canonical state） */
+      r.categorySelect.value = r.filter; r.statusSelect.value = r.status; r.rankSelect.value = r.rank; r.sortSelect.value = r.sort;
+      const list = sortUnits(filterUnits(state, { category: r.filter, status: r.status, rankId: r.rank }), r.sort);
+      const models = buildUnitRosterModels({ ...state, units: list });
+      r.grid.update(models);
+      r.empty.hidden = models.length > 0;
+      r.headTag.textContent = `${models.length} 个单位`;
+      return;
+    }
+    if (!r.list) return;
     const counts = this._renderUnitSummary(state);
     r.summary.innerHTML = '';
     [['单位总数', counts.total], ['空闲单位', counts.ready], ['已编队单位', counts.assigned], ['维修中单位', counts.repairing], ['轻度受损', counts.light], ['重度受损', counts.heavy], ['新兵', counts.recruit], ['训练有素', counts.trained], ['老兵', counts.veteran], ['精锐', counts.elite]].forEach(([label, value]) => {
@@ -933,7 +1276,18 @@ export class UI {
     });
     const selected = list.find((unit) => unit.id === r.selectedId) || list[0] || null;
     r.selectedId = selected ? selected.id : null;
-    this._renderUnitDetail(state, selected);
+    const equipmentSignature = JSON.stringify({
+      equipment: state.equipment || null,
+      battle: state.activeBattle ? {
+        id: state.activeBattle.id || null,
+        replayReadOnly: state.activeBattle.replayReadOnly === true,
+        settled: state.activeBattle.settled === true
+      } : null
+    });
+    if (r.equipmentSignature !== equipmentSignature || r.detailUnitId !== (selected && selected.id)) {
+      r.equipmentSignature = equipmentSignature;
+      this._renderUnitDetail(state, selected);
+    }
   }
 
   _renderUnitDetail(state, unit) {
@@ -942,7 +1296,7 @@ export class UI {
     box.innerHTML = '';
     box.appendChild(el('div', 'card-head', '单位详情'));
     if (!unit) { box.appendChild(el('div', 'hint', '选择一个单位查看详情。')); return; }
-    const def = UNITS[unit.type]; const rank = getUnitRank(unit); const progress = getRankProgress(unit); const stats = getUnitEffectiveStats(unit);
+    const def = UNITS[unit.type]; const rank = getUnitRank(unit); const progress = getRankProgress(unit); const stats = getUnitEffectiveStats(unit, state.equipment);
     const name = el('div', 'unit-detail-title'); name.appendChild(el('b', '', formatUnitDisplayName(unit))); name.appendChild(el('span', 'tag ok', rank.name)); box.appendChild(name);
     const callsign = el('input', 'unit-callsign'); callsign.type = 'text'; callsign.maxLength = 12; callsign.value = unit.callsign || ''; callsign.placeholder = '输入呼号（最多12字）';
     const rename = el('button', 'btn primary small', '保存呼号'); rename.type = 'button'; rename.addEventListener('click', () => this.handlers.onRenameUnit && this.handlers.onRenameUnit(unit.id, callsign.value));
@@ -951,6 +1305,39 @@ export class UI {
     const bar = el('div', 'bar unit-rank'); const fill = el('i'); fill.style.width = `${progress.percent}%`; bar.appendChild(fill); box.appendChild(bar);
     const statHead = el('div', 'section-head sub'); statHead.appendChild(el('span', '', '战斗中实际属性')); box.appendChild(statHead);
     ['attack', 'antiArmor', 'defense', 'scouting', 'mobility', 'repair'].forEach((key) => { const row = el('div', 'kv'); row.appendChild(el('span', '', key)); row.appendChild(el('span', '', `${stats[key]}（基础 ${def.stats[key]}）`)); box.appendChild(row); });
+
+    const equipmentHead = el('div', 'section-head sub');
+    equipmentHead.appendChild(el('span', '', `装备槽位（${(stats.equipment || []).length}/${EQUIPMENT_RULES.maxSlotsPerUnit}）`));
+    box.appendChild(equipmentHead);
+    const equipped = getUnitEquipment(state.equipment, unit.id);
+    if (!equipped.length) box.appendChild(el('div', 'hint', '当前没有挂载装备。'));
+    equipped.forEach((item) => {
+      const row = el('div', 'kv equipment-row');
+      row.appendChild(el('span', '', `${item.name} · 槽位${item.slotIndex + 1}`));
+      const remove = el('button', 'btn small', '卸载');
+      remove.type = 'button'; remove.dataset.action = 'unequip-equipment'; remove.dataset.unitId = unit.id; remove.dataset.equipmentInstanceId = item.instanceId;
+      remove.addEventListener('click', () => this.handlers.onUnequipEquipment && this.handlers.onUnequipEquipment(unit.id, item.instanceId));
+      row.appendChild(remove); box.appendChild(row);
+    });
+
+    const available = Array.isArray(state.equipment?.inventory) ? state.equipment.inventory : [];
+    const mountedIds = new Set(equipped.map((item) => item.instanceId));
+    available.filter((instance) => !mountedIds.has(instance.id)).forEach((instance) => {
+      const equipmentDef = getEquipmentDefinition(instance.equipmentId);
+      if (!equipmentDef) return;
+      const check = canEquipEquipment(state, unit.id, instance.id);
+      const provenance = instance.provenance?.kind === 'battle_salvage'
+        ? `战场回收${instance.provenance.theaterId ? ` · ${THEATERS[instance.provenance.theaterId]?.name || instance.provenance.theaterId}` : ''}`
+        : instance.provenance?.kind === 'production' ? '装甲工厂生产' : '初始配发';
+      const row = el('div', 'kv equipment-row');
+      row.appendChild(el('span', '', `${equipmentDef.name} · ${provenance} · ${instance.id}`));
+      const mount = el('button', 'btn primary small', '挂载');
+      mount.type = 'button'; mount.dataset.action = 'equip-equipment'; mount.dataset.unitId = unit.id; mount.dataset.equipmentInstanceId = instance.id; mount.disabled = !check.ok;
+      mount.title = check.ok ? equipmentDef.desc : check.reason;
+      mount.addEventListener('click', () => this.handlers.onEquipEquipment && this.handlers.onEquipEquipment(unit.id, instance.id));
+      row.appendChild(mount); box.appendChild(row);
+    });
+    this.refs.units.detailUnitId = unit.id;
   }
 
   /* ==========================================================
@@ -967,6 +1354,23 @@ export class UI {
     const r = this.refs;
     r.fm = { presetCards: {}, sig: {} };
 
+    /* Stage 10-P-B：紧凑编队 Tile + Inspector 管理操作 */
+    const cap = el('div', 'command-section-head fm-cap-head');
+    cap.appendChild(el('span', '', 'FORMATIONS'));
+    r.fm.capTag = el('small', '', '—');
+    cap.appendChild(r.fm.capTag);
+    page.appendChild(cap);
+
+    r.fm.listEmpty = el('div', 'command-empty', '尚无编队');
+    r.fm.listEmpty.hidden = true;
+    page.appendChild(r.fm.listEmpty);
+    r.fm.gridRoot = el('div', 'command-grid command-formation-grid');
+    r.fm.gridRoot.dataset.commandScope = 'formations';
+    page.appendChild(r.fm.gridRoot);
+    r.fm.grid = this.commandSurface.createGrid(r.fm.gridRoot, () => {});
+    page.appendChild(el('div', 'command-gesture-hint', '点击查看编队与管理操作 · 悬浮快览 · 长按详情'));
+    return;
+    {
     // —— 指挥容量概览 ——
     const cap = el('div', 'card fm-capacity');
     const capHead = el('div', 'card-head');
@@ -1122,6 +1526,7 @@ export class UI {
       + '单位加入编队后占用指挥容量，移出或解散后立即返回库存。'
       + '编队组建完成后，切到「战区」分页即可选择目标与作战策略并派遣出击。';
     page.appendChild(note);
+    }
   }
 
   /** 编队操作统一入口：加锁 → 转交 main.js */
@@ -1152,7 +1557,27 @@ export class UI {
   /** 刷新编队页 */
   _updateFormations(state) {
     const f = this.refs.fm;
-    if (!f || !f.list) return;
+    if (!f) return;
+
+    if (f.grid) {
+      /* Stage 10-P-B path：Tile 网格 + Inspector 管理 */
+      const formations = Array.isArray(state.formations) ? state.formations : [];
+      const cUsed = safeNumber(state.command.used, 0);
+      const cCap = safeNumber(state.command.capacity, 0);
+      f.capTag.textContent = `编队 ${formations.length}/${FORMATION.maxFormations} · 指挥 ${formatInt(cUsed)}/${formatInt(cCap)}`;
+      if (this.selectedFormationId && !formations.some((x) => x.id === this.selectedFormationId)) this.selectedFormationId = null;
+      // 选中回落：无选中且存在编队时自动选中首支（与旧编队页一致，Inspector 才有内容）
+      if (!this.selectedFormationId && formations.length > 0) this.selectedFormationId = formations[0].id;
+      const models = buildFormationCommandModels(state);
+      models.forEach((model) => {
+        if (model.id === `formation:${this.selectedFormationId}`) model.selected = true;
+      });
+      f.grid.update(models);
+      f.listEmpty.hidden = formations.length > 0;
+      return;
+    }
+
+    if (!f.list) return;
 
     const formations = Array.isArray(state.formations) ? state.formations : [];
     const cUsed = safeNumber(state.command.used, 0);
@@ -1460,15 +1885,19 @@ export class UI {
 
     page.appendChild(battle);
 
-    // —— 战区目标列表 ——
-    const listHead = el('div', 'section-head');
-    listHead.appendChild(el('span', '', '作战目标'));
-    r.th.listTag = el('span', 'tag', '0 / 0 已占领');
+    // —— 战区目标列表（Stage 10-P-B：紧凑战区 Tile，详情进 Inspector） ——
+    const listHead = el('div', 'command-section-head');
+    listHead.appendChild(el('span', '', 'THEATERS'));
+    r.th.listTag = el('small', '', '0 / 0 已占领');
     listHead.appendChild(r.th.listTag);
     page.appendChild(listHead);
 
-    r.th.list = el('div', 'th-list');
+    r.th.list = el('div');
+    r.th.gridRoot = el('div', 'command-grid command-theater-grid');
+    r.th.gridRoot.dataset.commandScope = 'theater';
+    r.th.list.appendChild(r.th.gridRoot);
     page.appendChild(r.th.list);
+    r.th.grid = this.commandSurface.createGrid(r.th.gridRoot, (model) => this._onCommandPrimary(model));
 
     // —— 派遣控制台 ——
     const ds = el('div', 'card th-dispatch');
@@ -1506,34 +1935,10 @@ export class UI {
     ds.appendChild(sHead);
 
     const sWrap = el('div', 'th-strategies');
-    listStrategies().forEach((st) => {
-      const card = el('article', 'th-strategy');
-      card.dataset.strategy = st.id;
-      card.dataset.action = 'select-strategy';
-
-      const head = el('div', 'bc-head');
-      head.appendChild(el('span', 'bc-name', st.name));
-      const costTag = el('span', 'bc-status tag', st.cost && Object.keys(st.cost).length
-        ? formatMissionCost(st.cost) : '无额外消耗');
-      head.appendChild(costTag);
-      card.appendChild(head);
-
-      card.appendChild(el('p', 'bc-desc', st.desc));
-
-      const pros = el('ul', 'th-pros');
-      st.advantages.forEach((x) => pros.appendChild(el('li', 'good', x)));
-      st.risks.forEach((x) => pros.appendChild(el('li', 'risk', x)));
-      card.appendChild(pros);
-
-      card.addEventListener('click', () => {
-        this.selectedStrategyId = st.id;
-        this.dispatchReview = null;
-        if (this.refs.th) this.refs.th.sig.cost = '';
-      });
-      sWrap.appendChild(card);
-      r.th.strategyCards[st.id] = card;
-    });
+    r.th.strategyGridRoot = el('div', 'command-grid command-strategy-grid');
+    sWrap.appendChild(r.th.strategyGridRoot);
     ds.appendChild(sWrap);
+    r.th.strategyGrid = this.commandSurface.createGrid(r.th.strategyGridRoot, (model) => this._onCommandPrimary(model));
 
     // 成本与派遣
     const cHead = el('div', 'section-head sub');
@@ -1579,7 +1984,7 @@ export class UI {
     if (active && this.dispatchReview) this.dispatchReview = null;
     this._updateBattlePanel(state, active);
 
-    // —— 战区列表 ——
+    // —— 战区列表（Stage 10-P-B：Tile 网格，主操作=选择目标） ——
     const theaters = listTheaters(state);
     const captured = theaters.filter((x) => x.captured).length;
     setText(t.listTag, `${captured} / ${theaters.length} 已占领`);
@@ -1590,6 +1995,29 @@ export class UI {
     if (!this.selectedTheaterId) {
       const first = theaters.find((x) => x.unlocked && !x.captured) || theaters[0] || null;
       this.selectedTheaterId = first ? first.id : null;
+    }
+
+    if (t.grid) {
+      const models = buildTheaterCommandModels(state);
+      models.forEach((model) => {
+        const [kind, rawId] = model.id.split(':');
+        model.selected = kind === 'theater' && rawId === this.selectedTheaterId && !this.selectedOperationId;
+        if (kind === 'theater') {
+          model.inspectOnClick = false;
+          model.actionId = 'select-theater';
+          model.actionPayload = { theaterId: rawId, operationId: null };
+          model.disabled = model.state === 'locked';
+        } else if (kind === 'operation') {
+          model.selected = this.selectedOperationId === rawId;
+          model.inspectOnClick = false;
+          model.actionId = 'select-theater';
+          model.actionPayload = { theaterId: this.selectedTheaterId, operationId: rawId };
+        }
+      });
+      t.grid.update(models);
+      t.sig.cost = t.sig.cost || '';
+      this._updateDispatchConsole(state, active);
+      return;
     }
 
     const radar = hasRadar(state);
@@ -1769,13 +2197,18 @@ export class UI {
       setText(t.dsFormMeta, '尚未选择编队。');
     }
 
-    // 策略高亮
-    if (!this.selectedStrategyId || !t.strategyCards[this.selectedStrategyId]) {
-      this.selectedStrategyId = Object.keys(t.strategyCards)[0] || null;
+    // 策略高亮（Stage 10-P-B：Tile 网格）
+    if (!this.selectedStrategyId) this.selectedStrategyId = listStrategies()[0]?.id || null;
+    if (t.strategyGrid) {
+      t.strategyGrid.update(buildStrategyModels(state, this.selectedStrategyId));
+    } else {
+      if (!this.selectedStrategyId || !t.strategyCards[this.selectedStrategyId]) {
+        this.selectedStrategyId = Object.keys(t.strategyCards)[0] || null;
+      }
+      Object.keys(t.strategyCards).forEach((sid) => {
+        toggleClass(t.strategyCards[sid], 'is-active', sid === this.selectedStrategyId);
+      });
     }
-    Object.keys(t.strategyCards).forEach((sid) => {
-      toggleClass(t.strategyCards[sid], 'is-active', sid === this.selectedStrategyId);
-    });
     const curStrategy = listStrategies().find((s) => s.id === this.selectedStrategyId) || null;
     setText(t.dsStrategyTag, curStrategy ? curStrategy.name : '未选择');
 
@@ -2025,7 +2458,11 @@ export class UI {
     t.battleActions.hidden = !active.settled;
     if (t.skipReturnBtn) t.skipReturnBtn.hidden = !active.settled;
 
-    const sig = `${active.id}:${active.settled ? 1 : 0}`;
+    const salvage = active.battleSessionId ? deriveSalvageOffer(state, active.battleSessionId) : null;
+    const salvageSig = salvage?.ok
+      ? `${salvage.salvageId}:${salvage.offerHash}:${salvage.state}:${salvage.claim?.instanceId || ''}`
+      : `${salvage?.code || 'none'}:${salvage?.reason || ''}`;
+    const sig = `${active.id}:${active.settled ? 1 : 0}:${active.replayReadOnly ? 1 : 0}:${salvageSig}`;
     if (sig === t.sig.battle) return;
     t.sig.battle = sig;
 
@@ -2053,6 +2490,8 @@ export class UI {
     const granted = active.granted || {};
     mk('本次获得', Object.keys(granted).length ? formatMissionCost(granted) : '无（奖励已领取或未占领）');
 
+    this._renderBattleSalvage(t.result, state, active, salvage);
+
     const reasons = report.reasons || { advantages: [], problems: [] };
     if (reasons.advantages.length || reasons.problems.length) {
       const ul = el('ul', 'th-reasons');
@@ -2060,6 +2499,42 @@ export class UI {
       reasons.problems.forEach((x) => ul.appendChild(el('li', 'risk', x)));
       t.result.appendChild(ul);
     }
+  }
+
+  /** 战后打捞只消费 salvage 模块的重算结果，不在 UI 层推导概率或装备池。 */
+  _renderBattleSalvage(box, state, active, offer = null) {
+    const section = el('div', 'battle-salvage');
+    const head = el('div', 'section-head sub');
+    head.appendChild(el('span', '', '战场打捞'));
+    head.appendChild(el('span', 'tag', '结算后获取'));
+    section.appendChild(head);
+
+    if (!offer || !offer.ok) {
+      section.appendChild(el('div', 'hint', offer?.reason || '本次作战不适用战场打捞。'));
+      box.appendChild(section);
+      return;
+    }
+    if (offer.outcome !== 'equipment') {
+      section.appendChild(el('div', 'hint', '未发现可回收装备。'));
+      box.appendChild(section);
+      return;
+    }
+    const def = getEquipmentDefinition(offer.equipmentId);
+    const title = offer.claimed ? `已回收：${def?.name || offer.equipmentId}` : `发现：${def?.name || offer.equipmentId}`;
+    section.appendChild(el('div', offer.claimed ? 'hint good' : 'hint', title));
+    if (offer.claimed) {
+      section.appendChild(el('div', 'hint', '装备实例已写入库存，可在单位档案中挂载。'));
+    } else if (active.replayReadOnly !== true && active.settlementAllowed !== false && active.settled === true) {
+      const claim = el('button', 'btn primary', '回收装备');
+      claim.type = 'button';
+      claim.dataset.action = 'claim-battle-salvage';
+      claim.dataset.battleSessionId = active.battleSessionId || '';
+      claim.addEventListener('click', () => this._onTheaterAction('onClaimBattleSalvage', active.battleSessionId));
+      section.appendChild(claim);
+    } else {
+      section.appendChild(el('div', 'hint', '只读回放中不能领取战利品。'));
+    }
+    box.appendChild(section);
   }
 
   /** 按播放进度推断当前阶段文本 */
@@ -2160,7 +2635,45 @@ export class UI {
 
   _buildResearchPage(page) {
     const r = this.refs;
-    r.research = { cards: {}, branchLists: {} };
+    r.research = { cards: {}, branchList: {}, branchGrids: {} };
+
+    /* Stage 10-P-B：紧凑科技 Tile；效果 / 成本 / 前置进 Inspector */
+    const labHead = el('div', 'command-section-head');
+    labHead.appendChild(el('span', '', 'RESEARCH'));
+    r.research.labTag = el('small', '', '未建成');
+    labHead.appendChild(r.research.labTag);
+    page.appendChild(labHead);
+    r.research.labHint = el('div', 'command-gesture-hint', '技术实验室尚未建成');
+    page.appendChild(r.research.labHint);
+
+    const currentHead = el('div', 'command-section-head');
+    currentHead.appendChild(el('span', '', 'CURRENT'));
+    r.research.currentTag = el('small', '', '空闲');
+    currentHead.appendChild(r.research.currentTag);
+    page.appendChild(currentHead);
+    r.research.currentEmpty = el('div', 'command-empty', '实验室空闲，可从下方科技树选择研究');
+    page.appendChild(r.research.currentEmpty);
+    r.research.currentRoot = el('div', 'command-grid command-research-current');
+    page.appendChild(r.research.currentRoot);
+    r.research.currentGrid = this.commandSurface.createQueue(r.research.currentRoot, () => {});
+    r.research.queueRoot = el('div', 'command-grid command-repair-grid');
+    page.appendChild(r.research.queueRoot);
+    r.research.queueGrid = this.commandSurface.createQueue(r.research.queueRoot, () => {});
+
+    const tree = el('div', 'research-tree research-tree-compact');
+    ['industry', 'military', 'command'].forEach((branch) => {
+      const col = el('div', 'research-branch');
+      col.dataset.branch = branch;
+      col.appendChild(el('h4', '', { industry: '工业', military: '军备', command: '指挥' }[branch]));
+      r.research.branchList[branch] = el('div', 'research-branch-list');
+      r.research.branchGrids[branch] = this.commandSurface.createGrid(r.research.branchList[branch], (model) => this._onCommandPrimary(model));
+      col.appendChild(r.research.branchList[branch]);
+      tree.appendChild(col);
+    });
+    page.appendChild(tree);
+    page.appendChild(el('div', 'command-gesture-hint', '点击开始研究 · 悬浮成本与时长 · 长按详情'));
+    return;
+    {
     const lab = el('div', 'card research-lab');
     const head = el('div', 'card-head');
     head.appendChild(el('span', '', '实验室状态'));
@@ -2227,6 +2740,7 @@ export class UI {
     });
     page.appendChild(tree);
     page.appendChild(el('div', 'hint', '研究只影响新创建的生产与维修任务；战斗修正按当前科技动态生效。暂停时科研不会推进。'));
+    }
   }
 
   _costText(cost) {
@@ -2237,6 +2751,32 @@ export class UI {
     const r = this.refs.research;
     if (!r) return;
     const built = hasResearchCenter(state);
+
+    /* Stage 10-P-B path：科技 Tile 网格 */
+    if (r.branchGrids && r.branchGrids.industry) {
+      const models = buildResearchCommandModels(state);
+      r.labTag.textContent = built ? '运行中' : '未建成';
+      r.labHint.textContent = built
+        ? `队列 ${models.current.length + models.queue.length} / ${RESEARCH.maxQueueSize} · 已完成 ${((state.research && state.research.completed) || []).length} / 9`
+        : '技术实验室尚未建成。需要先完成雷达站，然后在建设页面批准技术实验室工程。';
+      r.currentTag.textContent = models.current.length ? '研究中' : '空闲';
+      const currentModels = [...models.current, ...models.queue];
+      r.currentGrid.update(currentModels);
+      r.currentEmpty.hidden = currentModels.length > 0;
+      /* Stage 10-P-B.1: CommandGrid.update(models) replaces the whole grid,
+       * so each branch grid must be updated exactly once with ALL of its
+       * tech tiles. Updating per tech dropped every earlier tile of the
+       * branch and left only the last tech per branch rendered. */
+      const branchTechIds = {};
+      Object.values(TECHNOLOGIES).forEach((tech) => {
+        (branchTechIds[tech.branch] = branchTechIds[tech.branch] || []).push(`research:${tech.id}`);
+      });
+      Object.keys(r.branchGrids).forEach((branch) => {
+        r.branchGrids[branch]?.update(models.tech.filter((model) => (branchTechIds[branch] || []).includes(model.id)));
+      });
+      return;
+    }
+
     r.labTag.textContent = built ? '运行中' : '未建成';
     r.labTag.className = `tag ${built ? 'ok' : 'warn'}`;
     const mods = getResearchModifiers(state);
@@ -2301,6 +2841,21 @@ export class UI {
     const r = this.refs;
     r.rp = { sig: {} };
 
+    /* Stage 10-P-B：紧凑战报 Tile，完整战报进 Inspector */
+    const statHead = el('div', 'command-section-head');
+    statHead.appendChild(el('span', '', 'BATTLE LOG'));
+    r.rp.statTag = el('small', '', '0 份');
+    statHead.appendChild(r.rp.statTag);
+    page.appendChild(statHead);
+    r.rp.empty = el('div', 'command-empty', '尚无战报。前往「战区」分页派遣编队出击后，战斗结束即可在此查看完整复盘。');
+    page.appendChild(r.rp.empty);
+    r.rp.gridRoot = el('div', 'command-grid command-report-grid');
+    r.rp.gridRoot.dataset.commandScope = 'reports';
+    page.appendChild(r.rp.gridRoot);
+    r.rp.grid = this.commandSurface.createGrid(r.rp.gridRoot, () => {});
+    page.appendChild(el('div', 'command-gesture-hint', '点击查看完整战报 · 悬浮要点 · 长按详情'));
+    return;
+
     const stat = el('div', 'card');
     const sHead = el('div', 'card-head');
     sHead.appendChild(el('span', '', '战斗统计'));
@@ -2344,7 +2899,35 @@ export class UI {
   /** 刷新战报页 */
   _updateReports(state) {
     const p = this.refs.rp;
-    if (!p || !p.list) return;
+    if (!p) return;
+
+    /* Stage 10-P-B path：紧凑历史记录，完整战报进 Inspector */
+    if (p.grid) {
+      const reports = getReports(state);
+      const stats = state.stats || {};
+      const capturedCount = Object.keys(THEATERS)
+        .filter((id) => state.theaters && state.theaters[id] && state.theaters[id].captured).length;
+      p.statTag.textContent = `${reports.length} 份 · 交战 ${formatInt(safeNumber(stats.battlesFought, 0))} · 占领 ${formatInt(safeNumber(stats.victories, 0))} · 战区 ${capturedCount}/${Object.keys(THEATERS).length}`;
+      const models = buildReportModels(state);
+      const active = getActiveBattle(state);
+      models.forEach((model) => {
+        const reportId = model.id.slice('report:'.length);
+        const session = Object.values(state?.battleSessions || {})
+          .find((row) => row && row.formalReportId === reportId);
+        const applied = Boolean(session?.settlementId && state?.battleSettlementLedger?.[session.settlementId]);
+        model.inspector.actions = [
+          { id: 'replay-report', label: '只读回放', payload: { reportId }, disabled: !applied || Boolean(active) },
+          ...(session && !active
+            ? [{ id: 'claim-battle-salvage', label: '回收装备', payload: { battleSessionId: session.battleSessionId } }]
+            : [])
+        ];
+      });
+      p.grid.update(models);
+      p.empty.hidden = models.length > 0;
+      return;
+    }
+
+    if (!p.list) return;
 
     const reports = getReports(state);
     const stats = state.stats || {};
@@ -2444,6 +3027,32 @@ export class UI {
       replay.addEventListener('click', () => this._onTheaterAction('onReplayReport', report.id));
       sessionBox.appendChild(replay);
       box.appendChild(sessionBox);
+
+      // 历史战报只读取同一正式会话的确定性打捞结果；不在 UI 层复制
+      // 掉落概率、装备池或资格判断。
+      const salvage = deriveSalvageOffer(state, session.battleSessionId);
+      const salvageBox = el('div', 'battle-salvage');
+      const salvageHead = el('div', 'section-head sub');
+      salvageHead.appendChild(el('span', '', '战场打捞历史'));
+      salvageHead.appendChild(el('span', 'tag', '正式结算后'));
+      salvageBox.appendChild(salvageHead);
+      if (!salvage.ok || salvage.outcome !== 'equipment') {
+        salvageBox.appendChild(el('div', 'hint', salvage.ok ? '本次未发现可回收装备。' : (salvage.reason || '本次作战不适用战场打捞。')));
+      } else {
+        const def = getEquipmentDefinition(salvage.equipmentId);
+        salvageBox.appendChild(el('div', salvage.claimed ? 'hint good' : 'hint', `${salvage.claimed ? '已回收' : '发现'}：${def?.name || salvage.equipmentId}`));
+        if (salvage.claimed) {
+          salvageBox.appendChild(el('div', 'hint', `历史实例 ${salvage.claim?.instanceId || salvage.instanceId}`));
+        } else if (!getActiveBattle(state)) {
+          const claim = el('button', 'btn primary', '回收装备');
+          claim.type = 'button'; claim.dataset.action = 'claim-battle-salvage'; claim.dataset.battleSessionId = session.battleSessionId;
+          claim.addEventListener('click', () => this._onTheaterAction('onClaimBattleSalvage', session.battleSessionId));
+          salvageBox.appendChild(claim);
+        } else {
+          salvageBox.appendChild(el('div', 'hint', '请在结算面板领取；只读回放中不能领取。'));
+        }
+      }
+      box.appendChild(salvageBox);
     }
 
     const mk = (label, value) => {
@@ -2549,6 +3158,46 @@ export class UI {
     const r = this.refs;
     r.repairs = {};
 
+    /* Stage 10-P-B：portrait Tile + 进度覆盖 + 紧凑队列 */
+    const shopHead = el('div', 'command-section-head');
+    shopHead.appendChild(el('span', '', 'REPAIR BAY'));
+    r.repairs.shopTag = el('small', '', '——');
+    shopHead.appendChild(r.repairs.shopTag);
+    page.appendChild(shopHead);
+    r.repairs.shopHint = el('div', 'command-gesture-hint', '');
+    page.appendChild(r.repairs.shopHint);
+
+    r.repairs.activeEmpty = el('div', 'command-empty', '当前没有进行中的维修');
+    page.appendChild(r.repairs.activeEmpty);
+    r.repairs.activeGridRoot = el('div', 'command-grid command-repair-grid');
+    page.appendChild(r.repairs.activeGridRoot);
+    r.repairs.activeGrid = this.commandSurface.createQueue(r.repairs.activeGridRoot, () => {});
+
+    const queueHead = el('div', 'command-section-head');
+    queueHead.appendChild(el('span', '', 'QUEUE'));
+    r.repairs.queueTag = el('small', '', '0');
+    queueHead.appendChild(r.repairs.queueTag);
+    page.appendChild(queueHead);
+    r.repairs.queueEmpty = el('div', 'command-empty', '等待队列为空');
+    page.appendChild(r.repairs.queueEmpty);
+    r.repairs.queueGridRoot = el('div', 'command-grid command-repair-grid');
+    page.appendChild(r.repairs.queueGridRoot);
+    r.repairs.queueGrid = this.commandSurface.createQueue(r.repairs.queueGridRoot, () => {});
+
+    const candHead = el('div', 'command-section-head');
+    candHead.appendChild(el('span', '', 'DAMAGED'));
+    r.repairs.candTag = el('small', '', '0');
+    candHead.appendChild(r.repairs.candTag);
+    page.appendChild(candHead);
+    r.repairs.candEmpty = el('div', 'command-empty', '所有单位状态完好，无需维修');
+    page.appendChild(r.repairs.candEmpty);
+    r.repairs.candGridRoot = el('div', 'command-grid command-roster-grid');
+    r.repairs.candGridRoot.dataset.commandScope = 'repairs';
+    page.appendChild(r.repairs.candGridRoot);
+    r.repairs.candGrid = this.commandSurface.createGrid(r.repairs.candGridRoot, (model) => this._onCommandPrimary(model));
+    page.appendChild(el('div', 'command-gesture-hint', '点击送修 · 悬浮费用与时长 · 长按详情'));
+    return;
+    {
     // —— 维修车间状态 ——
     const shop = el('div', 'card repair-shop');
     const shopHead = el('div', 'card-head');
@@ -2594,6 +3243,7 @@ export class UI {
     r.repairs.candList = el('div', 'repair-cand-list');
     candidates.appendChild(r.repairs.candList);
     page.appendChild(candidates);
+    }
   }
 
   /** 维修页内容刷新（结构变化时重建列表，进度变化只更新数字） */
@@ -2601,6 +3251,28 @@ export class UI {
     const r = this.refs;
     if (!r.repairs) return;
     const labels = this._damageLabel(state);
+
+    /* Stage 10-P-B path：Tile 网格，CommandGrid 自身按 id 增量刷新 */
+    if (r.repairs.candGrid) {
+      const models = buildRepairCommandModels(state);
+      const hasShop = hasRepairShop(state);
+      r.repairs.shopTag.textContent = hasShop
+        ? `已运行 · 工位 ${models.active.length}/${REPAIR.maxConcurrent}`
+        : '未建成（可先排队）';
+      r.repairs.shopHint.textContent = hasShop
+        ? `同时进行 ${REPAIR.maxConcurrent} 项维修，队列最多 ${REPAIR.maxQueueSize} 项`
+        : '建造「装甲工厂」后开启维修车间';
+      r.repairs.activeGrid.update(models.active);
+      r.repairs.activeEmpty.hidden = models.active.length > 0;
+      r.repairs.queueGrid.update(models.queued);
+      r.repairs.queueTag.textContent = `${models.queued.length}`;
+      r.repairs.queueEmpty.hidden = models.queued.length > 0;
+      r.repairs.candGrid.update(models.candidates);
+      r.repairs.candTag.textContent = `${models.candidates.length}`;
+      r.repairs.candEmpty.hidden = models.candidates.length > 0;
+      return;
+    }
+
 
     // 车间状态
     const hasShop = hasRepairShop(state);
@@ -2751,9 +3423,111 @@ export class UI {
     return row;
   }
 
+  /** 离线报告渲染（Stage 10-P-B：与新 Overview 共用） */
+  _updateOfflineBox(state, offlineBox) {
+    if (!offlineBox) return;
+    const o = state.offline;
+    if (o && o.shown !== true) {
+      offlineBox.hidden = false;
+      offlineBox.innerHTML = '';
+      const head = el('div', 'card-head');
+      head.appendChild(el('span', '', '离线报告'));
+      head.appendChild(el('span', `tag ${o.settled ? 'ok' : 'warn'}`, o.settled ? '已结算' : '未结算'));
+      offlineBox.appendChild(head);
+      const viewBtn = el('button', 'btn offline-view-btn', '查看报告');
+      viewBtn.type = 'button';
+      viewBtn.dataset.action = 'view-offline-report';
+      viewBtn.addEventListener('click', () => {
+        offlineBox.dataset.viewed = 'true';
+        viewBtn.hidden = true;
+      });
+      offlineBox.appendChild(viewBtn);
+      const durRow = el('div', 'kv');
+      durRow.appendChild(el('span', '', '离线时长'));
+      let durText = o.text || '';
+      if (o.capped && o.rawSeconds > o.seconds) durText += `（原 ${formatDuration(o.rawSeconds)}，已按上限截断）`;
+      durRow.appendChild(el('span', '', durText));
+      offlineBox.appendChild(durRow);
+      (o.lines || []).forEach((line) => offlineBox.appendChild(el('div', 'kv dim', line)));
+      const btnRow = el('div', 'offline-actions');
+      const btn = el('button', 'btn', '知道了');
+      btn.type = 'button';
+      btn.dataset.action = 'dismiss-offline-report';
+      btn.addEventListener('click', () => this.handlers.onDismissOfflineReport?.());
+      btnRow.appendChild(btn);
+      offlineBox.appendChild(btnRow);
+    } else if (!o) {
+      offlineBox.hidden = true;
+    }
+  }
+
   /** 基地概览页 */
   _buildOverview(page) {
     const r = this.refs;
+
+    /* Stage 10-P-B：Commander Overview —— 只保留需要立即关注的信息 */
+    const head = el('div', 'command-section-head ov-command-head');
+    head.appendChild(el('span', '', 'COMMAND OVERVIEW'));
+    r.briefTag = el('small', '', '战备就绪');
+    head.appendChild(r.briefTag);
+    page.appendChild(head);
+
+    r.ovStatus = el('div', 'ov-status-line', '—');
+    page.appendChild(r.ovStatus);
+
+    const opsHead = el('div', 'command-section-head');
+    opsHead.appendChild(el('span', '', 'ACTIVE OPERATIONS'));
+    opsHead.appendChild(el('small', '', '当前施工 / 生产 / 科研 / 维修 / 作战'));
+    page.appendChild(opsHead);
+    r.ovEmpty = el('div', 'command-empty', '基地待命，没有进行中的任务');
+    page.appendChild(r.ovEmpty);
+    r.ovGridRoot = el('div', 'command-grid command-overview-grid');
+    r.ovGridRoot.dataset.commandScope = 'overview';
+    page.appendChild(r.ovGridRoot);
+    r.ovGrid = this.commandSurface.createGrid(r.ovGridRoot, () => {});
+
+    /* Stage 10-C：COMMAND DOCTRINE —— 全局指挥方针（点击立即切换） */
+    const doctrineHead = el('div', 'command-section-head');
+    doctrineHead.appendChild(el('span', '', 'COMMAND DOCTRINE'));
+    doctrineHead.appendChild(el('small', '', '全局战略倾向 · 点击切换，立即生效'));
+    page.appendChild(doctrineHead);
+    r.ovDoctrineGridRoot = el('div', 'command-grid command-doctrine-grid');
+    r.ovDoctrineGridRoot.dataset.commandScope = 'doctrine';
+    page.appendChild(r.ovDoctrineGridRoot);
+    r.ovDoctrineGrid = this.commandSurface.createGrid(r.ovDoctrineGridRoot, (model) => this._onCommandPrimary(model));
+
+    /* Stage 10-D：AUTO OPERATIONS 总开关与只读计数 */
+    const autoHead = el('div', 'command-section-head');
+    autoHead.appendChild(el('span', '', 'AUTO OPERATIONS'));
+    autoHead.appendChild(el('small', '', '仅自动补充 PATROL / RECON / SECURITY'));
+    page.appendChild(autoHead);
+    r.ovAutoOperations = el('div', 'auto-operations-panel');
+    const autoCopy = el('div');
+    r.ovAutoStatus = el('div', 'auto-operations-status', 'DISABLED');
+    r.ovAutoMetrics = el('div', 'auto-operations-metrics', '自动管理 0 · AUTO HOLD 0');
+    autoCopy.appendChild(r.ovAutoStatus);
+    autoCopy.appendChild(r.ovAutoMetrics);
+    r.ovAutoOperations.appendChild(autoCopy);
+    r.ovAutoToggle = el('button', 'btn auto-operations-toggle', 'DISABLED');
+    r.ovAutoToggle.type = 'button';
+    r.ovAutoToggle.dataset.action = 'toggle-auto-operations';
+    r.ovAutoToggle.addEventListener('click', () => {
+      const summary = autoOperationsSummary(this._lastState);
+      this.handlers.onSetAutoOperations?.(!summary.enabled);
+    });
+    r.ovAutoOperations.appendChild(r.ovAutoToggle);
+    page.appendChild(r.ovAutoOperations);
+
+    r.ovWarnBox = el('div', 'ov-warnings');
+    page.appendChild(r.ovWarnBox);
+
+    // —— 离线提示（读档时显示） ——
+    r.offlineBox = el('div', 'card');
+    r.offlineBox.id = 'offline-report';
+    r.offlineBox.dataset.action = 'offline-report-view';
+    r.offlineBox.hidden = true;
+    page.appendChild(r.offlineBox);
+    return;
 
     // —— 指挥官简报 ——
     const brief = el('div', 'card');
@@ -3067,7 +3841,44 @@ export class UI {
 
   _updateOverview(state) {
     const r = this.refs;
-    if (!r.kvPlayed) return;
+    if (!r.kvPlayed && !r.ovGrid) return;
+
+    /* Stage 10-P-B path：Commander Overview */
+    if (r.ovGrid) {
+      const used = safeNumber(state.power.used, 0);
+      const produced = safeNumber(state.power.produced, 0);
+      const speed = safeNumber(state.time.speed, 1);
+      r.briefTag.textContent = used > produced ? '电力超载' : '战备就绪';
+      setText(r.ovStatus,
+        `运行 ${formatDuration(state.time.played)} · ${speed === 0 ? '已暂停' : `${speed}× 速度`}`
+        + ` · 电力 ${formatInt(used)}/${formatInt(produced)}`
+        + ` · 指挥 ${formatInt(safeNumber(state.command.used, 0))}/${formatInt(safeNumber(state.command.capacity, 0))}`
+        + ` · 上次保存 ${state.savedAt ? formatWallClock(state.savedAt) : '尚未保存'}`);
+      const models = buildOverviewCommandModels(state);
+      r.ovGrid.update(models);
+      r.ovEmpty.hidden = models.length > 1;
+      if (r.ovDoctrineGrid) r.ovDoctrineGrid.update(buildDoctrineModels(state));
+      if (r.ovAutoToggle) {
+        const auto = autoOperationsSummary(state);
+        setText(r.ovAutoStatus, auto.enabled ? 'ENABLED · 自动补充空闲编队任务' : 'DISABLED · 不产生任何自动行为');
+        setText(r.ovAutoMetrics, `自动管理 ${auto.autoManaged} · AUTO HOLD ${auto.manualHold}`);
+        setText(r.ovAutoToggle, auto.enabled ? 'ENABLED' : 'DISABLED');
+        r.ovAutoToggle.classList.toggle('is-enabled', auto.enabled);
+        r.ovAutoToggle.setAttribute('aria-pressed', auto.enabled ? 'true' : 'false');
+      }
+      const warns = [];
+      if (used > produced) warns.push('电力超载：部分设施效率下降，请增建发电设施。');
+      if (!hasRepairShop(state) && (state.units || []).some((u) => u.status === 'repairing')) warns.push('维修车间未建成，维修队列不会推进。');
+      if ((getQueuedRepairs(state) || []).length >= REPAIR.maxQueueSize) warns.push('维修等待队列已满。');
+      const warnSig = warns.join('|');
+      if (this._ovWarnSig !== warnSig) {
+        this._ovWarnSig = warnSig;
+        r.ovWarnBox.innerHTML = '';
+        warns.forEach((text) => r.ovWarnBox.appendChild(el('div', 'bc-reason', text)));
+      }
+      this._updateOfflineBox(state, r.offlineBox);
+      return;
+    }
 
     setText(r.kvPlayed, formatDuration(state.time.played));
     const operational = state.buildings.filter((b) => b.status === BUILDING_STATUS.OPERATIONAL).length;

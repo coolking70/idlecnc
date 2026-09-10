@@ -1,0 +1,15 @@
+{
+  "stage": "9-A",
+  "passed": true,
+  "legacyMissingTheaters": [
+    "river_crossing",
+    "relay_station",
+    "mountain_pass"
+  ],
+  "legacyMissingOperations": [
+    "river_ferry",
+    "relay_intercept",
+    "pass_patrol"
+  ],
+  "newTheatersUncaptured": true
+}

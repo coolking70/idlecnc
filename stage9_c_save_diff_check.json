@@ -1,0 +1,26 @@
+{
+  "stage": "9-C.1",
+  "independentRecompute": true,
+  "mountChangedPaths": [
+    "equipment.bindings.stage9-c-diff-unit"
+  ],
+  "mountAllowedOnlyEquipment": true,
+  "formalBattleSettlementChangedPaths": [],
+  "forbiddenPaths": [
+    "battleSessions",
+    "battleSettlementLedger",
+    "battles",
+    "formations",
+    "settings",
+    "theaters",
+    "research",
+    "buildings"
+  ],
+  "productionOutputPaths": [
+    "resources",
+    "production",
+    "equipment",
+    "stats.equipmentBuilt",
+    "log"
+  ]
+}

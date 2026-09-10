@@ -1,0 +1,56 @@
+name: stage10-p-a-command-ui
+
+on:
+  push:
+    branches:
+      - auto/stage10-p-a-command-ui-foundation
+      - auto/stage10-p-a1-downstream-regression-final-closure
+  # Run on every pull request regardless of base branch. This gate previously
+  # filtered to `branches: [main]`, so the Stage 10-A through 10-E pull requests
+  # — which all targeted non-main bases — never executed it. Seven stages of
+  # breakage accumulated invisibly and only surfaced when the integrated line
+  # was first proposed against main. A gate that only guards one base branch
+  # does not guard a stacked-branch workflow.
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  command-ui-gate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 70
+    steps:
+      - name: Checkout exact workflow head
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.23.1
+      - name: Install project runtime
+        run: npm install --ignore-scripts --no-audit --no-fund
+      - name: Historical core regression
+        run: node tests/record-stage10-P-A-runtime-gate.mjs historical-core-regression -- npm run --ignore-scripts test
+      - name: Stage 9 relevant regression
+        run: node tests/record-stage10-P-A-runtime-gate.mjs stage9-relevant-regression -- npm run test:stage9-E:fast
+      - name: Restore accepted historical evidence bytes
+        run: node tests/stage9-E1-restore-historical-evidence.mjs
+      - name: Stage 10-P-A focused unit and canonical equivalence
+        run: node tests/record-stage10-P-A-runtime-gate.mjs stage10-focused-tests -- npm run test:stage10-P-A
+      - name: Stage 10-P-A real browser evidence
+        run: node tests/record-stage10-P-A-runtime-gate.mjs stage10-browser -- npm run browser:stage10-P-A
+      - name: Stage 10-P-A strong verifier and tamper corpus
+        run: node tests/record-stage10-P-A-runtime-gate.mjs stage10-strong-verifier -- npm run verify:stage10-P-A
+      - name: Stage 10-P-A final runtime closure
+        run: node tests/generate-stage10-P-A-final-closure.mjs
+      - name: Upload Stage 10-P-A audit evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: stage10-p-a1-closure-${{ github.sha }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            evidence/stage10-P-A/
+            screenshots/stage10-P-A/
+            STAGE10-P-A-SELFCHECK.json
+          if-no-files-found: error
+          retention-days: 30

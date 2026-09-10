@@ -12,3 +12,8 @@ tests/evidence/
 stage8_*.json
 **/audits/
 experiments/battle-sandbox/universal-planner/scenarios/fuzz.json
+# CNB Preview runtime artifacts (never tracked)
+.preview-logs/
+.preview-status.json
+/tmp/openmmo-nginx.pid
+/tmp/openmmo-nginx-error.log

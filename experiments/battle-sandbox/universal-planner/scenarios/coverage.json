@@ -5,57 +5,66 @@
   "canonical": {
     "total": 120,
     "byTerrain": {
-      "fortified": 7,
-      "open": 90,
-      "road": 23
+      "fortified": 11,
+      "open": 82,
+      "road": 27
     },
     "byMissionKind": {
-      "campaign": 105,
-      "operation": 15
+      "campaign": 103,
+      "operation": 17
     },
     "byMissionId": {
       "border_road": 17,
-      "convoy_escort": 6,
-      "enemy_outpost": 4,
-      "outpost_sweep": 3,
-      "salvage_run": 6,
-      "scrap_mine": 84
+      "convoy_escort": 5,
+      "enemy_outpost": 5,
+      "mountain_pass": 2,
+      "outpost_sweep": 2,
+      "pass_patrol": 2,
+      "relay_intercept": 2,
+      "relay_station": 3,
+      "river_crossing": 4,
+      "river_ferry": 1,
+      "salvage_run": 5,
+      "scrap_mine": 72
     },
     "byStrategy": {
-      "breakthrough": 43,
-      "cautious": 67,
+      "breakthrough": 30,
+      "cautious": 80,
       "recon_by_fire": 10
     },
     "byResult": {
       "defeat": 11,
-      "pyrrhic": 11,
-      "victory": 50,
-      "wiped": 24,
-      "withdraw": 24
+      "pyrrhic": 12,
+      "victory": 41,
+      "wiped": 33,
+      "withdraw": 23
     },
     "byArchetype": {
-      "armor_heavy": 8,
-      "infantry_heavy": 49,
-      "light_force": 52,
-      "recon_heavy": 4,
-      "support_heavy": 7
+      "armor_heavy": 7,
+      "infantry_heavy": 39,
+      "light_force": 65,
+      "recon_heavy": 3,
+      "support_heavy": 6
     },
     "byFriendlyActorCount": {
-      "1": 20,
-      "2": 32,
-      "3": 24,
-      "4": 18,
-      "5": 19,
-      "6": 5,
-      "8": 2
+      "1": 27,
+      "2": 38,
+      "3": 21,
+      "4": 11,
+      "5": 16,
+      "6": 4,
+      "8": 3
     },
     "byEnemyActorCount": {
-      "2": 6,
-      "3": 84,
-      "4": 6,
-      "6": 17,
-      "7": 3,
-      "10": 4
+      "2": 5,
+      "3": 76,
+      "4": 5,
+      "5": 2,
+      "6": 21,
+      "7": 2,
+      "8": 2,
+      "9": 2,
+      "10": 5
     },
     "friendTypesSequences": [
       "at_infantry,at_infantry,repair_vehicle",
@@ -101,36 +110,36 @@
       "scout_car,scout_car,mbt,repair_vehicle"
     ],
     "ambushed": {
-      "true": 19,
-      "false": 101
+      "true": 24,
+      "false": 96
     },
     "enemyRevealed": {
-      "true": 75,
-      "false": 45
+      "true": 68,
+      "false": 52
     },
     "revealHighThreat": {
-      "true": 18,
-      "false": 102
+      "true": 20,
+      "false": 100
     },
     "repairEvents": {
-      "present": 7,
-      "absent": 113
+      "present": 6,
+      "absent": 114
     },
     "friendlyLoss": {
-      "present": 60,
-      "absent": 60
+      "present": 63,
+      "absent": 57
     },
     "enemyArmor": {
-      "present": 7,
-      "absent": 113
+      "present": 16,
+      "absent": 104
     },
     "initialDamage": {
-      "present": 4,
-      "absent": 116
+      "present": 2,
+      "absent": 118
     },
     "experiencedUnits": {
-      "present": 4,
-      "absent": 116
+      "present": 2,
+      "absent": 118
     },
     "planFailures": [],
     "continuousLayoutFailures": [],
@@ -140,20 +149,26 @@
     "total": 1000,
     "byTerrain": {
       "fortified": 333,
-      "open": 333,
-      "road": 334
+      "open": 334,
+      "road": 333
     },
     "byMissionKind": {
       "campaign": 500,
       "operation": 500
     },
     "byMissionId": {
-      "border_road": 167,
-      "convoy_escort": 167,
-      "enemy_outpost": 166,
-      "outpost_sweep": 167,
-      "salvage_run": 166,
-      "scrap_mine": 167
+      "border_road": 84,
+      "convoy_escort": 83,
+      "enemy_outpost": 83,
+      "mountain_pass": 83,
+      "outpost_sweep": 83,
+      "pass_patrol": 84,
+      "relay_intercept": 83,
+      "relay_station": 84,
+      "river_crossing": 83,
+      "river_ferry": 83,
+      "salvage_run": 84,
+      "scrap_mine": 83
     },
     "byStrategy": {
       "breakthrough": 333,
@@ -162,15 +177,14 @@
     },
     "byResult": {
       "defeat": 19,
-      "pyrrhic": 33,
-      "victory": 293,
-      "wiped": 486,
-      "withdraw": 169
+      "pyrrhic": 26,
+      "victory": 208,
+      "wiped": 511,
+      "withdraw": 236
     },
     "byArchetype": {
-      "armor_heavy": 1,
-      "balanced": 16,
-      "infantry_heavy": 591,
+      "balanced": 15,
+      "infantry_heavy": 593,
       "light_force": 265,
       "recon_heavy": 64,
       "support_heavy": 63
@@ -186,12 +200,15 @@
       "8": 125
     },
     "byEnemyActorCount": {
-      "2": 166,
-      "3": 167,
-      "4": 167,
-      "6": 167,
-      "7": 167,
-      "10": 166
+      "2": 84,
+      "3": 166,
+      "4": 83,
+      "5": 83,
+      "6": 251,
+      "7": 83,
+      "8": 83,
+      "9": 84,
+      "10": 83
     },
     "friendTypesSequences": [
       "at_infantry",
@@ -857,28 +874,28 @@
       "scout_car,scout_car,scout_car,scout_car,scout_car,infantry,repair_vehicle"
     ],
     "ambushed": {
-      "true": 187,
-      "false": 813
+      "true": 234,
+      "false": 766
     },
     "enemyRevealed": {
-      "true": 801,
-      "false": 199
+      "true": 739,
+      "false": 261
     },
     "revealHighThreat": {
-      "true": 589,
-      "false": 411
+      "true": 619,
+      "false": 381
     },
     "repairEvents": {
-      "present": 359,
-      "absent": 641
+      "present": 364,
+      "absent": 636
     },
     "friendlyLoss": {
-      "present": 819,
-      "absent": 181
+      "present": 888,
+      "absent": 112
     },
     "enemyArmor": {
-      "present": 333,
-      "absent": 667
+      "present": 500,
+      "absent": 500
     },
     "initialDamage": {
       "present": 941,
@@ -895,59 +912,68 @@
   "total": {
     "total": 1120,
     "byTerrain": {
-      "fortified": 340,
-      "open": 423,
-      "road": 357
+      "fortified": 344,
+      "open": 416,
+      "road": 360
     },
     "byMissionKind": {
-      "campaign": 605,
-      "operation": 515
+      "campaign": 603,
+      "operation": 517
     },
     "byMissionId": {
-      "border_road": 184,
-      "convoy_escort": 173,
-      "enemy_outpost": 170,
-      "outpost_sweep": 170,
-      "salvage_run": 172,
-      "scrap_mine": 251
+      "border_road": 101,
+      "convoy_escort": 88,
+      "enemy_outpost": 88,
+      "mountain_pass": 85,
+      "outpost_sweep": 85,
+      "pass_patrol": 86,
+      "relay_intercept": 85,
+      "relay_station": 87,
+      "river_crossing": 87,
+      "river_ferry": 84,
+      "salvage_run": 89,
+      "scrap_mine": 155
     },
     "byStrategy": {
-      "breakthrough": 376,
-      "cautious": 400,
+      "breakthrough": 363,
+      "cautious": 413,
       "recon_by_fire": 344
     },
     "byResult": {
       "defeat": 30,
-      "pyrrhic": 44,
-      "victory": 343,
-      "wiped": 510,
-      "withdraw": 193
+      "pyrrhic": 38,
+      "victory": 249,
+      "wiped": 544,
+      "withdraw": 259
     },
     "byArchetype": {
-      "armor_heavy": 9,
-      "balanced": 16,
-      "infantry_heavy": 640,
-      "light_force": 317,
-      "recon_heavy": 68,
-      "support_heavy": 70
+      "armor_heavy": 7,
+      "balanced": 15,
+      "infantry_heavy": 632,
+      "light_force": 330,
+      "recon_heavy": 67,
+      "support_heavy": 69
     },
     "byFriendlyActorCount": {
-      "1": 140,
-      "2": 177,
-      "3": 144,
-      "4": 143,
-      "5": 139,
-      "6": 130,
+      "1": 147,
+      "2": 183,
+      "3": 141,
+      "4": 136,
+      "5": 136,
+      "6": 129,
       "7": 120,
-      "8": 127
+      "8": 128
     },
     "byEnemyActorCount": {
-      "2": 172,
-      "3": 251,
-      "4": 173,
-      "6": 184,
-      "7": 170,
-      "10": 170
+      "2": 89,
+      "3": 242,
+      "4": 88,
+      "5": 85,
+      "6": 272,
+      "7": 85,
+      "8": 85,
+      "9": 86,
+      "10": 88
     },
     "friendTypesSequences": [
       "at_infantry",
@@ -1641,36 +1667,36 @@
       "scout_car,scout_car,scout_car,scout_car,scout_car,infantry,repair_vehicle"
     ],
     "ambushed": {
-      "true": 206,
-      "false": 914
+      "true": 258,
+      "false": 862
     },
     "enemyRevealed": {
-      "true": 876,
-      "false": 244
+      "true": 807,
+      "false": 313
     },
     "revealHighThreat": {
-      "true": 607,
-      "false": 513
+      "true": 639,
+      "false": 481
     },
     "repairEvents": {
-      "present": 366,
-      "absent": 754
+      "present": 370,
+      "absent": 750
     },
     "friendlyLoss": {
-      "present": 879,
-      "absent": 241
+      "present": 951,
+      "absent": 169
     },
     "enemyArmor": {
-      "present": 340,
-      "absent": 780
+      "present": 516,
+      "absent": 604
     },
     "initialDamage": {
-      "present": 945,
-      "absent": 175
+      "present": 943,
+      "absent": 177
     },
     "experiencedUnits": {
-      "present": 1003,
-      "absent": 117
+      "present": 1001,
+      "absent": 119
     },
     "planFailures": [],
     "continuousLayoutFailures": [],
@@ -1682,7 +1708,13 @@
       "border_road",
       "convoy_escort",
       "enemy_outpost",
+      "mountain_pass",
       "outpost_sweep",
+      "pass_patrol",
+      "relay_intercept",
+      "relay_station",
+      "river_crossing",
+      "river_ferry",
       "salvage_run",
       "scrap_mine"
     ],
@@ -1693,8 +1725,8 @@
       "defeat",
       "wiped"
     ],
-    "totalCells": 30,
-    "coveredCells": 26,
+    "totalCells": 60,
+    "coveredCells": 44,
     "unobservedCells": [
       {
         "missionId": "enemy_outpost",
@@ -1705,8 +1737,56 @@
         "result": "pyrrhic"
       },
       {
+        "missionId": "enemy_outpost",
+        "result": "defeat"
+      },
+      {
+        "missionId": "mountain_pass",
+        "result": "victory"
+      },
+      {
+        "missionId": "mountain_pass",
+        "result": "pyrrhic"
+      },
+      {
         "missionId": "outpost_sweep",
         "result": "victory"
+      },
+      {
+        "missionId": "outpost_sweep",
+        "result": "pyrrhic"
+      },
+      {
+        "missionId": "outpost_sweep",
+        "result": "defeat"
+      },
+      {
+        "missionId": "pass_patrol",
+        "result": "victory"
+      },
+      {
+        "missionId": "pass_patrol",
+        "result": "pyrrhic"
+      },
+      {
+        "missionId": "relay_intercept",
+        "result": "victory"
+      },
+      {
+        "missionId": "relay_intercept",
+        "result": "pyrrhic"
+      },
+      {
+        "missionId": "relay_intercept",
+        "result": "defeat"
+      },
+      {
+        "missionId": "relay_station",
+        "result": "defeat"
+      },
+      {
+        "missionId": "river_crossing",
+        "result": "defeat"
       },
       {
         "missionId": "salvage_run",
@@ -1717,13 +1797,11 @@
       {
         "missionId": "border_road",
         "result": "victory",
-        "total": 3,
+        "total": 1,
         "canonical": 0,
-        "fuzz": 3,
+        "fuzz": 1,
         "sampleReportIds": [
-          "battle_1103_corpus-fuzz-103_border_road_recon_by_fire",
-          "battle_1205_corpus-fuzz-205_border_road_recon_by_fire",
-          "battle_1511_corpus-fuzz-511_border_road_recon_by_fire"
+          "battle_1205_corpus-fuzz-205_border_road_recon_by_fire"
         ]
       },
       {
@@ -1740,21 +1818,21 @@
       {
         "missionId": "border_road",
         "result": "withdraw",
-        "total": 62,
+        "total": 22,
         "canonical": 1,
-        "fuzz": 61,
+        "fuzz": 21,
         "sampleReportIds": [
           "battle_149_corpus-candidate-135_border_road_cautious",
-          "battle_1007_corpus-fuzz-7_border_road_recon_by_fire",
-          "battle_1031_corpus-fuzz-31_border_road_recon_by_fire"
+          "battle_1037_corpus-fuzz-37_border_road_recon_by_fire",
+          "battle_1061_corpus-fuzz-61_border_road_recon_by_fire"
         ]
       },
       {
         "missionId": "border_road",
         "result": "defeat",
-        "total": 18,
+        "total": 12,
         "canonical": 8,
-        "fuzz": 10,
+        "fuzz": 4,
         "sampleReportIds": [
           "battle_84_corpus-candidate-130_border_road_cautious",
           "battle_266_corpus-candidate-144_border_road_cautious",
@@ -1764,9 +1842,9 @@
       {
         "missionId": "border_road",
         "result": "wiped",
-        "total": 99,
+        "total": 64,
         "canonical": 8,
-        "fuzz": 91,
+        "fuzz": 56,
         "sampleReportIds": [
           "battle_6_corpus-candidate-124_border_road_cautious",
           "battle_19_corpus-candidate-125_border_road_cautious",
@@ -1776,60 +1854,61 @@
       {
         "missionId": "convoy_escort",
         "result": "victory",
-        "total": 70,
+        "total": 32,
         "canonical": 1,
-        "fuzz": 69,
+        "fuzz": 31,
         "sampleReportIds": [
-          "battle_125_corpus-candidate-501_operation_convoy_escort_cautious",
-          "battle_1004_corpus-fuzz-4_operation_convoy_escort_recon_by_fire",
-          "battle_1016_corpus-fuzz-16_operation_convoy_escort_recon_by_fire"
+          "battle_140_corpus-candidate-870_operation_convoy_escort_cautious",
+          "battle_1007_corpus-fuzz-7_operation_convoy_escort_recon_by_fire",
+          "battle_1031_corpus-fuzz-31_operation_convoy_escort_recon_by_fire"
         ]
       },
       {
         "missionId": "convoy_escort",
         "result": "pyrrhic",
-        "total": 11,
-        "canonical": 1,
-        "fuzz": 10,
+        "total": 9,
+        "canonical": 0,
+        "fuzz": 9,
         "sampleReportIds": [
-          "battle_138_corpus-candidate-543_operation_convoy_escort_breakthrough",
-          "battle_1100_corpus-fuzz-100_operation_convoy_escort_recon_by_fire",
-          "battle_1154_corpus-fuzz-154_operation_convoy_escort_recon_by_fire"
+          "battle_1163_corpus-fuzz-163_operation_convoy_escort_recon_by_fire",
+          "battle_1427_corpus-fuzz-427_operation_convoy_escort_recon_by_fire",
+          "battle_1463_corpus-fuzz-463_operation_convoy_escort_recon_by_fire"
         ]
       },
       {
         "missionId": "convoy_escort",
         "result": "withdraw",
-        "total": 45,
+        "total": 20,
         "canonical": 1,
-        "fuzz": 44,
+        "fuzz": 19,
         "sampleReportIds": [
-          "battle_47_corpus-candidate-495_operation_convoy_escort_cautious",
-          "battle_1028_corpus-fuzz-28_operation_convoy_escort_recon_by_fire",
-          "battle_1064_corpus-fuzz-64_operation_convoy_escort_recon_by_fire"
+          "battle_62_corpus-candidate-864_operation_convoy_escort_cautious",
+          "battle_1019_corpus-fuzz-19_operation_convoy_escort_recon_by_fire",
+          "battle_1091_corpus-fuzz-91_operation_convoy_escort_recon_by_fire"
         ]
       },
       {
         "missionId": "convoy_escort",
         "result": "defeat",
-        "total": 2,
+        "total": 4,
         "canonical": 0,
-        "fuzz": 2,
+        "fuzz": 4,
         "sampleReportIds": [
-          "battle_1226_corpus-fuzz-226_operation_convoy_escort_recon_by_fire",
-          "battle_1724_corpus-fuzz-724_operation_convoy_escort_recon_by_fire"
+          "battle_1451_corpus-fuzz-451_operation_convoy_escort_recon_by_fire",
+          "battle_1475_corpus-fuzz-475_operation_convoy_escort_recon_by_fire",
+          "battle_1523_corpus-fuzz-523_operation_convoy_escort_recon_by_fire"
         ]
       },
       {
         "missionId": "convoy_escort",
         "result": "wiped",
-        "total": 45,
+        "total": 23,
         "canonical": 3,
-        "fuzz": 42,
+        "fuzz": 20,
         "sampleReportIds": [
-          "battle_21_corpus-candidate-493_operation_convoy_escort_cautious",
-          "battle_34_corpus-candidate-494_operation_convoy_escort_cautious",
-          "battle_60_corpus-candidate-496_operation_convoy_escort_cautious"
+          "battle_36_corpus-candidate-862_operation_convoy_escort_cautious",
+          "battle_49_corpus-candidate-863_operation_convoy_escort_cautious",
+          "battle_75_corpus-candidate-865_operation_convoy_escort_cautious"
         ]
       },
       {
@@ -1852,28 +1931,26 @@
         "missionId": "enemy_outpost",
         "result": "withdraw",
         "total": 1,
-        "canonical": 0,
-        "fuzz": 1,
+        "canonical": 1,
+        "fuzz": 0,
         "sampleReportIds": [
-          "battle_1528_corpus-fuzz-528_enemy_outpost_breakthrough"
+          "battle_193_corpus-candidate-261_enemy_outpost_cautious"
         ]
       },
       {
         "missionId": "enemy_outpost",
         "result": "defeat",
-        "total": 1,
+        "total": 0,
         "canonical": 0,
-        "fuzz": 1,
-        "sampleReportIds": [
-          "battle_1096_corpus-fuzz-96_enemy_outpost_breakthrough"
-        ]
+        "fuzz": 0,
+        "sampleReportIds": []
       },
       {
         "missionId": "enemy_outpost",
         "result": "wiped",
-        "total": 168,
+        "total": 87,
         "canonical": 4,
-        "fuzz": 164,
+        "fuzz": 83,
         "sampleReportIds": [
           "battle_11_corpus-candidate-247_enemy_outpost_cautious",
           "battle_24_corpus-candidate-248_enemy_outpost_cautious",
@@ -1881,6 +1958,56 @@
         ]
       },
       {
+        "missionId": "mountain_pass",
+        "result": "victory",
+        "total": 0,
+        "canonical": 0,
+        "fuzz": 0,
+        "sampleReportIds": []
+      },
+      {
+        "missionId": "mountain_pass",
+        "result": "pyrrhic",
+        "total": 0,
+        "canonical": 0,
+        "fuzz": 0,
+        "sampleReportIds": []
+      },
+      {
+        "missionId": "mountain_pass",
+        "result": "withdraw",
+        "total": 16,
+        "canonical": 0,
+        "fuzz": 16,
+        "sampleReportIds": [
+          "battle_1069_corpus-fuzz-69_mountain_pass_breakthrough",
+          "battle_1117_corpus-fuzz-117_mountain_pass_breakthrough",
+          "battle_1333_corpus-fuzz-333_mountain_pass_breakthrough"
+        ]
+      },
+      {
+        "missionId": "mountain_pass",
+        "result": "defeat",
+        "total": 1,
+        "canonical": 0,
+        "fuzz": 1,
+        "sampleReportIds": [
+          "battle_1201_corpus-fuzz-201_mountain_pass_breakthrough"
+        ]
+      },
+      {
+        "missionId": "mountain_pass",
+        "result": "wiped",
+        "total": 68,
+        "canonical": 2,
+        "fuzz": 66,
+        "sampleReportIds": [
+          "battle_26_corpus-candidate-616_mountain_pass_cautious",
+          "battle_39_corpus-candidate-617_mountain_pass_cautious",
+          "battle_1009_corpus-fuzz-9_mountain_pass_breakthrough"
+        ]
+      },
+      {
         "missionId": "outpost_sweep",
         "result": "victory",
         "total": 0,
@@ -1891,83 +2018,343 @@
       {
         "missionId": "outpost_sweep",
         "result": "pyrrhic",
-        "total": 1,
-        "canonical": 1,
+        "total": 0,
+        "canonical": 0,
         "fuzz": 0,
+        "sampleReportIds": []
+      },
+      {
+        "missionId": "outpost_sweep",
+        "result": "withdraw",
+        "total": 37,
+        "canonical": 0,
+        "fuzz": 37,
         "sampleReportIds": [
-          "battle_234_corpus-candidate-673_operation_outpost_sweep_breakthrough"
+          "battle_1024_corpus-fuzz-24_operation_outpost_sweep_breakthrough",
+          "battle_1048_corpus-fuzz-48_operation_outpost_sweep_breakthrough",
+          "battle_1072_corpus-fuzz-72_operation_outpost_sweep_breakthrough"
         ]
       },
       {
         "missionId": "outpost_sweep",
+        "result": "defeat",
+        "total": 0,
+        "canonical": 0,
+        "fuzz": 0,
+        "sampleReportIds": []
+      },
+      {
+        "missionId": "outpost_sweep",
+        "result": "wiped",
+        "total": 48,
+        "canonical": 2,
+        "fuzz": 46,
+        "sampleReportIds": [
+          "battle_41_corpus-candidate-985_operation_outpost_sweep_cautious",
+          "battle_54_corpus-candidate-986_operation_outpost_sweep_cautious",
+          "battle_1012_corpus-fuzz-12_operation_outpost_sweep_breakthrough"
+        ]
+      },
+      {
+        "missionId": "pass_patrol",
+        "result": "victory",
+        "total": 0,
+        "canonical": 0,
+        "fuzz": 0,
+        "sampleReportIds": []
+      },
+      {
+        "missionId": "pass_patrol",
+        "result": "pyrrhic",
+        "total": 0,
+        "canonical": 0,
+        "fuzz": 0,
+        "sampleReportIds": []
+      },
+      {
+        "missionId": "pass_patrol",
+        "result": "withdraw",
+        "total": 2,
+        "canonical": 0,
+        "fuzz": 2,
+        "sampleReportIds": [
+          "battle_1375_corpus-fuzz-375_operation_pass_patrol_breakthrough",
+          "battle_1783_corpus-fuzz-783_operation_pass_patrol_breakthrough"
+        ]
+      },
+      {
+        "missionId": "pass_patrol",
+        "result": "defeat",
+        "total": 7,
+        "canonical": 0,
+        "fuzz": 7,
+        "sampleReportIds": [
+          "battle_1051_corpus-fuzz-51_operation_pass_patrol_breakthrough",
+          "battle_1315_corpus-fuzz-315_operation_pass_patrol_breakthrough",
+          "battle_1351_corpus-fuzz-351_operation_pass_patrol_breakthrough"
+        ]
+      },
+      {
+        "missionId": "pass_patrol",
+        "result": "wiped",
+        "total": 77,
+        "canonical": 2,
+        "fuzz": 75,
+        "sampleReportIds": [
+          "battle_56_corpus-candidate-1354_operation_pass_patrol_cautious",
+          "battle_69_corpus-candidate-1355_operation_pass_patrol_cautious",
+          "battle_1003_corpus-fuzz-3_operation_pass_patrol_breakthrough"
+        ]
+      },
+      {
+        "missionId": "relay_intercept",
+        "result": "victory",
+        "total": 0,
+        "canonical": 0,
+        "fuzz": 0,
+        "sampleReportIds": []
+      },
+      {
+        "missionId": "relay_intercept",
+        "result": "pyrrhic",
+        "total": 0,
+        "canonical": 0,
+        "fuzz": 0,
+        "sampleReportIds": []
+      },
+      {
+        "missionId": "relay_intercept",
+        "result": "withdraw",
+        "total": 3,
+        "canonical": 0,
+        "fuzz": 3,
+        "sampleReportIds": [
+          "battle_1358_corpus-fuzz-358_operation_relay_intercept_recon_by_fire",
+          "battle_1478_corpus-fuzz-478_operation_relay_intercept_recon_by_fire",
+          "battle_1766_corpus-fuzz-766_operation_relay_intercept_recon_by_fire"
+        ]
+      },
+      {
+        "missionId": "relay_intercept",
+        "result": "defeat",
+        "total": 0,
+        "canonical": 0,
+        "fuzz": 0,
+        "sampleReportIds": []
+      },
+      {
+        "missionId": "relay_intercept",
+        "result": "wiped",
+        "total": 82,
+        "canonical": 2,
+        "fuzz": 80,
+        "sampleReportIds": [
+          "battle_51_corpus-candidate-1231_operation_relay_intercept_cautious",
+          "battle_64_corpus-candidate-1232_operation_relay_intercept_cautious",
+          "battle_1010_corpus-fuzz-10_operation_relay_intercept_recon_by_fire"
+        ]
+      },
+      {
+        "missionId": "relay_station",
+        "result": "victory",
+        "total": 1,
+        "canonical": 0,
+        "fuzz": 1,
+        "sampleReportIds": [
+          "battle_1052_corpus-fuzz-52_relay_station_recon_by_fire"
+        ]
+      },
+      {
+        "missionId": "relay_station",
+        "result": "pyrrhic",
+        "total": 4,
+        "canonical": 2,
+        "fuzz": 2,
+        "sampleReportIds": [
+          "battle_125_corpus-candidate-501_relay_station_cautious",
+          "battle_125_corpus-candidate-583_relay_station_recon_by_fire",
+          "battle_1796_corpus-fuzz-796_relay_station_recon_by_fire"
+        ]
+      },
+      {
+        "missionId": "relay_station",
+        "result": "withdraw",
+        "total": 54,
+        "canonical": 0,
+        "fuzz": 54,
+        "sampleReportIds": [
+          "battle_1004_corpus-fuzz-4_relay_station_recon_by_fire",
+          "battle_1016_corpus-fuzz-16_relay_station_recon_by_fire",
+          "battle_1040_corpus-fuzz-40_relay_station_recon_by_fire"
+        ]
+      },
+      {
+        "missionId": "relay_station",
+        "result": "defeat",
+        "total": 0,
+        "canonical": 0,
+        "fuzz": 0,
+        "sampleReportIds": []
+      },
+      {
+        "missionId": "relay_station",
+        "result": "wiped",
+        "total": 28,
+        "canonical": 1,
+        "fuzz": 27,
+        "sampleReportIds": [
+          "battle_21_corpus-candidate-493_relay_station_cautious",
+          "battle_1028_corpus-fuzz-28_relay_station_recon_by_fire",
+          "battle_1076_corpus-fuzz-76_relay_station_recon_by_fire"
+        ]
+      },
+      {
+        "missionId": "river_crossing",
+        "result": "victory",
+        "total": 50,
+        "canonical": 0,
+        "fuzz": 50,
+        "sampleReportIds": [
+          "battle_1023_corpus-fuzz-23_river_crossing_cautious",
+          "battle_1059_corpus-fuzz-59_river_crossing_cautious",
+          "battle_1071_corpus-fuzz-71_river_crossing_cautious"
+        ]
+      },
+      {
+        "missionId": "river_crossing",
+        "result": "pyrrhic",
+        "total": 9,
+        "canonical": 3,
+        "fuzz": 6,
+        "sampleReportIds": [
+          "battle_107_corpus-candidate-377_river_crossing_cautious",
+          "battle_107_corpus-candidate-418_river_crossing_breakthrough",
+          "battle_107_corpus-candidate-459_river_crossing_recon_by_fire"
+        ]
+      },
+      {
+        "missionId": "river_crossing",
         "result": "withdraw",
         "total": 27,
         "canonical": 0,
         "fuzz": 27,
         "sampleReportIds": [
-          "battle_1015_corpus-fuzz-15_operation_outpost_sweep_breakthrough",
-          "battle_1039_corpus-fuzz-39_operation_outpost_sweep_breakthrough",
-          "battle_1087_corpus-fuzz-87_operation_outpost_sweep_breakthrough"
+          "battle_1011_corpus-fuzz-11_river_crossing_cautious",
+          "battle_1035_corpus-fuzz-35_river_crossing_cautious",
+          "battle_1047_corpus-fuzz-47_river_crossing_cautious"
         ]
       },
       {
-        "missionId": "outpost_sweep",
+        "missionId": "river_crossing",
         "result": "defeat",
-        "total": 6,
+        "total": 0,
         "canonical": 0,
-        "fuzz": 6,
+        "fuzz": 0,
+        "sampleReportIds": []
+      },
+      {
+        "missionId": "river_crossing",
+        "result": "wiped",
+        "total": 1,
+        "canonical": 1,
+        "fuzz": 0,
         "sampleReportIds": [
-          "battle_1051_corpus-fuzz-51_operation_outpost_sweep_breakthrough",
-          "battle_1201_corpus-fuzz-201_operation_outpost_sweep_breakthrough",
-          "battle_1315_corpus-fuzz-315_operation_outpost_sweep_breakthrough"
+          "battle_16_corpus-candidate-370_river_crossing_cautious"
         ]
       },
       {
-        "missionId": "outpost_sweep",
-        "result": "wiped",
-        "total": 136,
-        "canonical": 2,
-        "fuzz": 134,
+        "missionId": "river_ferry",
+        "result": "victory",
+        "total": 2,
+        "canonical": 0,
+        "fuzz": 2,
         "sampleReportIds": [
-          "battle_26_corpus-candidate-616_operation_outpost_sweep_cautious",
-          "battle_39_corpus-candidate-617_operation_outpost_sweep_cautious",
-          "battle_1003_corpus-fuzz-3_operation_outpost_sweep_breakthrough"
+          "battle_1341_corpus-fuzz-341_operation_river_ferry_cautious",
+          "battle_1749_corpus-fuzz-749_operation_river_ferry_cautious"
+        ]
+      },
+      {
+        "missionId": "river_ferry",
+        "result": "pyrrhic",
+        "total": 4,
+        "canonical": 0,
+        "fuzz": 4,
+        "sampleReportIds": [
+          "battle_1053_corpus-fuzz-53_operation_river_ferry_cautious",
+          "battle_1389_corpus-fuzz-389_operation_river_ferry_cautious",
+          "battle_1533_corpus-fuzz-533_operation_river_ferry_cautious"
+        ]
+      },
+      {
+        "missionId": "river_ferry",
+        "result": "withdraw",
+        "total": 20,
+        "canonical": 0,
+        "fuzz": 20,
+        "sampleReportIds": [
+          "battle_1029_corpus-fuzz-29_operation_river_ferry_cautious",
+          "battle_1077_corpus-fuzz-77_operation_river_ferry_cautious",
+          "battle_1125_corpus-fuzz-125_operation_river_ferry_cautious"
+        ]
+      },
+      {
+        "missionId": "river_ferry",
+        "result": "defeat",
+        "total": 3,
+        "canonical": 0,
+        "fuzz": 3,
+        "sampleReportIds": [
+          "battle_1101_corpus-fuzz-101_operation_river_ferry_cautious",
+          "battle_1401_corpus-fuzz-401_operation_river_ferry_cautious",
+          "battle_1701_corpus-fuzz-701_operation_river_ferry_cautious"
+        ]
+      },
+      {
+        "missionId": "river_ferry",
+        "result": "wiped",
+        "total": 55,
+        "canonical": 1,
+        "fuzz": 54,
+        "sampleReportIds": [
+          "battle_46_corpus-candidate-1108_operation_river_ferry_cautious",
+          "battle_1005_corpus-fuzz-5_operation_river_ferry_cautious",
+          "battle_1017_corpus-fuzz-17_operation_river_ferry_cautious"
         ]
       },
       {
         "missionId": "salvage_run",
         "result": "victory",
-        "total": 111,
+        "total": 56,
         "canonical": 0,
-        "fuzz": 111,
+        "fuzz": 56,
         "sampleReportIds": [
-          "battle_1011_corpus-fuzz-11_operation_salvage_run_cautious",
-          "battle_1023_corpus-fuzz-23_operation_salvage_run_cautious",
-          "battle_1029_corpus-fuzz-29_operation_salvage_run_cautious"
+          "battle_1002_corpus-fuzz-2_operation_salvage_run_cautious",
+          "battle_1014_corpus-fuzz-14_operation_salvage_run_cautious",
+          "battle_1026_corpus-fuzz-26_operation_salvage_run_cautious"
         ]
       },
       {
         "missionId": "salvage_run",
         "result": "pyrrhic",
-        "total": 16,
-        "canonical": 4,
-        "fuzz": 12,
+        "total": 6,
+        "canonical": 3,
+        "fuzz": 3,
         "sampleReportIds": [
-          "battle_107_corpus-candidate-377_operation_salvage_run_cautious",
-          "battle_55_corpus-candidate-414_operation_salvage_run_breakthrough",
-          "battle_107_corpus-candidate-418_operation_salvage_run_breakthrough"
+          "battle_122_corpus-candidate-746_operation_salvage_run_cautious",
+          "battle_122_corpus-candidate-787_operation_salvage_run_breakthrough",
+          "battle_122_corpus-candidate-828_operation_salvage_run_recon_by_fire"
         ]
       },
       {
         "missionId": "salvage_run",
         "result": "withdraw",
-        "total": 12,
+        "total": 22,
         "canonical": 1,
-        "fuzz": 11,
+        "fuzz": 21,
         "sampleReportIds": [
-          "battle_29_corpus-candidate-371_operation_salvage_run_cautious",
-          "battle_1005_corpus-fuzz-5_operation_salvage_run_cautious",
-          "battle_1083_corpus-fuzz-83_operation_salvage_run_cautious"
+          "battle_44_corpus-candidate-740_operation_salvage_run_cautious",
+          "battle_1074_corpus-fuzz-74_operation_salvage_run_cautious",
+          "battle_1098_corpus-fuzz-98_operation_salvage_run_cautious"
         ]
       },
       {
@@ -1981,33 +2368,33 @@
       {
         "missionId": "salvage_run",
         "result": "wiped",
-        "total": 33,
+        "total": 5,
         "canonical": 1,
-        "fuzz": 32,
+        "fuzz": 4,
         "sampleReportIds": [
-          "battle_16_corpus-candidate-370_operation_salvage_run_cautious",
-          "battle_1017_corpus-fuzz-17_operation_salvage_run_cautious",
-          "battle_1041_corpus-fuzz-41_operation_salvage_run_cautious"
+          "battle_31_corpus-candidate-739_operation_salvage_run_cautious",
+          "battle_1122_corpus-fuzz-122_operation_salvage_run_cautious",
+          "battle_1506_corpus-fuzz-506_operation_salvage_run_cautious"
         ]
       },
       {
         "missionId": "scrap_mine",
         "result": "victory",
-        "total": 159,
-        "canonical": 49,
-        "fuzz": 110,
+        "total": 107,
+        "canonical": 40,
+        "fuzz": 67,
         "sampleReportIds": [
-          "battle_118_corpus-candidate-10_scrap_mine_cautious",
-          "battle_131_corpus-candidate-11_scrap_mine_cautious",
-          "battle_144_corpus-candidate-12_scrap_mine_cautious"
+          "battle_66_corpus-candidate-6_scrap_mine_cautious",
+          "battle_105_corpus-candidate-9_scrap_mine_cautious",
+          "battle_118_corpus-candidate-10_scrap_mine_cautious"
         ]
       },
       {
         "missionId": "scrap_mine",
         "result": "pyrrhic",
-        "total": 14,
-        "canonical": 5,
-        "fuzz": 9,
+        "total": 4,
+        "canonical": 4,
+        "fuzz": 0,
         "sampleReportIds": [
           "battle_92_corpus-candidate-8_scrap_mine_cautious",
           "battle_92_corpus-candidate-49_scrap_mine_breakthrough",
@@ -2017,13 +2404,13 @@
       {
         "missionId": "scrap_mine",
         "result": "withdraw",
-        "total": 46,
-        "canonical": 21,
-        "fuzz": 25,
+        "total": 35,
+        "canonical": 19,
+        "fuzz": 16,
         "sampleReportIds": [
-          "battle_27_corpus-candidate-85_scrap_mine_recon_by_fire",
-          "battle_40_corpus-candidate-86_scrap_mine_recon_by_fire",
-          "battle_14_corpus-candidate-2_scrap_mine_cautious"
+          "battle_14_corpus-candidate-2_scrap_mine_cautious",
+          "battle_27_corpus-candidate-3_scrap_mine_cautious",
+          "battle_40_corpus-candidate-4_scrap_mine_cautious"
         ]
       },
       {
@@ -2041,9 +2428,9 @@
       {
         "missionId": "scrap_mine",
         "result": "wiped",
-        "total": 29,
+        "total": 6,
         "canonical": 6,
-        "fuzz": 23,
+        "fuzz": 0,
         "sampleReportIds": [
           "battle_1_corpus-candidate-1_scrap_mine_cautious",
           "battle_53_corpus-candidate-5_scrap_mine_cautious",

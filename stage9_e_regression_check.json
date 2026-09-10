@@ -1,0 +1,13 @@
+{
+  "stage": "9-E",
+  "kind": "regression",
+  "independentRecompute": true,
+  "source": "current-source-recomputed",
+  "stage9A": true,
+  "stage9B": true,
+  "stage9C": true,
+  "stage9D": true,
+  "stage9EA": true,
+  "stage9EA1": true,
+  "dc1": "regression-only"
+}

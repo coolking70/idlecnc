@@ -1,0 +1,9 @@
+{
+  "stage": "9-E",
+  "kind": "tech_gate",
+  "independentRecompute": true,
+  "source": "current-source-recomputed",
+  "requiresTechIsAuthoritative": true,
+  "blockedEnqueueHasZeroDiff": true,
+  "unchangedExistingTechnologyValues": true
+}

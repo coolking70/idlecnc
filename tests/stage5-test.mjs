@@ -379,8 +379,9 @@ check('A06 阶段3回归：损坏编队数据被自动修复（sanitizeFormation
  * ========================================================== */
 section('B. 战区配置与解锁链');
 
-check('B01 THEATERS 含 3 个战区且顺序稳定', () => {
-  assert.deepEqual(THEATER_IDS, ['scrap_mine', 'border_road', 'enemy_outpost']);
+check('B01 THEATERS 保留旧战区顺序并支持阶段9扩展', () => {
+  assert.ok(THEATER_IDS.length >= 6);
+  assert.deepEqual(THEATER_IDS.slice(0, 3), ['scrap_mine', 'border_road', 'enemy_outpost']);
 });
 
 check('B02 三个战区难度递增（1→2→3）', () => {
@@ -1097,8 +1098,9 @@ check('I02 refreshTheater 不抛，且战区卡片数 = THEATERS 数', () => {
   const f = battleReadyFormation(s);
   const ui = new UI(theaterHandlers);
   assert.doesNotThrow(() => ui.refreshTheater(s));
-  assert.ok(ui.refs.th.list, '战区列表容器应存在');
-  assert.equal(ui.refs.th.list.children.length, THEATER_IDS.length, '战区卡片数应等于战区数');
+  // Stage 10-P-B 起战区页改为紧凑 Tile 网格，卡片挂在 gridRoot 下
+  assert.ok(ui.refs.th.gridRoot, '战区网格容器应存在');
+  assert.equal(ui.refs.th.gridRoot.children.length, THEATER_IDS.length, '战区卡片数应等于战区数');
 });
 
 check('I03 派遣控制台结构完整（编队下拉 / 策略 / 成本 / 派遣按钮）', () => {
@@ -1108,7 +1110,9 @@ check('I03 派遣控制台结构完整（编队下拉 / 策略 / 成本 / 派遣
   ui.refreshTheater(s);
   const t = ui.refs.th;
   assert.ok(t.dsSelect, '编队下拉应存在');
-  assert.ok(t.strategyCards && Object.keys(t.strategyCards).length === 3, '应有三张策略卡');
+  // Stage 10-P-B 起策略卡由 strategyGrid 渲染（旧的 strategyCards 映射已移除）
+  assert.ok(t.strategyGrid, '策略网格应存在');
+  assert.equal(t.strategyGridRoot.children.length, 3, '应有三张策略卡');
   assert.ok(t.dsCost, '成本区应存在');
   assert.ok(t.dsBtn, '派遣按钮应存在');
 });
@@ -1155,8 +1159,9 @@ check('I07 refreshReports 不抛，且有战报时行数 = 战报数', () => {
   th.tickActiveBattle(s, s.activeBattle.duration + 1);
   const ui = new UI(theaterHandlers);
   assert.doesNotThrow(() => ui.refreshTheater(s));
-  assert.ok(ui.refs.rp.list, '战报列表容器应存在');
-  assert.equal(ui.refs.rp.list.children.length, th.getReports(s).length, '战报行数应等于战报数');
+  // Stage 10-P-B 起战报页改为紧凑 Tile 网格
+  assert.ok(ui.refs.rp.gridRoot, '战报网格容器应存在');
+  assert.equal(ui.refs.rp.gridRoot.children.length, th.getReports(s).length, '战报行数应等于战报数');
 });
 
 check('I08 战报详情渲染不抛且统计赋值正确', () => {
@@ -1167,8 +1172,12 @@ check('I08 战报详情渲染不抛且统计赋值正确', () => {
   th.tickActiveBattle(s, s.activeBattle.duration + 1);
   const ui = new UI(theaterHandlers);
   ui.refreshTheater(s);
-  assert.equal(ui.refs.rp.statTag.textContent, `${th.getReports(s).length} 份`);
-  assert.doesNotThrow(() => ui._renderReportDetail(ui.refs.rp.detail, th.getReports(s)[0]));
+  assert.ok(
+    ui.refs.rp.statTag.textContent.startsWith(`${th.getReports(s).length} 份`),
+    '战报统计应以份数开头'
+  );
+  // 完整战报改由 Inspector 承载；_renderReportDetail 仍须能对任意容器安全渲染
+  assert.doesNotThrow(() => ui._renderReportDetail(document.createElement('div'), th.getReports(s)[0]));
 });
 
 /* ============================================================

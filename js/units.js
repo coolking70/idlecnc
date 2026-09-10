@@ -1,8 +1,9 @@
 /** 阶段8单位档案、呼号与老兵等级。 */
 
-import { UNITS, UNIT_RANKS } from './config.js';
+import { UNITS, UNIT_RANKS, EQUIPMENT_STAT_KEYS } from './config.js';
 import { getDamageState } from './unit-status.js';
 import { clamp, safeNumber } from './utils.js';
+import { equipmentModifiersFor, roundEquipmentNumber } from './equipment.js';
 
 const RANK_ORDER = Object.values(UNIT_RANKS).sort((a, b) => a.minExperience - b.minExperience);
 
@@ -44,16 +45,47 @@ export function renameUnit(state, unitId, callsign) {
   return { ok: true, code: 'ready', reason: '', unit };
 }
 
-export function getUnitEffectiveStats(unit) {
+/**
+ * 解析生产侧有效属性。
+ * 确定性规则固定为：基础属性 → 老兵乘数并保留 4 位 → 按槽位顺序逐个应用装备乘数，
+ * 每次乘法后仍保留 4 位。hp 永远直接取基础定义，装备没有 hp/maxHp 通道。
+ */
+export function getUnitEffectiveStats(unit, equipmentState = null) {
   const def = unit && UNITS[unit.type];
   if (!def) return null;
   const rank = getUnitRank(unit);
+  const equipmentInfo = equipmentModifiersFor(unit, equipmentState);
+  const equipment = equipmentInfo.equipment;
   const stats = {};
   Object.keys(def.stats || {}).forEach((key) => {
-    const modifier = rank.modifiers[key] || 1;
-    stats[key] = key === 'hp' ? def.stats[key] : Number((safeNumber(def.stats[key], 0) * modifier).toFixed(4));
+    if (key === 'hp') {
+      stats[key] = safeNumber(def.stats[key], 0);
+      return;
+    }
+    const rankModifier = rank.modifiers[key] || 1;
+    let value = roundEquipmentNumber(safeNumber(def.stats[key], 0) * rankModifier);
+    equipment.forEach((item) => {
+      const modifier = Object.prototype.hasOwnProperty.call(item.modifiers, key)
+        ? Number(item.modifiers[key]) : 1;
+      if (Number.isFinite(modifier)) value = roundEquipmentNumber(value * modifier);
+    });
+    stats[key] = value;
   });
-  return { ...stats, rankId: rank.id, rankName: rank.name, rankModifiers: { ...rank.modifiers }, base: { ...def.stats } };
+  return {
+    ...stats,
+    rankId: rank.id,
+    rankName: rank.name,
+    rankModifiers: { ...rank.modifiers },
+    equipment,
+    equipmentIds: equipment.map((item) => item.instanceId),
+    equipmentModifiers: { ...equipmentInfo.modifiers },
+    calculation: {
+      order: 'base_then_rank_then_equipment',
+      rounding: 'round-half-up-4-decimal-after-each-multiplication',
+      statKeys: EQUIPMENT_STAT_KEYS.slice()
+    },
+    base: { ...def.stats }
+  };
 }
 
 export function sanitizeUnit(unit) {

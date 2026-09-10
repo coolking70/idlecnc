@@ -18,6 +18,8 @@ import { sanitizeRepairs } from './repairs.js';
 import { sanitizeResearch } from './research.js';
 import { sanitizeOperations } from './operations.js';
 import { sanitizeUnits } from './units.js';
+import { emptyEquipmentState, sanitizeEquipment } from './equipment.js';
+import { sanitizeSalvageClaims } from './battle-salvage.js';
 import { calculateOfflineSeconds, settleOfflineWindow } from './offline.js';
 import { logEvent, emit, LOG_LEVEL } from './events.js';
 import { safeNumber, deepClone, formatDuration } from './utils.js';
@@ -251,6 +253,17 @@ export function migrate(data, report = {}) {
   const unitFix = sanitizeUnits(merged);
   if (unitFix.repaired) report.notes = (report.notes || []).concat(unitFix.notes);
 
+  // Stage 9-B 装备清洗必须紧跟单位清洗：此时单位 ID 已经去重且非法单位已被
+  // 移除，装备库存也能同时作为另一端的权威集合。随后按“单位存在 + 装备存在 +
+  // 适用类型 + 唯一实例 + 槽位上限”逐项收敛，故装备→已删除单位与单位→不存在
+  // 装备两种悬空方向都 fail-closed。旧存档没有 equipment 时显式使用空库存，
+  // 不使用 fresh 的 starter inventory，避免迁移凭空生成装备。
+  merged.equipment = data.equipment && typeof data.equipment === 'object'
+    ? data.equipment : emptyEquipmentState();
+  const equipmentFix = sanitizeEquipment(merged);
+  if (equipmentFix.repaired) report.notes = (report.notes || []).concat(equipmentFix.notes);
+  report.equipmentRepaired = equipmentFix.repaired;
+
   merged.repairs = Array.isArray(data.repairs) ? data.repairs : [];
   merged.operations = data.operations && typeof data.operations === 'object' ? data.operations : fresh.operations;
   const operationFix = sanitizeOperations(merged);
@@ -274,6 +287,20 @@ export function migrate(data, report = {}) {
       }
     });
   }
+  // Stage 10-B：动态战区压力随存档透传（additive；老存档无此字段时保持缺省，
+  // 由 theater-pressure authority 在初始化时补齐默认值，Stage9 行为不变）。
+  if (data.theaterPressure && typeof data.theaterPressure === 'object' && !Array.isArray(data.theaterPressure)) {
+    merged.theaterPressure = data.theaterPressure;
+  }
+  // Stage 10-C：指挥方针随存档透传（additive；老存档无此字段时保持缺省，
+  // 由 doctrine authority 读取时回落 BALANCED，Stage9 行为不变）。
+  if (typeof data.doctrine === 'string' && data.doctrine) {
+    merged.doctrine = data.doctrine;
+  }
+  // Stage 10-D：老存档缺失时必须保持 disabled；只接受严格布尔 true。
+  merged.autoOperations = {
+    enabled: Boolean(data.autoOperations && data.autoOperations.enabled === true)
+  };
   const theaterFix = sanitizeTheaters(merged);
   if (theaterFix.repaired) {
     report.notes = (report.notes || []).concat(theaterFix.notes);
@@ -303,6 +330,22 @@ export function migrate(data, report = {}) {
   }
   report.battleRepaired = Boolean(battleFix.repaired || battlesFix.repaired);
 
+  // v9 及以前没有战场打捞语义。sanitizeActiveBattle 可能为旧活动战斗
+  // 补建 ProductionBattleSession；此类补建 session 必须明确保持 legacy，
+  // 不能因为当前工厂函数支持 v10 就获得追溯性战利品资格。
+  if (safeNumber(data.version, 0) < SAVE_VERSION) {
+    Object.values(merged.battleSessions || {}).forEach((session) => {
+      if (session && typeof session === 'object') session.salvageRulesVersion = 0;
+    });
+  }
+
+  // Salvage claims 必须在 battleSessions / reports / settlement ledger 清洗后处理：
+  // 这样 claim→session→ledger→report 与 inventory→claim 两条引用方向都能
+  // fail-closed。v9 及更旧存档只得到空 claims，不根据历史战报自动补发。
+  const salvageFix = sanitizeSalvageClaims(merged);
+  if (salvageFix.repaired) report.notes = (report.notes || []).concat(salvageFix.notes);
+  report.salvageRepaired = salvageFix.repaired;
+
   // 维修队列必须在编队容错之前处理：它会把「维修中的单位」从编队里摘出来并
   // 释放归属，随后 sanitizeFormations 才能算出正确的指挥容量占用。
   // （merged.repairs 已在生产容错后从存档挂载）
@@ -322,6 +365,8 @@ export function migrate(data, report = {}) {
     conFix.repaired || prodFix.repaired || formFix.repaired
     || theaterFix.repaired || battlesFix.repaired || battleFix.repaired
     || repairFix.repaired || researchFix.repaired || operationFix.repaired || unitFix.repaired
+    || equipmentFix.repaired
+    || salvageFix.repaired
   );
 
   if (safeNumber(data.version, 0) < SAVE_VERSION) {
@@ -438,6 +483,7 @@ export function loadGame({ preferManual = false } = {}) {
         gains: {},
         buildingsCompleted: [],
         unitsProduced: [],
+        equipmentProduced: [],
         repairsCompleted: [],
         steps: 0,
         lines: ['离线结算发生异常，本次未发放离线进度。'],

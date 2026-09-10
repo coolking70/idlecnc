@@ -1,0 +1,69 @@
+{
+  "stage": "Stage 9-C.1a",
+  "baselineHead": "86067c36fe94ecadca1c968f05550220cdf62bed",
+  "finalHead": "8ec82cf5d3b6deb5aa3db011b76db9198aad5213",
+  "sourceCommit": "8ec82cf5d3b6deb5aa3db011b76db9198aad5213",
+  "originalFailure": {
+    "command": "npm run test:stage9-A",
+    "ciHead": "86067c36fe94ecadca1c968f05550220cdf62bed",
+    "runId": 31630388697,
+    "jobId": 94227353734,
+    "reproduced": true,
+    "rootCauseCategory": [
+      "D",
+      "L"
+    ],
+    "rootCauseSummary": "Stage 9-A repeated the already-independent D-C.1 performance process after cumulative Ubuntu runner load; the duplicate measurement failed closed while 21/21 functional checks passed.",
+    "ciFunctionalChecks": "21/21",
+    "ciReportedP95Ms": 0.0595520000000036
+  },
+  "localFinal": {
+    "npmInstall": true,
+    "stage9A": true,
+    "browserStage9A": true,
+    "stage9B": true,
+    "browserStage9B": true,
+    "stage9C": true,
+    "browserStage9C": true
+  },
+  "stage9CStrongEvidence": {
+    "tamperCases": 141,
+    "tamperRejected": 141,
+    "coupledTamperCases": 11,
+    "coupledTamperRejected": 11,
+    "passedFlagOnlyCases": 0,
+    "performanceMeasurementValid": true,
+    "performanceSamples": 120,
+    "performanceP95Ms": {
+      "effectiveStats": 0.0076,
+      "snapshot": 0.0348,
+      "inventory": 0.0003
+    }
+  },
+  "authorityFreeze": {
+    "passed": true,
+    "modifiedFrozenFiles": []
+  },
+  "environment": {
+    "platform": "darwin",
+    "arch": "arm64",
+    "cpuModel": "Apple M5",
+    "cpuCount": 10,
+    "nodeVersion": "v25.2.1"
+  },
+  "finalHeadCi": {
+    "runId": 31646337573,
+    "jobId": 94281397473,
+    "attempt": 2,
+    "headSha": "8ec82cf5d3b6deb5aa3db011b76db9198aad5213",
+    "conclusion": "success",
+    "allRequiredStepsPassed": true,
+    "skippedRequiredSteps": []
+  },
+  "cleanClone": {
+    "overallPassed": true,
+    "clonedHead": "8ec82cf5d3b6deb5aa3db011b76db9198aad5213",
+    "currentHead": "8ec82cf5d3b6deb5aa3db011b76db9198aad5213"
+  },
+  "passed": true
+}

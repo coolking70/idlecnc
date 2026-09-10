@@ -1,0 +1,45 @@
+{
+  "stage": "9-C",
+  "independentRecompute": true,
+  "blocked": {
+    "ok": false,
+    "code": "equipment_tech_prerequisite",
+    "reasons": [
+      "需要先完成“模块化装配”"
+    ],
+    "reason": "需要先完成“模块化装配”",
+    "missingTech": "modular_assembly",
+    "definition": {
+      "id": "anti_armor_sights",
+      "name": "反装甲瞄具",
+      "slot": "weapon",
+      "applicableTypes": [
+        "at_infantry",
+        "mbt"
+      ],
+      "modifiers": {
+        "antiArmor": 1.1,
+        "scouting": 1.03
+      },
+      "requiresTech": "modular_assembly",
+      "acquisition": {
+        "kind": "production",
+        "label": "装甲工厂制造",
+        "building": "armor_factory",
+        "cost": {
+          "supply": 180,
+          "alloy": 140
+        },
+        "buildTime": 18
+      },
+      "desc": "提高反装甲火力与目标识别能力，不改变生命上限。"
+    },
+    "cost": {
+      "supply": 180,
+      "alloy": 140
+    },
+    "duration": 18
+  },
+  "completedGate": true,
+  "passed": true
+}

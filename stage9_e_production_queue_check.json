@@ -1,0 +1,11 @@
+{
+  "stage": "9-E",
+  "kind": "production_queue",
+  "independentRecompute": true,
+  "source": "current-source-recomputed",
+  "enqueueDeductsCost": true,
+  "cancelUsesConfiguredRatios": true,
+  "completionExactlyOnce": true,
+  "deterministicInstanceNamespace": "equipment-production-{equipmentId}-{serial}",
+  "reloadPhase": "production_queue"
+}

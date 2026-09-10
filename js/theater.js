@@ -16,8 +16,8 @@
  */
 
 import {
-  THEATERS, OPERATIONS, STRATEGIES, ENEMY_UNITS, TERRAIN, BATTLE, BATTLE_RESULT,
-  UNITS, BUILDING_STATUS, DAMAGE_STATES,
+  THEATERS, OPERATIONS, STRATEGIES, ENEMY_UNITS, TERRAIN, BATTLE, BATTLE_RESULT, SALVAGE_RULES,
+  UNITS, BUILDING_STATUS, DAMAGE_STATES, EQUIPMENT_STAT_KEYS,
   FORMATION_STATUS, RESOURCE_DEFS
 } from './config.js';
 import { BATTLE_EVENT, simulateBattle, resultLabel, rebuildBattleFromDispatchSnapshot } from './battle.js';
@@ -26,6 +26,9 @@ import { logEvent, emit, LOG_LEVEL } from './events.js';
 import { safeNumber, clamp, randomSeed, formatInt } from './utils.js';
 import { getDamageState } from './unit-status.js';
 import { getUnitRank, getUnitEffectiveStats, formatUnitDisplayName } from './units.js';
+import { getEquipmentComposition } from './equipment.js';
+import { getOperationalTask } from './tasking.js'; // Stage 10-A：派遣资格互斥（任务编队不可派遣）
+import { getStrategicMissionModifiers, applyStrategicSettlementPressure } from './strategic-loop.js'; // Stage 10-E：战略循环（任务成本 modifier + 战斗结算反向改写压力）
 import { compareBattleReports, validateBattleOutcomeConsistency, stableStringify } from './integrity.js';
 import { OPERATION_CODE, getOperationCost, canDispatchOperation, operationCooldown } from './operations.js';
 import {
@@ -49,6 +52,7 @@ export const THEATER_CODE = {
   NO_BATTLE: 'no_battle',
   FORMATION_NOT_FOUND: 'formation_not_found',
   FORMATION_BUSY: 'formation_busy',
+  FORMATION_TASKED: 'formation_tasked', /* Stage 10-A：编队正在执行作战任务 */
   FORMATION_EMPTY: 'formation_empty',
   NO_COMBAT_UNIT: 'no_combat_unit',
   UNIT_UNAVAILABLE: 'unit_unavailable',
@@ -459,12 +463,16 @@ export function getMissionCost(state, formationId, theaterId, strategyId) {
     });
   }
 
+  // Stage 10-E：战区压力影响任务成本（公式在 strategic-loop authority；
+  // 初始 pressure 时倍率为 1，旧成本完全不变；取整规则沿用 Math.round）
+  const strategic = getStrategicMissionModifiers(state, theaterId);
   const base = Math.round(upkeepSum * multiplier);
-  const supply = Math.round(base * upkeepMod);
+  const supply = Math.round(base * upkeepMod * strategic.supplyMultiplier);
   const cost = {};
   if (supply > 0) cost.supply = supply;
   Object.keys((strategy && strategy.cost) || {}).forEach((key) => {
-    cost[key] = safeNumber(cost[key], 0) + safeNumber(strategy.cost[key], 0);
+    const scale = key === 'supply' ? strategic.supplyMultiplier : key === 'intel' ? strategic.intelMultiplier : 1;
+    cost[key] = safeNumber(cost[key], 0) + Math.round(safeNumber(strategy.cost[key], 0) * scale);
   });
 
   const missing = state ? missingResources(state, cost) : [];
@@ -476,7 +484,9 @@ export function getMissionCost(state, formationId, theaterId, strategyId) {
       supplyMultiplier: multiplier,
       upkeepMod,
       base,
-      strategyCost: { ...((strategy && strategy.cost) || {}) }
+      strategyCost: { ...((strategy && strategy.cost) || {}) },
+      strategicSupplyMultiplier: strategic.supplyMultiplier,
+      strategicIntelMultiplier: strategic.intelMultiplier
     },
     affordable: missing.length === 0,
     missing
@@ -492,18 +502,30 @@ export function buildDispatchSnapshot(state, formation, theaterId, strategyId, m
     const unit = findUnit(state, unitId);
     if (!unit || !UNITS[unit.type]) return null;
     const rank = getUnitRank(unit);
-    const effective = getUnitEffectiveStats(unit);
+    const effective = getUnitEffectiveStats(unit, state && state.equipment);
+    const stats = {};
+    EQUIPMENT_STAT_KEYS.concat(['hp']).forEach((key) => {
+      stats[key] = safeNumber(effective && effective[key], UNITS[unit.type].stats[key]);
+    });
     return {
       id: unit.id, type: unit.type, hp: safeNumber(unit.hp, unit.maxHp), maxHp: safeNumber(unit.maxHp, 1),
       experience: safeNumber(unit.experience, 0), battles: Math.max(0, Math.floor(safeNumber(unit.battles, 0))),
       callsign: typeof unit.callsign === 'string' ? unit.callsign : null,
-      stats: effective, rankId: rank.id, rankName: rank.name, rankModifiers: { ...rank.modifiers }
+      // snapshot.stats 只允许七个正式战斗属性键；解析元数据单独留在 equipment 中。
+      stats,
+      equipment: effective && Array.isArray(effective.equipment)
+        ? effective.equipment.map((item) => ({
+          instanceId: item.instanceId, equipmentId: item.equipmentId, name: item.name,
+          slot: item.slot, slotIndex: item.slotIndex, modifiers: { ...item.modifiers }, desc: item.desc
+        })) : [],
+      rankId: rank.id, rankName: rank.name, rankModifiers: { ...rank.modifiers }
     };
   }).filter(Boolean);
   const research = state.research || {};
   return JSON.parse(JSON.stringify({
     formation: { id: formation.id, name: formation.name, experience: safeNumber(formation.experience, 0), unitIds: (formation.unitIds || []).slice() },
     units,
+    equipmentComposition: getEquipmentComposition(state && state.equipment, units.map((unit) => unit.id)),
     buildings: { radarOperational: hasRadar(state) },
     research: { revision: safeNumber(research.revision, 0), completed: Array.isArray(research.completed) ? research.completed.slice() : [] },
     theaterId, strategyId, missionKind, missionId,
@@ -579,6 +601,11 @@ export function canDispatch(state, formationId, theaterId, strategyId) {
 
   if (formation.status !== FORMATION_STATUS.IDLE) {
     return fail(THEATER_CODE.FORMATION_BUSY, '该编队当前不是待命状态');
+  }
+
+  // Stage 10-A：正在执行作战任务的编队必须先召回才能参加正式派遣
+  if (getOperationalTask(state, formationId)) {
+    return fail(THEATER_CODE.FORMATION_TASKED, '该编队正在执行作战任务，请先召回');
   }
 
   const ids = Array.isArray(formation.unitIds) ? formation.unitIds : [];
@@ -689,7 +716,8 @@ export function dispatchFormation(state, formationId, theaterId, strategyId, see
     report,
     sequence: state.battleSessionSequence,
     sessionOrigin: SESSION_ORIGIN.PRODUCTION,
-    createdAtGameTime: state.time && state.time.game
+    createdAtGameTime: state.time && state.time.game,
+    salvageRulesVersion: SALVAGE_RULES.version
   });
   productionSession.lifecycle = SESSION_LIFECYCLE.RUNNING;
   state.battleSessions[productionSession.battleSessionId] = productionSession;
@@ -1492,12 +1520,26 @@ export function settleActiveBattle(state) {
     updatedUnitIds: plan.unitUpdates.map((u) => u.unitId),
     settledGameTime: safeNumber(state.time ? state.time.game : 0, 0)
   };
+  // Stage 10-E：战斗结果反向改变战区压力。只在 exactly-once 结算提交块内
+  // 执行（settled + battleSettlementLedger + settlementReceipt.strategicPressure
+  // 三重防护）；replay / 查看战报 / skip return / save-load 都不会重复应用。
+  // 必须在 settlementReceipt 写入 session 之前完成，保证两份凭证一致。
+  const strategicOutcome = applyStrategicSettlementPressure(state, {
+    theaterId: ab.theaterId,
+    result: report.result,
+    receipt: ab.settlementReceipt
+  });
+  if (strategicOutcome.applied && strategicOutcome.logText) {
+    logEvent(state, `战区态势变化：${strategicOutcome.logText}。`, LOG_LEVEL.INFO);
+  }
+
   if (session) syncProductionSession(state, ab, {
     lifecycle: SESSION_LIFECYCLE.SETTLED,
     settlementStatus: 'applied',
     settlementReceipt: cloneJson(ab.settlementReceipt),
     presentationTime: safeNumber(ab.elapsed, 0)
   });
+
   ab.playing = false;
   ab.elapsed = ab.duration;
   ab.settled = true;

@@ -1,0 +1,56 @@
+{
+  "stage": "9-B",
+  "independentRecompute": true,
+  "requiredActions": [
+    "[data-action=\"equip-equipment\"]",
+    "[data-action=\"unequip-equipment\"]",
+    "[data-action=\"confirm-dispatch\"]",
+    "[data-action=\"replay-report\"]"
+  ],
+  "sourceChecks": {
+    "mountHook": true,
+    "unmountHook": true,
+    "authorityStats": true,
+    "renderSignature": true,
+    "requiredDomProvenance": [
+      {
+        "selector": "[data-action=\"equip-equipment\"]",
+        "observed": true
+      },
+      {
+        "selector": "[data-action=\"unequip-equipment\"]",
+        "observed": true
+      },
+      {
+        "selector": "[data-action=\"confirm-dispatch\"]",
+        "observed": true
+      },
+      {
+        "selector": "[data-action=\"replay-report\"]",
+        "observed": true
+      }
+    ],
+    "allRequiredDomProvenance": true
+  },
+  "observedSelectors": [
+    "#btn-save",
+    "button[data-tab=\"units\"]",
+    "[data-action=\"equip-equipment\"][data-equipment-instance-id=\"equipment-starter-2\"]",
+    "Page.reload",
+    "[data-action=\"unequip-equipment\"][data-equipment-instance-id=\"equipment-starter-2\"]",
+    "button[data-tab=\"formations\"]",
+    "[data-action=\"create-formation\"]",
+    "[data-action=\"add-unit\"]",
+    "button[data-tab=\"theater\"]",
+    "[data-action=\"select-theater\"][data-theater=\"scrap_mine\"]",
+    "[data-action=\"select-strategy\"][data-strategy=\"cautious\"]",
+    "[data-action=\"launch-battle\"]",
+    "[data-action=\"confirm-dispatch\"]",
+    "[data-action=\"view-report\"]",
+    "[data-action=\"return-from-battle\"]",
+    "button[data-tab=\"reports\"]",
+    "[data-action=\"replay-report\"]"
+  ],
+  "equipmentApiUsed": false,
+  "passed": true
+}

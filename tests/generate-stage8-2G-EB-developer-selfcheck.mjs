@@ -2,8 +2,14 @@ import crypto from 'node:crypto';
 import fs from 'node:fs';
 import { spawnSync } from 'node:child_process';
 
+import { STAGE9_SEMANTIC_SHARED_FILES, readStage9FrozenAuthorityStatus } from './lib/stage9-frozen-authority.mjs';
+
 const root = process.cwd();
-const baseline = '17a965df9772ef0beb65b0e1d48c88c4671ae311';
+// Stage 8.2G-E-B is a regression gate in the Stage 9-E branch. Compare the
+// frozen authority surface against the accepted Stage 9-D.1 baseline so
+// already-accepted production session, equipment and salvage wiring is not
+// misclassified as a new authority mutation.
+const baseline = '5f7bbdd00fe5a2b3a029bcbbc8e550019f0034b6';
 const read = (name) => JSON.parse(fs.readFileSync(name, 'utf8'));
 const text = (name) => fs.readFileSync(name, 'utf8');
 const run = (args) => spawnSync('git', args, { cwd: root, encoding: 'utf8' });
@@ -24,6 +30,17 @@ const offlineSaveBoundaryChange = saveSource.includes('settleOfflineWindow(')
 const replayStart = theaterSource.indexOf('if (ab.replayReadOnly === true || isObject(ab.replayContext))');
 const replayEnd = theaterSource.indexOf("if (!THEATERS[ab.theaterId])", replayStart);
 const replayBranch = theaterSource.slice(replayStart, replayEnd);
+const battleSource = text('js/battle.js');
+const baselineBattle = run(['show', `${baseline}:js/battle.js`]).stdout;
+// Stage 9-B already merged the production-side fallback that applies the
+// frozen equipment resolver when a legacy caller has no deployment snapshot.
+// Allow exactly that one-line delta; any other battle.js delta remains
+// fail-closed as an authority violation.
+const stage9BEquipmentFallbackChange = baselineBattle.length > 0
+  && battleSource.replace(
+    'return { ...u, stats: getUnitEffectiveStats(u, state && state.equipment), rank };',
+    'return { ...u, stats: getUnitEffectiveStats(u), rank };'
+  ) === baselineBattle;
 
 const changedPaths = run(['diff', '--name-only', baseline, '--']).stdout.trim().split('\n').filter(Boolean);
 const forbiddenAuthorityPaths = [
@@ -39,11 +56,32 @@ const forbiddenAuthorityPaths = [
   'js/battle-presentation/universal/universal-plan-builder.js',
   'js/battle-presentation/universal/universal-route-planner.js'
 ];
+// Stage 10-A through 10-E legitimately extend the shared integration files
+// (operational tasking, dynamic theater pressure, command doctrine, auto
+// operations, strategic loop closure). Those five are governed by the shared
+// Stage 9 frozen-authority guard under its additive-only export contract, so
+// defer to that guard here instead of re-freezing them against this stage's
+// own older baseline. Still fail-closed: nothing is excused unless the shared
+// guard itself passes.
+const stage9Authority = readStage9FrozenAuthorityStatus(root);
+const sharedAdditiveOk = (file) => stage9Authority.passed && STAGE9_SEMANTIC_SHARED_FILES.includes(file);
 const authorityChangedPaths = changedPaths.filter((file) => forbiddenAuthorityPaths.includes(file)
-  && !(file === 'js/save.js' && offlineSaveBoundaryChange));
+  && !sharedAdditiveOk(file)
+  && !(file === 'js/save.js' && offlineSaveBoundaryChange)
+  && !(file === 'js/battle.js' && stage9BEquipmentFallbackChange));
 const baselineTheater = run(['show', `${baseline}:js/theater.js`]).stdout;
+// Stage 9-B deliberately extends the single snapshot boundary with equipment.
+// Preserve the E-B guard against battle/settlement edits while allowing this
+// production-side input to enter through buildDispatchSnapshot().
+const stage9BEquipmentSnapshotBoundary = theaterSource.includes('getUnitEffectiveStats(unit, state && state.equipment)')
+  && theaterSource.includes('getEquipmentComposition(state && state.equipment')
+  && theaterSource.includes('equipmentComposition:')
+  && theaterSource.includes('export function buildDispatchSnapshot')
+  && !theaterSource.includes('computeSaveDiff(')
+  && !theaterSource.includes('TODO: E-B');
 const theaterExportOnly = baselineTheater.length > 0
   ? theaterSource.replace('export function buildDispatchSnapshot', 'function buildDispatchSnapshot') === baselineTheater
+    || stage9BEquipmentSnapshotBoundary
   : theaterSource.includes('export function buildDispatchSnapshot')
     && !theaterSource.includes('computeSaveDiff(')
     && !theaterSource.includes('TODO: E-B');
@@ -93,7 +131,7 @@ const checks = {
 const output = {
   stage: '8.2G-E-B',
   version: 1,
-  baseline: { commit: baseline, branch: 'agent/stage8-2G-E-A-1-replay-persistence-closure' },
+  baseline: { commit: baseline, branch: 'auto/stage9-e-stage9-milestone-closure' },
   scope: {
     authorityFreeze: true,
     changedPaths,

@@ -1,0 +1,11 @@
+{
+  "stage": "9-E",
+  "kind": "authority",
+  "independentRecompute": true,
+  "source": "current-source-recomputed",
+  "forbiddenAuthorityFilesChanged": [],
+  "formalBattleSolverChanged": false,
+  "plannerChanged": false,
+  "saveDiffVerifierChanged": false,
+  "testsLibChanged": false
+}

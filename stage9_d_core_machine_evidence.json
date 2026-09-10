@@ -1,0 +1,80 @@
+{
+  "stage": "9-D",
+  "independentRecompute": true,
+  "saveVersion": 10,
+  "salvageRules": {
+    "version": 1,
+    "victory": {
+      "baseChance": 0.3,
+      "perDifficulty": 0.04,
+      "cap": 0.5
+    },
+    "pyrrhic": {
+      "baseChance": 0.15,
+      "perDifficulty": 0.03,
+      "cap": 0.3
+    },
+    "allowedResults": [
+      "victory",
+      "pyrrhic"
+    ],
+    "poolKind": "production",
+    "instanceNamespace": "equipment-salvage"
+  },
+  "testCount": 12,
+  "passed": true,
+  "checks": [
+    {
+      "name": "v10 schema and centralized salvage rules are present",
+      "passed": true
+    },
+    {
+      "name": "victory derives a stable eligible offer and reload cannot reroll",
+      "passed": true
+    },
+    {
+      "name": "pyrrhic uses the lower deterministic chance",
+      "passed": true
+    },
+    {
+      "name": "defeat, withdraw and wiped are ineligible and cannot reroll",
+      "passed": true
+    },
+    {
+      "name": "legacy, debug and missing/invalid settlement fail closed",
+      "passed": true
+    },
+    {
+      "name": "first claim adds one deterministic instance and persisted provenance",
+      "passed": true
+    },
+    {
+      "name": "second claim and double click are exactly once",
+      "passed": true
+    },
+    {
+      "name": "claim before settlement, replay and other active battle cannot mutate state",
+      "passed": true
+    },
+    {
+      "name": "formal settlement boundary and claim save-diff are isolated",
+      "passed": true
+    },
+    {
+      "name": "salvage instance can be mounted normally after claim",
+      "passed": true
+    },
+    {
+      "name": "v9 migration preserves old state, creates empty claims and no legacy salvage",
+      "passed": true
+    },
+    {
+      "name": "claim sanitizer removes forged receipt and orphan salvage instance",
+      "passed": true
+    }
+  ],
+  "forbiddenAuthorityFilesChanged": [],
+  "formalSettlementEquipmentUnchanged": true,
+  "legacyCutoff": "salvageRulesVersion=1 only on new production sessions",
+  "noBattleDropInSolver": true
+}

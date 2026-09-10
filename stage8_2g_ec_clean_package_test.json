@@ -1,0 +1,21 @@
+{
+  "stage": "8.2G-E-C",
+  "deprecated": true,
+  "supersededBy": "clean-clone verification",
+  "package": "iron-command-stage8-2G-E-C-offline-progression-closure.zip",
+  "packageBytes": 50684641,
+  "entries": 1154,
+  "packageHygiene": {
+    "forbiddenEntries": [],
+    "nestedZipFound": false,
+    "staleFinalPackageRecordInZip": false
+  },
+  "install": "passed",
+  "focusedEC": "passed",
+  "regressionEBBrowser": "passed",
+  "cleanPackageBrowserRerun": "passed",
+  "strongEvidence": "passed",
+  "tamper": "passed",
+  "ordinaryNpmTest": "passed",
+  "passed": true
+}

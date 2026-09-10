@@ -1,0 +1,71 @@
+{
+  "stage": "9-C.1",
+  "independentRecompute": true,
+  "machineFrameCount": 9,
+  "actualFrameCount": 9,
+  "semanticOrderMatches": true,
+  "hashes": [
+    {
+      "file": "s9-c-01-production-queue.png",
+      "declared": "d3f1c51cd0e541752901e2ed3595e93d2ec471ddaee5cd0ace29c2b6aa0e65d1",
+      "manifest": "d3f1c51cd0e541752901e2ed3595e93d2ec471ddaee5cd0ace29c2b6aa0e65d1",
+      "actual": "d3f1c51cd0e541752901e2ed3595e93d2ec471ddaee5cd0ace29c2b6aa0e65d1"
+    },
+    {
+      "file": "s9-c-02-production-queue-reload.png",
+      "declared": "98bdb0dc09e65259bb13746a1db6f6afdd3231eec63fa92d03c108791fa7b53c",
+      "manifest": "98bdb0dc09e65259bb13746a1db6f6afdd3231eec63fa92d03c108791fa7b53c",
+      "actual": "98bdb0dc09e65259bb13746a1db6f6afdd3231eec63fa92d03c108791fa7b53c"
+    },
+    {
+      "file": "s9-c-03-completed-unmounted.png",
+      "declared": "08f00846c60c69716045df40b25275fff734d60c91f6bdec923d00bfdb7b6652",
+      "manifest": "08f00846c60c69716045df40b25275fff734d60c91f6bdec923d00bfdb7b6652",
+      "actual": "08f00846c60c69716045df40b25275fff734d60c91f6bdec923d00bfdb7b6652"
+    },
+    {
+      "file": "s9-c-04-completed-reload.png",
+      "declared": "5e0faf45de71d1653b37b7e12825a69f771c863751757d6a7b820a50729d1ff2",
+      "manifest": "5e0faf45de71d1653b37b7e12825a69f771c863751757d6a7b820a50729d1ff2",
+      "actual": "5e0faf45de71d1653b37b7e12825a69f771c863751757d6a7b820a50729d1ff2"
+    },
+    {
+      "file": "s9-c-05-mounted.png",
+      "declared": "8244d27139c20995b7f9b3ea374dbb1a8bfa2243c3a757c7e95e78579cbef4df",
+      "manifest": "8244d27139c20995b7f9b3ea374dbb1a8bfa2243c3a757c7e95e78579cbef4df",
+      "actual": "8244d27139c20995b7f9b3ea374dbb1a8bfa2243c3a757c7e95e78579cbef4df"
+    },
+    {
+      "file": "s9-c-06-running.png",
+      "declared": "012a219b3042e383348876e2645ac984fe59be57741f16afa3c2eba8686b4e57",
+      "manifest": "012a219b3042e383348876e2645ac984fe59be57741f16afa3c2eba8686b4e57",
+      "actual": "012a219b3042e383348876e2645ac984fe59be57741f16afa3c2eba8686b4e57"
+    },
+    {
+      "file": "s9-c-07-running-reload.png",
+      "declared": "40fc2645a1f765ebfa1d685b7fa1d3513a0703fecf9e7562dbb78adf350dafb7",
+      "manifest": "40fc2645a1f765ebfa1d685b7fa1d3513a0703fecf9e7562dbb78adf350dafb7",
+      "actual": "40fc2645a1f765ebfa1d685b7fa1d3513a0703fecf9e7562dbb78adf350dafb7"
+    },
+    {
+      "file": "s9-c-08-replay.png",
+      "declared": "0e1fa492b1b5ffe68c0f82b55b5b593b2e7cc34297e79c87aa845e8a2e7c09c0",
+      "manifest": "0e1fa492b1b5ffe68c0f82b55b5b593b2e7cc34297e79c87aa845e8a2e7c09c0",
+      "actual": "0e1fa492b1b5ffe68c0f82b55b5b593b2e7cc34297e79c87aa845e8a2e7c09c0"
+    },
+    {
+      "file": "s9-c-09-replay-reload.png",
+      "declared": "1ae7e4c86a59a4bb36797c2959c6a244a393aaf24134da3984a2cf57be0b1b3f",
+      "manifest": "1ae7e4c86a59a4bb36797c2959c6a244a393aaf24134da3984a2cf57be0b1b3f",
+      "actual": "1ae7e4c86a59a4bb36797c2959c6a244a393aaf24134da3984a2cf57be0b1b3f"
+    }
+  ],
+  "uniqueHashes": 9,
+  "flags": {
+    "dispatchApiUsed": false,
+    "replayApiUsed": false,
+    "offlineApiUsed": false,
+    "equipmentApiUsed": false
+  },
+  "passed": true
+}

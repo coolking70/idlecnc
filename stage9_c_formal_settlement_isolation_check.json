@@ -1,0 +1,149 @@
+{
+  "stage": "9-C.1",
+  "independentRecompute": true,
+  "battleSessionId": "battle-session-0-scrap_mine-f520c82ccd9c93e5bb96-1",
+  "deploymentHash": "f520c82ccd9c93e5bb962130b6808d828a88c9fe9a8f365093248b8790efd1de",
+  "formalReportHash": "4bb10abdc0a420e9541ad2d7405465de787ee4ef4339bfbfea1d1e0ad74fdd20",
+  "settlementId": "settlement-1f34c423df7735dfcd48d40045c9c50d56b24c1eee1a3d035e5a89b86bca9426",
+  "expectedMountedEquipment": {
+    "inventory": [
+      {
+        "id": "equipment-starter-1",
+        "equipmentId": "scout_optics",
+        "quantity": 1,
+        "acquiredAt": 0,
+        "acquisition": {
+          "kind": "starter",
+          "label": "初始装备补给"
+        }
+      },
+      {
+        "id": "equipment-starter-2",
+        "equipmentId": "reinforced_chassis",
+        "quantity": 1,
+        "acquiredAt": 0,
+        "acquisition": {
+          "kind": "starter",
+          "label": "初始装备补给"
+        }
+      },
+      {
+        "id": "equipment-starter-3",
+        "equipmentId": "field_toolkit",
+        "quantity": 1,
+        "acquiredAt": 0,
+        "acquisition": {
+          "kind": "starter",
+          "label": "初始装备补给"
+        }
+      }
+    ],
+    "bindings": {
+      "stage9-c-formal-unit": [
+        "equipment-starter-2"
+      ]
+    }
+  },
+  "beforeSettlement": {
+    "equipment": {
+      "inventory": [
+        {
+          "id": "equipment-starter-1",
+          "equipmentId": "scout_optics",
+          "quantity": 1,
+          "acquiredAt": 0,
+          "acquisition": {
+            "kind": "starter",
+            "label": "初始装备补给"
+          }
+        },
+        {
+          "id": "equipment-starter-2",
+          "equipmentId": "reinforced_chassis",
+          "quantity": 1,
+          "acquiredAt": 0,
+          "acquisition": {
+            "kind": "starter",
+            "label": "初始装备补给"
+          }
+        },
+        {
+          "id": "equipment-starter-3",
+          "equipmentId": "field_toolkit",
+          "quantity": 1,
+          "acquiredAt": 0,
+          "acquisition": {
+            "kind": "starter",
+            "label": "初始装备补给"
+          }
+        }
+      ],
+      "bindings": {
+        "stage9-c-formal-unit": [
+          "equipment-starter-2"
+        ]
+      }
+    },
+    "equipmentHash": "4ec48a0852320d5750de7a0b29ad505fa810b844b7b52435592753db4603483f",
+    "reportCount": 0,
+    "ledgerCount": 0,
+    "activeBattle": {
+      "battleSessionId": "battle-session-0-scrap_mine-f520c82ccd9c93e5bb96-1",
+      "deploymentHash": "f520c82ccd9c93e5bb962130b6808d828a88c9fe9a8f365093248b8790efd1de",
+      "formalReportHash": "4bb10abdc0a420e9541ad2d7405465de787ee4ef4339bfbfea1d1e0ad74fdd20",
+      "settlementId": "settlement-1f34c423df7735dfcd48d40045c9c50d56b24c1eee1a3d035e5a89b86bca9426"
+    }
+  },
+  "afterSettlement": {
+    "equipment": {
+      "inventory": [
+        {
+          "id": "equipment-starter-1",
+          "equipmentId": "scout_optics",
+          "quantity": 1,
+          "acquiredAt": 0,
+          "acquisition": {
+            "kind": "starter",
+            "label": "初始装备补给"
+          }
+        },
+        {
+          "id": "equipment-starter-2",
+          "equipmentId": "reinforced_chassis",
+          "quantity": 1,
+          "acquiredAt": 0,
+          "acquisition": {
+            "kind": "starter",
+            "label": "初始装备补给"
+          }
+        },
+        {
+          "id": "equipment-starter-3",
+          "equipmentId": "field_toolkit",
+          "quantity": 1,
+          "acquiredAt": 0,
+          "acquisition": {
+            "kind": "starter",
+            "label": "初始装备补给"
+          }
+        }
+      ],
+      "bindings": {
+        "stage9-c-formal-unit": [
+          "equipment-starter-2"
+        ]
+      }
+    },
+    "equipmentHash": "4ec48a0852320d5750de7a0b29ad505fa810b844b7b52435592753db4603483f",
+    "reportCount": 1,
+    "ledgerCount": 1,
+    "activeBattle": {
+      "battleSessionId": "battle-session-0-scrap_mine-f520c82ccd9c93e5bb96-1",
+      "deploymentHash": "f520c82ccd9c93e5bb962130b6808d828a88c9fe9a8f365093248b8790efd1de",
+      "formalReportHash": "4bb10abdc0a420e9541ad2d7405465de787ee4ef4339bfbfea1d1e0ad74fdd20",
+      "settlementId": "settlement-1f34c423df7735dfcd48d40045c9c50d56b24c1eee1a3d035e5a89b86bca9426",
+      "settled": true
+    }
+  },
+  "deepEqual": true
+}

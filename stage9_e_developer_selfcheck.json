@@ -1,0 +1,16 @@
+{
+  "stage": "9-E",
+  "independentRecompute": true,
+  "implementationPassed": true,
+  "strongEvidencePassed": true,
+  "tamperPassed": true,
+  "browserPassed": true,
+  "postFinalCommits": 0,
+  "deliveryClosed": false,
+  "externalGateRuns": {
+    "fast": null,
+    "stage": null,
+    "release": null
+  },
+  "passed": false
+}

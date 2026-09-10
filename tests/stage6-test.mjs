@@ -329,17 +329,17 @@ function damageUnit(state, unitId, ratio) {
  * ========================================================== */
 section('A. 阶段标记与配置');
 
-check('A01 CURRENT_STAGE 已进入阶段8', () => {
-  assert.equal(CURRENT_STAGE, 8);
+check('A01 CURRENT_STAGE 已进入阶段8及以上', () => {
+  assert.ok(CURRENT_STAGE >= 8);
 });
 
-check('A02 SAVE_VERSION === 7', () => {
-  assert.equal(SAVE_VERSION, 7);
+check('A02 SAVE_VERSION === 10', () => {
+  assert.equal(SAVE_VERSION, 10);
 });
 
-check('A03 package.json 版本号保持0.8.1-hotfix系列', () => {
+check('A03 package.json 已进入Stage 9正式版本', () => {
   const pkg = JSON.parse(readFileSync(path.join(ROOT, 'package.json'), 'utf8'));
-  assert.match(pkg.version, /^0\.8\.1-hotfix\./);
+  assert.equal(pkg.version, '0.9.0');
 });
 
 check('A04 DAMAGE_THRESHOLDS 配置 {intact:0.75, light:0.4}', () => {

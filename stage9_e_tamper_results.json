@@ -1,0 +1,916 @@
+{
+  "stage": "9-E",
+  "independentRecompute": true,
+  "total": 107,
+  "rejected": 107,
+  "verifierRejectedCount": 107,
+  "candidateDeclaredPassedTrueCount": 107,
+  "coupledTotal": 15,
+  "coupledRejected": 15,
+  "singleFieldTotal": 92,
+  "singleFieldRejected": 92,
+  "passedFlagOnlyCases": 0,
+  "results": [
+    {
+      "name": "core check count",
+      "coupled": false,
+      "domains": [],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "core recompute flag",
+      "coupled": false,
+      "domains": [],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "core production instance",
+      "coupled": false,
+      "domains": [],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "core salvage equipment",
+      "coupled": false,
+      "domains": [],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "core mission kind",
+      "coupled": false,
+      "domains": [],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "core mission id",
+      "coupled": false,
+      "domains": [],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "core seed",
+      "coupled": false,
+      "domains": [],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "core salvage version",
+      "coupled": false,
+      "domains": [],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "core settlement mutation",
+      "coupled": false,
+      "domains": [],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "core diff boundary",
+      "coupled": false,
+      "domains": [],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "core replay boundary",
+      "coupled": false,
+      "domains": [],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "core drop scope",
+      "coupled": false,
+      "domains": [],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "frame 0 semantic name",
+      "coupled": false,
+      "domains": [],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "frame 1 semantic name",
+      "coupled": false,
+      "domains": [],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 2
+    },
+    {
+      "name": "frame 2 semantic name",
+      "coupled": false,
+      "domains": [],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "frame 3 semantic name",
+      "coupled": false,
+      "domains": [],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "frame 4 semantic name",
+      "coupled": false,
+      "domains": [],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "frame 5 semantic name",
+      "coupled": false,
+      "domains": [],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 2
+    },
+    {
+      "name": "frame 6 semantic name",
+      "coupled": false,
+      "domains": [],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "frame 7 semantic name",
+      "coupled": false,
+      "domains": [],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 2
+    },
+    {
+      "name": "frame 8 semantic name",
+      "coupled": false,
+      "domains": [],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "frame 9 semantic name",
+      "coupled": false,
+      "domains": [],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 2
+    },
+    {
+      "name": "frame 10 semantic name",
+      "coupled": false,
+      "domains": [],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "frame 11 semantic name",
+      "coupled": false,
+      "domains": [],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 2
+    },
+    {
+      "name": "frame 12 semantic name",
+      "coupled": false,
+      "domains": [],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 2
+    },
+    {
+      "name": "frame 13 semantic name",
+      "coupled": false,
+      "domains": [],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 2
+    },
+    {
+      "name": "frame 0 screenshot hash",
+      "coupled": false,
+      "domains": [],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "frame 1 screenshot hash",
+      "coupled": false,
+      "domains": [],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "frame 2 screenshot hash",
+      "coupled": false,
+      "domains": [],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "frame 3 screenshot hash",
+      "coupled": false,
+      "domains": [],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "frame 4 screenshot hash",
+      "coupled": false,
+      "domains": [],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "frame 5 screenshot hash",
+      "coupled": false,
+      "domains": [],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "frame 6 screenshot hash",
+      "coupled": false,
+      "domains": [],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "frame 7 screenshot hash",
+      "coupled": false,
+      "domains": [],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "frame 8 screenshot hash",
+      "coupled": false,
+      "domains": [],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "frame 9 screenshot hash",
+      "coupled": false,
+      "domains": [],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "frame 10 screenshot hash",
+      "coupled": false,
+      "domains": [],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "frame 11 screenshot hash",
+      "coupled": false,
+      "domains": [],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "frame 12 screenshot hash",
+      "coupled": false,
+      "domains": [],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "frame 13 screenshot hash",
+      "coupled": false,
+      "domains": [],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "reload 0 timeOrigin",
+      "coupled": false,
+      "domains": [],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "reload 0 loader",
+      "coupled": false,
+      "domains": [],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "reload 1 timeOrigin",
+      "coupled": false,
+      "domains": [],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "reload 1 loader",
+      "coupled": false,
+      "domains": [],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 2
+    },
+    {
+      "name": "reload 2 timeOrigin",
+      "coupled": false,
+      "domains": [],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "reload 2 loader",
+      "coupled": false,
+      "domains": [],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "reload 3 timeOrigin",
+      "coupled": false,
+      "domains": [],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "reload 3 loader",
+      "coupled": false,
+      "domains": [],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "reload 4 timeOrigin",
+      "coupled": false,
+      "domains": [],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "reload 4 loader",
+      "coupled": false,
+      "domains": [],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "action 0 provenance",
+      "coupled": false,
+      "domains": [],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "action 1 provenance",
+      "coupled": false,
+      "domains": [],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "action 2 provenance",
+      "coupled": false,
+      "domains": [],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "action 3 provenance",
+      "coupled": false,
+      "domains": [],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "action 4 provenance",
+      "coupled": false,
+      "domains": [],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "action 5 provenance",
+      "coupled": false,
+      "domains": [],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "action 6 provenance",
+      "coupled": false,
+      "domains": [],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "action 7 provenance",
+      "coupled": false,
+      "domains": [],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "action 8 provenance",
+      "coupled": false,
+      "domains": [],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "action 9 provenance",
+      "coupled": false,
+      "domains": [],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "action 10 provenance",
+      "coupled": false,
+      "domains": [],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "action 11 provenance",
+      "coupled": false,
+      "domains": [],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "action 12 provenance",
+      "coupled": false,
+      "domains": [],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "action 13 provenance",
+      "coupled": false,
+      "domains": [],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "browser frame count",
+      "coupled": false,
+      "domains": [],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "browser unique hash count",
+      "coupled": false,
+      "domains": [],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "browser page error",
+      "coupled": false,
+      "domains": [],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "browser console error",
+      "coupled": false,
+      "domains": [],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "dispatch api flag",
+      "coupled": false,
+      "domains": [],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "replay api flag",
+      "coupled": false,
+      "domains": [],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "offline api flag",
+      "coupled": false,
+      "domains": [],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "equipment api flag",
+      "coupled": false,
+      "domains": [],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "salvage api flag",
+      "coupled": false,
+      "domains": [],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "reload count",
+      "coupled": false,
+      "domains": [],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "operation review kind",
+      "coupled": false,
+      "domains": [],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "operation review id",
+      "coupled": false,
+      "domains": [],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "queue state",
+      "coupled": false,
+      "domains": [],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "production mount binding",
+      "coupled": false,
+      "domains": [],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "running mission kind",
+      "coupled": false,
+      "domains": [],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "running mission id",
+      "coupled": false,
+      "domains": [],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "running salvage version",
+      "coupled": false,
+      "domains": [],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "pending result flag",
+      "coupled": false,
+      "domains": [],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "pending salvage outcome",
+      "coupled": false,
+      "domains": [],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "pending salvage definition",
+      "coupled": false,
+      "domains": [],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "claim count",
+      "coupled": false,
+      "domains": [],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "claim inventory",
+      "coupled": false,
+      "domains": [],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "salvage mount id",
+      "coupled": false,
+      "domains": [],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "salvage mount binding",
+      "coupled": false,
+      "domains": [],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "replay mode",
+      "coupled": false,
+      "domains": [],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "replay production snapshot",
+      "coupled": false,
+      "domains": [],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "replay salvage leakage",
+      "coupled": false,
+      "domains": [],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "replay current inventory",
+      "coupled": false,
+      "domains": [],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "coupled operation identity",
+      "coupled": true,
+      "domains": [
+        "formal_integration",
+        "browser_identity"
+      ],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 2
+    },
+    {
+      "name": "coupled production instance identity",
+      "coupled": true,
+      "domains": [
+        "inventory",
+        "binding"
+      ],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 2
+    },
+    {
+      "name": "coupled salvage equipment identity",
+      "coupled": true,
+      "domains": [
+        "salvage_offer",
+        "browser_result"
+      ],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 2
+    },
+    {
+      "name": "coupled salvage instance identity",
+      "coupled": true,
+      "domains": [
+        "inventory",
+        "claim"
+      ],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "coupled deployment and report hash",
+      "coupled": true,
+      "domains": [
+        "deployment",
+        "formal_report"
+      ],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 2
+    },
+    {
+      "name": "coupled session identity",
+      "coupled": true,
+      "domains": [
+        "battle_session",
+        "browser_session"
+      ],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "coupled settlement equipment hashes",
+      "coupled": true,
+      "domains": [
+        "settlement",
+        "equipment"
+      ],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 2
+    },
+    {
+      "name": "coupled salvage rules eligibility",
+      "coupled": true,
+      "domains": [
+        "salvage_rules",
+        "battle_state"
+      ],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 2
+    },
+    {
+      "name": "coupled historical replay disguise",
+      "coupled": true,
+      "domains": [
+        "historical_replay",
+        "current_inventory"
+      ],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "coupled acquisition provenance disguise",
+      "coupled": true,
+      "domains": [
+        "acquisition_scope",
+        "inventory"
+      ],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "coupled product metadata identity",
+      "coupled": true,
+      "domains": [
+        "bundle_metadata",
+        "core_metadata"
+      ],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "coupled catalog metadata identity",
+      "coupled": true,
+      "domains": [
+        "source_rules",
+        "core_catalog"
+      ],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 2
+    },
+    {
+      "name": "coupled operation mission tuple",
+      "coupled": true,
+      "domains": [
+        "browser_mission_kind",
+        "browser_mission_id"
+      ],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "coupled reload identity",
+      "coupled": true,
+      "domains": [
+        "reload_time",
+        "reload_loader"
+      ],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 2
+    },
+    {
+      "name": "coupled provenance and API disguise",
+      "coupled": true,
+      "domains": [
+        "dom_provenance",
+        "api_provenance"
+      ],
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 2
+    }
+  ]
+}

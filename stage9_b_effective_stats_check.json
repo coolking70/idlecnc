@@ -1,0 +1,46 @@
+{
+  "stage": "9-B",
+  "passed": true,
+  "order": [
+    "base",
+    "rank",
+    "equipment"
+  ],
+  "roundingDigits": 4,
+  "rankId": "veteran",
+  "equipmentIds": [
+    "equipment-starter-1",
+    "equipment-starter-3"
+  ],
+  "expected": {
+    "attack": 12.72,
+    "antiArmor": 4.24,
+    "defense": 10.812,
+    "scouting": 2.415,
+    "mobility": 5.15,
+    "repair": 0,
+    "hp": 100
+  },
+  "actual": {
+    "attack": 12.72,
+    "antiArmor": 4.24,
+    "defense": 10.812,
+    "scouting": 2.415,
+    "mobility": 5.15,
+    "repair": 0,
+    "hp": 100
+  },
+  "hpInvariant": true,
+  "floatingPointPolicy": {
+    "order": "base_then_rank_then_equipment",
+    "rounding": "round-half-up-4-decimal-after-each-multiplication",
+    "statKeys": [
+      "attack",
+      "antiArmor",
+      "defense",
+      "scouting",
+      "mobility",
+      "repair"
+    ]
+  }
+}

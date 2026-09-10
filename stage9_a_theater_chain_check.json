@@ -1,0 +1,44 @@
+{
+  "stage": "9-A",
+  "passed": true,
+  "theaterCount": 6,
+  "operationCount": 6,
+  "newTheaters": [
+    "river_crossing",
+    "relay_station",
+    "mountain_pass"
+  ],
+  "newOperations": [
+    "river_ferry",
+    "relay_intercept",
+    "pass_patrol"
+  ],
+  "requires": {
+    "river_crossing": [
+      "enemy_outpost"
+    ],
+    "relay_station": [
+      "river_crossing"
+    ],
+    "mountain_pass": [
+      "relay_station"
+    ]
+  },
+  "captures": {
+    "river_crossing": {
+      "seed": 3,
+      "result": "victory",
+      "battleSessionId": "battle-session-0-river_crossing-7c27ca490dd357f83573-1"
+    },
+    "relay_station": {
+      "seed": 1,
+      "result": "victory",
+      "battleSessionId": "battle-session-0-relay_station-2f8209d84af06d6f34e6-1"
+    },
+    "mountain_pass": {
+      "seed": 1,
+      "result": "victory",
+      "battleSessionId": "battle-session-0-mountain_pass-8b53cc0f287d94887ef1-1"
+    }
+  }
+}

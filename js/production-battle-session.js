@@ -157,7 +157,8 @@ export function createProductionBattleSession({
   report,
   sequence = 0,
   sessionOrigin = SESSION_ORIGIN.PRODUCTION,
-  createdAtGameTime = 0
+  createdAtGameTime = 0,
+  salvageRulesVersion = 0
 }) {
   const deployment = cloneJson(deploymentSnapshot) || {};
   const authority = buildAuthorityHashes(report);
@@ -187,6 +188,10 @@ export function createProductionBattleSession({
     returnedAtGameTime: null,
     replayReadOnly: false,
     settlementLocked: false,
+    // Stage 9-D metadata only. Formal identity, hashes and lifecycle remain
+    // unchanged; callers must explicitly opt into a salvage rules version.
+    salvageRulesVersion: Number.isInteger(salvageRulesVersion) && salvageRulesVersion >= 0
+      ? salvageRulesVersion : 0,
     version: 1
   };
 }

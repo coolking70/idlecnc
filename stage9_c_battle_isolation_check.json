@@ -1,0 +1,223 @@
+{
+  "stage": "9-C.1",
+  "independentRecompute": true,
+  "offlineProduction": {
+    "token": "stage9-c-offline-once",
+    "equipmentBefore": {
+      "inventory": [
+        {
+          "id": "equipment-starter-1",
+          "equipmentId": "scout_optics",
+          "quantity": 1,
+          "acquiredAt": 0,
+          "acquisition": {
+            "kind": "starter",
+            "label": "初始装备补给"
+          }
+        },
+        {
+          "id": "equipment-starter-2",
+          "equipmentId": "reinforced_chassis",
+          "quantity": 1,
+          "acquiredAt": 0,
+          "acquisition": {
+            "kind": "starter",
+            "label": "初始装备补给"
+          }
+        },
+        {
+          "id": "equipment-starter-3",
+          "equipmentId": "field_toolkit",
+          "quantity": 1,
+          "acquiredAt": 0,
+          "acquisition": {
+            "kind": "starter",
+            "label": "初始装备补给"
+          }
+        }
+      ],
+      "bindings": {}
+    },
+    "equipmentAfterFirst": {
+      "inventory": [
+        {
+          "id": "equipment-starter-1",
+          "equipmentId": "scout_optics",
+          "quantity": 1,
+          "acquiredAt": 0,
+          "acquisition": {
+            "kind": "starter",
+            "label": "初始装备补给"
+          }
+        },
+        {
+          "id": "equipment-starter-2",
+          "equipmentId": "reinforced_chassis",
+          "quantity": 1,
+          "acquiredAt": 0,
+          "acquisition": {
+            "kind": "starter",
+            "label": "初始装备补给"
+          }
+        },
+        {
+          "id": "equipment-starter-3",
+          "equipmentId": "field_toolkit",
+          "quantity": 1,
+          "acquiredAt": 0,
+          "acquisition": {
+            "kind": "starter",
+            "label": "初始装备补给"
+          }
+        },
+        {
+          "id": "equipment-production-anti_armor_sights-1",
+          "equipmentId": "anti_armor_sights",
+          "quantity": 1,
+          "acquiredAt": 28818,
+          "acquisition": {
+            "kind": "production",
+            "label": "装甲工厂制造",
+            "building": "armor_factory",
+            "cost": {
+              "supply": 180,
+              "alloy": 140
+            },
+            "buildTime": 18
+          }
+        }
+      ],
+      "bindings": {}
+    },
+    "equipmentAfterSecond": {
+      "inventory": [
+        {
+          "id": "equipment-starter-1",
+          "equipmentId": "scout_optics",
+          "quantity": 1,
+          "acquiredAt": 0,
+          "acquisition": {
+            "kind": "starter",
+            "label": "初始装备补给"
+          }
+        },
+        {
+          "id": "equipment-starter-2",
+          "equipmentId": "reinforced_chassis",
+          "quantity": 1,
+          "acquiredAt": 0,
+          "acquisition": {
+            "kind": "starter",
+            "label": "初始装备补给"
+          }
+        },
+        {
+          "id": "equipment-starter-3",
+          "equipmentId": "field_toolkit",
+          "quantity": 1,
+          "acquiredAt": 0,
+          "acquisition": {
+            "kind": "starter",
+            "label": "初始装备补给"
+          }
+        },
+        {
+          "id": "equipment-production-anti_armor_sights-1",
+          "equipmentId": "anti_armor_sights",
+          "quantity": 1,
+          "acquiredAt": 28818,
+          "acquisition": {
+            "kind": "production",
+            "label": "装甲工厂制造",
+            "building": "armor_factory",
+            "cost": {
+              "supply": 180,
+              "alloy": 140
+            },
+            "buildTime": 18
+          }
+        }
+      ],
+      "bindings": {}
+    },
+    "producedInstanceId": "equipment-production-anti_armor_sights-1",
+    "reportEquipmentProduced": [
+      {
+        "equipmentId": "anti_armor_sights",
+        "count": 1
+      }
+    ],
+    "repeated": {
+      "alreadySettled": true,
+      "equipmentAfter": {
+        "inventory": [
+          {
+            "id": "equipment-starter-1",
+            "equipmentId": "scout_optics",
+            "quantity": 1,
+            "acquiredAt": 0,
+            "acquisition": {
+              "kind": "starter",
+              "label": "初始装备补给"
+            }
+          },
+          {
+            "id": "equipment-starter-2",
+            "equipmentId": "reinforced_chassis",
+            "quantity": 1,
+            "acquiredAt": 0,
+            "acquisition": {
+              "kind": "starter",
+              "label": "初始装备补给"
+            }
+          },
+          {
+            "id": "equipment-starter-3",
+            "equipmentId": "field_toolkit",
+            "quantity": 1,
+            "acquiredAt": 0,
+            "acquisition": {
+              "kind": "starter",
+              "label": "初始装备补给"
+            }
+          },
+          {
+            "id": "equipment-production-anti_armor_sights-1",
+            "equipmentId": "anti_armor_sights",
+            "quantity": 1,
+            "acquiredAt": 28818,
+            "acquisition": {
+              "kind": "production",
+              "label": "装甲工厂制造",
+              "building": "armor_factory",
+              "cost": {
+                "supply": 180,
+                "alloy": 140
+              },
+              "buildTime": 18
+            }
+          }
+        ],
+        "bindings": {}
+      }
+    },
+    "battlePaused": true,
+    "battleIdentityBefore": {
+      "battleSessionId": "stage9-c-session",
+      "deploymentHash": "deployment-fixed",
+      "formalReportHash": "report-fixed",
+      "settlementAllowed": true,
+      "replayReadOnly": false,
+      "settled": false
+    },
+    "battleIdentityAfter": {
+      "battleSessionId": "stage9-c-session",
+      "deploymentHash": "deployment-fixed",
+      "formalReportHash": "report-fixed",
+      "settlementAllowed": true,
+      "replayReadOnly": false,
+      "settled": false
+    }
+  },
+  "battleLockedRejected": true
+}

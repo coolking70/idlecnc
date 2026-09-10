@@ -1,0 +1,21 @@
+{
+  "stage": "9-C",
+  "independentRecompute": true,
+  "saveVersion": 9,
+  "oldSaveCreatesNothing": true,
+  "productionQueueRestored": true,
+  "danglingUnitReferenceRemoved": true,
+  "danglingEquipmentReferenceRemoved": true,
+  "sanitizeOrder": [
+    "construction",
+    "production",
+    "units",
+    "equipment",
+    "operations",
+    "theaters",
+    "battles",
+    "activeBattle",
+    "repairs",
+    "formations"
+  ]
+}

@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
+import os from 'node:os';
 import path from 'node:path';
 import { performance } from 'node:perf_hooks';
 import { stableStringify } from '../js/battle-presentation/core/report-normalizer.js';
@@ -136,7 +137,7 @@ for (let index = 0; index < 60; index += 1) {
   const start = performance.now(); artPresentation.renderState.atTime((index * 0.71) % artReport.duration); samples.push(performance.now() - start);
 }
 samples.sort((a, b) => a - b);
-const performanceCheck = { stage: '8.2G-D-A.1', sampleCount: samples.length, p95RenderMs: Number(samples[Math.ceil(samples.length * .95) - 1].toFixed(4)), maxRenderMs: Number(Math.max(...samples).toFixed(4)), noWallClockInSemanticResolver: true, bounded: true, passed: true };
+const performanceCheck = { stage: '8.2G-D-A.1', sampleCount: samples.length, p95RenderMs: Number(samples[Math.ceil(samples.length * .95) - 1].toFixed(4)), maxRenderMs: Number(Math.max(...samples).toFixed(4)), noWallClockInSemanticResolver: true, bounded: true, environment: { platform: process.platform, arch: process.arch, cpuModel: os.cpus()[0]?.model || null, cpuCount: os.cpus().length, nodeVersion: process.version }, passed: true };
 write('stage8_2g_da1_performance_check.json', performanceCheck);
 const semanticFrame = (semantic) => artResolved.find((frame) => frame.semantic === semantic);
 const friendlyAtFrame = semanticFrame('friendly-at-fire');

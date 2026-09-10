@@ -1,0 +1,87 @@
+{
+  "stage": "10-B",
+  "passed": true,
+  "frames": [
+    "01-initial-pressure.png",
+    "02-tasks-running-pressure.png",
+    "03-after-recall.png"
+  ],
+  "assertions": [
+    {
+      "name": "production page booted",
+      "passed": true
+    },
+    {
+      "name": "initial pressure threat≈50 control=0",
+      "passed": true
+    },
+    {
+      "name": "tile shows THREAT 50 / CTRL 0 badges",
+      "passed": true
+    },
+    {
+      "name": "unique screenshot 01-initial-pressure.png",
+      "passed": true
+    },
+    {
+      "name": "RECON raises recon to 60 after 3000s",
+      "passed": true
+    },
+    {
+      "name": "PATROL raises control to 60 after 3000s",
+      "passed": true
+    },
+    {
+      "name": "tasks suppress threat",
+      "passed": true
+    },
+    {
+      "name": "tile CTRL badge updates live",
+      "passed": true
+    },
+    {
+      "name": "tile THREAT badge updates live (PATROL suppression)",
+      "passed": true
+    },
+    {
+      "name": "stacked task badge visible",
+      "passed": true
+    },
+    {
+      "name": "unique screenshot 02-tasks-running-pressure.png",
+      "passed": true
+    },
+    {
+      "name": "threat regenerates after recall",
+      "passed": true
+    },
+    {
+      "name": "recon decays after recall",
+      "passed": true
+    },
+    {
+      "name": "control decays after recall",
+      "passed": true
+    },
+    {
+      "name": "task badge cleared after recall",
+      "passed": true
+    },
+    {
+      "name": "unique screenshot 03-after-recall.png",
+      "passed": true
+    },
+    {
+      "name": "zero page errors",
+      "passed": true
+    },
+    {
+      "name": "zero console errors",
+      "passed": true
+    }
+  ],
+  "pageErrors": [],
+  "consoleErrors": [],
+  "saveVersion": 10,
+  "generatedAt": "2026-08-23T09:26:43.743Z"
+}

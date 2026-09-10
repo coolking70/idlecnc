@@ -1,0 +1,27 @@
+{
+  "stage": "9-B",
+  "passed": true,
+  "runningAttempt": {
+    "ok": false,
+    "code": "battle_locked",
+    "reason": "正式战斗或结果面板期间不能变更装备",
+    "equipment": null
+  },
+  "resultAttempt": {
+    "ok": false,
+    "code": "battle_locked",
+    "reason": "正式战斗或结果面板期间不能变更装备",
+    "equipment": null
+  },
+  "running": {
+    "battleSessionId": "battle-session-0-scrap_mine-30345824a5fe684353f8-1",
+    "deploymentHashUnchanged": true,
+    "formalReportHashUnchanged": true,
+    "equipmentUnchanged": true
+  },
+  "resultPanel": {
+    "ledgerUnchanged": true,
+    "noSecondSettlement": true,
+    "equipmentUnchanged": true
+  }
+}

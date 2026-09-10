@@ -1,0 +1,22 @@
+{
+  "stage": "Stage 9-C.1a",
+  "workflow": "core-regression",
+  "runId": 31646337573,
+  "jobId": 94281397473,
+  "attempt": 2,
+  "validatedSourceCommit": "8ec82cf5d3b6deb5aa3db011b76db9198aad5213",
+  "headSha": "8ec82cf5d3b6deb5aa3db011b76db9198aad5213",
+  "status": "completed",
+  "conclusion": "success",
+  "requiredSteps": [
+    { "name": "npm run test:stage9-A", "conclusion": "success", "skipped": false },
+    { "name": "npm run browser:stage9-A", "conclusion": "success", "skipped": false },
+    { "name": "npm run test:stage9-B", "conclusion": "success", "skipped": false },
+    { "name": "npm run browser:stage9-B", "conclusion": "success", "skipped": false },
+    { "name": "npm run test:stage9-C", "conclusion": "success", "skipped": false },
+    { "name": "npm run browser:stage9-C", "conclusion": "success", "skipped": false }
+  ],
+  "allRequiredStepsPassed": true,
+  "skippedRequiredSteps": [],
+  "sameSha": true
+}

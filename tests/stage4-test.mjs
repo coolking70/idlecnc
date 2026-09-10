@@ -967,8 +967,9 @@ check('J03 多次刷新不抛，且编队列表/详情渲染存在', () => {
     ui.refreshFormations(s);
   });
   assert.equal(ui.selectedFormationId, f.id);
-  assert.ok(ui.refs.fm.list, '编队列表容器应存在');
-  assert.ok(ui.refs.fm.detail, '编队详情容器应存在');
+  // Stage 10-P-B 起编队页改为 Tile 网格 + Inspector，旧的 list/detail 容器已移除
+  assert.ok(ui.refs.fm.gridRoot, '编队网格容器应存在');
+  assert.ok(ui.refs.fm.grid, '编队网格应存在');
 });
 
 /* ============================================================

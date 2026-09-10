@@ -7,6 +7,22 @@ import { buildChromiumLaunchArgs, resolveChromiumExecutable } from './chromium-r
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
+export const DEFAULT_DEVTOOLS_TIMEOUT_MS = 45000;
+
+function parsePositiveInteger(value) {
+  if (typeof value === 'number') return Number.isSafeInteger(value) && value > 0 ? value : null;
+  if (typeof value !== 'string' || !/^[1-9]\d*$/.test(value.trim())) return null;
+  const parsed = Number(value.trim());
+  return Number.isSafeInteger(parsed) && parsed > 0 ? parsed : null;
+}
+
+export function resolveDevToolsTimeoutMs(config = {}, env = process.env) {
+  const configured = parsePositiveInteger(config?.devtoolsTimeoutMs);
+  if (configured !== null) return configured;
+  const fromEnvironment = parsePositiveInteger(env?.IRON_BROWSER_DEVTOOLS_TIMEOUT_MS);
+  return fromEnvironment ?? DEFAULT_DEVTOOLS_TIMEOUT_MS;
+}
+
 function recentBuffer(limit = 12000) {
   let value = '';
   return {
@@ -15,7 +31,7 @@ function recentBuffer(limit = 12000) {
   };
 }
 
-function waitForDevTools(stderr, buffer, timeoutMs = 15000) {
+function waitForDevTools(stderr, buffer, timeoutMs = DEFAULT_DEVTOOLS_TIMEOUT_MS) {
   return new Promise((resolve, reject) => {
     let text = '';
     const timer = setTimeout(() => { cleanup(); reject(new Error(`DevTools startup timeout (${timeoutMs}ms), stderr=${buffer.value}`)); }, timeoutMs);
@@ -88,7 +104,7 @@ export async function launchManagedBrowser(config = {}) {
 
   try {
     const browserWs = await Promise.race([
-      waitForDevTools(child.stderr, stderr, config.devtoolsTimeoutMs || 15000),
+      waitForDevTools(child.stderr, stderr, resolveDevToolsTimeoutMs(config, config.env || process.env)),
       startupError,
       startupExit
     ]);

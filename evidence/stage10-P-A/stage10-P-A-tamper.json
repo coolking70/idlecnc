@@ -1,0 +1,127 @@
+{
+  "stage": "10-P-A",
+  "independentRecompute": true,
+  "total": 16,
+  "rejected": 16,
+  "candidateDeclaredPassedTrueCount": 16,
+  "passedFlagOnlyCases": 0,
+  "corpus": {
+    "browser": 9,
+    "machine": 7
+  },
+  "results": [
+    {
+      "name": "declared passed only",
+      "evidence": "browser",
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 36
+    },
+    {
+      "name": "missing screenshot",
+      "evidence": "browser",
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 3
+    },
+    {
+      "name": "duplicate screenshot bytes",
+      "evidence": "browser",
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 2
+    },
+    {
+      "name": "screenshot hash corruption",
+      "evidence": "browser",
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "missing mobile evidence",
+      "evidence": "browser",
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 9
+    },
+    {
+      "name": "missing hover evidence",
+      "evidence": "browser",
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 3
+    },
+    {
+      "name": "missing longPress evidence",
+      "evidence": "browser",
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "hidden page error",
+      "evidence": "browser",
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "hidden console error",
+      "evidence": "browser",
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "machine head sha mismatch",
+      "evidence": "machine",
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "machine gates bound to stale head",
+      "evidence": "machine",
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "machine authority changed flag",
+      "evidence": "machine",
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "machine frozen proof row changed",
+      "evidence": "machine",
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "machine state equivalence false",
+      "evidence": "machine",
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "machine gate record removed",
+      "evidence": "machine",
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    },
+    {
+      "name": "machine gate failure hidden by regression flag",
+      "evidence": "machine",
+      "candidateDeclaredPassed": true,
+      "rejected": true,
+      "failureCount": 1
+    }
+  ],
+  "passed": true
+}

@@ -1,0 +1,47 @@
+{
+  "stage": "9-B",
+  "independentRecompute": true,
+  "expectedReasons": [
+    "equipment_panel_mounted",
+    "running_battle",
+    "result",
+    "replay"
+  ],
+  "actualReasons": [
+    "equipment_panel_mounted",
+    "running_battle",
+    "result",
+    "replay"
+  ],
+  "checks": [
+    {
+      "reason": "equipment_panel_mounted",
+      "afterGreaterThanBefore": true,
+      "loaderChanged": true,
+      "declaredTimeOriginConsistent": true,
+      "loaderIdNotRepeated": true
+    },
+    {
+      "reason": "running_battle",
+      "afterGreaterThanBefore": true,
+      "loaderChanged": true,
+      "declaredTimeOriginConsistent": true,
+      "loaderIdNotRepeated": true
+    },
+    {
+      "reason": "result",
+      "afterGreaterThanBefore": true,
+      "loaderChanged": true,
+      "declaredTimeOriginConsistent": true,
+      "loaderIdNotRepeated": true
+    },
+    {
+      "reason": "replay",
+      "afterGreaterThanBefore": true,
+      "loaderChanged": true,
+      "declaredTimeOriginConsistent": true,
+      "loaderIdNotRepeated": true
+    }
+  ],
+  "passed": true
+}

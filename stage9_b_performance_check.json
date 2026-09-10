@@ -1,0 +1,77 @@
+{
+  "stage": "9-B",
+  "passed": true,
+  "budgetMs": 16.7,
+  "scenarios": {
+    "effectiveStats": {
+      "warmup": 20,
+      "samples": 120,
+      "metric": "p95",
+      "p95Ms": 0.021833999999998355,
+      "maxMs": 0.45241699999999696
+    },
+    "snapshot": {
+      "warmup": 20,
+      "samples": 120,
+      "metric": "p95",
+      "p95Ms": 0.04187500000000455,
+      "maxMs": 0.07916600000000074
+    }
+  },
+  "hotPathGuards": {
+    "equipmentParserOutsideBattleRenderer": true,
+    "equipmentParserOutsideBaseRenderer": true,
+    "uiUsesEquipmentRenderSignature": true,
+    "noPerFrameSaveDiffOrFullStateHash": true
+  },
+  "environment": {
+    "platform": "darwin",
+    "arch": "arm64",
+    "cpuModel": "Apple M5",
+    "cpuCount": 10,
+    "nodeVersion": "v25.2.1"
+  },
+  "sourceState": {
+    "unitId": "stage9-b-perf-unit",
+    "equipment": {
+      "inventory": [
+        {
+          "id": "equipment-starter-1",
+          "equipmentId": "scout_optics",
+          "quantity": 1,
+          "acquiredAt": 0,
+          "acquisition": {
+            "kind": "starter",
+            "label": "初始装备补给"
+          }
+        },
+        {
+          "id": "equipment-starter-2",
+          "equipmentId": "reinforced_chassis",
+          "quantity": 1,
+          "acquiredAt": 0,
+          "acquisition": {
+            "kind": "starter",
+            "label": "初始装备补给"
+          }
+        },
+        {
+          "id": "equipment-starter-3",
+          "equipmentId": "field_toolkit",
+          "quantity": 1,
+          "acquiredAt": 0,
+          "acquisition": {
+            "kind": "starter",
+            "label": "初始装备补给"
+          }
+        }
+      ],
+      "bindings": {
+        "stage9-b-perf-unit": [
+          "equipment-starter-1",
+          "equipment-starter-3"
+        ]
+      }
+    }
+  }
+}

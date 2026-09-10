@@ -1,0 +1,10 @@
+{
+  "stage": "9-E",
+  "kind": "ui_path",
+  "independentRecompute": true,
+  "source": "current-source-recomputed",
+  "requiredActionCount": 14,
+  "realDomActions": true,
+  "productionUiProvenance": true,
+  "syntheticApiCallCount": 0
+}

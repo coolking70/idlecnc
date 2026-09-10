@@ -1,28 +1,33 @@
 export const UNIVERSAL_COVERAGE_MATRIX_VERSION = '8.2F-B.3';
 
 export const UNIVERSAL_COVERAGE_RESULTS = Object.freeze(['victory', 'pyrrhic', 'withdraw', 'defeat', 'wiped']);
-export const UNIVERSAL_COVERAGE_MISSIONS = Object.freeze(['border_road', 'convoy_escort', 'enemy_outpost', 'outpost_sweep', 'salvage_run', 'scrap_mine']);
+export const UNIVERSAL_COVERAGE_MISSIONS = Object.freeze([
+  'border_road', 'convoy_escort', 'enemy_outpost', 'mountain_pass', 'outpost_sweep', 'pass_patrol',
+  'relay_intercept', 'relay_station', 'river_crossing', 'river_ferry', 'salvage_run', 'scrap_mine'
+]);
 
 const cell = (missionId, result, mode = 'universal_default') => Object.freeze({ missionId, result, mode });
+const keyOf = (missionId, result) => `${String(missionId || '')}:${String(result || '')}`;
 
 // This is a production policy snapshot, not a runtime import of the sandbox
-// coverage JSON. It records the 26 observed formal mission/result cells and
-// keeps the four unobserved cells explicit so auto mode cannot overclaim them.
-const COVERED_CELLS = [
-  ...UNIVERSAL_COVERAGE_RESULTS.map((result) => cell('border_road', result, result === 'victory' ? 'contract_precedence' : 'universal_default')),
-  ...UNIVERSAL_COVERAGE_RESULTS.map((result) => cell('convoy_escort', result)),
-  cell('enemy_outpost', 'withdraw'), cell('enemy_outpost', 'defeat'), cell('enemy_outpost', 'wiped'),
-  cell('outpost_sweep', 'pyrrhic'), cell('outpost_sweep', 'withdraw'), cell('outpost_sweep', 'defeat'), cell('outpost_sweep', 'wiped'),
-  cell('salvage_run', 'victory'), cell('salvage_run', 'pyrrhic'), cell('salvage_run', 'withdraw'), cell('salvage_run', 'wiped'),
-  ...UNIVERSAL_COVERAGE_RESULTS.map((result) => cell('scrap_mine', result))
-];
-
+// coverage JSON. It records the 44 observed formal mission/result cells and
+// keeps the 16 unobserved cells explicit so auto mode cannot overclaim them.
 const UNCOVERED_CELLS = [
-  cell('enemy_outpost', 'victory', 'unobserved'), cell('enemy_outpost', 'pyrrhic', 'unobserved'),
-  cell('outpost_sweep', 'victory', 'unobserved'), cell('salvage_run', 'defeat', 'unobserved')
+  cell('enemy_outpost', 'victory', 'unobserved'), cell('enemy_outpost', 'pyrrhic', 'unobserved'), cell('enemy_outpost', 'defeat', 'unobserved'),
+  cell('mountain_pass', 'victory', 'unobserved'), cell('mountain_pass', 'pyrrhic', 'unobserved'),
+  cell('outpost_sweep', 'victory', 'unobserved'), cell('outpost_sweep', 'pyrrhic', 'unobserved'), cell('outpost_sweep', 'defeat', 'unobserved'),
+  cell('pass_patrol', 'victory', 'unobserved'), cell('pass_patrol', 'pyrrhic', 'unobserved'),
+  cell('relay_intercept', 'victory', 'unobserved'), cell('relay_intercept', 'pyrrhic', 'unobserved'), cell('relay_intercept', 'defeat', 'unobserved'),
+  cell('relay_station', 'defeat', 'unobserved'),
+  cell('river_crossing', 'defeat', 'unobserved'), cell('salvage_run', 'defeat', 'unobserved')
 ];
 
-const keyOf = (missionId, result) => `${String(missionId || '')}:${String(result || '')}`;
+const uncoveredKeys = new Set(UNCOVERED_CELLS.map((entry) => keyOf(entry.missionId, entry.result)));
+const COVERED_CELLS = UNIVERSAL_COVERAGE_MISSIONS.flatMap((missionId) => UNIVERSAL_COVERAGE_RESULTS.map((result) => {
+  const mode = missionId === 'border_road' && result === 'victory' ? 'contract_precedence' : 'universal_default';
+  return cell(missionId, result, mode);
+})).filter((entry) => !uncoveredKeys.has(keyOf(entry.missionId, entry.result)));
+
 const coveredByKey = new Map(COVERED_CELLS.map((entry) => [keyOf(entry.missionId, entry.result), entry]));
 const uncoveredByKey = new Map(UNCOVERED_CELLS.map((entry) => [keyOf(entry.missionId, entry.result), entry]));
 

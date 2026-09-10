@@ -24,6 +24,7 @@ import { logEvent, emit, LOG_LEVEL } from './events.js';
 import { safeNumber, clamp, uid, formatInt } from './utils.js';
 import { getDamageState, damageStateOfUnit } from './unit-status.js';
 import { getResearchModifiers, getResearchCompletedAtRevision, ensureResearchRevision } from './research.js';
+import { getOperationalTask } from './tasking.js'; // Stage 10-A.1：任务编队成员不可送修（Tasking ↔ Repair 双向互斥）
 
 /* ============================================================
  * 结果码
@@ -40,6 +41,7 @@ export const REPAIR_CODE = {
   ALREADY_QUEUED: 'already_queued',
   UNIT_BUSY: 'unit_busy',
   FORMATION_BUSY: 'formation_busy',
+  FORMATION_TASKED: 'formation_tasked',
   UNIT_STATUS: 'unit_status',
   QUEUE_FULL: 'queue_full',
   INSUFFICIENT: 'insufficient',
@@ -158,6 +160,11 @@ export function canQueueRepair(state, unitId) {
     // 空闲库存单位：允许维修。
   } else if (unit.status === 'assigned' && formation && formation.status === 'idle') {
     // 待命编队成员：允许维修，正式入队时会脱离编队。
+    // Stage 10-A.1：编队正在执行持续性作战任务时除外（权威层互斥，
+    // 任务编队保持 idle，必须以 tasking 状态为准；玩家需先召回任务）。
+    if (getOperationalTask(state, formation.id)) {
+      return fail(REPAIR_CODE.FORMATION_TASKED, '该单位所属编队正在执行作战任务，请先召回', base);
+    }
   } else if (unit.status === 'assigned' && formation && formation.status !== 'idle') {
     return fail(REPAIR_CODE.FORMATION_BUSY, '所属编队尚未返回基地', base);
   } else {

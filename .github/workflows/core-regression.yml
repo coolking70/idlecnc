@@ -2,18 +2,74 @@ name: core-regression
 
 on:
   push:
+    branches:
+      - main
+      - auto/stage9-e1a-ci-browser-final-closure
+  # Run on every pull request regardless of base branch. This gate previously
+  # filtered to `branches: [main]`, so the Stage 10-A through 10-E pull requests
+  # — which all targeted non-main bases — never executed it. Seven stages of
+  # breakage accumulated invisibly and only surfaced when the integrated line
+  # was first proposed against main. A gate that only guards one base branch
+  # does not guard a stacked-branch workflow.
   pull_request:
+  workflow_dispatch:
+
+env:
+  FINAL_BRANCH: auto/stage9-e1a-ci-browser-final-closure
+  FINAL_MARKER: '[stage9-e1-final]'
 
 jobs:
-  node-core:
-    runs-on: ubuntu-latest
+  # Existing main/PR regression remains intact. Final-branch pushes use the
+  # explicitly registered Stage 9-E.1 topology below instead.
+  dc1-performance:
+    if: github.ref_name != 'auto/stage9-e1a-ci-browser-final-closure'
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
-          node-version: 22
-      - run: npm install --ignore-scripts
+          node-version: 22.23.1
+      - run: npm install --ignore-scripts --no-audit --no-fund
+      - name: Run one qualified D-C.1 formal performance measurement
+        run: npm run test:stage8-2G-D-C-1:performance
+      - name: Generate same-SHA performance runtime result
+        if: success()
+        run: node tests/generate-stage9-C1b-performance-result.mjs artifacts/stage9-c1b-performance
+      - name: Upload D-C.1 performance runtime evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: stage9-c1b-performance-${{ github.sha }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            stage8_2g_dc1_performance_check.json
+            stage8_2g_dc1_performance_environment_tamper_results.json
+            artifacts/stage9-c1b-performance/
+          if-no-files-found: error
+          retention-days: 30
+
+  node-core:
+    if: github.ref_name != 'auto/stage9-e1a-ci-browser-final-closure'
+    needs: dc1-performance
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.23.1
+      - run: npm install --ignore-scripts --no-audit --no-fund
+      - name: Download qualified D-C.1 performance input
+        uses: actions/download-artifact@v4
+        with:
+          name: stage9-c1b-performance-${{ github.sha }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: .
       - run: npm run test:stage8-2G-C-1
+      - run: npm run test:stage8-2G-D-C-1-prep
+      - name: Run npm run test:stage8-2G-D-C-1:functional
+        run: npm run test:stage8-2G-D-C-1:functional
       - run: npm run test:stage8-2G-C-1-1
       - run: npm run test:stage8-2G-C-1-1a
       - run: npm run test:stage8-2G-B-1-1a
@@ -24,7 +80,6 @@ jobs:
       - run: npm run test:stage8-2G-D-B-1
       - run: npm run test:stage8-2G-D-B-1a
       - run: npm run test:stage8-2G-D-C
-      - run: npm run test:stage8-2G-D-C-1
       - run: npm run test:stage8-2G-E-A
       - run: npm run test:stage8-2G-E-A-1
       - run: npm run browser:stage8-2G-E-A-1
@@ -32,3 +87,268 @@ jobs:
       - run: npm run browser:stage8-2G-E-B
       - run: npm run test:stage8-2G-E-C
       - run: npm run browser:stage8-2G-E-C
+      - run: npm run test:stage9-A
+      - run: npm run browser:stage9-A
+      - run: npm run test:stage9-B
+      - run: npm run browser:stage9-B
+      - run: npm run test:stage9-C
+      - run: npm run browser:stage9-C
+      - name: Generate same-SHA Stage 9 runtime result
+        run: node tests/generate-stage9-C1b-node-core-runtime.mjs artifacts/stage9-c1b-node-core
+      - name: Upload Stage 9 node/browser runtime evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: stage9-c1b-node-core-${{ github.sha }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: artifacts/stage9-c1b-node-core/
+          if-no-files-found: error
+          retention-days: 30
+
+  final-closure:
+    if: github.ref_name != 'auto/stage9-e1a-ci-browser-final-closure'
+    needs: [dc1-performance, node-core]
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.23.1
+      - run: npm install --ignore-scripts --no-audit --no-fund
+      - name: Download same-run performance evidence
+        uses: actions/download-artifact@v4
+        with:
+          name: stage9-c1b-performance-${{ github.sha }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: artifacts/stage9-c1b-final-closure
+      - name: Download same-run Stage 9 evidence
+        uses: actions/download-artifact@v4
+        with:
+          name: stage9-c1b-node-core-${{ github.sha }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: artifacts/stage9-c1b-final-closure
+      - name: Verify clean clone of exact immutable HEAD
+        env:
+          IRON_CLEAN_CLONE_RESULT_PATH: artifacts/stage9-c1b-final-closure/stage9_c1b_clean_clone_result.json
+          IRON_CLEAN_CLONE_TIMEOUT_MS: 3600000
+        timeout-minutes: 70
+        run: npm run verify:clean-clone
+      - name: Generate immutable final-head runtime closure
+        run: node tests/generate-stage9-C1b-runtime-closure.mjs artifacts/stage9-c1b-final-closure
+      - name: Upload immutable final-head closure
+        uses: actions/upload-artifact@v4
+        with:
+          name: stage9-c1b-final-closure-${{ github.sha }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: artifacts/stage9-c1b-final-closure/
+          if-no-files-found: error
+          retention-days: 30
+
+  fast-gate:
+    if: github.event_name == 'push' && github.ref_name == 'auto/stage9-e1a-ci-browser-final-closure'
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.23.1
+      - run: npm install --ignore-scripts --no-audit --no-fund
+      - name: Stage 9-E.1 Fast Gate
+        run: npm run test:stage9-E:fast
+      - name: Upload Stage 9-E.1 fast evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: stage9-e1-fast-${{ github.sha }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            stage9_e_core_evidence.json
+            stage9_e_machine_evidence.json
+          if-no-files-found: warn
+          retention-days: 30
+
+  stage9-e1-stage-gate:
+    if: github.event_name == 'push' && github.ref_name == 'auto/stage9-e1a-ci-browser-final-closure' && contains(github.event.head_commit.message, '[stage9-e1-final]')
+    runs-on: ubuntu-24.04
+    env:
+      IRON_BROWSER_DEVTOOLS_TIMEOUT_MS: 45000
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.23.1
+      - run: npm install --ignore-scripts --no-audit --no-fund
+      - name: Remove stale Stage 9-E browser evidence
+        run: node tests/clear-stage9-E-runtime-evidence.mjs
+      - name: Stage 9-E.1a browser startup contract
+        run: npm run test:stage9-E1a-browser-startup
+      - name: Stage 9-E core
+        run: npm run test:stage9-E
+      - name: Fresh Stage 9-E browser evidence, strong verifier and tamper
+        run: npm run browser:stage9-E
+      - name: Restore historical runtime evidence after regression generators
+        run: node tests/stage9-E1-restore-historical-evidence.mjs
+      - name: Stage 9-E.1 screenshot integrity regression
+        run: node tests/stage9-E1-screenshot-integrity-test.mjs
+      - name: Stage 9-E.1 historical evidence integrity regression
+        run: node tests/stage9-E1-historical-evidence-integrity-test.mjs
+      - name: Stage 9-E.1 committed selfcheck contract
+        run: node tests/stage9-E1-selfcheck-contract-test.mjs
+      - name: Upload fresh Stage 9-E.1 stage evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: stage9-e1-stage-${{ github.sha }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            stage9_e_core_evidence.json
+            stage9_e_machine_evidence.json
+            stage9_e_browser_capture_manifest.json
+            stage9_e_evidence.json
+            stage9_e_strong_evidence_verdict.json
+            stage9_e_tamper_results.json
+            stage9_e_developer_selfcheck.json
+            screenshots/stage9-E/
+          if-no-files-found: error
+          retention-days: 30
+
+  stage9-e1-release-performance:
+    if: github.event_name == 'push' && github.ref_name == 'auto/stage9-e1a-ci-browser-final-closure' && contains(github.event.head_commit.message, '[stage9-e1-final]')
+    needs: stage9-e1-stage-gate
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.23.1
+      - run: npm install --ignore-scripts --no-audit --no-fund
+      - name: One formal D-C.1 performance measurement
+        run: npm run test:stage8-2G-D-C-1:performance
+      - name: Package release performance runtime evidence
+        run: node tests/generate-stage9-C1b-performance-result.mjs artifacts/stage9-e1-performance
+      - name: Upload Stage 9-E.1 release performance
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: stage9-e1-performance-${{ github.sha }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            stage8_2g_dc1_performance_check.json
+            stage8_2g_dc1_performance_environment_tamper_results.json
+            artifacts/stage9-e1-performance/
+          if-no-files-found: error
+          retention-days: 30
+
+  stage9-e1-release-functional:
+    if: github.event_name == 'push' && github.ref_name == 'auto/stage9-e1a-ci-browser-final-closure' && contains(github.event.head_commit.message, '[stage9-e1-final]')
+    needs: [stage9-e1-stage-gate, stage9-e1-release-performance]
+    runs-on: ubuntu-24.04
+    env:
+      IRON_BROWSER_DEVTOOLS_TIMEOUT_MS: 45000
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.23.1
+      - run: npm install --ignore-scripts --no-audit --no-fund
+      - name: Download same-run qualified D-C.1 performance input
+        uses: actions/download-artifact@v4
+        with:
+          name: stage9-e1-performance-${{ github.sha }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: .
+      - name: Full historical functional release gate without formal D-C.1 rerun
+        run: npm run gate:stage9-release:functional
+      - name: Upload release functional marker
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: stage9-e1-functional-${{ github.sha }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: stage9_e_developer_selfcheck.json
+          if-no-files-found: warn
+          retention-days: 30
+
+  stage9-e1-clean-clone:
+    if: github.event_name == 'push' && github.ref_name == 'auto/stage9-e1a-ci-browser-final-closure' && contains(github.event.head_commit.message, '[stage9-e1-final]')
+    needs: stage9-e1-release-functional
+    runs-on: ubuntu-24.04
+    env:
+      IRON_BROWSER_DEVTOOLS_TIMEOUT_MS: 45000
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.23.1
+      - run: npm install --ignore-scripts --no-audit --no-fund
+      - name: Download same-run qualified D-C.1 performance input
+        uses: actions/download-artifact@v4
+        with:
+          name: stage9-e1-performance-${{ github.sha }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: artifacts/stage9-e1-performance-input
+      - name: Verify clean clone with release functional gate
+        env:
+          IRON_CLEAN_CLONE_GATE_SCRIPT: gate:stage9-release:functional
+          IRON_CLEAN_CLONE_PERFORMANCE_INPUT: artifacts/stage9-e1-performance-input/stage8_2g_dc1_performance_check.json
+          IRON_CLEAN_CLONE_RESULT_PATH: artifacts/stage9-e1-clean-clone/clean_clone_result.json
+          IRON_CLEAN_CLONE_TIMEOUT_MS: 3600000
+        timeout-minutes: 70
+        run: npm run verify:clean-clone
+      - name: Upload Stage 9-E.1 clean clone evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: stage9-e1-clean-clone-${{ github.sha }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: artifacts/stage9-e1-clean-clone/
+          if-no-files-found: error
+          retention-days: 30
+
+  stage9-e1-final-closure:
+    if: github.event_name == 'push' && github.ref_name == 'auto/stage9-e1a-ci-browser-final-closure' && contains(github.event.head_commit.message, '[stage9-e1-final]')
+    needs: [fast-gate, stage9-e1-stage-gate, stage9-e1-release-performance, stage9-e1-release-functional, stage9-e1-clean-clone]
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.23.1
+      - uses: actions/download-artifact@v4
+        with:
+          name: stage9-e1-stage-${{ github.sha }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: artifacts/stage9-e1-final-closure/stage
+      - uses: actions/download-artifact@v4
+        with:
+          name: stage9-e1-performance-${{ github.sha }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: artifacts/stage9-e1-final-closure/performance
+      - uses: actions/download-artifact@v4
+        with:
+          name: stage9-e1-clean-clone-${{ github.sha }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: artifacts/stage9-e1-final-closure/clean-clone
+      - uses: actions/download-artifact@v4
+        with:
+          name: stage9-e1-functional-${{ github.sha }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: artifacts/stage9-e1-final-closure/functional
+      - name: Assert and write immutable final-head closure
+        env:
+          STAGE_GATE_HEAD: ${{ github.sha }}
+          RELEASE_PERFORMANCE_HEAD: ${{ github.sha }}
+          RELEASE_FUNCTIONAL_HEAD: ${{ github.sha }}
+          GITHUB_SHA: ${{ github.sha }}
+        run: node tests/generate-stage9-E1-final-closure.mjs artifacts/stage9-e1-final-closure
+      - name: Upload Stage 9-E.1 final closure artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: stage9-e1-final-closure-${{ github.sha }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: artifacts/stage9-e1-final-closure/
+          if-no-files-found: error
+          retention-days: 30

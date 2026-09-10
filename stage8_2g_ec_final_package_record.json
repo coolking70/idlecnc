@@ -1,0 +1,92 @@
+{
+  "stage": "8.2G-E-C",
+  "recordType": "external_final_package_record",
+  "deprecated": true,
+  "supersededBy": "clean-clone verification",
+  "package": "iron-command-stage8-2G-E-C-offline-progression-closure.zip",
+  "packageBytes": 50684641,
+  "entries": 1154,
+  "branch": "main",
+  "baseline": {
+    "stage": "8.2G-E-B",
+    "commit": "b41ad940d8fab78038f1b1dedf5a404841b81401"
+  },
+  "scope": {
+    "offlineProgression": true,
+    "pendingReportReload": true,
+    "battleReplayIsolation": true,
+    "authorityModified": false,
+    "formalReportReadOnly": true,
+    "solverModified": false,
+    "plannerModified": false,
+    "choreographerModified": false,
+    "settlementCalculationModified": false,
+    "dcPresentationModified": false
+  },
+  "browser": {
+    "captureCount": 17,
+    "uniqueImageHashes": 17,
+    "realReloads": 5,
+    "pageErrors": [],
+    "consoleErrors": [],
+    "productionUiActions": 55,
+    "dispatchApiUsed": false,
+    "replayApiUsed": false,
+    "offlineApiUsed": false
+  },
+  "performance": {
+    "passed": true,
+    "warmupSamples": 20,
+    "sampleCount": 120,
+    "p95BudgetMs": 16.7,
+    "scenarios": [
+      {
+        "scenario": "idle",
+        "p95Ms": 0.027338999999997782
+      },
+      {
+        "scenario": "construction",
+        "p95Ms": 0.016359999999991715
+      },
+      {
+        "scenario": "battle",
+        "p95Ms": 0.05034899999998288
+      },
+      {
+        "scenario": "replay",
+        "p95Ms": 0.058177999999998065
+      }
+    ]
+  },
+  "tamper": {
+    "rejectionCount": 80,
+    "passedFlagOnlyCases": 0,
+    "passed": true
+  },
+  "selfcheck": true,
+  "packageHygiene": {
+    "forbiddenEntries": [],
+    "nestedZipFound": false,
+    "staleFinalPackageRecordInZip": false
+  },
+  "cleanPackageGate": "passed",
+  "cleanPackageTest": {
+    "stage": "8.2G-E-C",
+    "package": "iron-command-stage8-2G-E-C-offline-progression-closure.zip",
+    "packageBytes": 50684641,
+    "entries": 1154,
+    "packageHygiene": {
+      "forbiddenEntries": [],
+      "nestedZipFound": false,
+      "staleFinalPackageRecordInZip": false
+    },
+    "install": "passed",
+    "focusedEC": "passed",
+    "regressionEBBrowser": "passed",
+    "cleanPackageBrowserRerun": "passed",
+    "strongEvidence": "passed",
+    "tamper": "passed",
+    "ordinaryNpmTest": "passed",
+    "passed": true
+  }
+}

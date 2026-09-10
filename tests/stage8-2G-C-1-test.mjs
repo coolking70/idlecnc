@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
+import os from 'node:os';
 import path from 'node:path';
 import { performance } from 'node:perf_hooks';
 import { buildEnvironmentScene } from '../js/battle-presentation/environment/environment-scene-builder.js';
@@ -106,7 +107,7 @@ for (let index = 0; index < 160; index += 1) {
   presentation.renderState.atTime(plan.timeline.duration * ((index * 37) % 160) / 159);
   sampleMs.push(performance.now() - start);
 }
-const performanceCheck = { stage: '8.2G-C.1', sampleCount: sampleMs.length, averageRenderMs: round(sampleMs.reduce((sum, value) => sum + value, 0) / sampleMs.length), medianRenderMs: round(percentile(sampleMs, .5)), p95RenderMs: round(percentile(sampleMs, .95)), maxRenderMs: round(Math.max(...sampleMs)), samplesAreMeasured: true, percentileMethod: 'nearest-rank(sorted samples)', maxActiveParticles: state.destruction.limits.maxActiveParticles, maxSmokeColumns: state.destruction.limits.maxSmokeColumns, maxDustEffects: state.destruction.limits.maxDustEffects, maxPersistentDecals: state.destruction.limits.maxPersistentDecals, bounded: true, passed: true };
+const performanceCheck = { stage: '8.2G-C.1', sampleCount: sampleMs.length, averageRenderMs: round(sampleMs.reduce((sum, value) => sum + value, 0) / sampleMs.length), medianRenderMs: round(percentile(sampleMs, .5)), p95RenderMs: round(percentile(sampleMs, .95)), maxRenderMs: round(Math.max(...sampleMs)), samplesAreMeasured: true, percentileMethod: 'nearest-rank(sorted samples)', maxActiveParticles: state.destruction.limits.maxActiveParticles, maxSmokeColumns: state.destruction.limits.maxSmokeColumns, maxDustEffects: state.destruction.limits.maxDustEffects, maxPersistentDecals: state.destruction.limits.maxPersistentDecals, bounded: true, environment: { platform: process.platform, arch: process.arch, cpuModel: os.cpus()[0]?.model || null, cpuCount: os.cpus().length, nodeVersion: process.version }, passed: true };
 writeEvidence('stage8_2g_c1_performance_check.json', performanceCheck);
 
 const summary = { ok: true, stage: '8.2G-C.1', checks: 10, routeSeeds: routeRows.length, profileFields: ['muzzleShape', 'tracerWidth', 'impactScale', 'smoke', 'persistentMark'], performance: { sampleCount: performanceCheck.sampleCount, p95RenderMs: performanceCheck.p95RenderMs, maxRenderMs: performanceCheck.maxRenderMs }, authorityUnchanged: true, frozenCombatCore: true };

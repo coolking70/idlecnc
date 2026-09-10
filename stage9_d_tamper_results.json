@@ -1,0 +1,1041 @@
+{
+  "stage": "9-D",
+  "rule": "true-value mutation while passed=true",
+  "caseCount": 126,
+  "rejectionCount": 126,
+  "passedFlagOnlyCases": 0,
+  "cases": [
+    {
+      "label": "save-version",
+      "rejected": true,
+      "failureCodes": [
+        "save_version"
+      ]
+    },
+    {
+      "label": "salvage-rule-version",
+      "rejected": true,
+      "failureCodes": [
+        "salvage_rules_true_value"
+      ]
+    },
+    {
+      "label": "salvage-chance-cap",
+      "rejected": true,
+      "failureCodes": [
+        "salvage_rules_true_value"
+      ]
+    },
+    {
+      "label": "equipment-rule-slots",
+      "rejected": true,
+      "failureCodes": [
+        "equipment_rule_binding"
+      ]
+    },
+    {
+      "label": "catalog-remove-entry",
+      "rejected": true,
+      "failureCodes": [
+        "catalog_true_value"
+      ]
+    },
+    {
+      "label": "catalog-modifier",
+      "rejected": true,
+      "failureCodes": [
+        "catalog_true_value"
+      ]
+    },
+    {
+      "label": "machine-stage",
+      "rejected": true,
+      "failureCodes": [
+        "frame_count"
+      ]
+    },
+    {
+      "label": "machine-frame-count",
+      "rejected": true,
+      "failureCodes": [
+        "frame_count"
+      ]
+    },
+    {
+      "label": "machine-semantic-rename",
+      "rejected": true,
+      "failureCodes": [
+        "semantic_order"
+      ]
+    },
+    {
+      "label": "browser-dispatch-api",
+      "rejected": true,
+      "failureCodes": [
+        "api_provenance"
+      ]
+    },
+    {
+      "label": "machine-equipment-api",
+      "rejected": true,
+      "failureCodes": [
+        "api_provenance"
+      ]
+    },
+    {
+      "label": "browser-capture-count",
+      "rejected": true,
+      "failureCodes": [
+        "capture_counts"
+      ]
+    },
+    {
+      "label": "browser-duplicate-hash",
+      "rejected": true,
+      "failureCodes": [
+        "duplicate_screenshot_hash",
+        "screenshot_declared_hash"
+      ]
+    },
+    {
+      "label": "browser-console-error",
+      "rejected": true,
+      "failureCodes": [
+        "browser_errors"
+      ]
+    },
+    {
+      "label": "reload-reason-missing",
+      "rejected": true,
+      "failureCodes": [
+        "reload_reason_coverage"
+      ]
+    },
+    {
+      "label": "reload-reason-extra",
+      "rejected": true,
+      "failureCodes": [
+        "reload_reason_coverage",
+        "reload_loader_uniqueness"
+      ]
+    },
+    {
+      "label": "reload-time-equal",
+      "rejected": true,
+      "failureCodes": [
+        "reload_true_value"
+      ]
+    },
+    {
+      "label": "reload-time-backwards",
+      "rejected": true,
+      "failureCodes": [
+        "reload_true_value"
+      ]
+    },
+    {
+      "label": "reload-time-declaration",
+      "rejected": true,
+      "failureCodes": [
+        "reload_true_value"
+      ]
+    },
+    {
+      "label": "reload-loader-equal",
+      "rejected": true,
+      "failureCodes": [
+        "reload_true_value"
+      ]
+    },
+    {
+      "label": "reload-loader-duplicate",
+      "rejected": true,
+      "failureCodes": [
+        "reload_loader_uniqueness",
+        "reload_true_value"
+      ]
+    },
+    {
+      "label": "required-action-missing",
+      "rejected": true,
+      "failureCodes": [
+        "required_action"
+      ]
+    },
+    {
+      "label": "ui-provenance-source",
+      "rejected": true,
+      "failureCodes": [
+        "ui_provenance"
+      ]
+    },
+    {
+      "label": "ui-provenance-synthetic",
+      "rejected": true,
+      "failureCodes": [
+        "ui_provenance"
+      ]
+    },
+    {
+      "label": "frame-1-screenshot-hash",
+      "rejected": true,
+      "failureCodes": [
+        "screenshot_declared_hash"
+      ]
+    },
+    {
+      "label": "frame-1-screenshot-declaration",
+      "rejected": true,
+      "failureCodes": [
+        "screenshot_declared_hash"
+      ]
+    },
+    {
+      "label": "frame-1-salvage-roll",
+      "rejected": true,
+      "failureCodes": [
+        "salvage_true_value"
+      ]
+    },
+    {
+      "label": "frame-1-salvage-offer-hash",
+      "rejected": true,
+      "failureCodes": [
+        "salvage_true_value",
+        "pending_reload_stability"
+      ]
+    },
+    {
+      "label": "frame-1-salvage-id",
+      "rejected": true,
+      "failureCodes": [
+        "salvage_true_value"
+      ]
+    },
+    {
+      "label": "frame-1-settlement-ledger-hash",
+      "rejected": true,
+      "failureCodes": [
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_offer_invalid"
+      ]
+    },
+    {
+      "label": "frame-1-deployment-hash",
+      "rejected": true,
+      "failureCodes": [
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_offer_invalid"
+      ]
+    },
+    {
+      "label": "frame-1-session-id",
+      "rejected": true,
+      "failureCodes": [
+        "session_identity"
+      ]
+    },
+    {
+      "label": "frame-1-settlement-id",
+      "rejected": true,
+      "failureCodes": [
+        "session_identity"
+      ]
+    },
+    {
+      "label": "frame-1-report-hash",
+      "rejected": true,
+      "failureCodes": [
+        "session_identity"
+      ]
+    },
+    {
+      "label": "frame-2-screenshot-hash",
+      "rejected": true,
+      "failureCodes": [
+        "screenshot_declared_hash"
+      ]
+    },
+    {
+      "label": "frame-2-screenshot-declaration",
+      "rejected": true,
+      "failureCodes": [
+        "screenshot_declared_hash"
+      ]
+    },
+    {
+      "label": "frame-2-salvage-roll",
+      "rejected": true,
+      "failureCodes": [
+        "salvage_true_value"
+      ]
+    },
+    {
+      "label": "frame-2-salvage-offer-hash",
+      "rejected": true,
+      "failureCodes": [
+        "salvage_true_value",
+        "pending_reload_stability"
+      ]
+    },
+    {
+      "label": "frame-2-salvage-id",
+      "rejected": true,
+      "failureCodes": [
+        "salvage_true_value"
+      ]
+    },
+    {
+      "label": "frame-2-settlement-ledger-hash",
+      "rejected": true,
+      "failureCodes": [
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_offer_invalid"
+      ]
+    },
+    {
+      "label": "frame-2-deployment-hash",
+      "rejected": true,
+      "failureCodes": [
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_offer_invalid"
+      ]
+    },
+    {
+      "label": "frame-2-session-id",
+      "rejected": true,
+      "failureCodes": [
+        "session_identity"
+      ]
+    },
+    {
+      "label": "frame-2-settlement-id",
+      "rejected": true,
+      "failureCodes": [
+        "session_identity"
+      ]
+    },
+    {
+      "label": "frame-2-report-hash",
+      "rejected": true,
+      "failureCodes": [
+        "session_identity"
+      ]
+    },
+    {
+      "label": "frame-3-screenshot-hash",
+      "rejected": true,
+      "failureCodes": [
+        "screenshot_declared_hash"
+      ]
+    },
+    {
+      "label": "frame-3-screenshot-declaration",
+      "rejected": true,
+      "failureCodes": [
+        "screenshot_declared_hash"
+      ]
+    },
+    {
+      "label": "frame-3-salvage-roll",
+      "rejected": true,
+      "failureCodes": [
+        "salvage_true_value"
+      ]
+    },
+    {
+      "label": "frame-3-salvage-offer-hash",
+      "rejected": true,
+      "failureCodes": [
+        "salvage_true_value",
+        "replay_historical_offer"
+      ]
+    },
+    {
+      "label": "frame-3-salvage-id",
+      "rejected": true,
+      "failureCodes": [
+        "salvage_true_value"
+      ]
+    },
+    {
+      "label": "frame-3-settlement-ledger-hash",
+      "rejected": true,
+      "failureCodes": [
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_offer_invalid"
+      ]
+    },
+    {
+      "label": "frame-3-deployment-hash",
+      "rejected": true,
+      "failureCodes": [
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_offer_invalid"
+      ]
+    },
+    {
+      "label": "frame-3-session-id",
+      "rejected": true,
+      "failureCodes": [
+        "session_identity"
+      ]
+    },
+    {
+      "label": "frame-3-settlement-id",
+      "rejected": true,
+      "failureCodes": [
+        "session_identity"
+      ]
+    },
+    {
+      "label": "frame-3-report-hash",
+      "rejected": true,
+      "failureCodes": [
+        "session_identity"
+      ]
+    },
+    {
+      "label": "frame-4-screenshot-hash",
+      "rejected": true,
+      "failureCodes": [
+        "screenshot_declared_hash"
+      ]
+    },
+    {
+      "label": "frame-4-screenshot-declaration",
+      "rejected": true,
+      "failureCodes": [
+        "screenshot_declared_hash"
+      ]
+    },
+    {
+      "label": "frame-4-salvage-roll",
+      "rejected": true,
+      "failureCodes": [
+        "salvage_true_value"
+      ]
+    },
+    {
+      "label": "frame-4-salvage-offer-hash",
+      "rejected": true,
+      "failureCodes": [
+        "salvage_true_value"
+      ]
+    },
+    {
+      "label": "frame-4-salvage-id",
+      "rejected": true,
+      "failureCodes": [
+        "salvage_true_value"
+      ]
+    },
+    {
+      "label": "frame-4-settlement-ledger-hash",
+      "rejected": true,
+      "failureCodes": [
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_offer_invalid"
+      ]
+    },
+    {
+      "label": "frame-4-deployment-hash",
+      "rejected": true,
+      "failureCodes": [
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_offer_invalid"
+      ]
+    },
+    {
+      "label": "frame-4-session-id",
+      "rejected": true,
+      "failureCodes": [
+        "session_identity"
+      ]
+    },
+    {
+      "label": "frame-4-settlement-id",
+      "rejected": true,
+      "failureCodes": [
+        "session_identity"
+      ]
+    },
+    {
+      "label": "frame-4-report-hash",
+      "rejected": true,
+      "failureCodes": [
+        "session_identity"
+      ]
+    },
+    {
+      "label": "frame-5-screenshot-hash",
+      "rejected": true,
+      "failureCodes": [
+        "screenshot_declared_hash"
+      ]
+    },
+    {
+      "label": "frame-5-screenshot-declaration",
+      "rejected": true,
+      "failureCodes": [
+        "screenshot_declared_hash"
+      ]
+    },
+    {
+      "label": "frame-5-salvage-roll",
+      "rejected": true,
+      "failureCodes": [
+        "salvage_true_value"
+      ]
+    },
+    {
+      "label": "frame-5-salvage-offer-hash",
+      "rejected": true,
+      "failureCodes": [
+        "salvage_true_value"
+      ]
+    },
+    {
+      "label": "frame-5-salvage-id",
+      "rejected": true,
+      "failureCodes": [
+        "salvage_true_value"
+      ]
+    },
+    {
+      "label": "frame-5-settlement-ledger-hash",
+      "rejected": true,
+      "failureCodes": [
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_offer_invalid"
+      ]
+    },
+    {
+      "label": "frame-5-deployment-hash",
+      "rejected": true,
+      "failureCodes": [
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_offer_invalid"
+      ]
+    },
+    {
+      "label": "frame-5-session-id",
+      "rejected": true,
+      "failureCodes": [
+        "session_identity"
+      ]
+    },
+    {
+      "label": "frame-5-settlement-id",
+      "rejected": true,
+      "failureCodes": [
+        "session_identity"
+      ]
+    },
+    {
+      "label": "frame-5-report-hash",
+      "rejected": true,
+      "failureCodes": [
+        "session_identity"
+      ]
+    },
+    {
+      "label": "frame-6-screenshot-hash",
+      "rejected": true,
+      "failureCodes": [
+        "screenshot_declared_hash"
+      ]
+    },
+    {
+      "label": "frame-6-screenshot-declaration",
+      "rejected": true,
+      "failureCodes": [
+        "screenshot_declared_hash"
+      ]
+    },
+    {
+      "label": "frame-6-salvage-roll",
+      "rejected": true,
+      "failureCodes": [
+        "salvage_true_value"
+      ]
+    },
+    {
+      "label": "frame-6-salvage-offer-hash",
+      "rejected": true,
+      "failureCodes": [
+        "salvage_true_value",
+        "replay_historical_offer"
+      ]
+    },
+    {
+      "label": "frame-6-salvage-id",
+      "rejected": true,
+      "failureCodes": [
+        "salvage_true_value"
+      ]
+    },
+    {
+      "label": "frame-6-settlement-ledger-hash",
+      "rejected": true,
+      "failureCodes": [
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_offer_invalid"
+      ]
+    },
+    {
+      "label": "frame-6-deployment-hash",
+      "rejected": true,
+      "failureCodes": [
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_offer_invalid"
+      ]
+    },
+    {
+      "label": "frame-6-session-id",
+      "rejected": true,
+      "failureCodes": [
+        "session_identity"
+      ]
+    },
+    {
+      "label": "frame-6-settlement-id",
+      "rejected": true,
+      "failureCodes": [
+        "session_identity"
+      ]
+    },
+    {
+      "label": "frame-6-report-hash",
+      "rejected": true,
+      "failureCodes": [
+        "session_identity"
+      ]
+    },
+    {
+      "label": "frame-7-screenshot-hash",
+      "rejected": true,
+      "failureCodes": [
+        "screenshot_declared_hash"
+      ]
+    },
+    {
+      "label": "frame-7-screenshot-declaration",
+      "rejected": true,
+      "failureCodes": [
+        "screenshot_declared_hash"
+      ]
+    },
+    {
+      "label": "frame-7-salvage-roll",
+      "rejected": true,
+      "failureCodes": [
+        "salvage_true_value"
+      ]
+    },
+    {
+      "label": "frame-7-salvage-offer-hash",
+      "rejected": true,
+      "failureCodes": [
+        "salvage_true_value",
+        "replay_historical_offer"
+      ]
+    },
+    {
+      "label": "frame-7-salvage-id",
+      "rejected": true,
+      "failureCodes": [
+        "salvage_true_value"
+      ]
+    },
+    {
+      "label": "frame-7-settlement-ledger-hash",
+      "rejected": true,
+      "failureCodes": [
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_offer_invalid"
+      ]
+    },
+    {
+      "label": "frame-7-deployment-hash",
+      "rejected": true,
+      "failureCodes": [
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_offer_invalid"
+      ]
+    },
+    {
+      "label": "frame-7-session-id",
+      "rejected": true,
+      "failureCodes": [
+        "session_identity"
+      ]
+    },
+    {
+      "label": "frame-7-settlement-id",
+      "rejected": true,
+      "failureCodes": [
+        "session_identity"
+      ]
+    },
+    {
+      "label": "frame-7-report-hash",
+      "rejected": true,
+      "failureCodes": [
+        "session_identity"
+      ]
+    },
+    {
+      "label": "frame-8-screenshot-hash",
+      "rejected": true,
+      "failureCodes": [
+        "screenshot_declared_hash"
+      ]
+    },
+    {
+      "label": "frame-8-screenshot-declaration",
+      "rejected": true,
+      "failureCodes": [
+        "screenshot_declared_hash"
+      ]
+    },
+    {
+      "label": "frame-8-salvage-roll",
+      "rejected": true,
+      "failureCodes": [
+        "salvage_true_value"
+      ]
+    },
+    {
+      "label": "frame-8-salvage-offer-hash",
+      "rejected": true,
+      "failureCodes": [
+        "salvage_true_value",
+        "no_drop_reload_stability"
+      ]
+    },
+    {
+      "label": "frame-8-salvage-id",
+      "rejected": true,
+      "failureCodes": [
+        "salvage_true_value"
+      ]
+    },
+    {
+      "label": "frame-8-settlement-ledger-hash",
+      "rejected": true,
+      "failureCodes": [
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_offer_invalid"
+      ]
+    },
+    {
+      "label": "frame-8-deployment-hash",
+      "rejected": true,
+      "failureCodes": [
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_offer_invalid"
+      ]
+    },
+    {
+      "label": "frame-8-session-id",
+      "rejected": true,
+      "failureCodes": [
+        "session_identity"
+      ]
+    },
+    {
+      "label": "frame-8-settlement-id",
+      "rejected": true,
+      "failureCodes": [
+        "session_identity"
+      ]
+    },
+    {
+      "label": "frame-8-report-hash",
+      "rejected": true,
+      "failureCodes": [
+        "session_identity"
+      ]
+    },
+    {
+      "label": "frame-9-screenshot-hash",
+      "rejected": true,
+      "failureCodes": [
+        "screenshot_declared_hash"
+      ]
+    },
+    {
+      "label": "frame-9-screenshot-declaration",
+      "rejected": true,
+      "failureCodes": [
+        "screenshot_declared_hash"
+      ]
+    },
+    {
+      "label": "frame-9-salvage-roll",
+      "rejected": true,
+      "failureCodes": [
+        "salvage_true_value"
+      ]
+    },
+    {
+      "label": "frame-9-salvage-offer-hash",
+      "rejected": true,
+      "failureCodes": [
+        "salvage_true_value",
+        "no_drop_reload_stability"
+      ]
+    },
+    {
+      "label": "frame-9-salvage-id",
+      "rejected": true,
+      "failureCodes": [
+        "salvage_true_value"
+      ]
+    },
+    {
+      "label": "frame-9-settlement-ledger-hash",
+      "rejected": true,
+      "failureCodes": [
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_offer_invalid"
+      ]
+    },
+    {
+      "label": "frame-9-deployment-hash",
+      "rejected": true,
+      "failureCodes": [
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_true_value",
+        "salvage_offer_invalid"
+      ]
+    },
+    {
+      "label": "frame-9-session-id",
+      "rejected": true,
+      "failureCodes": [
+        "session_identity"
+      ]
+    },
+    {
+      "label": "frame-9-settlement-id",
+      "rejected": true,
+      "failureCodes": [
+        "session_identity"
+      ]
+    },
+    {
+      "label": "frame-9-report-hash",
+      "rejected": true,
+      "failureCodes": [
+        "session_identity"
+      ]
+    },
+    {
+      "label": "claimed-receipt-hash",
+      "rejected": true,
+      "failureCodes": [
+        "claim_receipt_binding"
+      ]
+    },
+    {
+      "label": "claimed-receipt-equipment",
+      "rejected": true,
+      "failureCodes": [
+        "claim_receipt_binding"
+      ]
+    },
+    {
+      "label": "claimed-receipt-instance",
+      "rejected": true,
+      "failureCodes": [
+        "claim_receipt_binding"
+      ]
+    },
+    {
+      "label": "claimed-inventory-instance",
+      "rejected": true,
+      "failureCodes": [
+        "claim_receipt_binding"
+      ]
+    },
+    {
+      "label": "claimed-inventory-equipment",
+      "rejected": true,
+      "failureCodes": [
+        "claim_receipt_binding"
+      ]
+    },
+    {
+      "label": "claimed-inventory-count",
+      "rejected": true,
+      "failureCodes": [
+        "inventory_count_binding"
+      ]
+    },
+    {
+      "label": "claimed-state-pending",
+      "rejected": true,
+      "failureCodes": [
+        "salvage_true_value",
+        "claim_reload_stability"
+      ]
+    },
+    {
+      "label": "replay-read-only-false",
+      "rejected": true,
+      "failureCodes": [
+        "replay_read_only"
+      ]
+    },
+    {
+      "label": "replay-claim-control-visible",
+      "rejected": true,
+      "failureCodes": [
+        "replay_claim_control"
+      ]
+    },
+    {
+      "label": "replay-historical-equipment",
+      "rejected": true,
+      "failureCodes": [
+        "salvage_true_value"
+      ]
+    },
+    {
+      "label": "no-drop-equipment",
+      "rejected": true,
+      "failureCodes": [
+        "salvage_true_value",
+        "no_drop_reload_stability"
+      ]
+    },
+    {
+      "label": "no-drop-inventory-growth",
+      "rejected": true,
+      "failureCodes": [
+        "inventory_count_binding",
+        "no_drop_inventory_stability"
+      ]
+    }
+  ],
+  "passed": true
+}

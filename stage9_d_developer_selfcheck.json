@@ -1,0 +1,153 @@
+{
+  "stage": "9-D",
+  "generatedBy": "tests/generate-stage9-D-developer-selfcheck.mjs",
+  "currentHead": "38d13c24816407c68a04a859a165e39f3b73bdb5",
+  "statusPorcelain": " M .github/workflows/core-regression.yml\n M js/config.js\n M js/equipment.js\n M js/main.js\n M js/save.js\n M js/ui.js\n M package.json\n M progress.md\n M stage9_b_authority_check.json\n M stage9_b_battle_isolation_check.json\n M stage9_b_developer_selfcheck.json\n M stage9_b_equipment_model_check.json\n M stage9_b_migration_check.json\n M stage9_b_performance_check.json\n M stage9_b_replay_historical_check.json\n M stage9_c_authority_check.json\n M stage9_c_battle_isolation_check.json\n M stage9_c_formal_settlement_isolation_check.json\n M stage9_c_migration_check.json\n M stage9_c_performance_check.json\n M stage9_c_regression_check.json\n M tests/generate-stage9-B-developer-selfcheck.mjs\n M tests/generate-stage9-B-evidence.mjs\n M tests/stage6-test.mjs\n M tests/stage7-test.mjs\n M tests/stage8-1-1-test.mjs\n M tests/stage8-1-test.mjs\n M tests/stage8-2E-A-2-1-test.mjs\n M tests/stage8-2E-A-2-2-test.mjs\n M tests/stage8-2E-A-2-3-test.mjs\n M tests/stage8-2E-A-2-4-test.mjs\n M tests/stage8-2E-A-2-test.mjs\n M tests/stage8-test.mjs\n M tests/stage9-B-equipment-test.mjs\n M tests/stage9-B-strong-evidence-test.mjs\n M tests/stage9-C-equipment-acquisition-test.mjs\n M tests/stage9-C-strong-evidence-test.mjs\n?? .github/workflows/stage9-d-fast.yml\n?? .github/workflows/stage9-d-stage-gate.yml\n?? STAGE9-D-DELIVERY.md\n?? js/battle-salvage.js\n?? stage9_d_browser_capture_manifest.json\n?? stage9_d_core_machine_evidence.json\n?? stage9_d_developer_selfcheck.json\n?? stage9_d_evidence_bundle.json\n?? stage9_d_machine_evidence.json\n?? stage9_d_performance_check.json\n?? stage9_d_strong_evidence_verdict.json\n?? stage9_d_tamper_results.json\n?? tests/browser/stage9-D-battle-salvage.mjs\n?? tests/generate-stage9-D-developer-selfcheck.mjs\n?? tests/generate-stage9-D-evidence.mjs\n?? tests/generate-stage9-D-machine-evidence.mjs\n?? tests/stage9-D-battle-salvage-test.mjs\n?? tests/stage9-D-evidence-tamper-test.mjs\n?? tests/stage9-D-evidence-verifier.mjs\n?? tests/stage9-D-performance-test.mjs\n?? tests/stage9-D-strong-evidence-test.mjs\n",
+  "answers": [
+    {
+      "id": 1,
+      "question": "remote commit",
+      "answer": "pending until final push",
+      "verified": false
+    },
+    {
+      "id": 2,
+      "question": "clean clone",
+      "answer": "pending until final final-head run",
+      "verified": false
+    },
+    {
+      "id": 3,
+      "question": "no battle drop in solver",
+      "answer": "salvage derives only after applied Formal Settlement",
+      "verified": true
+    },
+    {
+      "id": 4,
+      "question": "settlement write-set",
+      "answer": "claim is post-settlement and equipment-only; no settlement module change",
+      "verified": true
+    },
+    {
+      "id": 5,
+      "question": "deterministic roll/pool/id",
+      "answer": "canonical identity hash; no Math.random in salvage module",
+      "verified": true
+    },
+    {
+      "id": 6,
+      "question": "exactly once",
+      "answer": "salvageClaims receipt plus deterministic instance id",
+      "verified": true
+    },
+    {
+      "id": 7,
+      "question": "legacy migration",
+      "answer": "SAVE_VERSION=10; v9 sessions are stamped salvageRulesVersion=0",
+      "verified": true
+    },
+    {
+      "id": 8,
+      "question": "replay read-only",
+      "answer": "replay frames have no claim control and stable historical offer hash",
+      "verified": true
+    },
+    {
+      "id": 9,
+      "question": "no drop",
+      "answer": "no-drop offer persists across reload without inventory mutation",
+      "verified": true
+    },
+    {
+      "id": 10,
+      "question": "hp/maxHp",
+      "answer": "salvage catalog is production-only and equipment modifiers remain outside hp",
+      "verified": true
+    },
+    {
+      "id": 11,
+      "question": "performance",
+      "answer": "qualified 20 warmup/120 p95 under 16.7ms with environment and load",
+      "verified": {
+        "platform": "darwin",
+        "arch": "arm64",
+        "nodeVersion": "v25.2.1",
+        "cpuCount": 10,
+        "availableCpuCount": 10,
+        "effectiveCpuCount": 10,
+        "cpuModel": "Apple M5",
+        "loadAverage": [
+          1.56,
+          2.846,
+          3.043
+        ],
+        "normalizedLoad1": 0.156,
+        "spareEffectiveCores": 8.44,
+        "cgroup": {
+          "available": false,
+          "version": null,
+          "quotaCores": null
+        }
+      }
+    },
+    {
+      "id": 12,
+      "question": "tamper",
+      "answer": {
+        "cases": 126,
+        "rejected": 126,
+        "passedFlagOnlyCases": 0
+      },
+      "verified": true
+    },
+    {
+      "id": 13,
+      "question": "authority files",
+      "answer": "frozen authority source files and tests/lib are unchanged",
+      "verified": true
+    },
+    {
+      "id": 14,
+      "question": "strong verifier",
+      "answer": "source-derived verifier passed",
+      "verified": true
+    },
+    {
+      "id": 15,
+      "question": "ui provenance",
+      "answer": "salvage claim uses real DOM data-action and browser APIs are false",
+      "verified": true
+    }
+  ],
+  "requiredEvidence": [
+    {
+      "file": "stage9_d_machine_evidence.json",
+      "exists": true
+    },
+    {
+      "file": "stage9_d_browser_capture_manifest.json",
+      "exists": true
+    },
+    {
+      "file": "stage9_d_core_machine_evidence.json",
+      "exists": true
+    },
+    {
+      "file": "stage9_d_evidence_bundle.json",
+      "exists": true
+    },
+    {
+      "file": "stage9_d_strong_evidence_verdict.json",
+      "exists": true
+    },
+    {
+      "file": "stage9_d_tamper_results.json",
+      "exists": true
+    },
+    {
+      "file": "stage9_d_performance_check.json",
+      "exists": true
+    }
+  ],
+  "passed": true
+}

@@ -4,8 +4,8 @@
 
 玩家扮演基地指挥官，**不直接操作单位**：你只负责审批建设、编排部队、下达作战策略，剩下的交给系统自动推演。
 
-> **当前版本：0.8.1-hotfix.6 · Stage 8.2G-E-C Offline / Idle Progression Closure**
-> 在阶段 1～8.2G-D-C.1 与 E-A/E-A.1/E-B 之上，正式战斗已接入可恢复的派遣、结算、回放与离线长线循环；离线推进、战斗事实、正式战报和结算账本保持严格隔离。
+> **当前版本：0.9.0 · Stage 9 · Expanded Campaign & Equipment**
+> Stage 9 已完成 6 战区 / 6 重复任务、装备库存与挂载、装甲工厂生产、离线推进、战后确定性打捞及历史回放整合；兼容阶段8既有战斗、科研、离线与回放闭环，离线推进、战斗事实、正式战报和结算账本保持严格隔离。
 
 ---
 
@@ -46,7 +46,7 @@ npm start
 - `tests/stage8-1-1-test.mjs`（43 项）：真实 `WITHDRAW` + `RETREAT` 战报、结算阻断与一次性报错、安全关闭、旧存档确定性重建、阻断字段往返与无副作用。
 
 ```bash
-npm test            # 依次运行阶段3～阶段8.2G-C测试（包含 B.1、B.1.1、证据篡改与 C 环境回归）
+npm test            # 运行历史核心回归；Stage 9 整合门禁使用 npm run test:stage9-E:fast
 ```
 
 ---
@@ -65,11 +65,21 @@ npm test            # 依次运行阶段3～阶段8.2G-C测试（包含 B.1、B.
 | **速度控制** | 暂停 / 1× / 2× / 4×，逻辑采用固定步长推进，结果与帧率无关 |
 | **事件日志** | 底部滚动消息栏，最多保留 30 条，按信息/良好/警告/危险分色 |
 | **右侧面板** | 概览 / 建设 / 生产 / 编队 / 部队 / 战区 / 维修 / 科研 / 战报全部可用；部队页管理档案与呼号，战区页提供占领后的重复任务 |
+| **Stage 9 战役整合** | 6 个战区、6 个重复任务、装备生产与挂载、正式战斗快照、战后确定性回收、存档 / reload / 历史回放闭环 |
 | **建设系统** | 「建设」分页可批准 5 种建筑；每种最多 1 座；施工动画、电力约束、前置链、取消 50% 返还、施工存档与恢复 |
 | **生产系统** | 「生产」分页：当前生产线（进度条 / 百分比 / 剩余 / 暂停提示 / 取消）、等待队列、5 张单位卡片、实时库存统计 |
 | **单位实例** | 完成生产生成带呼号、经验、战斗次数和创建时间的单位档案；经验动态映射新兵 / 训练有素 / 老兵 / 精锐 |
 | **库存** | 单位实例存入 `state.units`，**不占用指挥容量**；页面实时统计总数 / 待命 / 已编入 / 维修中 |
-| **存档** | 每 30 秒自动保存 + 关闭页面前保存 + 手动保存/读取/新游戏；保存版本7支持阶段7旧档迁移、科研历史裁剪、单位档案与重复任务记录修复 |
+| **存档** | 每 30 秒自动保存 + 关闭页面前保存 + 手动保存/读取/新游戏；`SAVE_VERSION = 10` 支持阶段 9 装备、生产与战场回收状态的兼容迁移 |
+
+### Stage 9 · Expanded Campaign & Equipment
+
+- 6 个递进战区：`scrap_mine`、`border_road`、`enemy_outpost`、`river_crossing`、`relay_station`、`mountain_pass`。
+- 6 个重复任务：`river_ferry`、`relay_intercept`、`pass_patrol` 等均绑定已占领战区。
+- 装备系统包含 8 件装备（3 件初始配发、5 件装甲工厂生产），支持多实例、双槽位、生产 / 挂载 / 卸载和有效属性快照。
+- 装备来源正式区分为初始配发、装甲工厂生产、战场回收；回收仅在正式结算后由玩家显式领取，且可进入正常挂载循环。
+- Stage 9 的战场回收（battle salvage）是确定性、结算后、可追溯的装备获取路径；本阶段不实现战斗掉落。
+- 生产、科研、装备挂载、战区派遣、正式结算、战后回收、保存 / reload 与只读历史回放均保持独立边界。
 
 ### 初始状态
 
@@ -413,7 +423,7 @@ iron-command/
 - 存储键：`iron-command.save.v1`（localStorage）
 - 自动保存：每 **30 秒**（真实时间）一次，另在关闭/刷新页面前补存一次
 - 容错：存档损坏、版本不符、字段缺失时会**自动回退到新游戏**并在日志中提示，不会白屏
-- 版本迁移：`SAVE_VERSION` 当前为 **6**，兼容阶段6版本5存档；老存档加载时还会规范化科研任务、单位损伤、维修成本和离线账本，并立即持久化离线结算结果。
+- 版本迁移：`SAVE_VERSION` 当前为 **10**，兼容旧阶段存档；老存档加载时还会规范化科研任务、单位损伤、维修成本、装备实例、生产队列和战场回收凭证，并立即持久化离线结算结果。
 - 离线规则：`time.game` 会推进，`time.played` 不会因离线增加；1～59秒静默推进，60秒及以上生成报告。活动战斗在离线期间保持暂停；相同结算令牌只会执行一次。
 - 隐私模式或禁用 localStorage 时，游戏仍可正常运行，仅提示"存储不可用"
 
@@ -563,7 +573,7 @@ __IRON_COMMAND__.validateActiveBattleDeterministically()
 | 7 | 数据完整性修复、技术实验室与科研系统 | ✅ 已完成 |
 | 8 | 科研版本、战斗完整性、单位档案、老兵等级与重复任务 | ✅ 已完成 |
 | 8.1 | RTS战术战场、镜头、结算后返航与全局结果控件 | ✅ 已完成 |
-| 9 | 装备系统与新战区扩展 | 预留接口 |
+| 9 | Expanded Campaign & Equipment：6 战区、装备生产 / 挂载、确定性战场回收与回放整合 | ✅ 已完成 |
 
 ## Stage 8.2D-A.2
 
@@ -572,7 +582,7 @@ __IRON_COMMAND__.validateActiveBattleDeterministically()
 - campaign-victory 使用 `infantry + at_infantry + scout_car + mbt + mbt + repair_vehicle` 严格支持阵容；四份 Fixture 均由正式求解器确定性生成。
 - Manifest 增加 `validation`、`supported`、`missingRequirements`；新增交付包自检器和 20 项 A.2 正式测试。
 - `npm test`：608 passed / 0 failed；adapter 76 / 76；integrity 85 / 85；五组旧沙盒测试全部通过。
-- 完成 `STAGE8-2D-A-2-DELIVERY.md` 与 `iron-command-stage8-2D-A-2-outcome-fixture-hotfix.zip`；8.2D-B 未启动。
+- 该阶段的详细交付记录与代码封包已归档在 Git 历史中；8.2D-B 未启动。
 
 ## Stage 8.2D-A.3
 
@@ -580,7 +590,7 @@ __IRON_COMMAND__.validateActiveBattleDeterministically()
 - 原生、插入、归并排序在 1000 组候选数据和正式 Fixture seed 1..200 下生成完全一致战报；8 个独立 Node 进程 Fixture 哈希一致。
 - Manifest 正式边界补入 `js/battle-targeting.js` 与 `js/utils.js`，四张截图增加 `viewerScreenshot` SHA 和 Fixture report hash 绑定。
 - `verify-delivery-package.mjs` 和 `build-delivery-package.mjs` 均自启临时 HTTP 服务器，不依赖预先运行的 8000 端口。
-- package version 更新为 `0.8.1-hotfix.3`；`npm test` 为 627 passed / 0 failed；完成 `STAGE8-2D-A-3-DELIVERY.md` 与 A.3 交付 ZIP。
+- package version 更新为 `0.8.1-hotfix.3`；`npm test` 为 627 passed / 0 failed；A.3 历史交付材料已归档在 Git 历史中。
 - 8.2D-B 未启动。
 
 ## Stage 8.2E-A
@@ -588,7 +598,7 @@ __IRON_COMMAND__.validateActiveBattleDeterministically()
 - 正式战斗页面已接入 `js/battle-presentation/` 参数化公路胜利演出侧车，默认自动准入正式 `activeBattle.report`，不读取 `experiments/`。
 - 支持 session-only 的 `auto / legacy / contract` 偏好；实际模式为 `contract_road_victory` 或 `legacy`，任何不支持报告或渲染异常都会安全回退旧 BattleRenderer。
 - 演出时间由正式战斗 elapsed 驱动，计划按 battle/report/seed/result 缓存；结算、返航、跳过返航、读档与回基地均保持原业务语义。
-- 交付说明见 `STAGE8-2E-A-DELIVERY.md`，浏览器取帧见 `screenshots/stage8-2E-A-screenshot-manifest.json`，自包含封包验证由 `tests/build-stage8-2E-A-delivery-package.mjs` / `tests/verify-stage8-2E-A-delivery-package.mjs` 完成。
+- 浏览器取帧见 `screenshots/stage8-2E-A-screenshot-manifest.json`；历史交付说明已归档在 Git 历史中，自包含封包仍可由 `tests/build-stage8-2E-A-delivery-package.mjs` / `tests/verify-stage8-2E-A-delivery-package.mjs` 重新生成与验证。
 # 阶段 8.2E-A.2.2 验证器收口
 
 最终交付验证命令：
@@ -598,4 +608,4 @@ npm run verify:stage8-2E-A-2-2
 npm run build:stage8-2E-A-2-2
 ```
 
-验证器采用显式测试清单、按需静态服务器、进程组终止和可配置全局超时；统计从实际测试输出生成。详见 `STAGE8-2E-A-2-2-DELIVERY.md`。
+验证器采用显式测试清单、按需静态服务器、进程组终止和可配置全局超时；统计从实际测试输出生成。详细历史说明保留在 Git 历史中。
