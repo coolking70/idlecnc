@@ -346,13 +346,30 @@ check('mount/unmount changes equipment paths only and no settlement path is touc
 
 let uiEvidence;
 check('UI uses real data-action hooks and authoritative qualification functions', () => {
-  const source = ['js/ui.js', 'js/main.js'].map((file) => fs.readFileSync(path.join(root, file), 'utf8')).join('\n');
-  ['produce-equipment', 'cancel-production-current', 'cancel-production-queue', 'equip-equipment', 'unequip-equipment'].forEach((action) => assert.ok(source.includes(`'${action}'`)));
-  assert.ok(source.includes('canQueueEquipment(state, equipmentId)'));
-  assert.ok(source.includes('equipmentInventoryCounts(state.equipment)'));
+  // Stage 10-P-B moved the Command UI's model building into
+  // command-presentation.js and its tile/Inspector rendering into
+  // command-ui.js, so scanning only ui.js and main.js no longer covers the
+  // live surface. It also renamed the two production-queue cancel actions.
+  //
+  // This check used to pass against the pre-migration builders, which survived
+  // as unreachable code behind early returns in ui.js. Once that dead code was
+  // removed the check failed, which is what it should have done all along: it
+  // had stopped proving anything about the UI a player actually touches.
+  const uiFiles = ['js/ui.js', 'js/main.js', 'js/command-presentation.js', 'js/command-ui.js'];
+  const source = uiFiles.map((file) => fs.readFileSync(path.join(root, file), 'utf8')).join('\n');
+  const requiredActions = ['produce-equipment', 'cancel-current-production', 'cancel-queued-production', 'equip-equipment', 'unequip-equipment'];
+  requiredActions.forEach((action) => assert.ok(source.includes(`'${action}'`), `missing action id ${action}`));
+  // Every action id must also be dispatched, not merely mentioned in a model.
+  const dispatch = fs.readFileSync(path.join(root, 'js/ui.js'), 'utf8');
+  requiredActions.forEach((action) => assert.ok(dispatch.includes(`actionId === '${action}'`), `action ${action} is never dispatched`));
+  // Qualification comes from the authoritative functions rather than a local
+  // reimplementation. The call sites moved, so assert the calls, not their
+  // former argument spelling.
+  assert.ok(/canQueueEquipment\(/.test(source), 'canQueueEquipment is not called');
+  assert.ok(/equipmentInventoryCounts\(/.test(source), 'equipmentInventoryCounts is not called');
   assert.ok(source.includes('onProduceEquipment'));
   assert.ok(source.includes('equipmentSig'));
-  uiEvidence = { stage: '9-C', independentRecompute: true, requiredActions: ['produce-equipment', 'cancel-production-current', 'cancel-production-queue', 'equip-equipment', 'unequip-equipment'], authorityChecks: ['canQueueEquipment', 'equipmentInventoryCounts', 'getUnitEffectiveStats'], renderSignature: 'equipmentSig', productionApiUsed: false, passed: true };
+  uiEvidence = { stage: '9-C', independentRecompute: true, uiFiles, requiredActions, authorityChecks: ['canQueueEquipment', 'equipmentInventoryCounts', 'getUnitEffectiveStats'], renderSignature: 'equipmentSig', productionApiUsed: false, passed: true };
   write('stage9_c_ui_path_check.json', uiEvidence);
 });
 

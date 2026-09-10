@@ -6,27 +6,49 @@
  */
 
 import {
-  PANEL_TABS, STAGE_PLACEHOLDER, CURRENT_STAGE, CURRENT_STAGE_LABEL, BUILDINGS, BUILDING_STATUS,
-  RESOURCE_DEFS, BASE_LAYOUT, TIME, UNITS, CONSTRUCTION, CONSTRUCTION_UI,
-  PRODUCTION, PRODUCTION_UI, FORMATION, FORMATION_PRESETS, EQUIPMENT,
-  BATTLE, BATTLE_RESULT, THEATERS, OPERATIONS, DAMAGE_STATES, REPAIR, RESEARCH, TECHNOLOGIES, UNIT_RANKS
+  PANEL_TABS,
+  STAGE_PLACEHOLDER,
+  CURRENT_STAGE,
+  BUILDINGS,
+  BUILDING_STATUS,
+  RESOURCE_DEFS,
+  BASE_LAYOUT,
+  UNITS,
+  PRODUCTION,
+  FORMATION,
+  EQUIPMENT,
+  BATTLE,
+  BATTLE_RESULT,
+  THEATERS,
+  OPERATIONS,
+  DAMAGE_STATES,
+  REPAIR,
+  RESEARCH,
+  TECHNOLOGIES,
+  UNIT_RANKS
 } from './config.js';
-import { canBuild, getConstructionProgress, buildableList } from './construction.js';
-import { canQueueUnit, inventoryCount, getProductionProgress } from './production.js';
+import { canBuild } from './construction.js';
 import {
-  canQueueRepair, getActiveRepairs, getQueuedRepairs, getRepairProgress,
-  getRepairRemaining, hasRepairShop, getRepairCost, getRepairTime
+  canQueueRepair,
+  getActiveRepairs,
+  getQueuedRepairs,
+  getRepairProgress,
+  getRepairRemaining,
+  hasRepairShop,
+  getRepairCost
 } from './repairs.js';
 import { damageStateOfUnit } from './unit-status.js';
-import {
-  hasResearchCenter, listTechnologies, getResearchProgress, getResearchModifiers,
-  getTechnologyState
-} from './research.js';
+import { hasResearchCenter, getResearchProgress, getResearchModifiers, getTechnologyState } from './research.js';
 import { getUnitRank, getRankProgress, formatUnitDisplayName, getUnitEffectiveStats, filterUnits, sortUnits } from './units.js';
 import {
-  canCreateFormation, canApplyPreset, canAddUnit, getAvailableUnits,
-  getFormationStats, getFormationWarnings, getPresetCommandCost,
-  isEditable, statusLabel
+  canCreateFormation,
+  canApplyPreset,
+  canAddUnit,
+  getAvailableUnits,
+  getFormationStats,
+  getFormationWarnings,
+  isEditable,
+  statusLabel
 } from './formations.js';
 import {
   listTheaters, listStrategies, getTheaterIntel, getMissionCost, formatMissionCost,
@@ -35,11 +57,7 @@ import {
 } from './theater.js';
 import { getOperationCost } from './operations.js';
 import { EQUIPMENT_RULES } from './config.js';
-import {
-  canEquipEquipment, getEquipmentDefinition, getUnitEquipment,
-  equipmentInventoryCounts
-} from './equipment.js';
-import { canQueueEquipment } from './production.js';
+import { canEquipEquipment, getEquipmentDefinition, getUnitEquipment } from './equipment.js';
 import { deriveSalvageOffer } from './battle-salvage.js';
 import {
   missionKindLabel, dispatchEligibilityText, operationCooldownText, unitStatusLabel
@@ -397,156 +415,8 @@ export class UI {
     page.appendChild(r.build.gridRoot);
     r.build.commandGrid = this.commandSurface.createGrid(r.build.gridRoot, (model) => this._onCommandPrimary(model));
     page.appendChild(el('div', 'command-gesture-hint', '点击执行 · 悬浮快览 · 长按详情'));
-    return;
-
-    // —— 工程状态区 ——
-    const status = el('div', 'card build-status');
-    const head = el('div', 'card-head');
-    head.appendChild(el('span', '', '工程队状态'));
-    r.build.statusTag = el('span', 'tag', '空闲');
-    head.appendChild(r.build.statusTag);
-    status.appendChild(head);
-
-    // 空闲态
-    r.build.idleBox = el('div', 'cs-idle');
-    r.build.idleBox.appendChild(el('div', 'cs-idle-title', CONSTRUCTION_UI.idleTitle));
-    r.build.idleBox.appendChild(el('div', 'cs-idle-hint', CONSTRUCTION_UI.idleHint));
-    status.appendChild(r.build.idleBox);
-
-    // 施工态
-    const active = el('div', 'cs-active');
-    active.hidden = true;
-    r.build.activeBox = active;
-
-    r.build.jobName = el('div', 'cs-name', '——');
-    active.appendChild(r.build.jobName);
-
-    const mkRow = (label) => {
-      const row = el('div', 'kv');
-      row.appendChild(el('span', '', label));
-      const v = el('span', '', '——');
-      row.appendChild(v);
-      active.appendChild(row);
-      return v;
-    };
-    r.build.jobStatus = mkRow('状态');
-    r.build.jobElapsed = mkRow('已用时间');
-    r.build.jobRemaining = mkRow('剩余时间');
-
-    const barWrap = el('div', 'cs-bar-wrap');
-    const bar = el('div', 'bar build');
-    r.build.jobBar = el('i');
-    bar.appendChild(r.build.jobBar);
-    barWrap.appendChild(bar);
-    r.build.jobPercent = el('span', 'cs-pct', '0%');
-    barWrap.appendChild(r.build.jobPercent);
-    active.appendChild(barWrap);
-
-    r.build.pausedHint = el('div', 'cs-paused', CONSTRUCTION_UI.pausedHint);
-    r.build.pausedHint.hidden = true;
-    active.appendChild(r.build.pausedHint);
-
-    r.build.cancelBtn = el('button', 'btn danger cs-cancel', '取消工程');
-    r.build.cancelBtn.type = 'button';
-    r.build.cancelBtn.addEventListener('click', () => {
-      const fn = this.handlers.onCancelConstruction;
-      if (typeof fn === 'function') fn();
-    });
-    active.appendChild(r.build.cancelBtn);
-
-    status.appendChild(active);
-    page.appendChild(status);
-
-    // —— 建筑项目列表 ——
-    const listHead = el('div', 'section-head');
-    listHead.appendChild(el('span', '', '可建设项目'));
-    listHead.appendChild(el('span', 'tag', `同时施工上限 ${CONSTRUCTION.maxConcurrent}`));
-    page.appendChild(listHead);
-
-    const list = el('div', 'build-list');
-    buildableList().forEach((def) => {
-      const card = this._renderBuildCard(def);
-      list.appendChild(card.root);
-      r.build.cards[def.id] = card;
-    });
-    page.appendChild(list);
-
-    const note = el('div', 'hint');
-    note.innerHTML = `<b>说明：</b>每种建筑最多建造一座，同时只能进行 ${CONSTRUCTION.maxConcurrent} 项工程。`
-      + `取消施工只返还 ${Math.round(CONSTRUCTION.refundRatio * 100)}% 的建设资源，`
-      + '暂停状态下施工进度不会推进。';
-    page.appendChild(note);
   }
 
-  /** 单张建筑卡片（只建结构，文字由 _updateConstruction 刷新） */
-  _renderBuildCard(def) {
-    const root = el('article', 'build-card');
-    root.dataset.type = def.id;
-
-    const head = el('div', 'bc-head');
-    head.appendChild(el('span', 'bc-name', def.name));
-    const statusTag = el('span', 'bc-status tag', CONSTRUCTION_UI.statusLabel.available);
-    head.appendChild(statusTag);
-    root.appendChild(head);
-
-    root.appendChild(el('p', 'bc-desc', def.desc || ''));
-
-    // 区域 / 时间 / 电力 / 前置
-    const grid = el('div', 'bc-grid');
-    const mkCell = (label, value) => {
-      const cell = el('div', 'bc-cell');
-      cell.appendChild(el('b', '', label));
-      cell.appendChild(el('span', '', value));
-      grid.appendChild(cell);
-    };
-    const zone = (BASE_LAYOUT.zones || []).find((z) => z.id === def.zone);
-    mkCell('所在区域', zone ? zone.name : '基地');
-    mkCell('建造时间', `${formatInt(def.buildTime)} 秒`);
-    const consume = safeNumber(def.power && def.power.consume, 0);
-    const produce = safeNumber(def.power && def.power.produce, 0);
-    mkCell('电力需求', produce > 0 ? `产出 ${formatInt(produce)}` : (consume > 0 ? `占用 ${formatInt(consume)}` : '无'));
-    const reqNames = (def.requires || [])
-      .map((id) => (BUILDINGS[id] ? BUILDINGS[id].name : id));
-    mkCell('前置条件', reqNames.length ? reqNames.join('、') : '无');
-    root.appendChild(grid);
-
-    // 建设成本（缺料时高亮）
-    const costBox = el('div', 'bc-cost');
-    costBox.appendChild(el('b', '', '建设成本'));
-    const chips = {};
-    Object.keys(def.cost || {}).forEach((key) => {
-      const amount = safeNumber(def.cost[key], 0);
-      if (amount <= 0) return;
-      const resDef = RESOURCE_DEFS[key];
-      const chip = el('span', 'cost-chip', `${resDef ? resDef.name : key} ${formatInt(amount)}`);
-      chip.dataset.res = key;
-      costBox.appendChild(chip);
-      chips[key] = chip;
-    });
-    if (!Object.keys(chips).length) costBox.appendChild(el('span', 'cost-chip', '免费'));
-    root.appendChild(costBox);
-
-    // 建成效果
-    const effect = el('div', 'bc-effect');
-    effect.appendChild(el('b', '', '建成效果'));
-    effect.appendChild(el('span', '', this._effectSummary(def)));
-    root.appendChild(effect);
-
-    // 操作
-    const btn = el('button', 'btn primary build-btn', CONSTRUCTION_UI.buttonLabel.ready);
-    btn.type = 'button';
-    btn.dataset.type = def.id;
-    btn.dataset.action = 'build';
-    btn.dataset.buildingType = def.id;
-    btn.addEventListener('click', () => this._onBuildClick(def.id));
-    root.appendChild(btn);
-
-    const reason = el('div', 'bc-reason');
-    reason.hidden = true;
-    root.appendChild(reason);
-
-    return { root, statusTag, btn, reason, chips, def };
-  }
 
   /** 建造按钮点击：临时锁按钮，避免连点重复扣费 */
   _onBuildClick(typeId) {
@@ -568,25 +438,6 @@ export class UI {
     Object.keys(cards).forEach((id) => { cards[id].btn.disabled = Boolean(disabled); });
   }
 
-  /** 建筑效果的可读摘要（数据全部来自 config） */
-  _effectSummary(def) {
-    const parts = [];
-    const eff = def.effects || {};
-    if (eff.supplyPerSec) parts.push(`补给产量 +${eff.supplyPerSec}/s`);
-    if (eff.alloyPerSec) parts.push(`合金产量 +${eff.alloyPerSec}/s`);
-    if (eff.intelPerSec) parts.push(`情报产量 +${eff.intelPerSec}/s`);
-    if (eff.supplyCap) parts.push(`补给上限 +${formatInt(eff.supplyCap)}`);
-    if (eff.alloyCap) parts.push(`合金上限 +${formatInt(eff.alloyCap)}`);
-    if (eff.intelCap) parts.push(`情报上限 +${formatInt(eff.intelCap)}`);
-    if (eff.commandCapacity) parts.push(`指挥容量 +${eff.commandCapacity}`);
-    if (eff.powerCapacity) parts.push(`电力输出 +${eff.powerCapacity}`);
-    if (eff.scouting) parts.push(`侦察 +${eff.scouting}`);
-    if (eff.ambushResist) parts.push(`伏击抵抗 +${Math.round(eff.ambushResist * 100)}%`);
-    if (eff.intelAccuracy) parts.push('情报准确度提升');
-    const unlocks = (def.unlocks || []).map((id) => (UNITS[id] ? UNITS[id].name : id));
-    if (unlocks.length) parts.push(`解锁 ${unlocks.join('、')}（可生产）`);
-    return parts.length ? parts.join('；') : '暂无直接数值加成';
-  }
 
   /** 刷新建设页：工程进度 + 每张卡片的按钮状态与禁用原因 */
   _updateConstruction(state) {
@@ -599,88 +450,12 @@ export class UI {
     b.currentEmpty.hidden = Boolean(current);
     b.currentRoot.hidden = !current;
     b.commandGrid.update(buildConstructionTileModels(state));
-    return;
-
-    const job = getConstructionProgress(state);
-    const paused = safeNumber(state.time.speed, 1) === 0;
-
-    // —— 工程状态区 ——
-    if (job) {
-      b.idleBox.hidden = true;
-      b.activeBox.hidden = false;
-      b.statusTag.textContent = paused ? '已暂停' : '施工中';
-      b.statusTag.className = `tag ${paused ? 'warn' : 'ok'}`;
-      setText(b.jobName, job.name);
-      setText(b.jobStatus, paused ? '施工中（推演已暂停）' : '施工中');
-      setText(b.jobElapsed, `${job.elapsedText} / 共 ${formatDuration(Math.ceil(job.duration))}`);
-      setText(b.jobRemaining, job.remaining > 0 ? job.remainingText : '即将完成');
-      b.jobBar.style.width = `${clamp(job.percent, 0, 100)}%`;
-      setText(b.jobPercent, `${job.percent}%`);
-      b.pausedHint.hidden = !paused;
-      b.cancelBtn.disabled = false;
-    } else {
-      b.idleBox.hidden = false;
-      b.activeBox.hidden = true;
-      b.statusTag.textContent = '空闲';
-      b.statusTag.className = 'tag';
-      b.cancelBtn.disabled = true;
-    }
-
-    // —— 每张卡片 ——
-    Object.keys(b.cards).forEach((typeId) => {
-      const card = b.cards[typeId];
-      const def = card.def;
-      const inst = state.buildings.find((x) => x.type === typeId);
-      const isBuilding = Boolean(inst && inst.status === BUILDING_STATUS.UNDER_CONSTRUCTION);
-      const isBuilt = Boolean(inst && inst.status === BUILDING_STATUS.OPERATIONAL);
-      const check = canBuild(state, typeId);
-
-      // 状态徽标
-      let statusText = CONSTRUCTION_UI.statusLabel.available;
-      let statusClass = 'tag';
-      if (isBuilt) { statusText = CONSTRUCTION_UI.statusLabel.built; statusClass = 'tag ok'; }
-      else if (isBuilding) { statusText = CONSTRUCTION_UI.statusLabel.building; statusClass = 'tag warn'; }
-      else if (!check.ok) { statusText = CONSTRUCTION_UI.statusLabel.locked; statusClass = 'tag'; }
-      card.statusTag.textContent = statusText;
-      card.statusTag.className = `bc-status ${statusClass}`;
-      toggleClass(card.root, 'is-built', isBuilt);
-      toggleClass(card.root, 'is-building', isBuilding);
-
-      // 按钮文字与可用性
-      let label = CONSTRUCTION_UI.buttonLabel.ready;
-      if (isBuilt) label = CONSTRUCTION_UI.buttonLabel.built;
-      else if (isBuilding) label = CONSTRUCTION_UI.buttonLabel.building;
-      else if (check.code === 'busy') label = CONSTRUCTION_UI.buttonLabel.busy;
-      else if (!check.ok) label = CONSTRUCTION_UI.buttonLabel.blocked;
-      setText(card.btn, label);
-      card.btn.disabled = !check.ok;
-
-      // 禁用原因（已建成不算“原因”，不再刷屏）
-      if (check.ok || isBuilt) {
-        card.reason.hidden = true;
-        setText(card.reason, '');
-      } else {
-        card.reason.hidden = false;
-        setText(card.reason, check.reasons.join('；'));
-      }
-
-      // 成本缺料高亮
-      Object.keys(card.chips).forEach((key) => {
-        const need = safeNumber(def.cost[key], 0);
-        const have = safeNumber(state.resources[key], 0);
-        toggleClass(card.chips[key], 'lack', !isBuilt && !isBuilding && have < need);
-      });
-    });
   }
 
   /* ==========================================================
    * 生产页（阶段3）
    * ======================================================== */
 
-  /** 单位类别 → 中文标签 */
-  _categoryLabel(category) {
-    return { infantry: '步兵', vehicle: '车辆', armor: '装甲', support: '支援' }[category] || category || '单位';
-  }
 
   /** 构建生产分页：当前生产线 + 等待队列 + 单位卡片 + 单位库存 */
   _buildProductionPage(page) {
@@ -731,236 +506,9 @@ export class UI {
     page.appendChild(r.prod.equipmentSection);
     page.appendChild(el('div', 'command-gesture-hint', '点击生产 · 悬浮快览 · 长按详情'));
     this._setCommandCategory(this.commandCategory);
-    return;
-
-    // —— 当前生产线 ——
-    const line = el('div', 'card prod-line');
-    const lineHead = el('div', 'card-head');
-    lineHead.appendChild(el('span', '', '当前生产线'));
-    r.prod.statusTag = el('span', 'tag', '空闲');
-    lineHead.appendChild(r.prod.statusTag);
-    line.appendChild(lineHead);
-
-    // 空闲态
-    r.prod.idleBox = el('div', 'cs-idle');
-    r.prod.idleBox.appendChild(el('div', 'cs-idle-title', PRODUCTION_UI.idleTitle));
-    r.prod.idleBox.appendChild(el('div', 'cs-idle-hint', PRODUCTION_UI.idleHint));
-    line.appendChild(r.prod.idleBox);
-
-    // 生产中态
-    const active = el('div', 'cs-active');
-    active.hidden = true;
-    r.prod.activeBox = active;
-    r.prod.lineName = el('div', 'cs-name', '——');
-    active.appendChild(r.prod.lineName);
-
-    const mkRow = (label) => {
-      const row = el('div', 'kv');
-      row.appendChild(el('span', '', label));
-      const v = el('span', '', '——');
-      row.appendChild(v);
-      active.appendChild(row);
-      return v;
-    };
-    r.prod.lineSource = mkRow('生产设施');
-    r.prod.lineStatus = mkRow('状态');
-    r.prod.lineElapsed = mkRow('已用时间');
-    r.prod.lineTotal = mkRow('总生产时间');
-    r.prod.lineRemaining = mkRow('预计剩余');
-
-    const barWrap = el('div', 'cs-bar-wrap');
-    const bar = el('div', 'bar build');
-    r.prod.lineBar = el('i');
-    bar.appendChild(r.prod.lineBar);
-    barWrap.appendChild(bar);
-    r.prod.linePercent = el('span', 'cs-pct', '0%');
-    barWrap.appendChild(r.prod.linePercent);
-    active.appendChild(barWrap);
-
-    r.prod.pausedHint = el('div', 'cs-paused', PRODUCTION_UI.pausedHint);
-    r.prod.pausedHint.hidden = true;
-    active.appendChild(r.prod.pausedHint);
-
-    r.prod.cancelBtn = el('button', 'btn danger cs-cancel', '取消当前项目');
-    r.prod.cancelBtn.type = 'button';
-    r.prod.cancelBtn.dataset.action = 'cancel-production-current';
-    r.prod.cancelBtn.addEventListener('click', () => {
-      const fn = this.handlers.onCancelCurrentProduction;
-      if (typeof fn === 'function') fn();
-    });
-    active.appendChild(r.prod.cancelBtn);
-
-    line.appendChild(active);
-    page.appendChild(line);
-
-    // —— 等待队列 ——
-    const qHead = el('div', 'section-head');
-    qHead.appendChild(el('span', '', PRODUCTION_UI.queueHead));
-    qHead.appendChild(el('span', 'tag', `最多 ${PRODUCTION.maxQueueSize} 项（含当前）`));
-    page.appendChild(qHead);
-    r.prod.queueList = el('div', 'queue-list');
-    page.appendChild(r.prod.queueList);
-    r.prod.queueEmpty = el('div', 'hint', '队列为空，可同时排队多项生产。');
-    page.appendChild(r.prod.queueEmpty);
-
-    // —— 单位卡片 ——
-    const uHead = el('div', 'section-head');
-    uHead.appendChild(el('span', '', '可生产单位'));
-    page.appendChild(uHead);
-    const grid = el('div', 'unit-grid');
-    Object.values(UNITS).forEach((def) => {
-      const card = this._renderUnitCard(def);
-      grid.appendChild(card.root);
-      r.prod.cards[def.id] = card;
-    });
-    page.appendChild(grid);
-
-    // —— 装备制造卡片：仍然使用共享生产队列，UI 只读取权威资格结果 ——
-    const equipmentHead = el('div', 'section-head');
-    equipmentHead.appendChild(el('span', '', '装备制造'));
-    equipmentHead.appendChild(el('span', 'tag', '装甲工厂生产'));
-    page.appendChild(equipmentHead);
-    const equipmentGrid = el('div', 'unit-grid equipment-production-grid');
-    Object.values(EQUIPMENT).filter((def) => def.acquisition?.kind === 'production').forEach((def) => {
-      const card = this._renderEquipmentProductionCard(def);
-      equipmentGrid.appendChild(card.root);
-      r.prod.equipmentCards[def.id] = card;
-    });
-    page.appendChild(equipmentGrid);
-
-    // —— 单位库存 ——
-    const iHead = el('div', 'section-head');
-    iHead.appendChild(el('span', '', PRODUCTION_UI.inventoryHead));
-    page.appendChild(iHead);
-    const inv = el('div', 'card inv-card');
-    const mkInv = (label) => {
-      const row = el('div', 'kv');
-      row.appendChild(el('span', '', label));
-      const v = el('span', '', '0');
-      row.appendChild(v);
-      inv.appendChild(row);
-      return v;
-    };
-    r.prod.invTotal = mkInv('库存总单位');
-    r.prod.invIdle = mkInv('空闲单位');
-    r.prod.invAssigned = mkInv('已编入编队');
-    r.prod.invRepairing = mkInv('维修中');
-    const invList = el('div', 'inv-list');
-    r.prod.invList = invList;
-    inv.appendChild(invList);
-    page.appendChild(inv);
-
-    const note = el('div', 'hint');
-    note.innerHTML = `<b>说明：</b>同时只生产 1 个单位，当前生产 + 等待队列最多 ${PRODUCTION.maxQueueSize} 项。`
-      + `取消正在生产的单位返还 ${Math.round(PRODUCTION.activeCancelRefundRatio * 100)}% 成本，`
-      + '取消等待任务返还 100% 成本。库存单位不占用指挥容量，只有编入作战编队后才会占用。';
-    page.appendChild(note);
   }
 
-  /** 单张单位卡片（只建结构，文字由 _updateProduction 刷新） */
-  _renderUnitCard(def) {
-    const root = el('article', 'unit-card');
-    root.dataset.type = def.id;
 
-    const head = el('div', 'bc-head');
-    head.appendChild(el('span', 'bc-name', def.name));
-    const catTag = el('span', 'bc-status tag', this._categoryLabel(def.category));
-    head.appendChild(catTag);
-    root.appendChild(head);
-
-    root.appendChild(el('p', 'bc-desc', def.desc || ''));
-
-    const grid = el('div', 'bc-grid');
-    const mkCell = (label, value) => {
-      const cell = el('div', 'bc-cell');
-      cell.appendChild(el('b', '', label));
-      cell.appendChild(el('span', '', String(value)));
-      grid.appendChild(cell);
-    };
-    const producer = BUILDINGS[def.from] ? BUILDINGS[def.from].name : def.from;
-    mkCell('来源建筑', producer);
-    mkCell('生产时间', `${formatInt(def.buildTime)} 秒`);
-    const st = def.stats || {};
-    const dash = (v) => (v != null && Number.isFinite(Number(v))) ? Number(v) : '—';
-    mkCell('攻击', dash(st.attack));
-    mkCell('反装甲', dash(st.antiArmor));
-    mkCell('防御', dash(st.defense));
-    mkCell('侦察', dash(st.scouting));
-    mkCell('机动', dash(st.mobility));
-    mkCell('维修', dash(st.repair));
-    mkCell('生命值', dash(st.hp));
-    mkCell('任务补给消耗', dash(def.upkeep));
-    mkCell('指挥占用', dash(def.command));
-    root.appendChild(grid);
-
-    // 生产成本（缺料时高亮）
-    const costBox = el('div', 'bc-cost');
-    costBox.appendChild(el('b', '', '生产成本'));
-    const chips = {};
-    Object.keys(def.cost || {}).forEach((key) => {
-      const amount = safeNumber(def.cost[key], 0);
-      if (amount <= 0) return;
-      const resDef = RESOURCE_DEFS[key];
-      const chip = el('span', 'cost-chip', `${resDef ? resDef.name : key} ${formatInt(amount)}`);
-      chip.dataset.res = key;
-      costBox.appendChild(chip);
-      chips[key] = chip;
-    });
-    if (!Object.keys(chips).length) costBox.appendChild(el('span', 'cost-chip', '免费'));
-    root.appendChild(costBox);
-
-    // 当前库存数量
-    const inv = el('div', 'uc-inv');
-    inv.appendChild(el('b', '', '当前库存'));
-    const invCount = el('span', 'uc-inv-count', '0');
-    inv.appendChild(invCount);
-    root.appendChild(inv);
-
-    // 操作
-    const verb = def.category === 'infantry' ? PRODUCTION_UI.buttonLabel.train : PRODUCTION_UI.buttonLabel.manufacture;
-    const btn = el('button', 'btn primary unit-btn', verb);
-    btn.type = 'button';
-    btn.dataset.type = def.id;
-    btn.dataset.action = 'produce';
-    btn.dataset.unitType = def.id;
-    btn.addEventListener('click', () => this._onProduceClick(def.id));
-    root.appendChild(btn);
-
-    const reason = el('div', 'bc-reason');
-    reason.hidden = true;
-    root.appendChild(reason);
-
-    return { root, btn, reason, chips, invCount, def };
-  }
-
-  _renderEquipmentProductionCard(def) {
-    const root = el('article', 'unit-card equipment-card');
-    root.dataset.equipmentId = def.id;
-    const head = el('div', 'bc-head');
-    head.appendChild(el('span', 'bc-name', def.name));
-    const tag = el('span', 'bc-status tag', def.slot || '装备');
-    head.appendChild(tag); root.appendChild(head);
-    root.appendChild(el('p', 'bc-desc', def.desc || ''));
-    const grid = el('div', 'bc-grid');
-    const applicable = Array.isArray(def.applicableTypes) ? def.applicableTypes.map((id) => UNITS[id]?.name || id).join('、') : '—';
-    [['适用单位', applicable], ['制造时间', `${formatInt(def.acquisition?.buildTime || 0)} 秒`], ['科研前置', def.requiresTech ? (TECHNOLOGIES[def.requiresTech]?.name || def.requiresTech) : '无']]
-      .forEach(([label, value]) => { const cell = el('div', 'bc-cell'); cell.appendChild(el('b', '', label)); cell.appendChild(el('span', '', value)); grid.appendChild(cell); });
-    root.appendChild(grid);
-    const costBox = el('div', 'bc-cost'); costBox.appendChild(el('b', '', '制造成本'));
-    const chips = {};
-    Object.keys(def.acquisition?.cost || {}).forEach((key) => {
-      const chip = el('span', 'cost-chip', `${RESOURCE_DEFS[key] ? RESOURCE_DEFS[key].name : key} ${formatInt(def.acquisition.cost[key])}`);
-      chip.dataset.res = key; chips[key] = chip; costBox.appendChild(chip);
-    });
-    root.appendChild(costBox);
-    const inv = el('div', 'uc-inv'); inv.appendChild(el('b', '', '库存实例')); const invCount = el('span', 'uc-inv-count', '0'); inv.appendChild(invCount); root.appendChild(inv);
-    const btn = el('button', 'btn primary equipment-btn', '加入制造队列');
-    btn.type = 'button'; btn.dataset.action = 'produce-equipment'; btn.dataset.equipmentId = def.id;
-    btn.addEventListener('click', () => this._onEquipmentProduceClick(def.id));
-    root.appendChild(btn);
-    const reason = el('div', 'bc-reason'); reason.hidden = true; root.appendChild(reason);
-    return { root, btn, reason, chips, invCount, def };
-  }
 
   /** 生产按钮点击：临时锁按钮，避免连点重复扣费 */
   _onProduceClick(typeId) {
@@ -984,42 +532,6 @@ export class UI {
     }
   }
 
-  /** 渲染等待队列中的一项 */
-  _renderQueueItem(job, index, state) {
-    const def = job.kind === 'equipment' ? getEquipmentDefinition(job.equipmentId) : UNITS[job.type];
-    const item = el('div', 'queue-item');
-    item.dataset.jobId = job.id;
-
-    const title = el('div', 'qi-title');
-    title.appendChild(el('span', 'qi-idx', `${index}.`));
-    title.appendChild(el('span', 'qi-name', def ? def.name : '未知项目'));
-    item.appendChild(title);
-
-    const meta = el('div', 'qi-meta');
-    const producer = (state.buildings || []).find((b) => b.id === job.sourceBuildingId);
-    const pname = producer ? (BUILDINGS[producer.type] ? BUILDINGS[producer.type].name : '生产设施') : '生产设施';
-    meta.appendChild(el('span', '', `来源：${pname}`));
-    const duration = job.kind === 'equipment' ? def?.acquisition?.buildTime : def?.buildTime;
-    meta.appendChild(el('span', '', `时间：${formatInt(duration || 0)}秒`));
-    const paid = Object.keys(job.costPaid || {})
-      .filter((k) => safeNumber(job.costPaid[k], 0) > 0)
-      .map((k) => `${RESOURCE_DEFS[k] ? RESOURCE_DEFS[k].name : k}${formatInt(job.costPaid[k])}`)
-      .join(' · ');
-    meta.appendChild(el('span', '', `已支付：${paid || '无'}`));
-    item.appendChild(meta);
-
-    const cancel = el('button', 'btn tiny danger qi-cancel', '移除');
-    cancel.type = 'button';
-    cancel.dataset.jobId = job.id;
-    cancel.dataset.action = 'cancel-production-queue';
-    if (job.kind === 'equipment') cancel.dataset.equipmentId = job.equipmentId;
-    cancel.addEventListener('click', () => {
-      const fn = this.handlers.onCancelQueuedProduction;
-      if (typeof fn === 'function') fn(job.id);
-    });
-    item.appendChild(cancel);
-    return item;
-  }
 
   /** 刷新生产页：当前生产线 + 等待队列 + 单位卡片 + 库存统计 */
   _updateProduction(state) {
@@ -1035,119 +547,6 @@ export class UI {
     p.unitGrid.update(buildUnitProductionTileModels(state));
     p.equipmentGrid.update(buildEquipmentProductionTileModels(state));
     this._setCommandCategory(this.commandCategory);
-    return;
-
-    const progress = getProductionProgress(state);
-    const paused = safeNumber(state.time.speed, 1) === 0;
-
-    // —— 当前生产线 ——
-    if (progress) {
-      p.idleBox.hidden = true;
-      p.activeBox.hidden = false;
-      p.statusTag.textContent = paused ? '已暂停' : '生产中';
-      p.statusTag.className = `tag ${paused ? 'warn' : 'ok'}`;
-      setText(p.lineName, `当前项目：${progress.name}`);
-      setText(p.lineSource, progress.sourceBuildingName);
-      setText(p.lineStatus, paused ? '生产中（推演已暂停）' : '生产中');
-      setText(p.lineElapsed, progress.elapsedText);
-      setText(p.lineTotal, formatDuration(Math.ceil(progress.duration)));
-      setText(p.lineRemaining, progress.remaining > 0 ? progress.remainingText : '即将完成');
-      p.lineBar.style.width = `${clamp(progress.percent, 0, 100)}%`;
-      setText(p.linePercent, `${progress.percent}%`);
-      p.pausedHint.hidden = !paused;
-      p.cancelBtn.disabled = false;
-    } else {
-      p.idleBox.hidden = false;
-      p.activeBox.hidden = true;
-      p.statusTag.textContent = '空闲';
-      p.statusTag.className = 'tag';
-      p.cancelBtn.disabled = true;
-    }
-
-    // —— 等待队列（最多显示 4 项）——
-    const queue = (state.production && state.production.queue) || [];
-    const sig = queue.map((j) => j.id).join('|');
-    if (sig !== p.queueSig) {
-      p.queueSig = sig;
-      p.queueList.innerHTML = '';
-      const shown = queue.slice(0, 4);
-      shown.forEach((job, i) => {
-        p.queueList.appendChild(this._renderQueueItem(job, i + 1, state));
-      });
-    }
-    p.queueEmpty.hidden = queue.length > 0;
-
-    // —— 单位卡片：按钮状态、禁用原因、库存数量、缺料高亮 ——
-    const counts = inventoryCount(state);
-    Object.keys(p.cards).forEach((typeId) => {
-      const card = p.cards[typeId];
-      const def = card.def;
-      const check = canQueueUnit(state, typeId);
-      const inv = safeNumber(counts[typeId], 0);
-      setText(card.invCount, String(inv));
-
-      let label = def.category === 'infantry' ? PRODUCTION_UI.buttonLabel.train : PRODUCTION_UI.buttonLabel.manufacture;
-      if (state.production && state.production.current && state.production.current.type === typeId) {
-        label = PRODUCTION_UI.buttonLabel.producing;
-      }
-      setText(card.btn, label);
-      card.btn.disabled = !check.ok;
-
-      if (check.ok) {
-        card.reason.hidden = true;
-        setText(card.reason, '');
-      } else {
-        card.reason.hidden = false;
-        setText(card.reason, check.reasons.join('；'));
-      }
-
-      Object.keys(card.chips).forEach((key) => {
-        const need = safeNumber(def.cost[key], 0);
-        const have = safeNumber(state.resources[key], 0);
-        toggleClass(card.chips[key], 'lack', have < need);
-      });
-    });
-
-    // —— 装备制造卡片：库存只按已完成实例统计，生产中任务不会提前进入库存 ——
-    const equipmentCounts = equipmentInventoryCounts(state.equipment);
-    Object.keys(p.equipmentCards || {}).forEach((equipmentId) => {
-      const card = p.equipmentCards[equipmentId];
-      const def = card.def;
-      const check = canQueueEquipment(state, equipmentId);
-      setText(card.invCount, String(safeNumber(equipmentCounts[equipmentId], 0)));
-      const current = state.production?.current;
-      setText(card.btn, current?.kind === 'equipment' && current.equipmentId === equipmentId ? '制造中' : '加入制造队列');
-      card.btn.disabled = !check.ok;
-      card.reason.hidden = check.ok;
-      setText(card.reason, check.ok ? '' : (check.reasons || [check.reason]).join('；'));
-      Object.keys(card.chips).forEach((key) => {
-        toggleClass(card.chips[key], 'lack', safeNumber(state.resources?.[key], 0) < safeNumber(def.acquisition.cost[key], 0));
-      });
-    });
-
-    // —— 库存统计 ——
-    const units = state.units || [];
-    setText(p.invTotal, String(units.length));
-    const idle = units.filter((u) => !u.formationId && u.status === 'ready').length;
-    const assigned = units.filter((u) => u.formationId).length;
-    const repairing = units.filter((u) => u.status === 'repairing').length;
-    setText(p.invIdle, String(idle));
-    setText(p.invAssigned, String(assigned));
-    setText(p.invRepairing, String(repairing));
-
-    const listSig = `${units.map((u) => `${u.type}:${counts[u.type]}`).join('|')}|equipment:${JSON.stringify(state.equipment || {})}`;
-    if (listSig !== p._invListSig) {
-      p._invListSig = listSig;
-      p.invList.innerHTML = '';
-      Object.keys(UNITS).forEach((typeId) => {
-        const def = UNITS[typeId];
-        const n = safeNumber(counts[typeId], 0);
-        const row = el('div', 'inv-row');
-        row.appendChild(el('span', 'inv-name', def ? def.name : typeId));
-        row.appendChild(el('span', 'inv-num', `× ${n}`));
-        p.invList.appendChild(row);
-      });
-    }
   }
 
   /** 生产状态变化后由 main.js 立即调用一次，避免等待下一次节流刷新 */
@@ -1196,40 +595,6 @@ export class UI {
     page.appendChild(r.units.gridRoot);
     r.units.grid = this.commandSurface.createGrid(r.units.gridRoot, () => {});
     page.appendChild(el('div', 'command-gesture-hint', '点击查看档案 · 悬浮快览 · 长按详情'));
-    return;
-    {
-    const summary = el('div', 'card units-summary');
-    r.units.summary = el('div', 'units-summary-grid');
-    summary.appendChild(r.units.summary);
-    page.appendChild(summary);
-
-    const controls = el('div', 'card units-controls');
-    const mkSelect = (label, options, key) => {
-      const wrap = el('label', 'units-filter');
-      wrap.appendChild(el('span', '', label));
-      const select = el('select');
-      options.forEach(([value, text]) => { const opt = el('option', '', text); opt.value = value; select.appendChild(opt); });
-      select.addEventListener('change', () => { r.units[key] = select.value; r.units.sig = ''; this._updateUnits(this._lastState); });
-      wrap.appendChild(select);
-      return select;
-    };
-    r.units.categorySelect = mkSelect('类型', [['all', '全部类型'], ['infantry', '步兵'], ['vehicle', '车辆'], ['armor', '装甲'], ['support', '支援']], 'filter');
-    r.units.statusSelect = mkSelect('状态', [['all', '全部状态'], ['ready', '空闲'], ['assigned', '已编队'], ['repairing', '维修中'], ['damaged', '受损']], 'status');
-    r.units.rankSelect = mkSelect('等级', [['all', '全部等级'], ...Object.values(UNIT_RANKS).map((rank) => [rank.id, rank.name])], 'rank');
-    r.units.sortSelect = mkSelect('排序', [['createdAt', '创建时间'], ['experience', '经验'], ['battles', '战斗次数'], ['hpRatio', '生命比例'], ['type', '单位类型']], 'sort');
-    controls.appendChild(r.units.categorySelect.parentNode);
-    controls.appendChild(r.units.statusSelect.parentNode);
-    controls.appendChild(r.units.rankSelect.parentNode);
-    controls.appendChild(r.units.sortSelect.parentNode);
-    page.appendChild(controls);
-
-    const columns = el('div', 'units-layout');
-    r.units.list = el('div', 'card units-list');
-    r.units.detail = el('div', 'card units-detail');
-    columns.appendChild(r.units.list);
-    columns.appendChild(r.units.detail);
-    page.appendChild(columns);
-    }
   }
 
   _renderUnitSummary(state) {
@@ -1369,164 +734,6 @@ export class UI {
     page.appendChild(r.fm.gridRoot);
     r.fm.grid = this.commandSurface.createGrid(r.fm.gridRoot, () => {});
     page.appendChild(el('div', 'command-gesture-hint', '点击查看编队与管理操作 · 悬浮快览 · 长按详情'));
-    return;
-    {
-    // —— 指挥容量概览 ——
-    const cap = el('div', 'card fm-capacity');
-    const capHead = el('div', 'card-head');
-    capHead.appendChild(el('span', '', '指挥容量'));
-    r.fm.capTag = el('span', 'tag ok', '充足');
-    capHead.appendChild(r.fm.capTag);
-    cap.appendChild(capHead);
-
-    const mkKv = (parent, label) => {
-      const row = el('div', 'kv');
-      row.appendChild(el('span', '', label));
-      const v = el('span', '', '—');
-      row.appendChild(v);
-      parent.appendChild(row);
-      return v;
-    };
-    r.fm.capUsed = mkKv(cap, '已占用 / 总容量');
-    r.fm.capFree = mkKv(cap, '剩余可编入');
-    r.fm.capCount = mkKv(cap, '编队数量');
-    const capBar = el('div', 'bar command');
-    r.fm.capBar = el('i');
-    capBar.appendChild(r.fm.capBar);
-    cap.appendChild(capBar);
-    cap.appendChild(el('div', 'fm-cap-note', '库存单位不占用指挥容量；单位一旦编入编队即占用，移出或解散后立即释放。'));
-    page.appendChild(cap);
-
-    // —— 快速组建 ——
-    const quickHead = el('div', 'section-head');
-    quickHead.appendChild(el('span', '', '快速组建'));
-    quickHead.appendChild(el('span', 'tag', `最多 ${FORMATION.maxFormations} 支编队`));
-    page.appendChild(quickHead);
-
-    const quick = el('div', 'fm-quick');
-
-    // 空编队卡片
-    const emptyCard = el('article', 'fm-preset');
-    const ecHead = el('div', 'bc-head');
-    ecHead.appendChild(el('span', 'bc-name', '空编队'));
-    ecHead.appendChild(el('span', 'bc-status tag', '自定义'));
-    emptyCard.appendChild(ecHead);
-    emptyCard.appendChild(el('p', 'bc-desc', '先建立一支空编队，再手动挑选库存单位编入。'));
-    r.fm.createBtn = el('button', 'btn primary', '新建空编队');
-    r.fm.createBtn.type = 'button';
-    r.fm.createBtn.dataset.action = 'create-formation';
-    r.fm.createBtn.addEventListener('click', () => this._onFormationAction('onCreateFormation'));
-    emptyCard.appendChild(r.fm.createBtn);
-    r.fm.createReason = el('div', 'bc-reason');
-    r.fm.createReason.hidden = true;
-    emptyCard.appendChild(r.fm.createReason);
-    quick.appendChild(emptyCard);
-
-    // 预设模板卡片
-    FORMATION_PRESETS.forEach((preset) => {
-      const card = el('article', 'fm-preset');
-      card.dataset.preset = preset.id;
-      const head = el('div', 'bc-head');
-      head.appendChild(el('span', 'bc-name', preset.name));
-      head.appendChild(el('span', 'bc-status tag', `指挥 ${getPresetCommandCost(preset.id)}`));
-      card.appendChild(head);
-
-      const comp = Object.keys(preset.units)
-        .map((t) => `${UNITS[t] ? UNITS[t].name : t}×${preset.units[t]}`)
-        .join('、');
-      card.appendChild(el('p', 'bc-desc', comp));
-
-      const btn = el('button', 'btn primary', '一键组建');
-      btn.type = 'button';
-      btn.dataset.preset = preset.id;
-      btn.addEventListener('click', () => this._onFormationAction('onApplyPreset', preset.id));
-      card.appendChild(btn);
-
-      const reason = el('div', 'bc-reason');
-      reason.hidden = true;
-      card.appendChild(reason);
-
-      quick.appendChild(card);
-      r.fm.presetCards[preset.id] = { root: card, btn, reason, preset };
-    });
-    page.appendChild(quick);
-
-    // —— 编队列表 ——
-    const listHead = el('div', 'section-head');
-    listHead.appendChild(el('span', '', '我的编队'));
-    r.fm.listTag = el('span', 'tag', '0 支');
-    listHead.appendChild(r.fm.listTag);
-    page.appendChild(listHead);
-
-    r.fm.list = el('div', 'fm-list');
-    page.appendChild(r.fm.list);
-    r.fm.listEmpty = el('div', 'hint', '尚未建立任何编队。可以直接新建空编队，或使用上方预设模板一键组建。');
-    page.appendChild(r.fm.listEmpty);
-
-    // —— 编队详情 ——
-    const detail = el('div', 'card fm-detail');
-    r.fm.detail = detail;
-    const dHead = el('div', 'card-head');
-    r.fm.detailTitle = el('span', '', '编队详情');
-    dHead.appendChild(r.fm.detailTitle);
-    r.fm.detailTag = el('span', 'tag', '待命');
-    dHead.appendChild(r.fm.detailTag);
-    detail.appendChild(dHead);
-
-    // 重命名 / 解散（结构常驻，避免刷新时输入框失焦）
-    const nameRow = el('div', 'fm-name-row');
-    r.fm.nameInput = el('input', 'fm-name-input');
-    r.fm.nameInput.type = 'text';
-    r.fm.nameInput.maxLength = FORMATION.maxNameLength;
-    r.fm.nameInput.placeholder = '编队名称';
-    r.fm.nameInput.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') this._submitRename();
-    });
-    nameRow.appendChild(r.fm.nameInput);
-    r.fm.renameBtn = el('button', 'btn', '重命名');
-    r.fm.renameBtn.type = 'button';
-    r.fm.renameBtn.addEventListener('click', () => this._submitRename());
-    nameRow.appendChild(r.fm.renameBtn);
-    r.fm.disbandBtn = el('button', 'btn danger', '解散编队');
-    r.fm.disbandBtn.type = 'button';
-    r.fm.disbandBtn.addEventListener('click', () => {
-      if (this.selectedFormationId) this._onFormationAction('onDisbandFormation', this.selectedFormationId);
-    });
-    nameRow.appendChild(r.fm.disbandBtn);
-    detail.appendChild(nameRow);
-
-    r.fm.stats = el('div', 'fm-stats');
-    detail.appendChild(r.fm.stats);
-
-    r.fm.warnings = el('div', 'fm-warnings');
-    detail.appendChild(r.fm.warnings);
-
-    const mHead = el('div', 'section-head sub');
-    mHead.appendChild(el('span', '', '当前成员'));
-    r.fm.memberTag = el('span', 'tag', '0 个');
-    mHead.appendChild(r.fm.memberTag);
-    detail.appendChild(mHead);
-    r.fm.members = el('div', 'fm-members');
-    detail.appendChild(r.fm.members);
-
-    const aHead = el('div', 'section-head sub');
-    aHead.appendChild(el('span', '', '可加入单位'));
-    r.fm.availTag = el('span', 'tag', '0 个空闲');
-    aHead.appendChild(r.fm.availTag);
-    detail.appendChild(aHead);
-    r.fm.available = el('div', 'fm-available');
-    detail.appendChild(r.fm.available);
-
-    detail.hidden = true;
-    page.appendChild(detail);
-
-    const note = el('div', 'hint');
-    note.innerHTML = `<b>说明：</b>最多同时保有 ${FORMATION.maxFormations} 支编队，编队名称不超过 ${FORMATION.maxNameLength} 个字符。`
-      + '只有「待命」状态的编队可以调整成员、重命名与解散；'
-      + '单位加入编队后占用指挥容量，移出或解散后立即返回库存。'
-      + '编队组建完成后，切到「战区」分页即可选择目标与作战策略并派遣出击。';
-    page.appendChild(note);
-    }
   }
 
   /** 编队操作统一入口：加锁 → 转交 main.js */
@@ -1541,12 +748,6 @@ export class UI {
     }
   }
 
-  /** 提交重命名 */
-  _submitRename() {
-    const input = this.refs.fm && this.refs.fm.nameInput;
-    if (!input || !this.selectedFormationId) return;
-    this._onFormationAction('onRenameFormation', this.selectedFormationId, input.value);
-  }
 
   /** 选中某支编队（供列表点击与 main.js 调用） */
   selectFormation(formationId) {
@@ -2672,75 +1873,6 @@ export class UI {
     });
     page.appendChild(tree);
     page.appendChild(el('div', 'command-gesture-hint', '点击开始研究 · 悬浮成本与时长 · 长按详情'));
-    return;
-    {
-    const lab = el('div', 'card research-lab');
-    const head = el('div', 'card-head');
-    head.appendChild(el('span', '', '实验室状态'));
-    r.research.labTag = el('span', 'tag', '未建成');
-    head.appendChild(r.research.labTag);
-    lab.appendChild(head);
-    r.research.labHint = el('div', 'hint', '技术实验室尚未建成');
-    lab.appendChild(r.research.labHint);
-    page.appendChild(lab);
-
-    const current = el('div', 'card research-current');
-    const ch = el('div', 'card-head');
-    ch.appendChild(el('span', '', '当前研究'));
-    r.research.currentTag = el('span', 'tag', '空闲');
-    ch.appendChild(r.research.currentTag);
-    current.appendChild(ch);
-    r.research.currentBox = el('div', 'research-current-box');
-    current.appendChild(r.research.currentBox);
-    page.appendChild(current);
-
-    const queue = el('div', 'card research-queue');
-    const qh = el('div', 'card-head');
-    qh.appendChild(el('span', '', '等待队列'));
-    r.research.queueTag = el('span', 'tag', '0 / 3');
-    qh.appendChild(r.research.queueTag);
-    queue.appendChild(qh);
-    r.research.queueList = el('div', 'research-queue-list');
-    queue.appendChild(r.research.queueList);
-    page.appendChild(queue);
-
-    const treeHead = el('div', 'section-head');
-    treeHead.appendChild(el('span', '', '科技树'));
-    r.research.completedTag = el('span', 'tag', '已完成 0 / 9');
-    treeHead.appendChild(r.research.completedTag);
-    page.appendChild(treeHead);
-    const tree = el('div', 'research-tree');
-    ['industry', 'military', 'command'].forEach((branch) => {
-      const col = el('div', 'research-branch');
-      col.dataset.branch = branch;
-      col.appendChild(el('h4', '', { industry: '工业', military: '军备', command: '指挥' }[branch]));
-      r.research.branchLists[branch] = el('div', 'research-branch-list');
-      col.appendChild(r.research.branchLists[branch]);
-      tree.appendChild(col);
-    });
-    Object.values(TECHNOLOGIES).forEach((tech) => {
-      const card = el('article', 'research-card');
-      card.dataset.tech = tech.id;
-      card.appendChild(el('div', 'research-card-head', `${tech.name} · ${tech.tier}级`));
-      const status = el('span', 'tag', '未解锁');
-      card.appendChild(status);
-      card.appendChild(el('p', 'research-desc', tech.desc));
-      card.appendChild(el('div', 'research-meta', `成本：${this._costText(tech.cost)} · 时间：${tech.researchTime}秒`));
-      const reason = el('div', 'bc-reason');
-      reason.hidden = true;
-      card.appendChild(reason);
-      const btn = el('button', 'btn primary research-btn', '开始研究');
-      btn.type = 'button';
-      btn.addEventListener('click', () => {
-        if (this.handlers.onResearch) this.handlers.onResearch(tech.id);
-      });
-      card.appendChild(btn);
-      r.research.cards[tech.id] = { root: card, status, reason, btn, tech };
-      r.research.branchLists[tech.branch].appendChild(card);
-    });
-    page.appendChild(tree);
-    page.appendChild(el('div', 'hint', '研究只影响新创建的生产与维修任务；战斗修正按当前科技动态生效。暂停时科研不会推进。'));
-    }
   }
 
   _costText(cost) {
@@ -2854,46 +1986,6 @@ export class UI {
     page.appendChild(r.rp.gridRoot);
     r.rp.grid = this.commandSurface.createGrid(r.rp.gridRoot, () => {});
     page.appendChild(el('div', 'command-gesture-hint', '点击查看完整战报 · 悬浮要点 · 长按详情'));
-    return;
-
-    const stat = el('div', 'card');
-    const sHead = el('div', 'card-head');
-    sHead.appendChild(el('span', '', '战斗统计'));
-    r.rp.statTag = el('span', 'tag', '0 场');
-    sHead.appendChild(r.rp.statTag);
-    stat.appendChild(sHead);
-    const mkKv = (label) => {
-      const row = el('div', 'kv');
-      row.appendChild(el('span', '', label));
-      const v = el('span', '', '—');
-      row.appendChild(v);
-      stat.appendChild(row);
-      return v;
-    };
-    r.rp.statFought = mkKv('累计交战');
-    r.rp.statWin = mkKv('占领成功');
-    r.rp.statTheater = mkKv('已占领战区');
-    page.appendChild(stat);
-
-    const listHead = el('div', 'section-head');
-    listHead.appendChild(el('span', '', '历史战报'));
-    r.rp.listTag = el('span', 'tag', `最多保留 ${BATTLE.maxReports} 份`);
-    listHead.appendChild(r.rp.listTag);
-    page.appendChild(listHead);
-
-    r.rp.list = el('div', 'rp-list');
-    page.appendChild(r.rp.list);
-    r.rp.empty = el('div', 'hint', '尚无战报。前往「战区」分页派遣编队出击后，战斗结束即可在此查看完整复盘。');
-    page.appendChild(r.rp.empty);
-
-    r.rp.detail = el('div', 'card rp-detail');
-    r.rp.detail.hidden = true;
-    page.appendChild(r.rp.detail);
-
-    const note = el('div', 'hint');
-    note.innerHTML = '<b>说明：</b>战报中的随机种子决定了整场战斗的全部判定；'
-      + '相同种子、相同编队与相同策略必然得到完全相同的结果，可用于复盘与验证。';
-    page.appendChild(note);
   }
 
   /** 刷新战报页 */
@@ -3196,54 +2288,6 @@ export class UI {
     page.appendChild(r.repairs.candGridRoot);
     r.repairs.candGrid = this.commandSurface.createGrid(r.repairs.candGridRoot, (model) => this._onCommandPrimary(model));
     page.appendChild(el('div', 'command-gesture-hint', '点击送修 · 悬浮费用与时长 · 长按详情'));
-    return;
-    {
-    // —— 维修车间状态 ——
-    const shop = el('div', 'card repair-shop');
-    const shopHead = el('div', 'card-head');
-    shopHead.appendChild(el('span', '', '维修车间'));
-    r.repairs.shopTag = el('span', 'tag', '——');
-    shopHead.appendChild(r.repairs.shopTag);
-    shop.appendChild(shopHead);
-    r.repairs.shopHint = el('div', 'kv dim', '');
-    shop.appendChild(r.repairs.shopHint);
-    page.appendChild(shop);
-
-    // —— 工位占用 ——
-    const slots = el('div', 'card repair-slots');
-    const slotsHead = el('div', 'card-head');
-    slotsHead.appendChild(el('span', '', '维修工位'));
-    r.repairs.slotsTag = el('span', 'tag', '0 / 2');
-    slotsHead.appendChild(r.repairs.slotsTag);
-    slots.appendChild(slotsHead);
-    r.repairs.activeList = el('div', 'repair-active-list');
-    slots.appendChild(r.repairs.activeList);
-    page.appendChild(slots);
-
-    // —— 等待队列 ——
-    const queue = el('div', 'card repair-queue');
-    const queueHead = el('div', 'card-head');
-    queueHead.appendChild(el('span', '', '等待队列'));
-    r.repairs.queueTag = el('span', 'tag', '0');
-    queueHead.appendChild(r.repairs.queueTag);
-    queue.appendChild(queueHead);
-    r.repairs.queueList = el('div', 'repair-queue-list');
-    queue.appendChild(r.repairs.queueList);
-    page.appendChild(queue);
-
-    // —— 可维修单位 ——
-    const candidates = el('div', 'card repair-candidates');
-    const cHead = el('div', 'card-head');
-    cHead.appendChild(el('span', '', '受损单位'));
-    r.repairs.candTag = el('span', 'tag', '0');
-    cHead.appendChild(r.repairs.candTag);
-    candidates.appendChild(cHead);
-    r.repairs.candHint = el('div', 'kv dim', '战斗中受损的单位会在此列出，点击「送去维修」即可排队修复。');
-    candidates.appendChild(r.repairs.candHint);
-    r.repairs.candList = el('div', 'repair-cand-list');
-    candidates.appendChild(r.repairs.candList);
-    page.appendChild(candidates);
-    }
   }
 
   /** 维修页内容刷新（结构变化时重建列表，进度变化只更新数字） */
@@ -3520,154 +2564,6 @@ export class UI {
 
     r.ovWarnBox = el('div', 'ov-warnings');
     page.appendChild(r.ovWarnBox);
-
-    // —— 离线提示（读档时显示） ——
-    r.offlineBox = el('div', 'card');
-    r.offlineBox.id = 'offline-report';
-    r.offlineBox.dataset.action = 'offline-report-view';
-    r.offlineBox.hidden = true;
-    page.appendChild(r.offlineBox);
-    return;
-
-    // —— 指挥官简报 ——
-    const brief = el('div', 'card');
-    const briefHead = el('div', 'card-head');
-    briefHead.appendChild(el('span', '', '指挥官简报'));
-    // Production UI must not expose internal stage identifiers.  The debug
-    // renderer/text channel still carries CURRENT_STAGE_LABEL for diagnostics.
-    r.briefTag = el('span', 'tag ok', '战备就绪');
-    briefHead.appendChild(r.briefTag);
-    brief.appendChild(briefHead);
-
-    const mkKv = (label) => {
-      const row = el('div', 'kv');
-      row.appendChild(el('span', '', label));
-      const v = el('span', '', '—');
-      row.appendChild(v);
-      return { row, v };
-    };
-    const kvPlayed = mkKv('已运行时长');
-    const kvBuildings = mkKv('运行中建筑');
-    const kvSave = mkKv('上次保存');
-    const kvSpeed = mkKv('推演速度');
-    r.kvPlayed = kvPlayed.v;
-    r.kvBuildings = kvBuildings.v;
-    r.kvSave = kvSave.v;
-    r.kvSpeed = kvSpeed.v;
-    [kvPlayed, kvBuildings, kvSave, kvSpeed].forEach((k) => brief.appendChild(k.row));
-    page.appendChild(brief);
-
-    // —— 电力与指挥容量 ——
-    const cap = el('div', 'card');
-    const capHead = el('div', 'card-head');
-    capHead.appendChild(el('span', '', '基地负载'));
-    r.capTag = el('span', 'tag ok', '正常');
-    capHead.appendChild(r.capTag);
-    cap.appendChild(capHead);
-
-    const powerRow = el('div', 'kv');
-    powerRow.appendChild(el('span', '', '电力'));
-    r.ovPower = el('span', '', '0 / 0');
-    powerRow.appendChild(r.ovPower);
-    cap.appendChild(powerRow);
-    const powerBar = el('div', 'bar power');
-    r.ovPowerBar = el('i');
-    powerBar.appendChild(r.ovPowerBar);
-    cap.appendChild(powerBar);
-
-    const cmdRow = el('div', 'kv');
-    cmdRow.appendChild(el('span', '', '指挥容量'));
-    r.ovCommand = el('span', '', '0 / 0');
-    cmdRow.appendChild(r.ovCommand);
-    cap.appendChild(cmdRow);
-    const cmdBar = el('div', 'bar command');
-    r.ovCommandBar = el('i');
-    cmdBar.appendChild(r.ovCommandBar);
-    cap.appendChild(cmdBar);
-    page.appendChild(cap);
-
-    // —— 资源产出 ——
-    const prod = el('div', 'card');
-    const prodHead = el('div', 'card-head');
-    prodHead.appendChild(el('span', '', '资源产出'));
-    prodHead.appendChild(el('span', 'tag', '每秒'));
-    prod.appendChild(prodHead);
-    r.ovRates = {};
-    Object.keys(RESOURCE_DEFS).forEach((key) => {
-      const row = el('div', 'kv');
-      row.appendChild(el('span', '', RESOURCE_DEFS[key].name));
-      const v = el('span', '', '+0/s');
-      row.appendChild(v);
-      prod.appendChild(row);
-      r.ovRates[key] = v;
-    });
-    page.appendChild(prod);
-
-    // —— 建筑清单 ——
-    const blds = el('div', 'card');
-    const bldsHead = el('div', 'card-head');
-    bldsHead.appendChild(el('span', '', '基地设施'));
-    r.bldTag = el('span', 'tag', '0 座');
-    bldsHead.appendChild(r.bldTag);
-    blds.appendChild(bldsHead);
-    r.ovBuildingList = el('ul', 'blist');
-    blds.appendChild(r.ovBuildingList);
-    page.appendChild(blds);
-
-    // —— 阶段交付核对表 ——
-    const stage = el('div', 'card');
-    const stageHead = el('div', 'card-head');
-    stageHead.appendChild(el('span', '', '战区作战'));
-    stageHead.appendChild(el('span', 'tag ok', '战区作战'));
-    stage.appendChild(stageHead);
-    const list = el('ul', 'check-list');
-    [
-      '顶部资源栏与自动增长',
-      'Canvas 伪2.5D 基地画面',
-      '雷达旋转、烟雾、施工火花',
-      '暂停 / 1× / 2× / 4× 速度（暂停前档位可恢复）',
-      '五种建筑的完整建设流程与进度',
-      `取消工程并返还 ${Math.round(CONSTRUCTION.refundRatio * 100)}% 资源`,
-      '建成后效果立即生效（产量 / 上限 / 电力 / 解锁）',
-      `每${TIME.autoSaveInterval}秒自动保存，施工与生产要素可续`,
-      '兵营 / 装甲工厂训练与制造五种单位',
-      `生产队列（最多 ${PRODUCTION.maxQueueSize} 项）与 50%/100% 取消返还`,
-      '单位实例入库与实时库存统计',
-      '生产 / 施工动画与出厂表现',
-      `作战编队创建、重命名、解散（最多 ${FORMATION.maxFormations} 支）`,
-      '单位编入 / 移出与指挥容量实时校验',
-      `${FORMATION_PRESETS.length} 套预设模板一键组建（原子操作）`,
-      '编队汇总属性与编成评估提示',
-      'Canvas 基地集结区编队单位表现',
-      `${Object.keys(THEATERS).length} 个战区目标、解锁链与占领收益`,
-      '雷达站决定敌情精度（精确编成 / 模糊估算）',
-      '三套作战策略（谨慎推进 / 正面突破 / 火力侦察）',
-      '任务补给成本预览与派遣资格校验',
-      '确定性战斗求解器（同种子必得同结果）',
-      `四阶段自动战斗（侦察→接敌→交火≤${BATTLE.maxRounds}轮→结算）`,
-      'Canvas 战斗回放（只播放事件，不决定胜负）',
-      '战地抢救、压制与维修车修复判定',
-      '可解释战报：胜负原因、损失、事件时间轴',
-      `历史战报存档（最多 ${BATTLE.maxReports} 份）与存档版本4迁移`,
-      '单位档案、呼号、动态老兵等级与战斗属性修正',
-      '重复任务：固定成本、冷却、战报与离线就绪提示',
-      '战斗派遣快照、确定性重建与结算完整性校验'
-    ].forEach((text) => {
-      const li = el('li', 'done', text);
-      list.appendChild(li);
-    });
-    stage.appendChild(list);
-    page.appendChild(stage);
-
-    // —— 操作提示 ——
-    const hint = el('div', 'hint');
-    hint.innerHTML = '<b>操作提示：</b>鼠标悬停基地内的建筑或虚线预留位可查看详情；'
-      + '空格键暂停/继续，数字键 1 / 2 / 3 切换 1× / 2× / 4× 速度。'
-      + '切到「建设」分页可批准新工程，「生产」分页可训练/制造单位，'
-      + '「编队」分页可把库存单位编成作战编队，「战区」分页选择目标与策略后派遣出击，'
-      + '「部队」分页可管理呼号与老兵档案；占领战区后可选择重复任务，'
-      + '战斗结束后可在「战报」分页复盘全过程，冷却会随游戏时间推进。';
-    page.appendChild(hint);
 
     // —— 离线提示（读档时显示） ——
     r.offlineBox = el('div', 'card');
